@@ -8,13 +8,20 @@
     "pnpm": ">=11.0.0"
   },
   "scripts": {
+    "dev": "pnpm --filter @rowan/mobile dev",
+    "android": "pnpm --filter @rowan/mobile android",
+    "ios": "pnpm --filter @rowan/mobile ios",
+    "prebuild": "pnpm --filter @rowan/mobile prebuild",
     "lint": "pnpm -r --if-present lint",
     "typecheck": "pnpm -r --if-present typecheck",
     "test": "pnpm -r --if-present test",
-    "doctor": "pnpm --filter @rowan/mobile exec expo-doctor",
-    "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm doctor"
+    "doctor": "pnpm exec expo-doctor apps/mobile",
+    "verify:config": "node scripts/verify-app-config.mjs",
+    "verify:bundle": "pnpm --filter @rowan/mobile export:android",
+    "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm run doctor && pnpm verify:config && pnpm verify:bundle"
   },
   "devDependencies": {
+    "expo-doctor": "^1.20.4",
     "typescript": "~6.0.3",
     "vitest": "^4.0.0"
   }
