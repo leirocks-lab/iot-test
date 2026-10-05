@@ -43,6 +43,11 @@ function assertCommandWiring() {
   }
 
   assert(
+    !mobilePackage.scripts?.['reset-project'],
+    'Generated reset-project command must be removed from the mobile package',
+  );
+
+  assert(
     rootPackage.scripts.verify.includes('pnpm run doctor'),
     'Root verify script must invoke the package script with: pnpm run doctor',
   );
