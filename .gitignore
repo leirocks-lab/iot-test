@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Expo and generated native projects
+.expo/
+apps/*/.expo/
+apps/*/dist/
+apps/*/android/
+apps/*/ios/
+web-build/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.p8
+*.p12
+*.mobileprovision
+*.cer
+
+# Build, coverage, and caches
+dist/
+coverage/
+*.tsbuildinfo
+.turbo/
+
+# Local agent execution state
+.superpowers/
+.codex-tmp/
+
+# Editors and operating systems
+.idea/
+.DS_Store
+Thumbs.db
+
+# Office temporary files
+~$*

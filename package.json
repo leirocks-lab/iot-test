@@ -1,0 +1,20 @@
+{
+  "name": "rowan-iot-app",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": ">=22.13.0",
+    "pnpm": ">=11.0.0"
+  },
+  "scripts": {
+    "lint": "pnpm -r --if-present lint",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "test": "pnpm -r --if-present test",
+    "doctor": "pnpm --filter @rowan/mobile exec expo-doctor",
+    "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm doctor"
+  },
+  "devDependencies": {
+    "vitest": "^4.0.0"
+  }
+}

@@ -1,0 +1,13 @@
+packages:
+  - apps/*
+  - packages/*
+
+# Keep large Expo/React Native artifacts reliable on slower links.
+networkConcurrency: 4
+fetchRetries: 5
+fetchRetryMintimeout: 20000
+fetchRetryMaxtimeout: 120000
+fetchTimeout: 600000
+
+onlyBuiltDependencies:
+  - esbuild
