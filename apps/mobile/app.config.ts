@@ -14,7 +14,6 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     icon: './assets/images/icon.png',
     scheme: identity.scheme,
     userInterfaceStyle: 'automatic',
-    newArchEnabled: true,
     ios: {
       icon: './assets/expo.icon',
       bundleIdentifier: identity.iosBundleIdentifier,

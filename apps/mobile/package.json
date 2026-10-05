@@ -5,6 +5,7 @@
   "dependencies": {
     "@expo/ui": "~57.0.21",
     "@rowan/brand-config": "workspace:*",
+    "@rowan/design-system": "workspace:*",
     "expo": "~57.0.26",
     "expo-constants": "~57.0.20",
     "expo-dev-client": "~57.0.19",

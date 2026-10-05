@@ -1,98 +1,195 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
+import { getBrandConfig } from '@rowan/brand-config';
+import { rowanTheme } from '@rowan/design-system';
+import Constants from 'expo-constants';
+import { Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
-
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
-  return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
+const extra = Constants.expoConfig?.extra;
+const brand = getBrandConfig(extra?.brandId as string | undefined);
+const environment = (extra?.environment as string | undefined) ?? 'development';
+const androidPackage = (extra?.androidPackage as string | undefined) ?? 'Unavailable';
+const iosBundleIdentifier =
+  (extra?.iosBundleIdentifier as string | undefined) ?? 'Unavailable';
 
 export default function HomeScreen() {
   return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView contentContainerStyle={styles.content}>
+        <View style={styles.brandRow}>
+          <View style={styles.brandMark} />
+          <Text style={styles.brandName}>{brand.displayName}</Text>
+          <View style={styles.environmentBadge}>
+            <Text style={styles.environmentText}>{environment}</Text>
+          </View>
+        </View>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
+        <View style={styles.hero}>
+          <Text style={styles.eyebrow}>MOBILE FOUNDATION</Text>
+          <Text style={styles.title}>Development Build Ready</Text>
+          <Text style={styles.subtitle}>
+            Expo Router, typed brand configuration, and shared workspace packages are connected.
+          </Text>
+        </View>
 
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
+        <View style={styles.statusCard}>
+          <View style={styles.statusHeader}>
+            <View style={styles.statusDot} />
+            <Text style={styles.statusText}>Configuration active</Text>
+          </View>
 
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+          <View style={styles.divider} />
+
+          <View style={styles.detailRow}>
+            <Text style={styles.detailLabel}>ANDROID</Text>
+            <Text selectable style={styles.detailValue}>
+              {androidPackage}
+            </Text>
+          </View>
+
+          <View style={styles.detailRow}>
+            <Text style={styles.detailLabel}>IOS</Text>
+            <Text selectable style={styles.detailValue}>
+              {iosBundleIdentifier}
+            </Text>
+          </View>
+        </View>
+
+        <Text style={styles.footer}>React Native New Architecture · {Platform.OS}</Text>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
+const colors = rowanTheme.colors;
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
   safeArea: {
     flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
+    backgroundColor: colors.background,
   },
-  heroSection: {
+  content: {
+    flexGrow: 1,
+    width: '100%',
+    maxWidth: 720,
+    alignSelf: 'center',
+    paddingHorizontal: 24,
+    paddingVertical: 28,
+  },
+  brandRow: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+  },
+  brandMark: {
+    width: 13,
+    height: 13,
+    marginRight: 10,
+    backgroundColor: colors.primary,
+    borderRadius: 3,
+    transform: [{ rotate: '45deg' }],
+  },
+  brandName: {
     flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+    color: colors.text,
+    fontSize: 18,
+    fontWeight: '800',
+    letterSpacing: 2.4,
   },
-  title: {
-    textAlign: 'center',
+  environmentBadge: {
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderColor: colors.primary,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 999,
   },
-  code: {
+  environmentText: {
+    color: colors.primary,
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 0.8,
     textTransform: 'uppercase',
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+  hero: {
+    flex: 1,
+    minHeight: 300,
+    justifyContent: 'center',
+    paddingVertical: 56,
+  },
+  eyebrow: {
+    marginBottom: 14,
+    color: colors.primary,
+    fontSize: 12,
+    fontWeight: '700',
+    letterSpacing: 2,
+  },
+  title: {
+    maxWidth: 520,
+    color: colors.text,
+    fontSize: 42,
+    fontWeight: '800',
+    lineHeight: 46,
+    letterSpacing: -1.4,
+  },
+  subtitle: {
+    maxWidth: 540,
+    marginTop: 18,
+    color: colors.mutedText,
+    fontSize: 16,
+    lineHeight: 25,
+  },
+  statusCard: {
+    padding: 20,
+    backgroundColor: colors.surface,
+    borderColor: '#DCE4E7',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 18,
+    shadowColor: '#16383B',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.08,
+    shadowRadius: 24,
+    elevation: 3,
+  },
+  statusHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  statusDot: {
+    width: 9,
+    height: 9,
+    marginRight: 9,
+    backgroundColor: colors.success,
+    borderRadius: 999,
+  },
+  statusText: {
+    color: colors.text,
+    fontSize: 15,
+    fontWeight: '700',
+  },
+  divider: {
+    height: StyleSheet.hairlineWidth,
+    marginVertical: 18,
+    backgroundColor: '#DCE4E7',
+  },
+  detailRow: {
+    gap: 5,
+    marginBottom: 15,
+  },
+  detailLabel: {
+    color: colors.mutedText,
+    fontSize: 10,
+    fontWeight: '700',
+    letterSpacing: 1.4,
+  },
+  detailValue: {
+    color: colors.text,
+    fontFamily: Platform.select({ ios: 'Menlo', default: 'monospace' }),
+    fontSize: 13,
+    lineHeight: 20,
+  },
+  footer: {
+    marginTop: 22,
+    color: colors.mutedText,
+    fontSize: 11,
+    letterSpacing: 0.4,
+    textAlign: 'center',
   },
 });
