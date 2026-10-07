@@ -1,6 +1,6 @@
 # ROWAN IoT App
 
-ROWAN 移动端工程基于 Expo Development Build、React Native 新架构、Expo Router、TypeScript 和 pnpm Monorepo。当前版本提供可验证的工程底座，不包含登录、配网、MQTT、OTA 或正式设备控制功能。
+ROWAN 移动端工程基于 Expo Development Build、React Native 新架构、Expo Router、TypeScript 和 pnpm 单项目。当前版本提供可验证的工程底座，不包含登录、配网、MQTT、OTA 或正式设备控制功能。
 
 ## 环境要求
 
@@ -25,15 +25,43 @@ pnpm install
 ## 目录结构
 
 ```text
-apps/mobile                 Expo Router 移动应用
-packages/brand-config      品牌和构建环境配置
-packages/core              日志、错误和 HTTP 能力边界
-packages/iot-sdk           设备状态、命令和连接能力边界
-packages/device-ui         设备控制组件接口
-packages/design-system     主题和设计令牌
+src/app                  Expo Router 页面与导航布局
+src/config/brand         品牌、构建环境与应用标识
+src/theme                主题和设计令牌
+src/lib/core             日志、错误、HTTP 接口
+src/lib/iot              设备状态、命令与连接接口
+src/components/device    设备控制组件属性接口
+assets                   图片、图标等静态资源
+scripts                  工程维护与验证脚本
+tests                    工程工具测试
+docs                     原始需求与设计资料
+sdd                      功能规范、变更与验收证据
+app.config.ts            Expo、原生及构建配置
+package.json             唯一应用清单与命令入口
+pnpm-lock.yaml           单项目依赖锁文件
+tsconfig.json            继承 Expo 的 TypeScript 配置
 ```
 
-移动应用和共享包只能通过 `@rowan/*` 的公开入口相互引用，不要导入其他包的内部文件。
+仓库根目录即 Expo 应用根目录，所有安装、开发、构建及检查命令均在根目录执行。项目使用 pnpm 管理单个应用，不使用工作区包或独立内部包。pnpm 11 的 `pnpm-workspace.yaml` 仅保存本项目安装设置和 esbuild 构建许可，不含 `packages` 或工作区包定义。通过 `@/*` 导入 `src` 模块；`app.config.ts` 注册 `tsx/cjs` 后使用相对路径导入 TypeScript 品牌配置。
+
+`src/app` 只保存路由与布局，非路由组件、hooks、业务实现放在其外。随着已确认功能实现，按需增加 `src/features`、`src/hooks` 等目录。品牌与主题已接入应用；core、iot、device 目前仍是接口和类型占位，不代表正式业务功能已实现。
+
+应用包和 Expo 配置的版本均为 `1.0.0`，SDD 功能版本单独管理。`node_modules`、`.expo`、`dist`、`android` 和 `ios` 是安装或生成内容，由根目录 `.gitignore` 忽略。原生配置通过 `app.config.ts`、Config Plugin 或 Expo Module 维护。
+
+迁移前的本地生成工程和缓存保留在 `.codex-tmp/单项目迁移-20261007`，仅供恢复或排查，正式命令使用当前根目录配置。首次原生运行请从根目录重新生成和构建 Development Build。
+
+## 业务规范与 SDD
+
+业务规范入口为 [sdd/使用说明.md](<sdd/使用说明.md>)，功能导航为 [sdd/功能索引.md](<sdd/功能索引.md>)。功能范围仅以补充 API 及开发人员的 Excel 为准，UI、产品文档和流程图只补充范围内细节。
+
+```bash
+pnpm specs:index
+pnpm specs:check
+pnpm specs:search RF-0020
+pnpm specs:test
+```
+
+规范、交付和 App 发布分别记录状态；初版草稿不代表功能已经实现。后续迭代通过 `sdd/迭代变更/` 记录规范差异、实施任务和验收证据。
 
 ## Development Build
 
@@ -117,4 +145,11 @@ pnpm verify:bundle
 pnpm verify
 ```
 
-`pnpm verify` 会依次执行 ESLint、TypeScript、单元测试、Expo Doctor、应用配置检查和 Android Expo 导出。它验证 JavaScript/TypeScript 和 Metro 打包链路，不等同于完成 Android APK 或 iOS App 的原生签名构建。
+`pnpm verify` 会依次执行 ESLint、TypeScript、单元测试、Expo Doctor、应用配置检查和 Android Expo 导出。它验证单项目 JavaScript/TypeScript 和 Metro 打包链路，不等同于完成 Android APK 或 iOS App 的原生签名构建。
+
+## Windows 原生构建路径
+
+pnpm 配置使用 `nodeLinker: hoisted`，将原生依赖安装到根目录 `node_modules`，避免 `.pnpm` 版本目录使 CMake 对象文件路径超过限制。此配置不定义工作区包，项目仍为单一 Expo/CNG 应用。修改安装布局后执行 `pnpm install --frozen-lockfile`；已有原生生成缓存需要重新生成或清理后再构建。
+
+Windows 上建议使用 Ninja 1.12 或更高版本，参见 [Reanimated Windows 构建说明](https://docs.swmansion.com/react-native-reanimated/docs/guides/building-on-windows/)。本机 SDK 的 CMake 3.22.1 附带 Ninja 1.10.2，实际兼容性以原生构建结果为准。
+

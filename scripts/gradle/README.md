@@ -18,7 +18,7 @@
 
 ```powershell
 $env:JAVA_HOME='D:\Android\Java\jdk-17.0.20.1+1'
-.\apps\mobile\android\gradlew.bat -p tests/gradle-mirrors verifyMirrorRepositories verifyIncludedMirrorRepositories --offline --console=plain
+.\android\gradlew.bat -p tests/gradle-mirrors verifyMirrorRepositories verifyIncludedMirrorRepositories --offline --console=plain
 ```
 
 未安装时可加 `-I (Resolve-Path scripts/gradle/aliyun-maven-mirrors.gradle).Path`。`-p` 会改变相对初始化脚本路径的基准，所以 `-I` 使用绝对路径。

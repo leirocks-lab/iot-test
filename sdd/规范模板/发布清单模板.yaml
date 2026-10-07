@@ -1,0 +1,10 @@
+# 复制后替换所有占位值；本文件仅模板，不代表已发布。
+app_version: "<实际发布版本>"
+released_at: "<YYYY-MM-DD>"
+spec_git_commit: "<已提交规范的完整40位SHA>"
+features:
+  - id: "RF-<功能编号>"
+    version: "<已验收规范版本>"
+    path: "业务功能/<业务域>/<功能组>/<功能>/功能规范.md"
+changes:
+  - "CHG-YYYYMMDD-NNN"

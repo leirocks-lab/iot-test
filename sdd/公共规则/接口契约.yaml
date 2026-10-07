@@ -1,0 +1,2356 @@
+schema_version: 1
+note: 由 Word V1.4 提取的范围内接口参考快照；不是后端已上线声明，不覆盖 Excel 范围边界。
+apis:
+  - id: CONTENT-01
+    title: 获取隐私政策
+    method: GET
+    path: /api/app/privacy
+    authentication: 无需认证
+    source_status: 复用 + brandId 可选
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / CONTENT-01 / 段落 P257 / 表 T27
+    parameters:
+      - table: 28
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Query
+            - type
+            - String
+            - 是
+            - |-
+              返回的数据类型
+              url：用户协议链接
+              text：用户协议文本内容；示例：url
+          - - Query
+            - brandId
+            - String
+            - 否
+            - 仅当同一接口需返回不同 App 内容时传入；可选值如 as、zafro；示例：as
+          - - Query
+            - regionCode
+            - String
+            - 否
+            - 国家或地区代码；用于返回适用地区的协议内容；示例：US
+    responses:
+      - table: 29
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.type
+            - String
+            - url
+            - |-
+              返回的数据类型
+              url：用户协议链接
+              text：用户协议文本内容
+          - - data.content
+            - String
+            - https://cdn.rowan.com/example
+            - 用户协议内容。文本或网址
+    rules:
+      - 专属错误：1011 隐私政策不存在
+      - UI规则：仅当不同 App 返回不同协议内容时传 brandId；regionCode 取注册页面已选择地区；协议正文由云端返回，阅读倒计时与滚动状态由 App 控制。
+  - id: CONTENT-02
+    title: 获取用户协议
+    method: GET
+    path: /api/app/serviceTerms
+    authentication: 无需认证
+    source_status: 复用 + brandId 可选
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / CONTENT-02 / 段落 P273 / 表 T30
+    parameters:
+      - table: 31
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Query
+            - type
+            - String
+            - 是
+            - |-
+              返回的数据类型
+              url：用户协议链接
+              text：用户协议文本内容；示例：url
+          - - Query
+            - brandId
+            - String
+            - 否
+            - 仅当同一接口需返回不同 App 内容时传入；可选值如 as、zafro；示例：as
+          - - Query
+            - regionCode
+            - String
+            - 否
+            - 国家或地区代码；用于返回适用地区的协议内容；示例：US
+    responses:
+      - table: 32
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.type
+            - String
+            - url
+            - |-
+              返回的数据类型
+              url：用户协议链接
+              text：用户协议文本内容
+          - - data.content
+            - String
+            - https://cdn.rowan.com/example
+            - 用户协议内容。文本或网址
+    rules:
+      - 专属错误：1021 用户协议不存在
+      - UI规则：仅当不同 App 返回不同协议内容时传 brandId；regionCode 取注册页面已选择地区；协议正文由云端返回，阅读倒计时与滚动状态由 App 控制。
+  - id: AUTH-01
+    title: 获取验证码
+    method: GET
+    path: /api/app/captcha
+    authentication: 无需认证
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / AUTH-01 / 段落 P290 / 表 T33
+    parameters:
+      - table: 34
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Query
+            - account
+            - String
+            - 是
+            - 账户。手机号或邮箱（手机号需加上区号，并且进行URL encode）；示例：user@example.com
+          - - Query
+            - accountType
+            - String
+            - 是
+            - |-
+              账号类型
+              mobile：手机号
+              email：邮箱；示例：mobile
+          - - Query
+            - captchaType
+            - String
+            - 是
+            - |-
+              验证码类型；在第三方登录返回“第三方账号未注册”后，跳转到绑定手机号页面发送短信验证码，这时应该传“login”类型。
+              register：注册
+              forget：忘记密码
+              login：登录
+              close：注销；示例：register
+    responses: []
+    rules:
+      - 专属错误：1141 发送间隔过短；1142 发送次数超过限制；1143 发送失败；1144 用户已存在（captchaType=register时）
+      - UI规则：服务端必须限制账号、IP 和设备维度的发送频率；验证码发送成功也不应暴露账号是否已注册。
+  - id: AUTH-02
+    title: 校验验证码
+    method: GET
+    path: /api/app/captcha/{code}
+    authentication: 无需认证
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / AUTH-02 / 段落 P306 / 表 T35
+    parameters:
+      - table: 36
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - code
+            - String
+            - 是
+            - 用户获取到的验证码；示例：1234567890
+          - - Query
+            - account
+            - String
+            - 是
+            - 账户，手机号或邮箱（手机号需加上区号，并且进行URL encode）；示例：user@example.com
+          - - Query
+            - accountType
+            - String
+            - 是
+            - |-
+              账号类型
+              mobile：手机号
+              email：邮箱；示例：mobile
+    responses: []
+    rules:
+      - 专属错误：1151 验证码已过期；1152 验证码错误
+      - UI规则：验证码校验通过后建议返回一次性 verificationToken，避免验证码被重复使用。
+  - id: AUTH-03
+    title: 注册
+    method: PUT
+    path: /api/app/user
+    authentication: 无需认证
+    source_status: 复用 + regionCode 扩展
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / AUTH-03 / 段落 P322 / 表 T37
+    parameters:
+      - table: 38
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Body
+            - account
+            - String
+            - 是
+            - 账户，手机号或邮箱；示例：user@example.com
+          - - Body
+            - password
+            - String
+            - 是
+            - 密码；示例：Rowan@123
+          - - Body
+            - type
+            - String
+            - 是
+            - |-
+              验证码类型
+              mobile：手机号
+              email：邮箱；示例：mobile
+          - - Body
+            - captcha
+            - String
+            - 是
+            - 验证码；示例：123456
+          - - Body
+            - registrationId
+            - Integer
+            - 否
+            - 极光用户ID；示例：787
+          - - Body
+            - system
+            - String
+            - 否
+            - |-
+              用户使用的系统
+              ios：苹果
+              android：安卓；示例：ios
+          - - Body
+            - language
+            - String
+            - 否
+            - |-
+              APP语言
+              zh-CN：简体中文
+              zh-TW：繁体中文
+              en：英文；示例：zh-CN
+          - - Body
+            - regionCode
+            - String
+            - 是
+            - 注册时选定的国家或地区代码；创建后普通用户不可直接修改；示例：US
+    responses:
+      - table: 39
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.accessToken
+            - String
+            - CbcAb4Ad-8fEE-C227-dAA3-Af2DD2B7AdaB
+            - 访问token
+          - - data.refreshToken
+            - String
+            - e6cBA3F1-fb4A-7Ae8-f8ce-Ae51CBf1ceb1
+            - 刷新token。当accessToken过期后（过期时间比较短，默认是1小时），需要认证的接口会返回code=401，APP需用refreshToken去重新获取accessToken
+          - - data.expiresIn
+            - Integer
+            - "604800"
+            - refreshToken的过期时间。单位：秒，默认7天
+          - - data.tokenType
+            - String
+            - bearer
+            - |-
+              认证类型。
+              bearer：使用"Authorization: Bearer {{accessToken}}"请求头进行认证
+          - - data.userID
+            - String
+            - user_01J0ROWAN0001
+            - 第三方账号ID。对于微信则是unionid；对于苹果、Facebook和Twitter则是用户ID
+          - - data.setting
+            - Object
+            - "-"
+            - 用户设置；包含：language、notification、theme、wallpaper、wallpaper.2x、homeLayout
+    rules:
+      - 专属错误：1161 验证码已过期；1162 验证码错误；1163 用户已存在
+      - UI规则：最新 UI 已补齐邮箱验证码；confirmPassword 仅在 App 本地校验，不作为接口字段；注册必须提交 regionCode，地区变更进入客服流程；协议勾选和阅读完成后才能提交。
+  - id: AUTH-04
+    title: 登录
+    method: POST
+    path: /api/app/session
+    authentication: 无需认证
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / AUTH-04 / 段落 P338 / 表 T40
+    parameters:
+      - table: 41
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Body
+            - account
+            - String
+            - 是
+            - 账户，手机号或邮箱（手机号需加上区号）；示例：user@example.com
+          - - Body
+            - pin
+            - String
+            - 是
+            - 用户密码或验证码；示例：Rowan@123
+          - - Body
+            - verify
+            - String
+            - 是
+            - |-
+              验证类型
+              password：密码
+              captcha：验证码；示例：password
+          - - Body
+            - registrationId
+            - Integer
+            - 否
+            - |-
+              消息推送ID
+              国内：极光ID、各手机厂商推送渠道ID
+              国外：FCM ID、华为推送ID；示例：757
+          - - Body
+            - system
+            - String
+            - 否
+            - |-
+              用户使用的系统
+              ios：苹果
+              android：安卓
+              huawei：华为；示例：ios
+          - - Body
+            - language
+            - String
+            - 是
+            - |-
+              APP语言
+              zh-CN：简体中文
+              zh-TW：繁体中文
+              en：英文；示例：zh-CN
+    responses:
+      - table: 42
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.accessToken
+            - String
+            - 4A986E98-8C8D-47FA-0F1c-af2F8fB2EdF5
+            - 访问token
+          - - data.refreshToken
+            - String
+            - 0f1dC2DF-f9A2-3fDe-29Bd-EC9Da3dcB39B
+            - 刷新token。当accessToken过期后（过期时间比较短，默认是1小时），需要认证的接口会返回code=401，APP需用refreshToken去重新获取accessToken
+          - - data.expiresIn
+            - Integer
+            - "604800"
+            - refreshToken的过期时间。单位：秒，默认7天
+          - - data.tokenType
+            - String
+            - bearer
+            - |-
+              认证类型。
+              bearer：使用"Authorization: Bearer {{accessToken}}"请求头进行认证
+          - - data.userID
+            - String
+            - user_01J0ROWAN0001
+            - 用户ID
+          - - data.setting
+            - Object
+            - "-"
+            - 用户设置；包含：language、notification、theme、wallpaper、wallpaper.2x、homeLayout
+    rules:
+      - 专属错误：1181 验证码已过期；1182 验证码错误；1183 账号或密码错误；1184 账号未注册
+      - UI规则：登录成功后安全保存 accessToken 和 refreshToken；密码错误不得返回可用于枚举账号的额外信息。
+  - id: AUTH-05
+    title: 刷新token
+    method: PATCH
+    path: /api/app/session
+    authentication: Refresh Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / AUTH-05 / 段落 P354 / 表 T43
+    parameters:
+      - table: 44
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Body
+            - userID
+            - String
+            - 是
+            - 用户ID，登录后返回；示例：user_01J0ROWAN0001
+          - - Body
+            - registrationId
+            - Integer
+            - 否
+            - |-
+              消息推送ID
+              国内：极光ID、各手机厂商推送渠道ID
+              国外：FCM ID、华为推送ID；示例：826
+          - - Body
+            - refreshToken
+            - String
+            - 是
+            - 刷新token；示例：802D1B36-E1a9-52bf-87F2-BAF5eB52E118
+    responses:
+      - table: 45
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.accessToken
+            - String
+            - 61Ac521c-0f31-Fd4E-6d9C-8F1CB3f29dca
+            - 访问token
+          - - data.refreshToken
+            - String
+            - E2Dec2cb-EB21-856c-C67E-1da2f8A4FAee
+            - 刷新token。当accessToken过期后（过期时间比较短，默认是1小时），需要认证的接口会返回code=401，APP需用refreshToken去重新获取accessToken
+          - - data.expiresIn
+            - Integer
+            - "7200"
+            - refreshToken的过期时间。单位：秒，默认7天
+          - - data.tokenType
+            - String
+            - bearer
+            - |-
+              认证类型。
+              bearer：使用"Authorization: Bearer {{accessToken}}"请求头进行认证
+    rules:
+      - 专属错误：无；通用错误见第 6.4 节。
+      - UI规则：refreshToken 失效时清理本地登录态并返回登录页；禁止并发重复刷新；App 应做单飞控制。
+  - id: AUTH-06
+    title: 登出
+    method: DELETE
+    path: /api/app/session
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / AUTH-06 / 段落 P370 / 表 T46
+    parameters: []
+    responses: []
+    rules:
+      - 专属错误：无；通用错误见第 6.4 节。
+      - UI规则：登出成功后清除 Token、MQTT 凭证和用户缓存。
+  - id: AUTH-07
+    title: 密码重置
+    method: PATCH
+    path: /api/app/user/password
+    authentication: 无需认证
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / AUTH-07 / 段落 P386 / 表 T47
+    parameters:
+      - table: 48
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Body
+            - account
+            - String
+            - 是
+            - 账户，手机号或邮箱；示例：user@example.com
+          - - Body
+            - captcha
+            - String
+            - 是
+            - 验证码；示例：123456
+          - - Body
+            - password
+            - String
+            - 是
+            - 新的密码；示例：Rowan@123
+    responses: []
+    rules:
+      - 专属错误：1211 用户未注册；1212 验证码已过期；1213 验证码错误；1214 新旧密码相同
+      - UI规则：最新 UI 已补齐邮箱、验证码、新密码和成功提示；确认密码仅本地校验；重置成功后返回登录页，不自动复用旧 Token。
+  - id: HOME-01
+    title: 获取用户绑定的设备列表
+    method: GET
+    path: /api/app/devices
+    authentication: Bearer Token
+    source_status: 复用 + 示例泛化
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / HOME-01 / 段落 P403 / 表 T49
+    parameters: []
+    responses:
+      - table: 50
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.room
+            - Object
+            - "-"
+            - 房间数据；包含：id、name
+          - - data.devices
+            - Array
+            - "-"
+            - 该房间的设备；包含：deviceNickname、online、bindingAt、bindingRole、device、device.id、device.name、device.mac、device.mcuVersion、device.wifiVersion、device.activatedAt、product、product.id、product.name、product.category、product.seriesName、product.modelName、product.image、showAttributes、showAttributes.unit、showAttributes…
+    rules:
+      - 专属错误：无；通用错误见第 6.4 节。
+      - UI规则：REST 返回设备元数据和首页静态字段；实时状态随后由 MQTT property/update 更新；设备卡片快速开关属于 MQTT 控制，不调用 REST 控制接口。
+  - id: PAIR-01
+    title: 获取产品列表
+    method: GET
+    path: /api/app/products
+    authentication: Bearer Token
+    source_status: 复用 + brandId 可选
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / PAIR-01 / 段落 P420 / 表 T51
+    parameters:
+      - table: 52
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Query
+            - brandId
+            - String
+            - 否
+            - 仅当同一接口需返回不同 App 内容时传入；可选值如 as、zafro；示例：as
+    responses:
+      - table: 53
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.category
+            - String
+            - WineCooler
+            - 产品品类编码
+          - - data.categoryName
+            - Object
+            - "-"
+            - 产品品类名称（国际化）；包含：zh-CN、zh-TW、en
+          - - data.products
+            - Array
+            - "-"
+            - 该品类下的产品；至少包含 id、name、modelName、image、connectType、configType、recommended、buyLink、sort、cloudPlatform。
+    rules:
+      - 专属错误：无；通用错误见第 6.4 节。
+      - UI规则：仅当不同 App 可添加的产品目录不同才传 brandId；推荐商品、排序、Shop 链接和配网方式必须由云端配置，App 不按型号写死。
+  - id: PAIR-02
+    title: 获取产品详情
+    method: GET
+    path: /api/app/products/{productID}
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / PAIR-02 / 段落 P436 / 表 T54
+    parameters:
+      - table: 55
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - productID
+            - String
+            - 是
+            - 产品ID；示例：prd_01J0ROWAN0001
+          - - Query
+            - type
+            - String
+            - 是
+            - |-
+              返回的产品介绍文案数据类型
+              url：文案链接
+              text：文案文本内容；示例：text
+    responses:
+      - table: 56
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.id
+            - String
+            - prd_01J0ROWAN0001
+            - 产品 ID
+          - - data.name
+            - String
+            - RW-WC-01
+            - 产品名称
+          - - data.category
+            - String
+            - WineCooler
+            - 产品品类
+          - - data.seriesName
+            - String
+            - RW Series
+            - 产品系列
+          - - data.modelName
+            - String
+            - RW-WC-01
+            - 产品型号
+          - - data.image
+            - String
+            - https://cdn.rowan.com/example
+            - 产品详情图列表
+          - - data.parameters
+            - Object
+            - "-"
+            - 产品参数
+          - - data.introduction
+            - String
+            - 产品介绍示例
+            - 产品介绍文案
+          - - data.buyLink
+            - String
+            - https://cdn.rowan.com/example
+            - 产品购买链接
+          - - data.connectType
+            - String
+            - wifi
+            - |-
+              连接方式
+              wifi：WiFi
+              bluetooth：蓝牙
+          - - data.configType
+            - String
+            - B
+            - |-
+              配网属性
+              A：一期配网
+              B：二期配网
+              C：蓝牙配网
+          - - data.bluetooth
+            - Boolean
+            - "true"
+            - 是否蓝牙配网
+          - - data.cloudPlatform
+            - String
+            - aws
+            - |-
+              连接云平台
+              aws：亚马逊
+              aliyun：阿里云
+          - - data.craetedAt
+            - String
+            - 2026-07-29T10:30:00Z
+            - 创建时间（UTC时间，并使用ISO-8601格式）
+    rules:
+      - 专属错误：1091 产品不存在
+      - UI规则：配网方式、连接类型和云平台以接口返回为准，App 不应按型号硬编码。
+  - id: PAIR-03
+    title: 获取产品品类
+    method: GET
+    path: /api/app/products/category
+    authentication: Bearer Token
+    source_status: 复用 + brandId 可选
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / PAIR-03 / 段落 P452 / 表 T57
+    parameters:
+      - table: 58
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Query
+            - brandId
+            - String
+            - 否
+            - 仅当同一接口需返回不同 App 内容时传入；可选值如 as、zafro；示例：as
+    responses:
+      - table: 59
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data[]
+            - Object/Array
+            - 见字段说明
+            - 包含：name、value
+    rules:
+      - 专属错误：无；通用错误见第 6.4 节。
+      - UI规则：仅当不同 App 展示不同产品品类时传 brandId；品类显示名应使用服务端多语言配置，品类 value 作为稳定标识。
+  - id: PAIR-04
+    title: 获取产品配网地址（二期配网）
+    method: GET
+    path: /api/app/device/connection
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / PAIR-04 / 段落 P468 / 表 T60
+    parameters: []
+    responses:
+      - table: 61
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.certificationURL
+            - String
+            - https://cdn.rowan.com/example
+            - 设备认证URL
+          - - data.activationURL
+            - String
+            - https://cdn.rowan.com/example
+            - 设备激活URL
+          - - data.bindingURL
+            - String
+            - https://cdn.rowan.com/example
+            - 设备绑定URL
+          - - data.otaURL
+            - String
+            - https://cdn.rowan.com/example
+            - 设备检测OTA升级URL
+    rules:
+      - 专属错误：无；通用错误见第 6.4 节。
+  - id: PAIR-05
+    title: 检查设备是否绑定成功（二期配网）
+    method: GET
+    path: /api/app/device/bindStatus
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / PAIR-05 / 段落 P483 / 表 T62
+    parameters:
+      - table: 63
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Query
+            - bindCode
+            - String
+            - 是
+            - 绑定码；示例：ABCD1234EFGH5678
+    responses:
+      - table: 64
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.userID
+            - String
+            - user_01J0ROWAN0001
+            - 用户账号
+          - - data.deviceID
+            - String
+            - dev_01J0ROWAN0001
+            - 设备ID
+          - - data.bindingRole
+            - String
+            - sa
+            - |-
+              绑定关系的角色
+              sa：管理员
+              mbr：普通成员
+              obs：观察员（为方便运维人员查看设备时使用，不统计进设备成员中）
+    rules:
+      - 专属错误：1121 设备正在绑定；1122 设备不存在；1123 绑定码不存在或已过期
+      - UI规则：轮询间隔不低于 2 秒并设置总超时；绑定成功立即停止轮询并刷新首页；连接设备、认证、发送 Wi-Fi、激活、绑定、证书和服务器连接等步骤由统一状态机映射到 UI。
+  - id: PAIR-06
+    title: 设备绑定用户（一期配网、二维码分享绑定）
+    method: PUT
+    path: /api/app/device/{deviceId}/user
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / PAIR-06 / 段落 P499 / 表 T65
+    parameters:
+      - table: 66
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceId
+            - String
+            - 是
+            - 设备ID；示例：dev_01J0ROWAN0001
+          - - Body
+            - bindCode
+            - String
+            - 否
+            - 绑定码（二维码分享绑定时必填）；示例：ABCD1234EFGH5678
+    responses:
+      - table: 67
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.userID
+            - String
+            - user_01J0ROWAN0001
+            - 用户账号
+          - - data.deviceID
+            - String
+            - dev_01J0ROWAN0001
+            - 设备ID
+          - - data.bindingRole
+            - String
+            - sa
+            - |-
+              绑定关系的角色
+              sa：管理员
+              mbr：普通成员
+              obs：观察员（为方便运维人员查看设备时使用，不统计进设备成员中）
+    rules:
+      - 专属错误：1131 绑定码与设备不匹配；1132 绑定设备不存在；1133 绑定码不存在或已过期
+      - UI规则：首次绑定者成为管理员 sa；扫码解析出 deviceId/bindCode 后调用本接口；bindCode 单次有效；绑定成功后的昵称由 MORE-04 保存。
+  - id: PAIR-07
+    title: 设备配网FAQ
+    method: GET
+    path: /api/app/products/{productID}/connectHelping
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / PAIR-07 / 段落 P515 / 表 T68
+    parameters:
+      - table: 69
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - productID
+            - String
+            - 是
+            - 产品ID；示例：prd_01J0ROWAN0001
+          - - Query
+            - type
+            - String
+            - 是
+            - |-
+              返回的数据类型
+              url：用户协议链接
+              text：用户协议文本内容；示例：url
+    responses:
+      - table: 70
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.id
+            - String
+            - faq_10001
+            - 配网FAQ ID
+          - - data.title
+            - String
+            - 设备无法进入配网模式怎么办？
+            - 帮助标题
+          - - data.content
+            - String
+            - 请确认设备已上电，并按产品说明长按配网键进入配网模式。
+            - 帮助内容，文本或链接
+          - - data.createdAt
+            - String
+            - 2026-07-29T10:30:00Z
+            - 创建时间（UTC时间，并使用ISO-8601格式）
+    rules:
+      - 专属错误：无；通用错误见第 6.4 节。
+      - UI规则：FAQ 内容按 productID 与语言返回；最新 UI 在 Wi-Fi 输入页和配网失败页提供入口；正文支持文本或受信任链接。
+  - id: DEVICE-01
+    title: 获取设备MQTT链接
+    method: GET
+    path: /api/app/devices/{deviceID}/mqtt
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / DEVICE-01 / 段落 P532 / 表 T71
+    parameters:
+      - table: 72
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备ID；示例：dev_01J0ROWAN0001
+    responses:
+      - table: 73
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.host
+            - String
+            - wss://mqtt.rowan.com/mqtt
+            - MQTT链接
+          - - data.endpoint
+            - String
+            - mqtt.rowan.com
+            - MQTT域名
+          - - data.path
+            - String
+            - /mqtt
+            - MQTT路径
+          - - data.clientID
+            - String
+            - rowan-dev-01J0ROWAN0001
+            - 客户端ID
+          - - data.username
+            - String
+            - mqtt_user_10001
+            - 用户名
+          - - data.password
+            - String
+            - temp_pwd_xxxx
+            - 密码
+          - - data.deviceID
+            - String
+            - dev_01J0ROWAN0001
+            - 设备ID
+    rules:
+      - 专属错误：1331 设备不存在；1332 您没有绑定这台设备
+      - UI规则：MQTT 凭证必须短期有效，过期前由 App 重新获取；该接口只建立通信通道，不承担设备属性控制。
+  - id: DEVICE-02
+    title: 获取设备详情
+    method: GET
+    path: /api/app/devices/{deviceID}
+    authentication: Bearer Token
+    source_status: 复用 + 示例泛化
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / DEVICE-02 / 段落 P548 / 表 T74
+    parameters:
+      - table: 75
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备ID；示例：dev_01J0ROWAN0001
+    responses:
+      - table: 76
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.deviceNickname
+            - String
+            - Living Room Wine Cooler
+            - 设备昵称
+          - - data.bindingAt
+            - String
+            - 2026-07-29T10:30:00Z
+            - 绑定时间（UTC时间，并使用ISO-8601格式）
+          - - data.bindingRole
+            - String
+            - sa
+            - |-
+              绑定关系的角色
+              sa：管理员
+              mbr：普通成员
+              obs：观察员（为方便运维人员查看设备时使用，不统计进设备成员中）
+          - - data.device
+            - Object
+            - "-"
+            - 设备数据；包含：id、name、mac、mcuVersion、wifiVersion、activatedAt
+          - - data.product
+            - Object
+            - "-"
+            - 设备所属产品数据；包含：id、name、category、seriesName、modelName、image
+    rules:
+      - 专属错误：1341 设备不存在；1342 您没有绑定这台设备
+      - UI规则：设备实时属性不依赖该接口持续轮询，应由 MQTT 上报。
+  - id: MORE-01
+    title: 获取设备已绑定用户
+    method: GET
+    path: /api/app/devices/{deviceID}/users
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / MORE-01 / 段落 P565 / 表 T77
+    parameters:
+      - table: 78
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备ID；示例：dev_01J0ROWAN0001
+    responses:
+      - table: 79
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.userID
+            - String
+            - user_01J0ROWAN0001
+            - 用户ID
+          - - data.mobile
+            - String
+            - "13884216847"
+            - 手机号码
+          - - data.email
+            - String
+            - user@example.com
+            - 电子邮箱
+          - - data.nickname
+            - String
+            - Living Room Wine Cooler
+            - 用户昵称
+          - - data.bindingRole
+            - String
+            - sa
+            - |-
+              绑定关系的角色
+              sa：管理员
+              mbr：普通成员
+              obs：观察员（为方便运维人员查看设备时使用，不统计进设备成员中）
+    rules:
+      - 专属错误：1351 设备不存在；1352 您没有绑定这台设备
+  - id: MORE-02
+    title: 解绑设备用户（解绑自己）
+    method: DELETE
+    path: /api/app/devices/{deviceID}/users/self
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / MORE-02 / 段落 P580 / 表 T80
+    parameters:
+      - table: 81
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备ID；示例：dev_01J0ROWAN0001
+    responses: []
+    rules:
+      - 专属错误：1361 设备不存在；1362 您没有绑定这台设备
+      - UI规则：首页长按多选删除时按 deviceID 逐台调用；App 汇总每台结果并对部分失败单独提示；解绑成功后清除该设备 MQTT 订阅和本地缓存。
+  - id: MORE-03
+    title: 解绑设备用户（管理员解绑普通成员）
+    method: DELETE
+    path: /api/app/devices/{deviceID}/users/{userID}
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / MORE-03 / 段落 P596 / 表 T82
+    parameters:
+      - table: 83
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备ID；示例：dev_01J0ROWAN0001
+          - - Path
+            - userID
+            - String
+            - 是
+            - 用户ID；示例：user_01J0ROWAN0001
+    responses: []
+    rules:
+      - 专属错误：1371 设备不存在；1372 您不是这台设备的管理员，不能解绑其他成员；1373 该用户没有绑定这台设备
+  - id: MORE-04
+    title: 修改设备昵称
+    method: PATCH
+    path: /api/app/devices/{deviceID}
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / MORE-04 / 段落 P611 / 表 T84
+    parameters:
+      - table: 85
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备ID；示例：dev_01J0ROWAN0001
+          - - Body
+            - nickname
+            - String
+            - 是
+            - 设备昵称；示例：Living Room Wine Cooler
+    responses: []
+    rules:
+      - 专属错误：1381 设备不存在；1382 您没有绑定这台设备
+  - id: ROOM-01
+    title: 绑定设备到房间
+    method: PUT
+    path: /api/app/devices/{deviceID}/location
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / ROOM-01 / 段落 P627 / 表 T86
+    parameters:
+      - table: 87
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备ID；示例：dev_01J0ROWAN0001
+          - - Body
+            - id
+            - Number
+            - 是
+            - 房间ID，不传或为空时解除绑定关系；示例：room_10001
+    responses:
+      - table: 88
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.id
+            - String
+            - room_10001
+            - 房间ID
+          - - data.name
+            - String
+            - Kitchen
+            - 房间名称
+    rules:
+      - 专属错误：1391 设备不存在；1392 您没有绑定这台设备；1393 房间不存在
+  - id: ROOM-02
+    title: 获取设备绑定的房间
+    method: GET
+    path: /api/app/devices/{deviceID}/location
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / ROOM-02 / 段落 P642 / 表 T89
+    parameters:
+      - table: 90
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备ID；示例：dev_01J0ROWAN0001
+    responses:
+      - table: 91
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.id
+            - Number
+            - room_10001
+            - 房间ID
+          - - data.name
+            - String
+            - Kitchen
+            - 房间名称
+    rules:
+      - 专属错误：1401 设备不存在；1402 您没有绑定这台设备
+  - id: ROOM-03
+    title: 获取用户房间
+    method: GET
+    path: /api/app/user/locations
+    authentication: Bearer Token
+    source_status: 复用 + deviceCount 扩展
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / ROOM-03 / 段落 P657 / 表 T92
+    parameters: []
+    responses:
+      - table: 93
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.id
+            - Number
+            - room_10001
+            - 房间ID
+          - - data.name
+            - String
+            - Kitchen
+            - 房间名称
+          - - data.isDefault
+            - Boolean
+            - "true"
+            - 是否默认房间
+          - - data.deviceCount
+            - Integer
+            - "2"
+            - 房间设备数量；建议扩展，供房间管理页展示
+    rules:
+      - 专属错误：无；通用错误见第 6.4 节。
+      - UI规则：建议返回 deviceCount，避免房间管理页再次遍历设备列表统计。
+  - id: ROOM-04
+    title: 新增用户房间
+    method: POST
+    path: /api/app/user/locations
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / ROOM-04 / 段落 P673 / 表 T94
+    parameters:
+      - table: 95
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Body
+            - name
+            - String
+            - 是
+            - 房间名称，不能重复；示例：Kitchen
+    responses: []
+    rules:
+      - 专属错误：1421 存在相同名称的房间
+  - id: ROOM-05
+    title: 修改用户房间名称
+    method: PATCH
+    path: /api/app/user/locations/{locationID}
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / ROOM-05 / 段落 P688 / 表 T96
+    parameters:
+      - table: 97
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - locationID
+            - String
+            - 是
+            - 房间ID；示例：room_10001
+          - - Body
+            - name
+            - String
+            - 是
+            - 房间名称，不能重复；示例：Kitchen
+    responses: []
+    rules:
+      - 专属错误：1431 房间不存在；1432 存在相同名称的房间
+  - id: ROOM-06
+    title: 保存用户房间
+    method: PUT
+    path: /api/app/user/locations
+    authentication: Bearer Token
+    source_status: 复用 + 并发保护
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / ROOM-06 / 段落 P703 / 表 T98
+    parameters:
+      - table: 99
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Body
+            - rooms
+            - Array
+            - 是
+            - （整个）房间列表（后端会整体覆盖）
+          - - Body
+            - rooms.id
+            - Number
+            - 是
+            - 房间ID（没有ID则为新增）；示例：room_10001
+          - - Body
+            - rooms.name
+            - String
+            - 是
+            - 房间名称；示例：Kitchen
+    responses: []
+    rules:
+      - 专属错误：1441 房间不存在
+      - UI规则：原接口采用整体覆盖，服务端应增加 version 或 updatedAt 乐观锁；App 提交前必须以最新房间列表为基线，避免覆盖其他终端修改。
+  - id: MORE-05
+    title: 获取设备使用帮助
+    method: GET
+    path: /api/app/devices/{deviceID}/helping
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / MORE-05 / 段落 P720 / 表 T100
+    parameters:
+      - table: 101
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备ID；示例：dev_01J0ROWAN0001
+          - - Query
+            - type
+            - String
+            - 是
+            - |-
+              返回的数据类型
+              url：用户协议链接
+              text：用户协议文本内容；示例：text
+    responses:
+      - table: 102
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.id
+            - String
+            - help_10001
+            - 设备帮助ID
+          - - data.title
+            - String
+            - 设备使用帮助
+            - 帮助标题
+          - - data.content
+            - String
+            - 请查阅设备操作、配网与日常维护说明。
+            - 帮助内容，文本或链接
+          - - data.createdAt
+            - String
+            - 2026-07-29T10:30:00Z
+            - 创建时间（UTC时间，并使用ISO-8601格式）
+    rules:
+      - 专属错误：1451 设备不存在；1452 您没有绑定这台设备
+  - id: SHARE-01
+    title: 获取设备分享二维码
+    method: GET
+    path: /api/app/devices/{deviceID}/bindCode
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / SHARE-01 / 段落 P736 / 表 T103
+    parameters:
+      - table: 104
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备ID；示例：dev_01J0ROWAN0001
+    responses:
+      - table: 105
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.deviceID
+            - String
+            - dev_01J0ROWAN0001
+            - 设备ID
+          - - data.bindCode
+            - String
+            - ABCD1234EFGH5678
+            - 绑定码
+    rules:
+      - 专属错误：1461 设备不存在；1462 您没有绑定这台设备
+      - UI规则：bindCode 应设置短有效期并限制使用次数；二维码中只保存 bindCode 和必要版本信息，不直接保存 accessToken。
+  - id: OTA-01
+    title: 检查设备是否有新MCU固件
+    method: GET
+    path: /api/app/devices/{deviceID}/ota/mcu
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / OTA-01 / 段落 P753 / 表 T106
+    parameters:
+      - table: 107
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备ID；示例：dev_01J0ROWAN0001
+    responses:
+      - table: 108
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.firmware
+            - Object
+            - "-"
+            - 固件信息；包含：id、version、remark
+          - - data.device
+            - Object
+            - "-"
+            - 设备数据；包含：id、name、mac
+    rules:
+      - 专属错误：1491 设备不存在；1492 您没有绑定这台设备
+  - id: OTA-02
+    title: 检查设备是否有新WiFi固件
+    method: GET
+    path: /api/app/devices/{deviceID}/ota/wifi
+    authentication: Bearer Token
+    source_status: 复用 + 补认证头
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / OTA-02 / 段落 P768 / 表 T109
+    parameters:
+      - table: 110
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备ID；示例：dev_01J0ROWAN0001
+    responses:
+      - table: 111
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.firmware
+            - Object
+            - "-"
+            - 固件信息；包含：id、version、remark
+          - - data.device
+            - Object
+            - "-"
+            - 设备数据；包含：id、name、mac
+    rules:
+      - 专属错误：1501 设备不存在；1502 您没有绑定这台设备
+      - UI规则：原接口文档缺少 Authorization，本版按设备权限接口补齐 Bearer Token。
+  - id: OTA-03
+    title: 开始更新设备固件
+    method: PUT
+    path: /api/app/devices/{deviceID}/ota/task
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / OTA-03 / 段落 P784 / 表 T112
+    parameters:
+      - table: 113
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备ID；示例：dev_01J0ROWAN0001
+          - - Query
+            - type
+            - String
+            - 是
+            - |-
+              固件类型
+              mcu：MCU固件
+              wifi：WiFi固件；示例：mcu
+          - - Body
+            - firmwareID
+            - String
+            - 是
+            - 固件ID；示例：fw_10001
+    responses:
+      - table: 114
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.taskID
+            - String
+            - ota_10001
+            - 更新任务ID
+    rules:
+      - 专属错误：1511 设备不存在；1512 设备已离线；1513 您没有绑定该设备；1514 固件不存在；1515 设备与固件不匹配；1516 设备已升级
+      - UI规则：升级前必须校验设备在线、固件匹配和当前升级状态；App 创建任务后进入进度页，不重复创建任务。
+  - id: OTA-04
+    title: 取消更新设备固件
+    method: DELETE
+    path: /api/app/devices/{deviceID}/ota/task
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / OTA-04 / 段落 P800 / 表 T115
+    parameters:
+      - table: 116
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备ID；示例：dev_01J0ROWAN0001
+          - - Body
+            - taskID
+            - String
+            - 是
+            - 更新任务ID；示例：ota_10001
+    responses: []
+    rules:
+      - 专属错误：1521 设备不存在；1522 您没有绑定这台设备；1523 OTA升级任务不存在
+  - id: OTA-05
+    title: 检查设备MCU固件更新结果
+    method: GET
+    path: /api/app/devices/{deviceID}/ota/task/{taskID}
+    authentication: Bearer Token
+    source_status: 直接复用
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / OTA-05 / 段落 P815 / 表 T117
+    parameters:
+      - table: 118
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备ID；示例：dev_01J0ROWAN0001
+          - - Path
+            - taskID
+            - String
+            - 是
+            - 任务ID；示例：ota_10001
+    responses:
+      - table: 119
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.result
+            - String
+            - success
+            - |-
+              更新结果
+              success：更新成功
+              failed：更是失败
+              updating：正在更新
+              cancelled：取消更新
+    rules:
+      - 专属错误：1531 设备不存在；1532 您没有绑定这台设备；1533 更新任务不存在
+      - UI规则：轮询间隔建议 3-5 秒；达到 success、failed 或 cancelled 后停止。
+  - id: USER-01
+    title: 获取用户设置
+    method: GET
+    path: /api/app/user/setting
+    authentication: Bearer Token
+    source_status: 复用 + 单位字段扩展
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / USER-01 / 段落 P832 / 表 T120
+    parameters: []
+    responses:
+      - table: 121
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.language
+            - String
+            - zh-CN
+            - |-
+              APP语言
+              zh-CN：简体中文
+              zh-TW：繁体中文
+              en：英文
+          - - data.notification
+            - Boolean
+            - "true"
+            - 是否开启消息通知
+          - - data.theme
+            - String
+            - system
+            - |-
+              APP主题
+              system：跟随系统
+              light：明亮主题
+              dark：暗黑主题
+          - - data.wallpaper
+            - Object
+            - "-"
+            - 壁纸；包含：id、name、name.zh-CN、name.zh-TW、name.en、image、image.2x
+          - - data.homeLayout
+            - String
+            - layout1
+            - 首页排版
+          - - data.temperatureUnit
+            - String
+            - F
+            - 温度单位：C / F；建议扩展
+          - - data.measurementSystem
+            - String
+            - imperial
+            - 度量制式：metric / imperial；建议扩展
+    rules:
+      - 专属错误：无；通用错误见第 6.4 节。
+      - UI规则：新增 temperatureUnit 和 measurementSystem；原有字段保持不变。
+  - id: USER-02
+    title: 修改用户设置
+    method: PATCH
+    path: /api/app/user/setting
+    authentication: Bearer Token
+    source_status: 复用 + 单位字段扩展
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / USER-02 / 段落 P848 / 表 T122
+    parameters:
+      - table: 123
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Body
+            - language
+            - String
+            - 否
+            - |-
+              APP语言
+              zh-CN：简体中文
+              zh-TW：繁体中文
+              en：英文；示例：zh-CN
+          - - Body
+            - notification
+            - Boolean
+            - 否
+            - 是否开启消息通知；示例：true
+          - - Body
+            - theme
+            - String
+            - 否
+            - |-
+              APP主题
+              system：跟随系统
+              light：明亮主题
+              dark：暗黑主题；示例：system
+          - - Body
+            - wallpaper
+            - String
+            - 否
+            - 壁纸ID；示例：wp_10001
+          - - Body
+            - homeLayout
+            - String
+            - 否
+            - 首页排版；示例：layout1
+          - - Body
+            - temperatureUnit
+            - String
+            - 否
+            - 温度单位：C / F；建议扩展；示例：F
+          - - Body
+            - measurementSystem
+            - String
+            - 否
+            - 度量制式：metric / imperial；建议扩展；示例：imperial
+    responses: []
+    rules:
+      - 专属错误：无；通用错误见第 6.4 节。
+      - UI规则：未传字段保持原值；服务端不得用 null 覆盖未修改设置；temperatureUnit 和 measurementSystem 应保持组合一致。
+  - id: TIMER-01
+    title: 获取设备定时日程
+    method: GET
+    path: /api/app/devices/{deviceID}/schedules
+    authentication: Bearer Token
+    source_status: 新增设计
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / TIMER-01 / 段落 P865 / 表 T124
+    parameters:
+      - table: 125
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备 ID；示例：dev_01J0ROWAN0001
+    responses:
+      - table: 126
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.id
+            - String
+            - sch_10001
+            - 日程 ID
+          - - data.type
+            - String
+            - periodic
+            - once / periodic
+          - - data.name
+            - String
+            - Night Schedule
+            - 日程名称
+          - - data.enabled
+            - Boolean
+            - "true"
+            - 是否启用
+          - - data.startTime
+            - String
+            - 22:00
+            - 开始时间，HH:mm
+          - - data.endTime
+            - String
+            - 07:00
+            - 结束时间，HH:mm；一次定时可为空
+          - - data.repeatType
+            - String
+            - custom
+            - once / daily / weekdays / custom
+          - - data.weekdays
+            - Array<Integer>
+            - "[1,2,3,4,5]"
+            - ISO 星期：1=周一，7=周日
+          - - data.mode
+            - String
+            - sleep
+            - 设备模式；应来自产品能力配置
+          - - data.action
+            - Object
+            - '{"power":true}'
+            - 触发时下发的目标属性
+          - - data.timeZone
+            - String
+            - America/Chicago
+            - IANA 时区
+          - - data.nextExecutionAt
+            - String
+            - 2026-07-30T03:00:00Z
+            - 下次执行时间，UTC ISO-8601
+    rules:
+      - 专属错误：1701 设备不存在；1702 无设备权限；1703 日程参数不合法；1704 日程数量超过上限
+      - UI规则：定时由云端保存和执行；设备页即时控制仍走 MQTT；服务端按 timeZone 计算 nextExecutionAt，并处理夏令时切换；mode 和 action 必须依据产品能力校验，App 不应写死跨产品枚举。
+  - id: TIMER-02
+    title: 新增设备定时日程
+    method: POST
+    path: /api/app/devices/{deviceID}/schedules
+    authentication: Bearer Token
+    source_status: 新增设计
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / TIMER-02 / 段落 P881 / 表 T127
+    parameters:
+      - table: 128
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备 ID；示例：dev_01J0ROWAN0001
+          - - Body
+            - type
+            - String
+            - 是
+            - once / periodic；示例：periodic
+          - - Body
+            - name
+            - String
+            - 否
+            - 日程名称；示例：Night Schedule
+          - - Body
+            - enabled
+            - Boolean
+            - 否
+            - 默认 true；示例：true
+          - - Body
+            - startTime
+            - String
+            - 是
+            - 开始时间，HH:mm；示例：22:00
+          - - Body
+            - endTime
+            - String
+            - 否
+            - 结束时间，HH:mm；示例：07:00
+          - - Body
+            - repeatType
+            - String
+            - 是
+            - once / daily / weekdays / custom；示例：custom
+          - - Body
+            - weekdays
+            - Array<Integer>
+            - 条件必填
+            - repeatType=custom 时必填；示例：[1,2,3,4,5]
+          - - Body
+            - mode
+            - String
+            - 否
+            - 设备模式标识；示例：sleep
+          - - Body
+            - action
+            - Object
+            - 是
+            - 执行动作；示例：{"power":true}
+          - - Body
+            - timeZone
+            - String
+            - 是
+            - IANA 时区；示例：America/Chicago
+    responses:
+      - table: 129
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.id
+            - String
+            - sch_10001
+            - 日程 ID
+          - - data.type
+            - String
+            - periodic
+            - once / periodic
+          - - data.name
+            - String
+            - Night Schedule
+            - 日程名称
+          - - data.enabled
+            - Boolean
+            - "true"
+            - 是否启用
+          - - data.startTime
+            - String
+            - 22:00
+            - 开始时间，HH:mm
+          - - data.endTime
+            - String
+            - 07:00
+            - 结束时间，HH:mm；一次定时可为空
+          - - data.repeatType
+            - String
+            - custom
+            - once / daily / weekdays / custom
+          - - data.weekdays
+            - Array<Integer>
+            - "[1,2,3,4,5]"
+            - ISO 星期：1=周一，7=周日
+          - - data.mode
+            - String
+            - sleep
+            - 设备模式；应来自产品能力配置
+          - - data.action
+            - Object
+            - '{"power":true}'
+            - 触发时下发的目标属性
+          - - data.timeZone
+            - String
+            - America/Chicago
+            - IANA 时区
+          - - data.nextExecutionAt
+            - String
+            - 2026-07-30T03:00:00Z
+            - 下次执行时间，UTC ISO-8601
+    rules:
+      - 专属错误：1701 设备不存在；1702 无设备权限；1703 日程参数不合法；1704 日程数量超过上限
+      - UI规则：定时由云端保存和执行；设备页即时控制仍走 MQTT；服务端按 timeZone 计算 nextExecutionAt，并处理夏令时切换；mode 和 action 必须依据产品能力校验，App 不应写死跨产品枚举。
+  - id: TIMER-03
+    title: 修改设备定时日程
+    method: PATCH
+    path: /api/app/devices/{deviceID}/schedules/{scheduleID}
+    authentication: Bearer Token
+    source_status: 新增设计
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / TIMER-03 / 段落 P897 / 表 T130
+    parameters:
+      - table: 131
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备 ID；示例：dev_01J0ROWAN0001
+          - - Path
+            - scheduleID
+            - String
+            - 是
+            - 日程 ID；示例：sch_10001
+          - - Body
+            - type
+            - String
+            - 是
+            - once / periodic；示例：periodic
+          - - Body
+            - name
+            - String
+            - 否
+            - 日程名称；示例：Night Schedule
+          - - Body
+            - enabled
+            - Boolean
+            - 否
+            - 默认 true；示例：true
+          - - Body
+            - startTime
+            - String
+            - 是
+            - 开始时间，HH:mm；示例：22:00
+          - - Body
+            - endTime
+            - String
+            - 否
+            - 结束时间，HH:mm；示例：07:00
+          - - Body
+            - repeatType
+            - String
+            - 是
+            - once / daily / weekdays / custom；示例：custom
+          - - Body
+            - weekdays
+            - Array<Integer>
+            - 条件必填
+            - repeatType=custom 时必填；示例：[1,2,3,4,5]
+          - - Body
+            - mode
+            - String
+            - 否
+            - 设备模式标识；示例：sleep
+          - - Body
+            - action
+            - Object
+            - 是
+            - 执行动作；示例：{"power":true}
+          - - Body
+            - timeZone
+            - String
+            - 是
+            - IANA 时区；示例：America/Chicago
+    responses:
+      - table: 132
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.id
+            - String
+            - sch_10001
+            - 日程 ID
+          - - data.type
+            - String
+            - periodic
+            - once / periodic
+          - - data.name
+            - String
+            - Night Schedule
+            - 日程名称
+          - - data.enabled
+            - Boolean
+            - "true"
+            - 是否启用
+          - - data.startTime
+            - String
+            - 22:00
+            - 开始时间，HH:mm
+          - - data.endTime
+            - String
+            - 07:00
+            - 结束时间，HH:mm；一次定时可为空
+          - - data.repeatType
+            - String
+            - custom
+            - once / daily / weekdays / custom
+          - - data.weekdays
+            - Array<Integer>
+            - "[1,2,3,4,5]"
+            - ISO 星期：1=周一，7=周日
+          - - data.mode
+            - String
+            - sleep
+            - 设备模式；应来自产品能力配置
+          - - data.action
+            - Object
+            - '{"power":true}'
+            - 触发时下发的目标属性
+          - - data.timeZone
+            - String
+            - America/Chicago
+            - IANA 时区
+          - - data.nextExecutionAt
+            - String
+            - 2026-07-30T03:00:00Z
+            - 下次执行时间，UTC ISO-8601
+    rules:
+      - 专属错误：1701 设备不存在；1702 无设备权限；1703 日程参数不合法；1704 日程数量超过上限
+      - UI规则：定时由云端保存和执行；设备页即时控制仍走 MQTT；服务端按 timeZone 计算 nextExecutionAt，并处理夏令时切换；mode 和 action 必须依据产品能力校验，App 不应写死跨产品枚举。
+  - id: TIMER-04
+    title: 启用或停用设备定时日程
+    method: PUT
+    path: /api/app/devices/{deviceID}/schedules/{scheduleID}/enabled
+    authentication: Bearer Token
+    source_status: 新增设计
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / TIMER-04 / 段落 P913 / 表 T133
+    parameters:
+      - table: 134
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备 ID；示例：dev_01J0ROWAN0001
+          - - Path
+            - scheduleID
+            - String
+            - 是
+            - 日程 ID；示例：sch_10001
+          - - Body
+            - enabled
+            - Boolean
+            - 是
+            - 是否启用；示例：true
+    responses:
+      - table: 135
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.enabled
+            - Boolean
+            - "true"
+            - 更新后的启用状态
+    rules:
+      - 专属错误：1701 设备不存在；1702 无设备权限；1703 日程参数不合法；1704 日程数量超过上限
+      - UI规则：定时由云端保存和执行；设备页即时控制仍走 MQTT；服务端按 timeZone 计算 nextExecutionAt，并处理夏令时切换；mode 和 action 必须依据产品能力校验，App 不应写死跨产品枚举。
+  - id: TIMER-05
+    title: 删除设备定时日程
+    method: DELETE
+    path: /api/app/devices/{deviceID}/schedules/{scheduleID}
+    authentication: Bearer Token
+    source_status: 新增设计
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / TIMER-05 / 段落 P929 / 表 T136
+    parameters:
+      - table: 137
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - deviceID
+            - String
+            - 是
+            - 设备 ID；示例：dev_01J0ROWAN0001
+          - - Path
+            - scheduleID
+            - String
+            - 是
+            - 日程 ID；示例：sch_10001
+    responses: []
+    rules:
+      - 专属错误：1701 设备不存在；1702 无设备权限；1703 日程参数不合法；1704 日程数量超过上限
+      - UI规则：定时由云端保存和执行；设备页即时控制仍走 MQTT；服务端按 timeZone 计算 nextExecutionAt，并处理夏令时切换；mode 和 action 必须依据产品能力校验，App 不应写死跨产品枚举。
+  - id: APP-01
+    title: 获取 App 启动配置
+    method: GET
+    path: /api/app/config
+    authentication: 可选 Bearer
+    source_status: 新增设计
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / APP-01 / 段落 P946 / 表 T138
+    parameters:
+      - table: 139
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Query
+            - brandId
+            - String
+            - 是
+            - App 品牌标识；示例：as
+          - - Query
+            - platform
+            - String
+            - 是
+            - ios / android
+          - - Query
+            - appVersion
+            - String
+            - 是
+            - 当前 App 版本
+          - - Query
+            - regionCode
+            - String
+            - 否
+            - 国家或地区代码
+          - - Query
+            - language
+            - String
+            - 否
+            - 语言；示例：zh-CN
+    responses:
+      - table: 140
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.configVersion
+            - String
+            - cfg_20260806_01
+            - 配置版本
+          - - data.features
+            - Object
+            - '{"feedback":true}'
+            - 功能开关
+          - - data.minVersion
+            - String
+            - 1.0.0
+            - 最低可用版本
+          - - data.thirdPartyProviders
+            - Array
+            - '["apple","google"]'
+            - 可用第三方登录方式
+          - - data.support
+            - Object
+            - "-"
+            - 官网、客服及帮助入口摘要
+    rules:
+      - |-
+        专属错误：1801 配置不存在；1802 当前版本被禁用
+        UI规则：启动配置允许短期缓存；配置拉取失败时使用最近一次有效配置，不得阻断紧急登录和设备控制。
+  - id: THING-01
+    title: 获取已发布物模型
+    method: GET
+    path: /api/app/products/{productID}/thing-model
+    authentication: Bearer Token
+    source_status: 新增设计
+    source:
+      id: SRC-PRODUCT-001
+      locator: 第 8 章 / THING-01 / 段落 P1070 / 表 T183
+    parameters:
+      - table: 184
+        rows:
+          - - 位置
+            - 参数名
+            - 类型
+            - 必填
+            - 说明 / 示例
+          - - Path
+            - productID
+            - String
+            - 是
+            - 产品 ID
+          - - Query
+            - version
+            - String
+            - 否
+            - 指定版本；缺省返回当前已发布版本
+    responses:
+      - table: 185
+        rows:
+          - - 字段/模型
+            - 类型
+            - 示例
+            - 说明
+          - - data.version
+            - String
+            - tm_3
+            - 物模型版本
+          - - data.attributes
+            - Array
+            - "-"
+            - 标识、类型、范围、单位、读写权限
+          - - data.services
+            - Array
+            - "-"
+            - 服务标识及输入/输出参数
+          - - data.events
+            - Array
+            - "-"
+            - 事件标识、等级及参数
+          - - data.etag
+            - String
+            - W/"tm_3"
+            - 缓存校验值
+    rules:
+      - |-
+        专属错误：1861 物模型不存在；1862 版本未发布
+        UI规则：App 只读取已发布且不可变的版本；MQTT 属性/服务/事件标识必须与本接口一致。

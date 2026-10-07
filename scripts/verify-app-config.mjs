@@ -1,11 +1,12 @@
 import { spawnSync } from 'node:child_process';
 import { createRequire } from 'node:module';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parse } from 'yaml';
 
 const repositoryRoot = dirname(dirname(fileURLToPath(import.meta.url)));
-const mobileRoot = join(repositoryRoot, 'apps', 'mobile');
+const applicationRoot = repositoryRoot;
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, 'utf8'));
@@ -19,7 +20,13 @@ function assert(condition, message) {
 
 function assertCommandWiring() {
   const rootPackage = readJson(join(repositoryRoot, 'package.json'));
-  const mobilePackage = readJson(join(mobileRoot, 'package.json'));
+  assert(rootPackage.main === 'expo-router/entry', 'Root package must be the Expo Router application');
+  assert(!Object.values(rootPackage.dependencies ?? {}).some((value) => value.startsWith('workspace:')), 'Workspace dependencies must be removed');
+  const pnpmSettings = parse(readFileSync(join(repositoryRoot, 'pnpm-workspace.yaml'), 'utf8'));
+  assert(!pnpmSettings.packages && !pnpmSettings.catalog && !pnpmSettings.catalogs, 'pnpm settings must not define a monorepo');
+  const lock = parse(readFileSync(join(repositoryRoot, 'pnpm-lock.yaml'), 'utf8'));
+  assert(Object.keys(lock.importers).length === 1 && lock.importers['.'], 'Lockfile must describe only the root application');
+  assert(!existsSync(join(repositoryRoot, 'apps')) && !existsSync(join(repositoryRoot, 'packages')), 'Old monorepo directories must be removed');
   const requiredRootScripts = [
     'dev',
     'android',
@@ -32,19 +39,19 @@ function assertCommandWiring() {
     'verify:config',
     'verify',
   ];
-  const requiredMobileScripts = ['dev', 'android', 'ios', 'prebuild', 'export:android'];
+  const requiredAppScripts = ['dev', 'android', 'ios', 'prebuild', 'export:android'];
 
   for (const script of requiredRootScripts) {
     assert(rootPackage.scripts?.[script], `Missing root script: ${script}`);
   }
 
-  for (const script of requiredMobileScripts) {
-    assert(mobilePackage.scripts?.[script], `Missing mobile script: ${script}`);
+  for (const script of requiredAppScripts) {
+    assert(rootPackage.scripts?.[script], `Missing app script: ${script}`);
   }
 
   assert(
-    !mobilePackage.scripts?.['reset-project'],
-    'Generated reset-project command must be removed from the mobile package',
+    !rootPackage.scripts?.['reset-project'],
+    'Generated reset-project command must be removed from the application package',
   );
 
   assert(
@@ -53,8 +60,8 @@ function assertCommandWiring() {
   );
 }
 
-const requireFromMobile = createRequire(join(mobileRoot, 'package.json'));
-const expoCli = requireFromMobile.resolve('expo/bin/cli');
+const requireFromApp = createRequire(join(applicationRoot, 'package.json'));
+const expoCli = requireFromApp.resolve('expo/bin/cli');
 
 function createBuildEnvironment(overrides = {}) {
   const environment = {
@@ -72,7 +79,7 @@ function createBuildEnvironment(overrides = {}) {
 
 function executeExpoConfig(overrides = {}) {
   return spawnSync(process.execPath, [expoCli, 'config', '--type', 'public', '--json'], {
-    cwd: mobileRoot,
+    cwd: applicationRoot,
     encoding: 'utf8',
     env: createBuildEnvironment(overrides),
   });

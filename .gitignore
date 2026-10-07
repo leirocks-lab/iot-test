@@ -4,10 +4,8 @@ node_modules/
 
 # Expo and generated native projects
 .expo/
-apps/*/.expo/
-apps/*/dist/
-apps/*/android/
-apps/*/ios/
+/android/
+/ios/
 web-build/
 
 # Local environment and secrets
@@ -38,3 +36,15 @@ Thumbs.db
 
 # Office temporary files
 ~$*
+
+# Expo-generated files and local diagnostics
+expo-env.d.ts
+.kotlin/
+*.orig.*
+*.key
+*.pem
+.metro-health-check*
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+example

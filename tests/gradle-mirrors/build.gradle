@@ -12,6 +12,18 @@ buildscript {
 }
 
 def userHome = gradle.gradleUserHomeDir.canonicalPath
+if (gradle.startParameter.projectProperties.lateDetachedConflict == 'true') {
+    buildscript.repositories.find { it.url.toString().endsWith('/central') }.credentials {
+        username = 'fixture'
+        password = 'not-a-secret'
+    }
+    // Detached configurations never enter configurations.all. Offline mode keeps
+    // this security regression test from making any authenticated HTTP request.
+    def probe = buildscript.configurations.detachedConfiguration(
+        buildscript.dependencies.create('fixture.mirror:missing:0.0.0'))
+    probe.resolve()
+    throw new GradleException('Late detached authentication guard was not invoked')
+}
 tasks.register('verifyMirrorRepositories') {
     doLast {
         assert userHome
