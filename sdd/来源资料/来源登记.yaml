@@ -346,3 +346,10 @@ sources:
         sha256: 3134b0f34d097ce4b0fc4fe31b0918656c0dce33452f2ed71fc149d80ead3f3a
       - path: docs/ui/首页备份-长按编辑.png
         sha256: 61c272f78fdcd0443bda5ef470dac5f122cbdca33fa644be9fe6af5f629955a4
+  - id: SRC-FIRMWARE-001
+    path: docs/ROWAN_IoT模组固件功能需求说明书_V1.1_双协议兼容版.docx
+    kind: file
+    version: V1.1
+    collected_at: 2026-10-07
+    sha256: 8fd187b705ac37af2d8d724965c310342a560f3a31f6ff640ba31cd345e4622c
+    role: 用户指定的范围内BLE/Wi-Fi配网/MQTT模拟依据；评审稿，G项不构成真实契约

@@ -1,0 +1,55 @@
+import type { Language } from '../services/models';
+// English is the fallback language. Resource keys never alter protocol field names.
+const translations: Record<string, readonly [string,string]> = {
+  'Welcome home.':['欢迎回家','歡迎回家'],'Connecting your everyday spaces.':['连接你的日常生活','連接你的日常生活'],
+  'Welcome back':['欢迎回来','歡迎回來'],'One account. A connected home.':['一个账号，连接整个家','一個帳號，連接整個家'],
+  'Create your account':['创建账号','建立帳號'],'Reset your password':['重置密码','重設密碼'],
+  Email:['邮箱','電子郵件'],Password:['密码','密碼'],'Confirm password':['确认密码','確認密碼'],'Verification code':['验证码','驗證碼'],
+  'Send code':['发送验证码','傳送驗證碼'],'Sign in':['登录','登入'],'Register':['注册','註冊'],'Reset password':['重置密码','重設密碼'],
+  'Create account':['注册账号','註冊帳號'],'Forgot password':['忘记密码','忘記密碼'],'Back to sign in':['返回登录','返回登入'],
+  'Use password':['使用密码登录','使用密碼登入'],'Use verification code':['使用验证码登录','使用驗證碼登入'],
+  'Search country or region':['搜索国家或地区','搜尋國家或地區'],'Privacy policy':['隐私政策','隱私政策'],'Terms of service':['用户协议','使用者協議'],
+  'I agree to both agreements':['我同意两份协议','我同意兩份協議'],'Reading complete':['已完成阅读','已完成閱讀'],'Scroll to the end to finish reading':['请阅读至末尾','請閱讀至末尾'],
+  'Please wait…':['请稍候…','請稍候…'],Retry:['重试','重試'],Cancel:['取消','取消'],Confirm:['确认','確認'],
+  Home:['首页','首頁'],Store:['商城','商城'],Mine:['我的','我的'],'Coming soon':['暂未开放','暫未開放'],'Your home':['我的家','我的家'],
+  Rooms:['房间管理','房間管理'],'All rooms':['全屋','全屋'],'Add device':['添加设备','新增裝置'],'Scan QR code':['扫一扫','掃描二維碼'],
+  Offline:['离线','離線'],'Powered on':['已开启','已開啟'],'Powered off':['已关闭','已關閉'],'Turn on':['开启','開啟'],'Turn off':['关闭','關閉'],
+  'Waiting…':['等待设备回报…','等待裝置回報…'],Refresh:['刷新','重新整理'],'No devices yet. Add your first device.':['暂无设备，添加第一台设备','尚無裝置，新增第一台裝置'],
+  'No devices in this room':['此房间暂无设备','此房間尚無裝置'],'Remove selected':['解除所选绑定','解除所選綁定'],'Cancel selection':['取消选择','取消選取'],
+  'Room name':['房间名称','房間名稱'],'New room name':['新房间名称','新房間名稱'],'Add room':['添加房间','新增房間'],'No rooms yet':['暂无房间','尚無房間'],
+  'Save name':['保存名称','儲存名稱'],Rename:['重命名','重新命名'],Delete:['删除','刪除'],'Save order':['保存排序','儲存排序'],'Discard and reload':['放弃并刷新','放棄並重新整理'],
+  Preferences:['偏好设置','偏好設定'],'Make it yours':['设置我的应用','設定我的應用'],'Sign out':['退出登录','登出'],
+  Language:['语言','語言'],Notifications:['通知','通知'],Appearance:['外观','外觀'],Units:['单位','單位'],'Notification preference':['通知开关','通知開關'],
+  'Allow notifications':['允许通知','允許通知'],'Open system settings':['打开系统设置','開啟系統設定'],system:['跟随系统','跟隨系統'],light:['浅色','淺色'],dark:['深色','深色'],
+  metric:['公制','公制'],imperial:['英制','英制'],Wallpaper:['壁纸','桌布'],'Home layout':['首页布局','首頁版面'],
+  'Wallpaper options are not yet defined':['壁纸候选尚未定义','桌布選項尚未定義'],'Layout options are not yet defined':['布局样式尚未定义','版面樣式尚未定義'],
+  'Find your device':['找到你的设备','尋找你的裝置'],Recommended:['推荐产品','推薦產品'],'Select product':['选择产品','選擇產品'],'Pairing help':['配网帮助','配網說明'],
+  'Use a 2.4 GHz Wi-Fi network. Keep your device in pairing mode.':['使用 2.4 GHz Wi-Fi，并保持设备处于配网模式。','使用 2.4 GHz Wi-Fi，並保持裝置處於配網模式。'],
+  'Scan Bluetooth devices':['扫描蓝牙设备','掃描藍牙裝置'],'Scanning…':['正在扫描…','正在掃描…'],'Scan complete':['扫描完成','掃描完成'],
+  'No matching devices. Check pairing mode and retry.':['未发现匹配设备，请检查配网模式后重试。','未發現符合裝置，請檢查配網模式後重試。'],
+  'Wi-Fi name':['Wi-Fi 名称','Wi-Fi 名稱'],'Wi-Fi password':['Wi-Fi 密码','Wi-Fi 密碼'],'Connect device':['连接设备','連接裝置'],'Pairing…':['正在配网…','正在配網…'],
+  'Device added':['设备已添加','裝置已新增'],'Device nickname (optional)':['设备昵称（可跳过）','裝置暱稱（可略過）'],Finish:['完成','完成'],'Skip nickname':['跳过昵称','略過暱稱'],
+  'Choose another product':['选择其他产品','選擇其他產品'],Device:['设备','裝置'],More:['更多','更多'],'Online · Synced':['在线 · 已同步','在線 · 已同步'],
+  'Not synced · Last confirmed values':['未同步 · 显示最近确认值','未同步 · 顯示最近確認值'],'Waiting for device…':['等待设备回报…','等待裝置回報…'],
+  'Alarm is active until a recovery report arrives.':['收到设备恢复回报前，告警保持有效。','收到裝置恢復回報前，警報維持有效。'],
+  Power:['电源','電源'],TargetTemperature:['目标温度','目標溫度'],CurrentTemperature:['当前温度','目前溫度'],TargetHumidity:['目标湿度','目標濕度'],CurrentHumidity:['当前湿度','目前濕度'],
+  Mode:['模式','模式'],Light:['灯光','燈光'],Brightness:['亮度','亮度'],ChildLock:['童锁','兒童鎖'],normal:['标准','標準'],sleep:['睡眠','睡眠'],auto:['自动','自動'],
+  Enable:['启用','啟用'],Disable:['停用','停用'],Apply:['应用目标值','套用目標值'],'Cleaning timer':['清洁计时','清潔計時'],'Reset cleaning timer':['重置清洁计时','重設清潔計時'],Synchronize:['同步设备','同步裝置'],
+  Schedules:['定时日程','定時排程'],'Schedule name':['日程名称','排程名稱'],'Start time (HH:mm)':['开始时间（HH:mm）','開始時間（HH:mm）'],'End time (HH:mm)':['结束时间（HH:mm）','結束時間（HH:mm）'],
+  'Time zone (IANA)':['时区（IANA）','時區（IANA）'],Action:['执行动作','執行動作'],'Power on':['开机','開機'],'Power off':['关机','關機'],once:['一次定时','單次定時'],periodic:['周期日程','週期排程'],
+  daily:['每天','每天'],weekdays:['周一至周五','週一至週五'],custom:['自定义星期','自訂星期'],'Save schedule':['保存日程','儲存排程'],'Add schedule':['添加日程','新增排程'],
+  'No schedules yet':['暂无日程','尚無排程'],'Next execution unavailable':['下次执行时间不可用','下次執行時間無法取得'],Edit:['编辑','編輯'],
+  'Device settings':['设备设置','裝置設定'],'Device nickname':['设备昵称','裝置暱稱'],Room:['房间','房間'],Unassigned:['未分房','未分房'],Members:['设备成员','裝置成員'],
+  'Remove member':['移除成员','移除成員'],'Share device':['分享设备','分享裝置'],'Device manual & FAQ':['设备手册与常见问题','裝置手冊與常見問題'],'Firmware updates':['固件升级','韌體更新'],
+  'Remove my binding':['解除本人绑定','解除本人綁定'],Help:['帮助','說明'],'Check for updates':['检查更新','檢查更新'],'Start update':['开始升级','開始更新'],
+  'Already up to date':['已是最新版本','已是最新版本'],'Cancel update':['请求取消升级','要求取消更新'],'Generate new code':['生成新分享码','產生新分享碼'],
+  'Only one account can accept this code. It expires after five minutes.':['此分享码仅供一个账号使用，五分钟后失效。','此分享碼僅供一個帳號使用，五分鐘後失效。'],
+  'Wallpaper is unavailable':['当前壁纸资源不可用','目前桌布資源無法使用'],
+  'Allow camera':['允许使用相机','允許使用相機'],'Confirm shared device':['确认接受分享','確認接受分享'],'Confirm product':['确认产品','確認產品'],'Scan again':['重新扫描','重新掃描'],
+};
+export function translate(text:string,language:Language) {
+  if(language==='en')return text;
+  const suffix=text.endsWith(' ✓')?' ✓':'';
+  const key=suffix?text.slice(0,-2):text;
+  return (translations[key]?.[language==='zh-CN'?0:1]??key)+suffix;
+}

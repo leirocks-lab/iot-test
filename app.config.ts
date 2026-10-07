@@ -3,9 +3,14 @@ import 'tsx/cjs';
 import type { ConfigContext, ExpoConfig } from 'expo/config';
 
 import { getAppIdentity } from './src/config/brand';
+import { communicationConfig } from './src/services/config';
 
 export default ({ config }: ConfigContext): ExpoConfig => {
   const identity = getAppIdentity(process.env.APP_BRAND, process.env.APP_ENV);
+  const communication = communicationConfig({ environment: identity.environment,
+    httpMode: process.env.ROWAN_HTTP_MODE as 'mock' | 'real' | undefined,
+    deviceMode: process.env.ROWAN_DEVICE_MODE as 'mock' | 'real' | undefined,
+    apiBaseUrl: process.env.ROWAN_APP_API_BASE_URL });
 
   return {
     ...config,
@@ -37,6 +42,9 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     plugins: [
       'expo-router',
       'expo-dev-client',
+      'expo-secure-store',
+      ['expo-camera', { cameraPermission: '允许 ROWAN 扫描设备及分享二维码', recordAudioAndroid: false }],
+      'expo-notifications',
       [
         'expo-splash-screen',
         {
@@ -53,10 +61,10 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     extra: {
       ...config.extra,
       brandId: identity.brandId,
-      environment: identity.environment,
       androidPackage: identity.androidPackage,
       iosBundleIdentifier: identity.iosBundleIdentifier,
       themeId: identity.themeId,
+      ...communication,
     },
   };
 };

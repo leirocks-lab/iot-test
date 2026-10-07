@@ -16,6 +16,8 @@ export interface HttpRequest {
   readonly path: string;
   readonly headers?: Readonly<Record<string, string>>;
   readonly body?: unknown;
+  readonly query?: Readonly<Record<string, string | number | boolean | undefined>>;
+  readonly signal?: AbortSignal;
 }
 
 export interface HttpResponse<T> {

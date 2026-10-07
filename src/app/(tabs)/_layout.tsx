@@ -1,0 +1,5 @@
+import { Redirect, Tabs } from 'expo-router';
+import { Text } from 'react-native';
+import { translate } from '../../ui/i18n';
+import { useApp, useColors } from '../../ui/context';
+export default function TabLayout(){const {runtime,navigationLocked}=useApp(),c=useColors();if(!runtime?.service.session)return <Redirect href="/auth"/>;return <Tabs screenListeners={{tabPress:e=>{if(navigationLocked)e.preventDefault();}}} screenOptions={{headerShown:false,tabBarActiveTintColor:c.primary,tabBarInactiveTintColor:c.muted,tabBarStyle:{backgroundColor:c.surface,borderTopColor:c.border},tabBarIcon:()=>null}}><Tabs.Screen name="home" options={{title:translate('Home',runtime.service.language),tabBarIcon:({color})=><Text style={{color,fontSize:20}}>⌂</Text>}}/><Tabs.Screen name="store" options={{title:translate('Store',runtime.service.language),tabBarIcon:({color})=><Text style={{color,fontSize:20}}>▤</Text>}}/><Tabs.Screen name="mine" options={{title:translate('Mine',runtime.service.language),tabBarIcon:({color})=><Text style={{color,fontSize:20}}>○</Text>}}/></Tabs>;}

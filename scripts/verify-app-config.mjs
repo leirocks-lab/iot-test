@@ -128,12 +128,14 @@ function main() {
   assertConfigFailure({ APP_BRAND: 'other' }, 'Unknown APP_BRAND: other');
   assertConfigFailure({ APP_ENV: 'staging' }, 'Unknown APP_ENV: staging');
 
+  assertConfigFailure({APP_ENV:'production',ROWAN_HTTP_MODE:'mock'},'Production requires real transports');
+  assertConfigFailure({ROWAN_HTTP_MODE:'real',ROWAN_APP_API_BASE_URL:'http://insecure.invalid'},'HTTPS');
   const variants = [
     ['development', 'com.rowan.iot.dev'],
     ['preview', 'com.rowan.iot.preview'],
     ['production', 'com.rowan.iot'],
   ].map(([environment, identifier]) => {
-    const config = readExpoConfig({ APP_BRAND: 'rowan', APP_ENV: environment });
+    const config = readExpoConfig({ APP_BRAND: 'rowan', APP_ENV: environment, ...(environment==='production'?{ROWAN_APP_API_BASE_URL:'https://api.example.invalid'}:{}) });
     assertIdentity(config, identifier, environment);
     return config;
   });
