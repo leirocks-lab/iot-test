@@ -1,0 +1,96 @@
+import org.gradle.api.GradleException
+import org.gradle.api.artifacts.repositories.MavenArtifactRepository
+import org.gradle.util.GradleVersion
+
+// Only exact standard HTTPS endpoints qualify. Never rewrite signed/custom URLs.
+URI mirrorUrl(URI source) {
+    if (source == null || source.scheme != 'https' || source.userInfo != null ||
+        source.query != null || source.fragment != null || !(source.port in [-1, 443])) {
+        return source
+    }
+    def path = source.path?.replaceAll('/+$', '') ?: ''
+    def host = source.host?.toLowerCase(Locale.ROOT)
+    if ((host == 'dl.google.com' && path in ['/dl/android/maven2', '/android/maven2']) ||
+        (host == 'maven.google.com' && path == '')) {
+        return URI.create('https://maven.aliyun.com/repository/google')
+    }
+    if (host in ['repo.maven.apache.org', 'repo1.maven.org'] && path == '/maven2') {
+        return URI.create('https://maven.aliyun.com/repository/central')
+    }
+    if (host == 'plugins.gradle.org' && path == '/m2') {
+        return URI.create('https://maven.aliyun.com/repository/gradle-plugin')
+    }
+    return source
+}
+
+def mirrorRepository = { repository ->
+    if (!(repository instanceof MavenArtifactRepository)) return
+    URI original = repository.url
+    URI mirrored = mirrorUrl(original)
+    boolean isMirror = original?.toString() in [
+        'https://maven.aliyun.com/repository/google',
+        'https://maven.aliyun.com/repository/central',
+        'https://maven.aliyun.com/repository/gradle-plugin'
+    ]
+    if (mirrored == original && !isMirror) return
+
+    // Gradle's ordinary credentials getter creates empty credentials. Prefer the
+    // read-only configured property when available; never log credential values.
+    boolean hasCredentials
+    if (repository.hasProperty('configuredCredentials')) {
+        hasCredentials = repository.configuredCredentials.present
+    } else {
+        try {
+            def credentials = repository.credentials
+            hasCredentials = credentials.username != null || credentials.password != null
+        } catch (IllegalArgumentException ignored) {
+            hasCredentials = true // Non-password authentication must not be forwarded.
+        }
+    }
+    if (hasCredentials || !repository.authentication.empty) {
+        throw new GradleException("Aliyun mirror credential conflict in repository '${repository.name}'; refusing to forward authentication.")
+    }
+    if (mirrored != original) {
+        repository.setUrl(mirrored) // Preserve the object, filters, ordering and metadata.
+        logger.info("[Aliyun Maven] ${original} -> ${mirrored}")
+    }
+}
+
+def watchRepositories = { repositories -> repositories.all(mirrorRepository) }
+def guardResolution = { configurations, repositories ->
+    configurations.all { configuration ->
+        configuration.incoming.beforeResolve { repositories.each(mirrorRepository) }
+    }
+}
+def settingsDependencyRepositories = null
+
+if (GradleVersion.current() >= GradleVersion.version('6.0')) {
+    gradle.beforeSettings { settings ->
+        watchRepositories(settings.pluginManagement.repositories)
+        settings.pluginManagement.resolutionStrategy.eachPlugin {
+            settings.pluginManagement.repositories.each(mirrorRepository)
+        }
+        if (settings.hasProperty('dependencyResolutionManagement')) {
+            settingsDependencyRepositories = settings.dependencyResolutionManagement.repositories
+            watchRepositories(settingsDependencyRepositories)
+        }
+        watchRepositories(settings.buildscript.repositories)
+        guardResolution(settings.buildscript.configurations, settings.buildscript.repositories)
+    }
+    gradle.settingsEvaluated { settings ->
+        settings.pluginManagement.repositories.each(mirrorRepository)
+        settingsDependencyRepositories?.each(mirrorRepository)
+    }
+} else {
+    logger.warn('[Aliyun Maven] Gradle < 6.0 cannot safely mirror settings plugin repositories; upgrade Gradle or configure that project explicitly.')
+}
+
+gradle.beforeProject { project ->
+    watchRepositories(project.repositories)
+    watchRepositories(project.buildscript.repositories)
+    guardResolution(project.configurations, project.repositories)
+    if (settingsDependencyRepositories != null) {
+        guardResolution(project.configurations, settingsDependencyRepositories)
+    }
+    guardResolution(project.buildscript.configurations, project.buildscript.repositories)
+}

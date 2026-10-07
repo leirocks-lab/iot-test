@@ -1,0 +1,24 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    assert repositories.collect { it.url.toString() } == [
+        'https://maven.aliyun.com/repository/google',
+        'https://maven.aliyun.com/repository/central',
+        'https://maven.aliyun.com/repository/gradle-plugin'
+    ] : 'Buildscript repositories were not mirrored before classpath resolution'
+}
+
+def userHome = gradle.gradleUserHomeDir.canonicalPath
+tasks.register('verifyMirrorRepositories') {
+    doLast {
+        assert userHome
+        println 'PASS: pre-resolution settings, strict repository mode, buildscript and child'
+        println "Gradle user home: ${userHome}"
+    }
+}
+tasks.register('verifyIncludedMirrorRepositories') {
+    dependsOn gradle.includedBuild('included').task(':verifyIncludedMirrorRepositories')
+}
