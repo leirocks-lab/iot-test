@@ -44,6 +44,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       'expo-dev-client',
       'expo-secure-store',
       ['expo-camera', { cameraPermission: '允许 ROWAN 扫描设备及分享二维码', recordAudioAndroid: false }],
+      ['expo-image-picker', { photosPermission: '允许 ROWAN 识别所选图片中的设备二维码', microphonePermission: false }],
       'expo-notifications',
       [
         'expo-splash-screen',
