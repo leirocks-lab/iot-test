@@ -1,2 +1,59 @@
-import Svg, { Defs, LinearGradient, Rect, Stop, Path, Circle } from 'react-native-svg';
-export function DeviceGlyph({humidity=false}:{humidity?:boolean}){return <Svg width={112} height={128} viewBox="0 0 112 128" accessibilityLabel={humidity?'Dehumidifier':'Wine cooler'}><Defs><LinearGradient id="body" x1="0" y1="0" x2="1" y2="1"><Stop offset="0" stopColor="#EFF3F5"/><Stop offset="1" stopColor="#BFCBD2"/></LinearGradient></Defs><Rect x="26" y="12" width="60" height="102" rx={humidity?16:5} fill="url(#body)"/><Path d="M86 16 L96 24 L96 109 L86 114 Z" fill="#A7B5BD"/>{humidity?<><Path d="M35 28 H77 M35 35 H77 M35 42 H77 M35 49 H77" stroke="#8B9DA8" strokeWidth="2"/><Rect x="36" y="72" width="38" height="31" rx="5" fill="#E5ECEF"/><Circle cx="66" cy="20" r="2" fill="#208DC4"/></>:<><Rect x="33" y="25" width="46" height="76" rx="2" fill="#263B4D"/><Path d="M38 42 H74 M38 60 H74 M38 78 H74" stroke="#8C9CA6"/><Path d="M42 38 H49 M57 38 H64 M42 56 H49 M57 56 H64 M42 74 H49 M57 74 H64" stroke="#BEAF8C" strokeWidth="5"/><Rect x="75" y="50" width="2" height="24" fill="#E8EEF1"/><Rect x="47" y="16" width="18" height="4" rx="1" fill="#4BB5CB"/></>}<Rect x="33" y="114" width="7" height="4" rx="1" fill="#73858F"/><Rect x="74" y="114" width="7" height="4" rx="1" fill="#73858F"/></Svg>;}
+import Svg, {
+    Circle,
+    Defs,
+    LinearGradient,
+    Path,
+    Rect,
+    Stop,
+} from "react-native-svg";
+export function DeviceGlyph({ humidity = false }: { humidity?: boolean }) {
+  return (
+    <Svg
+      width={112}
+      height={128}
+      viewBox="0 0 112 128"
+      accessibilityLabel={humidity ? "Dehumidifier" : "Wine cooler"}
+    >
+      <Defs>
+        <LinearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+          <Stop offset="0" stopColor="#EFF3F5" />
+          <Stop offset="1" stopColor="#BFCBD2" />
+        </LinearGradient>
+      </Defs>
+      <Rect
+        x="26"
+        y="12"
+        width="60"
+        height="102"
+        rx={humidity ? 16 : 5}
+        fill="url(#body)"
+      />
+      <Path d="M86 16 L96 24 L96 109 L86 114 Z" fill="#A7B5BD" />
+      {humidity ? (
+        <>
+          <Path
+            d="M35 28 H77 M35 35 H77 M35 42 H77 M35 49 H77"
+            stroke="#8B9DA8"
+            strokeWidth="2"
+          />
+          <Rect x="36" y="72" width="38" height="31" rx="5" fill="#E5ECEF" />
+          <Circle cx="66" cy="20" r="2" fill="#208DC4" />
+        </>
+      ) : (
+        <>
+          <Rect x="33" y="25" width="46" height="76" rx="2" fill="#263B4D" />
+          <Path d="M38 42 H74 M38 60 H74 M38 78 H74" stroke="#8C9CA6" />
+          <Path
+            d="M42 38 H49 M57 38 H64 M42 56 H49 M57 56 H64 M42 74 H49 M57 74 H64"
+            stroke="#BEAF8C"
+            strokeWidth="5"
+          />
+          <Rect x="75" y="50" width="2" height="24" fill="#E8EEF1" />
+          <Rect x="47" y="16" width="18" height="4" rx="1" fill="#4BB5CB" />
+        </>
+      )}
+      <Rect x="33" y="114" width="7" height="4" rx="1" fill="#73858F" />
+      <Rect x="74" y="114" width="7" height="4" rx="1" fill="#73858F" />
+    </Svg>
+  );
+}
