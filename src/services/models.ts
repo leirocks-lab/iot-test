@@ -1,5 +1,6 @@
 export type Language = 'zh-CN' | 'zh-TW' | 'en';
 export type Role = 'sa' | 'mbr' | 'obs';
+export interface BindingResult { deviceID: string; userID: string; bindingRole: Role }
 export interface Settings {
   language: Language; notification: boolean; theme: 'system' | 'light' | 'dark';
   wallpaper: { id: string; name: Record<Language, string>; image: string } | null;

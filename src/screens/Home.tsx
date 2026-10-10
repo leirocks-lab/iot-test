@@ -34,7 +34,7 @@ export default function Home(){
     <View style={styles.row}><Label large>Your home</Label><Button secondary title="Rooms" disabled={!!selected.length} onPress={()=>router.push('/rooms')}/></View>
     <ScrollView horizontal showsHorizontalScrollIndicator={false}><View style={styles.row}><Button title="All rooms" secondary={room!=='all'} disabled={!!selected.length} onPress={()=>{setRoom('all');void runtime?.service.preference('homeRoom','all');}}/>{groups?.filter(g=>g.room.id).map(g=><Button key={g.room.id} title={g.room.name} secondary={room!==g.room.id} disabled={!!selected.length} onPress={()=>{setRoom(g.room.id!);void runtime?.service.preference('homeRoom',g.room.id!);}}/>)}</View></ScrollView>
     <ErrorText error={action.error}/>{action.busy&&<Busy/>}
-    {groups&&devices.length===0&&<Empty text="No devices yet. Add your first device."/>}
+    {groups&&devices.length===0&&<><Empty text="No devices yet. Add your first device."/><Button title="Add device" disabled={!!selected.length} onPress={()=>setMenu(true)}/></>}
     {groups&&devices.length>0&&visible.length===0&&<Empty text="No devices in this room"/>}
     <View style={{flexDirection:'row',flexWrap:'wrap',justifyContent:'space-between'}}>{visible.map(d=><DeviceCard key={d.device.id} device={d} selected={selected.includes(d.device.id)} editing={!!selected.length} onSelect={()=>toggle(d.device.id)}/>)}</View>
     {selected.length>0?<Card><Label>{selected.length} selected</Label><Button title="Remove selected" danger disabled={action.busy} onPress={remove}/><Button secondary title="Cancel selection" onPress={()=>setSelected([])}/></Card>:<Button secondary title="Refresh" disabled={action.busy} onPress={()=>void run(load)}/>}

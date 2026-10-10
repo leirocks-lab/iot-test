@@ -1,5 +1,5 @@
 import { simulateMcu } from './mcu';
-import { ApiError, type Role } from '../services/models';
+import { ApiError, type BindingResult, type Role } from '../services/models';
 import { MockDatabase, products } from '../services/store';
 import { validateProperties } from '../services/http';
 import { decodeFrame, deriveKey, encodeFrame, fragment, handshakeDigest, parseAdvertisement, reassemble, utf8, type DiscoveredDevice } from './ble';
@@ -16,23 +16,27 @@ export interface DeviceTransport {
   shadowGet(deviceID:string,userID:string):Promise<ShadowMessage>;
   subscribe(deviceID:string,userID:string,listener:(topic:string,message:ShadowMessage)=>void):()=>void;
   publish(deviceID:string,userID:string,message:ShadowMessage):Promise<void>;
+  releaseProvision?(bindCode:string):void;
 }
 export const mockProfile = {version:'mock-v1',scanTimeout:30000,ackTimeout:5000,routerTimeout:60000,bindInterval:3000,bindAttempts:10,controlTimeout:10000,mtu:128};
 export async function pause(ms:number,signal?:AbortSignal) {
   if(signal?.aborted)throw new ApiError(499,'操作已取消');
   await new Promise<void>((resolve,reject)=>{
-    const abort=()=>{clearTimeout(timer);reject(new ApiError(499,'操作已取消'));};
+    const abort=()=>{clearTimeout(timer);signal?.removeEventListener('abort',abort);reject(new ApiError(499,'操作已取消'));};
     const timer=setTimeout(()=>{signal?.removeEventListener('abort',abort);resolve();},ms);
     signal?.addEventListener('abort',abort,{once:true});
   });
 }
 // Timers are replaceable by test clocks; aborting a budget also stops adapter work.
 export async function withBudget<T>(work:(signal:AbortSignal)=>Promise<T>,ms:number,message:string,signal?:AbortSignal):Promise<T> {
+  if(signal?.aborted)throw new ApiError(499,'操作已取消');
   const controller=new AbortController();let timer:ReturnType<typeof setTimeout>|undefined;
-  const abort=()=>controller.abort();signal?.addEventListener('abort',abort,{once:true});
-  if(signal?.aborted)controller.abort();
-  try { return await Promise.race([work(controller.signal),new Promise<T>((_,reject)=>{timer=setTimeout(()=>{reject(new ApiError(408,message));controller.abort();},ms);})]); }
-  finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);}
+  let rejectCancelled:(error:Error)=>void=()=>undefined;
+  const stopped=new Promise<never>((_,reject)=>{rejectCancelled=reject;});
+  const abort=()=>{rejectCancelled(new ApiError(499,'操作已取消'));controller.abort();};
+  signal?.addEventListener('abort',abort,{once:true});
+  try { return await Promise.race([work(controller.signal),stopped,new Promise<never>((_,reject)=>{timer=setTimeout(()=>{reject(new ApiError(408,message));controller.abort();},ms);})]); }
+  finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);controller.abort();}
 }
 export class MockDeviceTransport implements DeviceTransport {
   fault:DeviceFault;
@@ -40,11 +44,14 @@ export class MockDeviceTransport implements DeviceTransport {
   private listeners=new Map<string,Set<{userID:string;fn:(topic:string,message:ShadowMessage)=>void}>>();
   executionTrace:{protocol:string;request:string|Uint8Array}[]=[];
   private exchanges=new Map<string,{step:number;validated:boolean;parameters:Record<number,string>;generation?:string}>();
+  releaseProvision(bindCode:string){const exchange=this.exchanges.get(bindCode);if(exchange)for(const key of Object.keys(exchange.parameters))delete exchange.parameters[Number(key)];this.exchanges.delete(bindCode);}
   constructor(public db:MockDatabase,options:{delay?:number;fault?:DeviceFault}={}){this.delay=options.delay??180;this.fault=options.fault??'none';}
-  async scan(signal?:AbortSignal) {
+  async scan(signal?:AbortSignal):Promise<DiscoveredDevice[]> {
     await pause(this.delay,signal);if(this.fault==='disconnect')throw new ApiError(61,'蓝牙已关闭');
+    if(this.fault==='permission')throw new ApiError(403,'蓝牙权限未授权');
     const adverts=[{handle:'mock-ble-wine',service:'0822',manufacturer:new Uint8Array([0,0,0x80,0xa0,0x36,0xd5,0x1a,0xac,7,...utf8('ADD6830')])},{handle:'mock-ble-humidity',service:'0922',manufacturer:new Uint8Array([0,0,0x80,0xa0,0x36,0xd5,0x1a,0xad,7,...utf8('RW-DH01')])}];
-    return [...new Map(adverts.map(a=>{const d=parseAdvertisement(a);return [d.mac,d];})).values()];
+    // mock-v1 registry resolves firmware model identities; pages never infer product capability from a name.
+    return [...new Map(adverts.map(a=>{const d=parseAdvertisement(a);return [d.mac,{...d,productID:products.find(p=>p.modelName===d.model)?.id}];})).values()];
   }
   async exchange(input:ProvisionInput,packets:Uint8Array[],signal?:AbortSignal) {
     await pause(this.delay,signal);if(this.fault==='disconnect')throw new ApiError(65,'蓝牙连接已断开');
@@ -135,7 +142,11 @@ export class MockDeviceTransport implements DeviceTransport {
 }
 export class Provisioner {
   constructor(private transport:DeviceTransport) {}
-  async run(input:ProvisionInput,onStatus:(status:string)=>void,signal?:AbortSignal) {
+  async run(input:ProvisionInput,onStatus:(status:string)=>void,signal?:AbortSignal,confirmBinding?:(signal?:AbortSignal)=>Promise<BindingResult>) {
+    try{return await this.execute(input,onStatus,signal,confirmBinding);}
+    finally{this.transport.releaseProvision?.(input.bindCode);}
+  }
+  private async execute(input:ProvisionInput,onStatus:(status:string)=>void,signal?:AbortSignal,confirmBinding?:(signal?:AbortSignal)=>Promise<BindingResult>) {
     const key=deriveKey(input.mac,input.model);
     const send=async(command:number,value:string,expected?:number)=>{
       const packets=fragment(encodeFrame(command,utf8(value),key),mockProfile.mtu);
@@ -153,6 +164,8 @@ export class Provisioner {
     for(let i=0;i<values.length;i++){onStatus(`参数 ${i+1}/10`);await send(i+1,values[i],0x81+i);}
     await withBudget(s=>this.transport.provision(input,onStatus,s),mockProfile.routerTimeout,'配网等待超时',signal);
     onStatus('确认绑定');
+    // App flows confirm through PAIR-05; the legacy transport query remains for protocol-only callers.
+    if(confirmBinding)return confirmBinding(signal);
     for(let attempt=0;attempt<mockProfile.bindAttempts;attempt++) {
       try{return await this.transport.binding(input);}catch(error){if(!(error instanceof ApiError)||error.code!==404||attempt===9)throw error;await pause(mockProfile.bindInterval,signal);}
     }

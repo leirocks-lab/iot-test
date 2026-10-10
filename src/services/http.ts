@@ -94,7 +94,7 @@ export class MockHttpClient implements HttpClient {
     }
     if(path==='/api/app/device/connection')return ok({certificationURL:'https://mock.rowan.invalid/device/certification',activationURL:'https://mock.rowan.invalid/device/activation',bindingURL:'https://mock.rowan.invalid/enduser/bindDevice/',otaURL:'https://mock.rowan.invalid/ota/updatecheck/'});
     if(path==='/api/app/device/bindStatus') {
-      const result=state.binds[String(query.bindCode)];if(!result||result.userID!==userID)throw new ApiError(404,'尚未确认绑定');return ok(result);
+      const result=state.binds[String(query.bindCode)];if(!result||result.userID!==userID)throw new ApiError(1123,'绑定码不存在或已过期');return ok(result);
     }
     const binding=path.match(/^\/api\/app\/device\/([^/]+)\/user$/);
     if(binding&&method==='PUT') {

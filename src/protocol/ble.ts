@@ -42,7 +42,7 @@ export function reassemble(packets:readonly Uint8Array[]) {
   return out;
 }
 export interface Advertisement {handle:string;service:string;manufacturer:Uint8Array;rssi?:number;manufacturerIncludesCompany?:boolean}
-export interface DiscoveredDevice {handle:string;mac:string;model:string;service:string;rssi:number}
+export interface DiscoveredDevice {handle:string;mac:string;model:string;service:string;rssi:number;productID?:string}
 export function parseAdvertisement(ad:Advertisement):DiscoveredDevice {
   if(!['0822','0922',...BLE_UUID.services].includes(ad.service.toLowerCase()))throw new Error('Unsupported BLE service');
   const offset=ad.manufacturerIncludesCompany===false?0:2, data=ad.manufacturer;
