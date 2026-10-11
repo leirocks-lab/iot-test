@@ -112,6 +112,27 @@ describe('真实HTTP边界',()=>{
   it('does not invent unassigned location from an undocumented empty response',async()=>{
     await expect(setup(ok({})).client.request({method:'GET',path:'/api/app/devices/dev/location'})).rejects.toMatchObject({code:502});
   });
+  it('normalizes documented omitted location data but rejects null, empty or invalid room ids',async()=>{
+    const {client}=setup({code:0,message:'成功',success:true}),service=new RowanService(client,new MemoryStorage());
+    expect(await service.location('dev')).toEqual({id:null,name:''});
+    for(const data of [null,{}, {id:7,name:'Not a string'}])
+      await expect(setup(ok(data)).client.request({method:'GET',path:'/api/app/devices/dev/location'})).rejects.toMatchObject({code:502});
+    const denied=setup({code:1392,msg:'无绑定权限'});
+    await expect(new RowanService(denied.client,new MemoryStorage()).location('dev')).rejects.toMatchObject({code:1392});
+  });
+  it('validates the actual room choices without creating IDs or converting failed reads to empty lists',async()=>{
+    const service=new RowanService(setup(ok([{id:'room_actual',name:'Study'}])).client,new MemoryStorage());
+    expect((await service.rooms()).rooms).toEqual([{id:'room_actual',name:'Study'}]);
+    for(const data of [[{id:12,name:'Bad ID'}],[{id:'room',name:null}],{}])
+      await expect(new RowanService(setup(ok(data)).client,new MemoryStorage()).rooms()).rejects.toMatchObject({code:502});
+    await expect(new RowanService(setup({code:403,msg:'拒绝'}).client,new MemoryStorage()).rooms()).rejects.toMatchObject({code:403});
+  });
+  it('passes cancellation and encoded IDs through all settings reads and room writes',async()=>{
+    const {client,fetcher}=setup(ok([])),service=new RowanService(client,new MemoryStorage()),controller=new AbortController();
+    await service.rooms(controller.signal);await service.members('dev/one',controller.signal);await service.moveDevice('dev/one','room',controller.signal);
+    expect(fetcher.mock.calls.map(call=>call[0])).toEqual(['https://iot.example.test/module/app-api/user/locations','https://iot.example.test/module/app-api/devices/dev%2Fone/users','https://iot.example.test/module/app-api/devices/dev%2Fone/location']);
+    expect(fetcher.mock.calls.every(call=>call[1]?.signal===controller.signal)).toBe(true);
+  });
   it('rejects unrecognised model structure rather than allowing Mock fields to enable control',async()=>{
     const result=ok({version:'v1',attributes:[{code:'power',dataType:'bool'}],services:[],events:[]});
     await expect(setup(result).client.request({method:'GET',path:'/api/app/products/prd/thing-model'})).rejects.toMatchObject({code:503});

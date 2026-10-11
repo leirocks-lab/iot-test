@@ -5,6 +5,7 @@ import { ApiError, type ApiEnvelope, type BindingResult, type DeviceView, type H
 export class RowanService {
   session: Session | null = null;
   private epoch = 0;
+  get sessionRevision() { return this.epoch; }
   private sessionListeners=new Set<()=>void>();
   onSessionChange(listener:()=>void){this.sessionListeners.add(listener);return ()=>{this.sessionListeners.delete(listener);};}
   private sessionChanged(){for(const listener of this.sessionListeners)listener();}
@@ -93,21 +94,21 @@ export class RowanService {
   async device(id:string,signal?:AbortSignal) {return this.request<DeviceView>({method:'GET',path:`/api/app/devices/${encodeURIComponent(id)}`,signal});}
   async products(signal?:AbortSignal) {return this.request<{category:string;products:Product[]}[]>({method:'GET',path:'/api/app/products',query:{brandId:'rowan'},signal});}
   async product(id:string,signal?:AbortSignal) {return this.request<Product>({method:'GET',path:`/api/app/products/${encodeURIComponent(id)}`,query:{type:'text'},signal});}
-  async model(productID:string) {return this.request<ThingModel>({method:'GET',path:`/api/app/products/${encodeURIComponent(productID)}/thing-model`});}
+  async model(productID:string,signal?:AbortSignal) {return this.request<ThingModel>({method:'GET',path:`/api/app/products/${encodeURIComponent(productID)}/thing-model`,signal});}
   async mqtt(id:string,signal?:AbortSignal){return this.request<Record<string,string>>({method:'GET',path:`/api/app/devices/${encodeURIComponent(id)}/mqtt`,signal});}
   async connection(signal?:AbortSignal) {return this.request<Record<string,string>>({method:'GET',path:'/api/app/device/connection',signal});}
   async bindStatus(bindCode:string,signal?:AbortSignal) {return this.request<BindingResult>({method:'GET',path:'/api/app/device/bindStatus',query:{bindCode},signal});}
   async renameDevice(id:string,nickname:string,signal?:AbortSignal) {return this.request({method:'PATCH',path:`/api/app/devices/${encodeURIComponent(id)}`,body:{nickname},signal});}
   async unbind(id:string) {return this.request({method:'DELETE',path:`/api/app/devices/${id}/users/self`});}
-  async rooms() {
-    const response=await this.response<Room[]>({method:'GET',path:'/api/app/user/locations'});
+  async rooms(signal?:AbortSignal) {
+    const response=await this.response<Room[]>({method:'GET',path:'/api/app/user/locations',signal});
     return {rooms:response.data.data,version:response.headers.etag??response.headers.ETag??''};
   }
   async createRoom(name:string) {return this.request({method:'POST',path:'/api/app/user/locations',body:{name}});}
   async renameRoom(id:string,name:string) {return this.request({method:'PATCH',path:`/api/app/user/locations/${id}`,body:{name}});}
   async saveRooms(rooms:Room[],version:string) {return this.request({method:'PUT',path:'/api/app/user/locations',body:{rooms:rooms.map(({id,name})=>({id,name}))},headers:{'If-Match':version}});}
-  async moveDevice(id:string,roomID:string|null) {return this.request({method:'PUT',path:`/api/app/devices/${encodeURIComponent(id)}/location`,body:{id:roomID}});}
-  async location(id:string) {return this.request<{id:string|null;name:string}>({method:'GET',path:`/api/app/devices/${encodeURIComponent(id)}/location`});}
+  async moveDevice(id:string,roomID:string|null,signal?:AbortSignal) {return this.request({method:'PUT',path:`/api/app/devices/${encodeURIComponent(id)}/location`,body:{id:roomID},signal});}
+  async location(id:string,signal?:AbortSignal) {return this.request<{id:string|null;name:string}>({method:'GET',path:`/api/app/devices/${encodeURIComponent(id)}/location`,signal});}
   async settings() {return this.request<Settings>({method:'GET',path:'/api/app/user/setting'});}
   async updateSettings(patch:Partial<Settings>) {
     const round=this.epoch;
@@ -125,7 +126,7 @@ export class RowanService {
   }
   async enableSchedule(id:string,scheduleID:string,enabled:boolean) {return this.request({method:'PUT',path:`/api/app/devices/${id}/schedules/${scheduleID}/enabled`,body:{enabled}});}
   async deleteSchedule(id:string,scheduleID:string) {return this.request({method:'DELETE',path:`/api/app/devices/${id}/schedules/${scheduleID}`});}
-  async members(id:string) {return this.request<{userID:string;email:string;nickname:string;bindingRole:string}[]>({method:'GET',path:`/api/app/devices/${id}/users`});}
+  async members(id:string,signal?:AbortSignal) {return this.request<{userID:string;email:string;nickname:string;bindingRole:string}[]>({method:'GET',path:`/api/app/devices/${encodeURIComponent(id)}/users`,signal});}
   async removeMember(id:string,userID:string) {return this.request({method:'DELETE',path:`/api/app/devices/${id}/users/${userID}`});}
   async share(id:string) {return this.request<{deviceID:string;bindCode:string}>({method:'GET',path:`/api/app/devices/${id}/bindCode`});}
   async acceptShare(id:string,bindCode:string,signal?:AbortSignal) {return this.request<BindingResult>({method:'PUT',path:`/api/app/device/${encodeURIComponent(id)}/user`,body:{bindCode},signal});}

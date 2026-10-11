@@ -98,7 +98,14 @@ export function realResponseData(req:HttpRequest,value:unknown):unknown {
   if(/^\/api\/app\/devices\/[^/]+$/.test(path))return device(value);
   if(path.endsWith('/connectHelping')||path.endsWith('/helping'))return helpArticles(value);
   if(path.endsWith('/thing-model'))return thingModel(value);
+  if(path==='/api/app/user/locations')return array(value).map(item=>{
+    const room=object(item);
+    if(typeof room.name!=='string')throw new ApiError(502,'候选房间名称尚未确认');
+    return {...room,id:id(room.id),name:room.name};
+  });
   if(/^\/api\/app\/devices\/[^/]+\/location$/.test(path)){
+    // The deployed GET contract explicitly omits data when no room is assigned.
+    if(value===undefined)return {id:null,name:''};
     const room=object(value);
     if(room.id!==null&&typeof room.id!=='string')throw new ApiError(502,'设备房间归属尚未确认，请重试读取');
     return {...room,name:text(room.name)??''};

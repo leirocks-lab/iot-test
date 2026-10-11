@@ -2,7 +2,7 @@ import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AppState, Pressable, ScrollView, Text, View } from 'react-native';
 import type { DeviceView, HomeGroup } from '../services/models';
-import { ShadowSession } from '../protocol/device';
+import { ShadowSession, withBudget } from '../protocol/device';
 import { useApp, useColors } from '../ui/context';
 import { Busy, Button, Card, Empty, ErrorText, Label, Page, confirm, styles, useAction } from '../ui/kit';
 import { DeviceGlyph } from '../ui/device-glyph';
@@ -15,14 +15,27 @@ function DeviceCard({device,selected,editing,onSelect}:{device:DeviceView;select
 export default function Home(){
   const {runtime,lockNavigation}=useApp(),action=useAction(),run=action.run,[groups,setGroups]=useState<HomeGroup[]|null>(null),[room,setRoom]=useState('all'),[selected,setSelected]=useState<string[]>([]),[menu,setMenu]=useState(false);
   useEffect(()=>{lockNavigation(selected.length>0);return ()=>lockNavigation(false);},[selected.length,lockNavigation]);
-  const refreshRef=useRef<Promise<void>|null>(null),mounted=useRef(true);
-  useEffect(()=>{mounted.current=true;return ()=>{mounted.current=false;};},[]);
-  const load=useCallback(async()=>{if(!runtime?.service.session)return;if(refreshRef.current)return refreshRef.current;
-    const userID=runtime.service.userID;
-    const task=(async()=>{const data=await runtime.service.home(),saved=await runtime.service.preference('homeRoom');if(!mounted.current||runtime.service.session?.userID!==userID)return;setGroups(data);setRoom(saved&&data.some(g=>g.room?.id===saved)?saved:'all');})();
-    refreshRef.current=task;try{await task;}finally{if(refreshRef.current===task)refreshRef.current=null;}
-  },[runtime]);
-  useFocusEffect(useCallback(()=>{void run(load);const sub=AppState.addEventListener('change',state=>{if(state==='active')void run(load);});return ()=>sub.remove();},[load,run]));
+  const [loading,setLoading]=useState(false),[loadError,setLoadError]=useState('');
+  const refreshRef=useRef<AbortController|null>(null),focused=useRef(false),readOwner=useRef('');
+  const sessionRevision=runtime?.service.sessionRevision;
+  const load=useCallback(async()=>{
+    if(!runtime?.service.session||sessionRevision===undefined||!focused.current)return;
+    const userID=runtime.service.userID,context=`${userID}:${sessionRevision}`;
+    if(readOwner.current!==context){readOwner.current=context;setGroups(null);setSelected([]);setRoom('all');}
+    refreshRef.current?.abort();const controller=new AbortController();refreshRef.current=controller;
+    const current=()=>focused.current&&!controller.signal.aborted&&refreshRef.current===controller&&runtime.service.session?.userID===userID&&runtime.service.sessionRevision===sessionRevision;
+    setLoading(true);setLoadError('');
+    try {
+      const data=await withBudget(signal=>runtime.service.home(signal),10000,'首页刷新超时，请重试',controller.signal);
+      const saved=await withBudget(()=>runtime.service.preference('homeRoom'),10000,'首页房间选择读取超时',controller.signal);
+      if(!current())return;setGroups(data);setRoom(saved&&data.some(group=>group.room?.id===saved)?saved:'all');
+    }catch(error){if(current())setLoadError(error instanceof Error?error.message:String(error));}
+    finally{if(current()){setLoading(false);refreshRef.current=null;}}
+  },[runtime,sessionRevision]);
+  useFocusEffect(useCallback(()=>{
+    focused.current=true;void load();const sub=AppState.addEventListener('change',state=>{if(state==='active')void load();});
+    return ()=>{focused.current=false;refreshRef.current?.abort();refreshRef.current=null;sub.remove();};
+  },[load]));
   const devices=groups?.flatMap(g=>g.devices)??[],visible=room==='all'?devices:groups?.find(g=>g.room?.id===room)?.devices??[];
   const toggle=(id:string)=>setSelected(s=>s.includes(id)?s.filter(v=>v!==id):[...s,id]);
   const remove=()=>confirm('Remove devices','只解除你与所选设备的绑定，不恢复出厂或删除其他成员。',()=>void run(async()=>{
@@ -33,10 +46,10 @@ export default function Home(){
     {menu&&<Card><Button title="Scan QR code" onPress={()=>router.push('/scan')}/><Button secondary title="Add device" onPress={()=>router.push('/add')}/></Card>}
     <View style={styles.row}><Label large>Your home</Label><Button secondary title="Rooms" disabled={!!selected.length} onPress={()=>router.push('/rooms')}/></View>
     <ScrollView horizontal showsHorizontalScrollIndicator={false}><View style={styles.row}><Button title="All rooms" secondary={room!=='all'} disabled={!!selected.length} onPress={()=>{setRoom('all');void runtime?.service.preference('homeRoom','all');}}/>{groups?.filter(g=>g.room?.id).map(g=><Button key={g.room?.id} title={g.room?.name??''} secondary={room!==g.room?.id} disabled={!!selected.length} onPress={()=>{setRoom(g.room?.id!);void runtime?.service.preference('homeRoom',g.room?.id!);}}/>)}</View></ScrollView>
-    <ErrorText error={action.error}/>{action.busy&&<Busy/>}
+    <ErrorText error={action.error}/><ErrorText error={loadError}/>{(action.busy||loading)&&<Busy/>}
     {groups&&devices.length===0&&<><Empty text="No devices yet. Add your first device."/><Button title="Add device" disabled={!!selected.length} onPress={()=>setMenu(true)}/></>}
     {groups&&devices.length>0&&visible.length===0&&<Empty text="No devices in this room"/>}
     <View style={{flexDirection:'row',flexWrap:'wrap',justifyContent:'space-between'}}>{visible.map(d=><DeviceCard key={d.device.id} device={d} selected={selected.includes(d.device.id)} editing={!!selected.length} onSelect={()=>toggle(d.device.id)}/>)}</View>
-    {selected.length>0?<Card><Label>{selected.length} selected</Label><Button title="Remove selected" danger disabled={action.busy} onPress={remove}/><Button secondary title="Cancel selection" onPress={()=>setSelected([])}/></Card>:<Button secondary title="Refresh" disabled={action.busy} onPress={()=>void run(load)}/>}
+    {selected.length>0?<Card><Label>{selected.length} selected</Label><Button title="Remove selected" danger disabled={action.busy} onPress={remove}/><Button secondary title="Cancel selection" onPress={()=>setSelected([])}/></Card>:<Button secondary title="Refresh" disabled={action.busy||loading} onPress={()=>void load()}/>}
   </Page>;
 }
