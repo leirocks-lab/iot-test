@@ -102,9 +102,15 @@ export class AddDeviceFlow {
     return this.operate(async(round,signal)=>{
       this.update({stage:'selecting',message:'正在确认产品能力',candidate:undefined,product:undefined});
       try {
-        if(!candidate.productID)throw new ApiError(503,'设备产品身份尚未解析，不能仅凭广播名称配网');
-        const product=await this.service.product(candidate.productID,signal);this.check(round,signal);
-        if(!product.bluetooth || product.connectType!=='wifi' || product.configType!=='B')throw new ApiError(503,'当前产品配网路线尚未接入');
+          let productID=candidate.productID;
+          if(!productID&&this.options.mode==='real'){
+            const groups=await this.service.products(signal);this.check(round,signal);
+            const matches=groups.flatMap(group=>group.products).filter(product=>product.modelName===candidate.model);
+            if(matches.length===1)productID=matches[0].id;
+          }
+          if(!productID)throw new ApiError(503,'设备产品身份尚未解析或不唯一，不能仅凭广播名称配网');
+          const product=await this.service.product(productID,signal);this.check(round,signal);
+        if(!product.bluetooth || product.connectType!=='wifi' || !(product.configTypes?.includes('B')??product.configType==='B'))throw new ApiError(503,'当前产品配网路线尚未接入');
         this.bindCode=undefined;
         this.update({stage:'selected',candidate,product,message:'设备已选择，请确认 Wi-Fi'});
       } catch(error){this.check(round,signal);this.update({stage:'failed'});throw error;}

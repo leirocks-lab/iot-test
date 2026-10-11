@@ -8,8 +8,9 @@ export function requestUrl(base: string, req: HttpRequest) {
   for(const [key,value] of Object.entries(req.query??{}))if(value!==undefined)url.searchParams.set(key,String(value));
   return url.toString();
 }
+export type HttpFetcher=(url:string,init?:RequestInit)=>Promise<Response>;
 export class FetchHttpClient implements HttpClient {
-  constructor(private base: string, private fetcher: typeof fetch = fetch) {
+  constructor(private base: string, private fetcher: HttpFetcher = fetch) {
     if(!/^https:\/\//.test(base))throw new Error('真实 API 必须配置 HTTPS 地址');
   }
   async request<T>(req: HttpRequest): Promise<HttpResponse<T>> {

@@ -31,7 +31,9 @@ function AddContent({runtime}:{runtime:NonNullable<ReturnType<typeof useApp>['ru
       }
       const groups=await runtime.service.products(controller.signal);
       if(!focused.current || controller.signal.aborted)return;
-      setCatalog(groups.flatMap(group=>group.products).sort((a,b)=>a.sort-b.sort));
+      const products=groups.flatMap(group=>group.products);
+      if(products.every(product=>product.sort!==undefined))products.sort((a,b)=>a.sort!-b.sort!);
+      setCatalog(products);
       if(productID){const product=await runtime.service.product(productID,controller.signal);if(!controller.signal.aborted && focused.current)setChoice(product);}
     });
     const subscription=AppState.addEventListener('change',status=>{
@@ -69,7 +71,7 @@ function AddContent({runtime}:{runtime:NonNullable<ReturnType<typeof useApp>['ru
       {wifiForm&&<>
         <Label muted>Use a 2.4 GHz Wi-Fi network. Keep your device in pairing mode.</Label>
         <WifiStatus/>
-        {runtime.config.deviceMode==='mock'?<Field label="模拟 Wi-Fi 名称" value={ssid} editable={!busy} onChangeText={setSsid}/>:<Label muted>真实 SSID 读取与设备驱动尚未接入，暂无法继续真实配网。</Label>}
+        {runtime.config.deviceMode==='mock'?<Field label="模拟 Wi-Fi 名称" value={ssid} editable={!busy} onChangeText={setSsid}/>:<Label muted>真实配网所需网络、绑定码与工厂确认参数尚未配置，暂无法继续。</Label>}
         <Field label={runtime.config.deviceMode==='mock'?'模拟 Wi-Fi 密码':'Wi-Fi password'} secureTextEntry={!showPassword} value={password} editable={!busy} onChangeText={setPassword}/>
         <Button secondary title={showPassword?'隐藏密码':'显示密码'} disabled={busy} onPress={()=>setShowPassword(value=>!value)}/>
         <ErrorText error={error}/>

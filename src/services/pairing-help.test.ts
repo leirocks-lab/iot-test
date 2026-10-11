@@ -16,7 +16,7 @@ describe('PAIR-07 Mock contract',()=>{
   ] as const)('returns existing text in %s with product and language request',async(language,title,word)=>{
     const {http,service}=await setup();service.session!.setting.language=language as Language;
     const request=vi.spyOn(http,'request'),result=await service.help('prd_humidity',true);
-    expect(result.title).toBe(title);expect(result.content).toContain(word);
+    expect(result).toHaveLength(1);expect(result[0].title).toBe(title);expect(result[0].content).toContain(word);
     expect(request).toHaveBeenCalledWith(expect.objectContaining({method:'GET',path,query:{type:'text'},headers:expect.objectContaining({'Accept-Language':language})}));
   });
   it.each(['missing','bare','refresh','expired','invalid'] as const)('rejects %s authorization instead of serving public help',async(kind)=>{

@@ -10,7 +10,9 @@ export default ({ config }: ConfigContext): ExpoConfig => {
   const communication = communicationConfig({ environment: identity.environment,
     httpMode: process.env.ROWAN_HTTP_MODE as 'mock' | 'real' | undefined,
     deviceMode: process.env.ROWAN_DEVICE_MODE as 'mock' | 'real' | undefined,
-    apiBaseUrl: process.env.ROWAN_APP_API_BASE_URL });
+    apiBaseUrl: process.env.ROWAN_APP_API_BASE_URL,
+    iotApiBaseUrl: process.env.ROWAN_IOT_API_BASE_URL,
+    tenantID: process.env.ROWAN_TENANT_ID });
 
   return {
     ...config,
@@ -42,6 +44,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     plugins: [
       'expo-router',
       'expo-dev-client',
+      ['react-native-ble-plx', { isBackgroundEnabled: false, bluetoothAlwaysPermission: '允许 ROWAN 发现并连接配网设备' }],
       'expo-secure-store',
       ['expo-camera', { cameraPermission: '允许 ROWAN 扫描设备及分享二维码', recordAudioAndroid: false }],
       ['expo-image-picker', { photosPermission: '允许 ROWAN 识别所选图片中的设备二维码', microphonePermission: false }],

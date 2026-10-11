@@ -8,6 +8,7 @@ export type DeviceFault='none'|'drop-fragment'|'out-of-order'|'wrong-ack'|'crc'|
 export interface ProvisionInput {userID:string;mac:string;model:string;ssid:string;password:string;token:string;bindCode:string;productID:string;modelID:string;seriesName?:string;urls?:Record<string,string>}
 export interface ShadowMessage {version:number;clientToken?:string;state?:{desired?:Record<string,unknown>;reported?:Record<string,number|string|boolean>;[key:string]:unknown};code?:number}
 export interface DeviceTransport {
+  dispose?():void|Promise<void>;
   scan(signal?:AbortSignal):Promise<DiscoveredDevice[]>;
   exchange(input:ProvisionInput,packets:Uint8Array[],signal?:AbortSignal):Promise<Uint8Array[]>;
   challenge(input:ProvisionInput,signal?:AbortSignal):Promise<Uint8Array[]>;
@@ -206,8 +207,8 @@ export class ShadowSession {
 export class UnavailableDeviceTransport implements DeviceTransport {
   private unavailable():never{throw new ApiError(503,'真实设备驱动尚未接入');}
   async scan():Promise<DiscoveredDevice[]>{return this.unavailable();}
-  async exchange():Promise<Uint8Array[]>{return this.unavailable();}
-  async challenge():Promise<Uint8Array[]>{return this.unavailable();}
+  async exchange(_input:ProvisionInput,_packets:Uint8Array[],_signal?:AbortSignal):Promise<Uint8Array[]>{return this.unavailable();}
+  async challenge(_input:ProvisionInput,_signal?:AbortSignal):Promise<Uint8Array[]>{return this.unavailable();}
   async provision():Promise<void>{return this.unavailable();}
   async binding():Promise<{deviceID:string;bindingRole:Role;userID:string}>{return this.unavailable();}
   async shadowGet():Promise<ShadowMessage>{return this.unavailable();}

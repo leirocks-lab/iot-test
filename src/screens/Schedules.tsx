@@ -7,7 +7,7 @@ import { Button, Card, Empty, ErrorText, Field, Label, Page, confirm, styles, us
 const newSchedule=():ScheduleInput=>({type:'once',name:'',enabled:true,startTime:'',repeatType:'once',weekdays:[],action:{Power:1},timeZone:Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC'});
 export default function Schedules(){
   const {id}=useLocalSearchParams<{id:string}>(),{runtime}=useApp(),action=useAction(),run=action.run,[list,setList]=useState<Schedule[]|null>(null),[draft,setDraft]=useState<ScheduleInput|null>(null),[model,setModel]=useState<ThingModel|null>(null);
-  const load=useCallback(async()=>{const [s,d]=await Promise.all([runtime!.service.schedules(id),runtime!.service.device(id)]);setList(s);setModel(await runtime!.service.model(d.product.id));},[runtime,id]);
+  const load=useCallback(async()=>{const [s,d]=await Promise.all([runtime!.service.schedules(id),runtime!.service.device(id)]);setList(s);if(!d.product)throw new Error('产品信息尚未确认');setModel(await runtime!.service.model(d.product.id));},[runtime,id]);
   useFocusEffect(useCallback(()=>{if(runtime)void run(load);},[runtime,load,run]));
   const edit=(patch:Partial<ScheduleInput>)=>setDraft(d=>d?{...d,...patch}:null);
   const unknown=draft&&Object.keys(draft.action).some(k=>!model?.attributes.some(a=>a.identifier===k&&a.writable));

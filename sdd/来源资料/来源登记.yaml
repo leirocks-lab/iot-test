@@ -353,3 +353,24 @@ sources:
     collected_at: 2026-10-07
     sha256: 8fd187b705ac37af2d8d724965c310342a560f3a31f6ff640ba31cd345e4622c
     role: 用户指定的范围内BLE/Wi-Fi配网/MQTT模拟依据；评审稿，G项不构成真实契约
+  - id: SRC-REAL-API-001
+    path: sdd/来源资料/真实接口/物联网OpenAPI-20261011.json
+    kind: file
+    version: 1.0.0
+    collected_at: 2026-10-11
+    sha256: 760a00f3b791f4908e0c4204600f61eb8a5b39170f71dce4b73917bf2e2bc9b2
+    role: 用户提供部署文档的只读快照；仅李P1及必要依赖的HTTP适配依据，管理后台接口不纳入范围；未证明接口自测或真实联调通过
+  - id: SRC-REAL-API-002
+    path: sdd/来源资料/真实接口/平台OpenAPI-20261011.json
+    kind: file
+    version: 1.0.0
+    collected_at: 2026-10-11
+    sha256: ebf37e5f1e5123dcbf9ed85e28962f26b4505f82cbac4b549690b75effee5b97
+    role: 本批P1所需登录与会话依赖的部署接口快照；不扩大P0页面业务或管理后台范围
+  - id: SRC-BLE-0822-001
+    path: docs/RowanBleNetconfTest/README_BLE配网.md
+    kind: file
+    version: null
+    collected_at: 2026-10-11
+    sha256: b6a6b69f408a7217b58d717fe1abc3feed2abf98c4dbec5b8077a12c607aae41
+    role: 用户选择的0822新版仿真配网实现依据；真实产品身份、绑定码及MQTT业务能力仍待确认

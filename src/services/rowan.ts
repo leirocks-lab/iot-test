@@ -1,4 +1,5 @@
 import type { HttpClient, HttpRequest, HttpResponse } from '../lib/core';
+import { helpArticles } from './real-api-data';
 import { ApiError, type ApiEnvelope, type BindingResult, type DeviceView, type HomeGroup, type KeyValueStorage, type Language, type Product, type Room, type Schedule, type ScheduleInput, type Session, type Settings, type ThingModel } from './models';
 
 export class RowanService {
@@ -52,6 +53,15 @@ export class RowanService {
     if(!response.data.success||response.status>=400)throw new ApiError(response.data.code,response.data.message);
     const session=response.data.data;
     if(!session.accessToken||!session.refreshToken||!session.userID)throw new ApiError(500,'会话响应不完整');
+    if(!session.setting) {
+      if(signal?.aborted||round!==this.epoch)throw new ApiError(499,'操作已取消');
+      const setting=await this.http.request<ApiEnvelope<Settings>>({method:'GET',path:'/api/app/user/setting',
+        headers:{Authorization:'Bearer '+session.accessToken,'Accept-Language':this.language},signal});
+      if(signal?.aborted||round!==this.epoch)throw new ApiError(499,'操作已取消');
+      if(setting.status>=400||!setting.data.success||setting.data.code!==0)throw new ApiError(setting.data.code||setting.status,setting.data.message||'用户设置读取失败');
+      if(!setting.data.data||typeof setting.data.data.language!=='string')throw new ApiError(502,'用户设置响应不完整');
+      session.setting=setting.data.data;
+    }
     await this.save(session,round);
   }
   cancelAuthentication() { this.epoch++;this.refreshTask=undefined; }
@@ -96,8 +106,8 @@ export class RowanService {
   async createRoom(name:string) {return this.request({method:'POST',path:'/api/app/user/locations',body:{name}});}
   async renameRoom(id:string,name:string) {return this.request({method:'PATCH',path:`/api/app/user/locations/${id}`,body:{name}});}
   async saveRooms(rooms:Room[],version:string) {return this.request({method:'PUT',path:'/api/app/user/locations',body:{rooms:rooms.map(({id,name})=>({id,name}))},headers:{'If-Match':version}});}
-  async moveDevice(id:string,roomID:string|null) {return this.request({method:'PUT',path:`/api/app/devices/${id}/location`,body:{id:roomID}});}
-  async location(id:string) {return this.request<{id:string|null;name:string}>({method:'GET',path:`/api/app/devices/${id}/location`});}
+  async moveDevice(id:string,roomID:string|null) {return this.request({method:'PUT',path:`/api/app/devices/${encodeURIComponent(id)}/location`,body:{id:roomID}});}
+  async location(id:string) {return this.request<{id:string|null;name:string}>({method:'GET',path:`/api/app/devices/${encodeURIComponent(id)}/location`});}
   async settings() {return this.request<Settings>({method:'GET',path:'/api/app/user/setting'});}
   async updateSettings(patch:Partial<Settings>) {
     const round=this.epoch;
@@ -119,7 +129,7 @@ export class RowanService {
   async removeMember(id:string,userID:string) {return this.request({method:'DELETE',path:`/api/app/devices/${id}/users/${userID}`});}
   async share(id:string) {return this.request<{deviceID:string;bindCode:string}>({method:'GET',path:`/api/app/devices/${id}/bindCode`});}
   async acceptShare(id:string,bindCode:string,signal?:AbortSignal) {return this.request<BindingResult>({method:'PUT',path:`/api/app/device/${encodeURIComponent(id)}/user`,body:{bindCode},signal});}
-  async help(id:string,product=false) {return this.request<{title:string;content:string}>({method:'GET',path:product?`/api/app/products/${id}/connectHelping`:`/api/app/devices/${id}/helping`,query:{type:'text'}});}
+  async help(id:string,product=false) {return helpArticles(await this.request<unknown>({method:'GET',path:product?`/api/app/products/${encodeURIComponent(id)}/connectHelping`:`/api/app/devices/${encodeURIComponent(id)}/helping`,query:{type:'text'}}));}
   async firmware(id:string,type:'mcu'|'wifi') {return this.request<{firmware:{id:string;version:string;remark:string}|null}>({method:'GET',path:`/api/app/devices/${id}/ota/${type}`});}
   async startOta(id:string,type:'mcu'|'wifi',firmwareID:string) {return this.request<{taskID:string}>({method:'PUT',path:`/api/app/devices/${id}/ota/task`,query:{type},body:{firmwareID}});}
   async otaTask(id:string,taskID:string) {return this.request<{result:'updating'|'success'|'failed'|'cancelled'}>({method:'GET',path:`/api/app/devices/${id}/ota/task/${taskID}`});}
