@@ -12,6 +12,7 @@ import type { WifiReader } from './wifi';
 import type { RowanCodeParser } from './qr';
 import { QrScanCoordinator } from './scan-flow';
 import type { MqttConnection } from '../protocol/mqtt-connection';
+import { MockDeviceSession, RealtimeDeviceSession, type DeviceProfileResolver, type DeviceSession } from '../protocol/device-session';
 export interface Runtime {
   service:RowanService; devices:DeviceTransport; config:CommunicationConfig;
   dispose:()=>void;
@@ -19,9 +20,10 @@ export interface Runtime {
   scanner:QrScanCoordinator;
   wifi?:WifiReader;
   createRealtimeConnection?:()=>Promise<MqttConnection>;
+  createDeviceSession:(id:string)=>DeviceSession;
   developer?:{cloud:MockCloud;http:MockHttpClient;devices:MockDeviceTransport;reset:()=>Promise<void>};
 }
-export async function createRuntime(input:Partial<CommunicationConfig>, realDeviceDriver?:DeviceTransport,contracts?:{onboarding?:RealAddContract;qr?:RowanCodeParser;wifi?:WifiReader}):Promise<Runtime> {
+export async function createRuntime(input:Partial<CommunicationConfig>, realDeviceDriver?:DeviceTransport,contracts?:{onboarding?:RealAddContract;qr?:RowanCodeParser;wifi?:WifiReader;realtime?:DeviceProfileResolver}):Promise<Runtime> {
   const config=communicationConfig(input);
   const db=config.httpMode==='mock'||config.deviceMode==='mock'?await MockDatabase.open(new MockFileStorage()):undefined;
   const storage=new SessionStorage(()=>`rowan.${config.httpMode}.${config.httpMode==='mock'?(db?.state.generation??'legacy-v1'):realSessionScope(config)}`);
@@ -32,13 +34,30 @@ export async function createRuntime(input:Partial<CommunicationConfig>, realDevi
   const timer=cloud?setInterval(()=>{if(working)return;working=true;void cloud.advance().then(()=>mockDevices?.syncCloud()).catch(()=>undefined).finally(()=>{working=false;});},15000):undefined;
   const service=new RowanService(http,storage);await service.restore();
   const wifi=config.deviceMode==='real'?contracts?.wifi??(await import('../protocol/native-wifi')).createWifiReader():undefined;
-  const onboarding=new AddDeviceCoordinator(service,devices,{mode:config.deviceMode,real:contracts?.onboarding,wifi});
+  let disposed=false;
+  const sessions=new Map<string,DeviceSession>();
+  const createDeviceSession=(id:string):DeviceSession=>{
+    const userID=service.userID,revision=service.sessionRevision;
+    let session:DeviceSession;
+    const lifecycle={
+      current:()=>!disposed&&service.session?.userID===userID&&service.sessionRevision===revision,
+      start:()=>{if(!lifecycle.current())throw new Error('设备连接上下文已变更');const previous=sessions.get(id);if(previous&&previous!==session)previous.close();sessions.set(id,session);},
+      stop:()=>{if(sessions.get(id)===session)sessions.delete(id);},
+      credentials:(signal:AbortSignal)=>service.mqtt(id,signal),
+    };
+    session=config.deviceMode==='mock'?new MockDeviceSession(devices,id,userID,lifecycle):new RealtimeDeviceSession({...lifecycle,deviceID:id,userID,
+      connection:async()=> (await import('../protocol/mqtt-browser')).createMqttConnection(),
+      context:async(signal)=>{const device=await service.device(id,signal);if(!device.product)throw new Error('产品信息尚未确认');return {device,model:await service.model(device.product.id,signal)};},
+      profile:contracts?.realtime,
+    });return session;
+  };
+  const onboarding=new AddDeviceCoordinator(service,devices,{mode:config.deviceMode,real:contracts?.onboarding,wifi,createSession:createDeviceSession});
   const scanner=new QrScanCoordinator(service,config.httpMode,contracts?.qr);
   let revision=service.sessionRevision;
-  const connections=new Set<MqttConnection>();let disposed=false;
-  const closeConnections=()=>{for(const connection of connections)connection.close();connections.clear();};
+  const connections=new Set<MqttConnection>();
+  const closeConnections=()=>{for(const session of [...sessions.values()])session.close();sessions.clear();for(const connection of connections)connection.close();connections.clear();};
   const unsubscribe=service.onSessionChange(()=>{const next=service.sessionRevision;if(next!==revision){onboarding.clear();scanner.clear();closeConnections();revision=next;}});
-  return {dispose:()=>{disposed=true;clearInterval(timer);unsubscribe();onboarding.clear();scanner.clear();closeConnections();void Promise.resolve(devices.dispose?.()).catch(()=>undefined);},service,devices,config,onboarding,scanner,wifi,
+  return {dispose:()=>{disposed=true;clearInterval(timer);unsubscribe();onboarding.clear();scanner.clear();closeConnections();void Promise.resolve(devices.dispose?.()).catch(()=>undefined);},service,devices,config,onboarding,scanner,wifi,createDeviceSession,
     ...(config.deviceMode==='real'?{createRealtimeConnection:async()=>{
       const userID=service.userID,sessionRevision=service.sessionRevision,connection=(await import('../protocol/mqtt-browser')).createMqttConnection();
       if(disposed||service.session?.userID!==userID||service.sessionRevision!==sessionRevision){connection.close();throw new Error('设备连接上下文已变更');}

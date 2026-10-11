@@ -180,11 +180,27 @@ export class ShadowSession {
   private pending?:{token:string;expected:Record<string,unknown>;resolve:()=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>};
   private listeners=new Set<()=>void>();
   private sequence=0;
+  private connectRound=0;
+  private connectController?:AbortController;
   constructor(private transport:DeviceTransport,private deviceID:string,private userID:string,private timeout:number=mockProfile.controlTimeout) {}
   onChange(fn:()=>void){this.listeners.add(fn);return ()=>{this.listeners.delete(fn);};}
   private notify(){for(const fn of this.listeners)fn();}
   get sending(){return !!this.pending;}
-  async connect(){this.unsubscribe?.();this.ready=false;this.unsubscribe=this.transport.subscribe(this.deviceID,this.userID,(topic,msg)=>{if(topic.endsWith('/update/rejected')){this.ready=false;if(this.pending){const p=this.pending;clearTimeout(p.timer);this.pending=undefined;p.reject(new ApiError(msg.code??403,'设备权限已失效'));}this.notify();}else if(topic.endsWith('/update/accepted')||topic.endsWith('/get/accepted'))this.receive(msg);});const msg=await this.transport.shadowGet(this.deviceID,this.userID);this.receive(msg);this.ready=true;this.notify();}
+  async connect(signal?:AbortSignal){
+    if(signal?.aborted)throw new ApiError(499,'设备会话已停止');
+    this.resetSession();const round=this.connectRound;
+    const controller=new AbortController();this.connectController=controller;
+    const abort=()=>this.close();signal?.addEventListener('abort',abort,{once:true});
+    const current=()=>round===this.connectRound&&!controller.signal.aborted&&!signal?.aborted;
+    this.unsubscribe=this.transport.subscribe(this.deviceID,this.userID,(topic,msg)=>{if(!current())return;if(topic.endsWith('/update/rejected')){this.ready=false;if(this.pending){const p=this.pending;clearTimeout(p.timer);this.pending=undefined;p.reject(new ApiError(msg.code??403,'设备权限已失效'));}this.notify();}else if(this.ready&&(topic.endsWith('/update/accepted')||topic.endsWith('/get/accepted')))this.receive(msg);});
+    try{
+      const msg=await withBudget(()=>this.transport.shadowGet(this.deviceID,this.userID),this.timeout,'完整属性等待超时',controller.signal);
+      if(!current())throw new ApiError(499,'设备会话已停止');
+      if(!msg.state?.reported||!Number.isSafeInteger(msg.version)||msg.version<0)throw new ApiError(503,'完整属性尚未确认');
+      this.confirmed={...msg.state.reported};this.version=msg.version;this.ready=true;this.notify();
+    }catch(error){if(current())this.close();throw error;}
+    finally{signal?.removeEventListener('abort',abort);}
+  }
   receive(message:ShadowMessage){
     if(!message.state?.reported||message.version<this.version)return;
     this.version=message.version;this.confirmed={...this.confirmed,...message.state.reported};
@@ -202,7 +218,8 @@ export class ShadowSession {
     await result;
   }
 
-  close(){this.ready=false;this.unsubscribe?.();this.unsubscribe=undefined;if(this.pending){clearTimeout(this.pending.timer);this.pending.reject(new ApiError(499,'控制监听已关闭'));this.pending=undefined;}this.notify();}
+  private resetSession(){++this.connectRound;const controller=this.connectController;this.connectController=undefined;controller?.abort();this.ready=false;this.unsubscribe?.();this.unsubscribe=undefined;if(this.pending){clearTimeout(this.pending.timer);this.pending.reject(new ApiError(499,'控制监听已关闭'));this.pending=undefined;}this.notify();}
+  close(){this.resetSession();}
 }
 export class UnavailableDeviceTransport implements DeviceTransport {
   private unavailable():never{throw new ApiError(503,'真实设备驱动尚未接入');}

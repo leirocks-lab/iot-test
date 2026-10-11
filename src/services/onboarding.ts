@@ -1,9 +1,10 @@
 import type { DiscoveredDevice } from '../protocol/ble';
-import { mockProfile, pause, Provisioner, ShadowSession, withBudget, type DeviceTransport } from '../protocol/device';
+import { mockProfile, pause, Provisioner, withBudget, type DeviceTransport } from '../protocol/device';
 import { ApiError, type BindingResult, type Product } from './models';
 import type { RowanService } from './rowan';
 import { Provisioner0822, type Profile0822 } from '../protocol/provision-0822';
 import { requireCurrentWifi, type WifiReader } from './wifi';
+import { MockDeviceSession, type DeviceSession } from '../protocol/device-session';
 
 export interface RealAddContract {
   profile:Profile0822;
@@ -40,6 +41,7 @@ export interface AddOptions {
   makeBindCode?: () => string;
   real?:RealAddContract;
   wifi?:WifiReader;
+  createSession?:(id:string)=>DeviceSession;
 }
 const initial = (): AddState => ({stage:'idle',message:'',error:'',discovered:[],nickname:'pending',nicknameUnknown:false,visible:false,realtime:'pending',realtimeError:'',busy:false});
 const errorText = (error: unknown) => error instanceof Error ? error.message : String(error);
@@ -74,7 +76,8 @@ export class AddDeviceFlow {
   private submitted=false;
   private pendingNickname?:string;
   private serial = 0;
-  private session?: ShadowSession;
+  private session?: DeviceSession;
+  private sessionUnsubscribe?:()=>void;
   constructor(private service: RowanService, private devices: DeviceTransport, private options: AddOptions) {
     if((options.pollInterval??mockProfile.bindInterval)<2000)throw new Error('绑定查询间隔不能低于2秒');
   }
@@ -97,7 +100,7 @@ export class AddDeviceFlow {
   }
   stop() {
     const uncertain=['binding','unknown'].includes(this.state.stage)||this.state.stage==='provisioning'&&this.submitted;
-    ++this.round;this.controller?.abort();this.controller=undefined;this.session?.close();this.session=undefined;
+    ++this.round;this.controller?.abort();this.controller=undefined;this.sessionUnsubscribe?.();this.sessionUnsubscribe=undefined;this.session?.close();this.session=undefined;
     this.update({busy:false,...(uncertain?{stage:'unknown' as const,message:'客户端已停止，请核对绑定结果；设备端结果仍待确认'}:this.state.stage==='provisioning'?{stage:'selected' as const,message:'客户端已停止，本次尚未发送配网参数'}:['scanning','selecting'].includes(this.state.stage)?{stage:'idle' as const,message:'本次客户端扫描已停止'}:this.state.stage==='finishing'?{stage:'bound' as const,message:'已停止结果刷新，绑定事实保留'}:{}),...(this.state.realtime==='ready'?{realtime:'pending' as const}:{})});
   }
   reset() {
@@ -241,13 +244,18 @@ export class AddDeviceFlow {
     });
   }
   private async connectRealtime(round:number,signal:AbortSignal,id:string) {
-    this.session?.close();this.session=undefined;
-    let session:ShadowSession|undefined;
+    this.sessionUnsubscribe?.();this.sessionUnsubscribe=undefined;this.session?.close();this.session=undefined;
+    let session:DeviceSession|undefined;
     try {
-      await withBudget(budget=>this.service.mqtt(id,budget),mockProfile.controlTimeout,'实时凭据获取超时',signal);this.check(round,signal);
-      session=new ShadowSession(this.devices,id,this.owner!);
-      await withBudget(async budget=>{await session!.connect();this.check(round,budget);},mockProfile.controlTimeout,'实时连接等待超时',signal);
-      this.check(round,signal);this.session=session;this.update({realtime:'ready',realtimeError:''});
+      if(this.options.createSession)session=this.options.createSession(id);
+      else if(this.options.mode==='mock')session=new MockDeviceSession(this.devices,id,this.owner!,{
+        current:()=>round===this.round&&!signal.aborted&&this.service.session?.userID===this.owner&&this.service.sessionRevision===this.revision,
+        start:()=>undefined,stop:()=>undefined,credentials:budget=>this.service.mqtt(id,budget),
+      });
+      else throw new ApiError(503,'真实MQTT会话尚未配置');
+      await session.connect(signal);
+      this.check(round,signal);if(!session.ready)throw new ApiError(503,'完整属性尚未确认');
+      this.check(round,signal);const live=session;this.session=live;this.sessionUnsubscribe=live.onChange(()=>{if(round===this.round&&this.session===live&&!live.ready)this.update({realtime:'failed',realtimeError:live.error||'实时连接未同步，请重试'});});this.update({realtime:'ready',realtimeError:''});
     } catch(error) {
       session?.close();this.check(round,signal);this.update({realtime:'failed',realtimeError:errorText(error)});
     }
