@@ -1,1 +1,1 @@
-export { default } from '../screens/Auth';
+export { default } from "../screens/AuthLanding";
