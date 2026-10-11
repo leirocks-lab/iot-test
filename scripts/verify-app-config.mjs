@@ -73,6 +73,7 @@ function createBuildEnvironment(overrides = {}) {
 
   delete environment.APP_BRAND;
   delete environment.APP_ENV;
+  delete environment.ROWAN_INTEGRATION_PROFILE;
 
   return { ...environment, ...overrides };
 }
@@ -130,6 +131,10 @@ function main() {
 
   assertConfigFailure({APP_ENV:'production',ROWAN_HTTP_MODE:'mock'},'Production requires real transports');
   assertConfigFailure({ROWAN_HTTP_MODE:'real',ROWAN_APP_API_BASE_URL:'http://insecure.invalid'},'HTTPS');
+  assertConfigFailure({ROWAN_INTEGRATION_PROFILE:'https://not-a-profile.invalid'},'ROWAN_INTEGRATION_PROFILE');
+  const integrationConfig=readExpoConfig({ROWAN_INTEGRATION_PROFILE:'reviewed-fixture-v1',ROWAN_DEVICE_TOKEN:'public-test-sentinel'});
+  assert(integrationConfig.extra?.integrationProfile==='reviewed-fixture-v1','Integration profile ID must reach public extra');
+  assert(!integrationConfig.extra?.contracts&&!integrationConfig.extra?.deviceToken&&!JSON.stringify(integrationConfig).includes('public-test-sentinel'),'Public integration selection must not include contracts or device credentials');
   const variants = [
     ['development', 'com.rowan.iot.dev'],
     ['preview', 'com.rowan.iot.preview'],

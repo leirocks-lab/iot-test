@@ -17,8 +17,12 @@ import { ControlledDeviceSession } from '../protocol/controlled-session';
 import { mockControlProfile, type ControlProfileResolver } from './device-controls';
 import { maintenanceLedger, mockMaintenanceProfile, type MaintenanceLedger, type MaintenanceProfileResolver } from './device-maintenance';
 import { eventLedger, mockEventProfile, type EventLedger, type EventProfileResolver } from './device-events';
+import { integrationStatus, type IntegrationStatus } from './runtime-integration';
+import { ApiError } from './models';
+export interface RuntimeContracts {onboarding?:RealAddContract;qr?:RowanCodeParser;wifi?:WifiReader;realtime?:DeviceProfileResolver;controls?:ControlProfileResolver;maintenance?:MaintenanceProfileResolver;events?:EventProfileResolver}
 export interface Runtime {
   service:RowanService; devices:DeviceTransport; config:CommunicationConfig;
+  integration:IntegrationStatus;
   dispose:()=>void;
   onboarding:AddDeviceCoordinator;
   scanner:QrScanCoordinator;
@@ -27,18 +31,30 @@ export interface Runtime {
   createDeviceSession:(id:string)=>DeviceSession;
   developer?:{cloud:MockCloud;http:MockHttpClient;devices:MockDeviceTransport;reset:()=>Promise<void>};
 }
-export async function createRuntime(input:Partial<CommunicationConfig>, realDeviceDriver?:DeviceTransport,contracts?:{onboarding?:RealAddContract;qr?:RowanCodeParser;wifi?:WifiReader;realtime?:DeviceProfileResolver;controls?:ControlProfileResolver;maintenance?:MaintenanceProfileResolver;events?:EventProfileResolver}):Promise<Runtime> {
+export async function createRuntime(input:Partial<CommunicationConfig>, realDeviceDriver?:DeviceTransport,contracts?:RuntimeContracts,startupSignal?:AbortSignal):Promise<Runtime> {
+  let ownedDriver=realDeviceDriver,timer:ReturnType<typeof setInterval>|undefined,initializingService:RowanService|undefined;
+  let releasedDriver:DeviceTransport|undefined,releaseFlight:Promise<void>|undefined;
+  const releaseDriver=()=>{if(!ownedDriver)return Promise.resolve();if(releasedDriver===ownedDriver)return releaseFlight!;releasedDriver=ownedDriver;return releaseFlight=disposeStartupDriver(ownedDriver);};
+  const check=()=>{if(startupSignal?.aborted)throw new ApiError(499,'App启动装配已停止');};
+  const abort=()=>{clearInterval(timer);initializingService?.cancelAuthentication();void releaseDriver();};
+  startupSignal?.addEventListener('abort',abort,{once:true});
+  try{
+  check();
   const config=communicationConfig(input);
   const db=config.httpMode==='mock'||config.deviceMode==='mock'?await MockDatabase.open(new MockFileStorage()):undefined;
+  check();
   const storage=new SessionStorage(()=>`rowan.${config.httpMode}.${config.httpMode==='mock'?(db?.state.generation??'legacy-v1'):realSessionScope(config)}`);
   const mockHttp=db?new MockHttpClient(db):undefined, mockDevices=db?new MockDeviceTransport(db):undefined;
   const http=config.httpMode==='mock'?mockHttp!:new RealHttpClient(config);
   const devices:DeviceTransport=config.deviceMode==='mock'?mockDevices!:realDeviceDriver??await (await import('../protocol/native-ble')).createNativeBleTransport();
+  ownedDriver=devices;
+  check();
   const cloud=db?new MockCloud(db):undefined;let working=false;
-  const timer=cloud?setInterval(()=>{if(working)return;working=true;void cloud.advance().then(()=>mockDevices?.syncCloud()).catch(()=>undefined).finally(()=>{working=false;});},15000):undefined;
-  const service=new RowanService(http,storage);await service.restore();
+  const service=new RowanService(http,storage);initializingService=service;await service.restore();check();
   const wifi=config.deviceMode==='real'?contracts?.wifi??(await import('../protocol/native-wifi')).createWifiReader():undefined;
+  check();
   let disposed=false;
+  timer=cloud?setInterval(()=>{if(working)return;working=true;void cloud.advance().then(()=>mockDevices?.syncCloud()).catch(()=>undefined).finally(()=>{working=false;});},15000):undefined;
   const sessions=new Map<string,DeviceSession>();
   const maintenanceStates=new Map<string,MaintenanceLedger>();
   const eventStates=new Map<string,EventLedger>();
@@ -66,11 +82,14 @@ export async function createRuntime(input:Partial<CommunicationConfig>, realDevi
   const connections=new Set<MqttConnection>();
   const closeConnections=()=>{for(const session of [...sessions.values()])session.close();sessions.clear();maintenanceStates.clear();eventStates.clear();for(const connection of connections)connection.close();connections.clear();};
   const unsubscribe=service.onSessionChange(()=>{const next=service.sessionRevision;if(next!==revision){onboarding.clear();scanner.clear();closeConnections();revision=next;}});
-  return {dispose:()=>{disposed=true;clearInterval(timer);unsubscribe();onboarding.clear();scanner.clear();closeConnections();void Promise.resolve(devices.dispose?.()).catch(()=>undefined);},service,devices,config,onboarding,scanner,wifi,createDeviceSession,
+  return {dispose:()=>{if(disposed)return;disposed=true;clearInterval(timer);unsubscribe();onboarding.clear();scanner.clear();closeConnections();void releaseDriver();},service,devices,config,integration:integrationStatus(config,contracts,!!realDeviceDriver),onboarding,scanner,wifi,createDeviceSession,
     ...(config.deviceMode==='real'?{createRealtimeConnection:async()=>{
       const userID=service.userID,sessionRevision=service.sessionRevision,connection=(await import('../protocol/mqtt-browser')).createMqttConnection();
       if(disposed||service.session?.userID!==userID||service.sessionRevision!==sessionRevision){connection.close();throw new Error('设备连接上下文已变更');}
       connections.add(connection);return connection;
     }}:{}),
     developer:config.environment!=='production'&&mockHttp&&mockDevices?{cloud:cloud!,http:mockHttp,devices:mockDevices,reset:async()=>{await service.clearLocal();await db!.reset();mockHttp.fault='none';mockDevices.fault='none';}}:undefined};
+  }catch(error){clearInterval(timer);initializingService?.cancelAuthentication();await releaseDriver();throw error;}
+  finally{startupSignal?.removeEventListener('abort',abort);}
 }
+export async function disposeStartupDriver(driver?:DeviceTransport){try{await driver?.dispose?.();}catch{/* Preserve the original startup error, never fall back to Mock. */}}

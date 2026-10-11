@@ -12,7 +12,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     deviceMode: process.env.ROWAN_DEVICE_MODE as 'mock' | 'real' | undefined,
     apiBaseUrl: process.env.ROWAN_APP_API_BASE_URL,
     iotApiBaseUrl: process.env.ROWAN_IOT_API_BASE_URL,
-    tenantID: process.env.ROWAN_TENANT_ID });
+    tenantID: process.env.ROWAN_TENANT_ID,
+    integrationProfile: process.env.ROWAN_INTEGRATION_PROFILE });
 
   return {
     ...config,
