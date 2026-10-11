@@ -1,4 +1,6 @@
-export type RowanCode={version:'rowan-mock-v1';type:'share';deviceID:string;bindCode:string}|{version:'rowan-mock-v1';type:'product';productID:string};
+export type CodeIdentity={type:'share';deviceID:string;bindCode:string}|{type:'product';productID:string};
+export type RowanCode=CodeIdentity&{version:'rowan-mock-v1'};
+export type RowanCodeParser=(value:string)=>CodeIdentity;
 // Versioned mock codec boundary. Replace this codec when the real QR contract is frozen.
 export function encodeShareCode(value:{deviceID:string;bindCode:string}) {
   const encoded=JSON.stringify({version:'rowan-mock-v1',type:'share',...value});
@@ -12,9 +14,14 @@ export function parseRowanCode(value:string):RowanCode {
   return parsed as RowanCode;
 }
 
-export function parseRowanCandidates(values: readonly string[]):RowanCode[] {
-  const unique=new Map<string,RowanCode>();
-  for(const value of values){try{const code=parseRowanCode(value);const key=code.type==='product'?`product:${code.productID}`:`share:${code.deviceID}:${code.bindCode}`;if(!unique.has(key))unique.set(key,code);}catch{/* A non-ROWAN barcode is not an eligible candidate. */}}
+export function parseRowanCandidates(values: readonly string[],parser:RowanCodeParser=parseRowanCode):CodeIdentity[] {
+  const unique=new Map<string,CodeIdentity>();
+  for(const value of values){try{
+    const code=parser(value);
+    if(!code||(code.type==='product'?typeof code.productID!=='string'||!code.productID:code.type!=='share'||typeof code.deviceID!=='string'||!code.deviceID||typeof code.bindCode!=='string'||!code.bindCode))continue;
+    const key=JSON.stringify(code.type==='product'?['product',code.productID]:['share',code.deviceID,code.bindCode]);
+    if(!unique.has(key))unique.set(key,code);
+  }catch{/* A non-ROWAN barcode is not an eligible candidate. */}}
   if(!unique.size)throw new Error('图片中没有有效的 ROWAN 二维码');
   return [...unique.values()];
 }

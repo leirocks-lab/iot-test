@@ -19,7 +19,7 @@ const aborted=()=>new ApiError(499,'当前蓝牙客户端操作已停止');
 interface Session {
   mac:string;model:string;key:Uint8Array;stream:FrameStream0822;frames:{command:number;raw:Uint8Array}[];
   channel?:BleConnection;closed:boolean;error?:Error;
-  pending?:{command:number;resolve:(frame:Uint8Array)=>void;reject:(error:Error)=>void;clear:()=>void};
+  pending?:{command:number|'stage';resolve:(frame:Uint8Array)=>void;reject:(error:Error)=>void;clear:()=>void};
 }
 
 /** Native BLE capability; cloud binding and MQTT remain separate, explicitly unavailable boundaries. */
@@ -68,9 +68,9 @@ export class Ble0822DeviceTransport extends UnavailableDeviceTransport {
     if(session.closed)return;
     try{for(const raw of session.stream.push(bytes)){
       const decoded=decode0822(raw,session.key),command=decoded.command;decoded.data.fill(0);
-      if(session.pending&&(session.pending.command===command||classify0822(command).kind==='failure')){
+      if(session.pending&&(this.matches(session.pending.command,command)||classify0822(command).kind==='failure')){
         const job=session.pending;job.clear();session.pending=undefined;
-        if(job.command===command)job.resolve(raw);else{raw.fill(0);job.reject(new ApiError(command,`设备拒绝配网参数（${command.toString(16).toUpperCase()}）`));}
+        if(this.matches(job.command,command))job.resolve(raw);else{raw.fill(0);job.reject(new ApiError(command,`设备拒绝配网参数（${command.toString(16).toUpperCase()}）`));}
       }else{
         if(session.frames.length>=32){raw.fill(0);throw new ApiError(0x63,'蓝牙通知队列超出限制');}
         session.frames.push({command,raw});
@@ -99,17 +99,18 @@ export class Ble0822DeviceTransport extends UnavailableDeviceTransport {
     }catch(error){this.close(session);throw error;}
     finally{signal?.removeEventListener('abort',cancel);}
   }
-  private wait(session:Session,command:number,signal?:AbortSignal):Promise<Uint8Array> {
+  private matches(expected:number|'stage',command:number){return expected==='stage'?classify0822(command).kind==='stage':expected===command;}
+  private wait(session:Session,command:number|'stage',signal?:AbortSignal):Promise<Uint8Array> {
     if(session.closed||signal?.aborted)return Promise.reject(session.error??aborted());
     if(session.pending)return Promise.reject(new ApiError(409,'已有蓝牙应答等待'));
-    const index=session.frames.findIndex(frame=>frame.command===command||classify0822(frame.command).kind==='failure');
+    const index=session.frames.findIndex(frame=>this.matches(command,frame.command)||classify0822(frame.command).kind==='failure');
     if(index>=0){const item=session.frames.splice(index,1)[0];
-      if(item.command!==command){item.raw.fill(0);return Promise.reject(new ApiError(item.command,'设备拒绝配网参数'));}
+      if(!this.matches(command,item.command)){item.raw.fill(0);return Promise.reject(new ApiError(item.command,'设备拒绝配网参数'));}
       return Promise.resolve(item.raw);
     }
     return new Promise((resolve,reject)=>{
       const abort=()=>{if(session.pending?.resolve===resolve){clear();session.pending=undefined;reject(aborted());}};
-      const timer=setTimeout(()=>{if(session.pending?.resolve===resolve){clear();session.pending=undefined;reject(new ApiError(408,'0822 ACK等待超时'));}},this.ackTimeout);
+      const timer=command==='stage'?undefined:setTimeout(()=>{if(session.pending?.resolve===resolve){clear();session.pending=undefined;reject(new ApiError(408,'0822 ACK等待超时'));}},this.ackTimeout);
       const clear=()=>{clearTimeout(timer);signal?.removeEventListener('abort',abort);};
       session.pending={command,resolve,reject,clear};signal?.addEventListener('abort',abort,{once:true});
       if(signal?.aborted)abort();
@@ -134,7 +135,20 @@ export class Ble0822DeviceTransport extends UnavailableDeviceTransport {
     const session=this.sessions.get(input.bindCode);if(!session||session.closed)throw new ApiError(409,'尚未建立0822校验会话');
     try{return [await this.wait(session,0x0f,signal)];}catch(error){this.releaseProvision(input.bindCode);throw error;}
   }
-  async provision():Promise<void>{throw new ApiError(503,'真实配网仍需确认SSID、绑定码及工厂确认载荷');}
+  async provision(input?:ProvisionInput,onStatus?:(status:string)=>void,signal?:AbortSignal):Promise<void>{
+    const session=input&&this.sessions.get(input.bindCode);
+    if(!session||!onStatus)throw new ApiError(503,'尚未建立完整0822配网会话');
+    try{for(;;){
+      const raw=await this.wait(session,'stage',signal);
+      let command:number;
+      try{const decoded=decode0822(raw,session.key);command=decoded.command;decoded.data.fill(0);}finally{raw.fill(0);}
+      const stage=classify0822(command);
+      if(stage.kind!=='stage')throw new ApiError(0x63,'设备配网状态无效');
+      onStatus(stage.status);
+      if(stage.outcome==='failure')throw new ApiError(command,`配网未完成（${stage.status}）`);
+      if(command===0xf0)return;
+    }}finally{if(input)this.releaseProvision(input.bindCode);}
+  }
   releaseProvision(bindCode:string){const session=this.sessions.get(bindCode);if(session){this.close(session);this.sessions.delete(bindCode);}}
   async dispose(){this.disposed=true;this.scanCancel?.();for(const session of this.sessions.values())this.close(session);this.sessions.clear();this.found.clear();await this.radio.dispose();}
 }
