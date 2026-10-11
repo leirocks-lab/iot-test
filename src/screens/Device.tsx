@@ -6,8 +6,9 @@ import { withBudget } from '../protocol/device';
 import type { DeviceSession } from '../protocol/device-session';
 import { displayNumber } from '../services/device-controls';
 import { DevicePropertyControls } from '../components/device/property-controls';
+import { DeviceMaintenance } from '../components/device/maintenance-controls';
 import { useApp } from '../ui/context';
-import { Busy, Button, Card, ErrorText, Label, Page, confirm, styles, useAction } from '../ui/kit';
+import { Busy, Button, Card, ErrorText, Label, Page, styles, useAction } from '../ui/kit';
 import { DeviceGlyph } from '../ui/device-glyph';
 export default function DeviceScreen(){
   const {id}=useLocalSearchParams<{id:string}>(),{runtime}=useApp(),action=useAction(),run=action.run,[device,setDevice]=useState<DeviceView|null>(null),[model,setModel]=useState<ThingModel|null>(null),[shadow,setShadow]=useState<DeviceSession|null>(null),[,redraw]=useState(0);
@@ -37,15 +38,15 @@ export default function DeviceScreen(){
     const app=AppState.addEventListener('change',state=>{foreground=state==='active';if(foreground)void refresh();else stop();});
     return ()=>{active=false;stop();unsub();app.remove();retryRef.current=async()=>undefined;};
   },[runtime,id,sessionRevision]));
-  const values=shadow?.confirmed??{}, writable=!!shadow?.ready&&shadow?.canWrite!==false&&!shadow?.sending&&device?.bindingRole!=='obs';
+  const values=shadow?.confirmed??{};
   const temperatureUnit=runtime?.service.session?.setting.temperatureUnit??'C';
-  const send=(payload:Record<string,unknown>)=>action.run(()=>shadow!.command(payload));
   return <Page title={device?.deviceNickname??'Device'} action={<Button secondary title="More" onPress={()=>router.push({pathname:'/device/[id]/more',params:{id}})}/>}><ErrorText error={action.error}/><ErrorText error={detailError||shadow?.error||''}/><ErrorText error={shadow?.controlError||''}/>{!device?<><Busy/><Button secondary title="Retry" onPress={()=>void run(()=>retryRef.current())}/></>:<>
     <View style={{alignItems:'center',gap:12}}>{device.product?<DeviceGlyph humidity={device.product.category==='Dehumidifier'}/>:null}<Label large>{device.product?.name??'产品信息待确认'}</Label><Label muted>{shadow?.ready?'Synced':shadow?.connected?'通信已连接 · 属性待同步':'Not synced · Last confirmed values'}</Label></View>
     {!!values.Alarm&&<Card><ErrorText error={String(values.Alarm)}/><Label muted>Alarm is active until a recovery report arrives.</Label></Card>}
-    <Card><View style={styles.row}>{model?.attributes.filter(a=>!a.writable&&a.identifier!=='CleanHours').map(a=><View key={a.identifier} style={{flex:1}}><Label muted>{a.identifier}</Label><Label large>{displayNumber(values[a.identifier],a.unit,temperatureUnit)}</Label></View>)}</View>{shadow?.sending&&<Label muted>Waiting for device…</Label>}</Card>
+    <Card><View style={styles.row}>{model?.attributes.filter(a=>!a.writable&&a.identifier!==shadow?.maintenance?.identifier).map(a=><View key={a.identifier} style={{flex:1}}><Label muted>{a.identifier}</Label><Label large>{displayNumber(values[a.identifier],a.unit,temperatureUnit)}</Label></View>)}</View>{shadow?.sending&&<Label muted>Waiting for device…</Label>}</Card>
     {shadow?.controls?<DevicePropertyControls controls={shadow.controls} temperatureUnit={temperatureUnit} busy={action.busy} run={run}/>:<Label muted>产品控制能力待确认</Label>}
-    <Card><Label>Cleaning timer</Label><Label large>{String(values.CleanHours??'—')} h</Label><Button secondary title="Reset cleaning timer" disabled={!writable} onPress={()=>confirm('Reset cleaning timer','确认重置设备清洁计时？',()=>void send({Service:'CleanReset'}))}/></Card>
+    <ErrorText error={shadow?.maintenanceError||''}/>
+    {shadow?.maintenance&&<DeviceMaintenance maintenance={shadow.maintenance} busy={action.busy} run={run} synchronize={()=>retryRef.current()}/>}
     <Button secondary title="Schedules" onPress={()=>router.push({pathname:'/device/[id]/schedules',params:{id}})}/><Button secondary title="Synchronize" disabled={action.busy} onPress={()=>void run(()=>retryRef.current())}/>
   </>}</Page>;
 }

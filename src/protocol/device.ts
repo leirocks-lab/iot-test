@@ -173,6 +173,7 @@ export class Provisioner {
     throw new ApiError(0,'未确认绑定结果');
   }
 }
+let shadowSessionSequence=0;
 export class ShadowSession {
   confirmed:Record<string,number|string|boolean>={};
   version=-1; ready=false;
@@ -180,6 +181,7 @@ export class ShadowSession {
   private pending?:{token:string;expected:Record<string,unknown>;resolve:()=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>};
   private listeners=new Set<()=>void>();
   private sequence=0;
+  private identity=++shadowSessionSequence;
   private connectRound=0;
   private connectController?:AbortController;
   constructor(private transport:DeviceTransport,private deviceID:string,private userID:string,private timeout:number=mockProfile.controlTimeout) {}
@@ -209,7 +211,7 @@ export class ShadowSession {
   }
   async command(properties:Record<string,unknown>){
     if(!this.ready||this.pending)throw new ApiError(409,'设备未同步或正在等待回报');
-    const token=`${this.userID}-${Date.now()}-${++this.sequence}`;
+    const token=`${this.userID}-${Date.now()}-${this.identity}-${++this.sequence}`;
     const result=new Promise<void>((resolve,reject)=>{this.pending={token,expected:properties.Service==='CleanReset'?{CleanHours:0}:properties,resolve,reject,timer:setTimeout(()=>{this.pending=undefined;this.notify();reject(new ApiError(0,'未确认设备结果'));},this.timeout)};});
     this.notify();
     void this.transport.publish(this.deviceID,this.userID,{version:this.version,clientToken:token,state:{desired:{EnduserId:this.userID,DeviceId:this.deviceID,CommandType:'app',...properties}}}).catch(error=>{

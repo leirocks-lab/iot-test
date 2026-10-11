@@ -5,6 +5,7 @@ import { MockDeviceTransport } from '../protocol/device';
 import type { DeviceProfileResolver } from '../protocol/device-session';
 import type { MqttCredentials, MqttPort } from '../protocol/mqtt-connection';
 import type { ControlProfileResolver } from './device-controls';
+import type { MaintenanceProfileResolver } from './device-maintenance';
 
 vi.mock('./native-storage',async()=>{const {MemoryStorage}=await import('./store');return {SessionStorage:MemoryStorage,MockFileStorage:MemoryStorage};});
 const testPorts=vi.hoisted(()=>({ports:[] as MqttPort[],issued:[] as MqttCredentials[]}));
@@ -13,8 +14,8 @@ vi.mock('../protocol/mqtt-browser',async()=>{
   return {createMqttConnection:()=>new MqttConnection(credentials=>{
     testPorts.issued.push(credentials);const listeners=new Map<string,(()=>void)[]>();let message:(topic:string,payload:Uint8Array)=>void=()=>undefined;
     const port:MqttPort={on:(event,fn)=>{listeners.set(event,[...(listeners.get(event)??[]),fn]);},onMessage:fn=>{message=fn;},subscribe:(_topic,done)=>done(),unsubscribe:vi.fn(),end:vi.fn(),
-      publish:vi.fn((topic:string,payload:Uint8Array,done:(error?:Error)=>void)=>{done();const text=new TextDecoder().decode(payload),command=topic==='fixture/set'?JSON.parse(text):undefined;
-        queueMicrotask(()=>message('fixture/state',new TextEncoder().encode(JSON.stringify(command?{kind:'delta',version:2,requestID:command.id,reported:command.properties}:{kind:'full',version:1,requestID:text,reported:{Power:0}}))));}),
+      publish:vi.fn((topic:string,payload:Uint8Array,done:(error?:Error)=>void)=>{done();const text=new TextDecoder().decode(payload),command=topic==='fixture/set'?JSON.parse(text):undefined,service=topic==='fixture/service'?JSON.parse(text):undefined;
+        queueMicrotask(()=>message('fixture/state',new TextEncoder().encode(JSON.stringify(service?{kind:'serviceResult',requestID:service.id,identifier:service.identifier,success:true}:command?{kind:'delta',version:2,requestID:command.id,reported:command.properties}:{kind:'full',version:1,requestID:text,reported:{Power:0,CleanHours:120}}))));}),
     };
     testPorts.ports.push(port);queueMicrotask(()=>{for(const fn of listeners.get('connect')??[])fn();});return port;
   },100)};
@@ -22,9 +23,9 @@ vi.mock('../protocol/mqtt-browser',async()=>{
 // Fixture protocol, intentionally unrelated to either pending production route.
 const resolver:DeviceProfileResolver=async()=>({topics:['fixture/state'],query:id=>({topic:'fixture/query',payload:new TextEncoder().encode(id)}),decode:(_topic,payload)=>JSON.parse(new TextDecoder().decode(payload)),canWrite:false});
 const runtimes:Runtime[]=[];
-async function setup(profile:DeviceProfileResolver|undefined=resolver,controls?:ControlProfileResolver){
+async function setup(profile:DeviceProfileResolver|undefined=resolver,controls?:ControlProfileResolver,maintenance?:MaintenanceProfileResolver){
   const driver=new MockDeviceTransport(await MockDatabase.open(new MemoryStorage()),{delay:0});
-  const runtime=await createRuntime({httpMode:'mock',deviceMode:'real'},driver,{realtime:profile,controls,wifi:{read:async()=>({connection:'wifi',band:'unknown',source:'system',ssid:'fixture'})}});
+  const runtime=await createRuntime({httpMode:'mock',deviceMode:'real'},driver,{realtime:profile,controls,maintenance,wifi:{read:async()=>({connection:'wifi',band:'unknown',source:'system',ssid:'fixture'})}});
   runtimes.push(runtime);await runtime.service.login('rowan@example.com','Rowan@123','password');return runtime;
 }
 afterEach(()=>{for(const runtime of runtimes)runtime.dispose();runtimes.length=0;testPorts.ports.length=0;testPorts.issued.length=0;vi.restoreAllMocks();});
@@ -70,5 +71,25 @@ describe('Runtime设备会话接线（Mock HTTP/构造MQTT）',()=>{
     const port=testPorts.ports[0];await expect(session.command({Power:true})).rejects.toThrow('有效数值');expect(port.publish).toHaveBeenCalledOnce();
     const command=session.controls!.toggle('power');expect(session.confirmed.Power).toBe(0);await command;expect(session.confirmed.Power).toBe(1);expect(port.publish).toHaveBeenCalledTimes(2);
     expect(session.sending).toBe(false);session.close();await expect(session.command({Power:0})).rejects.toThrow('未确认');
+  });
+  it('uses an explicit maintenance resolver and independent real-mode service result without zeroing fixture data',async()=>{
+    const runtime=await setup(async(context,signal)=>({...await resolver(context,signal),canWrite:true,service:(call,id)=>({topic:'fixture/service',payload:new TextEncoder().encode(JSON.stringify({id,...call})),confirmation:{kind:'result'}})}),undefined,
+      async()=>({attribute:'CleanHours',reset:{identifier:'CleanReset',params:{},roles:['sa'],conditions:[]}}));
+    const session=runtime.createDeviceSession('dev_wine');await session.connect();expect(session.controls).toBeUndefined();expect(session.maintenance).toBeDefined();
+    await session.maintenance!.requestReset().confirm();expect(session.maintenance!.ledger.phase).toBe('confirmed');expect(session.confirmed.CleanHours).toBe(120);expect(testPorts.ports[0].publish).toHaveBeenCalledTimes(2);session.close();
+  });
+  it('retains unknown reset across page-created sessions until a new complete maintenance query',async()=>{
+    const runtime=await createRuntime({httpMode:'mock',deviceMode:'mock'});runtimes.push(runtime);await runtime.service.login('rowan@example.com','Rowan@123','password');
+    const first=runtime.createDeviceSession('dev_wine');await first.connect();const driver=runtime.developer!.devices,publish=vi.spyOn(driver,'publish');driver.fault='no-report';vi.useFakeTimers();
+    const pending=first.maintenance!.requestReset().confirm(),rejected=expect(pending).rejects.toThrow('未确认');await vi.advanceTimersByTimeAsync(10001);await rejected;const ledger=first.maintenance!.ledger;first.close();vi.useRealTimers();
+    let full:(message:Awaited<ReturnType<MockDeviceTransport['shadowGet']>>)=>void=()=>undefined;vi.spyOn(driver,'shadowGet').mockImplementationOnce(()=>new Promise(resolve=>{full=resolve;}));
+    const next=runtime.createDeviceSession('dev_wine'),connecting=next.connect();await vi.waitFor(()=>expect(next.maintenance).toBeDefined());expect(next.maintenance!.ledger).toBe(ledger);expect(ledger.phase).toBe('unknown');
+    expect(()=>next.maintenance!.requestReset()).toThrow('先同步');full({version:2,state:{desired:{},reported:{CleanHours:4,Power:1,ChildLock:0}}});await connecting;
+    expect(ledger.phase).toBe('idle');expect(next.maintenance!.text).toBe('4 h');expect(publish).toHaveBeenCalledOnce();runtime.dispose();
+  });
+  it('does not share reset transaction records across account revisions',async()=>{
+    const runtime=await createRuntime({httpMode:'mock',deviceMode:'mock'});runtimes.push(runtime);await runtime.service.login('rowan@example.com','Rowan@123','password');
+    const first=runtime.createDeviceSession('dev_wine');await first.connect();const old=first.maintenance!.ledger,ticket=first.maintenance!.requestReset();await runtime.service.login('rowan@example.com','Rowan@123','password');
+    await expect(ticket.confirm()).rejects.toThrow('失效');const next=runtime.createDeviceSession('dev_wine');await next.connect();expect(next.maintenance!.ledger).not.toBe(old);expect(next.maintenance!.ledger.phase).toBe('idle');runtime.dispose();
   });
 });

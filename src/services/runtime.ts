@@ -15,6 +15,7 @@ import type { MqttConnection } from '../protocol/mqtt-connection';
 import { MockDeviceSession, RealtimeDeviceSession, type DeviceProfileResolver, type DeviceSession } from '../protocol/device-session';
 import { ControlledDeviceSession } from '../protocol/controlled-session';
 import { mockControlProfile, type ControlProfileResolver } from './device-controls';
+import { maintenanceLedger, mockMaintenanceProfile, type MaintenanceLedger, type MaintenanceProfileResolver } from './device-maintenance';
 export interface Runtime {
   service:RowanService; devices:DeviceTransport; config:CommunicationConfig;
   dispose:()=>void;
@@ -25,7 +26,7 @@ export interface Runtime {
   createDeviceSession:(id:string)=>DeviceSession;
   developer?:{cloud:MockCloud;http:MockHttpClient;devices:MockDeviceTransport;reset:()=>Promise<void>};
 }
-export async function createRuntime(input:Partial<CommunicationConfig>, realDeviceDriver?:DeviceTransport,contracts?:{onboarding?:RealAddContract;qr?:RowanCodeParser;wifi?:WifiReader;realtime?:DeviceProfileResolver;controls?:ControlProfileResolver}):Promise<Runtime> {
+export async function createRuntime(input:Partial<CommunicationConfig>, realDeviceDriver?:DeviceTransport,contracts?:{onboarding?:RealAddContract;qr?:RowanCodeParser;wifi?:WifiReader;realtime?:DeviceProfileResolver;controls?:ControlProfileResolver;maintenance?:MaintenanceProfileResolver}):Promise<Runtime> {
   const config=communicationConfig(input);
   const db=config.httpMode==='mock'||config.deviceMode==='mock'?await MockDatabase.open(new MockFileStorage()):undefined;
   const storage=new SessionStorage(()=>`rowan.${config.httpMode}.${config.httpMode==='mock'?(db?.state.generation??'legacy-v1'):realSessionScope(config)}`);
@@ -38,8 +39,10 @@ export async function createRuntime(input:Partial<CommunicationConfig>, realDevi
   const wifi=config.deviceMode==='real'?contracts?.wifi??(await import('../protocol/native-wifi')).createWifiReader():undefined;
   let disposed=false;
   const sessions=new Map<string,DeviceSession>();
+  const maintenanceStates=new Map<string,MaintenanceLedger>();
   const createDeviceSession=(id:string):DeviceSession=>{
     const userID=service.userID,revision=service.sessionRevision;
+    let ledger=maintenanceStates.get(id);if(!ledger){ledger=maintenanceLedger();maintenanceStates.set(id,ledger);}
     let session:DeviceSession;
     const lifecycle={
       current:()=>!disposed&&service.session?.userID===userID&&service.sessionRevision===revision,
@@ -52,13 +55,13 @@ export async function createRuntime(input:Partial<CommunicationConfig>, realDevi
       connection:async()=> (await import('../protocol/mqtt-browser')).createMqttConnection(),
       context,
       profile:contracts?.realtime,
-    });session=new ControlledDeviceSession(inner,context,config.deviceMode==='mock'&&config.httpMode==='mock'?mockControlProfile:contracts?.controls);return session;
+    });const mock=config.deviceMode==='mock'&&config.httpMode==='mock';session=new ControlledDeviceSession(inner,context,mock?mockControlProfile:contracts?.controls,mock?mockMaintenanceProfile:contracts?.maintenance,ledger);return session;
   };
   const onboarding=new AddDeviceCoordinator(service,devices,{mode:config.deviceMode,real:contracts?.onboarding,wifi,createSession:createDeviceSession});
   const scanner=new QrScanCoordinator(service,config.httpMode,contracts?.qr);
   let revision=service.sessionRevision;
   const connections=new Set<MqttConnection>();
-  const closeConnections=()=>{for(const session of [...sessions.values()])session.close();sessions.clear();for(const connection of connections)connection.close();connections.clear();};
+  const closeConnections=()=>{for(const session of [...sessions.values()])session.close();sessions.clear();maintenanceStates.clear();for(const connection of connections)connection.close();connections.clear();};
   const unsubscribe=service.onSessionChange(()=>{const next=service.sessionRevision;if(next!==revision){onboarding.clear();scanner.clear();closeConnections();revision=next;}});
   return {dispose:()=>{disposed=true;clearInterval(timer);unsubscribe();onboarding.clear();scanner.clear();closeConnections();void Promise.resolve(devices.dispose?.()).catch(()=>undefined);},service,devices,config,onboarding,scanner,wifi,createDeviceSession,
     ...(config.deviceMode==='real'?{createRealtimeConnection:async()=>{

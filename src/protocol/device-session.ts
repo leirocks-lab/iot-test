@@ -2,6 +2,7 @@ import { ApiError, type DeviceView, type ThingModel } from '../services/models';
 import { ShadowSession, withBudget, type DeviceTransport } from './device';
 import type { MqttConnection } from './mqtt-connection';
 import type { PropertyControls } from '../services/device-controls';
+import { ServiceRejectedError, type MaintenanceControls, type ServiceCall } from '../services/device-maintenance';
 
 type Values = Record<string, number|string|boolean>;
 export interface DeviceSession {
@@ -13,6 +14,10 @@ export interface DeviceSession {
   readonly canWrite?:boolean;
   readonly controls?:PropertyControls;
   readonly controlError?:string;
+  readonly maintenance?:MaintenanceControls;
+  readonly maintenanceError?:string;
+  readonly canInvokeService?:boolean;
+  invokeService?(call:ServiceCall):Promise<void>;
   connect(signal?:AbortSignal):Promise<void>;
   command(properties:Record<string,unknown>):Promise<void>;
   onChange(listener:()=>void):()=>void;
@@ -22,6 +27,7 @@ export interface Publication {topic:string;payload:Uint8Array}
 export type DeviceReport =
   | {kind:'full'|'delta';version:number;reported:Values;requestID?:string}
   | {kind:'rejected';requestID?:string}
+  | {kind:'serviceResult';requestID:string;identifier:string;success:boolean}
   | {kind:'revoked';requestID?:string};
 /** Supplied only after the deployment's identity, topics, payloads and permissions are confirmed. */
 export interface DeviceSyncProfile {
@@ -31,6 +37,7 @@ export interface DeviceSyncProfile {
   decode(topic:string,payload:Uint8Array):DeviceReport|undefined;
   canWrite:boolean;
   command?:(properties:Record<string,unknown>,requestID:string)=>Publication & {expected:Values};
+  service?:(call:ServiceCall,requestID:string)=>Publication & {confirmation:{kind:'result'}|{kind:'reported';expected:Values}};
 }
 export type DeviceProfileResolver = (context:{deviceID:string;userID:string;device:DeviceView;model:ThingModel},signal:AbortSignal)=>Promise<DeviceSyncProfile>;
 interface Lifecycle {
@@ -63,21 +70,22 @@ export class RealtimeDeviceSession implements DeviceSession {
   private writable=false;
   private flight?:Promise<void>;
   private listeners=new Set<()=>void>();
-  private waiting?:{id:string;expected?:Values;resolve:()=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>};
+  private waiting?:{id:string;expected?:Values;service?:{identifier:string;result:boolean};resolve:()=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>};
   private timeout:number;
   private identity:string;
   constructor(private options:RealSessionOptions){this.timeout=options.timeout??10000;this.identity=`${options.userID}-${Date.now()}-${++sessionSequence}`;}
-  get sending(){return !!this.waiting?.expected;}
+  get sending(){return !!(this.waiting?.expected||this.waiting?.service);}
   get canWrite(){return this.writable&&!!this.profile?.command;}
+  get canInvokeService(){return this.writable&&!!this.profile?.service;}
   onChange(listener:()=>void){this.listeners.add(listener);return ()=>{this.listeners.delete(listener);};}
   private notify(){for(const listener of this.listeners)listener();}
   private check(round:number,signal:AbortSignal){if(round!==this.round||signal.aborted||!this.options.current())throw cancelled();}
   private requestID(){return `${this.identity}-${++this.sequence}`;}
   private rejectWaiting(error:Error){const waiting=this.waiting;if(!waiting)return;this.waiting=undefined;clearTimeout(waiting.timer);waiting.reject(error);}
-  private wait(id:string,expected?:Values){
-    return new Promise<void>((resolve,reject)=>{this.waiting={id,expected,resolve,reject,timer:setTimeout(()=>{
+  private wait(id:string,expected?:Values,service?:{identifier:string;result:boolean}){
+    return new Promise<void>((resolve,reject)=>{this.waiting={id,expected,service,resolve,reject,timer:setTimeout(()=>{
       this.waiting=undefined;
-      if(!expected){this.ready=false;this.error='完整属性等待超时，仍未同步';}
+      if(!expected&&!service){this.ready=false;this.error='完整属性等待超时，仍未同步';}
       else this.error='未确认设备结果';
       this.notify();reject(new ApiError(408,this.error));
     },this.timeout)};});
@@ -130,11 +138,18 @@ export class RealtimeDeviceSession implements DeviceSession {
     this.check(round,signal);
   }
   private receive(report:DeviceReport){
+    if(report.kind==='serviceResult'){
+      const waiting=this.waiting;
+      if(!waiting?.service?.result||report.requestID!==waiting.id||report.identifier!==waiting.service.identifier||typeof report.success!=='boolean')return;
+      if(!report.success){this.rejectWaiting(new ServiceRejectedError());this.error='设备拒绝了维护重置';}
+      else{clearTimeout(waiting.timer);this.waiting=undefined;waiting.resolve();this.error='';}
+      this.notify();return;
+    }
     if(report.kind==='revoked'){
       this.close();this.error='设备权限已失效';this.notify();return;
     }
     if(report.kind==='rejected'){
-      if(this.waiting&&report.requestID===this.waiting.id){this.rejectWaiting(new ApiError(403,'设备请求被拒绝'));this.ready=false;this.error='设备请求被拒绝';this.notify();}
+      if(this.waiting&&report.requestID===this.waiting.id){this.rejectWaiting(this.waiting.service?new ServiceRejectedError():new ApiError(403,'设备请求被拒绝'));this.ready=false;this.error='设备请求被拒绝';this.notify();}
       return;
     }
     if(report.kind!=='full'&&report.kind!=='delta')return;
@@ -150,7 +165,7 @@ export class RealtimeDeviceSession implements DeviceSession {
       this.confirmed={...this.confirmed,...report.reported};this.version=report.version;
     }
     const waiting=this.waiting;
-    if(waiting&&report.requestID===waiting.id&&(!waiting.expected||Object.entries(waiting.expected).every(([key,value])=>report.reported[key]===value))){
+    if(waiting&&!waiting.service?.result&&report.requestID===waiting.id&&(!waiting.expected||Object.entries(waiting.expected).every(([key,value])=>report.reported[key]===value))){
       clearTimeout(waiting.timer);this.waiting=undefined;waiting.resolve();this.error='';
     }
     this.notify();
@@ -161,6 +176,15 @@ export class RealtimeDeviceSession implements DeviceSession {
     const round=this.round,signal=this.controller!.signal,id=this.requestID(),publication=this.profile.command(properties,id);
     if(!Object.keys(publication.expected).length)throw new ApiError(503,'控制确认规则尚未配置');
     const received=this.wait(id,publication.expected);this.notify();
+    try{await Promise.all([this.connection.publish(publication.topic,publication.payload,signal),received]);this.check(round,signal);}
+    catch(error){if(round===this.round){this.rejectWaiting(error instanceof Error?error:new Error(text(error)));if(error instanceof ApiError&&[0,401,403,499].includes(error.code))this.close();this.error=text(error);this.notify();}throw error;}
+  }
+  async invokeService(call:ServiceCall){
+    if(!this.options.current()){this.close();throw cancelled();}
+    if(!this.ready||this.waiting||!this.connection||!this.profile?.service||!this.writable)throw new ApiError(409,'设备未同步、服务权限未确认或正在等待回报');
+    const round=this.round,signal=this.controller!.signal,id=this.requestID(),publication=this.profile.service(call,id),confirmation=publication.confirmation;
+    if(!confirmation||!['result','reported'].includes(confirmation.kind)||confirmation.kind==='reported'&&(!confirmation.expected||typeof confirmation.expected!=='object'||Array.isArray(confirmation.expected)||!Object.keys(confirmation.expected).length||Object.values(confirmation.expected).some(value=>!['number','boolean','string'].includes(typeof value)||typeof value==='number'&&!Number.isFinite(value))))throw new ApiError(503,'维护服务确认规则尚未配置');
+    const received=this.wait(id,confirmation.kind==='reported'?confirmation.expected:undefined,{identifier:call.identifier,result:confirmation.kind==='result'});this.notify();
     try{await Promise.all([this.connection.publish(publication.topic,publication.payload,signal),received]);this.check(round,signal);}
     catch(error){if(round===this.round){this.rejectWaiting(error instanceof Error?error:new Error(text(error)));if(error instanceof ApiError&&[0,401,403,499].includes(error.code))this.close();this.error=text(error);this.notify();}throw error;}
   }
@@ -175,6 +199,7 @@ export class RealtimeDeviceSession implements DeviceSession {
 /** Mock keeps its transport contract but follows the same credential and ownership boundary. */
 export class MockDeviceSession extends ShadowSession {
   get canWrite(){return this.ready;}
+  get canInvokeService(){return this.ready;}
   private controller?:AbortController;
   private flight?:Promise<void>;
   constructor(transport:DeviceTransport,id:string,user:string,private lifecycle:Lifecycle){super(transport,id,user);}
@@ -193,4 +218,5 @@ export class MockDeviceSession extends ShadowSession {
   }
   override close(){const controller=this.controller;this.controller=undefined;controller?.abort();this.flight=undefined;super.close();this.lifecycle.stop();}
   override async command(properties:Record<string,unknown>){if(!this.lifecycle.current()){this.close();throw cancelled();}return super.command(properties);}
+  async invokeService(call:ServiceCall){if(call.identifier!=='CleanReset'||Object.keys(call.params).length)throw new ApiError(400,'Mock维护服务或参数不支持');await this.command({Service:'CleanReset'});}
 }
