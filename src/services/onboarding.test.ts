@@ -65,6 +65,15 @@ describe('添加设备业务闭环',()=>{
     vi.spyOn(service,'home').mockResolvedValue([]);
     await expect(flow.finish(null)).rejects.toThrow('暂未显示');expect(flow.state.visible).toBe(false);expect(flow.state.binding).toBeDefined();flow.stop();
   });
+  it('rejects an overlength nickname without losing binding and retries only the result',async()=>{
+    const {flow,service,driver}=await selected();const provision=vi.spyOn(driver,'provision');
+    await flow.provision('Test','test');const binding=flow.state.binding,rename=vi.spyOn(service,'renameDevice');
+    await expect(flow.finish('123456789012345678901')).rejects.toMatchObject({code:400});
+    expect(rename).not.toHaveBeenCalled();expect(flow.state.binding).toEqual(binding);
+    expect(flow.state).toMatchObject({stage:'bound',nickname:'pending'});
+    await flow.finish('Office');expect(rename).toHaveBeenCalledOnce();expect(provision).toHaveBeenCalledOnce();
+    expect(flow.state).toMatchObject({stage:'complete',nickname:'saved',visible:true});flow.stop();
+  });
   it('retains completion if realtime fails and retries realtime only',async()=>{
     const {flow,service}=await selected();await flow.provision('Test','test');
     const mqtt=vi.spyOn(service,'mqtt').mockRejectedValueOnce(new ApiError(401,'凭据失效'));
