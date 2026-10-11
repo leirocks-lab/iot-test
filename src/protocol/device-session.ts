@@ -1,6 +1,7 @@
 import { ApiError, type DeviceView, type ThingModel } from '../services/models';
 import { ShadowSession, withBudget, type DeviceTransport } from './device';
 import type { MqttConnection } from './mqtt-connection';
+import type { PropertyControls } from '../services/device-controls';
 
 type Values = Record<string, number|string|boolean>;
 export interface DeviceSession {
@@ -10,6 +11,8 @@ export interface DeviceSession {
   readonly connected?:boolean;
   readonly error?:string;
   readonly canWrite?:boolean;
+  readonly controls?:PropertyControls;
+  readonly controlError?:string;
   connect(signal?:AbortSignal):Promise<void>;
   command(properties:Record<string,unknown>):Promise<void>;
   onChange(listener:()=>void):()=>void;
@@ -171,6 +174,7 @@ export class RealtimeDeviceSession implements DeviceSession {
 
 /** Mock keeps its transport contract but follows the same credential and ownership boundary. */
 export class MockDeviceSession extends ShadowSession {
+  get canWrite(){return this.ready;}
   private controller?:AbortController;
   private flight?:Promise<void>;
   constructor(transport:DeviceTransport,id:string,user:string,private lifecycle:Lifecycle){super(transport,id,user);}
@@ -188,4 +192,5 @@ export class MockDeviceSession extends ShadowSession {
     });this.flight=flight;return flight;
   }
   override close(){const controller=this.controller;this.controller=undefined;controller?.abort();this.flight=undefined;super.close();this.lifecycle.stop();}
+  override async command(properties:Record<string,unknown>){if(!this.lifecycle.current()){this.close();throw cancelled();}return super.command(properties);}
 }

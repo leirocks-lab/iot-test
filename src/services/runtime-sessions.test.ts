@@ -4,6 +4,7 @@ import { MemoryStorage, MockDatabase } from './store';
 import { MockDeviceTransport } from '../protocol/device';
 import type { DeviceProfileResolver } from '../protocol/device-session';
 import type { MqttCredentials, MqttPort } from '../protocol/mqtt-connection';
+import type { ControlProfileResolver } from './device-controls';
 
 vi.mock('./native-storage',async()=>{const {MemoryStorage}=await import('./store');return {SessionStorage:MemoryStorage,MockFileStorage:MemoryStorage};});
 const testPorts=vi.hoisted(()=>({ports:[] as MqttPort[],issued:[] as MqttCredentials[]}));
@@ -12,7 +13,8 @@ vi.mock('../protocol/mqtt-browser',async()=>{
   return {createMqttConnection:()=>new MqttConnection(credentials=>{
     testPorts.issued.push(credentials);const listeners=new Map<string,(()=>void)[]>();let message:(topic:string,payload:Uint8Array)=>void=()=>undefined;
     const port:MqttPort={on:(event,fn)=>{listeners.set(event,[...(listeners.get(event)??[]),fn]);},onMessage:fn=>{message=fn;},subscribe:(_topic,done)=>done(),unsubscribe:vi.fn(),end:vi.fn(),
-      publish:(_topic,payload,done)=>{done();const id=new TextDecoder().decode(payload);queueMicrotask(()=>message('fixture/state',new TextEncoder().encode(JSON.stringify({kind:'full',version:1,requestID:id,reported:{Power:0}}))));},
+      publish:vi.fn((topic:string,payload:Uint8Array,done:(error?:Error)=>void)=>{done();const text=new TextDecoder().decode(payload),command=topic==='fixture/set'?JSON.parse(text):undefined;
+        queueMicrotask(()=>message('fixture/state',new TextEncoder().encode(JSON.stringify(command?{kind:'delta',version:2,requestID:command.id,reported:command.properties}:{kind:'full',version:1,requestID:text,reported:{Power:0}}))));}),
     };
     testPorts.ports.push(port);queueMicrotask(()=>{for(const fn of listeners.get('connect')??[])fn();});return port;
   },100)};
@@ -20,9 +22,9 @@ vi.mock('../protocol/mqtt-browser',async()=>{
 // Fixture protocol, intentionally unrelated to either pending production route.
 const resolver:DeviceProfileResolver=async()=>({topics:['fixture/state'],query:id=>({topic:'fixture/query',payload:new TextEncoder().encode(id)}),decode:(_topic,payload)=>JSON.parse(new TextDecoder().decode(payload)),canWrite:false});
 const runtimes:Runtime[]=[];
-async function setup(profile:DeviceProfileResolver|undefined=resolver){
+async function setup(profile:DeviceProfileResolver|undefined=resolver,controls?:ControlProfileResolver){
   const driver=new MockDeviceTransport(await MockDatabase.open(new MemoryStorage()),{delay:0});
-  const runtime=await createRuntime({httpMode:'mock',deviceMode:'real'},driver,{realtime:profile,wifi:{read:async()=>({connection:'wifi',band:'unknown',source:'system',ssid:'fixture'})}});
+  const runtime=await createRuntime({httpMode:'mock',deviceMode:'real'},driver,{realtime:profile,controls,wifi:{read:async()=>({connection:'wifi',band:'unknown',source:'system',ssid:'fixture'})}});
   runtimes.push(runtime);await runtime.service.login('rowan@example.com','Rowan@123','password');return runtime;
 }
 afterEach(()=>{for(const runtime of runtimes)runtime.dispose();runtimes.length=0;testPorts.ports.length=0;testPorts.issued.length=0;vi.restoreAllMocks();});
@@ -60,5 +62,13 @@ describe('Runtime设备会话接线（Mock HTTP/构造MQTT）',()=>{
     const session=runtime.createDeviceSession('dev_wine'),pending=session.connect(),rejected=expect(pending).rejects.toMatchObject({code:499});
     await vi.waitFor(()=>expect(runtime.service.mqtt).toHaveBeenCalled());await runtime.service.login('rowan@example.com','Rowan@123','password');await rejected;
     resolve({});await Promise.resolve();expect(testPorts.ports).toHaveLength(0);expect(session.ready).toBe(false);
+  });
+  it('validates explicitly provided real-mode controls before MQTT and confirms only the correlated reported result',async()=>{
+    const runtime=await setup(async(context,signal)=>({...await resolver(context,signal),canWrite:true,command:(properties,id)=>({topic:'fixture/set',payload:new TextEncoder().encode(JSON.stringify({id,properties})),expected:properties as Record<string,number>})}),
+      async()=>({bindings:{power:{identifier:'Power',roles:['sa'],switch:{on:1,off:0}}}}));
+    const session=runtime.createDeviceSession('dev_wine');await session.connect();expect(session.controls).toBeDefined();
+    const port=testPorts.ports[0];await expect(session.command({Power:true})).rejects.toThrow('有效数值');expect(port.publish).toHaveBeenCalledOnce();
+    const command=session.controls!.toggle('power');expect(session.confirmed.Power).toBe(0);await command;expect(session.confirmed.Power).toBe(1);expect(port.publish).toHaveBeenCalledTimes(2);
+    expect(session.sending).toBe(false);session.close();await expect(session.command({Power:0})).rejects.toThrow('未确认');
   });
 });

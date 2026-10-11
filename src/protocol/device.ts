@@ -95,7 +95,7 @@ export class MockDeviceTransport implements DeviceTransport {
     await this.db.transact(()=>{
       if(transaction.generation!==this.db.state.generation)throw new ApiError(499,'模拟数据已重置');
       let d=this.db.state.devices.find(d=>d.mac===input.mac);
-      if(!d){const id=this.db.id('dev');d={id,name:products.find(p=>p.id===input.productID)?.name??input.model,mac:input.mac,thingName:id,productID:input.productID,mcuVersion:'1.0.0',wifiVersion:'1.0.0',activatedAt:new Date().toISOString(),online:true,protocol:input.productID==='prd_humidity'?'55AA':'AT',properties:{Power:1,...(input.productID==='prd_wine'?{CurrentTemperature:14,TargetTemperature:12}:{CurrentHumidity:55,TargetHumidity:50}),Mode:'normal',Light:0,Brightness:50,ChildLock:0,CleanHours:10,Alarm:''},shadowVersion:1,members:{}};this.db.state.devices.push(d);}
+      if(!d){const id=this.db.id('dev');d={id,name:products.find(p=>p.id===input.productID)?.name??input.model,mac:input.mac,thingName:id,productID:input.productID,mcuVersion:'1.0.0',wifiVersion:'1.0.0',activatedAt:new Date().toISOString(),online:true,protocol:input.productID==='prd_humidity'?'55AA':'AT',properties:{Power:1,...(input.productID==='prd_wine'?{CurrentTemperature:14,TargetTemperature:12}:{CurrentHumidity:55,TargetHumidity:50}),Mode:'normal',Light:0,Brightness:50,ChildLock:0,Mute:false,CleanHours:10,Alarm:''},shadowVersion:1,members:{}};this.db.state.devices.push(d);}
       this.db.account(input.userID);
       if(Object.keys(d.members).length&&!d.members[input.userID])throw new ApiError(403,'设备已有绑定，请通过管理员分享加入');
       if(!d.members[input.userID])d.members[input.userID]={role:'sa',nickname:d.name,roomID:null};

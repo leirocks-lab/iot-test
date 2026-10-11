@@ -1,7 +1,8 @@
 import type { HttpClient, HttpRequest, HttpResponse } from '../lib/core';
-import { ApiError, type Schedule } from './models';
+import { ApiError, type Attribute, type Schedule } from './models';
 import { MockDatabase, defaultSettings, digest, products } from './store';
 import { nextExecution, validateSchedule } from './scheduler';
+import { validateAttributeValue } from './device-controls';
 
 export function requestUrl(base: string, req: HttpRequest) {
   const url = new URL(base.replace(/\/$/,'')+req.path);
@@ -204,6 +205,7 @@ export function thingModel(productID:string) {
     {identifier:'Light',type:'number',writable:true,min:0,max:1,step:1},
     {identifier:'Brightness',type:'number',writable:true,min:0,max:100,step:1},
     {identifier:'ChildLock',type:'number',writable:true,min:0,max:1,step:1},
+    {identifier:'Mute',type:'boolean',writable:true},
     {identifier:'CleanHours',type:'number',writable:false},
   ],services:[{identifier:'CleanReset'}],events:[{identifier:'Alarm',level:'warning'}]};
 }
@@ -211,7 +213,6 @@ export function validateProperties(productID:string,values:Record<string,unknown
   for(const [key,value]of Object.entries(values)) {
     const a=thingModel(productID).attributes.find(a=>a.identifier===key);
     if(!a?.writable)throw new ApiError(400,'未知或只读属性');
-    if(a.type==='enum'&&!a.values?.includes(String(value)))throw new ApiError(400,'模式不支持');
-    if(a.type==='number'&&(typeof value!=='number'||!Number.isFinite(value)||value<a.min!||value>a.max!||(value-a.min!) % a.step! !== 0))throw new ApiError(400,'属性值超出范围或步长');
+    validateAttributeValue(a as Attribute,value);
   }
 }

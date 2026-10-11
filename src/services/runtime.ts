@@ -13,6 +13,8 @@ import type { RowanCodeParser } from './qr';
 import { QrScanCoordinator } from './scan-flow';
 import type { MqttConnection } from '../protocol/mqtt-connection';
 import { MockDeviceSession, RealtimeDeviceSession, type DeviceProfileResolver, type DeviceSession } from '../protocol/device-session';
+import { ControlledDeviceSession } from '../protocol/controlled-session';
+import { mockControlProfile, type ControlProfileResolver } from './device-controls';
 export interface Runtime {
   service:RowanService; devices:DeviceTransport; config:CommunicationConfig;
   dispose:()=>void;
@@ -23,7 +25,7 @@ export interface Runtime {
   createDeviceSession:(id:string)=>DeviceSession;
   developer?:{cloud:MockCloud;http:MockHttpClient;devices:MockDeviceTransport;reset:()=>Promise<void>};
 }
-export async function createRuntime(input:Partial<CommunicationConfig>, realDeviceDriver?:DeviceTransport,contracts?:{onboarding?:RealAddContract;qr?:RowanCodeParser;wifi?:WifiReader;realtime?:DeviceProfileResolver}):Promise<Runtime> {
+export async function createRuntime(input:Partial<CommunicationConfig>, realDeviceDriver?:DeviceTransport,contracts?:{onboarding?:RealAddContract;qr?:RowanCodeParser;wifi?:WifiReader;realtime?:DeviceProfileResolver;controls?:ControlProfileResolver}):Promise<Runtime> {
   const config=communicationConfig(input);
   const db=config.httpMode==='mock'||config.deviceMode==='mock'?await MockDatabase.open(new MockFileStorage()):undefined;
   const storage=new SessionStorage(()=>`rowan.${config.httpMode}.${config.httpMode==='mock'?(db?.state.generation??'legacy-v1'):realSessionScope(config)}`);
@@ -45,11 +47,12 @@ export async function createRuntime(input:Partial<CommunicationConfig>, realDevi
       stop:()=>{if(sessions.get(id)===session)sessions.delete(id);},
       credentials:(signal:AbortSignal)=>service.mqtt(id,signal),
     };
-    session=config.deviceMode==='mock'?new MockDeviceSession(devices,id,userID,lifecycle):new RealtimeDeviceSession({...lifecycle,deviceID:id,userID,
+    const context=async(signal:AbortSignal)=>{const device=await service.device(id,signal);if(device.device.id!==id)throw new Error('产品控制设备身份不一致');if(!device.product)throw new Error('产品信息尚未确认');return {device,model:await service.model(device.product.id,signal)};};
+    const inner=config.deviceMode==='mock'?new MockDeviceSession(devices,id,userID,lifecycle):new RealtimeDeviceSession({...lifecycle,deviceID:id,userID,
       connection:async()=> (await import('../protocol/mqtt-browser')).createMqttConnection(),
-      context:async(signal)=>{const device=await service.device(id,signal);if(!device.product)throw new Error('产品信息尚未确认');return {device,model:await service.model(device.product.id,signal)};},
+      context,
       profile:contracts?.realtime,
-    });return session;
+    });session=new ControlledDeviceSession(inner,context,config.deviceMode==='mock'&&config.httpMode==='mock'?mockControlProfile:contracts?.controls);return session;
   };
   const onboarding=new AddDeviceCoordinator(service,devices,{mode:config.deviceMode,real:contracts?.onboarding,wifi,createSession:createDeviceSession});
   const scanner=new QrScanCoordinator(service,config.httpMode,contracts?.qr);

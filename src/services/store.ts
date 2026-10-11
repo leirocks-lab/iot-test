@@ -30,7 +30,7 @@ export function seedState(): MockState {
   const member = { user_demo: { role: 'sa' as const, nickname:'Living room cooler', roomID:'room_living' } };
   return { schemaVersion:1, generation:`${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`, sequence:10,
     accounts:[{ id:'user_demo', email:'rowan@example.com', passwordHash:digest('mock-v1:Rowan@123'), regionCode:'US', setting:defaultSettings(), rooms:[{ id:'room_living', name:'Living room', isDefault:false }, { id:'room_kitchen', name:'Kitchen', isDefault:false }], roomVersion:1 }],
-    devices:[{ id:'dev_wine', name:'Wine Cooler', mac:'80a036d51aac', thingName:'dev_wine', productID:'prd_wine', mcuVersion:'1.0.0', wifiVersion:'1.0.0', activatedAt:'2026-10-07T00:00:00Z', online:true, protocol:'AT', properties:{ Power:1, TargetTemperature:12, CurrentTemperature:14, Mode:'normal', Light:0, Brightness:50, ChildLock:0, CleanHours:120, Alarm:'' }, shadowVersion:1, members:member }], tokens:{}, captchas:{}, binds:{}, shares:{}, schedules:{}, tasks:{} };
+    devices:[{ id:'dev_wine', name:'Wine Cooler', mac:'80a036d51aac', thingName:'dev_wine', productID:'prd_wine', mcuVersion:'1.0.0', wifiVersion:'1.0.0', activatedAt:'2026-10-07T00:00:00Z', online:true, protocol:'AT', properties:{ Power:1, TargetTemperature:12, CurrentTemperature:14, Mode:'normal', Light:0, Brightness:50, ChildLock:0, Mute:false, CleanHours:120, Alarm:'' }, shadowVersion:1, members:member }], tokens:{}, captchas:{}, binds:{}, shares:{}, schedules:{}, tasks:{} };
 }
 export class MockDatabase {
   private queue: Promise<unknown> = Promise.resolve();
