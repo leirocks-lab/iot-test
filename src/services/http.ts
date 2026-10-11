@@ -207,7 +207,7 @@ export function thingModel(productID:string) {
     {identifier:'ChildLock',type:'number',writable:true,min:0,max:1,step:1},
     {identifier:'Mute',type:'boolean',writable:true},
     {identifier:'CleanHours',type:'number',writable:false,unit:'h'},
-  ],services:[{identifier:'CleanReset'}],events:[{identifier:'Alarm',level:'warning'}]};
+  ],services:[{identifier:'CleanReset'}],events:[{identifier:'Alarm',level:'warning'},{identifier:'AlarmRecovered',level:'info'}]};
 }
 export function validateProperties(productID:string,values:Record<string,unknown>) {
   for(const [key,value]of Object.entries(values)) {

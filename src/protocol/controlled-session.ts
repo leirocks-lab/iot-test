@@ -3,6 +3,7 @@ import { PropertyControls, type ControlProfileResolver } from '../services/devic
 import { withBudget } from './device';
 import type { DeviceSession } from './device-session';
 import { MaintenanceControls, maintenanceLedger, type MaintenanceLedger, type MaintenanceProfileResolver } from '../services/device-maintenance';
+import { EventControls, eventLedger, type EventLedger, type EventProfileResolver } from '../services/device-events';
 
 /** Capability context is refreshed with every connection; a previous model cannot authorize a new session. */
 export class ControlledDeviceSession implements DeviceSession {
@@ -10,12 +11,16 @@ export class ControlledDeviceSession implements DeviceSession {
   controlError='';
   maintenance?:MaintenanceControls;
   maintenanceError='';
+  events?:EventControls;
+  eventError='';
+  private observationUnsubs:(()=>void)[]=[];
+  private finishEvents?:()=>void;
   private round=0;
   private controller?:AbortController;
   private flight?:Promise<void>;
   private listeners=new Set<()=>void>();
   constructor(private inner:DeviceSession,private load:(signal:AbortSignal)=>Promise<{device:DeviceView;model:ThingModel}>,private resolver?:ControlProfileResolver,
-    private maintenanceResolver?:MaintenanceProfileResolver,private ledger:MaintenanceLedger=maintenanceLedger()){}
+    private maintenanceResolver?:MaintenanceProfileResolver,private ledger:MaintenanceLedger=maintenanceLedger(),private eventResolver?:EventProfileResolver,private eventState:EventLedger=eventLedger()){}
   get confirmed(){return this.inner.confirmed;}
   get ready(){return !!this.controller&&!this.controller.signal.aborted&&this.inner.ready;}
   get sending(){return !!this.controller&&!this.controller.signal.aborted&&this.inner.sending;}
@@ -27,12 +32,24 @@ export class ControlledDeviceSession implements DeviceSession {
   private notify(){for(const listener of this.listeners)listener();}
   connect(signal?:AbortSignal):Promise<void>{
     if(signal?.aborted)return Promise.reject(new ApiError(499,'设备控制会话已停止'));if(this.flight)return this.flight;
-    this.close();const round=this.round,controller=new AbortController();this.controller=controller;this.controlError='';this.maintenanceError='';
+    this.close();const round=this.round,controller=new AbortController();this.controller=controller;this.controlError='';this.maintenanceError='';this.eventError='';
     const abort=()=>this.close();signal?.addEventListener('abort',abort,{once:true});
     const valid=()=>round===this.round&&!controller.signal.aborted;
+    const events=new EventControls(this.eventState,valid,()=>{if(valid())this.notify();});this.events=events;
+    const pending:(()=>void)[]=[];let loaded=false;
+    this.finishEvents=()=>{if(loaded)return;loaded=true;for(const apply of pending.splice(0))apply();};
+    const observe=(apply:()=>void)=>{if(!valid())return;if(loaded)apply();else pending.push(apply);};
+    if(this.inner.onEvent)this.observationUnsubs.push(this.inner.onEvent(event=>{const snapshot=JSON.parse(JSON.stringify(event));observe(()=>events.receive(snapshot));}));
+    if(this.inner.onProperties)this.observationUnsubs.push(this.inner.onProperties(value=>{const snapshot={...value,reported:{...value.reported}};observe(()=>events.properties(snapshot));}));
+    this.observationUnsubs.push(this.inner.onChange(()=>{if(valid()&&!this.inner.ready)observe(()=>events.stop());}));
     // Shared context avoids reading two different product versions for controls and maintenance.
     const context=withBudget(budget=>this.load(budget),10000,'产品能力读取超时',controller.signal);
     void context.catch(()=>undefined);
+    const eventCapability=withBudget(async budget=>{
+      if(!this.eventResolver||!this.inner.onEvent)throw new ApiError(503,'产品事件协议或能力映射尚未配置');
+      const data=await context,profile=await this.eventResolver(data,budget);
+      if(budget.aborted||!valid())throw new ApiError(499,'事件上下文已停止');events.configure(data,profile);
+    },10000,'产品事件能力读取超时',controller.signal).catch(error=>{if(valid())this.eventError=error instanceof Error?error.message:'产品事件能力未确认';}).finally(()=>{if(valid()){this.finishEvents?.();this.notify();}});
     const capabilities=withBudget(async budget=>{
       if(!this.resolver)throw new ApiError(503,'产品控制映射尚未配置');
       const data=await context,profile=await this.resolver(data,budget);
@@ -50,7 +67,7 @@ export class ControlledDeviceSession implements DeviceSession {
         call=>{if(!valid()||!this.inner.invokeService)throw new ApiError(503,'维护服务协议尚未配置');return this.inner.invokeService(call);},this.ledger,()=>{if(valid())this.notify();});
       this.notify();
     },10000,'产品维护能力读取超时',controller.signal).catch(error=>{if(valid()){this.maintenanceError=error instanceof Error?error.message:'维护能力未确认';this.notify();}});
-    const flight=Promise.all([this.inner.connect(controller.signal),capabilities,maintenance]).then(()=>{if(!valid())throw new ApiError(499,'设备控制会话已停止');this.maintenance?.synchronized();}).catch(error=>{if(valid())this.close();throw error;}).finally(()=>{
+    const flight=Promise.all([this.inner.connect(controller.signal),capabilities,maintenance,eventCapability]).then(()=>{if(!valid())throw new ApiError(499,'设备控制会话已停止');this.maintenance?.synchronized();}).catch(error=>{if(valid())this.close();throw error;}).finally(()=>{
       signal?.removeEventListener('abort',abort);if(this.flight===flight)this.flight=undefined;
     });this.flight=flight;return flight;
   }
@@ -58,5 +75,5 @@ export class ControlledDeviceSession implements DeviceSession {
     if(!this.controls)throw new ApiError(503,this.controlError||'产品控制能力尚未确认');
     return this.controls.command(properties);
   }
-  close(){++this.round;this.maintenance?.stop();this.maintenance=undefined;const controller=this.controller;this.controller=undefined;controller?.abort();this.flight=undefined;this.controls=undefined;this.inner.close();this.notify();}
+  close(){this.finishEvents?.();this.finishEvents=undefined;++this.round;this.events?.stop();for(const unsub of this.observationUnsubs)unsub();this.observationUnsubs=[];this.maintenance?.stop();this.maintenance=undefined;const controller=this.controller;this.controller=undefined;controller?.abort();this.flight=undefined;this.controls=undefined;this.inner.close();this.notify();}
 }

@@ -3,11 +3,13 @@ import { ApiError, type BindingResult, type Role } from '../services/models';
 import { MockDatabase, products } from '../services/store';
 import { validateProperties } from '../services/http';
 import { decodeFrame, deriveKey, encodeFrame, fragment, handshakeDigest, parseAdvertisement, reassemble, utf8, type DiscoveredDevice } from './ble';
+import type { DeviceEvent, PropertyObservation } from '../services/device-events';
 
 export type DeviceFault='none'|'drop-fragment'|'out-of-order'|'wrong-ack'|'crc'|'disconnect'|'wifi-password'|'wifi-ssid'|'network'|'no-report'|'permission'|'credentials'|'cloud';
 export interface ProvisionInput {userID:string;mac:string;model:string;ssid:string;password:string;token:string;bindCode:string;productID:string;modelID:string;seriesName?:string;urls?:Record<string,string>}
 export interface ShadowMessage {version:number;clientToken?:string;state?:{desired?:Record<string,unknown>;reported?:Record<string,number|string|boolean>;[key:string]:unknown};code?:number}
 export interface DeviceTransport {
+  subscribeEvents?(deviceID:string,userID:string,listener:(event:DeviceEvent)=>void):()=>void;
   dispose?():void|Promise<void>;
   scan(signal?:AbortSignal):Promise<DiscoveredDevice[]>;
   exchange(input:ProvisionInput,packets:Uint8Array[],signal?:AbortSignal):Promise<Uint8Array[]>;
@@ -43,6 +45,10 @@ export class MockDeviceTransport implements DeviceTransport {
   fault:DeviceFault;
   private delay:number;
   private listeners=new Map<string,Set<{userID:string;fn:(topic:string,message:ShadowMessage)=>void}>>();
+  private eventListeners=new Map<string,Set<{userID:string;fn:(event:DeviceEvent)=>void}>>();
+  subscribeEvents(id:string,userID:string,listener:(event:DeviceEvent)=>void){this.db.device(id,userID);let set=this.eventListeners.get(id);if(!set){set=new Set();this.eventListeners.set(id,set);}const entry={userID,fn:listener};set.add(entry);return ()=>{set.delete(entry);};}
+  /** Explicit simulation input, not a device clear-alarm command or production Topic. */
+  emitEvent(id:string,event:DeviceEvent){for(const entry of this.eventListeners.get(id)??[]){try{this.db.device(id,entry.userID);}catch{this.eventListeners.get(id)?.delete(entry);continue;}entry.fn(JSON.parse(JSON.stringify(event)));}}
   executionTrace:{protocol:string;request:string|Uint8Array}[]=[];
   private exchanges=new Map<string,{step:number;validated:boolean;parameters:Record<number,string>;generation?:string}>();
   releaseProvision(bindCode:string){const exchange=this.exchanges.get(bindCode);if(exchange)for(const key of Object.keys(exchange.parameters))delete exchange.parameters[Number(key)];this.exchanges.delete(bindCode);}
@@ -174,18 +180,21 @@ export class Provisioner {
   }
 }
 let shadowSessionSequence=0;
+function validReported(value:Record<string,unknown>){return typeof value==='object'&&!Array.isArray(value)&&Object.values(value).every(item=>['number','boolean','string'].includes(typeof item)&&(typeof item!=='number'||Number.isFinite(item)));}
 export class ShadowSession {
   confirmed:Record<string,number|string|boolean>={};
   version=-1; ready=false;
   private unsubscribe?:()=>void;
   private pending?:{token:string;expected:Record<string,unknown>;resolve:()=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>};
   private listeners=new Set<()=>void>();
+  private propertyListeners=new Set<(observation:PropertyObservation)=>void>();
   private sequence=0;
   private identity=++shadowSessionSequence;
   private connectRound=0;
   private connectController?:AbortController;
   constructor(private transport:DeviceTransport,private deviceID:string,private userID:string,private timeout:number=mockProfile.controlTimeout) {}
   onChange(fn:()=>void){this.listeners.add(fn);return ()=>{this.listeners.delete(fn);};}
+  onProperties(listener:(observation:PropertyObservation)=>void){this.propertyListeners.add(listener);return ()=>{this.propertyListeners.delete(listener);};}
   private notify(){for(const fn of this.listeners)fn();}
   get sending(){return !!this.pending;}
   async connect(signal?:AbortSignal){
@@ -198,14 +207,16 @@ export class ShadowSession {
     try{
       const msg=await withBudget(()=>this.transport.shadowGet(this.deviceID,this.userID),this.timeout,'完整属性等待超时',controller.signal);
       if(!current())throw new ApiError(499,'设备会话已停止');
-      if(!msg.state?.reported||!Number.isSafeInteger(msg.version)||msg.version<0)throw new ApiError(503,'完整属性尚未确认');
-      this.confirmed={...msg.state.reported};this.version=msg.version;this.ready=true;this.notify();
+      if(!msg.state?.reported||!Number.isSafeInteger(msg.version)||msg.version<0||!validReported(msg.state.reported))throw new ApiError(503,'完整属性尚未确认');
+      this.confirmed={...msg.state.reported};this.version=msg.version;this.ready=true;for(const listener of this.propertyListeners)listener({reported:{...msg.state.reported},full:true});this.notify();
     }catch(error){if(current())this.close();throw error;}
     finally{signal?.removeEventListener('abort',abort);}
   }
   receive(message:ShadowMessage){
-    if(!message.state?.reported||message.version<this.version)return;
+    if(!message.state?.reported||!Number.isSafeInteger(message.version)||message.version<0||message.version<this.version||!validReported(message.state.reported))return;
+    const fresh=message.version>this.version;
     this.version=message.version;this.confirmed={...this.confirmed,...message.state.reported};
+    if(fresh)for(const listener of this.propertyListeners)listener({reported:{...message.state.reported},full:false});
     if(this.pending&&message.clientToken===this.pending.token&&!message.state.desired&&Object.entries(this.pending.expected).every(([key,value])=>message.state!.reported![key]===value)){const p=this.pending;clearTimeout(p.timer);this.pending=undefined;p.resolve();}
     this.notify();
   }

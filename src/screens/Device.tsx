@@ -7,6 +7,7 @@ import type { DeviceSession } from '../protocol/device-session';
 import { displayNumber } from '../services/device-controls';
 import { DevicePropertyControls } from '../components/device/property-controls';
 import { DeviceMaintenance } from '../components/device/maintenance-controls';
+import { DeviceEvents } from '../components/device/event-controls';
 import { useApp } from '../ui/context';
 import { Busy, Button, Card, ErrorText, Label, Page, styles, useAction } from '../ui/kit';
 import { DeviceGlyph } from '../ui/device-glyph';
@@ -42,7 +43,8 @@ export default function DeviceScreen(){
   const temperatureUnit=runtime?.service.session?.setting.temperatureUnit??'C';
   return <Page title={device?.deviceNickname??'Device'} action={<Button secondary title="More" onPress={()=>router.push({pathname:'/device/[id]/more',params:{id}})}/>}><ErrorText error={action.error}/><ErrorText error={detailError||shadow?.error||''}/><ErrorText error={shadow?.controlError||''}/>{!device?<><Busy/><Button secondary title="Retry" onPress={()=>void run(()=>retryRef.current())}/></>:<>
     <View style={{alignItems:'center',gap:12}}>{device.product?<DeviceGlyph humidity={device.product.category==='Dehumidifier'}/>:null}<Label large>{device.product?.name??'产品信息待确认'}</Label><Label muted>{shadow?.ready?'Synced':shadow?.connected?'通信已连接 · 属性待同步':'Not synced · Last confirmed values'}</Label></View>
-    {!!values.Alarm&&<Card><ErrorText error={String(values.Alarm)}/><Label muted>Alarm is active until a recovery report arrives.</Label></Card>}
+    <ErrorText error={shadow?.eventError||''}/>
+    {shadow?.events&&<DeviceEvents events={shadow.events}/>}
     <Card><View style={styles.row}>{model?.attributes.filter(a=>!a.writable&&a.identifier!==shadow?.maintenance?.identifier).map(a=><View key={a.identifier} style={{flex:1}}><Label muted>{a.identifier}</Label><Label large>{displayNumber(values[a.identifier],a.unit,temperatureUnit)}</Label></View>)}</View>{shadow?.sending&&<Label muted>Waiting for device…</Label>}</Card>
     {shadow?.controls?<DevicePropertyControls controls={shadow.controls} temperatureUnit={temperatureUnit} busy={action.busy} run={run}/>:<Label muted>产品控制能力待确认</Label>}
     <ErrorText error={shadow?.maintenanceError||''}/>

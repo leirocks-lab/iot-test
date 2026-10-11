@@ -3,6 +3,7 @@ import { ShadowSession, withBudget, type DeviceTransport } from './device';
 import type { MqttConnection } from './mqtt-connection';
 import type { PropertyControls } from '../services/device-controls';
 import { ServiceRejectedError, type MaintenanceControls, type ServiceCall } from '../services/device-maintenance';
+import type { DeviceEvent, EventControls, PropertyObservation } from '../services/device-events';
 
 type Values = Record<string, number|string|boolean>;
 export interface DeviceSession {
@@ -17,6 +18,10 @@ export interface DeviceSession {
   readonly maintenance?:MaintenanceControls;
   readonly maintenanceError?:string;
   readonly canInvokeService?:boolean;
+  readonly events?:EventControls;
+  readonly eventError?:string;
+  onEvent?(listener:(event:DeviceEvent)=>void):()=>void;
+  onProperties?(listener:(observation:PropertyObservation)=>void):()=>void;
   invokeService?(call:ServiceCall):Promise<void>;
   connect(signal?:AbortSignal):Promise<void>;
   command(properties:Record<string,unknown>):Promise<void>;
@@ -28,6 +33,7 @@ export type DeviceReport =
   | {kind:'full'|'delta';version:number;reported:Values;requestID?:string}
   | {kind:'rejected';requestID?:string}
   | {kind:'serviceResult';requestID:string;identifier:string;success:boolean}
+  | {kind:'event';event:DeviceEvent}
   | {kind:'revoked';requestID?:string};
 /** Supplied only after the deployment's identity, topics, payloads and permissions are confirmed. */
 export interface DeviceSyncProfile {
@@ -70,6 +76,8 @@ export class RealtimeDeviceSession implements DeviceSession {
   private writable=false;
   private flight?:Promise<void>;
   private listeners=new Set<()=>void>();
+  private eventListeners=new Set<(event:DeviceEvent)=>void>();
+  private propertyListeners=new Set<(observation:PropertyObservation)=>void>();
   private waiting?:{id:string;expected?:Values;service?:{identifier:string;result:boolean};resolve:()=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>};
   private timeout:number;
   private identity:string;
@@ -78,6 +86,8 @@ export class RealtimeDeviceSession implements DeviceSession {
   get canWrite(){return this.writable&&!!this.profile?.command;}
   get canInvokeService(){return this.writable&&!!this.profile?.service;}
   onChange(listener:()=>void){this.listeners.add(listener);return ()=>{this.listeners.delete(listener);};}
+  onEvent(listener:(event:DeviceEvent)=>void){this.eventListeners.add(listener);return ()=>{this.eventListeners.delete(listener);};}
+  onProperties(listener:(observation:PropertyObservation)=>void){this.propertyListeners.add(listener);return ()=>{this.propertyListeners.delete(listener);};}
   private notify(){for(const listener of this.listeners)listener();}
   private check(round:number,signal:AbortSignal){if(round!==this.round||signal.aborted||!this.options.current())throw cancelled();}
   private requestID(){return `${this.identity}-${++this.sequence}`;}
@@ -138,6 +148,7 @@ export class RealtimeDeviceSession implements DeviceSession {
     this.check(round,signal);
   }
   private receive(report:DeviceReport){
+    if(report.kind==='event'){for(const listener of this.eventListeners)listener(report.event);return;}
     if(report.kind==='serviceResult'){
       const waiting=this.waiting;
       if(!waiting?.service?.result||report.requestID!==waiting.id||report.identifier!==waiting.service.identifier||typeof report.success!=='boolean')return;
@@ -164,6 +175,7 @@ export class RealtimeDeviceSession implements DeviceSession {
       if(report.version<=this.version)return;
       this.confirmed={...this.confirmed,...report.reported};this.version=report.version;
     }
+    for(const listener of this.propertyListeners)listener({reported:{...report.reported},full:report.kind==='full'});
     const waiting=this.waiting;
     if(waiting&&!waiting.service?.result&&report.requestID===waiting.id&&(!waiting.expected||Object.entries(waiting.expected).every(([key,value])=>report.reported[key]===value))){
       clearTimeout(waiting.timer);this.waiting=undefined;waiting.resolve();this.error='';
@@ -202,7 +214,10 @@ export class MockDeviceSession extends ShadowSession {
   get canInvokeService(){return this.ready;}
   private controller?:AbortController;
   private flight?:Promise<void>;
-  constructor(transport:DeviceTransport,id:string,user:string,private lifecycle:Lifecycle){super(transport,id,user);}
+  private eventListeners=new Set<(event:DeviceEvent)=>void>();
+  private eventUnsub?:()=>void;
+  constructor(private driver:DeviceTransport,private id:string,private user:string,private lifecycle:Lifecycle){super(driver,id,user);}
+  onEvent(listener:(event:DeviceEvent)=>void){this.eventListeners.add(listener);return ()=>{this.eventListeners.delete(listener);};}
   override connect(signal?:AbortSignal):Promise<void>{
     if(signal?.aborted||!this.lifecycle.current())return Promise.reject(cancelled());
     if(this.flight)return this.flight;
@@ -211,12 +226,13 @@ export class MockDeviceSession extends ShadowSession {
     const flight=Promise.resolve().then(async()=>{
       await withBudget(budget=>this.lifecycle.credentials(budget),10000,'设备连接凭据读取超时',controller.signal);
       if(controller.signal.aborted||!this.lifecycle.current())throw cancelled();
+      this.eventUnsub=this.driver.subscribeEvents?.(this.id,this.user,event=>{if(this.controller===controller&&!controller.signal.aborted&&this.lifecycle.current())for(const listener of this.eventListeners)listener(event);});
       await super.connect(controller.signal);
     }).catch(error=>{if(this.controller===controller)this.close();throw error;}).finally(()=>{
       signal?.removeEventListener('abort',abort);if(this.flight===flight)this.flight=undefined;
     });this.flight=flight;return flight;
   }
-  override close(){const controller=this.controller;this.controller=undefined;controller?.abort();this.flight=undefined;super.close();this.lifecycle.stop();}
+  override close(){const controller=this.controller;this.controller=undefined;controller?.abort();this.flight=undefined;this.eventUnsub?.();this.eventUnsub=undefined;super.close();this.lifecycle.stop();}
   override async command(properties:Record<string,unknown>){if(!this.lifecycle.current()){this.close();throw cancelled();}return super.command(properties);}
   async invokeService(call:ServiceCall){if(call.identifier!=='CleanReset'||Object.keys(call.params).length)throw new ApiError(400,'Mock维护服务或参数不支持');await this.command({Service:'CleanReset'});}
 }
