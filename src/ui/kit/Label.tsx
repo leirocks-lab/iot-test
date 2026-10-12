@@ -16,7 +16,7 @@ export function Label({ children, muted = false, large = false }: LabelProps) {
   return (
     <Text
       style={{
-        color: muted ? colors.muted : colors.text,
+        color: muted ? colors.font.subtitle : colors.font.title,
         fontSize: large ? 26 : 16,
         lineHeight: large ? 34 : 24,
         fontWeight: large ? '700' : '400',

@@ -3,13 +3,19 @@ import { ApiError, type BindingResult, type Role } from '../services/models';
 import { MockDatabase, products } from '../services/store';
 import { validateProperties } from '../services/http';
 import { decodeFrame, deriveKey, encodeFrame, fragment, handshakeDigest, parseAdvertisement, reassemble, utf8, type DiscoveredDevice } from './ble';
+import type { DeviceEvent, PropertyObservation } from '../services/device-events';
 
 export type DeviceFault='none'|'drop-fragment'|'out-of-order'|'wrong-ack'|'crc'|'disconnect'|'wifi-password'|'wifi-ssid'|'network'|'no-report'|'permission'|'credentials'|'cloud';
 export interface ProvisionInput {userID:string;mac:string;model:string;ssid:string;password:string;token:string;bindCode:string;productID:string;modelID:string;seriesName?:string;urls?:Record<string,string>}
 export interface ShadowMessage {version:number;clientToken?:string;state?:{desired?:Record<string,unknown>;reported?:Record<string,number|string|boolean>;[key:string]:unknown};code?:number}
+/** Certified local failure before any write in this provisioning transaction. Never infer from a status code. */
+export class ProvisionNotSentError extends ApiError {constructor(error:unknown){super(error instanceof ApiError?error.code:503,error instanceof Error?error.message:'配网尚未发送');}}
 export interface DeviceTransport {
-  scan(signal?:AbortSignal):Promise<DiscoveredDevice[]>;
-  exchange(input:ProvisionInput,packets:Uint8Array[],signal?:AbortSignal):Promise<Uint8Array[]>;
+  readonly reportsProvisionWriteStart?:boolean;
+  subscribeEvents?(deviceID:string,userID:string,listener:(event:DeviceEvent)=>void):()=>void;
+  dispose?():void|Promise<void>;
+  scan(signal?:AbortSignal,onDiscovered?:(device:DiscoveredDevice)=>void):Promise<DiscoveredDevice[]>;
+  exchange(input:ProvisionInput,packets:Uint8Array[],signal?:AbortSignal,onWriteStart?:()=>void):Promise<Uint8Array[]>;
   challenge(input:ProvisionInput,signal?:AbortSignal):Promise<Uint8Array[]>;
   provision(input:ProvisionInput,onStatus:(status:string)=>void,signal?:AbortSignal):Promise<void>;
   binding(input:ProvisionInput):Promise<{deviceID:string;bindingRole:Role;userID:string}>;
@@ -42,16 +48,21 @@ export class MockDeviceTransport implements DeviceTransport {
   fault:DeviceFault;
   private delay:number;
   private listeners=new Map<string,Set<{userID:string;fn:(topic:string,message:ShadowMessage)=>void}>>();
+  private eventListeners=new Map<string,Set<{userID:string;fn:(event:DeviceEvent)=>void}>>();
+  subscribeEvents(id:string,userID:string,listener:(event:DeviceEvent)=>void){this.db.device(id,userID);let set=this.eventListeners.get(id);if(!set){set=new Set();this.eventListeners.set(id,set);}const entry={userID,fn:listener};set.add(entry);return ()=>{set.delete(entry);};}
+  /** Explicit simulation input, not a device clear-alarm command or production Topic. */
+  emitEvent(id:string,event:DeviceEvent){for(const entry of this.eventListeners.get(id)??[]){try{this.db.device(id,entry.userID);}catch{this.eventListeners.get(id)?.delete(entry);continue;}entry.fn(JSON.parse(JSON.stringify(event)));}}
   executionTrace:{protocol:string;request:string|Uint8Array}[]=[];
   private exchanges=new Map<string,{step:number;validated:boolean;parameters:Record<number,string>;generation?:string}>();
   releaseProvision(bindCode:string){const exchange=this.exchanges.get(bindCode);if(exchange)for(const key of Object.keys(exchange.parameters))delete exchange.parameters[Number(key)];this.exchanges.delete(bindCode);}
   constructor(public db:MockDatabase,options:{delay?:number;fault?:DeviceFault}={}){this.delay=options.delay??180;this.fault=options.fault??'none';}
-  async scan(signal?:AbortSignal):Promise<DiscoveredDevice[]> {
+  async scan(signal?:AbortSignal,onDiscovered?:(device:DiscoveredDevice)=>void):Promise<DiscoveredDevice[]> {
     await pause(this.delay,signal);if(this.fault==='disconnect')throw new ApiError(61,'蓝牙已关闭');
     if(this.fault==='permission')throw new ApiError(403,'蓝牙权限未授权');
     const adverts=[{handle:'mock-ble-wine',service:'0822',manufacturer:new Uint8Array([0,0,0x80,0xa0,0x36,0xd5,0x1a,0xac,7,...utf8('ADD6830')])},{handle:'mock-ble-humidity',service:'0922',manufacturer:new Uint8Array([0,0,0x80,0xa0,0x36,0xd5,0x1a,0xad,7,...utf8('RW-DH01')])}];
     // mock-v1 registry resolves firmware model identities; pages never infer product capability from a name.
-    return [...new Map(adverts.map(a=>{const d=parseAdvertisement(a);return [d.mac,{...d,productID:products.find(p=>p.modelName===d.model)?.id}];})).values()];
+    const found=[...new Map(adverts.map(a=>{const d=parseAdvertisement(a);return [d.mac,{...d,productID:products.find(p=>p.modelName===d.model)?.id}];})).values()];
+    for(const device of found)onDiscovered?.({...device});return found;
   }
   async exchange(input:ProvisionInput,packets:Uint8Array[],signal?:AbortSignal) {
     await pause(this.delay,signal);if(this.fault==='disconnect')throw new ApiError(65,'蓝牙连接已断开');
@@ -94,7 +105,7 @@ export class MockDeviceTransport implements DeviceTransport {
     await this.db.transact(()=>{
       if(transaction.generation!==this.db.state.generation)throw new ApiError(499,'模拟数据已重置');
       let d=this.db.state.devices.find(d=>d.mac===input.mac);
-      if(!d){const id=this.db.id('dev');d={id,name:products.find(p=>p.id===input.productID)?.name??input.model,mac:input.mac,thingName:id,productID:input.productID,mcuVersion:'1.0.0',wifiVersion:'1.0.0',activatedAt:new Date().toISOString(),online:true,protocol:input.productID==='prd_humidity'?'55AA':'AT',properties:{Power:1,...(input.productID==='prd_wine'?{CurrentTemperature:14,TargetTemperature:12}:{CurrentHumidity:55,TargetHumidity:50}),Mode:'normal',Light:0,Brightness:50,ChildLock:0,CleanHours:10,Alarm:''},shadowVersion:1,members:{}};this.db.state.devices.push(d);}
+      if(!d){const id=this.db.id('dev');d={id,name:products.find(p=>p.id===input.productID)?.name??input.model,mac:input.mac,thingName:id,productID:input.productID,mcuVersion:'1.0.0',wifiVersion:'1.0.0',activatedAt:new Date().toISOString(),online:true,protocol:input.productID==='prd_humidity'?'55AA':'AT',properties:{Power:1,...(input.productID==='prd_wine'?{CurrentTemperature:14,TargetTemperature:12}:{CurrentHumidity:55,TargetHumidity:50}),Mode:'normal',Light:0,Brightness:50,ChildLock:0,Mute:false,CleanHours:10,Alarm:''},shadowVersion:1,members:{}};this.db.state.devices.push(d);}
       this.db.account(input.userID);
       if(Object.keys(d.members).length&&!d.members[input.userID])throw new ApiError(403,'设备已有绑定，请通过管理员分享加入');
       if(!d.members[input.userID])d.members[input.userID]={role:'sa',nickname:d.name,roomID:null};
@@ -172,27 +183,50 @@ export class Provisioner {
     throw new ApiError(0,'未确认绑定结果');
   }
 }
+let shadowSessionSequence=0;
+function validReported(value:Record<string,unknown>){return typeof value==='object'&&!Array.isArray(value)&&Object.values(value).every(item=>['number','boolean','string'].includes(typeof item)&&(typeof item!=='number'||Number.isFinite(item)));}
 export class ShadowSession {
   confirmed:Record<string,number|string|boolean>={};
   version=-1; ready=false;
   private unsubscribe?:()=>void;
   private pending?:{token:string;expected:Record<string,unknown>;resolve:()=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>};
   private listeners=new Set<()=>void>();
+  private propertyListeners=new Set<(observation:PropertyObservation)=>void>();
   private sequence=0;
+  private identity=++shadowSessionSequence;
+  private connectRound=0;
+  private connectController?:AbortController;
   constructor(private transport:DeviceTransport,private deviceID:string,private userID:string,private timeout:number=mockProfile.controlTimeout) {}
   onChange(fn:()=>void){this.listeners.add(fn);return ()=>{this.listeners.delete(fn);};}
+  onProperties(listener:(observation:PropertyObservation)=>void){this.propertyListeners.add(listener);return ()=>{this.propertyListeners.delete(listener);};}
   private notify(){for(const fn of this.listeners)fn();}
   get sending(){return !!this.pending;}
-  async connect(){this.unsubscribe?.();this.ready=false;this.unsubscribe=this.transport.subscribe(this.deviceID,this.userID,(topic,msg)=>{if(topic.endsWith('/update/rejected')){this.ready=false;if(this.pending){const p=this.pending;clearTimeout(p.timer);this.pending=undefined;p.reject(new ApiError(msg.code??403,'设备权限已失效'));}this.notify();}else if(topic.endsWith('/update/accepted')||topic.endsWith('/get/accepted'))this.receive(msg);});const msg=await this.transport.shadowGet(this.deviceID,this.userID);this.receive(msg);this.ready=true;this.notify();}
+  async connect(signal?:AbortSignal){
+    if(signal?.aborted)throw new ApiError(499,'设备会话已停止');
+    this.resetSession();const round=this.connectRound;
+    const controller=new AbortController();this.connectController=controller;
+    const abort=()=>this.close();signal?.addEventListener('abort',abort,{once:true});
+    const current=()=>round===this.connectRound&&!controller.signal.aborted&&!signal?.aborted;
+    this.unsubscribe=this.transport.subscribe(this.deviceID,this.userID,(topic,msg)=>{if(!current())return;if(topic.endsWith('/update/rejected')){this.ready=false;if(this.pending){const p=this.pending;clearTimeout(p.timer);this.pending=undefined;p.reject(new ApiError(msg.code??403,'设备权限已失效'));}this.notify();}else if(this.ready&&(topic.endsWith('/update/accepted')||topic.endsWith('/get/accepted')))this.receive(msg);});
+    try{
+      const msg=await withBudget(()=>this.transport.shadowGet(this.deviceID,this.userID),this.timeout,'完整属性等待超时',controller.signal);
+      if(!current())throw new ApiError(499,'设备会话已停止');
+      if(!msg.state?.reported||!Number.isSafeInteger(msg.version)||msg.version<0||!validReported(msg.state.reported))throw new ApiError(503,'完整属性尚未确认');
+      this.confirmed={...msg.state.reported};this.version=msg.version;this.ready=true;for(const listener of this.propertyListeners)listener({reported:{...msg.state.reported},full:true});this.notify();
+    }catch(error){if(current())this.close();throw error;}
+    finally{signal?.removeEventListener('abort',abort);}
+  }
   receive(message:ShadowMessage){
-    if(!message.state?.reported||message.version<this.version)return;
+    if(!message.state?.reported||!Number.isSafeInteger(message.version)||message.version<0||message.version<this.version||!validReported(message.state.reported))return;
+    const fresh=message.version>this.version;
     this.version=message.version;this.confirmed={...this.confirmed,...message.state.reported};
+    if(fresh)for(const listener of this.propertyListeners)listener({reported:{...message.state.reported},full:false});
     if(this.pending&&message.clientToken===this.pending.token&&!message.state.desired&&Object.entries(this.pending.expected).every(([key,value])=>message.state!.reported![key]===value)){const p=this.pending;clearTimeout(p.timer);this.pending=undefined;p.resolve();}
     this.notify();
   }
   async command(properties:Record<string,unknown>){
     if(!this.ready||this.pending)throw new ApiError(409,'设备未同步或正在等待回报');
-    const token=`${this.userID}-${Date.now()}-${++this.sequence}`;
+    const token=`${this.userID}-${Date.now()}-${this.identity}-${++this.sequence}`;
     const result=new Promise<void>((resolve,reject)=>{this.pending={token,expected:properties.Service==='CleanReset'?{CleanHours:0}:properties,resolve,reject,timer:setTimeout(()=>{this.pending=undefined;this.notify();reject(new ApiError(0,'未确认设备结果'));},this.timeout)};});
     this.notify();
     void this.transport.publish(this.deviceID,this.userID,{version:this.version,clientToken:token,state:{desired:{EnduserId:this.userID,DeviceId:this.deviceID,CommandType:'app',...properties}}}).catch(error=>{
@@ -201,13 +235,14 @@ export class ShadowSession {
     await result;
   }
 
-  close(){this.ready=false;this.unsubscribe?.();this.unsubscribe=undefined;if(this.pending){clearTimeout(this.pending.timer);this.pending.reject(new ApiError(499,'控制监听已关闭'));this.pending=undefined;}this.notify();}
+  private resetSession(){++this.connectRound;const controller=this.connectController;this.connectController=undefined;controller?.abort();this.ready=false;this.unsubscribe?.();this.unsubscribe=undefined;if(this.pending){clearTimeout(this.pending.timer);this.pending.reject(new ApiError(499,'控制监听已关闭'));this.pending=undefined;}this.notify();}
+  close(){this.resetSession();}
 }
 export class UnavailableDeviceTransport implements DeviceTransport {
   private unavailable():never{throw new ApiError(503,'真实设备驱动尚未接入');}
   async scan():Promise<DiscoveredDevice[]>{return this.unavailable();}
-  async exchange():Promise<Uint8Array[]>{return this.unavailable();}
-  async challenge():Promise<Uint8Array[]>{return this.unavailable();}
+  async exchange(_input:ProvisionInput,_packets:Uint8Array[],_signal?:AbortSignal):Promise<Uint8Array[]>{return this.unavailable();}
+  async challenge(_input:ProvisionInput,_signal?:AbortSignal):Promise<Uint8Array[]>{return this.unavailable();}
   async provision():Promise<void>{return this.unavailable();}
   async binding():Promise<{deviceID:string;bindingRole:Role;userID:string}>{return this.unavailable();}
   async shadowGet():Promise<ShadowMessage>{return this.unavailable();}

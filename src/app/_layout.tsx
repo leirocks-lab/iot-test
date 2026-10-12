@@ -40,7 +40,7 @@ function Routes() {
           <Stack.Screen name="help" />
         </Stack.Protected>
       </Stack>
-      <StatusBar style={c.background === "#111C22" ? "light" : "dark"} />
+      <StatusBar style={c.background.split === "#111C22" ? "light" : "dark"} />
     </>
   );
 }

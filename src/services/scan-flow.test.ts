@@ -13,6 +13,10 @@ async function setup() {
 }
 afterEach(()=>{vi.restoreAllMocks();vi.useRealTimers();});
 describe('扫码及相册共用业务流程',()=>{
+  it('acquires a fresh scanner on same-user login revision while keeping old confirmations invalid',async()=>{
+    const {service}=await setup(),coordinator=new QrScanCoordinator(service,'mock'),old=coordinator.acquire();old.read([encodeProductCode('prd_wine')]);const user=service.userID;
+    await service.login('rowan@example.com','Rowan@123','password');expect(service.userID).toBe(user);await expect(old.confirm()).rejects.toMatchObject({code:499});const next=coordinator.acquire();expect(next).not.toBe(old);expect(next.state.phase).toBe('idle');next.read([encodeProductCode('prd_humidity')]);expect(await next.confirm()).toEqual({productID:'prd_humidity'});coordinator.clear();
+  });
   it('filters invalid barcodes and deduplicates valid candidates without auto-binding a multi-code image',async()=>{
     const {flow,service}=await setup(),first=encodeProductCode('prd_wine'),second=encodeProductCode('prd_humidity');
     flow.read(['not a code',first,first,second]);expect(flow.state.choices).toHaveLength(2);expect(flow.state.selected).toBeUndefined();
@@ -27,6 +31,15 @@ describe('扫码及相册共用业务流程',()=>{
   it('does not allow mock QR contracts in real HTTP mode',async()=>{
     const {service}=await setup(),flow=new QrScanFlow(service,'real'),bind=vi.spyOn(service,'acceptShare');
     flow.read([encodeProductCode('prd_wine')]);expect(flow.state.phase).toBe('idle');expect(flow.state.error).toContain('正式');expect(bind).not.toHaveBeenCalled();
+  });
+  it('shares an injected real parser across camera/image candidates without defining a production format',async()=>{
+    const {service}=await setup(),parser=vi.fn((value:string)=>{if(value==='fixture-wine')return {type:'product' as const,productID:'prd_wine'};if(value==='fixture-humidity')return {type:'product' as const,productID:'prd_humidity'};throw new Error('invalid fixture');}),flow=new QrScanFlow(service,'real',parser);
+    flow.read(['fixture-wine','invalid','fixture-humidity','fixture-wine']);expect(flow.state.choices).toHaveLength(2);expect(flow.state.selected).toBeUndefined();
+    flow.choose(1);expect(await flow.confirm()).toEqual({productID:'prd_humidity'});expect(parser).toHaveBeenCalledTimes(4);
+  });
+  it('isolates a QR result from a same-account re-login',async()=>{
+    const {service,flow}=await setup();flow.read([encodeProductCode('prd_wine')]);const product=vi.spyOn(service,'product');
+    await service.login('rowan@example.com','Rowan@123','password');await expect(flow.confirm()).rejects.toMatchObject({code:499});expect(product).not.toHaveBeenCalled();
   });
   it('prevents duplicate confirmation while product lookup is in flight',async()=>{
     const {flow,service}=await setup();let resolve!:()=>void;

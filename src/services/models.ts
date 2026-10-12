@@ -6,11 +6,11 @@ export interface Settings {
   wallpaper: { id: string; name: Record<Language, string>; image: string } | null;
   homeLayout: string; temperatureUnit: 'C' | 'F'; measurementSystem: 'metric' | 'imperial';
 }
-export interface Room { id: string; name: string; isDefault: boolean; deviceCount?: number }
+export interface Room { id: string; name: string; isDefault?: boolean; deviceCount?: number }
 export interface Product {
   id: string; name: string; category: string; seriesName: string; modelName: string;
-  image: string; connectType: string; configType: string; recommended: boolean; sort: number;
-  cloudPlatform: string; bluetooth: boolean; buyLink: string;
+  image: string; connectType?: string; configType?: string; configTypes?: readonly string[]; recommended?: boolean; sort?: number;
+  cloudPlatform?: string; bluetooth?: boolean; buyLink: string;
 }
 export interface Attribute {
   identifier: string; type: 'number' | 'boolean' | 'enum'; writable: boolean;
@@ -24,10 +24,12 @@ export interface Device {
   shadowVersion: number; shadowDesired?:Record<string,unknown>; members: Record<string, { role: Role; nickname: string; roomID: string | null }>;
 }
 export interface DeviceView {
-  deviceNickname: string; online: boolean; bindingRole: Role; bindingAt: string;
-  device: Omit<Device, 'members' | 'properties'>; product: Product;
+  deviceNickname: string; online?: boolean; bindingRole: Role; bindingAt: string;
+  device: Pick<Device, 'id'> & Partial<Omit<Device, 'members' | 'properties'>>;
+  product: (Pick<Product,'id'> & Partial<Product>) | null;
 }
-export interface HomeGroup { room: { id: string | null; name: string }; devices: DeviceView[] }
+export interface HomeGroup { room: { id: string | null; name: string } | null; devices: DeviceView[] }
+export interface HelpArticle { id?: string; title: string; content: string; createdAt?: string }
 export interface Session { accessToken: string; refreshToken: string; expiresIn: number; tokenType: string; userID: string; setting: Settings }
 export interface Schedule {
   id: string; type: 'once' | 'periodic'; name: string; enabled: boolean;

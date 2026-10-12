@@ -9,13 +9,10 @@ import {
   type ReactNode,
 } from "react";
 import { useColorScheme } from "react-native";
-import {
-  communicationConfig,
-  type CommunicationConfig,
-} from "../services/config";
+import type { CommunicationConfig } from "../services/config";
 import type { Settings } from "../services/models";
 import type { Runtime } from "../services/runtime";
-import { createRuntime } from "../services/runtime";
+import { createConfiguredRuntime } from "../services/app-runtime";
 
 const Context = createContext<{
   runtime: Runtime | null;
@@ -46,12 +43,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let active = true;
     let created: Runtime | undefined;
+    const controller = new AbortController();
     const extra = Constants.expoConfig?.extra ?? {};
     Promise.resolve()
       .then(() =>
-        createRuntime(
-          communicationConfig(extra as Partial<CommunicationConfig>),
-        ),
+        createConfiguredRuntime(extra as Partial<CommunicationConfig>, { signal: controller.signal }),
       )
       .then((r) => {
         created = r;
@@ -59,10 +55,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
         else r.dispose();
       })
       .catch((e) => {
-        if (active) setError(String(e.message));
+        if (active) setError(e instanceof Error ? e.message : "App初始化失败，请核对通信配置");
       });
     return () => {
       active = false;
+      controller.abort();
       created?.dispose();
     };
   }, []);

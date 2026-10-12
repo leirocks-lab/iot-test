@@ -11,7 +11,7 @@ import { Busy, Button, Card, ErrorText, Field, Label, Page, useAction } from '..
 export default function Scan() {
   const {runtime}=useApp();
   if(!runtime)return <Busy/>;
-  return <ScanContent key={runtime.service.session?.userID??'signed-out'} runtime={runtime}/>;
+  return <ScanContent key={runtime.service.sessionRevision} runtime={runtime}/>;
 }
 function ScanContent({runtime}:{runtime:NonNullable<ReturnType<typeof useApp>['runtime']>}) {
   const action=useAction(),run=action.run,[permission,requestPermission,refreshPermission]=useCameraPermissions();

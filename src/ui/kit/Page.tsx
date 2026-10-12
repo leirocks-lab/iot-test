@@ -38,7 +38,7 @@ export function Page({
   const language = runtime?.service.language ?? "zh-CN";
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background.split }}>
       {image && image !== failedImage && (
         <>
           <Image
@@ -50,7 +50,7 @@ export function Page({
           <View
             style={[
               StyleSheet.absoluteFill,
-              { backgroundColor: colors.background, opacity: 0.88 },
+              { backgroundColor: colors.background.split, opacity: 0.88 },
             ]}
           />
         </>
@@ -76,7 +76,7 @@ export function Page({
               />
             </Pressable>
           )}
-          <Text style={[styles.heading, { color: colors.text }]}>
+          <Text style={[styles.heading, { color: colors.font.title }]}>
             {translate(title, language)}
           </Text>
           {action}

@@ -6,5 +6,5 @@ import { styles } from './styles';
 export function Card({ children }: { children: ReactNode }) {
   const colors = useColors();
 
-  return <View style={[styles.card, { backgroundColor: colors.surface }]}>{children}</View>;
+  return <View style={[styles.card, { backgroundColor: colors.background.invert }]}>{children}</View>;
 }

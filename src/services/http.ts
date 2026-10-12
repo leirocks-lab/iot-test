@@ -1,15 +1,17 @@
 import type { HttpClient, HttpRequest, HttpResponse } from '../lib/core';
-import { ApiError, type Schedule } from './models';
+import { ApiError, type Attribute, type Schedule } from './models';
 import { MockDatabase, defaultSettings, digest, products } from './store';
 import { nextExecution, validateSchedule } from './scheduler';
+import { validateAttributeValue } from './device-controls';
 
 export function requestUrl(base: string, req: HttpRequest) {
   const url = new URL(base.replace(/\/$/,'')+req.path);
   for(const [key,value] of Object.entries(req.query??{}))if(value!==undefined)url.searchParams.set(key,String(value));
   return url.toString();
 }
+export type HttpFetcher=(url:string,init?:RequestInit)=>Promise<Response>;
 export class FetchHttpClient implements HttpClient {
-  constructor(private base: string, private fetcher: typeof fetch = fetch) {
+  constructor(private base: string, private fetcher: HttpFetcher = fetch) {
     if(!/^https:\/\//.test(base))throw new Error('真实 API 必须配置 HTTPS 地址');
   }
   async request<T>(req: HttpRequest): Promise<HttpResponse<T>> {
@@ -78,15 +80,25 @@ export class MockHttpClient implements HttpClient {
     if(path==='/api/app/products/category')return ok(products.map(p=>({name:p.category,value:p.category})));
     if(path==='/api/app/products')return ok(products.map(p=>({category:p.category,categoryName:{'zh-CN':p.category,'zh-TW':p.category,en:p.category},products:[p]})));
     const productPath=path.match(/^\/api\/app\/products\/([^/]+)(?:\/(.*))?$/);
-    if(productPath) {
+    if(productPath && productPath[2]!=='connectHelping') {
       const p=products.find(p=>p.id===productPath[1]);if(!p)throw new ApiError(404,'产品不存在');
       if(productPath[2]==='thing-model')return ok(thingModel(p.id));
-      if(productPath[2]==='connectHelping')return ok({id:'help_pair',title:'配网帮助',content:'开启设备配网模式。选择 2.4 GHz 网络，保持蓝牙开启，按步骤连接。'});
       return ok({...p,parameters:{},introduction:'ROWAN 智能家居设备 · Mock 产品'});
     }
+    if(productPath?.[2]==='connectHelping'&&!req.headers?.Authorization?.startsWith('Bearer '))throw new ApiError(401,'登录已失效');
     const tokenValue=req.headers?.Authorization?.replace(/^Bearer /,''), token=tokenValue?state.tokens[tokenValue]:undefined;
     if(!token||token.refresh||token.expiresAt<now)throw new ApiError(401,'登录已失效');
     const userID=token.userID, account=this.db.account(userID);
+    if(productPath?.[2]==='connectHelping'&&method==='GET') {
+      if(!products.some(product=>product.id===productPath[1]))throw new ApiError(404,'产品不存在');
+      const language=req.headers?.['Accept-Language'];
+      const help=language==='en'
+        ? {title:'Pairing help',content:'Put the device in pairing mode. Select a 2.4 GHz network, keep Bluetooth on, and follow the connection steps.'}
+        : language==='zh-TW'
+          ? {title:'配網幫助',content:'開啟裝置配網模式。選擇 2.4 GHz 網路，保持藍牙開啟，依照步驟連線。'}
+          : {title:'配网帮助',content:'开启设备配网模式。选择 2.4 GHz 网络，保持蓝牙开启，按步骤连接。'};
+      return ok({id:'help_pair',...help});
+    }
     if(path==='/api/app/session'&&method==='DELETE') { for(const [key,value]of Object.entries(state.tokens))if(value.userID===userID)delete state.tokens[key];return ok(); }
     if(path==='/api/app/devices') {
       const devices=state.devices.filter(d=>d.members[userID]);
@@ -193,14 +205,14 @@ export function thingModel(productID:string) {
     {identifier:'Light',type:'number',writable:true,min:0,max:1,step:1},
     {identifier:'Brightness',type:'number',writable:true,min:0,max:100,step:1},
     {identifier:'ChildLock',type:'number',writable:true,min:0,max:1,step:1},
-    {identifier:'CleanHours',type:'number',writable:false},
-  ],services:[{identifier:'CleanReset'}],events:[{identifier:'Alarm',level:'warning'}]};
+    {identifier:'Mute',type:'boolean',writable:true},
+    {identifier:'CleanHours',type:'number',writable:false,unit:'h'},
+  ],services:[{identifier:'CleanReset'}],events:[{identifier:'Alarm',level:'warning'},{identifier:'AlarmRecovered',level:'info'}]};
 }
 export function validateProperties(productID:string,values:Record<string,unknown>) {
   for(const [key,value]of Object.entries(values)) {
     const a=thingModel(productID).attributes.find(a=>a.identifier===key);
     if(!a?.writable)throw new ApiError(400,'未知或只读属性');
-    if(a.type==='enum'&&!a.values?.includes(String(value)))throw new ApiError(400,'模式不支持');
-    if(a.type==='number'&&(typeof value!=='number'||!Number.isFinite(value)||value<a.min!||value>a.max!||(value-a.min!) % a.step! !== 0))throw new ApiError(400,'属性值超出范围或步长');
+    validateAttributeValue(a as Attribute,value);
   }
 }
