@@ -1,11 +1,13 @@
 import { View, type TextInputProps } from "react-native";
 import { useApp, useColors } from "../context";
 import { translate } from "../i18n";
-import { Input } from "./Input";
+import { Input, type InputProps } from "./Input";
 import { Label } from "./Label";
 
 type FieldProps = TextInputProps & {
   label: string;
+  prefixIcon?: InputProps["prefixIcon"];
+  clearable?: InputProps["clearable"];
 };
 
 export function Field({ label, ...props }: FieldProps) {
@@ -17,6 +19,8 @@ export function Field({ label, ...props }: FieldProps) {
     <View style={{ gap: 6 }}>
       <Label muted>{label}</Label>
       <Input
+        prefixIcon={props.prefixIcon}
+        clearable={props.clearable}
         accessibilityLabel={translate(label, language)}
         placeholderTextColor={colors.font.subtitle2}
         autoCapitalize="none"

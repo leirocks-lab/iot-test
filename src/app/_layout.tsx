@@ -1,4 +1,5 @@
 import { AppProvider, useApp, useColors } from "@/ui/context";
+import { LoadingProvider } from "@/components/Loading";
 import { Busy, ErrorText } from "@/ui/kit";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -46,7 +47,9 @@ function Routes() {
 export default function RootLayout() {
   return (
     <AppProvider>
-      <Routes />
+      <LoadingProvider>
+        <Routes />
+      </LoadingProvider>
     </AppProvider>
   );
 }

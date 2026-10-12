@@ -27,6 +27,8 @@ describe('document-backed API flows', () => {
     const { service } = await setup();
     await service.logout();
     await service.sendCaptcha('new@example.com', 'register');
+    await expect(service.checkCaptcha('new@example.com', '000000')).rejects.toThrow('验证码无效或已过期');
+    await service.checkCaptcha('new@example.com', '123456');
     await service.register('new@example.com', ' New@123 ', '123456', 'US');
     expect(service.session).toBe(null);
     await service.login('new@example.com', ' New@123 ', 'password');
