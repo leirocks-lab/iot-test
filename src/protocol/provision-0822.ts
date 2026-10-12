@@ -4,7 +4,7 @@ import { appDigest0822, decode0822, encode0822, factoryReply0822, key0822, verif
 import { withBudget, type DeviceTransport, type ProvisionInput } from './device';
 
 export interface ProvisionRunner {
-  run(input:ProvisionInput,onStatus:(status:string)=>void,signal?:AbortSignal,confirmBinding?:(signal?:AbortSignal)=>Promise<BindingResult>):Promise<BindingResult>;
+  run(input:ProvisionInput,onStatus:(status:string)=>void,signal?:AbortSignal,confirmBinding?:(signal?:AbortSignal)=>Promise<BindingResult>,onSubmitted?:()=>void):Promise<BindingResult>;
 }
 export interface Profile0822 {
   /** Exact DATA confirmed for the selected firmware. No default inherited from mock-v1. */
@@ -14,7 +14,7 @@ export interface Profile0822 {
 /** Selected SOFTSTART=5 protocol. Injected ports/vectors are development evidence, not board acceptance. */
 export class Provisioner0822 implements ProvisionRunner {
   constructor(private transport:DeviceTransport,private profile:Profile0822){}
-  async run(input:ProvisionInput,onStatus:(status:string)=>void,signal?:AbortSignal,confirmBinding?:(signal?:AbortSignal)=>Promise<BindingResult>):Promise<BindingResult> {
+  async run(input:ProvisionInput,onStatus:(status:string)=>void,signal?:AbortSignal,confirmBinding?:(signal?:AbortSignal)=>Promise<BindingResult>,onSubmitted?:()=>void):Promise<BindingResult> {
     const check=()=>{if(signal?.aborted)throw new ApiError(499,'0822客户端操作已停止');};check();
     if(!confirmBinding)throw new ApiError(503,'0822必须通过云端查询确认账号绑定');
     if(!(this.profile.factoryReply instanceof Uint8Array)||!Number.isFinite(this.profile.stageTimeout)||this.profile.stageTimeout<=0)
@@ -35,7 +35,8 @@ export class Provisioner0822 implements ProvisionRunner {
       for(let index=0;index<values.length;index++)frames.push(encode0822(index+1,utf8(values[index]),key));
       const send=async(frame:Uint8Array,expected?:number,echo?:string)=>{
         check();
-        const response=await this.transport.exchange(input,[frame],signal);
+        if(this.transport.reportsProvisionWriteStart!==true)onSubmitted?.();
+        const response=await this.transport.exchange(input,[frame],signal,onSubmitted);
         try{
           check();
           if(expected===undefined){if(response.length)throw new ApiError(0x63,'8F不应有未定义ACK');return;}

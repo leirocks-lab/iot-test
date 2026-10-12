@@ -76,8 +76,9 @@ export async function createRuntime(input:Partial<CommunicationConfig>, realDevi
       profile:contracts?.realtime,
     });const mock=config.deviceMode==='mock'&&config.httpMode==='mock';session=new ControlledDeviceSession(inner,context,mock?mockControlProfile:contracts?.controls,mock?mockMaintenanceProfile:contracts?.maintenance,ledger,mock?mockEventProfile:contracts?.events,eventState);return session;
   };
-  const onboarding=new AddDeviceCoordinator(service,devices,{mode:config.deviceMode,real:contracts?.onboarding,wifi,createSession:createDeviceSession});
-  const scanner=new QrScanCoordinator(service,config.httpMode,contracts?.qr);
+  let scanner:QrScanCoordinator;
+  const onboarding=new AddDeviceCoordinator(service,devices,{mode:config.deviceMode,real:contracts?.onboarding,wifi,createSession:createDeviceSession,beforeNewContext:()=>{if(scanner?.pending)throw new ApiError(409,'请先核对或完成当前扫码绑定结果');}});
+  scanner=new QrScanCoordinator(service,config.httpMode,contracts?.qr,()=>{if(onboarding.pending)throw new ApiError(409,'请先核对或完成当前蓝牙添加结果');});
   let revision=service.sessionRevision;
   const connections=new Set<MqttConnection>();
   const closeConnections=()=>{for(const session of [...sessions.values()])session.close();sessions.clear();maintenanceStates.clear();eventStates.clear();for(const connection of connections)connection.close();connections.clear();};

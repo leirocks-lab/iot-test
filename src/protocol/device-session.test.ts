@@ -42,6 +42,15 @@ function setup(options:{profile?:false;role?:'obs';write?:boolean;query?:DeviceS
 }
 afterEach(()=>{vi.useRealTimers();vi.restoreAllMocks();});
 describe('真实MQTT会话（构造协议/端口）',()=>{
+  it.each([undefined,null,{},[],{Power:undefined},{Power:null},{Power:NaN},{Power:Infinity},{Power:{value:1}}])('never publishes with an invalid confirmation rule %j',async expected=>{
+    const c=setup();c.profile.command=(properties,id)=>({topic:'fixture/set',payload:encode({id,properties}),expected:expected as never});const {pending,port}=await c.begin();await c.full(port,pending);
+    await expect(c.session.command({Power:1})).rejects.toThrow('确认规则');expect(port.publish).toHaveBeenCalledOnce();expect(c.session.sending).toBe(false);expect(c.session.confirmed.Power).toBe(0);c.session.close();
+  });
+  it('uses the sent confirmation snapshot even if the adapter later mutates its shared rule',async()=>{
+    const c=setup(),expected={Power:1};c.profile.command=(properties,id)=>({topic:'fixture/set',payload:encode({id,properties}),expected});const {pending,port}=await c.begin();await c.full(port,pending);
+    const sent=c.session.command({Power:1}),id=decode(port.publish.mock.calls.at(-1)![1]).id;expected.Power=0;port.report({kind:'delta',version:6,requestID:id,reported:{Power:0}});expect(c.session.sending).toBe(true);
+    port.report({kind:'delta',version:7,requestID:id,reported:{Power:1}});await sent;expect(c.session.sending).toBe(false);c.session.close();
+  });
   it('consumes exactly issued credentials; CONNACK, SUBACK and PUBACK never alone set ready',async()=>{
     const c=setup(),{pending,port}=await c.begin();await vi.waitFor(()=>expect(port.publish).toHaveBeenCalled());
     expect(c.issued[0]).toEqual({...credentials,password:'public-0'});expect(c.session.connected).toBe(true);expect(c.session.ready).toBe(false);

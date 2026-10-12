@@ -8,11 +8,14 @@ import type { DeviceEvent, PropertyObservation } from '../services/device-events
 export type DeviceFault='none'|'drop-fragment'|'out-of-order'|'wrong-ack'|'crc'|'disconnect'|'wifi-password'|'wifi-ssid'|'network'|'no-report'|'permission'|'credentials'|'cloud';
 export interface ProvisionInput {userID:string;mac:string;model:string;ssid:string;password:string;token:string;bindCode:string;productID:string;modelID:string;seriesName?:string;urls?:Record<string,string>}
 export interface ShadowMessage {version:number;clientToken?:string;state?:{desired?:Record<string,unknown>;reported?:Record<string,number|string|boolean>;[key:string]:unknown};code?:number}
+/** Certified local failure before any write in this provisioning transaction. Never infer from a status code. */
+export class ProvisionNotSentError extends ApiError {constructor(error:unknown){super(error instanceof ApiError?error.code:503,error instanceof Error?error.message:'配网尚未发送');}}
 export interface DeviceTransport {
+  readonly reportsProvisionWriteStart?:boolean;
   subscribeEvents?(deviceID:string,userID:string,listener:(event:DeviceEvent)=>void):()=>void;
   dispose?():void|Promise<void>;
-  scan(signal?:AbortSignal):Promise<DiscoveredDevice[]>;
-  exchange(input:ProvisionInput,packets:Uint8Array[],signal?:AbortSignal):Promise<Uint8Array[]>;
+  scan(signal?:AbortSignal,onDiscovered?:(device:DiscoveredDevice)=>void):Promise<DiscoveredDevice[]>;
+  exchange(input:ProvisionInput,packets:Uint8Array[],signal?:AbortSignal,onWriteStart?:()=>void):Promise<Uint8Array[]>;
   challenge(input:ProvisionInput,signal?:AbortSignal):Promise<Uint8Array[]>;
   provision(input:ProvisionInput,onStatus:(status:string)=>void,signal?:AbortSignal):Promise<void>;
   binding(input:ProvisionInput):Promise<{deviceID:string;bindingRole:Role;userID:string}>;
@@ -53,12 +56,13 @@ export class MockDeviceTransport implements DeviceTransport {
   private exchanges=new Map<string,{step:number;validated:boolean;parameters:Record<number,string>;generation?:string}>();
   releaseProvision(bindCode:string){const exchange=this.exchanges.get(bindCode);if(exchange)for(const key of Object.keys(exchange.parameters))delete exchange.parameters[Number(key)];this.exchanges.delete(bindCode);}
   constructor(public db:MockDatabase,options:{delay?:number;fault?:DeviceFault}={}){this.delay=options.delay??180;this.fault=options.fault??'none';}
-  async scan(signal?:AbortSignal):Promise<DiscoveredDevice[]> {
+  async scan(signal?:AbortSignal,onDiscovered?:(device:DiscoveredDevice)=>void):Promise<DiscoveredDevice[]> {
     await pause(this.delay,signal);if(this.fault==='disconnect')throw new ApiError(61,'蓝牙已关闭');
     if(this.fault==='permission')throw new ApiError(403,'蓝牙权限未授权');
     const adverts=[{handle:'mock-ble-wine',service:'0822',manufacturer:new Uint8Array([0,0,0x80,0xa0,0x36,0xd5,0x1a,0xac,7,...utf8('ADD6830')])},{handle:'mock-ble-humidity',service:'0922',manufacturer:new Uint8Array([0,0,0x80,0xa0,0x36,0xd5,0x1a,0xad,7,...utf8('RW-DH01')])}];
     // mock-v1 registry resolves firmware model identities; pages never infer product capability from a name.
-    return [...new Map(adverts.map(a=>{const d=parseAdvertisement(a);return [d.mac,{...d,productID:products.find(p=>p.modelName===d.model)?.id}];})).values()];
+    const found=[...new Map(adverts.map(a=>{const d=parseAdvertisement(a);return [d.mac,{...d,productID:products.find(p=>p.modelName===d.model)?.id}];})).values()];
+    for(const device of found)onDiscovered?.({...device});return found;
   }
   async exchange(input:ProvisionInput,packets:Uint8Array[],signal?:AbortSignal) {
     await pause(this.delay,signal);if(this.fault==='disconnect')throw new ApiError(65,'蓝牙连接已断开');

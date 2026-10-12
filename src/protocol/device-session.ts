@@ -61,6 +61,10 @@ interface RealSessionOptions extends Lifecycle {
 }
 const cancelled=()=>new ApiError(499,'设备会话已停止');
 const text=(error:unknown)=>error instanceof Error?error.message:'设备会话失败';
+function confirmationValues(value:unknown,message:string):Values {
+  if(!value||typeof value!=='object'||Array.isArray(value)||!Object.keys(value).length||Object.values(value).some(item=>!['number','string','boolean'].includes(typeof item)||typeof item==='number'&&!Number.isFinite(item)))throw new ApiError(503,message);
+  return {...value} as Values;
+}
 let sessionSequence=0;
 
 /** One foreground conversation. Every attempt obtains new credentials; no SDK retry or command replay. */
@@ -186,8 +190,8 @@ export class RealtimeDeviceSession implements DeviceSession {
     if(!this.options.current()){this.close();throw cancelled();}
     if(!this.ready||this.waiting||!this.connection||!this.profile?.command||!this.writable)throw new ApiError(409,'设备未同步、权限未确认或正在等待回报');
     const round=this.round,signal=this.controller!.signal,id=this.requestID(),publication=this.profile.command(properties,id);
-    if(!Object.keys(publication.expected).length)throw new ApiError(503,'控制确认规则尚未配置');
-    const received=this.wait(id,publication.expected);this.notify();
+    const expected=confirmationValues(publication.expected,'控制确认规则尚未配置');
+    const received=this.wait(id,expected);this.notify();
     try{await Promise.all([this.connection.publish(publication.topic,publication.payload,signal),received]);this.check(round,signal);}
     catch(error){if(round===this.round){this.rejectWaiting(error instanceof Error?error:new Error(text(error)));if(error instanceof ApiError&&[0,401,403,499].includes(error.code))this.close();this.error=text(error);this.notify();}throw error;}
   }
@@ -195,8 +199,9 @@ export class RealtimeDeviceSession implements DeviceSession {
     if(!this.options.current()){this.close();throw cancelled();}
     if(!this.ready||this.waiting||!this.connection||!this.profile?.service||!this.writable)throw new ApiError(409,'设备未同步、服务权限未确认或正在等待回报');
     const round=this.round,signal=this.controller!.signal,id=this.requestID(),publication=this.profile.service(call,id),confirmation=publication.confirmation;
-    if(!confirmation||!['result','reported'].includes(confirmation.kind)||confirmation.kind==='reported'&&(!confirmation.expected||typeof confirmation.expected!=='object'||Array.isArray(confirmation.expected)||!Object.keys(confirmation.expected).length||Object.values(confirmation.expected).some(value=>!['number','boolean','string'].includes(typeof value)||typeof value==='number'&&!Number.isFinite(value))))throw new ApiError(503,'维护服务确认规则尚未配置');
-    const received=this.wait(id,confirmation.kind==='reported'?confirmation.expected:undefined,{identifier:call.identifier,result:confirmation.kind==='result'});this.notify();
+    if(!confirmation||!['result','reported'].includes(confirmation.kind))throw new ApiError(503,'维护服务确认规则尚未配置');
+    const expected=confirmation.kind==='reported'?confirmationValues(confirmation.expected,'维护服务确认规则尚未配置'):undefined;
+    const received=this.wait(id,expected,{identifier:call.identifier,result:confirmation.kind==='result'});this.notify();
     try{await Promise.all([this.connection.publish(publication.topic,publication.payload,signal),received]);this.check(round,signal);}
     catch(error){if(round===this.round){this.rejectWaiting(error instanceof Error?error:new Error(text(error)));if(error instanceof ApiError&&[0,401,403,499].includes(error.code))this.close();this.error=text(error);this.notify();}throw error;}
   }

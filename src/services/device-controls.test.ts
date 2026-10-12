@@ -26,6 +26,25 @@ function setup(options:{profile?:ControlProfile;model?:ThingModel;role?:'sa'|'mb
   return {state,publish,controls};
 }
 describe('七项产品属性控制（显式合成映射）',()=>{
+  it.each(['sa',['sa','unconfirmed-role']])('does not interpret malformed or unconfirmed role declarations as authorization: %j',roles=>{
+    const p=structuredClone(profile),{controls,publish}=setup({profile:p});p.bindings.power!.roles=roles as never;
+    return expect(controls.toggle('power')).rejects.toThrow('权限尚未完整确认').then(()=>expect(publish).not.toHaveBeenCalled());
+  });
+  it.each([
+    [{identifier:'not_published',equals:true}], [{identifier:'locked'}], [{identifier:'locked',equals:undefined}],
+    [{identifier:'locked',equals:0}], [{identifier:'program',equals:'unpublished'}], [{identifier:'extra_unscoped',equals:NaN}], null,
+  ])('does not authorize incomplete/unpublished product conditions %j',conditions=>{
+    const p=structuredClone(profile);p.bindings.mode!.conditions=conditions as never;const publish=vi.fn();
+    expect(()=>new PropertyControls(model,p,'sa',()=>({ready:true,sending:false,canWrite:true,confirmed:{program:'eco',not_published:true}}),publish)).toThrow('产品操作条件');expect(publish).not.toHaveBeenCalled();
+  });
+  it('revalidates a changed condition before action instead of treating missing values as equal',async()=>{
+    const p=structuredClone(profile),{controls,publish,state}=setup({profile:p});p.bindings.mode!.conditions=[{identifier:'not_published',equals:true}];state.confirmed.not_published=true;
+    await expect(controls.choose('mode','rapid')).rejects.toThrow('产品操作条件');expect(publish).not.toHaveBeenCalled();
+  });
+  it('allows a declared readonly numeric condition without inventing a writable range for it',async()=>{
+    const m=structuredClone(model),p=structuredClone(profile);m.attributes.push({identifier:'sensor',type:'number',writable:false});p.bindings.mode!.conditions=[{identifier:'sensor',equals:55}];
+    const {controls,state,publish}=setup({model:m,profile:p});await expect(controls.choose('mode','rapid')).rejects.toThrow('不满足');state.confirmed.sensor=55;await controls.choose('mode','rapid');expect(publish).toHaveBeenCalledExactlyOnceWith({program:'rapid'});
+  });
   it('preserves identifiers and boolean/string switch values without inferring Power or max=1',async()=>{
     const {controls,publish,state}=setup();await controls.toggle('power');expect(publish).toHaveBeenLastCalledWith({relay:true});expect(state.confirmed.relay).toBe(false);
     await controls.toggle('light');expect(publish).toHaveBeenLastCalledWith({lamp:'lit'});await controls.toggle('mute');expect(publish).toHaveBeenLastCalledWith({quiet:true});

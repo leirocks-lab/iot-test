@@ -64,6 +64,15 @@ export class PropertyControls {
     const bindings=Object.values(profile.bindings);
     if(!model.version||model.attributes.some(attribute=>typeof attribute.identifier!=='string'||!attribute.identifier)||this.attributes.size!==model.attributes.length||new Set(bindings.map(binding=>binding.identifier)).size!==bindings.length)throw new ApiError(503,'产品属性映射不唯一或版本未确认');
     if(bindings.some(binding=>!this.attributes.has(binding.identifier)))throw new ApiError(503,'控制属性不在当前物模型中');
+    for(const binding of bindings){const reason=this.conditionsReason(binding);if(reason)throw new ApiError(503,reason);}
+  }
+  private conditionsReason(binding:ControlBinding){
+    if(binding.conditions===undefined)return '';
+    return !Array.isArray(binding.conditions)||binding.conditions.some(condition=>{
+      if(!condition||typeof condition.identifier!=='string'||!Object.hasOwn(condition,'equals'))return true;
+      const attribute=this.attributes.get(condition.identifier),value=condition.equals;if(!attribute)return true;
+      return attribute.type==='number'?typeof value!=='number'||!Number.isFinite(value):attribute.type==='boolean'?typeof value!=='boolean':attribute.type!=='enum'||typeof value!=='string'||!attribute.values?.includes(value);
+    })?'产品操作条件尚未完整确认或不在当前物模型中':'';
   }
   private binding(kind:ControlKind){const binding=this.profile.bindings[kind];if(!binding)throw new ApiError(503,'当前产品未提供此控制能力');return binding;}
   private attribute(kind:ControlKind){const attribute=this.attributes.get(this.binding(kind).identifier);if(!attribute)throw new ApiError(503,'控制属性不在当前物模型中');return attribute;}
@@ -77,12 +86,14 @@ export class PropertyControls {
     try{
       const binding=this.binding(kind),attribute=this.attribute(kind),state=this.state();
       if(!attribute.writable)return '当前属性只读';
+      if(!Array.isArray(binding.roles)||binding.roles.some(role=>!['sa','mbr','obs'].includes(role)))return '产品控制权限尚未完整确认';
       if(this.role==='obs'||!binding.roles?.includes(this.role)||state.canWrite!==true)return '当前账号没有此属性控制权限';
       if(!state.ready)return '设备属性尚未同步';
       if(state.sending||this.busy)return '正在等待设备回报';
       if(kind==='temperature'&&attribute.unit!=='C'&&attribute.unit!=='F')return '温度原生单位尚未确认';
       if((kind==='humidity'||kind==='brightness')&&!attribute.unit&&!binding.unitless)return '属性单位尚未确认';
       if(kind==='mode'&&binding.conditions===undefined)return '模式冲突规则尚未确认';
+      const conditionReason=this.conditionsReason(binding);if(conditionReason)return conditionReason;
       for(const condition of binding.conditions??[])if(state.confirmed[condition.identifier]!==condition.equals)return '当前设备状态不满足产品操作条件';
       if(['power','light','childLock','mute'].includes(kind)){
         if(!binding.switch||binding.switch.on===binding.switch.off)return '开关值域尚未确认';

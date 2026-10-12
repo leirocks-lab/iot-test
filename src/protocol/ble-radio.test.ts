@@ -3,6 +3,7 @@ import { ApiError } from '../services/models';
 import { utf8 } from './ble';
 import { BLE_0822, decode0822, encode0822, key0822 } from './ble-0822';
 import { Ble0822DeviceTransport, type BleConnection, type BleRadio } from './ble-radio';
+import { ProvisionNotSentError } from './device';
 
 const input={userID:'node-user',mac:'aabbccddeeff',model:'Cheetah02',ssid:'public-wifi',password:'public-test',token:'public-token',bindCode:'provided-fixture',productID:'prd-fixture',modelID:'Cheetah02'};
 const key=key0822(input.mac,input.model);
@@ -25,6 +26,21 @@ async function selected(){
 }
 afterEach(()=>{vi.useRealTimers();vi.restoreAllMocks();});
 describe('原生BLE端口编排（注入端口，无真机结论）',()=>{
+  it('retains valid discoveries when readiness consumes part of the overall scan budget',async()=>{
+    vi.useFakeTimers();const radio=new Radio();radio.ready.mockImplementationOnce(()=>new Promise(resolve=>setTimeout(resolve,8000)));const driver=new Ble0822DeviceTransport(radio),observed=vi.fn(),scan=driver.scan(undefined,observed);
+    await vi.advanceTimersByTimeAsync(8000);radio.listeners[0](null,advert());await vi.advanceTimersByTimeAsync(22001);const discovered=await scan;expect(discovered).toHaveLength(1);expect(observed).toHaveBeenCalledOnce();expect(radio.stopScan).toHaveBeenCalled();
+    const next=driver.scan();await vi.advanceTimersByTimeAsync(0);radio.listeners[0](null,advert());await vi.advanceTimersByTimeAsync(25001);expect(await next).toEqual([]);await driver.dispose();
+  });
+  it('certifies a first-frame MTU rejection as not sent but never certifies errors after a write',async()=>{
+    const {radio,driver}=await selected();radio.channel.mtu=23;const started=vi.fn(),first=driver.exchange(input,[encode0822(0,new Uint8Array(16),key)],undefined,started);await expect(first).rejects.toBeInstanceOf(ProvisionNotSentError);await expect(first).rejects.toMatchObject({code:503});expect(started).not.toHaveBeenCalled();expect(radio.channel.write).not.toHaveBeenCalled();
+    radio.channel.mtu=517;radio.channel.write=vi.fn(async()=>radio.bytes!(encode0822(0x80,new Uint8Array(),key)));await driver.exchange(input,[encode0822(0,new Uint8Array(16),key)],undefined,started);expect(started).toHaveBeenCalledOnce();
+    radio.channel.mtu=23;let failure:unknown;try{await driver.exchange(input,[encode0822(1,new Uint8Array(32),key)],undefined,started);}catch(error){failure=error;}
+    expect(failure).toMatchObject({code:503});expect(failure).not.toBeInstanceOf(ProvisionNotSentError);expect(started).toHaveBeenCalledOnce();await driver.dispose();
+  });
+  it('keeps write evidence when disposal clears the session map during an ACK wait',async()=>{
+    const {radio,driver}=await selected(),started=vi.fn(),pending=driver.exchange(input,[encode0822(0,new Uint8Array(16),key)],undefined,started);const captured=pending.catch(error=>error);
+    await vi.advanceTimersByTimeAsync(0);expect(radio.channel.write).toHaveBeenCalledOnce();await driver.dispose();const failure=await captured;expect(failure).toMatchObject({code:499});expect(failure).not.toBeInstanceOf(ProvisionNotSentError);expect(started).toHaveBeenCalledOnce();
+  });
   it('deduplicates manufacturer identities and leaves product capabilities unresolved',async()=>{
     vi.useFakeTimers();const radio=new Radio(),driver=new Ble0822DeviceTransport(radio,50);
     const scan=driver.scan();await vi.advanceTimersByTimeAsync(0);

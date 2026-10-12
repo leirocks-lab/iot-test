@@ -41,6 +41,10 @@ async function setup(){
   return {radio,driver,runner:new Provisioner0822(driver,profile)};
 }
 afterEach(()=>{vi.useRealTimers();vi.restoreAllMocks();});
+it('uses conservative submission evidence when an adapter does not declare the exact supported capability',async()=>{
+  const {driver,runner}=await setup();Object.defineProperty(driver,'reportsProvisionWriteStart',{value:'unverified',configurable:true});const exchange=vi.spyOn(driver,'exchange').mockRejectedValue(new ApiError(503,'opaque adapter failure')),submitted=vi.fn();
+  await expect(runner.run(input,()=>undefined,undefined,async()=>binding,submitted)).rejects.toMatchObject({code:503});expect(exchange).toHaveBeenCalledOnce();expect(submitted).toHaveBeenCalledOnce();await driver.dispose();
+});
 describe('0822真实编排端口验证（非固件/云端验收）',()=>{
   it('writes binary handshake and raw ordered parameters, drains coalesced stages, then confirms HTTP binding',async()=>{
     const {radio,driver,runner}=await setup(),confirm=vi.fn(async()=>binding),statuses:string[]=[];

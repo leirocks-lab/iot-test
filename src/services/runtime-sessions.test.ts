@@ -7,6 +7,8 @@ import type { MqttCredentials, MqttPort } from '../protocol/mqtt-connection';
 import type { ControlProfileResolver } from './device-controls';
 import type { MaintenanceProfileResolver } from './device-maintenance';
 import type { EventProfileResolver } from './device-events';
+import { encodeProductCode, encodeShareCode } from './qr';
+import { ApiError } from './models';
 
 vi.mock('./native-storage',async()=>{const {MemoryStorage}=await import('./store');return {SessionStorage:MemoryStorage,MockFileStorage:MemoryStorage};});
 const testPorts=vi.hoisted(()=>({ports:[] as MqttPort[],issued:[] as MqttCredentials[],reports:[] as ((value:unknown)=>void)[]}));
@@ -31,6 +33,16 @@ async function setup(profile:DeviceProfileResolver|undefined=resolver,controls?:
 }
 afterEach(()=>{for(const runtime of runtimes)runtime.dispose();runtimes.length=0;testPorts.ports.length=0;testPorts.issued.length=0;testPorts.reports.length=0;vi.restoreAllMocks();});
 describe('Runtime设备会话接线（Mock HTTP/构造MQTT）',()=>{
+  it('blocks new Bluetooth actions behind an unknown QR transaction while allowing its original query recovery',async()=>{
+    const runtime=await createRuntime({httpMode:'mock',deviceMode:'mock'});runtimes.push(runtime);await runtime.service.login('rowan@example.com','Rowan@123','password');const qr=runtime.scanner.acquire(),add=runtime.onboarding.acquire(),binding=vi.spyOn(runtime.service,'acceptShare').mockRejectedValue(new ApiError(0,'lost fixture response'));
+    qr.read([encodeShareCode({deviceID:'dev_wine',bindCode:'fixture-code'})]);await expect(qr.confirm()).rejects.toThrow('lost');expect(runtime.scanner.pending).toBe(true);const scan=vi.spyOn(runtime.developer!.devices,'scan');
+    await expect(add.scan()).rejects.toThrow('扫码绑定');await expect(add.select({handle:'fixture',mac:'80a036d51aad',model:'RW-DH01',service:'0822'})).rejects.toThrow('扫码绑定');await expect(add.provision('Test','public-password')).rejects.toThrow('扫码绑定');expect(scan).not.toHaveBeenCalled();
+    await qr.reconcile();expect(runtime.scanner.pending).toBe(false);await add.scan();expect(scan).toHaveBeenCalledOnce();expect(binding).toHaveBeenCalledOnce();add.stop();
+  });
+  it('blocks QR confirmation behind unfinished Bluetooth results and allows it after finishing the original result',async()=>{
+    const runtime=await createRuntime({httpMode:'mock',deviceMode:'mock'});runtimes.push(runtime);await runtime.service.login('rowan@example.com','Rowan@123','password');const add=runtime.onboarding.acquire();add.adoptBinding({deviceID:'dev_wine',userID:runtime.service.userID,bindingRole:'sa'});const qr=runtime.scanner.acquire(),read=vi.spyOn(runtime.service,'product');qr.read([encodeProductCode('prd_humidity')]);
+    await expect(qr.confirm()).rejects.toThrow('蓝牙添加');expect(read).not.toHaveBeenCalled();await add.finish(null);expect(runtime.onboarding.pending).toBe(false);expect(await qr.confirm()).toEqual({productID:'prd_humidity'});expect(read).toHaveBeenCalledOnce();
+  });
   it('consumes DEVICE-01 and shares one active device lease across callers',async()=>{
     const runtime=await setup(),read=vi.spyOn(runtime.service,'mqtt');
     const first=runtime.createDeviceSession('dev_wine');await first.connect();expect(first.ready).toBe(true);

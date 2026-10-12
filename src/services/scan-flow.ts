@@ -14,8 +14,9 @@ export class QrScanCoordinator {
   private current?:QrScanFlow;
   private owner?:string;
   private revision?:number;
-  constructor(private service:RowanService,private codecMode:'mock'|'real',private realParser?:RowanCodeParser){}
-  acquire(){const owner=this.service.userID;if(!this.current||this.owner!==owner||this.revision!==this.service.sessionRevision||this.current.state.phase==='done'){this.current?.stop();this.owner=owner;this.revision=this.service.sessionRevision;this.current=new QrScanFlow(this.service,this.codecMode,this.realParser);}return this.current;}
+  constructor(private service:RowanService,private codecMode:'mock'|'real',private realParser?:RowanCodeParser,private beforeNewContext?:()=>void){}
+  get pending(){return this.owner===this.service.session?.userID&&this.revision===this.service.sessionRevision&&!!this.current&&['confirming','unknown'].includes(this.current.state.phase);}
+  acquire(){const owner=this.service.userID;if(!this.current||this.owner!==owner||this.revision!==this.service.sessionRevision||this.current.state.phase==='done'){this.current?.stop();this.owner=owner;this.revision=this.service.sessionRevision;this.current=new QrScanFlow(this.service,this.codecMode,this.realParser,this.beforeNewContext);}return this.current;}
   clear(){this.current?.stop();this.current=undefined;this.owner=undefined;}
 }
 export type ScanDestination={productID:string}|{binding:BindingResult};
@@ -28,7 +29,7 @@ export class QrScanFlow {
   private submitted=false;
   private owner?:string;
   private revision:number;
-  constructor(private service:RowanService,private codecMode:'mock'|'real',private realParser?:RowanCodeParser){this.revision=service.sessionRevision;}
+  constructor(private service:RowanService,private codecMode:'mock'|'real',private realParser?:RowanCodeParser,private beforeNewContext?:()=>void){this.revision=service.sessionRevision;}
   snapshot=()=>this.state;
   subscribe=(listener:()=>void)=>{this.listeners.add(listener);return()=>{this.listeners.delete(listener);};};
   private update(patch:Partial<ScanState>){this.state={...this.state,...patch};for(const listener of this.listeners)listener();}
@@ -48,6 +49,7 @@ export class QrScanFlow {
   async confirm():Promise<ScanDestination> {
     if(this.state.phase!=='choosing'||this.state.selected===undefined)throw new ApiError(409,'请先选择一个二维码，勿重复确认');
     if(this.service.sessionRevision!==this.revision)throw new ApiError(499,'登录上下文已变更，请重新扫码');
+    this.beforeNewContext?.();
     const code=this.codes[this.state.selected],round=++this.round,controller=new AbortController();this.controller=controller;this.owner=this.service.userID;this.submitted=false;
     this.update({phase:'confirming',error:''});
     try {

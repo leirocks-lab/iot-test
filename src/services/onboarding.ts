@@ -1,8 +1,8 @@
 import type { DiscoveredDevice } from '../protocol/ble';
-import { mockProfile, pause, Provisioner, withBudget, type DeviceTransport } from '../protocol/device';
+import { mockProfile, pause, Provisioner, ProvisionNotSentError, withBudget, type DeviceTransport } from '../protocol/device';
 import { ApiError, type BindingResult, type Product } from './models';
 import type { RowanService } from './rowan';
-import { Provisioner0822, type Profile0822 } from '../protocol/provision-0822';
+import { Provisioner0822, type Profile0822, type ProvisionRunner } from '../protocol/provision-0822';
 import { requireCurrentWifi, type WifiReader } from './wifi';
 import { MockDeviceSession, type DeviceSession } from '../protocol/device-session';
 
@@ -31,6 +31,7 @@ export interface AddState {
   realtimeError: string;
   busy: boolean;
   deviceStep?: string;
+  scanIssue?:'permission'|'bluetooth'|'timeout'|'other';
 }
 export interface AddOptions {
   mode: 'mock' | 'real';
@@ -42,6 +43,7 @@ export interface AddOptions {
   real?:RealAddContract;
   wifi?:WifiReader;
   createSession?:(id:string)=>DeviceSession;
+  beforeNewContext?:()=>void;
 }
 const initial = (): AddState => ({stage:'idle',message:'',error:'',discovered:[],nickname:'pending',nicknameUnknown:false,visible:false,realtime:'pending',realtimeError:'',busy:false});
 const errorText = (error: unknown) => error instanceof Error ? error.message : String(error);
@@ -107,23 +109,34 @@ export class AddDeviceFlow {
     if(this.state.busy || this.state.stage==='unknown' || this.state.binding)throw new ApiError(409,'请先核对或完成当前设备的添加结果');
     this.stop();this.bindCode=undefined;this.pendingNickname=undefined;this.owner=undefined;this.revision=undefined;this.state=initial();this.update({});
   }
+  /** A confirmed product route must not silently retain a different unsent Bluetooth target. */
+  adoptProduct(product:Product){if(!this.state.busy&&!this.state.binding&&this.state.stage!=='unknown'&&this.state.product&&this.state.product.id!==product.id)this.reset();}
   async scan() {
+    this.options.beforeNewContext?.();
     if(this.state.stage==='unknown' || this.state.binding)throw new ApiError(409,'请先完成当前绑定结果');
     return this.operate(async(round,signal)=>{
-      this.update({stage:'scanning',message:'正在扫描蓝牙设备',discovered:[],candidate:undefined});
+      this.update({stage:'scanning',message:'正在扫描蓝牙设备',discovered:[],candidate:undefined,scanIssue:undefined});
       try {
-        const found=await withBudget(s=>this.devices.scan(s),this.options.scanTimeout??mockProfile.scanTimeout,'蓝牙扫描超时',signal);
+        const found=await withBudget(budget=>this.devices.scan(budget,device=>{
+          if(round!==this.round||signal.aborted||budget.aborted||this.service.session?.userID!==this.owner||this.service.sessionRevision!==this.revision)return;
+          if(device.mac&&!this.state.discovered.some(item=>item.mac.toLowerCase()===device.mac.toLowerCase()))this.update({discovered:[...this.state.discovered,{...device}]});
+        }),this.options.scanTimeout??mockProfile.scanTimeout,'蓝牙扫描超时',signal);
         this.check(round,signal);
         const unique=new Map<string,DiscoveredDevice>();
         for(const device of found)if(device.mac && !unique.has(device.mac.toLowerCase()))unique.set(device.mac.toLowerCase(),device);
         this.update({stage:'idle',discovered:[...unique.values()],message:unique.size?'扫描已结束，请选择设备':'未发现设备，可重试或选择已有产品'});
-      } catch(error) {this.check(round,signal);this.update({stage:'failed',message:'扫描未完成'});throw error;}
+      } catch(error) {this.check(round,signal);
+        const scanIssue=error instanceof ApiError?error.code===403?'permission':error.code===61?'bluetooth':error.code===408?'timeout':'other':'other';
+        if(scanIssue==='timeout'&&this.state.discovered.length){this.update({stage:'idle',scanIssue,message:'扫描时限已到，请选择已发现设备'});return;}
+        this.update({stage:'failed',scanIssue,message:'扫描未完成'});throw error;
+      }
     });
   }
   async select(candidate: DiscoveredDevice,selectedProductID?:string) {
+    this.options.beforeNewContext?.();
     if(this.state.stage==='unknown' || this.state.binding)throw new ApiError(409,'请先完成当前绑定结果');
     return this.operate(async(round,signal)=>{
-      this.update({stage:'selecting',message:'正在确认产品能力',candidate:undefined,product:undefined});
+      this.update({stage:'selecting',message:'正在确认产品能力',candidate:undefined,product:undefined,scanIssue:undefined});
       try {
           let productID=selectedProductID??candidate.productID;
           if(!productID&&this.options.mode==='real'){
@@ -160,6 +173,7 @@ export class AddDeviceFlow {
     if(!result.deviceID || result.userID!==this.owner || !['sa','mbr','obs'].includes(result.bindingRole))throw new ApiError(0,'绑定响应身份或角色不一致，请核对结果');
   }
   async provision(ssid: string, password: string) {
+    this.options.beforeNewContext?.();
     if(this.state.binding || this.state.stage==='unknown')throw new ApiError(409,'已有绑定结果或结果待确认，请勿重复配网');
     const {candidate,product}=this.state;
     if(!candidate || !product)throw new ApiError(400,'请先选择已确认产品的设备');
@@ -186,16 +200,18 @@ export class AddDeviceFlow {
         }
         const result=await withBudget(async budget=>{
           this.update({stage:'provisioning'});
-          const runner=this.options.mode==='real'?new Provisioner0822(this.devices,this.options.real!.profile):new Provisioner(this.devices);
-          return runner.run(input,status=>{this.check(round,budget);sent=true;this.submitted=true;this.update({message:describeProvisionStatus(status),deviceStep:describeProvisionStatus(status)});},budget,async bindingSignal=>{
+          const markSubmitted=()=>{this.check(round,budget);sent=true;this.submitted=true;};
+          const runner:ProvisionRunner=this.options.mode==='real'?new Provisioner0822(this.devices,this.options.real!.profile):new Provisioner(this.devices);
+          return runner.run(input,status=>{this.check(round,budget);if(this.options.mode==='mock')markSubmitted();this.update({message:describeProvisionStatus(status),deviceStep:describeProvisionStatus(status)});},budget,async bindingSignal=>{
             this.check(round,budget);this.update({stage:'binding',message:'正在查询云端绑定结果'});
             return this.poll(round,bindingSignal!);
-          });
+          },markSubmitted);
         },this.options.operationTimeout??this.options.real?.operationTimeout??13*mockProfile.ackTimeout+mockProfile.routerTimeout+mockProfile.bindInterval*mockProfile.bindAttempts,'配网结果等待超时，请核对绑定结果',signal);
         this.check(round,signal);this.validateBinding(result);
         this.update({binding:result,stage:'bound',message:'绑定已确认，可设置昵称'});
       } catch(error) {
         this.check(round,signal);
+        if(error instanceof ProvisionNotSentError){sent=false;this.submitted=false;}
         const definite=this.state.stage!=='binding' && error instanceof ApiError && [0x63,0x70,0x7f,0xa2,0xa3,0xa4,0xc3,403].includes(error.code);
         this.update({stage:!sent||definite?'failed':'unknown',message:!sent||definite?'配网未完成，可检查原因后重试':'绑定结果未知，请先核对；不要重复配网'});
         throw error;
@@ -211,6 +227,7 @@ export class AddDeviceFlow {
     });
   }
   adoptBinding(binding: BindingResult) {
+    this.options.beforeNewContext?.();
     if(this.state.busy || this.state.binding)throw new ApiError(409,'已有添加事务');
     this.owner=this.service.userID;this.revision=this.service.sessionRevision;this.validateBinding(binding);this.update({binding,stage:'bound',message:'绑定已确认，可设置昵称'});
   }
@@ -272,6 +289,7 @@ export class AddDeviceCoordinator {
   private owner?:string;
   private revision?:number;
   constructor(private service:RowanService,private devices:DeviceTransport,private options:AddOptions){}
+  get pending(){return this.owner===this.service.session?.userID&&this.revision===this.service.sessionRevision&&!!this.current&&this.current.state.stage!=='complete'&&(this.current.state.busy||this.current.state.stage==='unknown'||!!this.current.state.binding);}
   acquire() {
     const owner=this.service.userID;
     if(!this.current || this.owner!==owner || this.revision!==this.service.sessionRevision || this.current.state.stage==='complete'){

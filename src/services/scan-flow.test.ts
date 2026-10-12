@@ -13,6 +13,10 @@ async function setup() {
 }
 afterEach(()=>{vi.restoreAllMocks();vi.useRealTimers();});
 describe('扫码及相册共用业务流程',()=>{
+  it('acquires a fresh scanner on same-user login revision while keeping old confirmations invalid',async()=>{
+    const {service}=await setup(),coordinator=new QrScanCoordinator(service,'mock'),old=coordinator.acquire();old.read([encodeProductCode('prd_wine')]);const user=service.userID;
+    await service.login('rowan@example.com','Rowan@123','password');expect(service.userID).toBe(user);await expect(old.confirm()).rejects.toMatchObject({code:499});const next=coordinator.acquire();expect(next).not.toBe(old);expect(next.state.phase).toBe('idle');next.read([encodeProductCode('prd_humidity')]);expect(await next.confirm()).toEqual({productID:'prd_humidity'});coordinator.clear();
+  });
   it('filters invalid barcodes and deduplicates valid candidates without auto-binding a multi-code image',async()=>{
     const {flow,service}=await setup(),first=encodeProductCode('prd_wine'),second=encodeProductCode('prd_humidity');
     flow.read(['not a code',first,first,second]);expect(flow.state.choices).toHaveLength(2);expect(flow.state.selected).toBeUndefined();

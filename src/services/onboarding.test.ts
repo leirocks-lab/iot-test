@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { MockDeviceTransport, withBudget } from '../protocol/device';
+import { MockDeviceTransport, ProvisionNotSentError, withBudget } from '../protocol/device';
+import type { DiscoveredDevice } from '../protocol/ble';
 import { ApiError } from './models';
 import { MockHttpClient } from './http';
 import { AddDeviceCoordinator, AddDeviceFlow, describeProvisionStatus, matchesDiscoveredProduct, validateWifi } from './onboarding';
@@ -17,6 +18,27 @@ async function setup() {
 async function selected() {
   const context=await setup();await context.flow.scan();await context.flow.select(context.flow.state.discovered[1]);return context;
 }
+describe('P1审计：扫描与发送证据',()=>{
+  it('replaces an unsent different-product target but preserves same-product help and binding facts',async()=>{
+    const {flow,service}=await selected(),original=flow.state.candidate!,same=flow.state.product!;flow.adoptProduct(same);expect(flow.state.candidate).toBe(original);
+    const other=await service.product('prd_wine');flow.adoptProduct(other);expect(flow.state.candidate).toBeUndefined();expect(flow.state.product).toBeUndefined();expect(flow.state.stage).toBe('idle');
+    flow.adoptBinding({deviceID:'dev_wine',userID:service.userID,bindingRole:'sa'});flow.adoptProduct(same);expect(flow.state.binding?.deviceID).toBe('dev_wine');flow.stop();
+  });
+  it('retains incremental discoveries on the outer scan deadline and ignores late old callbacks',async()=>{
+    const {service,driver}=await setup(),flow=new AddDeviceFlow(service,driver,{mode:'mock',scanTimeout:25});let report:(device:DiscoveredDevice)=>void=()=>undefined;
+    vi.spyOn(driver,'scan').mockImplementation((_signal,onDiscovered)=>{report=onDiscovered!;report({handle:'fixture',mac:'80a036d51aad',model:'RW-DH01',service:'0822',productID:'prd_humidity'});return new Promise(()=>undefined);});
+    vi.useFakeTimers();const scanning=flow.scan();await vi.advanceTimersByTimeAsync(26);await scanning;expect(flow.state).toMatchObject({stage:'idle',scanIssue:'timeout',busy:false});expect(flow.state.discovered).toHaveLength(1);
+    report({handle:'late',mac:'80a036d51aae',model:'RW-DH01',service:'0822'});expect(flow.state.discovered).toHaveLength(1);vi.useRealTimers();await flow.select(flow.state.discovered[0]);expect(flow.state.stage).toBe('selected');flow.stop();
+  });
+  it.each([[403,'permission'],[61,'bluetooth']] as const)('classifies scan error %s so the page can offer the appropriate settings recovery',async(code,scanIssue)=>{
+    const {flow,driver}=await setup();vi.spyOn(driver,'scan').mockRejectedValue(new ApiError(code,'scan fixture'));await expect(flow.scan()).rejects.toMatchObject({code});expect(flow.state).toMatchObject({stage:'failed',scanIssue,discovered:[]});flow.stop();
+  });
+  it.each([false,true])('distinguishes certified local rejection from a 503 after an attempted write: %s',async written=>{
+    const {service,driver}=await setup(),flow=new AddDeviceFlow(service,driver,{mode:'real',wifi:{read:async()=>({source:'system',connection:'wifi',ssid:'Test',band:'unknown'})},real:{profile:{factoryReply:new Uint8Array([1]),stageTimeout:60000},bindingTimeout:30000,operationTimeout:165000,makeBindCode:async()=> 'provided-fixture',validatePassword:()=>undefined,deviceToken:token=>token}});
+    await flow.select({handle:'fixture',mac:'80a036d51aad',model:'RW-DH01',service:'0822'},'prd_humidity');vi.spyOn(Provisioner0822.prototype,'run').mockImplementation(async(_input,status,_signal,_confirm,submitted)=>{status('校验设备');if(written){submitted!();throw new ApiError(503,'reported fixture failure after write');}throw new ProvisionNotSentError(new ApiError(503,'local MTU fixture'));});
+    await expect(flow.provision('Test','public-password')).rejects.toMatchObject({code:503});expect(flow.state.stage).toBe(written?'unknown':'failed');if(written)expect(()=>flow.reset()).toThrow('核对');else{expect(()=>flow.reset()).not.toThrow();expect(flow.state.stage).toBe('idle');}flow.stop();
+  });
+});
 afterEach(()=>{vi.useRealTimers();vi.restoreAllMocks();});
 describe('添加设备业务闭环',()=>{
   it('confirms binding through HTTP PAIR-05, skips nickname and checks home/realtime independently',async()=>{

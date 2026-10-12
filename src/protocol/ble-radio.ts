@@ -1,7 +1,7 @@
 import type { DiscoveredDevice } from './ble';
 import { BLE_0822, classify0822, decode0822, expectedAck0822, FrameStream0822, key0822, parseAdvertisement0822 } from './ble-0822';
 import { ApiError } from '../services/models';
-import { UnavailableDeviceTransport, withBudget, type ProvisionInput } from './device';
+import { ProvisionNotSentError, UnavailableDeviceTransport, withBudget, type ProvisionInput } from './device';
 
 export interface BleConnection {
   mtu:number;
@@ -19,18 +19,20 @@ const aborted=()=>new ApiError(499,'当前蓝牙客户端操作已停止');
 interface Session {
   mac:string;model:string;key:Uint8Array;stream:FrameStream0822;frames:{command:number;raw:Uint8Array}[];
   channel?:BleConnection;closed:boolean;error?:Error;
+  writeStarted:boolean;
   pending?:{command:number|'stage';resolve:(frame:Uint8Array)=>void;reject:(error:Error)=>void;clear:()=>void};
 }
 
 /** Native BLE capability; cloud binding and MQTT remain separate, explicitly unavailable boundaries. */
 export class Ble0822DeviceTransport extends UnavailableDeviceTransport {
+  readonly reportsProvisionWriteStart=true;
   private found=new Map<string,DiscoveredDevice>();
   private sessions=new Map<string,Session>();
   private scanCancel?:()=>void;
   private disposed=false;
   private writing=false;
   constructor(private radio:BleRadio,private scanWindow=25000,private ackTimeout=5000){super();}
-  async scan(signal?:AbortSignal):Promise<DiscoveredDevice[]> {
+  async scan(signal?:AbortSignal,onDiscovered?:(device:DiscoveredDevice)=>void):Promise<DiscoveredDevice[]> {
     if(this.disposed)throw new ApiError(503,'蓝牙客户端已关闭');
     if(this.scanCancel)throw new ApiError(409,'已有蓝牙扫描进行中');
     this.found.clear();
@@ -42,7 +44,7 @@ export class Ble0822DeviceTransport extends UnavailableDeviceTransport {
           if(settled)return;settled=true;clearTimeout(timer);budget.removeEventListener('abort',cancel);
           if(this.scanCancel===cancel)this.scanCancel=undefined;
           void this.radio.stopScan().catch(()=>undefined);
-          if(error){this.found.clear();reject(error);}else resolve([...this.found.values()]);
+          if(error)reject(error);else resolve([...this.found.values()]);
         };
         const cancel=()=>finish(aborted());
         const timer=setTimeout(()=>finish(),this.scanWindow);
@@ -52,11 +54,11 @@ export class Ble0822DeviceTransport extends UnavailableDeviceTransport {
           if(settled||budget.aborted)return;
           if(error){finish(error);return;}
           if(!advertisement)return;
-          try{const device=parseAdvertisement0822(advertisement);if(!this.found.has(device.mac))this.found.set(device.mac,device);}
+          try{const device=parseAdvertisement0822(advertisement);if(!this.found.has(device.mac)){this.found.set(device.mac,device);onDiscovered?.({...device});}}
           catch{/* Unsupported advertisements are not eligible devices in this profile. */}
         }).catch(error=>finish(error instanceof Error?error:new ApiError(65,'蓝牙扫描失败')));
       });
-    },30000,'蓝牙扫描超时',signal);
+    },30000,'蓝牙扫描超时',signal).catch(error=>{if(error instanceof ApiError&&error.code===408&&!signal?.aborted&&this.found.size)return [...this.found.values()];throw error;});
   }
   private close(session:Session,error:Error=aborted()) {
     if(session.closed)return;session.closed=true;session.error=error;
@@ -86,7 +88,7 @@ export class Ble0822DeviceTransport extends UnavailableDeviceTransport {
     }
     const candidate=this.found.get(input.mac);
     if(!candidate||candidate.model!==input.model)throw new ApiError(503,'蓝牙发现身份已失效，请重新扫描');
-    const session:Session={mac:input.mac,model:input.model,key:key0822(input.mac,input.model),stream:new FrameStream0822(),frames:[],closed:false};
+    const session:Session={mac:input.mac,model:input.model,key:key0822(input.mac,input.model),stream:new FrameStream0822(),frames:[],closed:false,writeStarted:false};
     this.sessions.set(input.bindCode,session);
     const cancel=()=>this.close(session);
     signal?.addEventListener('abort',cancel,{once:true});
@@ -116,19 +118,21 @@ export class Ble0822DeviceTransport extends UnavailableDeviceTransport {
       if(signal?.aborted)abort();
     });
   }
-  async exchange(input:ProvisionInput,packets:Uint8Array[],signal?:AbortSignal):Promise<Uint8Array[]> {
+  async exchange(input:ProvisionInput,packets:Uint8Array[],signal?:AbortSignal,onWriteStart?:()=>void):Promise<Uint8Array[]> {
     if(this.writing)throw new ApiError(409,'已有蓝牙参数写入');
     if(packets.length!==1||packets[0][0]!==0xa5||packets[0][1]!==0x5a)throw new ApiError(400,'0822不接受旧版应用分片');
+    let activeSession=this.sessions.get(input.bindCode);
     this.writing=true;
     try{return await withBudget(async budget=>{
-      const session=await this.session(input,budget),frame=packets[0],decoded=decode0822(frame,session.key),command=decoded.command;
+      const session=await this.session(input,budget);activeSession=session;
+      const frame=packets[0],decoded=decode0822(frame,session.key),command=decoded.command;
       decoded.data.fill(0);const expected=expectedAck0822(command);
       if(expected===undefined&&command!==0x8f)throw new ApiError(503,'当前客户端未开放该设备命令');
       if(frame.length>session.channel!.mtu-3)throw new ApiError(503,'设备MTU不能发送完整0822帧，禁止猜测长写');
-      await session.channel!.write(frame,budget);if(budget.aborted)throw aborted();
+      onWriteStart?.();session.writeStarted=true;await session.channel!.write(frame,budget);if(budget.aborted)throw aborted();
       return expected===undefined?[]:[await this.wait(session,expected,budget)];
     },this.ackTimeout+15000,'0822蓝牙写入超时',signal);}
-    catch(error){this.releaseProvision(input.bindCode);throw error;}
+    catch(error){const unsent=(activeSession??this.sessions.get(input.bindCode))?.writeStarted!==true;this.releaseProvision(input.bindCode);throw unsent?new ProvisionNotSentError(error):error;}
     finally{this.writing=false;}
   }
   async challenge(input:ProvisionInput,signal?:AbortSignal):Promise<Uint8Array[]> {
