@@ -11,6 +11,27 @@ export interface ShareBinding {
   bindCode: string;
   expiresAt: string;
 }
+export type OtaType = 'mcu' | 'wifi';
+export type OtaResult = 'updating' | 'success' | 'failed' | 'cancelled';
+export type OtaStatus = 'waiting' | 'downloading' | 'upgrading' | 'success' | 'failed' | 'cancelled';
+export interface OtaFirmware {
+  id: string;
+  version: string;
+  remark: string;
+}
+export interface OtaCheck {
+  hasUpdate: boolean;
+  firmware: OtaFirmware | null;
+  deviceID: string;
+}
+export interface OtaTask {
+  result: OtaResult;
+  status: OtaStatus;
+  progress: number;
+  startedAt: string;
+  finishedAt?: string | null;
+  updatedAt?: string | null;
+}
 export interface Settings {
   language: Language; notification: boolean; theme: 'system' | 'light' | 'dark';
   wallpaper: { id: string; name: Record<Language, string>; image: string } | null;

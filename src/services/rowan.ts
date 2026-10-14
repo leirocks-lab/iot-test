@@ -9,6 +9,9 @@ import {
   type HomeGroup,
   type KeyValueStorage,
   type Language,
+  type OtaCheck,
+  type OtaTask,
+  type OtaType,
   type Room,
   type Schedule,
   type ScheduleInput,
@@ -250,9 +253,78 @@ export class RowanService {
     });
     return helpArticles(data);
   }
-  async firmware(id:string,type:'mcu'|'wifi') {return this.request<{firmware:{id:string;version:string;remark:string}|null}>({method:'GET',path:`/api/app/devices/${id}/ota/${type}`});}
-  async startOta(id:string,type:'mcu'|'wifi',firmwareID:string) {return this.request<{taskID:string}>({method:'PUT',path:`/api/app/devices/${id}/ota/task`,query:{type},body:{firmwareID}});}
-  async otaTask(id:string,taskID:string) {return this.request<{result:'updating'|'success'|'failed'|'cancelled'}>({method:'GET',path:`/api/app/devices/${id}/ota/task/${taskID}`});}
-  async cancelOta(id:string,taskID:string) {return this.request({method:'DELETE',path:`/api/app/devices/${id}/ota/task`,body:{taskID}});}
+  async firmware(id: string, type: OtaType, signal?: AbortSignal): Promise<OtaCheck> {
+    const data = await this.request<unknown>({
+      method: 'GET',
+      path: `/api/app/devices/${encodeURIComponent(id)}/ota/${type}`,
+      signal,
+    });
+    if (!data || typeof data !== 'object' || Array.isArray(data)) {
+      throw new ApiError(502, '固件检查响应无效');
+    }
+    const value = data as Record<string, unknown>;
+    const device = value.device as Record<string, unknown> | null;
+    const firmware = value.firmware as Record<string, unknown> | null;
+    if (typeof value.hasUpdate !== 'boolean' || device?.id !== id ||
+      (value.hasUpdate && (!firmware || typeof firmware.id !== 'string' || !firmware.id ||
+        typeof firmware.version !== 'string' || !firmware.version || typeof firmware.remark !== 'string')) ||
+      (!value.hasUpdate && firmware !== null)) {
+      throw new ApiError(502, '固件检查响应与设备不匹配');
+    }
+    return {
+      hasUpdate: value.hasUpdate,
+      firmware: value.hasUpdate ? firmware as unknown as OtaCheck['firmware'] : null,
+      deviceID: id,
+    };
+  }
+
+  async startOta(id: string, type: OtaType, firmwareID: string, signal?: AbortSignal) {
+    const data = await this.request<unknown>({
+      method: 'PUT',
+      path: `/api/app/devices/${encodeURIComponent(id)}/ota/task`,
+      query: { type },
+      body: { firmwareID },
+      signal,
+    }, false);
+    if (!data || typeof data !== 'object' || Array.isArray(data) ||
+      typeof (data as { taskID?: unknown }).taskID !== 'string' ||
+      !(data as { taskID: string }).taskID.trim()) {
+      throw new ApiError(502, '升级任务响应缺少 taskID');
+    }
+    return { taskID: (data as { taskID: string }).taskID };
+  }
+
+  async otaTask(id: string, taskID: string, signal?: AbortSignal): Promise<OtaTask> {
+    const data = await this.request<unknown>({
+      method: 'GET',
+      path: `/api/app/devices/${encodeURIComponent(id)}/ota/task/${encodeURIComponent(taskID)}`,
+      signal,
+    });
+    if (!data || typeof data !== 'object' || Array.isArray(data)) {
+      throw new ApiError(502, '升级任务状态响应无效');
+    }
+    const value = data as Record<string, unknown>;
+    const statuses = ['waiting', 'downloading', 'upgrading', 'success', 'failed', 'cancelled'];
+    const results = ['updating', 'success', 'failed', 'cancelled'];
+    if (!results.includes(String(value.result)) || !statuses.includes(String(value.status)) ||
+      typeof value.progress !== 'number' || !Number.isFinite(value.progress) ||
+      value.progress < 0 || value.progress > 100 ||
+      typeof value.startedAt !== 'string' || !Number.isFinite(Date.parse(value.startedAt)) ||
+      (value.result === 'updating'
+        ? !statuses.slice(0, 3).includes(String(value.status))
+        : value.result !== value.status)) {
+      throw new ApiError(502, '升级任务状态字段无效');
+    }
+    return value as unknown as OtaTask;
+  }
+
+  async cancelOta(id: string, taskID: string, signal?: AbortSignal) {
+    return this.request({
+      method: 'DELETE',
+      path: `/api/app/devices/${encodeURIComponent(id)}/ota/task`,
+      body: { taskID },
+      signal,
+    }, false);
+  }
   async preference(key:string,value?:string) {const scoped=`${this.userID}.${key}`;if(value!==undefined)await this.storage.set(scoped,value);return this.storage.get(scoped);}
 }

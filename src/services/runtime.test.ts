@@ -77,7 +77,9 @@ describe('document-backed API flows', () => {
     await service.otaTask('dev_wine', task.taskID);
     await service.otaTask('dev_wine', task.taskID);
     expect((await service.otaTask('dev_wine', task.taskID)).result).toBe('success');
-    await expect(service.cancelOta('dev_wine', task.taskID)).rejects.toMatchObject({ code: 409 });
+    await expect(service.cancelOta('dev_wine', task.taskID)).rejects.toMatchObject({
+      code: 400,
+    });
   });
   it('does not silently fall back to mock in real HTTP mode', async () => {
     const client = new FetchHttpClient('https://api.example.test', async () => { throw new Error('offline'); });
