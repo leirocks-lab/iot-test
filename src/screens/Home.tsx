@@ -1,6 +1,15 @@
+import { Image } from "expo-image";
 import { router, useFocusEffect } from "expo-router";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { AppState, Pressable, ScrollView, Text, View } from "react-native";
+import {
+  AppState,
+  Pressable,
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { ShadowSession, withBudget } from "../protocol/device";
 import type { DeviceView, HomeGroup } from "../services/models";
 import { useApp, useColors } from "../ui/context";
@@ -11,12 +20,16 @@ import {
   Card,
   Empty,
   ErrorText,
-  Label,
   Page,
   confirm,
-  styles,
   useAction,
 } from "../ui/kit";
+
+const homeLogo = require("../../assets/images/home-logo.png");
+const powerOn = require("../../assets/images/poweron-icon.png");
+const powerOff = require("../../assets/images/poweroff-icon.png");
+const choice = require("../../assets/images/multiple-choice.png");
+const choiceSelected = require("../../assets/images/multiple-choice-selected.png");
 
 function DeviceCard({
   device,
@@ -29,12 +42,11 @@ function DeviceCard({
   editing: boolean;
   onSelect: () => void;
 }) {
-  const { runtime } = useApp(),
-    c = useColors(),
-    action = useAction(),
-    run = action.run,
-    [shadow, setShadow] = useState<ShadowSession | null>(null),
-    [, rerender] = useState(0);
+  const { runtime } = useApp();
+  const colors = useColors();
+  const action = useAction();
+  const [shadow, setShadow] = useState<ShadowSession | null>(null);
+  const [, rerender] = useState(0);
   useEffect(() => {
     if (!runtime?.service.session) return;
     let active = true;
@@ -59,9 +71,21 @@ function DeviceCard({
       session.close();
     };
   }, [runtime, device.device.id]);
+  const powered =
+    shadow?.confirmed.Power === 1 || shadow?.confirmed.Power === true;
+  const canControl =
+    !!shadow?.ready &&
+    !shadow.sending &&
+    device.online !== false &&
+    device.bindingRole !== "obs";
   return (
-    <View style={{ width: "48%", marginBottom: 14 }}>
-      <Card>
+    <View style={styles.cardWrap}>
+      <View
+        style={[
+          styles.deviceCard,
+          { backgroundColor: colors.background.invert },
+        ]}
+      >
         <Pressable
           accessibilityRole="button"
           accessibilityLabel={device.deviceNickname}
@@ -74,84 +98,106 @@ function DeviceCard({
                   params: { id: device.device.id },
                 })
           }
-          style={{
-            alignItems: "center",
-            gap: 8,
-            opacity: device.online ? 1 : 0.55,
-          }}
+          style={styles.cardPress}
         >
-          <View
-            style={{ alignSelf: "flex-start", flexDirection: "row", gap: 6 }}
-          >
-            <Text
-              style={{ color: device.online ? "#25987C" : c.font.subtitle }}
-            >
-              ●
-            </Text>
-            {editing && <Label>{selected ? "☑" : "□"}</Label>}
+          <View style={styles.cardTop}>
+            <View
+              style={[
+                styles.onlineDot,
+                { backgroundColor: device.online ? "#1CC787" : "#B9BDBE" },
+              ]}
+            />
+            {editing && (
+              <Image
+                source={selected ? choiceSelected : choice}
+                style={styles.choice}
+                contentFit="contain"
+              />
+            )}
           </View>
-          {device.product ? (
-            <DeviceGlyph
-              humidity={device.product.category === "Dehumidifier"}
+          {device.product?.image ? (
+            <Image
+              source={{ uri: device.product.image }}
+              contentFit="contain"
+              style={styles.productImage}
             />
           ) : (
-            <Label muted>产品信息待确认</Label>
+            <DeviceGlyph
+              humidity={device.product?.category === "Dehumidifier"}
+              size={78}
+            />
           )}
-          <Label>{device.deviceNickname}</Label>
-          <Label muted>
-            {device.online === false
-              ? "Offline"
-              : shadow?.confirmed.Power === undefined
-                ? "状态待同步"
-                : shadow.confirmed.Power
-                  ? "Powered on"
-                  : "Powered off"}
-          </Label>
+          <Text
+            numberOfLines={1}
+            style={[styles.productName, { color: colors.font.title }]}
+          >
+            {device.product?.name || device.deviceNickname || "Air Conditioner"}
+          </Text>
+          <Text
+            numberOfLines={1}
+            style={[styles.productModel, { color: colors.font.subtitle2 }]}
+          >
+            {device.product?.modelName || "RW-400PRO"}
+          </Text>
         </Pressable>
-        <Button
-          title={
-            shadow?.sending
-              ? "Waiting…"
-              : shadow?.confirmed.Power
-                ? "Turn off"
-                : "Turn on"
-          }
-          secondary
-          disabled={
-            editing ||
-            !shadow?.ready ||
-            shadow.sending ||
-            device.bindingRole === "obs"
-          }
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={powered ? "Turn off" : "Turn on"}
+          disabled={editing || !canControl}
           onPress={() =>
-            void run(async () => {
-              await shadow!.command({ Power: shadow!.confirmed.Power ? 0 : 1 });
+            void action.run(async () => {
+              await shadow!.command({ Power: powered ? 0 : 1 });
             })
           }
-        />
-        <ErrorText error={action.error} />
-      </Card>
+          style={[
+            styles.powerButton,
+            { opacity: !canControl || editing ? 0.45 : 1 },
+          ]}
+        >
+          <View
+            style={{
+              width: 38,
+              height: 38,
+              borderRadius: "50%",
+              backgroundColor: powered
+                ? colors.brand.blue
+                : colors.background.control,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Image
+              source={powered ? powerOn : powerOff}
+              style={styles.powerIcon}
+              contentFit="contain"
+            />
+          </View>
+        </Pressable>
+        {!!action.error && <Text style={styles.error}>{action.error}</Text>}
+      </View>
     </View>
   );
 }
+
 export default function Home() {
-  const { runtime, lockNavigation } = useApp(),
-    action = useAction(),
-    run = action.run,
-    [groups, setGroups] = useState<HomeGroup[] | null>(null),
-    [room, setRoom] = useState("all"),
-    [selected, setSelected] = useState<string[]>([]),
-    [menu, setMenu] = useState(false);
-  useEffect(() => {
-    lockNavigation(selected.length > 0);
-    return () => lockNavigation(false);
-  }, [selected.length, lockNavigation]);
-  const [loading, setLoading] = useState(false),
-    [loadError, setLoadError] = useState("");
+  const { runtime, lockNavigation } = useApp();
+  const action = useAction();
+  const [groups, setGroups] = useState<HomeGroup[] | null>(null);
+  const [room, setRoom] = useState("all");
+  const [selected, setSelected] = useState<string[]>([]);
+  const [editing, setEditing] = useState(false);
+  const [menu, setMenu] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [loadError, setLoadError] = useState("");
+  const colors = useColors();
   const refreshRef = useRef<AbortController | null>(null),
     focused = useRef(false),
     readOwner = useRef("");
   const sessionRevision = runtime?.service.sessionRevision;
+  useEffect(() => {
+    lockNavigation(editing);
+    return () => lockNavigation(false);
+  }, [editing, lockNavigation]);
   const load = useCallback(async () => {
     if (
       !runtime?.service.session ||
@@ -165,6 +211,7 @@ export default function Home() {
       readOwner.current = context;
       setGroups(null);
       setSelected([]);
+      setEditing(false);
       setRoom("all");
     }
     refreshRef.current?.abort();
@@ -221,21 +268,30 @@ export default function Home() {
       };
     }, [load]),
   );
-  const devices = groups?.flatMap((g) => g.devices) ?? [],
+  const devices = groups?.flatMap((group) => group.devices) ?? [],
     visible =
       room === "all"
         ? devices
-        : (groups?.find((g) => g.room?.id === room)?.devices ?? []);
-  const toggle = (id: string) =>
-    setSelected((s) =>
-      s.includes(id) ? s.filter((v) => v !== id) : [...s, id],
+        : (groups?.find((group) => group.room?.id === room)?.devices ?? []);
+  const toggle = (id: string) => {
+    setEditing(true);
+    setSelected((current) =>
+      current.includes(id)
+        ? current.filter((value) => value !== id)
+        : [...current, id],
     );
-  const remove = () =>
+  };
+  const exitEditing = () => {
+    setSelected([]);
+    setEditing(false);
+  };
+  const remove = () => {
+    if (!selected.length) return;
     confirm(
-      "Remove devices",
-      "只解除你与所选设备的绑定，不恢复出厂或删除其他成员。",
+      "删除设备",
+      "仅解除你与所选设备的绑定，不删除设备或其他成员。",
       () =>
-        void run(async () => {
+        void action.run(async () => {
           const failures: string[] = [];
           for (const id of selected) {
             try {
@@ -247,124 +303,249 @@ export default function Home() {
           setSelected(failures);
           await load();
           if (failures.length)
-            throw new Error("部分设备解绑未确认，请刷新核对后再试");
+            throw new Error("部分设备解绑未确认，请刷新核对后重试");
         }),
     );
+  };
+  const header = (
+    <View style={styles.header}>
+      {editing ? (
+        <>
+          <Pressable onPress={exitEditing} style={styles.headerAction}>
+            <Text style={styles.cancel}>取消</Text>
+          </Pressable>
+          <Text style={styles.selectionTitle}>
+            已选中 {selected.length} 个设备
+          </Text>
+          <Pressable onPress={exitEditing} style={styles.headerAction}>
+            <Text style={styles.done}>完成</Text>
+          </Pressable>
+        </>
+      ) : (
+        <>
+          <Image source={homeLogo} style={styles.logo} contentFit="contain" />
+          <Pressable
+            onPress={() => setMenu((value) => !value)}
+            style={styles.menuButton}
+          >
+            <Text style={styles.menuIcon}>☰</Text>
+          </Pressable>
+        </>
+      )}
+    </View>
+  );
+  const footer = editing ? (
+    <View style={styles.selectionFooter}>
+      <Pressable
+        disabled={!selected.length || action.busy}
+        onPress={remove}
+        style={{ opacity: selected.length ? 1 : 0.35 }}
+      >
+        <Text style={styles.trash}>▣</Text>
+        <Text style={styles.deleteText}>删除设备</Text>
+      </Pressable>
+    </View>
+  ) : undefined;
   return (
     <Page
       title="ROWAN"
       wallpaper
       back={false}
-      action={
-        <Button
-          title="＋"
-          disabled={!!selected.length}
-          onPress={() => setMenu((v) => !v)}
+      header={header}
+      footer={footer}
+      loadingContent={
+        (action.busy || loading) && !editing ? (
+          <View style={styles.loadingRegion}>
+            <Busy />
+          </View>
+        ) : null
+      }
+      refreshControl={
+        <RefreshControl
+          refreshing={loading && !editing}
+          onRefresh={() => {
+            if (!editing) void load();
+          }}
+          tintColor={colors.font.subtitle2}
+          colors={[colors.font.subtitle2]}
         />
       }
     >
-      {menu && (
+      {menu && !editing && (
         <Card>
-          <Button title="Scan QR code" onPress={() => router.push("/scan")} />
+          <Button
+            title="添加设备"
+            onPress={() => {
+              setMenu(false);
+              router.push("/add");
+            }}
+          />
           <Button
             secondary
-            title="Add device"
-            onPress={() => router.push("/add")}
+            title="扫一扫"
+            onPress={() => {
+              setMenu(false);
+              router.push("/scan");
+            }}
           />
         </Card>
       )}
-      <View style={styles.row}>
-        <Label large>Your home</Label>
-        <Button
-          secondary
-          title="Rooms"
-          disabled={!!selected.length}
-          onPress={() => router.push("/rooms")}
-        />
-      </View>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <View style={styles.row}>
-          <Button
-            title="All rooms"
-            secondary={room !== "all"}
-            disabled={!!selected.length}
-            onPress={() => {
-              setRoom("all");
-              void runtime?.service.preference("homeRoom", "all");
-            }}
-          />
-          {groups
-            ?.filter((g) => g.room?.id)
-            .map((g) => (
-              <Button
-                key={g.room?.id}
-                title={g.room?.name ?? ""}
-                secondary={room !== g.room?.id}
-                disabled={!!selected.length}
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.rooms}
+      >
+        <Pressable
+          disabled={editing}
+          onPress={() => {
+            setRoom("all");
+            void runtime?.service.preference("homeRoom", "all");
+          }}
+          style={styles.roomTab}
+        >
+          <Text
+            style={[styles.roomText, room === "all" && styles.roomTextActive]}
+          >
+            全屋
+          </Text>
+          {room === "all" && <View style={styles.tabLine} />}
+        </Pressable>
+        {groups
+          ?.filter((group) => group.room?.id)
+          .map((group) => {
+            const id = group.room!.id!;
+            return (
+              <Pressable
+                key={id}
+                disabled={editing}
                 onPress={() => {
-                  setRoom(g.room?.id!);
-                  void runtime?.service.preference("homeRoom", g.room?.id!);
+                  setRoom(id);
+                  void runtime?.service.preference("homeRoom", id);
                 }}
-              />
-            ))}
-        </View>
+                style={styles.roomTab}
+              >
+                <Text
+                  style={[
+                    styles.roomText,
+                    room === id && styles.roomTextActive,
+                  ]}
+                >
+                  {group.room!.name}
+                </Text>
+                {room === id && <View style={styles.tabLine} />}
+              </Pressable>
+            );
+          })}
       </ScrollView>
-      <ErrorText error={action.error} />
       <ErrorText error={loadError} />
-      {(action.busy || loading) && <Busy />}
       {groups && devices.length === 0 && (
         <>
           <Empty text="No devices yet. Add your first device." />
           <Button
-            title="Add device"
-            disabled={!!selected.length}
-            onPress={() => setMenu(true)}
+            title="添加设备"
+            disabled={editing}
+            onPress={() => router.push("/add")}
           />
         </>
       )}
       {groups && devices.length > 0 && visible.length === 0 && (
         <Empty text="No devices in this room" />
       )}
-      <View
-        style={{
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "space-between",
-        }}
-      >
-        {visible.map((d) => (
+      <View style={styles.grid}>
+        {visible.map((device) => (
           <DeviceCard
-            key={d.device.id}
-            device={d}
-            selected={selected.includes(d.device.id)}
-            editing={!!selected.length}
-            onSelect={() => toggle(d.device.id)}
+            key={device.device.id}
+            device={device}
+            selected={selected.includes(device.device.id)}
+            editing={editing}
+            onSelect={() => toggle(device.device.id)}
           />
         ))}
       </View>
-      {selected.length > 0 ? (
-        <Card>
-          <Label>{selected.length} selected</Label>
-          <Button
-            title="Remove selected"
-            danger
-            disabled={action.busy}
-            onPress={remove}
-          />
-          <Button
-            secondary
-            title="Cancel selection"
-            onPress={() => setSelected([])}
-          />
-        </Card>
-      ) : (
-        <Button
-          secondary
-          title="Refresh"
-          disabled={action.busy || loading}
-          onPress={() => void load()}
-        />
-      )}
     </Page>
   );
 }
+
+const styles = StyleSheet.create({
+  header: {
+    height: 62,
+    paddingHorizontal: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  logo: { width: 180, height: 38 },
+  menuButton: {
+    width: 38,
+    height: 38,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  menuIcon: { color: "#999", fontSize: 24 },
+  headerAction: { minWidth: 56, paddingVertical: 12 },
+  cancel: { color: "#777", fontSize: 16 },
+  done: { color: "#1677FF", fontSize: 16, textAlign: "right" },
+  selectionTitle: { color: "#111", fontSize: 17, fontWeight: "700" },
+  rooms: { gap: 22, alignItems: "flex-start" },
+  roomTab: { paddingBottom: 8, alignItems: "center", minWidth: 32 },
+  roomText: { color: "#777", fontSize: 15 },
+  roomTextActive: { color: "#111", fontWeight: "700" },
+  tabLine: {
+    height: 3,
+    width: 12,
+    borderRadius: 2,
+    backgroundColor: "#222",
+    marginTop: 5,
+  },
+  grid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    rowGap: 10,
+  },
+  cardWrap: { width: "48.5%" },
+  deviceCard: {
+    borderRadius: 12,
+    padding: 10,
+    minHeight: 202,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 2,
+  },
+  cardPress: { width: "100%", alignItems: "center" },
+  cardTop: {
+    width: "100%",
+    height: 18,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  onlineDot: { width: 8, height: 8, borderRadius: 4 },
+  choice: { width: 26, height: 26 },
+  productImage: { width: 76, height: 76, marginTop: 3, marginBottom: 4 },
+  productName: { fontSize: 15, fontWeight: "600", maxWidth: "100%" },
+  productModel: { fontSize: 13, marginTop: 2 },
+  powerButton: {
+    width: 38,
+    height: 38,
+    marginTop: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  powerIcon: { width: 20, height: 20 },
+  error: { color: "#F0534A", fontSize: 11, marginTop: 3 },
+  loadingRegion: { height: 56, alignItems: "center", justifyContent: "center" },
+  selectionFooter: {
+    height: 76,
+    backgroundColor: "rgba(255,255,255,0.96)",
+    alignItems: "center",
+    justifyContent: "center",
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: "#eee",
+  },
+  trash: { color: "#F0534A", fontSize: 18, textAlign: "center" },
+  deleteText: { color: "#F0534A", fontSize: 13, marginTop: 3 },
+});

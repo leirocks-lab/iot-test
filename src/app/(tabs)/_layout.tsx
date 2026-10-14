@@ -10,6 +10,8 @@ const mine = require("../../../assets/images/my.png");
 const mineSelected = require("../../../assets/images/my-selected.png");
 const add = require("../../../assets/images/add.png");
 const addOpen = require("../../../assets/images/add-open.png");
+const barAdd = require("../../../assets/images/bar-add.png");
+const barScan = require("../../../assets/images/bar-scan.png");
 function BottomBar({ state, navigation }: any) {
   const [open, setOpen] = useState(false),
     current = state.routes[state.index]?.name;
@@ -22,15 +24,31 @@ function BottomBar({ state, navigation }: any) {
         <Pressable style={styles.scrim} onPress={() => setOpen(false)} />
       )}
       {open && (
-        <View style={styles.menu}>
+        <View
+          style={[
+            styles.menu,
+            {
+              bottom: 56 + bottomInset,
+            },
+          ]}
+        >
           <Pressable
-            style={styles.menuItem}
+            style={[
+              styles.menuItem,
+              {
+                borderBottomWidth: 1,
+                borderBottomColor: color.background.split,
+              },
+            ]}
             onPress={() => {
               setOpen(false);
               router.push("/add");
             }}
           >
-            <Text style={styles.menuText}>＋ 添加设备</Text>
+            <View style={styles.menuRow}>
+              <Image source={barAdd} style={styles.menuIcon} />
+              <Text style={styles.menuText}>添加设备</Text>
+            </View>
           </Pressable>
           <Pressable
             style={styles.menuItem}
@@ -39,7 +57,10 @@ function BottomBar({ state, navigation }: any) {
               router.push("/scan");
             }}
           >
-            <Text style={styles.menuText}>⌗ 扫一扫</Text>
+            <View style={styles.menuRow}>
+              <Image source={barScan} style={styles.menuIcon} />
+              <Text style={styles.menuText}>扫一扫</Text>
+            </View>
           </Pressable>
         </View>
       )}
@@ -84,7 +105,7 @@ function BottomBar({ state, navigation }: any) {
         </View>
       </View>
       <Pressable
-        style={[styles.addButton, { bottom: bottomInset - 20 }]}
+        style={[styles.addButton, { bottom: bottomInset - 25 }]}
         onPress={() => setOpen((v) => !v)}
       >
         <Image source={open ? addOpen : add} style={styles.addIcon} />
@@ -138,7 +159,7 @@ const styles = StyleSheet.create({
   centerSpace: { width: 86 },
   icon: { width: 40, height: 40, resizeMode: "contain" },
   addButton: {
-    position: "absolute",
+    position: "fixed",
     width: 74,
     height: 74,
     borderRadius: 29,
@@ -159,16 +180,21 @@ const styles = StyleSheet.create({
   },
   menu: {
     position: "absolute",
-    bottom: 90,
+    bottom: 56,
     left: "50%",
-    marginLeft: -72,
-    width: 144,
-    paddingVertical: 6,
+    marginLeft: -71,
+    width: 142,
     backgroundColor: "#fff",
-    borderRadius: 14,
+    borderRadius: 12,
     zIndex: 5,
     elevation: 8,
   },
-  menuItem: { height: 42, justifyContent: "center", paddingHorizontal: 14 },
-  menuText: { fontSize: 15, color: "#333" },
+  menuItem: {
+    height: 38,
+    justifyContent: "center",
+    marginHorizontal: 12,
+  },
+  menuRow: { flexDirection: "row", alignItems: "center", gap: 12 },
+  menuIcon: { width: 20, height: 20, resizeMode: "contain" },
+  menuText: { fontSize: 14, color: "#333" },
 });
