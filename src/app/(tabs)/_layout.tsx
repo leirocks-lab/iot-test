@@ -16,8 +16,10 @@ function BottomBar({ state, navigation }: any) {
   const [open, setOpen] = useState(false),
     current = state.routes[state.index]?.name;
   const { bottom: bottomInset } = useSafeAreaInsets();
+  const { navigationLocked } = useApp();
   const color = useColors();
   const barHeight = 43 + bottomInset;
+  if (navigationLocked) return null;
   return (
     <View style={[styles.host, { height: barHeight }]}>
       {open && (

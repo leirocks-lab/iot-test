@@ -30,6 +30,7 @@ const powerOn = require("../../assets/images/poweron-icon.png");
 const powerOff = require("../../assets/images/poweroff-icon.png");
 const choice = require("../../assets/images/multiple-choice.png");
 const choiceSelected = require("../../assets/images/multiple-choice-selected.png");
+const delect = require("../../assets/images/delect.png");
 
 function DeviceCard({
   device,
@@ -339,9 +340,18 @@ export default function Home() {
       <Pressable
         disabled={!selected.length || action.busy}
         onPress={remove}
-        style={{ opacity: selected.length ? 1 : 0.35 }}
+        style={{
+          opacity: selected.length ? 1 : 0.35,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
-        <Text style={styles.trash}>▣</Text>
+        <Image
+          accessibilityLabel="删除设备"
+          source={delect}
+          style={styles.trash}
+          contentFit="contain"
+        />
         <Text style={styles.deleteText}>删除设备</Text>
       </Pressable>
     </View>
@@ -546,6 +556,6 @@ const styles = StyleSheet.create({
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: "#eee",
   },
-  trash: { color: "#F0534A", fontSize: 18, textAlign: "center" },
-  deleteText: { color: "#F0534A", fontSize: 13, marginTop: 3 },
+  trash: { width: 24, height: 24 },
+  deleteText: { color: "#F0534A", fontSize: 13, marginTop: 4 },
 });
