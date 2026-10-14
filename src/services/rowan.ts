@@ -1,6 +1,21 @@
-import type { HttpClient, HttpRequest, HttpResponse } from '../lib/core';
-import { helpArticles } from './real-api-data';
-import { ApiError, type ApiEnvelope, type BindingResult, type DeviceView, type HomeGroup, type KeyValueStorage, type Language, type Product, type Room, type Schedule, type ScheduleInput, type Session, type Settings, type ThingModel } from './models';
+import type { HttpClient, HttpRequest, HttpResponse } from "../lib/core";
+import { helpArticles } from "./real-api-data";
+import { productCategories, productData, productGroups } from "./product-data";
+import {
+  ApiError,
+  type ApiEnvelope,
+  type BindingResult,
+  type DeviceView,
+  type HomeGroup,
+  type KeyValueStorage,
+  type Language,
+  type Room,
+  type Schedule,
+  type ScheduleInput,
+  type Session,
+  type Settings,
+  type ThingModel,
+} from "./models";
 
 export class RowanService {
   session: Session | null = null;
@@ -92,8 +107,35 @@ export class RowanService {
   async agreement(kind:'privacy'|'serviceTerms',regionCode:string) {return this.request<{type:string;content:string}>({method:'GET',path:'/api/app/'+kind,query:{type:'text',brandId:'rowan',regionCode}});}
   async home(signal?:AbortSignal) {return this.request<HomeGroup[]>({method:'GET',path:'/api/app/devices',signal});}
   async device(id:string,signal?:AbortSignal) {return this.request<DeviceView>({method:'GET',path:`/api/app/devices/${encodeURIComponent(id)}`,signal});}
-  async products(signal?:AbortSignal) {return this.request<{category:string;products:Product[]}[]>({method:'GET',path:'/api/app/products',query:{brandId:'rowan'},signal});}
-  async product(id:string,signal?:AbortSignal) {return this.request<Product>({method:'GET',path:`/api/app/products/${encodeURIComponent(id)}`,query:{type:'text'},signal});}
+  async categories(signal?: AbortSignal, brandId?: string) {
+    const data = await this.request<unknown>({
+      method: "GET",
+      path: "/api/app/products/category",
+      ...(brandId ? { query: { brandId } } : {}),
+      signal,
+    });
+    return productCategories(data);
+  }
+
+  async products(signal?: AbortSignal, brandId?: string) {
+    const data = await this.request<unknown>({
+      method: "GET",
+      path: "/api/app/products",
+      ...(brandId ? { query: { brandId } } : {}),
+      signal,
+    });
+    return productGroups(data);
+  }
+
+  async product(id: string, signal?: AbortSignal) {
+    const data = await this.request<unknown>({
+      method: "GET",
+      path: `/api/app/products/${encodeURIComponent(id)}`,
+      query: { type: "text" },
+      signal,
+    });
+    return productData(data);
+  }
   async model(productID:string,signal?:AbortSignal) {return this.request<ThingModel>({method:'GET',path:`/api/app/products/${encodeURIComponent(productID)}/thing-model`,signal});}
   async mqtt(id:string,signal?:AbortSignal){return this.request<Record<string,string>>({method:'GET',path:`/api/app/devices/${encodeURIComponent(id)}/mqtt`,signal});}
   async connection(signal?:AbortSignal) {return this.request<Record<string,string>>({method:'GET',path:'/api/app/device/connection',signal});}

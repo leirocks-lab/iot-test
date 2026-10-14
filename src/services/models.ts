@@ -8,9 +8,38 @@ export interface Settings {
 }
 export interface Room { id: string; name: string; isDefault?: boolean; deviceCount?: number }
 export interface Product {
-  id: string; name: string; category: string; seriesName: string; modelName: string;
-  image: string; connectType?: string; configType?: string; configTypes?: readonly string[]; recommended?: boolean; sort?: number;
-  cloudPlatform?: string; bluetooth?: boolean; buyLink: string;
+  id: string;
+  name: string;
+  category: string;
+  seriesName: string;
+  modelName: string;
+  image: string;
+  images?: readonly string[];
+  parameters?: ProductParameters;
+  introduction?: string | null;
+  connectType?: string;
+  configType?: string;
+  configTypes?: readonly string[];
+  recommended?: boolean;
+  sort?: number;
+  cloudPlatform?: string;
+  bluetooth?: boolean;
+  buyLink: string;
+}
+
+export type ProductParameters =
+  | Readonly<Record<string, unknown>>
+  | readonly Readonly<Record<string, unknown>>[];
+
+export interface ProductCategory {
+  name: string;
+  value: string;
+}
+
+export interface ProductGroup {
+  category: string;
+  categoryName?: Partial<Record<Language, string>>;
+  products: Product[];
 }
 export interface Attribute {
   identifier: string; type: 'number' | 'boolean' | 'enum'; writable: boolean;

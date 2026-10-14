@@ -1,5 +1,13 @@
-import type { HttpRequest } from '../lib/core';
-import { ApiError, type ApiEnvelope, type DeviceView, type HelpArticle, type HomeGroup, type Product, type ThingModel } from './models';
+import type { HttpRequest } from "../lib/core";
+import { productCategories, productData, productGroups } from "./product-data";
+import {
+  ApiError,
+  type ApiEnvelope,
+  type DeviceView,
+  type HelpArticle,
+  type HomeGroup,
+  type ThingModel,
+} from "./models";
 
 type ObjectValue = Record<string, unknown>;
 function object(value:unknown):ObjectValue {
@@ -10,6 +18,7 @@ function array(value:unknown):unknown[] {
   if(!Array.isArray(value))throw new ApiError(502,'服务端响应不是列表');
   return value;
 }
+
 function id(value:unknown):string {
   if(typeof value!=='string'||!value)throw new ApiError(502,'服务端响应缺少有效标识');
   return value;
@@ -32,16 +41,6 @@ export function realEnvelope(value:unknown,status:number):ApiEnvelope<unknown> {
     success:status<400&&code===0&&wire.success!==false,data:wire.data};
 }
 
-function product(value:unknown,category?:string):Product {
-  const wire=object(value),productID=id(wire.id);
-  const configTypes=wire.configType===undefined?undefined:strings(wire.configType);
-  return {id:productID,name:text(wire.name)??productID,category:text(wire.category)??category??'',
-    seriesName:text(wire.seriesName)??'',modelName:text(wire.modelName)??'',image:image(wire.image),buyLink:text(wire.buyLink)??'',
-    configTypes,connectType:text(wire.connectType),cloudPlatform:text(wire.cloudPlatform),
-    ...(typeof wire.bluetooth==='boolean'?{bluetooth:wire.bluetooth}:{}),
-    ...(typeof wire.recommended==='boolean'?{recommended:wire.recommended}:{}),
-    ...(typeof wire.sort==='number'&&Number.isFinite(wire.sort)?{sort:wire.sort}:{}),};
-}
 function device(value:unknown):DeviceView {
   const wire=object(value),metadata=object(wire.device),deviceID=id(metadata.id);
   if(!['sa','mbr','obs'].includes(String(wire.bindingRole)))throw new ApiError(502,'设备绑定角色未确认');
@@ -88,27 +87,37 @@ function thingModel(value:unknown):ThingModel {
   return {version:wire.version,attributes,services,events};
 }
 
-export function realResponseData(req:HttpRequest,value:unknown):unknown {
-  if(req.method!=='GET')return value;
-  const path=req.path;
-  if(path==='/api/app/products')return array(value).map(item=>{const group=object(item),category=text(group.category)??'';
-    return {...group,category,products:array(group.products).map(p=>product(p,category))};});
-  if(/^\/api\/app\/products\/[^/]+$/.test(path))return product(value);
-  if(path==='/api/app/devices')return home(value);
-  if(/^\/api\/app\/devices\/[^/]+$/.test(path))return device(value);
-  if(path.endsWith('/connectHelping')||path.endsWith('/helping'))return helpArticles(value);
-  if(path.endsWith('/thing-model'))return thingModel(value);
-  if(path==='/api/app/user/locations')return array(value).map(item=>{
-    const room=object(item);
-    if(typeof room.name!=='string')throw new ApiError(502,'候选房间名称尚未确认');
-    return {...room,id:id(room.id),name:room.name};
-  });
-  if(/^\/api\/app\/devices\/[^/]+\/location$/.test(path)){
+export function realResponseData(req: HttpRequest, value: unknown): unknown {
+  if (req.method !== "GET") return value;
+  const path = req.path;
+  if (path === "/api/app/products/category") {
+    return productCategories(value);
+  }
+  if (path === "/api/app/products") {
+    return productGroups(value);
+  }
+  if (/^\/api\/app\/products\/[^/]+$/.test(path)) {
+    return productData(value);
+  }
+  if (path === "/api/app/devices") return home(value);
+  if (/^\/api\/app\/devices\/[^/]+$/.test(path)) return device(value);
+  if (path.endsWith("/connectHelping") || path.endsWith("/helping"))
+    return helpArticles(value);
+  if (path.endsWith("/thing-model")) return thingModel(value);
+  if (path === "/api/app/user/locations")
+    return array(value).map((item) => {
+      const room = object(item);
+      if (typeof room.name !== "string")
+        throw new ApiError(502, "候选房间名称尚未确认");
+      return { ...room, id: id(room.id), name: room.name };
+    });
+  if (/^\/api\/app\/devices\/[^/]+\/location$/.test(path)) {
     // The deployed GET contract explicitly omits data when no room is assigned.
-    if(value===undefined)return {id:null,name:''};
-    const room=object(value);
-    if(room.id!==null&&typeof room.id!=='string')throw new ApiError(502,'设备房间归属尚未确认，请重试读取');
-    return {...room,name:text(room.name)??''};
+    if (value === undefined) return { id: null, name: "" };
+    const room = object(value);
+    if (room.id !== null && typeof room.id !== "string")
+      throw new ApiError(502, "设备房间归属尚未确认，请重试读取");
+    return { ...room, name: text(room.name) ?? "" };
   }
   return value;
 }

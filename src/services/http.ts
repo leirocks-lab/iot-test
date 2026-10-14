@@ -1,8 +1,13 @@
-import type { HttpClient, HttpRequest, HttpResponse } from '../lib/core';
-import { ApiError, type Attribute, type Schedule } from './models';
-import { MockDatabase, defaultSettings, digest, products } from './store';
-import { nextExecution, validateSchedule } from './scheduler';
-import { validateAttributeValue } from './device-controls';
+import type { HttpClient, HttpRequest, HttpResponse } from "../lib/core";
+import { ApiError, type Attribute, type Schedule } from "./models";
+import { MockDatabase, defaultSettings, digest, products } from "./store";
+import { nextExecution, validateSchedule } from "./scheduler";
+import { validateAttributeValue } from "./device-controls";
+import {
+  mockProductCategories,
+  mockProductDetail,
+  mockProductGroups,
+} from "./mock-product-catalog";
 
 export function requestUrl(base: string, req: HttpRequest) {
   const url = new URL(base.replace(/\/$/,'')+req.path);
@@ -77,18 +82,47 @@ export class MockHttpClient implements HttpClient {
       if(!account||text('password').length<8)throw new ApiError(400,'无法重置密码');
       account.passwordHash=digest('mock-v1:'+text('password'));for(const [key,value] of Object.entries(state.tokens))if(value.userID===account.id)delete state.tokens[key];delete state.captchas[account.email];return ok();
     }
-    if(path==='/api/app/products/category')return ok(products.map(p=>({name:p.category,value:p.category})));
-    if(path==='/api/app/products')return ok(products.map(p=>({category:p.category,categoryName:{'zh-CN':p.category,'zh-TW':p.category,en:p.category},products:[p]})));
-    const productPath=path.match(/^\/api\/app\/products\/([^/]+)(?:\/(.*))?$/);
-    if(productPath && productPath[2]!=='connectHelping') {
-      const p=products.find(p=>p.id===productPath[1]);if(!p)throw new ApiError(404,'产品不存在');
-      if(productPath[2]==='thing-model')return ok(thingModel(p.id));
-      return ok({...p,parameters:{},introduction:'ROWAN 智能家居设备 · Mock 产品'});
+    const productPath = path.match(
+      /^\/api\/app\/products\/([^/]+)(?:\/(.*))?$/,
+    );
+    if (productPath?.[2] === "thing-model") {
+      const product = products.find((product) => product.id === productPath[1]);
+      if (!product) throw new ApiError(404, "产品不存在");
+      return ok(thingModel(product.id));
     }
     if(productPath?.[2]==='connectHelping'&&!req.headers?.Authorization?.startsWith('Bearer '))throw new ApiError(401,'登录已失效');
+    const catalogRequest = method === "GET" && (
+      path === "/api/app/products/category" || path === "/api/app/products"
+      || !!productPath && !productPath[2]
+    );
+    if (catalogRequest && !req.headers?.Authorization?.startsWith("Bearer ")) {
+      throw new ApiError(401, "登录已失效");
+    }
     const tokenValue=req.headers?.Authorization?.replace(/^Bearer /,''), token=tokenValue?state.tokens[tokenValue]:undefined;
     if(!token||token.refresh||token.expiresAt<now)throw new ApiError(401,'登录已失效');
     const userID=token.userID, account=this.db.account(userID);
+    if (method === "GET" && path.startsWith("/api/app/products")) {
+      const requestedLanguage = req.headers?.["Accept-Language"];
+      const language =
+        requestedLanguage === "en" || requestedLanguage === "zh-TW"
+          ? requestedLanguage
+          : "zh-CN";
+      if (path === "/api/app/products/category") {
+        return ok(mockProductCategories(products, language));
+      }
+      if (path === "/api/app/products") {
+        return ok(mockProductGroups(products));
+      }
+      if (productPath && !productPath[2]) {
+        const product = products.find(
+          (product) => product.id === decodeURIComponent(productPath[1]),
+        );
+        if (!product) throw new ApiError(1091, "产品不存在");
+        if (query.type !== "text")
+          throw new ApiError(400, "模拟目录仅提供文本介绍");
+        return ok(mockProductDetail(product, language));
+      }
+    }
     if(productPath?.[2]==='connectHelping'&&method==='GET') {
       if(!products.some(product=>product.id===productPath[1]))throw new ApiError(404,'产品不存在');
       const language=req.headers?.['Accept-Language'];
