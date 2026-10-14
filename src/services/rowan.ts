@@ -1,5 +1,5 @@
 import type { HttpClient, HttpRequest, HttpResponse } from "../lib/core";
-import { helpArticles } from "./real-api-data";
+import { deviceMembers, helpArticles } from "./real-api-data";
 import { productCategories, productData, productGroups } from "./product-data";
 import {
   ApiError,
@@ -168,8 +168,21 @@ export class RowanService {
   }
   async enableSchedule(id:string,scheduleID:string,enabled:boolean) {return this.request({method:'PUT',path:`/api/app/devices/${id}/schedules/${scheduleID}/enabled`,body:{enabled}});}
   async deleteSchedule(id:string,scheduleID:string) {return this.request({method:'DELETE',path:`/api/app/devices/${id}/schedules/${scheduleID}`});}
-  async members(id:string,signal?:AbortSignal) {return this.request<{userID:string;email:string;nickname:string;bindingRole:string}[]>({method:'GET',path:`/api/app/devices/${encodeURIComponent(id)}/users`,signal});}
-  async removeMember(id:string,userID:string) {return this.request({method:'DELETE',path:`/api/app/devices/${id}/users/${userID}`});}
+  async members(id: string, signal?: AbortSignal) {
+    const data = await this.request<unknown>({
+      method: "GET",
+      path: `/api/app/devices/${encodeURIComponent(id)}/users`,
+      signal,
+    });
+    return deviceMembers(data);
+  }
+  async removeMember(id: string, userID: string, signal?: AbortSignal) {
+    return this.request({
+      method: "DELETE",
+      path: `/api/app/devices/${encodeURIComponent(id)}/users/${encodeURIComponent(userID)}`,
+      signal,
+    });
+  }
   async share(id:string) {return this.request<{deviceID:string;bindCode:string}>({method:'GET',path:`/api/app/devices/${id}/bindCode`});}
   async acceptShare(id:string,bindCode:string,signal?:AbortSignal) {return this.request<BindingResult>({method:'PUT',path:`/api/app/device/${encodeURIComponent(id)}/user`,body:{bindCode},signal});}
   async help(id: string, product = false, signal?: AbortSignal) {

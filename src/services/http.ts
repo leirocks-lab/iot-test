@@ -184,6 +184,17 @@ export class MockHttpClient implements HttpClient {
         method !== "GET" && suffix !== "users/self",
       );
     } catch (error) {
+      if (
+        error instanceof ApiError &&
+        (suffix === "users" || suffix.startsWith("users/"))
+      ) {
+        if (error.code === 404) {
+          throw new ApiError(suffix === "users" ? 1351 : 1371, "设备不存在");
+        }
+        if (error.code === 403) {
+          throw new ApiError(suffix === "users" ? 1352 : 1372, "没有设备成员权限");
+        }
+      }
       if (suffix === "helping" && error instanceof ApiError) {
         if (error.code === 404) {
           throw new ApiError(1451, "设备不存在");
@@ -199,8 +210,29 @@ export class MockHttpClient implements HttpClient {
     if(!suffix) { if(method==='PATCH'){ if(!text('nickname').trim()||text('nickname').length>20)throw new ApiError(400,'昵称需1～20字符');member.nickname=text('nickname');return ok(); }return ok(this.db.view(d,userID)); }
     if(suffix==='mqtt')return ok({host:'wss://mock.rowan.invalid/mqtt',endpoint:'mock.rowan.invalid',path:'/mqtt',clientID:this.db.id('mqtt'),username:userID,password:'mock-temporary',deviceID:d.id});
     if(suffix==='users/self'&&method==='DELETE'){delete d.members[userID];return ok();}
-    if(suffix==='users')return ok(Object.entries(d.members).map(([id,m])=>({userID:id,email:state.accounts.find(a=>a.id===id)?.email?.replace(/^(.).+(@.*)$/,'$1***$2')??'',nickname:id,bindingRole:m.role})));
-    if(suffix.startsWith('users/')&&method==='DELETE'){admin();const id=suffix.slice(6);if(d.members[id]?.role!=='mbr')throw new ApiError(403,'只能移除普通成员');delete d.members[id];return ok();}
+    if (suffix === "users" && method === "GET") {
+      return ok(
+        Object.entries(d.members).map(([id, binding]) => ({
+          userID: id,
+          nickname: null,
+          bindingRole: binding.role,
+        })),
+      );
+    }
+    if (suffix.startsWith("users/") && method === "DELETE") {
+      if (member.role !== "sa") {
+        throw new ApiError(1372, "您不是这台设备的管理员");
+      }
+      const targetID = decodeURIComponent(suffix.slice(6));
+      if (!d.members[targetID]) {
+        throw new ApiError(1373, "该用户没有绑定这台设备");
+      }
+      if (d.members[targetID].role !== "mbr") {
+        throw new ApiError(403, "只能移除普通成员");
+      }
+      delete d.members[targetID];
+      return ok();
+    }
     if(suffix==='bindCode'){admin();const code=this.db.id('share');state.shares[code]={deviceID:d.id,expiresAt:now+300000};return ok({deviceID:d.id,bindCode:code});}
     if(suffix==='location') {
       if(method==='PUT'){const id=text('id')||null;if(id&&!account.rooms.some(r=>r.id===id))throw new ApiError(1431,'房间已失效');member.roomID=id;}
