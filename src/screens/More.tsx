@@ -12,13 +12,11 @@ import {
   Label,
   Page,
   confirm,
-  useAction,
 } from "../ui/kit";
 
 export default function More() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { runtime } = useApp();
-  const action = useAction();
   const [, redraw] = useState(0);
   const service = runtime?.service,
     revision = service?.sessionRevision;
@@ -29,16 +27,26 @@ export default function More() {
         : null,
     [service, id, revision],
   );
+  const unbindFlow = useMemo(
+    () =>
+      runtime && id && revision !== undefined ? runtime.unbindFlow(id) : null,
+    [runtime, id, revision],
+  );
   useFocusEffect(
     useCallback(() => {
-      if (!flow) return;
-      const unsubscribe = flow.onChange(() => redraw((value) => value + 1));
+      if (!flow || !unbindFlow) return;
+      const notify = () => redraw((value) => value + 1);
+      const unsubscribeSettings = flow.onChange(notify);
+      const unsubscribeUnbind = unbindFlow.onChange(notify);
       void flow.start();
+      unbindFlow.start();
       return () => {
-        unsubscribe();
+        unsubscribeSettings();
+        unsubscribeUnbind();
         flow.stop();
+        unbindFlow.stop();
       };
-    }, [flow]),
+    }, [flow, unbindFlow]),
   );
   if (!flow)
     return (
@@ -239,7 +247,6 @@ export default function More() {
           />
         )}
         {/* Existing member actions stay separate from nickname and room loading. */}
-        <ErrorText error={action.error} />
         {state.members.error && (
           <Button
             secondary
@@ -330,19 +337,40 @@ export default function More() {
           <Button
             danger
             title="Remove my binding"
-            disabled={action.busy || flow.busy}
+            disabled={
+              !unbindFlow ||
+              unbindFlow.busy ||
+              unbindFlow.pending ||
+              unbindFlow.state.phase === "complete" ||
+              flow.busy ||
+              device.device.id !== id
+            }
             onPress={() =>
               confirm(
                 "Remove my binding",
-                "仅解除本人绑定，不清除设备或其他用户。",
-                () =>
-                  void action.run(async () => {
-                    await service!.unbind(id);
-                    router.replace("/home");
-                  }),
+                `设备：${device.deviceNickname} (${device.device.id})\n当前账号：${service!.userID}\n仅解除本人绑定，不清除设备或其他用户。`,
+                () => {
+                  void unbindFlow?.submit().then((complete) => {
+                    if (complete) router.replace("/home");
+                  });
+                },
               )
             }
           />
+          {unbindFlow?.busy && <Busy />}
+          <ErrorText error={unbindFlow?.state.error ?? ""} />
+          {unbindFlow?.pending && (
+            <Button
+              secondary
+              title="Check unbind result"
+              disabled={unbindFlow.busy}
+              onPress={() => {
+                void unbindFlow.reconcile().then((complete) => {
+                  if (complete) router.replace("/home");
+                });
+              }}
+            />
+          )}
         </>
       )}
     </Page>

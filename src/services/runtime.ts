@@ -19,6 +19,7 @@ import { maintenanceLedger, mockMaintenanceProfile, type MaintenanceLedger, type
 import { eventLedger, mockEventProfile, type EventLedger, type EventProfileResolver } from './device-events';
 import { integrationStatus, type IntegrationStatus } from './runtime-integration';
 import { ApiError } from './models';
+import { DeviceUnbindFlow } from './device-unbind';
 export interface RuntimeContracts {onboarding?:RealAddContract;qr?:RowanCodeParser;wifi?:WifiReader;realtime?:DeviceProfileResolver;controls?:ControlProfileResolver;maintenance?:MaintenanceProfileResolver;events?:EventProfileResolver}
 export interface Runtime {
   service:RowanService; devices:DeviceTransport; config:CommunicationConfig;
@@ -29,6 +30,8 @@ export interface Runtime {
   wifi?:WifiReader;
   createRealtimeConnection?:()=>Promise<MqttConnection>;
   createDeviceSession:(id:string)=>DeviceSession;
+  unbindFlow: (id: string) => DeviceUnbindFlow;
+  releaseDevice: (id: string, owner: string, revision: number) => boolean;
   developer?:{cloud:MockCloud;http:MockHttpClient;devices:MockDeviceTransport;reset:()=>Promise<void>};
 }
 export async function createRuntime(input:Partial<CommunicationConfig>, realDeviceDriver?:DeviceTransport,contracts?:RuntimeContracts,startupSignal?:AbortSignal):Promise<Runtime> {
@@ -58,13 +61,44 @@ export async function createRuntime(input:Partial<CommunicationConfig>, realDevi
   const sessions=new Map<string,DeviceSession>();
   const maintenanceStates=new Map<string,MaintenanceLedger>();
   const eventStates=new Map<string,EventLedger>();
+  const deviceEpochs = new Map<string, number>();
+  const unbindFlows = new Map<string, DeviceUnbindFlow>();
+  const releaseDevice = (id: string, owner: string, revision: number) => {
+    if (
+      disposed ||
+      service.session?.userID !== owner ||
+      service.sessionRevision !== revision
+    ) {
+      return false;
+    }
+    deviceEpochs.set(id, (deviceEpochs.get(id) ?? 0) + 1);
+    sessions.get(id)?.close();
+    sessions.delete(id);
+    maintenanceStates.delete(id);
+    eventStates.delete(id);
+    return true;
+  };
+  const unbindFlow = (id: string) => {
+    let flow = unbindFlows.get(id);
+    if (!flow || flow.state.phase === 'complete') {
+      flow?.stop();
+      flow = new DeviceUnbindFlow(service, id, releaseDevice);
+      unbindFlows.set(id, flow);
+    }
+    return flow;
+  };
   const createDeviceSession=(id:string):DeviceSession=>{
     const userID=service.userID,revision=service.sessionRevision;
+    const deviceEpoch = deviceEpochs.get(id) ?? 0;
     let ledger=maintenanceStates.get(id);if(!ledger){ledger=maintenanceLedger();maintenanceStates.set(id,ledger);}
     let eventState=eventStates.get(id);if(!eventState){eventState=eventLedger();eventStates.set(id,eventState);}
     let session:DeviceSession;
     const lifecycle={
-      current:()=>!disposed&&service.session?.userID===userID&&service.sessionRevision===revision,
+      current:() =>
+        !disposed &&
+        service.session?.userID === userID &&
+        service.sessionRevision === revision &&
+        (deviceEpochs.get(id) ?? 0) === deviceEpoch,
       start:()=>{if(!lifecycle.current())throw new Error('设备连接上下文已变更');const previous=sessions.get(id);if(previous&&previous!==session)previous.close();sessions.set(id,session);},
       stop:()=>{if(sessions.get(id)===session)sessions.delete(id);},
       credentials:(signal:AbortSignal)=>service.mqtt(id,signal),
@@ -81,15 +115,75 @@ export async function createRuntime(input:Partial<CommunicationConfig>, realDevi
   scanner=new QrScanCoordinator(service,config.httpMode,contracts?.qr,()=>{if(onboarding.pending)throw new ApiError(409,'请先核对或完成当前蓝牙添加结果');});
   let revision=service.sessionRevision;
   const connections=new Set<MqttConnection>();
-  const closeConnections=()=>{for(const session of [...sessions.values()])session.close();sessions.clear();maintenanceStates.clear();eventStates.clear();for(const connection of connections)connection.close();connections.clear();};
+  const closeConnections = () => {
+    for (const flow of unbindFlows.values()) flow.stop();
+    unbindFlows.clear();
+    for (const session of [...sessions.values()]) session.close();
+    sessions.clear();
+    maintenanceStates.clear();
+    eventStates.clear();
+    deviceEpochs.clear();
+    for (const connection of connections) connection.close();
+    connections.clear();
+  };
   const unsubscribe=service.onSessionChange(()=>{const next=service.sessionRevision;if(next!==revision){onboarding.clear();scanner.clear();closeConnections();revision=next;}});
-  return {dispose:()=>{if(disposed)return;disposed=true;clearInterval(timer);unsubscribe();onboarding.clear();scanner.clear();closeConnections();void releaseDriver();},service,devices,config,integration:integrationStatus(config,contracts,!!realDeviceDriver),onboarding,scanner,wifi,createDeviceSession,
-    ...(config.deviceMode==='real'?{createRealtimeConnection:async()=>{
-      const userID=service.userID,sessionRevision=service.sessionRevision,connection=(await import('../protocol/mqtt-browser')).createMqttConnection();
-      if(disposed||service.session?.userID!==userID||service.sessionRevision!==sessionRevision){connection.close();throw new Error('设备连接上下文已变更');}
-      connections.add(connection);return connection;
-    }}:{}),
-    developer:config.environment!=='production'&&mockHttp&&mockDevices?{cloud:cloud!,http:mockHttp,devices:mockDevices,reset:async()=>{await service.clearLocal();await db!.reset();mockHttp.fault='none';mockDevices.fault='none';}}:undefined};
+  return {
+    dispose: () => {
+      if (disposed) return;
+      disposed = true;
+      clearInterval(timer);
+      unsubscribe();
+      onboarding.clear();
+      scanner.clear();
+      closeConnections();
+      void releaseDriver();
+    },
+    service,
+    devices,
+    config,
+    integration: integrationStatus(config, contracts, !!realDeviceDriver),
+    onboarding,
+    scanner,
+    wifi,
+    createDeviceSession,
+    unbindFlow,
+    releaseDevice,
+    ...(config.deviceMode === 'real'
+      ? {
+          createRealtimeConnection: async () => {
+            const userID = service.userID;
+            const sessionRevision = service.sessionRevision;
+            const connection = (
+              await import('../protocol/mqtt-browser')
+            ).createMqttConnection();
+            if (
+              disposed ||
+              service.session?.userID !== userID ||
+              service.sessionRevision !== sessionRevision
+            ) {
+              connection.close();
+              throw new Error('设备连接上下文已变更');
+            }
+            connections.add(connection);
+            return connection;
+          },
+        }
+      : {}),
+    developer:
+      config.environment !== 'production' && mockHttp && mockDevices
+        ? {
+            cloud: cloud!,
+            http: mockHttp,
+            devices: mockDevices,
+            reset: async () => {
+              await service.clearLocal();
+              await db!.reset();
+              mockHttp.fault = 'none';
+              mockDevices.fault = 'none';
+            },
+          }
+        : undefined,
+  };
   }catch(error){clearInterval(timer);initializingService?.cancelAuthentication();await releaseDriver();throw error;}
   finally{startupSignal?.removeEventListener('abort',abort);}
 }

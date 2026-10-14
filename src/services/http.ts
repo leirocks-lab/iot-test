@@ -175,11 +175,12 @@ export class MockHttpClient implements HttpClient {
     if(room&&method==='PATCH') { const r=account.rooms.find(r=>r.id===room[1]);if(!r)throw new ApiError(1431,'房间已失效');r.name=this.roomName(text('name'),userID,r.id);account.roomVersion++;return ok(); }
     const dev=path.match(/^\/api\/app\/devices\/([^/]+)(?:\/(.*))?$/);
     if(!dev)throw new ApiError(404,'Mock 未定义此接口');
+    const deviceID = decodeURIComponent(dev[1]);
     const suffix = dev[2] ?? "";
     let d: ReturnType<MockDatabase["device"]>;
     try {
       d = this.db.device(
-        dev[1],
+        deviceID,
         userID,
         method !== "GET" && suffix !== "users/self",
       );
@@ -188,11 +189,19 @@ export class MockHttpClient implements HttpClient {
         error instanceof ApiError &&
         (suffix === "users" || suffix.startsWith("users/"))
       ) {
+        const memberList = suffix === "users";
+        const selfUnbind = suffix === "users/self";
         if (error.code === 404) {
-          throw new ApiError(suffix === "users" ? 1351 : 1371, "设备不存在");
+          throw new ApiError(
+            selfUnbind ? 1361 : memberList ? 1351 : 1371,
+            "设备不存在",
+          );
         }
         if (error.code === 403) {
-          throw new ApiError(suffix === "users" ? 1352 : 1372, "没有设备成员权限");
+          throw new ApiError(
+            selfUnbind ? 1362 : memberList ? 1352 : 1372,
+            selfUnbind ? "您没有绑定这台设备" : "没有设备成员权限",
+          );
         }
       }
       if (suffix === "helping" && error instanceof ApiError) {

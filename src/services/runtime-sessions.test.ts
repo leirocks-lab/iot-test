@@ -33,6 +33,28 @@ async function setup(profile:DeviceProfileResolver|undefined=resolver,controls?:
 }
 afterEach(()=>{for(const runtime of runtimes)runtime.dispose();runtimes.length=0;testPorts.ports.length=0;testPorts.issued.length=0;testPorts.reports.length=0;vi.restoreAllMocks();});
 describe('Runtime设备会话接线（Mock HTTP/构造MQTT）',()=>{
+  it('releases only the unbound device MQTT subscription and connection', async () => {
+    const runtime = await setup();
+    const devices = runtime.developer!.http.db.state.devices;
+    const secondDevice = structuredClone(devices[0]);
+    secondDevice.id = 'dev_second';
+    secondDevice.thingName = 'dev_second';
+    devices.push(secondDevice);
+
+    const first = runtime.createDeviceSession('dev_wine');
+    const second = runtime.createDeviceSession('dev_second');
+    await first.connect();
+    await second.connect();
+
+    const owner = runtime.service.userID;
+    const revision = runtime.service.sessionRevision;
+    expect(runtime.releaseDevice('dev_wine', owner, revision)).toBe(true);
+    expect(first.ready).toBe(false);
+    expect(second.ready).toBe(true);
+    expect(testPorts.ports[0].end).toHaveBeenCalledOnce();
+    expect(testPorts.ports[1].end).not.toHaveBeenCalled();
+  });
+
   it('blocks new Bluetooth actions behind an unknown QR transaction while allowing its original query recovery',async()=>{
     const runtime=await createRuntime({httpMode:'mock',deviceMode:'mock'});runtimes.push(runtime);await runtime.service.login('rowan@example.com','Rowan@123','password');const qr=runtime.scanner.acquire(),add=runtime.onboarding.acquire(),binding=vi.spyOn(runtime.service,'acceptShare').mockRejectedValue(new ApiError(0,'lost fixture response'));
     qr.read([encodeShareCode({deviceID:'dev_wine',bindCode:'fixture-code'})]);await expect(qr.confirm()).rejects.toThrow('lost');expect(runtime.scanner.pending).toBe(true);const scan=vi.spyOn(runtime.developer!.devices,'scan');

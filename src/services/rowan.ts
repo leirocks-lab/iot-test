@@ -141,7 +141,16 @@ export class RowanService {
   async connection(signal?:AbortSignal) {return this.request<Record<string,string>>({method:'GET',path:'/api/app/device/connection',signal});}
   async bindStatus(bindCode:string,signal?:AbortSignal) {return this.request<BindingResult>({method:'GET',path:'/api/app/device/bindStatus',query:{bindCode},signal});}
   async renameDevice(id:string,nickname:string,signal?:AbortSignal) {return this.request({method:'PATCH',path:`/api/app/devices/${encodeURIComponent(id)}`,body:{nickname},signal});}
-  async unbind(id:string) {return this.request({method:'DELETE',path:`/api/app/devices/${id}/users/self`});}
+  async unbind(id: string, signal?: AbortSignal) {
+    return this.request(
+      {
+        method: "DELETE",
+        path: `/api/app/devices/${encodeURIComponent(id)}/users/self`,
+        signal,
+      },
+      false,
+    );
+  }
   async rooms(signal?:AbortSignal) {
     const response=await this.response<Room[]>({method:'GET',path:'/api/app/user/locations',signal});
     return {rooms:response.data.data,version:response.headers.etag??response.headers.ETag??''};
