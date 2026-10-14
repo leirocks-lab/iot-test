@@ -14,6 +14,7 @@ import {
   type ScheduleInput,
   type Session,
   type Settings,
+  type ShareBinding,
   type ThingModel,
 } from "./models";
 
@@ -192,8 +193,51 @@ export class RowanService {
       signal,
     });
   }
-  async share(id:string) {return this.request<{deviceID:string;bindCode:string}>({method:'GET',path:`/api/app/devices/${id}/bindCode`});}
-  async acceptShare(id:string,bindCode:string,signal?:AbortSignal) {return this.request<BindingResult>({method:'PUT',path:`/api/app/device/${encodeURIComponent(id)}/user`,body:{bindCode},signal});}
+  async share(id: string, signal?: AbortSignal): Promise<ShareBinding> {
+    const data = await this.request<unknown>(
+      {
+        method: "GET",
+        path: `/api/app/devices/${encodeURIComponent(id)}/bindCode`,
+        signal,
+      },
+      false,
+    );
+    if (!data || typeof data !== "object" || Array.isArray(data)) {
+      throw new ApiError(502, "设备分享响应结构不完整");
+    }
+    const value = data as Record<string, unknown>;
+    if (
+      value.deviceID !== id ||
+      typeof value.bindCode !== "string" ||
+      !value.bindCode.trim() ||
+      typeof value.expiresAt !== "string" ||
+      !/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?(?:Z|[+-]\d\d:\d\d)$/.test(value.expiresAt) ||
+      !Number.isFinite(Date.parse(value.expiresAt))
+    ) {
+      throw new ApiError(502, "设备分享码或到期时间无效");
+    }
+    return {
+      deviceID: value.deviceID,
+      bindCode: value.bindCode,
+      expiresAt: value.expiresAt,
+    };
+  }
+
+  async acceptShare(
+    id: string,
+    bindCode: string,
+    signal?: AbortSignal,
+  ): Promise<BindingResult> {
+    return this.request<BindingResult>(
+      {
+        method: "PUT",
+        path: `/api/app/device/${encodeURIComponent(id)}/user`,
+        body: { bindCode },
+        signal,
+      },
+      false,
+    );
+  }
   async help(id: string, product = false, signal?: AbortSignal) {
     const path = product
       ? `/api/app/products/${encodeURIComponent(id)}/connectHelping`

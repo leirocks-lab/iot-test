@@ -6,6 +6,11 @@ export interface DeviceMember {
   bindingRole: Role;
 }
 export interface BindingResult { deviceID: string; userID: string; bindingRole: Role }
+export interface ShareBinding {
+  deviceID: string;
+  bindCode: string;
+  expiresAt: string;
+}
 export interface Settings {
   language: Language; notification: boolean; theme: 'system' | 'light' | 'dark';
   wallpaper: { id: string; name: Record<Language, string>; image: string } | null;

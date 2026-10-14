@@ -87,11 +87,14 @@ describe('document-backed API flows', () => {
     const {service,db}=await setup();db.state.tokens[service.session!.accessToken].expiresAt=0;
     expect((await service.rooms()).rooms).toHaveLength(2);
   });
-  it('accepts share idempotently and revokes the removed member',async()=>{
+  it('consumes a share code once and revokes the removed member', async () => {
     const {service:admin,db}=await setup();const share=await admin.share('dev_wine');
     const member=new RowanService(new MockHttpClient(db),new MemoryStorage());
     await member.sendCaptcha('member@example.com','register');await member.register('member@example.com','Member@123','123456','US');await member.login('member@example.com','Member@123','password');
-    await member.acceptShare('dev_wine',share.bindCode);await member.acceptShare('dev_wine',share.bindCode);
+    await member.acceptShare('dev_wine', share.bindCode);
+    await expect(member.acceptShare('dev_wine', share.bindCode)).rejects.toMatchObject({
+      code: 1133,
+    });
     expect((await member.device('dev_wine')).bindingRole).toBe('mbr');
     expect((await admin.members('dev_wine')).filter(m=>m.bindingRole==='mbr')).toHaveLength(1);
     await expect(member.share('dev_wine')).rejects.toMatchObject({code:403});

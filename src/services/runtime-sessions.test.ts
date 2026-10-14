@@ -57,6 +57,7 @@ describe('Runtime设备会话接线（Mock HTTP/构造MQTT）',()=>{
 
   it('blocks new Bluetooth actions behind an unknown QR transaction while allowing its original query recovery',async()=>{
     const runtime=await createRuntime({httpMode:'mock',deviceMode:'mock'});runtimes.push(runtime);await runtime.service.login('rowan@example.com','Rowan@123','password');const qr=runtime.scanner.acquire(),add=runtime.onboarding.acquire(),binding=vi.spyOn(runtime.service,'acceptShare').mockRejectedValue(new ApiError(0,'lost fixture response'));
+    vi.spyOn(runtime.service, 'home').mockResolvedValueOnce([]);
     qr.read([encodeShareCode({deviceID:'dev_wine',bindCode:'fixture-code'})]);await expect(qr.confirm()).rejects.toThrow('lost');expect(runtime.scanner.pending).toBe(true);const scan=vi.spyOn(runtime.developer!.devices,'scan');
     await expect(add.scan()).rejects.toThrow('扫码绑定');await expect(add.select({handle:'fixture',mac:'80a036d51aad',model:'RW-DH01',service:'0822'})).rejects.toThrow('扫码绑定');await expect(add.provision('Test','public-password')).rejects.toThrow('扫码绑定');expect(scan).not.toHaveBeenCalled();
     await qr.reconcile();expect(runtime.scanner.pending).toBe(false);await add.scan();expect(scan).toHaveBeenCalledOnce();expect(binding).toHaveBeenCalledOnce();add.stop();

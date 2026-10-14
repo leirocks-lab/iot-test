@@ -45,7 +45,15 @@ export class QrScanFlow {
   reset(){if(this.state.phase==='unknown')throw new ApiError(409,'请先核对本次扫码绑定结果');this.stop();this.codes=[];this.submitted=false;this.update({phase:'idle',choices:[],selected:undefined,error:''});}
   stop(){++this.round;this.controller?.abort();this.controller=undefined;if(this.state.phase==='confirming')this.update({phase:this.submitted?'unknown':'choosing'});}
   private check(round:number,signal:AbortSignal){if(round!==this.round||signal.aborted||this.service.session?.userID!==this.owner||this.service.sessionRevision!==this.revision)throw new ApiError(499,'扫码操作已停止');}
-  private binding(result:BindingResult,deviceID:string){if(result.deviceID!==deviceID||result.userID!==this.owner||!['sa','mbr','obs'].includes(result.bindingRole))throw new ApiError(0,'绑定结果不一致，请核对设备');}
+  private binding(result: BindingResult, deviceID: string) {
+    if (
+      result.deviceID !== deviceID ||
+      result.userID !== this.owner ||
+      !["sa", "mbr", "obs"].includes(result.bindingRole)
+    ) {
+      throw new ApiError(502, "绑定结果不一致，请核对设备");
+    }
+  }
   async confirm():Promise<ScanDestination> {
     if(this.state.phase!=='choosing'||this.state.selected===undefined)throw new ApiError(409,'请先选择一个二维码，勿重复确认');
     if(this.service.sessionRevision!==this.revision)throw new ApiError(499,'登录上下文已变更，请重新扫码');
@@ -59,10 +67,41 @@ export class QrScanFlow {
         const binding=await this.service.acceptShare(code.deviceID,code.bindCode,signal);this.check(round,signal);this.binding(binding,code.deviceID);return {binding};
       },mockProfile.scanTimeout,'扫码结果等待超时，请核对绑定结果',controller.signal);
       this.check(round,controller.signal);this.update({phase:'done'});return destination;
-    }catch(error){
-      if(round===this.round){const definite=error instanceof ApiError&&[400,401,403,404,1131,1132,1133].includes(error.code);this.update({phase:this.submitted&&!definite?'unknown':'choosing',error:(error as Error).message});}
+    } catch (error) {
+      if (round === this.round) {
+        const definite =
+          error instanceof ApiError &&
+          [400, 401, 403, 404, 1131, 1132, 1133].includes(error.code);
+        if (this.submitted && definite) {
+          this.codes = [];
+          this.update({
+            phase: "idle",
+            choices: [],
+            selected: undefined,
+            error: (error as Error).message,
+          });
+        } else {
+          this.update({
+            phase: this.submitted ? "unknown" : "choosing",
+            error: (error as Error).message,
+          });
+        }
+        if (
+          this.submitted &&
+          !definite &&
+          !(error instanceof ApiError && error.code === 502)
+        ) {
+          try {
+            return await this.reconcile();
+          } catch {
+            // Keep the pending state. Reconciliation never resubmits PAIR-06.
+          }
+        }
+      }
       throw error;
-    }finally{if(round===this.round)this.controller=undefined;}
+    } finally {
+      if (round === this.round) this.controller = undefined;
+    }
   }
   async reconcile():Promise<ScanDestination> {
     if(this.state.phase!=='unknown'||this.state.selected===undefined)throw new ApiError(409,'没有待核对的扫码事务');
@@ -71,10 +110,45 @@ export class QrScanFlow {
     if(this.service.userID!==this.owner||this.service.sessionRevision!==this.revision)throw new ApiError(499,'账号上下文已变更，请返回首页核对');
     const round=++this.round,controller=new AbortController();this.controller=controller;this.update({phase:'confirming',error:''});
     try {
-      const view=await withBudget(signal=>this.service.device(code.deviceID,signal),mockProfile.scanTimeout,'设备结果核对超时',controller.signal);
-      this.check(round,controller.signal);const binding={deviceID:view.device.id,userID:this.owner!,bindingRole:view.bindingRole};this.binding(binding,code.deviceID);
-      this.update({phase:'done'});return {binding};
-    }catch(error){if(round===this.round)this.update({phase:'unknown',error:(error as Error).message});throw error;}
-    finally{if(round===this.round)this.controller=undefined;}
+      const groups = await withBudget(
+        (signal) => this.service.home(signal),
+        mockProfile.scanTimeout,
+        "设备结果核对超时",
+        controller.signal,
+      );
+      this.check(round, controller.signal);
+      if (
+        !Array.isArray(groups) ||
+        groups.some(
+          (group) =>
+            !group ||
+            !Array.isArray(group.devices) ||
+            group.devices.some((view) => typeof view?.device?.id !== "string"),
+        )
+      ) {
+        throw new ApiError(502, "当前账号设备关系无法辨识，请稍后核对");
+      }
+      const view = groups
+        .flatMap((group) => group.devices)
+        .find((device) => device.device.id === code.deviceID);
+      if (!view) {
+        throw new ApiError(409, "首页尚未显示该设备，绑定结果待核对；不会重复提交绑定码");
+      }
+      const binding = {
+        deviceID: view.device.id,
+        userID: this.owner!,
+        bindingRole: view.bindingRole,
+      };
+      this.binding(binding, code.deviceID);
+      this.update({ phase: "done", error: "" });
+      return { binding };
+    } catch (error) {
+      if (round === this.round) {
+        this.update({ phase: "unknown", error: (error as Error).message });
+      }
+      throw error;
+    } finally {
+      if (round === this.round) this.controller = undefined;
+    }
   }
 }

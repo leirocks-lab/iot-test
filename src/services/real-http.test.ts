@@ -36,6 +36,65 @@ describe('真实HTTP边界',()=>{
     expect(fetcher.mock.calls[0][0]).toBe('https://iot.example.test/module/app-api/device/bindStatus?bindCode=a%2Bb%2F%26');
     expect(fetcher.mock.calls[0][1]?.signal).toBe(controller.signal);
   });
+  it('adapts SHARE-01 fields and never replays PAIR-06 after a 401', async () => {
+    const shareResponse = {
+      deviceID: 'dev_test',
+      bindCode: 'CODE1234',
+      expiresAt: '2026-10-14T14:00:00Z',
+    };
+    const fetcher = vi.fn<HttpFetcher>().mockImplementation(async (url) =>
+      response(
+        String(url).endsWith('/bindCode')
+          ? ok(shareResponse)
+          : { code: 401, message: '未登录', success: false, data: null },
+      ),
+    );
+    const service = new RowanService(new RealHttpClient(config, fetcher), new MemoryStorage());
+    service.session = {
+      accessToken: 'fixture',
+      refreshToken: 'fixture',
+      userID: 'user_test',
+      tokenType: 'Bearer',
+      expiresIn: 1,
+      setting: defaultSettings(),
+    };
+
+    expect(await service.share('dev_test')).toEqual(shareResponse);
+    await expect(service.acceptShare('dev_test', shareResponse.bindCode)).rejects.toMatchObject({ code: 401 });
+    expect(fetcher).toHaveBeenCalledTimes(2);
+    expect(fetcher.mock.calls[0][0]).toBe('https://iot.example.test/module/app-api/devices/dev_test/bindCode');
+    expect(fetcher.mock.calls[1][0]).toBe('https://iot.example.test/module/app-api/device/dev_test/user');
+    expect(fetcher.mock.calls[1][1]).toMatchObject({ method: 'PUT' });
+  });
+  it('rejects mismatched or incomplete SHARE-01 data', async () => {
+    const { client } = setup(ok({ deviceID: 'different', bindCode: 'A', expiresAt: '2026-10-14T14:00:00Z' }));
+    const service = new RowanService(client, new MemoryStorage());
+    service.session = {
+      accessToken: 'fixture',
+      refreshToken: 'fixture',
+      userID: 'user_test',
+      tokenType: 'Bearer',
+      expiresIn: 1,
+      setting: defaultSettings(),
+    };
+    await expect(service.share('dev_test')).rejects.toMatchObject({ code: 502 });
+  });
+  it('does not request a second SHARE-01 code after authorization failure', async () => {
+    const fetcher = vi.fn<HttpFetcher>().mockResolvedValue(
+      response({ code: 401, message: '未登录', success: false, data: null }),
+    );
+    const service = new RowanService(new RealHttpClient(config, fetcher), new MemoryStorage());
+    service.session = {
+      accessToken: 'fixture',
+      refreshToken: 'fixture',
+      userID: 'user_test',
+      tokenType: 'Bearer',
+      expiresIn: 1,
+      setting: defaultSettings(),
+    };
+    await expect(service.share('dev_test')).rejects.toMatchObject({ code: 401 });
+    expect(fetcher).toHaveBeenCalledOnce();
+  });
   it('refuses absent tenants before making a request',async()=>{
     const fetcher=vi.fn<HttpFetcher>(),client=new RealHttpClient({...config,tenantID:undefined},fetcher);
     await expect(client.request({method:'GET',path:'/api/app/devices'})).rejects.toMatchObject({code:503});

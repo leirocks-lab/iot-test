@@ -144,12 +144,32 @@ export class MockHttpClient implements HttpClient {
       const result=state.binds[String(query.bindCode)];if(!result||result.userID!==userID)throw new ApiError(1123,'绑定码不存在或已过期');return ok(result);
     }
     const binding=path.match(/^\/api\/app\/device\/([^/]+)\/user$/);
-    if(binding&&method==='PUT') {
-      const share=state.shares[text('bindCode')];
-      if(!share||share.deviceID!==binding[1]||share.expiresAt<now||share.usedBy&&share.usedBy!==userID)throw new ApiError(400,'分享码无效或已过期');
-      const device=state.devices.find(d=>d.id===binding[1]);if(!device)throw new ApiError(404,'设备不存在');
-      if(device.members[userID])return ok({userID,deviceID:device.id,bindingRole:device.members[userID].role});
-      device.members[userID]={role:'mbr',nickname:device.name,roomID:null};share.usedBy=userID;return ok({userID,deviceID:device.id,bindingRole:'mbr'});
+    if (binding && method === "PUT") {
+      const bindingDeviceID = decodeURIComponent(binding[1]);
+      const device = state.devices.find((item) => item.id === bindingDeviceID);
+      if (!device) throw new ApiError(1132, "绑定设备不存在");
+      const code = text("bindCode");
+      const share = state.shares[code];
+      if (!share || share.expiresAt <= now || share.usedBy) {
+        throw new ApiError(1133, "绑定码不存在或已过期");
+      }
+      if (share.deviceID !== bindingDeviceID) {
+        throw new ApiError(1131, "绑定码与设备不匹配");
+      }
+      const existing = device.members[userID];
+      if (!existing) {
+        device.members[userID] = {
+          role: Object.keys(device.members).length === 0 ? "sa" : "mbr",
+          nickname: device.name,
+          roomID: null,
+        };
+      }
+      delete state.shares[code];
+      return ok({
+        userID,
+        deviceID: device.id,
+        bindingRole: device.members[userID].role,
+      });
     }
     if(path==='/api/app/user/setting') {
       if(method==='GET')return ok(account.setting);
@@ -212,6 +232,10 @@ export class MockHttpClient implements HttpClient {
           throw new ApiError(1452, "您没有绑定这台设备");
         }
       }
+      if (suffix === "bindCode" && error instanceof ApiError) {
+        if (error.code === 404) throw new ApiError(1461, "设备不存在");
+        if (error.code === 403) throw new ApiError(1462, "您没有绑定这台设备");
+      }
       throw error;
     }
     const member = d.members[userID];
@@ -242,7 +266,17 @@ export class MockHttpClient implements HttpClient {
       delete d.members[targetID];
       return ok();
     }
-    if(suffix==='bindCode'){admin();const code=this.db.id('share');state.shares[code]={deviceID:d.id,expiresAt:now+300000};return ok({deviceID:d.id,bindCode:code});}
+    if (suffix === "bindCode" && method === "GET") {
+      admin();
+      const code = this.db.id("share");
+      const expiresAt = now + 600000;
+      state.shares[code] = { deviceID: d.id, expiresAt };
+      return ok({
+        deviceID: d.id,
+        bindCode: code,
+        expiresAt: new Date(expiresAt).toISOString(),
+      });
+    }
     if(suffix==='location') {
       if(method==='PUT'){const id=text('id')||null;if(id&&!account.rooms.some(r=>r.id===id))throw new ApiError(1431,'房间已失效');member.roomID=id;}
       return ok(account.rooms.find(r=>r.id===member.roomID)??{id:null,name:'未分房'});
