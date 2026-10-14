@@ -1,6 +1,21 @@
-import type { HttpClient, HttpRequest, HttpResponse } from '../lib/core';
-import { helpArticles } from './real-api-data';
-import { ApiError, type ApiEnvelope, type BindingResult, type DeviceView, type HomeGroup, type KeyValueStorage, type Language, type Product, type Room, type Schedule, type ScheduleInput, type Session, type Settings, type ThingModel } from './models';
+import type { HttpClient, HttpRequest, HttpResponse } from "../lib/core";
+import { helpArticles } from "./real-api-data";
+import { productCategories, productData, productGroups } from "./product-data";
+import {
+  ApiError,
+  type ApiEnvelope,
+  type BindingResult,
+  type DeviceView,
+  type HomeGroup,
+  type KeyValueStorage,
+  type Language,
+  type Room,
+  type Schedule,
+  type ScheduleInput,
+  type Session,
+  type Settings,
+  type ThingModel,
+} from "./models";
 
 export class RowanService {
   session: Session | null = null;
@@ -92,8 +107,35 @@ export class RowanService {
   async agreement(kind:'privacy'|'serviceTerms',regionCode:string) {return this.request<{type:string;content:string}>({method:'GET',path:'/api/app/'+kind,query:{type:'text',brandId:'rowan',regionCode}});}
   async home(signal?:AbortSignal) {return this.request<HomeGroup[]>({method:'GET',path:'/api/app/devices',signal});}
   async device(id:string,signal?:AbortSignal) {return this.request<DeviceView>({method:'GET',path:`/api/app/devices/${encodeURIComponent(id)}`,signal});}
-  async products(signal?:AbortSignal) {return this.request<{category:string;products:Product[]}[]>({method:'GET',path:'/api/app/products',query:{brandId:'rowan'},signal});}
-  async product(id:string,signal?:AbortSignal) {return this.request<Product>({method:'GET',path:`/api/app/products/${encodeURIComponent(id)}`,query:{type:'text'},signal});}
+  async categories(signal?: AbortSignal, brandId?: string) {
+    const data = await this.request<unknown>({
+      method: "GET",
+      path: "/api/app/products/category",
+      ...(brandId ? { query: { brandId } } : {}),
+      signal,
+    });
+    return productCategories(data);
+  }
+
+  async products(signal?: AbortSignal, brandId?: string) {
+    const data = await this.request<unknown>({
+      method: "GET",
+      path: "/api/app/products",
+      ...(brandId ? { query: { brandId } } : {}),
+      signal,
+    });
+    return productGroups(data);
+  }
+
+  async product(id: string, signal?: AbortSignal) {
+    const data = await this.request<unknown>({
+      method: "GET",
+      path: `/api/app/products/${encodeURIComponent(id)}`,
+      query: { type: "text" },
+      signal,
+    });
+    return productData(data);
+  }
   async model(productID:string,signal?:AbortSignal) {return this.request<ThingModel>({method:'GET',path:`/api/app/products/${encodeURIComponent(productID)}/thing-model`,signal});}
   async mqtt(id:string,signal?:AbortSignal){return this.request<Record<string,string>>({method:'GET',path:`/api/app/devices/${encodeURIComponent(id)}/mqtt`,signal});}
   async connection(signal?:AbortSignal) {return this.request<Record<string,string>>({method:'GET',path:'/api/app/device/connection',signal});}
@@ -130,7 +172,18 @@ export class RowanService {
   async removeMember(id:string,userID:string) {return this.request({method:'DELETE',path:`/api/app/devices/${id}/users/${userID}`});}
   async share(id:string) {return this.request<{deviceID:string;bindCode:string}>({method:'GET',path:`/api/app/devices/${id}/bindCode`});}
   async acceptShare(id:string,bindCode:string,signal?:AbortSignal) {return this.request<BindingResult>({method:'PUT',path:`/api/app/device/${encodeURIComponent(id)}/user`,body:{bindCode},signal});}
-  async help(id:string,product=false) {return helpArticles(await this.request<unknown>({method:'GET',path:product?`/api/app/products/${encodeURIComponent(id)}/connectHelping`:`/api/app/devices/${encodeURIComponent(id)}/helping`,query:{type:'text'}}));}
+  async help(id: string, product = false, signal?: AbortSignal) {
+    const path = product
+      ? `/api/app/products/${encodeURIComponent(id)}/connectHelping`
+      : `/api/app/devices/${encodeURIComponent(id)}/helping`;
+    const data = await this.request<unknown>({
+      method: "GET",
+      path,
+      query: { type: "text" },
+      signal,
+    });
+    return helpArticles(data);
+  }
   async firmware(id:string,type:'mcu'|'wifi') {return this.request<{firmware:{id:string;version:string;remark:string}|null}>({method:'GET',path:`/api/app/devices/${id}/ota/${type}`});}
   async startOta(id:string,type:'mcu'|'wifi',firmwareID:string) {return this.request<{taskID:string}>({method:'PUT',path:`/api/app/devices/${id}/ota/task`,query:{type},body:{firmwareID}});}
   async otaTask(id:string,taskID:string) {return this.request<{result:'updating'|'success'|'failed'|'cancelled'}>({method:'GET',path:`/api/app/devices/${id}/ota/task/${taskID}`});}

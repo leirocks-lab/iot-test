@@ -1,8 +1,14 @@
-import type { HttpClient, HttpRequest, HttpResponse } from '../lib/core';
-import { ApiError, type Attribute, type Schedule } from './models';
-import { MockDatabase, defaultSettings, digest, products } from './store';
-import { nextExecution, validateSchedule } from './scheduler';
-import { validateAttributeValue } from './device-controls';
+import type { HttpClient, HttpRequest, HttpResponse } from "../lib/core";
+import { ApiError, type Attribute, type Schedule } from "./models";
+import { MockDatabase, defaultSettings, digest, products } from "./store";
+import { nextExecution, validateSchedule } from "./scheduler";
+import { validateAttributeValue } from "./device-controls";
+import {
+  mockProductCategories,
+  mockProductDetail,
+  mockProductGroups,
+} from "./mock-product-catalog";
+import { mockDeviceHelp } from "./mock-device-help";
 
 export function requestUrl(base: string, req: HttpRequest) {
   const url = new URL(base.replace(/\/$/,'')+req.path);
@@ -77,18 +83,47 @@ export class MockHttpClient implements HttpClient {
       if(!account||text('password').length<8)throw new ApiError(400,'无法重置密码');
       account.passwordHash=digest('mock-v1:'+text('password'));for(const [key,value] of Object.entries(state.tokens))if(value.userID===account.id)delete state.tokens[key];delete state.captchas[account.email];return ok();
     }
-    if(path==='/api/app/products/category')return ok(products.map(p=>({name:p.category,value:p.category})));
-    if(path==='/api/app/products')return ok(products.map(p=>({category:p.category,categoryName:{'zh-CN':p.category,'zh-TW':p.category,en:p.category},products:[p]})));
-    const productPath=path.match(/^\/api\/app\/products\/([^/]+)(?:\/(.*))?$/);
-    if(productPath && productPath[2]!=='connectHelping') {
-      const p=products.find(p=>p.id===productPath[1]);if(!p)throw new ApiError(404,'产品不存在');
-      if(productPath[2]==='thing-model')return ok(thingModel(p.id));
-      return ok({...p,parameters:{},introduction:'ROWAN 智能家居设备 · Mock 产品'});
+    const productPath = path.match(
+      /^\/api\/app\/products\/([^/]+)(?:\/(.*))?$/,
+    );
+    if (productPath?.[2] === "thing-model") {
+      const product = products.find((product) => product.id === productPath[1]);
+      if (!product) throw new ApiError(404, "产品不存在");
+      return ok(thingModel(product.id));
     }
     if(productPath?.[2]==='connectHelping'&&!req.headers?.Authorization?.startsWith('Bearer '))throw new ApiError(401,'登录已失效');
+    const catalogRequest = method === "GET" && (
+      path === "/api/app/products/category" || path === "/api/app/products"
+      || !!productPath && !productPath[2]
+    );
+    if (catalogRequest && !req.headers?.Authorization?.startsWith("Bearer ")) {
+      throw new ApiError(401, "登录已失效");
+    }
     const tokenValue=req.headers?.Authorization?.replace(/^Bearer /,''), token=tokenValue?state.tokens[tokenValue]:undefined;
     if(!token||token.refresh||token.expiresAt<now)throw new ApiError(401,'登录已失效');
     const userID=token.userID, account=this.db.account(userID);
+    if (method === "GET" && path.startsWith("/api/app/products")) {
+      const requestedLanguage = req.headers?.["Accept-Language"];
+      const language =
+        requestedLanguage === "en" || requestedLanguage === "zh-TW"
+          ? requestedLanguage
+          : "zh-CN";
+      if (path === "/api/app/products/category") {
+        return ok(mockProductCategories(products, language));
+      }
+      if (path === "/api/app/products") {
+        return ok(mockProductGroups(products));
+      }
+      if (productPath && !productPath[2]) {
+        const product = products.find(
+          (product) => product.id === decodeURIComponent(productPath[1]),
+        );
+        if (!product) throw new ApiError(1091, "产品不存在");
+        if (query.type !== "text")
+          throw new ApiError(400, "模拟目录仅提供文本介绍");
+        return ok(mockProductDetail(product, language));
+      }
+    }
     if(productPath?.[2]==='connectHelping'&&method==='GET') {
       if(!products.some(product=>product.id===productPath[1]))throw new ApiError(404,'产品不存在');
       const language=req.headers?.['Accept-Language'];
@@ -140,7 +175,26 @@ export class MockHttpClient implements HttpClient {
     if(room&&method==='PATCH') { const r=account.rooms.find(r=>r.id===room[1]);if(!r)throw new ApiError(1431,'房间已失效');r.name=this.roomName(text('name'),userID,r.id);account.roomVersion++;return ok(); }
     const dev=path.match(/^\/api\/app\/devices\/([^/]+)(?:\/(.*))?$/);
     if(!dev)throw new ApiError(404,'Mock 未定义此接口');
-    const d=this.db.device(dev[1],userID,method!=='GET'&&dev[2]!=='users/self'), suffix=dev[2]??'', member=d.members[userID];
+    const suffix = dev[2] ?? "";
+    let d: ReturnType<MockDatabase["device"]>;
+    try {
+      d = this.db.device(
+        dev[1],
+        userID,
+        method !== "GET" && suffix !== "users/self",
+      );
+    } catch (error) {
+      if (suffix === "helping" && error instanceof ApiError) {
+        if (error.code === 404) {
+          throw new ApiError(1451, "设备不存在");
+        }
+        if (error.code === 403) {
+          throw new ApiError(1452, "您没有绑定这台设备");
+        }
+      }
+      throw error;
+    }
+    const member = d.members[userID];
     const admin=()=>{if(member.role!=='sa')throw new ApiError(403,'仅管理员可执行');};
     if(!suffix) { if(method==='PATCH'){ if(!text('nickname').trim()||text('nickname').length>20)throw new ApiError(400,'昵称需1～20字符');member.nickname=text('nickname');return ok(); }return ok(this.db.view(d,userID)); }
     if(suffix==='mqtt')return ok({host:'wss://mock.rowan.invalid/mqtt',endpoint:'mock.rowan.invalid',path:'/mqtt',clientID:this.db.id('mqtt'),username:userID,password:'mock-temporary',deviceID:d.id});
@@ -152,7 +206,17 @@ export class MockHttpClient implements HttpClient {
       if(method==='PUT'){const id=text('id')||null;if(id&&!account.rooms.some(r=>r.id===id))throw new ApiError(1431,'房间已失效');member.roomID=id;}
       return ok(account.rooms.find(r=>r.id===member.roomID)??{id:null,name:'未分房'});
     }
-    if(suffix==='helping')return ok({id:'help_device',title:'设备手册与 FAQ',content:'保持设备通风。控制成功以设备回报为准。配网需 2.4 GHz Wi-Fi。清洁前关闭电源。'});
+    if (suffix === "helping" && method === "GET") {
+      if (query.type !== "text") {
+        throw new ApiError(400, "模拟设备帮助仅提供文本内容");
+      }
+      const requestedLanguage = req.headers?.["Accept-Language"];
+      const language =
+        requestedLanguage === "en" || requestedLanguage === "zh-TW"
+          ? requestedLanguage
+          : "zh-CN";
+      return ok(mockDeviceHelp(language));
+    }
     if(suffix.startsWith('ota/')) {
       admin();const type=(query.type??suffix.split('/')[1]) as 'mcu'|'wifi';
       if(suffix==='ota/mcu'||suffix==='ota/wifi')return ok({firmware:d[type==='mcu'?'mcuVersion':'wifiVersion']==='2.0.0'?null:{id:`fw_${type}_2`,version:'2.0.0',remark:'Mock 固件更新'},device:{id:d.id,name:d.name,mac:d.mac}});
