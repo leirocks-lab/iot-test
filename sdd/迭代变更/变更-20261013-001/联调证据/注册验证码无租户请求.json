@@ -1,0 +1,9 @@
+{
+  "api": "AUTH-01",
+  "method": "GET",
+  "url": "http://47.107.80.36/app-api/captcha?account=zhanglei%40verveso.com&accountType=email&captchaType=register&language=zh-CN",
+  "time": "2026-10-13T08:19:15.4112505+08:00",
+  "tenantHeader": "omitted per user instruction",
+  "status": 200,
+  "body": "{\"code\":400,\"msg\":\"请求的租户标识未传递，请进行排查\",\"data\":null}"
+}

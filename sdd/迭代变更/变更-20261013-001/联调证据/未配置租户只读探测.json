@@ -1,0 +1,42 @@
+[
+  {
+    "id": "APP-01",
+    "method": "GET",
+    "url": "http://47.107.80.36/app-api/config?brandId=rowan&platform=android&appVersion=1.0.0&language=zh-CN",
+    "headers": "none: 未提供租户，未携带鉴权",
+    "time": "2026-10-13T08:10:19.3414250+08:00",
+    "status": 200,
+    "durationMs": 795,
+    "body": "{\"code\":400,\"msg\":\"请求的租户标识未传递，请进行排查\",\"data\":null}"
+  },
+  {
+    "id": "CONTENT-01",
+    "method": "GET",
+    "url": "http://47.107.80.36/app-api/privacy?type=text&brandId=rowan&regionCode=CN",
+    "headers": "none: 未提供租户，未携带鉴权",
+    "time": "2026-10-13T08:10:19.4471208+08:00",
+    "status": 200,
+    "durationMs": 80,
+    "body": "{\"code\":400,\"msg\":\"请求的租户标识未传递，请进行排查\",\"data\":null}"
+  },
+  {
+    "id": "CONTENT-02",
+    "method": "GET",
+    "url": "http://47.107.80.36/app-api/serviceTerms?type=text&brandId=rowan&regionCode=CN",
+    "headers": "none: 未提供租户，未携带鉴权",
+    "time": "2026-10-13T08:10:19.5183949+08:00",
+    "status": 200,
+    "durationMs": 71,
+    "body": "{\"code\":400,\"msg\":\"请求的租户标识未传递，请进行排查\",\"data\":null}"
+  },
+  {
+    "id": "HOME-01",
+    "method": "GET",
+    "url": "http://47.107.80.36/iot/app-api/devices",
+    "headers": "none: 未提供租户，未携带鉴权",
+    "time": "2026-10-13T08:10:19.5779717+08:00",
+    "status": 200,
+    "durationMs": 59,
+    "body": "{\"code\":401,\"msg\":\"账号未登录\",\"data\":null}"
+  }
+]

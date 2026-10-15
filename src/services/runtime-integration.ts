@@ -13,7 +13,7 @@ export interface IntegrationStatus {profile:string|null;httpMode:'mock'|'real';d
 export function integrationStatus(config:CommunicationConfig,contracts:RuntimeContracts={},driverProvided=false):IntegrationStatus{
   const dualMock=config.httpMode==='mock'&&config.deviceMode==='mock';
   const capability=(key:keyof RuntimeContracts,label:string,mock:boolean,native=false):IntegrationCapability=>({key,label,source:mock?'mock':contracts[key]?'provided':native?'native':'missing'});
-  const configurationIssues=[...(!dualMock&&!config.integrationProfile?['尚未选择已确认的真实接入配置']:[]),...(config.httpMode==='real'&&!config.tenantID?['测试租户尚未提供，真实接口请求不可用']:[])];
+  const configurationIssues=[...(!dualMock&&!config.integrationProfile?['尚未选择已确认的真实接入配置']:[])];
   return Object.freeze({profile:config.integrationProfile??null,httpMode:config.httpMode,deviceMode:config.deviceMode,configurationIssues:Object.freeze(configurationIssues),capabilities:Object.freeze([
     Object.freeze({key:'ble' as const,label:'蓝牙驱动',source:config.deviceMode==='mock'?'mock' as const:driverProvided?'provided' as const:'native' as const}),
     capability('qr','二维码解析',config.httpMode==='mock'),capability('onboarding','Wi-Fi配网协议',config.deviceMode==='mock'),

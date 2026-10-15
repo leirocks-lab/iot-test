@@ -1,0 +1,113 @@
+{
+  "change": "CHG-20261013-001",
+  "execution": "Windows Node / RowanService / RealHttpClient / actual fetch",
+  "environment": "development HTTP real / device mock",
+  "tenantConfigured": false,
+  "notes": [
+    "No passwords, tokens or captcha values are persisted.",
+    "Unauthenticated HOME-01 denial is not a successful device-list acceptance.",
+    "Native mobile UI and MQTT were not exercised."
+  ],
+  "results": [
+    {
+      "api": "APP-01",
+      "time": "2026-10-14T23:47:39.939Z",
+      "durationMs": 252,
+      "url": "http://47.107.80.36/app-api/config?brandId=rowan&platform=android&appVersion=1.0.0&language=zh-CN",
+      "method": "GET",
+      "httpStatus": 200,
+      "code": 400,
+      "message": "请求的租户标识未传递，请进行排查",
+      "authenticated": false,
+      "tenantHeader": "omitted",
+      "responseFields": [
+        "code",
+        "msg",
+        "data"
+      ],
+      "result": "failed",
+      "errorCode": 400,
+      "errorMessage": "请求的租户标识未传递，请进行排查"
+    },
+    {
+      "api": "CONTENT-01",
+      "time": "2026-10-14T23:47:40.024Z",
+      "durationMs": 75,
+      "url": "http://47.107.80.36/app-api/privacy?type=text&brandId=rowan&regionCode=CN",
+      "method": "GET",
+      "httpStatus": 200,
+      "code": 400,
+      "message": "请求的租户标识未传递，请进行排查",
+      "authenticated": false,
+      "tenantHeader": "omitted",
+      "responseFields": [
+        "code",
+        "msg",
+        "data"
+      ],
+      "result": "failed",
+      "errorCode": 400,
+      "errorMessage": "请求的租户标识未传递，请进行排查"
+    },
+    {
+      "api": "CONTENT-02",
+      "time": "2026-10-14T23:47:40.058Z",
+      "durationMs": 34,
+      "url": "http://47.107.80.36/app-api/serviceTerms?type=text&brandId=rowan&regionCode=CN",
+      "method": "GET",
+      "httpStatus": 200,
+      "code": 400,
+      "message": "请求的租户标识未传递，请进行排查",
+      "authenticated": false,
+      "tenantHeader": "omitted",
+      "responseFields": [
+        "code",
+        "msg",
+        "data"
+      ],
+      "result": "failed",
+      "errorCode": 400,
+      "errorMessage": "请求的租户标识未传递，请进行排查"
+    },
+    {
+      "api": "HOME-01 unauthenticated",
+      "time": "2026-10-14T23:47:40.240Z",
+      "durationMs": 182,
+      "url": "http://47.107.80.36/iot/app-api/devices",
+      "method": "GET",
+      "httpStatus": 200,
+      "code": 401,
+      "message": "账号未登录",
+      "authenticated": false,
+      "tenantHeader": "omitted",
+      "responseFields": [
+        "code",
+        "msg",
+        "data"
+      ],
+      "result": "failed",
+      "errorCode": 401,
+      "errorMessage": "账号未登录"
+    },
+    {
+      "api": "AUTH-01 register",
+      "time": "2026-10-14T23:47:40.280Z",
+      "durationMs": 40,
+      "url": "http://47.107.80.36/app-api/captcha?account=zhanglei%40verveso.com&accountType=email&captchaType=register&language=zh-CN",
+      "method": "GET",
+      "httpStatus": 200,
+      "code": 400,
+      "message": "请求的租户标识未传递，请进行排查",
+      "authenticated": false,
+      "tenantHeader": "omitted",
+      "responseFields": [
+        "code",
+        "msg",
+        "data"
+      ],
+      "result": "failed",
+      "errorCode": 400,
+      "errorMessage": "请求的租户标识未传递，请进行排查"
+    }
+  ]
+}

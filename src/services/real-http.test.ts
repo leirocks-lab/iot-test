@@ -36,10 +36,11 @@ describe('真实HTTP边界',()=>{
     expect(fetcher.mock.calls[0][0]).toBe('https://iot.example.test/module/app-api/device/bindStatus?bindCode=a%2Bb%2F%26');
     expect(fetcher.mock.calls[0][1]?.signal).toBe(controller.signal);
   });
-  it('refuses absent tenants before making a request',async()=>{
-    const fetcher=vi.fn<HttpFetcher>(),client=new RealHttpClient({...config,tenantID:undefined},fetcher);
-    await expect(client.request({method:'GET',path:'/api/app/devices'})).rejects.toMatchObject({code:503});
-    expect(fetcher).not.toHaveBeenCalled();
+  it('omits absent tenants and preserves the actual gateway denial',async()=>{
+    const fetcher=vi.fn<HttpFetcher>().mockResolvedValue(response({code:400,msg:'请求的租户标识未传递',data:null})),client=new RealHttpClient({...config,tenantID:undefined},fetcher);
+    const result=await client.request<ApiEnvelope<unknown>>({method:'GET',path:'/api/app/devices'});
+    expect(result.data).toMatchObject({code:400,success:false});
+    expect(fetcher.mock.calls[0][1]?.headers).not.toHaveProperty('tenant-id');
   });
   it('rejects HTTP, embedded credentials and ambiguous app-api roots',()=>{
     for(const apiBaseUrl of ['http://api.example.test','https://u:p@api.example.test','https://api.example.test/app-api'])

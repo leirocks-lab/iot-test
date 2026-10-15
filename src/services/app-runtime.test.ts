@@ -91,8 +91,8 @@ describe('P1 App启动装配',()=>{
     const driver=Object.assign(new MockDeviceTransport(await MockDatabase.open(new MemoryStorage())),{dispose:vi.fn()}),restore=vi.spyOn(RowanService.prototype,'restore').mockRejectedValueOnce(new Error('fixture restore failure'));vi.useFakeTimers();
     await expect(createRuntime({httpMode:'mock',deviceMode:'real'},driver,{wifi:contracts.wifi})).rejects.toThrow('fixture restore failure');expect(restore).toHaveBeenCalledOnce();expect(driver.dispose).toHaveBeenCalledOnce();expect(vi.getTimerCount()).toBe(0);
   });
-  it('failure before driver initialization still releases a factory-supplied driver',async()=>{
-    const driver=Object.assign(new MockDeviceTransport(await MockDatabase.open(new MemoryStorage())),{dispose:vi.fn()});await expect(createConfiguredRuntime({...config,apiBaseUrl:'https://public-user:public-fixture@api.example.test'},{registry:{'fixture-v1':{environments:['development'],create:()=>({contracts,createDeviceDriver:async()=>driver})}}})).rejects.toThrow('无凭据');expect(driver.dispose).toHaveBeenCalledOnce();
+  it('invalid API credentials are rejected before allocating a deployment driver',async()=>{
+    const createDriver=vi.fn();await expect(createConfiguredRuntime({...config,apiBaseUrl:'https://public-user:public-fixture@api.example.test'},{registry:{'fixture-v1':{environments:['development'],create:()=>({contracts,createDeviceDriver:createDriver})}}})).rejects.toThrow('无凭据');expect(createDriver).not.toHaveBeenCalled();
   });
   it('rejects an invalid declared driver instead of silently falling back to the native driver',async()=>{
     const dispose=vi.fn(),create=vi.fn(async()=>({dispose:vi.fn()} as unknown as Runtime));await expect(createConfiguredRuntime(config,{create,registry:{'fixture-v1':{environments:['development'],create:()=>({contracts,createDeviceDriver:async()=>({dispose}) as unknown as MockDeviceTransport})}}})).rejects.toThrow('无效端口');expect(create).not.toHaveBeenCalled();expect(dispose).toHaveBeenCalledOnce();
@@ -107,8 +107,8 @@ describe('P1 App启动装配',()=>{
     runtime.service.session={userID:'fixture-user',accessToken:'public-fixture',refreshToken:'public-fixture',expiresIn:3600,tokenType:'Bearer',setting:defaultSettings()};
     const flow=runtime.scanner.acquire();flow.read(['explicit-fixture']);expect(flow.state.error).toBe('');expect(flow.state.choices).toEqual([{type:'product',label:'fixture-product'}]);expect(runtime.wifi).toBeUndefined();
   });
-  it('reports missing tenant without embedding its value, URLs, contracts or secrets in diagnostics',()=>{
-    const status=integrationStatus({...config,tenantID:undefined},contracts,true);expect(status.configurationIssues).toContain('测试租户尚未提供，真实接口请求不可用');
+  it('does not report an optional missing tenant as a local blocker or embed connection secrets',()=>{
+    const status=integrationStatus({...config,tenantID:undefined},contracts,true);expect(status.configurationIssues).not.toContain('测试租户尚未提供，真实接口请求不可用');
     expect(JSON.stringify(status)).not.toMatch(/api\.example|public-fixture|factoryReply|tenantID/);expect(status.capabilities.filter(item=>item.source==='provided')).toHaveLength(8);
   });
   it('invalid async assembly reports a configuration failure without leaking an unhandled rejection',async()=>{

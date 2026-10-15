@@ -1,0 +1,205 @@
+{
+  "observations": [
+    {
+      "status": 200,
+      "servers": [
+        {
+          "url": "http://47.107.80.36",
+          "description": "Generated server url"
+        }
+      ],
+      "url": "http://47.107.80.36/v3/api-docs/all",
+      "paths": [
+        {
+          "methods": [
+            "put"
+          ],
+          "path": "/app-api/user",
+          "tenantHeaders": [
+            {
+              "name": "tenant-id",
+              "in": "header",
+              "description": "租户编号",
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 1,
+                "description": "租户编号"
+              }
+            }
+          ]
+        },
+        {
+          "methods": [
+            "post",
+            "delete",
+            "patch"
+          ],
+          "path": "/app-api/session",
+          "tenantHeaders": [
+            {
+              "name": "tenant-id",
+              "in": "header",
+              "description": "租户编号",
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 1,
+                "description": "租户编号"
+              }
+            },
+            {
+              "name": "tenant-id",
+              "in": "header",
+              "description": "租户编号",
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 1,
+                "description": "租户编号"
+              }
+            },
+            {
+              "name": "tenant-id",
+              "in": "header",
+              "description": "租户编号",
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 1,
+                "description": "租户编号"
+              }
+            }
+          ]
+        },
+        {
+          "methods": [
+            "get"
+          ],
+          "path": "/app-api/serviceTerms",
+          "tenantHeaders": [
+            {
+              "name": "tenant-id",
+              "in": "header",
+              "description": "租户编号",
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 1,
+                "description": "租户编号"
+              }
+            }
+          ]
+        },
+        {
+          "methods": [
+            "get"
+          ],
+          "path": "/app-api/privacy",
+          "tenantHeaders": [
+            {
+              "name": "tenant-id",
+              "in": "header",
+              "description": "租户编号",
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 1,
+                "description": "租户编号"
+              }
+            }
+          ]
+        },
+        {
+          "methods": [
+            "get"
+          ],
+          "path": "/app-api/config",
+          "tenantHeaders": [
+            {
+              "name": "tenant-id",
+              "in": "header",
+              "description": "租户编号",
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 1,
+                "description": "租户编号"
+              }
+            }
+          ]
+        },
+        {
+          "methods": [
+            "get"
+          ],
+          "path": "/app-api/captcha",
+          "tenantHeaders": [
+            {
+              "name": "tenant-id",
+              "in": "header",
+              "description": "租户编号",
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 1,
+                "description": "租户编号"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "status": 200,
+      "servers": [
+        {
+          "url": "http://47.107.80.36",
+          "description": "Generated server url"
+        }
+      ],
+      "url": "http://47.107.80.36/iot/v3/api-docs/all",
+      "paths": [
+        {
+          "methods": [
+            "get"
+          ],
+          "path": "/app-api/devices",
+          "tenantHeaders": [
+            {
+              "name": "tenant-id",
+              "in": "header",
+              "description": "租户编号",
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 1,
+                "description": "租户编号"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "status": 200,
+      "responseHeaders": {
+        "via": null,
+        "age": null,
+        "server": [
+          "nginx"
+        ],
+        "date": [
+          "Wed, 14 Oct 2026 23:48:25 GMT"
+        ]
+      },
+      "body": "{\"code\":400,\"msg\":\"请求的租户标识未传递，请进行排查\",\"data\":null}",
+      "requestHeaders": {
+        "Pragma": "no-cache",
+        "Cache-Control": "no-cache"
+      },
+      "url": "http://47.107.80.36/app-api/config?brandId=rowan&platform=android&appVersion=1.0.0&language=zh-CN"
+    }
+  ],
+  "time": "2026-10-15T07:48:24.9622365+08:00"
+}

@@ -1,0 +1,2 @@
+# Preserve the registered firmware documentation bytes across Windows checkouts.
+docs/RowanBleNetconfTest/README_BLE配网.md text eol=lf

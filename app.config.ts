@@ -13,6 +13,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     apiBaseUrl: process.env.ROWAN_APP_API_BASE_URL,
     iotApiBaseUrl: process.env.ROWAN_IOT_API_BASE_URL,
     tenantID: process.env.ROWAN_TENANT_ID,
+    allowTestHttp: process.env.ROWAN_ALLOW_TEST_HTTP==='1',
     integrationProfile: process.env.ROWAN_INTEGRATION_PROFILE });
 
   return {
@@ -27,6 +28,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     ios: {
       icon: './assets/expo.icon',
       bundleIdentifier: identity.iosBundleIdentifier,
+      infoPlist: {NSAppTransportSecurity:{NSAllowsArbitraryLoads:communication.allowTestHttp===true}},
     },
     android: {
       package: identity.androidPackage,
@@ -43,6 +45,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       favicon: './assets/images/favicon.png',
     },
     plugins: [
+      ['./plugins/with-development-http.ts',{enabled:communication.allowTestHttp===true}],
       'expo-router',
       'expo-dev-client',
       ['react-native-ble-plx', { isBackgroundEnabled: false, bluetoothAlwaysPermission: '允许 ROWAN 发现并连接配网设备' }],

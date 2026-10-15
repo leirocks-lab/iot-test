@@ -1,0 +1,42 @@
+{
+  "change": "CHG-20261013-001",
+  "date": "2026-10-15",
+  "execution": "Windows Node / RowanService / RealHttpClient / actual fetch",
+  "account": "13aoteman@126.com",
+  "loginRequest": {
+    "verify": "password",
+    "registrationId": 1,
+    "system": "ios",
+    "language": "zh-CN",
+    "pin": "[redacted]"
+  },
+  "tenantConfigured": true,
+  "loggedIn": false,
+  "error": {
+    "code": 500,
+    "message": "系统异常"
+  },
+  "followups": [],
+  "requests": [
+    {
+      "time": "2026-10-15T00:11:14.539Z",
+      "url": "http://47.107.80.36/app-api/session",
+      "method": "POST",
+      "httpStatus": 200,
+      "code": 500,
+      "message": "系统异常",
+      "authenticated": false,
+      "tenantHeader": "1",
+      "responseFields": [
+        "code",
+        "msg",
+        "data"
+      ]
+    }
+  ],
+  "notes": [
+    "Registration is paused per user instruction.",
+    "Passwords and Token values are not persisted.",
+    "This is an API/service-layer login, not a native App UI session."
+  ]
+}

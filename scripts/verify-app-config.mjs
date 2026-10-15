@@ -74,6 +74,7 @@ function createBuildEnvironment(overrides = {}) {
   delete environment.APP_BRAND;
   delete environment.APP_ENV;
   delete environment.ROWAN_INTEGRATION_PROFILE;
+  delete environment.ROWAN_ALLOW_TEST_HTTP;
 
   return { ...environment, ...overrides };
 }
@@ -131,6 +132,10 @@ function main() {
 
   assertConfigFailure({APP_ENV:'production',ROWAN_HTTP_MODE:'mock'},'Production requires real transports');
   assertConfigFailure({ROWAN_HTTP_MODE:'real',ROWAN_APP_API_BASE_URL:'http://insecure.invalid'},'HTTPS');
+  const testHttp=readExpoConfig({APP_ENV:'development',ROWAN_HTTP_MODE:'real',ROWAN_DEVICE_MODE:'mock',ROWAN_ALLOW_TEST_HTTP:'1',ROWAN_APP_API_BASE_URL:'http://47.107.80.36',ROWAN_IOT_API_BASE_URL:'http://47.107.80.36/iot'});
+  assert(testHttp.extra.allowTestHttp===true&&testHttp.extra.tenantID===undefined,'Development HTTP must not invent a tenant');
+  assert(testHttp.ios.infoPlist.NSAppTransportSecurity.NSAllowsArbitraryLoads===true,'Development IP HTTP requires a native iOS transport exception');
+  assertConfigFailure({APP_ENV:'production',ROWAN_ALLOW_TEST_HTTP:'1',ROWAN_APP_API_BASE_URL:'http://47.107.80.36'},'HTTPS');
   assertConfigFailure({ROWAN_INTEGRATION_PROFILE:'https://not-a-profile.invalid'},'ROWAN_INTEGRATION_PROFILE');
   const integrationConfig=readExpoConfig({ROWAN_INTEGRATION_PROFILE:'reviewed-fixture-v1',ROWAN_DEVICE_TOKEN:'public-test-sentinel'});
   assert(integrationConfig.extra?.integrationProfile==='reviewed-fixture-v1','Integration profile ID must reach public extra');

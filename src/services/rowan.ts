@@ -1,5 +1,6 @@
 import type { HttpClient, HttpRequest, HttpResponse } from '../lib/core';
 import { helpArticles } from './real-api-data';
+import { withBudget } from '../protocol/device';
 import { ApiError, type ApiEnvelope, type BindingResult, type DeviceView, type HomeGroup, type KeyValueStorage, type Language, type Product, type Room, type Schedule, type ScheduleInput, type Session, type Settings, type ThingModel } from './models';
 
 export class RowanService {
@@ -82,13 +83,27 @@ export class RowanService {
   }
   private async clear() { this.epoch++;this.refreshTask=undefined;this.session=null;this.sessionChanged();await this.persist(()=>this.storage.remove('session')); }
   async logout() { await this.request({method:'DELETE',path:'/api/app/session'},false);await this.clear(); }
-  async sendCaptcha(account:string,captchaType:'register'|'login'|'forget') { return this.request({method:'GET',path:'/api/app/captcha',query:{account,accountType:'email',captchaType}}); }
+  async sendCaptcha(account:string,captchaType:'register'|'login'|'forget') { return this.request({method:'GET',path:'/api/app/captcha',query:{account,accountType:'email',captchaType,language:this.language}}); }
   async checkCaptcha(account:string,code:string) { return this.request({method:'GET',path:'/api/app/captcha/'+encodeURIComponent(code),query:{account,accountType:'email'}}); }
   async register(account:string,password:string,captcha:string,regionCode:string) {
     await this.request({method:'PUT',path:'/api/app/user',body:{account,password,captcha,type:'email',regionCode,language:this.language}},false);
   }
   async resetPassword(account:string,password:string,captcha:string) { await this.request({method:'PATCH',path:'/api/app/user/password',body:{account,password,captcha}},false); }
-  async config(platform:string) {return this.request<{configVersion:string}>({method:'GET',path:'/api/app/config',query:{brandId:'rowan',platform,appVersion:'1.0.0',language:this.language}});}
+  async config(platform:string,signal?:AbortSignal) {return this.request<{configVersion:string}>({method:'GET',path:'/api/app/config',query:{brandId:'rowan',platform,appVersion:'1.0.0',language:this.language},signal});}
+  async startupConfig(platform:string) {
+    const key=`startup.${platform}`;
+    const valid=(value:unknown):value is {configVersion:string}=>!!value&&typeof value==='object'&&typeof (value as {configVersion?:unknown}).configVersion==='string'&&!!(value as {configVersion:string}).configVersion;
+    try {
+      const value=await withBudget(signal=>this.config(platform,signal),10000,'启动配置请求超时');
+      if(!valid(value))throw new ApiError(502,'启动配置响应不完整');
+      try{await this.storage.set(key,JSON.stringify(value));}catch{/* Cache failure does not invalidate a successful server response. */}
+      return value;
+    } catch(error) {
+      if(error instanceof ApiError&&(error.code===1802||error.code===499))throw error;
+      try{const raw=await this.storage.get(key);if(raw){const cached:unknown=JSON.parse(raw);if(valid(cached))return cached;}}catch{/* No usable cache: nonessential configuration must not block account entry. */}
+      return null;
+    }
+  }
   async agreement(kind:'privacy'|'serviceTerms',regionCode:string) {return this.request<{type:string;content:string}>({method:'GET',path:'/api/app/'+kind,query:{type:'text',brandId:'rowan',regionCode}});}
   async home(signal?:AbortSignal) {return this.request<HomeGroup[]>({method:'GET',path:'/api/app/devices',signal});}
   async device(id:string,signal?:AbortSignal) {return this.request<DeviceView>({method:'GET',path:`/api/app/devices/${encodeURIComponent(id)}`,signal});}
