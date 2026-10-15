@@ -4,6 +4,7 @@ import {
   ApiError,
   type ApiEnvelope,
   type DeviceView,
+  type DeviceMember,
   type HelpArticle,
   type HomeGroup,
   type ThingModel,
@@ -64,6 +65,32 @@ export function helpArticles(value:unknown):HelpArticle[] {
   return items.map(item=>{const wire=object(item);
     if(typeof wire.title!=='string'||typeof wire.content!=='string')throw new ApiError(502,'帮助内容格式不支持');
     return {title:wire.title,content:wire.content,id:text(wire.id),createdAt:text(wire.createdAt)};
+  });
+}
+export function deviceMembers(value: unknown): DeviceMember[] {
+  const seen = new Set<string>();
+  return array(value).map((item) => {
+    const wire = object(item);
+    const userID = id(wire.userID);
+    if (!userID.trim() || seen.has(userID)) {
+      throw new ApiError(502, "设备成员标识无效或重复");
+    }
+    seen.add(userID);
+    if (!["sa", "mbr", "obs"].includes(String(wire.bindingRole))) {
+      throw new ApiError(502, "设备成员角色未确认");
+    }
+    if (
+      wire.nickname !== undefined &&
+      wire.nickname !== null &&
+      typeof wire.nickname !== "string"
+    ) {
+      throw new ApiError(502, "设备成员昵称格式不支持");
+    }
+    return {
+      userID,
+      nickname: typeof wire.nickname === "string" ? wire.nickname : null,
+      bindingRole: wire.bindingRole as DeviceMember["bindingRole"],
+    };
   });
 }
 function thingModel(value:unknown):ThingModel {

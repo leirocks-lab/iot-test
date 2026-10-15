@@ -1,5 +1,5 @@
 import type { HttpClient, HttpRequest, HttpResponse } from "../lib/core";
-import { helpArticles } from "./real-api-data";
+import { deviceMembers, helpArticles } from "./real-api-data";
 import { productCategories, productData, productGroups } from "./product-data";
 import {
   ApiError,
@@ -9,11 +9,15 @@ import {
   type HomeGroup,
   type KeyValueStorage,
   type Language,
+  type OtaCheck,
+  type OtaTask,
+  type OtaType,
   type Room,
   type Schedule,
   type ScheduleInput,
   type Session,
   type Settings,
+  type ShareBinding,
   type ThingModel,
 } from "./models";
 
@@ -141,7 +145,16 @@ export class RowanService {
   async connection(signal?:AbortSignal) {return this.request<Record<string,string>>({method:'GET',path:'/api/app/device/connection',signal});}
   async bindStatus(bindCode:string,signal?:AbortSignal) {return this.request<BindingResult>({method:'GET',path:'/api/app/device/bindStatus',query:{bindCode},signal});}
   async renameDevice(id:string,nickname:string,signal?:AbortSignal) {return this.request({method:'PATCH',path:`/api/app/devices/${encodeURIComponent(id)}`,body:{nickname},signal});}
-  async unbind(id:string) {return this.request({method:'DELETE',path:`/api/app/devices/${id}/users/self`});}
+  async unbind(id: string, signal?: AbortSignal) {
+    return this.request(
+      {
+        method: "DELETE",
+        path: `/api/app/devices/${encodeURIComponent(id)}/users/self`,
+        signal,
+      },
+      false,
+    );
+  }
   async rooms(signal?:AbortSignal) {
     const response=await this.response<Room[]>({method:'GET',path:'/api/app/user/locations',signal});
     return {rooms:response.data.data,version:response.headers.etag??response.headers.ETag??''};
@@ -168,10 +181,66 @@ export class RowanService {
   }
   async enableSchedule(id:string,scheduleID:string,enabled:boolean) {return this.request({method:'PUT',path:`/api/app/devices/${id}/schedules/${scheduleID}/enabled`,body:{enabled}});}
   async deleteSchedule(id:string,scheduleID:string) {return this.request({method:'DELETE',path:`/api/app/devices/${id}/schedules/${scheduleID}`});}
-  async members(id:string,signal?:AbortSignal) {return this.request<{userID:string;email:string;nickname:string;bindingRole:string}[]>({method:'GET',path:`/api/app/devices/${encodeURIComponent(id)}/users`,signal});}
-  async removeMember(id:string,userID:string) {return this.request({method:'DELETE',path:`/api/app/devices/${id}/users/${userID}`});}
-  async share(id:string) {return this.request<{deviceID:string;bindCode:string}>({method:'GET',path:`/api/app/devices/${id}/bindCode`});}
-  async acceptShare(id:string,bindCode:string,signal?:AbortSignal) {return this.request<BindingResult>({method:'PUT',path:`/api/app/device/${encodeURIComponent(id)}/user`,body:{bindCode},signal});}
+  async members(id: string, signal?: AbortSignal) {
+    const data = await this.request<unknown>({
+      method: "GET",
+      path: `/api/app/devices/${encodeURIComponent(id)}/users`,
+      signal,
+    });
+    return deviceMembers(data);
+  }
+  async removeMember(id: string, userID: string, signal?: AbortSignal) {
+    return this.request({
+      method: "DELETE",
+      path: `/api/app/devices/${encodeURIComponent(id)}/users/${encodeURIComponent(userID)}`,
+      signal,
+    });
+  }
+  async share(id: string, signal?: AbortSignal): Promise<ShareBinding> {
+    const data = await this.request<unknown>(
+      {
+        method: "GET",
+        path: `/api/app/devices/${encodeURIComponent(id)}/bindCode`,
+        signal,
+      },
+      false,
+    );
+    if (!data || typeof data !== "object" || Array.isArray(data)) {
+      throw new ApiError(502, "设备分享响应结构不完整");
+    }
+    const value = data as Record<string, unknown>;
+    if (
+      value.deviceID !== id ||
+      typeof value.bindCode !== "string" ||
+      !value.bindCode.trim() ||
+      typeof value.expiresAt !== "string" ||
+      !/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?(?:Z|[+-]\d\d:\d\d)$/.test(value.expiresAt) ||
+      !Number.isFinite(Date.parse(value.expiresAt))
+    ) {
+      throw new ApiError(502, "设备分享码或到期时间无效");
+    }
+    return {
+      deviceID: value.deviceID,
+      bindCode: value.bindCode,
+      expiresAt: value.expiresAt,
+    };
+  }
+
+  async acceptShare(
+    id: string,
+    bindCode: string,
+    signal?: AbortSignal,
+  ): Promise<BindingResult> {
+    return this.request<BindingResult>(
+      {
+        method: "PUT",
+        path: `/api/app/device/${encodeURIComponent(id)}/user`,
+        body: { bindCode },
+        signal,
+      },
+      false,
+    );
+  }
   async help(id: string, product = false, signal?: AbortSignal) {
     const path = product
       ? `/api/app/products/${encodeURIComponent(id)}/connectHelping`
@@ -184,9 +253,78 @@ export class RowanService {
     });
     return helpArticles(data);
   }
-  async firmware(id:string,type:'mcu'|'wifi') {return this.request<{firmware:{id:string;version:string;remark:string}|null}>({method:'GET',path:`/api/app/devices/${id}/ota/${type}`});}
-  async startOta(id:string,type:'mcu'|'wifi',firmwareID:string) {return this.request<{taskID:string}>({method:'PUT',path:`/api/app/devices/${id}/ota/task`,query:{type},body:{firmwareID}});}
-  async otaTask(id:string,taskID:string) {return this.request<{result:'updating'|'success'|'failed'|'cancelled'}>({method:'GET',path:`/api/app/devices/${id}/ota/task/${taskID}`});}
-  async cancelOta(id:string,taskID:string) {return this.request({method:'DELETE',path:`/api/app/devices/${id}/ota/task`,body:{taskID}});}
+  async firmware(id: string, type: OtaType, signal?: AbortSignal): Promise<OtaCheck> {
+    const data = await this.request<unknown>({
+      method: 'GET',
+      path: `/api/app/devices/${encodeURIComponent(id)}/ota/${type}`,
+      signal,
+    });
+    if (!data || typeof data !== 'object' || Array.isArray(data)) {
+      throw new ApiError(502, '固件检查响应无效');
+    }
+    const value = data as Record<string, unknown>;
+    const device = value.device as Record<string, unknown> | null;
+    const firmware = value.firmware as Record<string, unknown> | null;
+    if (typeof value.hasUpdate !== 'boolean' || device?.id !== id ||
+      (value.hasUpdate && (!firmware || typeof firmware.id !== 'string' || !firmware.id ||
+        typeof firmware.version !== 'string' || !firmware.version || typeof firmware.remark !== 'string')) ||
+      (!value.hasUpdate && firmware !== null)) {
+      throw new ApiError(502, '固件检查响应与设备不匹配');
+    }
+    return {
+      hasUpdate: value.hasUpdate,
+      firmware: value.hasUpdate ? firmware as unknown as OtaCheck['firmware'] : null,
+      deviceID: id,
+    };
+  }
+
+  async startOta(id: string, type: OtaType, firmwareID: string, signal?: AbortSignal) {
+    const data = await this.request<unknown>({
+      method: 'PUT',
+      path: `/api/app/devices/${encodeURIComponent(id)}/ota/task`,
+      query: { type },
+      body: { firmwareID },
+      signal,
+    }, false);
+    if (!data || typeof data !== 'object' || Array.isArray(data) ||
+      typeof (data as { taskID?: unknown }).taskID !== 'string' ||
+      !(data as { taskID: string }).taskID.trim()) {
+      throw new ApiError(502, '升级任务响应缺少 taskID');
+    }
+    return { taskID: (data as { taskID: string }).taskID };
+  }
+
+  async otaTask(id: string, taskID: string, signal?: AbortSignal): Promise<OtaTask> {
+    const data = await this.request<unknown>({
+      method: 'GET',
+      path: `/api/app/devices/${encodeURIComponent(id)}/ota/task/${encodeURIComponent(taskID)}`,
+      signal,
+    });
+    if (!data || typeof data !== 'object' || Array.isArray(data)) {
+      throw new ApiError(502, '升级任务状态响应无效');
+    }
+    const value = data as Record<string, unknown>;
+    const statuses = ['waiting', 'downloading', 'upgrading', 'success', 'failed', 'cancelled'];
+    const results = ['updating', 'success', 'failed', 'cancelled'];
+    if (!results.includes(String(value.result)) || !statuses.includes(String(value.status)) ||
+      typeof value.progress !== 'number' || !Number.isFinite(value.progress) ||
+      value.progress < 0 || value.progress > 100 ||
+      typeof value.startedAt !== 'string' || !Number.isFinite(Date.parse(value.startedAt)) ||
+      (value.result === 'updating'
+        ? !statuses.slice(0, 3).includes(String(value.status))
+        : value.result !== value.status)) {
+      throw new ApiError(502, '升级任务状态字段无效');
+    }
+    return value as unknown as OtaTask;
+  }
+
+  async cancelOta(id: string, taskID: string, signal?: AbortSignal) {
+    return this.request({
+      method: 'DELETE',
+      path: `/api/app/devices/${encodeURIComponent(id)}/ota/task`,
+      body: { taskID },
+      signal,
+    }, false);
+  }
   async preference(key:string,value?:string) {const scoped=`${this.userID}.${key}`;if(value!==undefined)await this.storage.set(scoped,value);return this.storage.get(scoped);}
 }

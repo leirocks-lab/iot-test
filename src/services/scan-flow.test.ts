@@ -9,7 +9,8 @@ import { observeNetwork, wifiGuidance } from './network-policy';
 
 async function setup() {
   const db=await MockDatabase.open(new MemoryStorage()),service=new RowanService(new MockHttpClient(db),new MemoryStorage());
-  await service.login('rowan@example.com','Rowan@123','password');return {service,flow:new QrScanFlow(service,'mock')};
+  await service.login('rowan@example.com', 'Rowan@123', 'password');
+  return { db, service, flow: new QrScanFlow(service, 'mock') };
 }
 afterEach(()=>{vi.restoreAllMocks();vi.useRealTimers();});
 describe('扫码及相册共用业务流程',()=>{
@@ -55,10 +56,60 @@ describe('扫码及相册共用业务流程',()=>{
   it('keeps binding timeout unknown and reconciles via GET without replaying a single-use code',async()=>{
     const {flow,service}=await setup();const share=await service.share('dev_wine');flow.read([encodeShareCode(share)]);
     const bind=vi.spyOn(service,'acceptShare').mockRejectedValue(new ApiError(0,'结果未知'));
+    vi.spyOn(service, 'home').mockResolvedValueOnce([]).mockResolvedValueOnce([]);
     await expect(flow.confirm()).rejects.toMatchObject({code:0});expect(flow.state.phase).toBe('unknown');
     expect(()=>flow.reset()).toThrow('核对');await expect(flow.confirm()).rejects.toMatchObject({code:409});
+    await expect(flow.reconcile()).rejects.toMatchObject({ code: 409 });
+    expect(flow.state.phase).toBe('unknown');
     const destination=await flow.reconcile();expect(destination).toMatchObject({binding:{deviceID:'dev_wine',userID:service.userID}});expect(bind).toHaveBeenCalledOnce();
     expect(JSON.stringify(flow.state)).not.toContain(share.bindCode);
+  });
+  it('accepts a mock share only after confirmation and consumes its code once', async () => {
+    const { db, service: admin } = await setup();
+    const share = await admin.share('dev_wine');
+    const member = new RowanService(new MockHttpClient(db), new MemoryStorage());
+    await member.sendCaptcha('sharee@example.com', 'register');
+    await member.register('sharee@example.com', 'Member@123', '123456', 'US');
+    await member.login('sharee@example.com', 'Member@123', 'password');
+    const flow = new QrScanFlow(member, 'mock');
+    const bind = vi.spyOn(member, 'acceptShare');
+
+    flow.read([encodeShareCode(share)]);
+    expect(bind).not.toHaveBeenCalled();
+    expect((await flow.confirm())).toMatchObject({
+      binding: { deviceID: 'dev_wine', userID: member.userID, bindingRole: 'mbr' },
+    });
+    expect(bind).toHaveBeenCalledOnce();
+    const visible = (await member.home())
+      .flatMap((group) => group.devices)
+      .some((view) => view.device.id === 'dev_wine');
+    expect(visible).toBe(true);
+
+    const repeat = new QrScanFlow(member, 'mock');
+    repeat.read([encodeShareCode(share)]);
+    await expect(repeat.confirm()).rejects.toMatchObject({ code: 1133 });
+    expect(repeat.state.phase).toBe('idle');
+  });
+  it('reads back a lost PAIR-06 response without resubmitting the code', async () => {
+    const { db, service: admin } = await setup();
+    const share = await admin.share('dev_wine');
+    const member = new RowanService(new MockHttpClient(db), new MemoryStorage());
+    await member.sendCaptcha('lost@example.com', 'register');
+    await member.register('lost@example.com', 'Member@123', '123456', 'US');
+    await member.login('lost@example.com', 'Member@123', 'password');
+    const flow = new QrScanFlow(member, 'mock');
+    flow.read([encodeShareCode(share)]);
+    const original = member.acceptShare.bind(member);
+    const bind = vi.spyOn(member, 'acceptShare').mockImplementation(async (...args) => {
+      await original(...args);
+      throw new ApiError(0, '响应丢失');
+    });
+
+    expect(await flow.confirm()).toMatchObject({
+      binding: { deviceID: 'dev_wine', userID: member.userID, bindingRole: 'mbr' },
+    });
+    expect(bind).toHaveBeenCalledOnce();
+    expect(flow.state.phase).toBe('done');
   });
   it('rejects mismatched binding role/identity results',async()=>{
     const {flow,service}=await setup();const share=await service.share('dev_wine');flow.read([encodeShareCode(share)]);
@@ -67,7 +118,10 @@ describe('扫码及相册共用业务流程',()=>{
   });
   it('shows an expired-code failure without an automatic retry',async()=>{
     const {flow,service}=await setup();flow.read([encodeShareCode({deviceID:'dev_wine',bindCode:'expired'})]);const bind=vi.spyOn(service,'acceptShare').mockRejectedValue(new ApiError(1133,'已过期'));
-    await expect(flow.confirm()).rejects.toMatchObject({code:1133});expect(flow.state.phase).toBe('choosing');expect(bind).toHaveBeenCalledOnce();flow.reset();
+    await expect(flow.confirm()).rejects.toMatchObject({ code: 1133 });
+    expect(flow.state.phase).toBe('idle');
+    expect(bind).toHaveBeenCalledOnce();
+    await expect(flow.confirm()).rejects.toMatchObject({ code: 409 });
   });
   it('does not fabricate network type, SSID or band from unknown platform fields',()=>{
     expect(observeNetwork({type:'UNKNOWN',isConnected:false})).toMatchObject({connection:'unknown',band:'unknown',source:'system'});
@@ -80,6 +134,7 @@ describe('扫码及相册共用业务流程',()=>{
   it('retains an uncertain single-use code across scanner route instances',async()=>{
     const {service}=await setup(),coordinator=new QrScanCoordinator(service,'mock'),flow=coordinator.acquire();
     flow.read([encodeShareCode({deviceID:'dev_wine',bindCode:'unknown_code'})]);vi.spyOn(service,'acceptShare').mockRejectedValue(new ApiError(0,'未知'));
+    vi.spyOn(service, 'home').mockResolvedValueOnce([]);
     await expect(flow.confirm()).rejects.toThrow('未知');flow.stop();expect(coordinator.acquire()).toBe(flow);expect(coordinator.acquire().state.phase).toBe('unknown');coordinator.clear();
   });
 });
