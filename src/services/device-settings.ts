@@ -7,6 +7,11 @@ type Members = Awaited<ReturnType<RowanService['members']>>;
 export interface SettingsResource<T> { value: T | null; loading: boolean; error: string }
 type SavePhase = 'idle' | 'saving' | 'checking' | 'unknown' | 'saved';
 interface EditState<T> { draft: T; phase: SavePhase; error: string }
+interface MemberRemovalState {
+  userID: string | null;
+  phase: 'idle' | 'removing' | 'checking' | 'unknown' | 'removed';
+  error: string;
+}
 export interface DeviceSettingsState {
   device: SettingsResource<DeviceView>;
   rooms: SettingsResource<Room[]>;
@@ -16,12 +21,14 @@ export interface DeviceSettingsState {
   name: EditState<string>;
   room: EditState<string | null | undefined>;
   roomNeedsSelection: boolean;
+  memberRemoval: MemberRemovalState;
 }
 const resource = <T>(): SettingsResource<T> => ({ value: null, loading: false, error: '' });
 const initial = (): DeviceSettingsState => ({
   device: resource(), rooms: resource(), location: resource(), members: resource(), home: resource(),
   name: { draft: '', phase: 'idle', error: '' },
   room: { draft: undefined, phase: 'idle', error: '' }, roomNeedsSelection: false,
+  memberRemoval: { userID: null, phase: 'idle', error: '' },
 });
 const message = (error: unknown) => error instanceof Error ? error.message : String(error);
 const permissionError = (error: unknown) => error instanceof ApiError && [401,403,404,1341,1342,1381,1382,1391,1392,1401,1402].includes(error.code);
@@ -39,6 +46,7 @@ export class DeviceSettingsFlow {
   private unsubscribe?: () => void;
   private pendingName?: { target: string; acknowledged: boolean };
   private pendingRoom?: { target: string | null; acknowledged: boolean };
+  private pendingMember?: { userID: string };
 
   constructor(private service: RowanService, readonly deviceID: string, private budget = 10000) {}
   onChange(listener: () => void) { this.listeners.add(listener); return () => { this.listeners.delete(listener); }; }
@@ -54,13 +62,22 @@ export class DeviceSettingsFlow {
     this.stop();
     const owner = this.service.session?.userID;
     if (owner !== this.owner || this.revision !== this.service.sessionRevision) {
-      this.pendingName = undefined; this.pendingRoom = undefined; this.state = initial();
+      this.pendingName = undefined;
+      this.pendingRoom = undefined;
+      this.pendingMember = undefined;
+      this.state = initial();
     }
     this.owner = owner; this.revision = this.service.sessionRevision;
     if (!owner) { this.update({ device: { ...resource(), error: '请先登录' } }); return; }
     this.active = true;
     this.unsubscribe = this.service.onSessionChange(() => {
-      if (!this.current()) { this.stop(); this.pendingName = undefined; this.pendingRoom = undefined; this.update(initial()); }
+      if (!this.current()) {
+        this.stop();
+        this.pendingName = undefined;
+        this.pendingRoom = undefined;
+        this.pendingMember = undefined;
+        this.update(initial());
+      }
     });
     // Each read catches its own failure. An unavailable members endpoint cannot hide P1.
     await Promise.all([this.loadDevice(), this.loadRooms(), this.loadLocation(), this.loadMembers()]);
@@ -73,6 +90,13 @@ export class DeviceSettingsFlow {
       location: { ...this.state.location, loading: false }, members: { ...this.state.members, loading: false }, home: { ...this.state.home, loading: false },
       name: { ...this.state.name, draft: this.pendingName?.target ?? this.state.device.value?.deviceNickname ?? '', phase: this.pendingName ? 'unknown' : 'idle' },
       room: { ...this.state.room, draft: this.pendingRoom ? this.pendingRoom.target : this.state.location.value?.id, phase: this.pendingRoom ? 'unknown' : 'idle' },
+      memberRemoval: this.pendingMember
+        ? {
+            userID: this.pendingMember.userID,
+            phase: 'unknown',
+            error: '移除结果待核对',
+          }
+        : this.state.memberRemoval,
     };
   }
   private async request<T>(key: string, work: (signal: AbortSignal) => Promise<T>): Promise<T> {
@@ -92,7 +116,13 @@ export class DeviceSettingsFlow {
       this.update({ [key]: { value, loading: false, error: '' } }); apply?.(value);
     } catch (error) {
       if (this.current(generation)) {
-        this.update({ [key]: { ...this.state[key], loading: false, error: message(error) } });
+        const value =
+          key === 'members' &&
+          error instanceof ApiError &&
+          [401, 403, 404, 1351, 1352].includes(error.code)
+            ? null
+            : this.state[key].value;
+        this.update({ [key]: { value, loading: false, error: message(error) } });
         if (key === 'device' || key === 'location') this.deny(error);
       }
     }
@@ -112,7 +142,103 @@ export class DeviceSettingsFlow {
       if (this.state.room.draft === oldRoom || this.state.room.draft === undefined) this.update({ room: { ...this.state.room, draft: value.id } });
     });
   }
-  async loadMembers() { await this.read('members', signal => this.service.members(this.deviceID, signal)); }
+  async loadMembers() {
+    if (this.pendingMember) return this.reconcileMember();
+    await this.read('members', (signal) =>
+      this.service.members(this.deviceID, signal),
+    );
+  }
+  async removeMember(userID: string) {
+    if (
+      !this.current() ||
+      this.pendingMember ||
+      this.state.members.loading ||
+      this.state.members.error ||
+      !this.state.members.value ||
+      this.state.device.loading ||
+      this.state.device.error ||
+      this.state.device.value?.bindingRole !== 'sa' ||
+      this.state.members.value.find((member) => member.userID === userID)
+        ?.bindingRole !== 'mbr'
+    ) return;
+    const generation = this.generation;
+    this.pendingMember = { userID };
+    this.update({ memberRemoval: { userID, phase: 'removing', error: '' } });
+    try {
+      await this.request('member-write', (signal) =>
+        this.service.removeMember(this.deviceID, userID, signal),
+      );
+      if (!this.current(generation)) return;
+    } catch (error) {
+      if (!this.current(generation)) return;
+      if (
+        error instanceof ApiError &&
+        [400, 401, 403, 404, 1371, 1372, 1373].includes(error.code)
+      ) {
+        this.pendingMember = undefined;
+        this.update({ memberRemoval: { userID, phase: 'idle', error: message(error) } });
+        await Promise.all([this.loadMembers(), this.loadDevice()]);
+        return;
+      }
+      this.update({
+        memberRemoval: {
+          userID,
+          phase: 'unknown',
+          error: '移除结果未知，正在读取成员核对',
+        },
+      });
+    }
+    if (this.current(generation)) await this.reconcileMember();
+  }
+  async reconcileMember() {
+    const pending = this.pendingMember, generation = this.generation;
+    if (
+      !pending ||
+      !this.current() ||
+      this.state.memberRemoval.phase === 'checking'
+    ) return;
+    this.update({
+      memberRemoval: { userID: pending.userID, phase: 'checking', error: '' },
+      members: { ...this.state.members, loading: true, error: '' },
+    });
+    try {
+      const value = await this.request('members', (signal) =>
+        this.service.members(this.deviceID, signal),
+      );
+      if (!this.current(generation)) return;
+      this.update({ members: { value, loading: false, error: '' } });
+      if (value.some((member) => member.userID === pending.userID)) {
+        this.update({
+          memberRemoval: {
+            userID: pending.userID,
+            phase: 'unknown',
+            error: '目标仍在成员列表，请稍后继续核对',
+          },
+        });
+        return;
+      }
+      this.pendingMember = undefined;
+      this.update({ memberRemoval: { userID: pending.userID, phase: 'removed', error: '' } });
+    } catch (error) {
+      if (!this.current(generation)) return;
+      const accessLost =
+        error instanceof ApiError &&
+        [401, 403, 404, 1351, 1352].includes(error.code);
+      this.update({
+        members: {
+          value: accessLost ? null : this.state.members.value,
+          loading: false,
+          error: message(error),
+        },
+        memberRemoval: {
+          userID: pending.userID,
+          phase: 'unknown',
+          error: '成员列表暂不可读，请继续核对移除结果',
+        },
+      });
+      if (accessLost) await this.loadDevice();
+    }
+  }
   editName(draft: string) { if (!this.busy && !this.pendingName) this.update({ name: { draft, phase: 'idle', error: '' } }); }
   cancelName() { if (!this.busy && !this.pendingName) this.update({ name: { draft: this.state.device.value?.deviceNickname ?? '', phase: 'idle', error: '' } }); }
   selectRoom(draft: string | null) {

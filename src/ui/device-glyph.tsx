@@ -6,11 +6,11 @@ import Svg, {
     Rect,
     Stop,
 } from "react-native-svg";
-export function DeviceGlyph({ humidity = false }: { humidity?: boolean }) {
+export function DeviceGlyph({ humidity = false, size = 112 }: { humidity?: boolean; size?: number }) {
   return (
     <Svg
-      width={112}
-      height={128}
+      width={size}
+      height={size * (128 / 112)}
       viewBox="0 0 112 128"
       accessibilityLabel={humidity ? "Dehumidifier" : "Wine cooler"}
     >

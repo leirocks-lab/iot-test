@@ -20,7 +20,15 @@ export interface MockState {
   binds: Record<string, { userID: string; deviceID: string; bindingRole: 'sa' | 'mbr' }>;
   shares: Record<string, { deviceID: string; expiresAt: number; usedBy?: string }>;
   schedules: Record<string, Schedule[]>;processedCommands?:Record<string,string[]>;
-  tasks: Record<string, { deviceID: string; type: 'mcu' | 'wifi'; firmwareID: string; result: 'updating' | 'success' | 'failed' | 'cancelled'; polls: number }>;
+  tasks: Record<string, {
+    deviceID: string;
+    type: 'mcu' | 'wifi';
+    firmwareID: string;
+    result: 'updating' | 'success' | 'failed' | 'cancelled';
+    polls: number;
+    startedAt?: string;
+    finishedAt?: string;
+  }>;
 }
 export const products: Product[] = [
   { id:'prd_wine', name:'ROWAN Wine Cooler', category:'WineCooler', seriesName:'RW Series', modelName:'ADD6830', image:'', connectType:'wifi', configType:'B', recommended:true, sort:1, cloudPlatform:'aws', bluetooth:true, buyLink:'' },

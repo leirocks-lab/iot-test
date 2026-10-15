@@ -32,7 +32,13 @@ describe('PAIR-07 Mock contract',()=>{
   it('preserves unknown-product errors and existing product-detail Mock behavior',async()=>{
     const {http,service}=await setup();
     await expect(service.help('missing-product',true)).rejects.toMatchObject({code:404});
-    const response=await http.request<ApiEnvelope<{id:string}>>({method:'GET',path:'/api/app/products/prd_humidity'});
-    expect(response.status).toBe(200);expect(response.data.data.id).toBe('prd_humidity');
+    const response = await http.request<ApiEnvelope<{ id: string }>>({
+      method: 'GET',
+      path: '/api/app/products/prd_humidity',
+      query: { type: 'text' },
+      headers: { Authorization: `Bearer ${service.session!.accessToken}` },
+    });
+    expect(response.status).toBe(200);
+    expect(response.data.data.id).toBe('prd_humidity');
   });
 });

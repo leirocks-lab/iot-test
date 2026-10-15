@@ -1,9 +1,15 @@
-import type { HttpClient, HttpRequest, HttpResponse } from '../lib/core';
-import { ApiError, type Attribute, type Schedule } from './models';
-import { MockDatabase, defaultSettings, digest, products } from './store';
-import { nextExecution, validateSchedule } from './scheduler';
-import { validateAttributeValue } from './device-controls';
-import { validateApiRoot, type CommunicationConfig } from './config';
+import type { HttpClient, HttpRequest, HttpResponse } from "../lib/core";
+import { ApiError, type Attribute, type Schedule } from "./models";
+import { MockDatabase, defaultSettings, digest, products } from "./store";
+import { nextExecution, validateSchedule } from "./scheduler";
+import { validateAttributeValue } from "./device-controls";
+import {
+  mockProductCategories,
+  mockProductDetail,
+  mockProductGroups,
+} from "./mock-product-catalog";
+import { mockDeviceHelp } from "./mock-device-help";
+import { validateApiRoot, type CommunicationConfig } from "./config";
 
 export function requestUrl(base: string, req: HttpRequest) {
   const url = new URL(base.replace(/\/$/,'')+req.path);
@@ -12,8 +18,8 @@ export function requestUrl(base: string, req: HttpRequest) {
 }
 export type HttpFetcher=(url:string,init?:RequestInit)=>Promise<Response>;
 export class FetchHttpClient implements HttpClient {
-  constructor(private base: string, private fetcher: HttpFetcher = fetch,policy:Pick<Partial<CommunicationConfig>,'environment'|'allowTestHttp'>={}) {
-    validateApiRoot(base,policy);
+  constructor(private base: string, private fetcher: HttpFetcher = fetch, policy: Pick<Partial<CommunicationConfig>, "environment" | "allowTestHttp"> = {}) {
+    validateApiRoot(base, policy);
   }
   async request<T>(req: HttpRequest): Promise<HttpResponse<T>> {
     const response=await this.fetcher(requestUrl(this.base,req),{method:req.method, headers:{Accept:'application/json',...(req.body!==undefined?{'Content-Type':'application/json'}:{}),...req.headers}, body:req.body===undefined?undefined:JSON.stringify(req.body), signal:req.signal});
@@ -78,18 +84,47 @@ export class MockHttpClient implements HttpClient {
       if(!account||text('password').length<8)throw new ApiError(400,'无法重置密码');
       account.passwordHash=digest('mock-v1:'+text('password'));for(const [key,value] of Object.entries(state.tokens))if(value.userID===account.id)delete state.tokens[key];delete state.captchas[account.email];return ok();
     }
-    if(path==='/api/app/products/category')return ok(products.map(p=>({name:p.category,value:p.category})));
-    if(path==='/api/app/products')return ok(products.map(p=>({category:p.category,categoryName:{'zh-CN':p.category,'zh-TW':p.category,en:p.category},products:[p]})));
-    const productPath=path.match(/^\/api\/app\/products\/([^/]+)(?:\/(.*))?$/);
-    if(productPath && productPath[2]!=='connectHelping') {
-      const p=products.find(p=>p.id===productPath[1]);if(!p)throw new ApiError(404,'产品不存在');
-      if(productPath[2]==='thing-model')return ok(thingModel(p.id));
-      return ok({...p,parameters:{},introduction:'ROWAN 智能家居设备 · Mock 产品'});
+    const productPath = path.match(
+      /^\/api\/app\/products\/([^/]+)(?:\/(.*))?$/,
+    );
+    if (productPath?.[2] === "thing-model") {
+      const product = products.find((product) => product.id === productPath[1]);
+      if (!product) throw new ApiError(404, "产品不存在");
+      return ok(thingModel(product.id));
     }
     if(productPath?.[2]==='connectHelping'&&!req.headers?.Authorization?.startsWith('Bearer '))throw new ApiError(401,'登录已失效');
+    const catalogRequest = method === "GET" && (
+      path === "/api/app/products/category" || path === "/api/app/products"
+      || !!productPath && !productPath[2]
+    );
+    if (catalogRequest && !req.headers?.Authorization?.startsWith("Bearer ")) {
+      throw new ApiError(401, "登录已失效");
+    }
     const tokenValue=req.headers?.Authorization?.replace(/^Bearer /,''), token=tokenValue?state.tokens[tokenValue]:undefined;
     if(!token||token.refresh||token.expiresAt<now)throw new ApiError(401,'登录已失效');
     const userID=token.userID, account=this.db.account(userID);
+    if (method === "GET" && path.startsWith("/api/app/products")) {
+      const requestedLanguage = req.headers?.["Accept-Language"];
+      const language =
+        requestedLanguage === "en" || requestedLanguage === "zh-TW"
+          ? requestedLanguage
+          : "zh-CN";
+      if (path === "/api/app/products/category") {
+        return ok(mockProductCategories(products, language));
+      }
+      if (path === "/api/app/products") {
+        return ok(mockProductGroups(products));
+      }
+      if (productPath && !productPath[2]) {
+        const product = products.find(
+          (product) => product.id === decodeURIComponent(productPath[1]),
+        );
+        if (!product) throw new ApiError(1091, "产品不存在");
+        if (query.type !== "text")
+          throw new ApiError(400, "模拟目录仅提供文本介绍");
+        return ok(mockProductDetail(product, language));
+      }
+    }
     if(productPath?.[2]==='connectHelping'&&method==='GET') {
       if(!products.some(product=>product.id===productPath[1]))throw new ApiError(404,'产品不存在');
       const language=req.headers?.['Accept-Language'];
@@ -110,12 +145,32 @@ export class MockHttpClient implements HttpClient {
       const result=state.binds[String(query.bindCode)];if(!result||result.userID!==userID)throw new ApiError(1123,'绑定码不存在或已过期');return ok(result);
     }
     const binding=path.match(/^\/api\/app\/device\/([^/]+)\/user$/);
-    if(binding&&method==='PUT') {
-      const share=state.shares[text('bindCode')];
-      if(!share||share.deviceID!==binding[1]||share.expiresAt<now||share.usedBy&&share.usedBy!==userID)throw new ApiError(400,'分享码无效或已过期');
-      const device=state.devices.find(d=>d.id===binding[1]);if(!device)throw new ApiError(404,'设备不存在');
-      if(device.members[userID])return ok({userID,deviceID:device.id,bindingRole:device.members[userID].role});
-      device.members[userID]={role:'mbr',nickname:device.name,roomID:null};share.usedBy=userID;return ok({userID,deviceID:device.id,bindingRole:'mbr'});
+    if (binding && method === "PUT") {
+      const bindingDeviceID = decodeURIComponent(binding[1]);
+      const device = state.devices.find((item) => item.id === bindingDeviceID);
+      if (!device) throw new ApiError(1132, "绑定设备不存在");
+      const code = text("bindCode");
+      const share = state.shares[code];
+      if (!share || share.expiresAt <= now || share.usedBy) {
+        throw new ApiError(1133, "绑定码不存在或已过期");
+      }
+      if (share.deviceID !== bindingDeviceID) {
+        throw new ApiError(1131, "绑定码与设备不匹配");
+      }
+      const existing = device.members[userID];
+      if (!existing) {
+        device.members[userID] = {
+          role: Object.keys(device.members).length === 0 ? "sa" : "mbr",
+          nickname: device.name,
+          roomID: null,
+        };
+      }
+      delete state.shares[code];
+      return ok({
+        userID,
+        deviceID: device.id,
+        bindingRole: device.members[userID].role,
+      });
     }
     if(path==='/api/app/user/setting') {
       if(method==='GET')return ok(account.setting);
@@ -141,32 +196,162 @@ export class MockHttpClient implements HttpClient {
     if(room&&method==='PATCH') { const r=account.rooms.find(r=>r.id===room[1]);if(!r)throw new ApiError(1431,'房间已失效');r.name=this.roomName(text('name'),userID,r.id);account.roomVersion++;return ok(); }
     const dev=path.match(/^\/api\/app\/devices\/([^/]+)(?:\/(.*))?$/);
     if(!dev)throw new ApiError(404,'Mock 未定义此接口');
-    const d=this.db.device(dev[1],userID,method!=='GET'&&dev[2]!=='users/self'), suffix=dev[2]??'', member=d.members[userID];
+    const deviceID = decodeURIComponent(dev[1]);
+    const suffix = dev[2] ?? "";
+    let d: ReturnType<MockDatabase["device"]>;
+    try {
+      d = this.db.device(
+        deviceID,
+        userID,
+        method !== "GET" && suffix !== "users/self" && !suffix.startsWith("ota/"),
+      );
+    } catch (error) {
+      if (
+        error instanceof ApiError &&
+        (suffix === "users" || suffix.startsWith("users/"))
+      ) {
+        const memberList = suffix === "users";
+        const selfUnbind = suffix === "users/self";
+        if (error.code === 404) {
+          throw new ApiError(
+            selfUnbind ? 1361 : memberList ? 1351 : 1371,
+            "设备不存在",
+          );
+        }
+        if (error.code === 403) {
+          throw new ApiError(
+            selfUnbind ? 1362 : memberList ? 1352 : 1372,
+            selfUnbind ? "您没有绑定这台设备" : "没有设备成员权限",
+          );
+        }
+      }
+      if (suffix === "helping" && error instanceof ApiError) {
+        if (error.code === 404) {
+          throw new ApiError(1451, "设备不存在");
+        }
+        if (error.code === 403) {
+          throw new ApiError(1452, "您没有绑定这台设备");
+        }
+      }
+      if (suffix === "bindCode" && error instanceof ApiError) {
+        if (error.code === 404) throw new ApiError(1461, "设备不存在");
+        if (error.code === 403) throw new ApiError(1462, "您没有绑定这台设备");
+      }
+      throw error;
+    }
+    const member = d.members[userID];
     const admin=()=>{if(member.role!=='sa')throw new ApiError(403,'仅管理员可执行');};
     if(!suffix) { if(method==='PATCH'){ if(!text('nickname').trim()||text('nickname').length>20)throw new ApiError(400,'昵称需1～20字符');member.nickname=text('nickname');return ok(); }return ok(this.db.view(d,userID)); }
     if(suffix==='mqtt')return ok({host:'wss://mock.rowan.invalid/mqtt',endpoint:'mock.rowan.invalid',path:'/mqtt',clientID:this.db.id('mqtt'),username:userID,password:'mock-temporary',deviceID:d.id});
     if(suffix==='users/self'&&method==='DELETE'){delete d.members[userID];return ok();}
-    if(suffix==='users')return ok(Object.entries(d.members).map(([id,m])=>({userID:id,email:state.accounts.find(a=>a.id===id)?.email?.replace(/^(.).+(@.*)$/,'$1***$2')??'',nickname:id,bindingRole:m.role})));
-    if(suffix.startsWith('users/')&&method==='DELETE'){admin();const id=suffix.slice(6);if(d.members[id]?.role!=='mbr')throw new ApiError(403,'只能移除普通成员');delete d.members[id];return ok();}
-    if(suffix==='bindCode'){admin();const code=this.db.id('share');state.shares[code]={deviceID:d.id,expiresAt:now+300000};return ok({deviceID:d.id,bindCode:code});}
+    if (suffix === "users" && method === "GET") {
+      return ok(
+        Object.entries(d.members).map(([id, binding]) => ({
+          userID: id,
+          nickname: null,
+          bindingRole: binding.role,
+        })),
+      );
+    }
+    if (suffix.startsWith("users/") && method === "DELETE") {
+      if (member.role !== "sa") {
+        throw new ApiError(1372, "您不是这台设备的管理员");
+      }
+      const targetID = decodeURIComponent(suffix.slice(6));
+      if (!d.members[targetID]) {
+        throw new ApiError(1373, "该用户没有绑定这台设备");
+      }
+      if (d.members[targetID].role !== "mbr") {
+        throw new ApiError(403, "只能移除普通成员");
+      }
+      delete d.members[targetID];
+      return ok();
+    }
+    if (suffix === "bindCode" && method === "GET") {
+      admin();
+      const code = this.db.id("share");
+      const expiresAt = now + 600000;
+      state.shares[code] = { deviceID: d.id, expiresAt };
+      return ok({
+        deviceID: d.id,
+        bindCode: code,
+        expiresAt: new Date(expiresAt).toISOString(),
+      });
+    }
     if(suffix==='location') {
       if(method==='PUT'){const id=text('id')||null;if(id&&!account.rooms.some(r=>r.id===id))throw new ApiError(1431,'房间已失效');member.roomID=id;}
       return ok(account.rooms.find(r=>r.id===member.roomID)??{id:null,name:'未分房'});
     }
-    if(suffix==='helping')return ok({id:'help_device',title:'设备手册与 FAQ',content:'保持设备通风。控制成功以设备回报为准。配网需 2.4 GHz Wi-Fi。清洁前关闭电源。'});
-    if(suffix.startsWith('ota/')) {
-      admin();const type=(query.type??suffix.split('/')[1]) as 'mcu'|'wifi';
-      if(suffix==='ota/mcu'||suffix==='ota/wifi')return ok({firmware:d[type==='mcu'?'mcuVersion':'wifiVersion']==='2.0.0'?null:{id:`fw_${type}_2`,version:'2.0.0',remark:'Mock 固件更新'},device:{id:d.id,name:d.name,mac:d.mac}});
-      if(suffix==='ota/task'&&method==='PUT') {
-        if(!['mcu','wifi'].includes(type)||text('firmwareID')!==`fw_${type}_2`)throw new ApiError(400,'固件不匹配');
-        if(Object.values(state.tasks).some(t=>t.deviceID===d.id&&t.result==='updating'))throw new ApiError(409,'已有升级任务');
-        const taskID=this.db.id('ota');state.tasks[taskID]={deviceID:d.id,type,firmwareID:text('firmwareID'),result:'updating',polls:0};return ok({taskID});
+    if (suffix === "helping" && method === "GET") {
+      if (query.type !== "text") {
+        throw new ApiError(400, "模拟设备帮助仅提供文本内容");
       }
-      const task=state.tasks[method==='DELETE'?text('taskID'):suffix.split('/')[2]];
-      if(!task||task.deviceID!==d.id)throw new ApiError(404,'升级任务不存在');
-      if(method==='DELETE'){if(task.result!=='updating'||task.polls>=2)throw new ApiError(409,'当前状态不可取消');task.result='cancelled';return ok();}
-      if(task.result==='updating'&&++task.polls>=3){task.result='success';d[task.type==='mcu'?'mcuVersion':'wifiVersion']='2.0.0';}
-      return ok({result:task.result});
+      const requestedLanguage = req.headers?.["Accept-Language"];
+      const language =
+        requestedLanguage === "en" || requestedLanguage === "zh-TW"
+          ? requestedLanguage
+          : "zh-CN";
+      return ok(mockDeviceHelp(language));
+    }
+    if (suffix.startsWith('ota/')) {
+      const type = (query.type ?? suffix.split('/')[1]) as 'mcu' | 'wifi';
+      if ((suffix === 'ota/mcu' || suffix === 'ota/wifi') && method === 'GET') {
+        const hasUpdate = d[type === 'mcu' ? 'mcuVersion' : 'wifiVersion'] !== '2.0.0';
+        return ok({
+          hasUpdate,
+          firmware: hasUpdate
+            ? { id: `fw_${type}_2`, version: '2.0.0', remark: 'Mock 固件更新' }
+            : null,
+          device: { id: d.id, name: d.name, mac: d.mac },
+        });
+      }
+      if (suffix === 'ota/task' && method === 'PUT') {
+        if (!d.online) throw new ApiError(1512, '设备离线');
+        if (!['mcu', 'wifi'].includes(type) || text('firmwareID') !== `fw_${type}_2`) {
+          throw new ApiError(1515, '固件不匹配');
+        }
+        const running = Object.entries(state.tasks).find(([, task]) =>
+          task.deviceID === d.id && task.result === 'updating');
+        if (running) {
+          if (running[1].type !== type) throw new ApiError(409, '设备已有其他类型升级任务');
+          return ok({ taskID: running[0] });
+        }
+        const taskID = this.db.id('ota');
+        state.tasks[taskID] = {
+          deviceID: d.id,
+          type,
+          firmwareID: text('firmwareID'),
+          result: 'updating',
+          polls: 0,
+          startedAt: new Date(now).toISOString(),
+        };
+        return ok({ taskID });
+      }
+      const task = state.tasks[method === 'DELETE' ? text('taskID') : suffix.split('/')[2]];
+      if (!task || task.deviceID !== d.id) throw new ApiError(1533, '升级任务不存在');
+      if (method === 'DELETE') {
+        if (task.result !== 'updating') throw new ApiError(400, '任务已结束，无法取消');
+        task.result = 'cancelled';
+        task.finishedAt = new Date(now).toISOString();
+        return ok();
+      }
+      if (method !== 'GET') throw new ApiError(405, '不支持的升级操作');
+      if (task.result === 'updating' && ++task.polls >= 3) {
+        task.result = 'success';
+        task.finishedAt = new Date(now).toISOString();
+        d[task.type === 'mcu' ? 'mcuVersion' : 'wifiVersion'] = '2.0.0';
+      }
+      const status = task.result === 'updating'
+        ? task.polls === 0 ? 'waiting' : task.polls === 1 ? 'downloading' : 'upgrading'
+        : task.result;
+      return ok({
+        result: task.result,
+        status,
+        progress: task.result === 'success' ? 100 : task.result === 'updating' ? task.polls * 30 : 0,
+        startedAt: task.startedAt ?? new Date(now).toISOString(),
+        ...(task.finishedAt ? { finishedAt: task.finishedAt } : {}),
+        updatedAt: new Date(now).toISOString(),
+      });
     }
     if(suffix.startsWith('schedules')) {
       const list=state.schedules[d.id]??(state.schedules[d.id]=[]), parts=suffix.split('/');
