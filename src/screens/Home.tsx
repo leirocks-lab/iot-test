@@ -3,6 +3,7 @@ import { router, useFocusEffect } from "expo-router";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   AppState,
+  Modal,
   Pressable,
   RefreshControl,
   ScrollView,
@@ -17,7 +18,6 @@ import { DeviceGlyph } from "../ui/device-glyph";
 import {
   Busy,
   Button,
-  Card,
   Empty,
   ErrorText,
   Page,
@@ -31,6 +31,7 @@ const powerOff = require("../../assets/images/poweroff-icon.png");
 const choice = require("../../assets/images/multiple-choice.png");
 const choiceSelected = require("../../assets/images/multiple-choice-selected.png");
 const delect = require("../../assets/images/delect.png");
+const homeMore = require("../../assets/images/home-more.png");
 
 function DeviceCard({
   device,
@@ -187,7 +188,7 @@ export default function Home() {
   const [room, setRoom] = useState("all");
   const [selected, setSelected] = useState<string[]>([]);
   const [editing, setEditing] = useState(false);
-  const [menu, setMenu] = useState(false);
+  const [roomMenu, setRoomMenu] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState("");
   const colors = useColors();
@@ -214,6 +215,7 @@ export default function Home() {
       setSelected([]);
       setEditing(false);
       setRoom("all");
+      setRoomMenu(false);
     }
     refreshRef.current?.abort();
     const controller = new AbortController();
@@ -275,6 +277,7 @@ export default function Home() {
         ? devices
         : (groups?.find((group) => group.room?.id === room)?.devices ?? []);
   const toggle = (id: string) => {
+    setRoomMenu(false);
     setEditing(true);
     setSelected((current) =>
       current.includes(id)
@@ -283,6 +286,7 @@ export default function Home() {
     );
   };
   const exitEditing = () => {
+    setRoomMenu(false);
     setSelected([]);
     setEditing(false);
   };
@@ -323,15 +327,7 @@ export default function Home() {
           </Pressable>
         </>
       ) : (
-        <>
-          <Image source={homeLogo} style={styles.logo} contentFit="contain" />
-          <Pressable
-            onPress={() => setMenu((value) => !value)}
-            style={styles.menuButton}
-          >
-            <Text style={styles.menuIcon}>☰</Text>
-          </Pressable>
-        </>
+        <Image source={homeLogo} style={styles.logo} contentFit="contain" />
       )}
     </View>
   );
@@ -381,72 +377,142 @@ export default function Home() {
         />
       }
     >
-      {menu && !editing && (
-        <Card>
-          <Button
-            title="添加设备"
+      <View style={styles.roomBar}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.roomScroll}
+          contentContainerStyle={styles.rooms}
+        >
+          <Pressable
+            disabled={editing}
             onPress={() => {
-              setMenu(false);
-              router.push("/add");
+              setRoom("all");
+              void runtime?.service.preference("homeRoom", "all");
             }}
+            style={styles.roomTab}
+          >
+            <Text
+              style={[styles.roomText, room === "all" && styles.roomTextActive]}
+            >
+              全屋
+            </Text>
+            {room === "all" && <View style={styles.tabLine} />}
+          </Pressable>
+          {groups
+            ?.filter((group) => group.room?.id)
+            .map((group) => {
+              const id = group.room!.id!;
+              return (
+                <Pressable
+                  key={id}
+                  disabled={editing}
+                  onPress={() => {
+                    setRoom(id);
+                    void runtime?.service.preference("homeRoom", id);
+                  }}
+                  style={styles.roomTab}
+                >
+                  <Text
+                    style={[
+                      styles.roomText,
+                      room === id && styles.roomTextActive,
+                    ]}
+                  >
+                    {group.room!.name}
+                  </Text>
+                  {room === id && <View style={styles.tabLine} />}
+                </Pressable>
+              );
+            })}
+        </ScrollView>
+        <Pressable
+          accessibilityLabel="房间列表"
+          accessibilityRole="button"
+          disabled={editing}
+          onPress={() => setRoomMenu(true)}
+          style={styles.roomMenuButton}
+        >
+          {/* <Text style={styles.menuIcon}>☰</Text> */}
+          <Image
+            source={homeMore}
+            style={{ width: 24, height: 24 }}
+            contentFit="contain"
           />
-          <Button
-            secondary
-            title="扫一扫"
-            onPress={() => {
-              setMenu(false);
-              router.push("/scan");
-            }}
-          />
-        </Card>
-      )}
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.rooms}
+        </Pressable>
+      </View>
+      <Modal
+        visible={roomMenu && !editing}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setRoomMenu(false)}
       >
         <Pressable
-          disabled={editing}
-          onPress={() => {
-            setRoom("all");
-            void runtime?.service.preference("homeRoom", "all");
-          }}
-          style={styles.roomTab}
+          style={styles.roomOverlay}
+          onPress={() => setRoomMenu(false)}
         >
-          <Text
-            style={[styles.roomText, room === "all" && styles.roomTextActive]}
+          <Pressable
+            style={styles.roomPopover}
+            onPress={(event) => event.stopPropagation()}
           >
-            全屋
-          </Text>
-          {room === "all" && <View style={styles.tabLine} />}
-        </Pressable>
-        {groups
-          ?.filter((group) => group.room?.id)
-          .map((group) => {
-            const id = group.room!.id!;
-            return (
-              <Pressable
-                key={id}
-                disabled={editing}
-                onPress={() => {
-                  setRoom(id);
-                  void runtime?.service.preference("homeRoom", id);
-                }}
-                style={styles.roomTab}
+            <Pressable
+              style={styles.roomOption}
+              onPress={() => {
+                setRoom("all");
+                setRoomMenu(false);
+                void runtime?.service.preference("homeRoom", "all");
+              }}
+            >
+              <Text
+                style={[
+                  styles.roomOptionName,
+                  room === "all" && styles.roomOptionActive,
+                ]}
               >
-                <Text
-                  style={[
-                    styles.roomText,
-                    room === id && styles.roomTextActive,
-                  ]}
-                >
-                  {group.room!.name}
-                </Text>
-                {room === id && <View style={styles.tabLine} />}
-              </Pressable>
-            );
-          })}
-      </ScrollView>
+                全屋
+              </Text>
+              <Text style={styles.roomCount}>{devices.length}</Text>
+            </Pressable>
+            {groups
+              ?.filter((group) => group.room?.id)
+              .map((group) => {
+                const id = group.room!.id!;
+                return (
+                  <Pressable
+                    key={id}
+                    style={styles.roomOption}
+                    onPress={() => {
+                      setRoom(id);
+                      setRoomMenu(false);
+                      void runtime?.service.preference("homeRoom", id);
+                    }}
+                  >
+                    <Text
+                      style={[
+                        styles.roomOptionName,
+                        room === id && styles.roomOptionActive,
+                      ]}
+                      numberOfLines={1}
+                    >
+                      {group.room!.name}
+                    </Text>
+                    <Text style={styles.roomCount}>{group.devices.length}</Text>
+                  </Pressable>
+                );
+              })}
+            <Pressable
+              style={[styles.roomOption, styles.roomManage]}
+              onPress={() => {
+                setRoomMenu(false);
+                router.push("/rooms");
+              }}
+            >
+              <Text style={styles.roomManageText}>房间管理</Text>
+              <Text style={styles.roomArrow}>›</Text>
+            </Pressable>
+          </Pressable>
+        </Pressable>
+      </Modal>
       <ErrorText error={loadError} />
       {groups && devices.length === 0 && (
         <>
@@ -485,9 +551,16 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   logo: { width: 180, height: 38 },
-  menuButton: {
-    width: 38,
-    height: 38,
+  roomBar: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+  },
+  roomScroll: {
+    flex: 1,
+  },
+  roomMenuButton: {
+    width: 24,
+    height: 24,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -496,7 +569,7 @@ const styles = StyleSheet.create({
   cancel: { color: "#777", fontSize: 16 },
   done: { color: "#1677FF", fontSize: 16, textAlign: "right" },
   selectionTitle: { color: "#111", fontSize: 17, fontWeight: "700" },
-  rooms: { gap: 22, alignItems: "flex-start" },
+  rooms: { gap: 22, alignItems: "flex-start", paddingRight: 8 },
   roomTab: { paddingBottom: 8, alignItems: "center", minWidth: 32 },
   roomText: { color: "#777", fontSize: 15 },
   roomTextActive: { color: "#111", fontWeight: "700" },
@@ -507,6 +580,41 @@ const styles = StyleSheet.create({
     backgroundColor: "#222",
     marginTop: 5,
   },
+  roomOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.28)",
+  },
+  roomPopover: {
+    position: "absolute",
+    top: 100,
+    right: 16,
+    width: 142,
+    paddingVertical: 8,
+    borderRadius: 14,
+    backgroundColor: "#fff",
+    elevation: 8,
+    shadowColor: "#000",
+    shadowOpacity: 0.12,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 4 },
+  },
+  roomOption: {
+    minHeight: 38,
+    paddingHorizontal: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  roomOptionName: { color: "#333", fontSize: 15, maxWidth: 92 },
+  roomOptionActive: { color: "#1677FF", fontWeight: "600" },
+  roomCount: { color: "#aaa", fontSize: 13 },
+  roomManage: {
+    marginTop: 4,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: "#eee",
+  },
+  roomManageText: { color: "#1677FF", fontSize: 15 },
+  roomArrow: { color: "#aaa", fontSize: 22, lineHeight: 22 },
   grid: {
     flexDirection: "row",
     flexWrap: "wrap",

@@ -1,8 +1,16 @@
 import { Redirect, Tabs, router } from "expo-router";
 import { useState } from "react";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Svg, { Path } from "react-native-svg";
+
 import { useApp, useColors } from "../../ui/context";
 const home = require("../../../assets/images/home.png");
 const homeSelected = require("../../../assets/images/home-selected.png");
@@ -75,7 +83,6 @@ function BottomBar({ state, navigation }: any) {
         >
           <Path
             d="M0 0H375V58H0Z M140 0H151 C158 0 160 4 161 11 C164 30 174 43 187.5 43 C201 43 211 30 214 11 C215 4 217 0 224 0H235Z"
-            // fill={"rgba(255,255,255,0.8)"}
             fill={color.background.invert}
             fillRule="evenodd"
           />
@@ -107,7 +114,16 @@ function BottomBar({ state, navigation }: any) {
         </View>
       </View>
       <Pressable
-        style={[styles.addButton, { bottom: bottomInset - 25 }]}
+        style={[
+          styles.addButton,
+          {
+            bottom: Platform.select({
+              ios: bottomInset - 25,
+              android: 10,
+              web: -10,
+            }),
+          },
+        ]}
         onPress={() => setOpen((v) => !v)}
       >
         <Image source={open ? addOpen : add} style={styles.addIcon} />
@@ -149,7 +165,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "rgba(255,255,255,0.8)",
   },
   barContent: {
     ...StyleSheet.absoluteFill,
@@ -169,7 +184,6 @@ const styles = StyleSheet.create({
     marginLeft: -37,
     alignItems: "center",
     justifyContent: "center",
-    elevation: 7,
   },
   addIcon: { width: 74, height: 74, resizeMode: "contain" },
   scrim: {
