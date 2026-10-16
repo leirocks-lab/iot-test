@@ -1,0 +1,25 @@
+{
+  "change": "CHG-20261016-001",
+  "date": "2026-10-16T00:11:38.798Z",
+  "timeAsiaShanghai": "2026-10-16T08:11:38+08:00",
+  "environment": "Windows Node / RowanService / RealHttpClient / development HTTP",
+  "account": null,
+  "tenantHeader": "1",
+  "operation": "APP-01 GET /api/app/config",
+  "result": "degraded",
+  "request": {
+    "method": "GET",
+    "url": "http://47.107.80.36/app-api/config?brandId=rowan&platform=android&appVersion=1.0.0&language=zh-CN",
+    "httpStatus": 200,
+    "businessCode": 1001030000,
+    "message": "启动配置不存在",
+    "dataFields": []
+  },
+  "responseDataFields": [],
+  "configurationAvailable": false,
+  "startupFallback": "no-valid-cache; returned null without blocking account entry",
+  "notes": [
+    "Read-only unauthenticated startup config request.",
+    "No credentials or tokens used or persisted."
+  ]
+}
