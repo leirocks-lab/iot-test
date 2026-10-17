@@ -4,6 +4,7 @@ import type { ConfigContext, ExpoConfig } from 'expo/config';
 
 import { getAppIdentity } from './src/config/brand';
 import { communicationConfig } from './src/services/config';
+import { allowsHttpApi } from './src/services/api-transport';
 
 export default ({ config }: ConfigContext): ExpoConfig => {
   const identity = getAppIdentity(process.env.APP_BRAND, process.env.APP_ENV);
@@ -27,6 +28,9 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     ios: {
       icon: './assets/expo.icon',
       bundleIdentifier: identity.iosBundleIdentifier,
+      infoPlist: {
+        NSAppTransportSecurity: { NSAllowsArbitraryLoads: allowsHttpApi(identity.environment) },
+      },
     },
     android: {
       package: identity.androidPackage,
@@ -43,6 +47,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       favicon: './assets/images/favicon.png',
     },
     plugins: [
+      ['./src/config/with-api-transport.ts', { environment: identity.environment }],
       'expo-router',
       'expo-dev-client',
       ['react-native-ble-plx', { isBackgroundEnabled: false, bluetoothAlwaysPermission: '允许 ROWAN 发现并连接配网设备' }],

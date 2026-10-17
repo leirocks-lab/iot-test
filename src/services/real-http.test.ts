@@ -103,7 +103,7 @@ describe('真实HTTP边界',()=>{
   it('rejects HTTP, embedded credentials and ambiguous app-api roots',()=>{
     for(const apiBaseUrl of ['http://api.example.test','https://u:p@api.example.test','https://api.example.test/app-api'])
       expect(()=>new RealHttpClient({...config,apiBaseUrl})).toThrow();
-    expect(()=>communicationConfig({httpMode:'real',apiBaseUrl:config.apiBaseUrl,iotApiBaseUrl:'http://iot.example.test'})).toThrow('HTTPS');
+    expect(()=>communicationConfig({environment:'production',httpMode:'real',apiBaseUrl:config.apiBaseUrl,iotApiBaseUrl:'http://iot.example.test'})).toThrow('HTTPS');
     expect(()=>communicationConfig({tenantID:'not-issued'})).toThrow('integer');
   });
   it('does not normalize cancelled late results even if fetch ignores abort',async()=>{
