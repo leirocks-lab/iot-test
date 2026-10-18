@@ -1,12 +1,13 @@
 import { bytesToHex } from '@noble/hashes/utils.js';
 import { sha256 } from '@noble/hashes/sha2.js';
 import type { HttpClient, HttpRequest, HttpResponse } from '../lib/core';
-import { validateApiRoot, type CommunicationConfig } from './config';
+import type { CommunicationConfig } from './config';
 import { FetchHttpClient, type HttpFetcher } from './http';
 import { ApiError } from './models';
 import { realEnvelope, realResponseData } from './real-api-data';
+import { validateApiBaseUrl } from './api-transport';
 
-type RealHttpConfig=Pick<CommunicationConfig,'apiBaseUrl'|'iotApiBaseUrl'|'tenantID'> & Pick<Partial<CommunicationConfig>,'environment'|'allowTestHttp'>;
+type RealHttpConfig=Pick<CommunicationConfig,'apiBaseUrl'|'iotApiBaseUrl'|'tenantID'>&Partial<Pick<CommunicationConfig,'environment'>>;
 export function realSessionScope(config:RealHttpConfig) {
   const scope=JSON.stringify([config.apiBaseUrl,config.iotApiBaseUrl??config.apiBaseUrl,config.tenantID??null]);
   return bytesToHex(sha256(new TextEncoder().encode(scope)));
@@ -15,14 +16,14 @@ export class RealHttpClient implements HttpClient {
   private platform:FetchHttpClient;
   private iot:FetchHttpClient;
   private tenantID?:string;
-  constructor(config:RealHttpConfig,fetcher:HttpFetcher=fetch) {
+  constructor(config:RealHttpConfig,fetcher?:HttpFetcher) {
     for(const root of [config.apiBaseUrl,config.iotApiBaseUrl??config.apiBaseUrl]){
-      validateApiRoot(root,config);
+      validateApiBaseUrl(root,config.environment);
     }
     this.tenantID=config.tenantID;
     if(this.tenantID!==undefined&&!/^\d+$/.test(this.tenantID))throw new Error('tenant-id must be an integer supplied by the backend');
-    this.platform=new FetchHttpClient(config.apiBaseUrl,fetcher,config);
-    this.iot=new FetchHttpClient(config.iotApiBaseUrl??config.apiBaseUrl,fetcher,config);
+    this.platform=new FetchHttpClient(config.apiBaseUrl,fetcher,config.environment);
+    this.iot=new FetchHttpClient(config.iotApiBaseUrl??config.apiBaseUrl,fetcher,config.environment);
   }
   async request<T>(req:HttpRequest):Promise<HttpResponse<T>> {
     if(req.signal?.aborted)throw new ApiError(499,'操作已取消');

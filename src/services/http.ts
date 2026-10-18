@@ -3,13 +3,14 @@ import { ApiError, type Attribute, type Schedule } from "./models";
 import { MockDatabase, defaultSettings, digest, products } from "./store";
 import { nextExecution, validateSchedule } from "./scheduler";
 import { validateAttributeValue } from "./device-controls";
+import { validateApiBaseUrl } from './api-transport';
 import {
   mockProductCategories,
   mockProductDetail,
   mockProductGroups,
 } from "./mock-product-catalog";
 import { mockDeviceHelp } from "./mock-device-help";
-import { validateApiRoot, type CommunicationConfig } from "./config";
+
 
 export function requestUrl(base: string, req: HttpRequest) {
   const url = new URL(base.replace(/\/$/,'')+req.path);
@@ -18,8 +19,8 @@ export function requestUrl(base: string, req: HttpRequest) {
 }
 export type HttpFetcher=(url:string,init?:RequestInit)=>Promise<Response>;
 export class FetchHttpClient implements HttpClient {
-  constructor(private base: string, private fetcher: HttpFetcher = fetch, policy: Pick<Partial<CommunicationConfig>, "environment" | "allowTestHttp"> = {}) {
-    validateApiRoot(base, policy);
+  constructor(private base: string, private fetcher: HttpFetcher = (url, init) => globalThis.fetch(url, init), environment?: string) {
+    validateApiBaseUrl(base, environment);
   }
   async request<T>(req: HttpRequest): Promise<HttpResponse<T>> {
     const response=await this.fetcher(requestUrl(this.base,req),{method:req.method, headers:{Accept:'application/json',...(req.body!==undefined?{'Content-Type':'application/json'}:{}),...req.headers}, body:req.body===undefined?undefined:JSON.stringify(req.body), signal:req.signal});

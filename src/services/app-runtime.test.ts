@@ -91,8 +91,8 @@ describe('P1 App启动装配',()=>{
     const driver=Object.assign(new MockDeviceTransport(await MockDatabase.open(new MemoryStorage())),{dispose:vi.fn()}),restore=vi.spyOn(RowanService.prototype,'restore').mockRejectedValueOnce(new Error('fixture restore failure'));vi.useFakeTimers();
     await expect(createRuntime({httpMode:'mock',deviceMode:'real'},driver,{wifi:contracts.wifi})).rejects.toThrow('fixture restore failure');expect(restore).toHaveBeenCalledOnce();expect(driver.dispose).toHaveBeenCalledOnce();expect(vi.getTimerCount()).toBe(0);
   });
-  it('invalid API credentials are rejected before allocating a deployment driver',async()=>{
-    const createDriver=vi.fn();await expect(createConfiguredRuntime({...config,apiBaseUrl:'https://public-user:public-fixture@api.example.test'},{registry:{'fixture-v1':{environments:['development'],create:()=>({contracts,createDeviceDriver:createDriver})}}})).rejects.toThrow('无凭据');expect(createDriver).not.toHaveBeenCalled();
+  it('rejects invalid module roots before a driver factory creates any resources',async()=>{
+    const driver=Object.assign(new MockDeviceTransport(await MockDatabase.open(new MemoryStorage())),{dispose:vi.fn()}),createDeviceDriver=vi.fn(async()=>driver);await expect(createConfiguredRuntime({...config,apiBaseUrl:'https://public-user:public-fixture@api.example.test'},{registry:{'fixture-v1':{environments:['development'],create:()=>({contracts,createDeviceDriver})}}})).rejects.toThrow('无凭据');expect(createDeviceDriver).not.toHaveBeenCalled();expect(driver.dispose).not.toHaveBeenCalled();
   });
   it('rejects an invalid declared driver instead of silently falling back to the native driver',async()=>{
     const dispose=vi.fn(),create=vi.fn(async()=>({dispose:vi.fn()} as unknown as Runtime));await expect(createConfiguredRuntime(config,{create,registry:{'fixture-v1':{environments:['development'],create:()=>({contracts,createDeviceDriver:async()=>({dispose}) as unknown as MockDeviceTransport})}}})).rejects.toThrow('无效端口');expect(create).not.toHaveBeenCalled();expect(dispose).toHaveBeenCalledOnce();

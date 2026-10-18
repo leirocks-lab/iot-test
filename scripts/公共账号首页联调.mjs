@@ -6,7 +6,7 @@ import { RealHttpClient } from '../src/services/real-http.ts';
 import { RowanService } from '../src/services/rowan.ts';
 import { MemoryStorage } from '../src/services/store.ts';
 
-const config=communicationConfig({environment:'development',httpMode:'real',deviceMode:'mock',allowTestHttp:true,
+const config=communicationConfig({environment:'development',httpMode:'real',deviceMode:'mock',
   apiBaseUrl:'http://47.107.80.36',iotApiBaseUrl:'http://47.107.80.36/iot',tenantID:process.env.ROWAN_TENANT_ID});
 const account=process.env.ROWAN_TEST_ACCOUNT??'zhanglei@verveso.com';
 const password=process.env.ROWAN_TEST_PASSWORD;

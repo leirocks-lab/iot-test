@@ -25,7 +25,7 @@
     "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm run doctor && pnpm verify:config && pnpm verify:bundle",
     "start": "expo start --dev-client",
     "export:android": "expo export --platform android --output-dir dist/android",
-    "web": "expo start --web",
+    "web": "expo start --web --clear",
     "export:ios": "expo export --platform ios --output-dir dist/ios"
   },
   "devDependencies": {

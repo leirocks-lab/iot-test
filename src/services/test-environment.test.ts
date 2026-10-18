@@ -5,7 +5,7 @@ import { FetchHttpClient } from './http';
 import { RowanService } from './rowan';
 import { MemoryStorage } from './store';
 
-const testConfig={environment:'development',allowTestHttp:true,apiBaseUrl:'http://47.107.80.36',iotApiBaseUrl:'http://47.107.80.36/iot',tenantID:'42'};
+const testConfig={environment:'development',apiBaseUrl:'http://47.107.80.36',iotApiBaseUrl:'http://47.107.80.36/iot',tenantID:'42'};
 const reply=(data:unknown,code=0)=>new Response(JSON.stringify({code,data,msg:code?'failed':'ok'}));
 
 describe('confirmed development HTTP environment',()=>{
@@ -18,10 +18,12 @@ describe('confirmed development HTTP environment',()=>{
     expect(fetcher.mock.calls.map(call=>new URL(call[0]).pathname)).toEqual(['/app-api/config','/iot/app-api/devices']);
     expect(fetcher.mock.calls.every(call=>call[1].headers['tenant-id']==='42')).toBe(true);
   });
-  it('rejects an HTTP exception in preview/production and every unapproved module root',()=>{
-    for(const environment of ['preview','production'])
-      expect(()=>communicationConfig({...testConfig,environment,httpMode:'real',deviceMode:'real'})).toThrow();
-    for(const apiBaseUrl of ['http://47.107.80.37','http://47.107.80.36:8080','http://47.107.80.36/other','http://u:p@47.107.80.36','http://47.107.80.36?x=1'])
+  it('allows development/preview HTTP roots while rejecting production HTTP and malformed roots',()=>{
+    for(const environment of ['development','preview'])
+      for(const apiBaseUrl of ['http://47.107.80.37','http://47.107.80.36:8080','http://47.107.80.36/other'])
+        expect(()=>communicationConfig({...testConfig,environment,httpMode:'real',apiBaseUrl})).not.toThrow();
+    expect(()=>communicationConfig({...testConfig,environment:'production',httpMode:'real',deviceMode:'real'})).toThrow();
+    for(const apiBaseUrl of ['http://u:p@47.107.80.36','http://47.107.80.36?x=1'])
       expect(()=>communicationConfig({...testConfig,httpMode:'real',apiBaseUrl})).toThrow();
     expect(()=>new RealHttpClient({...testConfig,environment:'production'})).toThrow();
     expect(()=>new FetchHttpClient('http://47.107.80.36')).toThrow();

@@ -51,7 +51,7 @@ export function getBrandConfig(brandId?: string): BrandConfig {
 }
 
 export function getAppEnvironment(value?: string): AppEnvironment {
-  const resolvedEnvironment = value || DEFAULT_ENVIRONMENT;
+  const resolvedEnvironment = value === undefined ? DEFAULT_ENVIRONMENT : value;
 
   if (
     resolvedEnvironment !== 'development' &&
