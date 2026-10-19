@@ -71,23 +71,23 @@ function createBuildEnvironment(overrides = {}) {
     ...overrides,
   };
 
-  delete environment.APP_BRAND;
-  delete environment.APP_ENV;
-  delete environment.ROWAN_INTEGRATION_PROFILE;
+  for (const key of Object.keys(environment)) {
+    if (key === 'APP_BRAND' || key === 'APP_ENV' || key.startsWith('ROWAN_')) delete environment[key];
+  }
 
   return { ...environment, ...overrides };
 }
 
-function executeExpoConfig(overrides = {}) {
-  return spawnSync(process.execPath, [expoCli, 'config', '--type', 'public', '--json'], {
+function executeExpoConfig(overrides = {}, type = 'public') {
+  return spawnSync(process.execPath, [expoCli, 'config', '--type', type, '--json'], {
     cwd: applicationRoot,
     encoding: 'utf8',
     env: createBuildEnvironment(overrides),
   });
 }
 
-function readExpoConfig(overrides = {}) {
-  const result = executeExpoConfig(overrides);
+function readExpoConfig(overrides = {}, type = 'public') {
+  const result = executeExpoConfig(overrides, type);
 
   assert(
     result.status === 0,
@@ -128,9 +128,13 @@ function main() {
 
   assertConfigFailure({ APP_BRAND: 'other' }, 'Unknown APP_BRAND: other');
   assertConfigFailure({ APP_ENV: 'staging' }, 'Unknown APP_ENV: staging');
+  assertConfigFailure({ APP_ENV: '' }, 'Unknown APP_ENV:');
 
   assertConfigFailure({APP_ENV:'production',ROWAN_HTTP_MODE:'mock'},'Production requires real transports');
-  assertConfigFailure({ROWAN_HTTP_MODE:'real',ROWAN_APP_API_BASE_URL:'http://insecure.invalid'},'HTTPS');
+  assertConfigFailure({APP_ENV:'production',ROWAN_HTTP_MODE:'real',ROWAN_APP_API_BASE_URL:'http://insecure.invalid'},'HTTPS');
+  assertConfigFailure({APP_ENV:'production',ROWAN_HTTP_MODE:'real',ROWAN_APP_API_BASE_URL:'https://api.example.invalid',ROWAN_IOT_API_BASE_URL:'http://iot.example.invalid'},'HTTPS');
+  assertConfigFailure({APP_ENV:'preview',ROWAN_HTTP_MODE:'real',ROWAN_APP_API_BASE_URL:'http://user:password@example.invalid'},'无凭据');
+  assertConfigFailure({APP_ENV:'preview',ROWAN_HTTP_MODE:'real',ROWAN_APP_API_BASE_URL:'http://api.example.invalid/app-api'},'/app-api');
   assertConfigFailure({ROWAN_INTEGRATION_PROFILE:'https://not-a-profile.invalid'},'ROWAN_INTEGRATION_PROFILE');
   const integrationConfig=readExpoConfig({ROWAN_INTEGRATION_PROFILE:'reviewed-fixture-v1',ROWAN_DEVICE_TOKEN:'public-test-sentinel'});
   assert(integrationConfig.extra?.integrationProfile==='reviewed-fixture-v1','Integration profile ID must reach public extra');
@@ -144,6 +148,20 @@ function main() {
     assertIdentity(config, identifier, environment);
     return config;
   });
+
+  for (const environment of ['development', 'preview']) {
+    const config = readExpoConfig({ APP_ENV: environment, ROWAN_HTTP_MODE: 'real', ROWAN_APP_API_BASE_URL: 'http://api.example.invalid', ROWAN_IOT_API_BASE_URL: 'http://iot.example.invalid/iot' });
+    assert(config.extra.httpMode === 'real' && config.extra.apiBaseUrl.startsWith('http://') && config.extra.iotApiBaseUrl.startsWith('http://'), `${environment} must support both real HTTP roots`);
+  }
+
+  for (const environment of ['development', 'preview', 'production']) {
+    const config = readExpoConfig({ APP_ENV: environment, ...(environment === 'production' ? { ROWAN_APP_API_BASE_URL: 'https://api.example.invalid' } : {}) }, 'introspect');
+    const expected = environment !== 'production';
+    const application = config._internal.modResults.android.manifest.manifest.application[0];
+    assert(application.$['android:usesCleartextTraffic'] === String(expected), `${environment} Android main manifest cleartext policy is wrong`);
+    assert(!application.$['android:networkSecurityConfig'], 'A separate network security config must not silently override the environment policy');
+    assert(config._internal.modResults.ios.infoPlist.NSAppTransportSecurity.NSAllowsArbitraryLoads === expected, `${environment} iOS ATS policy is wrong`);
+  }
 
   assert(
     new Set(variants.map((config) => config.android.package)).size === 3,
@@ -160,7 +178,7 @@ function main() {
     assert(!config.runtimeVersion, 'EAS runtime version must not be configured');
   }
 
-  console.log('App configuration verified: defaults, failures, variants, and EAS independence.');
+  console.log('App configuration verified: defaults, failures, HTTP/HTTPS environments, Android manifest, iOS ATS, and EAS independence.');
 }
 
 try {

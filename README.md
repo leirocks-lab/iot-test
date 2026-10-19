@@ -65,6 +65,25 @@ pnpm specs:test
 
 ## Development Build
 
+开发/测试环境（`APP_ENV=development` 或 `preview`）的真实业务 API 支持 HTTP/HTTPS；`production` 正式交付只支持 HTTPS，平台与 IoT 模块根任一为 HTTP 都会在配置阶段失败。模块根不包含 `/app-api`，不在 URL 中保存账号、密码、query 或 fragment。直接构造低层 HTTP 客户端时需显式传入开发/测试环境，否则只允许 HTTPS。
+
+例如仅使用公开配置接测试后台：
+
+```dotenv
+APP_ENV=development
+ROWAN_HTTP_MODE=real
+ROWAN_DEVICE_MODE=real
+ROWAN_APP_API_BASE_URL=http://47.107.80.36
+ROWAN_IOT_API_BASE_URL=http://47.107.80.36/iot
+ROWAN_TENANT_ID=1
+```
+
+租户须与目标后台确认；密码和 Token 通过正常登录取得，不写入配置。未装配正式设备协议时仍会提示具体缺项；真实 API 不会因失败回落 Mock。网页可用 `pnpm web` 查看，HTTP 测试 API 应从本地 HTTP 页面联调，浏览器的 CORS/混合内容规则仍生效。
+
+Web 的 Expo Constants 配置会内嵌到编译后的 JavaScript；切换 Mock/real、API 根或租户后，旧 Metro 转换缓存可能仍保留之前配置，即使服务端 manifest 已更新。`pnpm web` 默认带 `--clear`：修改环境后先停止旧服务、重新启动，再完整刷新浏览器页面。手动运行 Expo CLI 时也需加 `--clear`。验证 Web 通信模式应核对实际网页包和浏览器请求，不能只查原生 manifest 或根路由是否跳到登录页。
+
+Android 明文策略由 Config Plugin/CNG 按环境生成，preview 的 release 测试包也适用；production 关闭明文。iOS ATS 配置遵循同一环境边界，平台运行验收单独记录。**原生网络策略改变后须重新构建并安装开发/测试包，仅重启 Metro 不会更新已安装包。** MQTT、外部链接及模组自身协议仍遵守原规则。详见 [CHG-20261016-002](<sdd/迭代变更/变更-20261016-002/变更提案.md>)。
+
 本项目使用 `expo-dev-client`，不将 Expo Go 作为正式开发运行环境。首次运行或原生配置变化后，需要重新构建 Development Build。
 
 启动 Metro：
