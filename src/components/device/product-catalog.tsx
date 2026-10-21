@@ -2,42 +2,42 @@ import { Image } from "expo-image";
 import { useFocusEffect } from "expo-router";
 import {
   useCallback,
+  useEffect,
   useMemo,
   useRef,
   useState,
   useSyncExternalStore,
 } from "react";
-import { AppState, Linking, StyleSheet, View } from "react-native";
+import {
+  AppState,
+  Linking,
+  Modal,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import Svg, { Circle, Path } from "react-native-svg";
 import { productCatalogOptions } from "../../config/product-catalog";
 import type { Product } from "../../services/models";
 import {
   ProductCatalogFlow,
   catalogPairingIssue,
   catalogProducts,
+  trustedBuyLink,
 } from "../../services/product-catalog";
 import { productParameterRows } from "../../services/product-data";
 import type { RowanService } from "../../services/rowan";
 import { useApp } from "../../ui/context";
-import {
-  Busy,
-  Button,
-  Card,
-  ErrorText,
-  Label,
-  styles,
-  useAction,
-} from "../../ui/kit";
-
-interface ProductCatalogProps {
-  service: RowanService;
-  disabled: boolean;
-  onChoose: (product: Product) => void;
-}
+import { Busy, Button, ErrorText, Label, useAction } from "../../ui/kit";
+import { ProductThumbnail } from "./product-thumbnail";
 
 function ProductImage({ source, name }: { source?: string; name: string }) {
   const [failedSource, setFailedSource] = useState("");
-  if (!source || !source.startsWith("https://") || failedSource === source) {
-    return <Label muted>暂无产品图片</Label>;
+  if (!source?.startsWith("https://") || failedSource === source) {
+    return <ProductThumbnail name={name} style={catalogStyles.detailImage} />;
   }
   return (
     <Image
@@ -45,7 +45,7 @@ function ProductImage({ source, name }: { source?: string; name: string }) {
       accessibilityLabel={name}
       contentFit="contain"
       recyclingKey={source}
-      style={catalogStyles.image}
+      style={catalogStyles.detailImage}
       onError={() => setFailedSource(source)}
     />
   );
@@ -92,12 +92,17 @@ export function ProductDetails({ product }: { product: Product }) {
   );
 }
 
-/** Basic catalog interaction. Final visual design remains a separate acceptance step. */
 export function ProductCatalog({
   service,
   disabled,
   onChoose,
-}: ProductCatalogProps) {
+  onProducts,
+}: {
+  service: RowanService;
+  disabled: boolean;
+  onChoose: (product: Product) => void;
+  onProducts?: (products: Product[]) => void;
+}) {
   const catalog = useMemo(
     () => new ProductCatalogFlow(service, productCatalogOptions),
     [service],
@@ -110,8 +115,10 @@ export function ProductCatalog({
   const focused = useRef(false);
   const action = useAction();
   const { settings } = useApp();
+  const insets = useSafeAreaInsets();
   const language = settings?.language ?? service.language;
   const sessionRevision = service.sessionRevision;
+  const [gridWidth, setGridWidth] = useState(0);
 
   useFocusEffect(
     useCallback(() => {
@@ -124,9 +131,8 @@ export function ProductCatalog({
       if (
         AppState.currentState !== "background" &&
         AppState.currentState !== "inactive"
-      ) {
+      )
         void catalog.start();
-      }
       const subscription = AppState.addEventListener("change", (status) => {
         if (status === "active" && focused.current) void catalog.start();
         else catalog.stop();
@@ -139,39 +145,58 @@ export function ProductCatalog({
     }, [catalog, language, service, sessionRevision]),
   );
 
-  const products = catalogProducts(state.products.value ?? [], state.filter);
+  useEffect(() => {
+    if (state.products.value)
+      onProducts?.(state.products.value.flatMap((group) => group.products));
+  }, [onProducts, state.products.value]);
+
+  const products = catalogProducts(state.products.value ?? [], {
+    kind: "recommended",
+  });
+  const categories = state.categories.value ?? [];
+  const categoryKeys = [
+    ...new Set([
+      ...categories.map((category) => category.value),
+      ...products.map((product) => product.category),
+    ]),
+  ];
+  const sections = categoryKeys
+    .map((key) => ({
+      key,
+      name:
+        categories.find((category) => category.value === key)?.name ||
+        state.products.value?.find((group) => group.category === key)
+          ?.categoryName?.[language] ||
+        key,
+      products: products.filter((product) => product.category === key),
+    }))
+    .filter((section) => section.products.length);
   const detail = state.detail.value;
   const pairingIssue = detail ? catalogPairingIssue(detail) : "";
   const locked = disabled || !state.active || action.busy;
   const useProduct = () =>
     void action.run(async () => {
       const selected = await catalog.confirmSelection();
-      if (selected && focused.current) onChoose(selected);
+      if (selected && focused.current) {
+        catalog.clearSelection();
+        onChoose(selected);
+      }
     });
-  const openBuyLink = () =>
+  const openBuyLink = (product: Product) =>
     void action.run(async () => {
-      const link = catalog.buyLink;
+      const link = trustedBuyLink(
+        product.buyLink,
+        productCatalogOptions.trustedBuyOrigins,
+      );
       if (link && focused.current) await Linking.openURL(link);
     });
 
   return (
-    <>
-      <Label large>Find your device</Label>
-      <View style={styles.row}>
-        <Button
-          title="Recommended"
-          secondary={state.filter.kind !== "recommended"}
-          disabled={locked}
-          onPress={() => void catalog.filter({ kind: "recommended" })}
-        />
-        <Button
-          title="手动产品"
-          secondary={state.filter.kind !== "manual"}
-          disabled={locked}
-          onPress={() => void catalog.filter({ kind: "manual" })}
-        />
-      </View>
-      {state.categories.loading && <Busy />}
+    <View
+      style={catalogStyles.catalog}
+      onLayout={(event) => setGridWidth(event.nativeEvent.layout.width)}
+    >
+      {state.categories.loading && !state.products.value && <Busy />}
       <ErrorText error={state.categories.error} />
       {!!state.categories.error && (
         <Button
@@ -181,22 +206,6 @@ export function ProductCatalog({
           onPress={() => void catalog.loadCategories()}
         />
       )}
-      <View style={styles.row}>
-        {state.categories.value?.map((category) => (
-          <Button
-            key={category.value}
-            title={category.name}
-            secondary={
-              state.filter.kind !== "category" ||
-              state.filter.value !== category.value
-            }
-            disabled={locked}
-            onPress={() =>
-              void catalog.filter({ kind: "category", value: category.value })
-            }
-          />
-        ))}
-      </View>
       {state.products.loading && <Busy />}
       <ErrorText error={state.products.error} />
       {!!state.products.error && (
@@ -211,72 +220,252 @@ export function ProductCatalog({
         !state.products.error &&
         state.products.value &&
         !products.length && (
-          <Card>
-            <Label muted>
-              {state.filter.kind === "recommended"
-                ? "暂无推荐产品，可查看手动产品"
-                : "当前品类暂无产品"}
-            </Label>
-          </Card>
+          <Text style={catalogStyles.empty}>暂无推荐设备</Text>
         )}
-      {products.map((product) => (
-        <Card key={product.id}>
-          <ProductImage source={product.image} name={product.name} />
-          <Label large>{product.name}</Label>
-          {!!product.modelName && <Label muted>{product.modelName}</Label>}
-          <Button
-            title="Select product"
-            secondary={state.selectedID !== product.id}
-            disabled={locked}
-            onPress={() => void catalog.select(product.id)}
-          />
-        </Card>
+      {sections.map((section) => (
+        <View key={section.key} style={catalogStyles.section}>
+          <Text style={catalogStyles.categoryTitle}>{section.name}：</Text>
+          <View style={catalogStyles.grid}>
+            {section.products.map((product) => {
+              const buyLink = trustedBuyLink(
+                product.buyLink,
+                productCatalogOptions.trustedBuyOrigins,
+              );
+              return (
+                <View
+                  key={product.id}
+                  style={[
+                    catalogStyles.catalogCard,
+                    { width: gridWidth ? (gridWidth - 20) / 3 : "31%" },
+                  ]}
+                >
+                  <Pressable
+                    accessibilityRole="button"
+                    accessibilityLabel={`查看 ${product.name}`}
+                    disabled={locked}
+                    onPress={() => void catalog.select(product.id)}
+                    style={({ pressed }) => [
+                      catalogStyles.product,
+                      pressed && catalogStyles.pressed,
+                      locked && catalogStyles.disabled,
+                    ]}
+                  >
+                    <ProductThumbnail
+                      source={product.image}
+                      name={product.name}
+                      style={catalogStyles.thumbnail}
+                    />
+                    <Text numberOfLines={1} style={catalogStyles.productName}>
+                      {product.modelName || product.name}
+                    </Text>
+                    {!!product.seriesName && (
+                      <Text numberOfLines={1} style={catalogStyles.series}>
+                        {product.seriesName}
+                      </Text>
+                    )}
+                    <View style={catalogStyles.connections}>
+                      {product.connectType === "wifi" && (
+                        <Svg
+                          width={16}
+                          height={16}
+                          viewBox="0 0 24 24"
+                          accessibilityLabel="Wi-Fi"
+                        >
+                          <Path
+                            d="M2 8c5.5-5.3 14.5-5.3 20 0M5.5 11.5a9.3 9.3 0 0 1 13 0M9 15a4.3 4.3 0 0 1 6 0"
+                            stroke="#777777"
+                            strokeWidth={1.5}
+                            fill="none"
+                            strokeLinecap="round"
+                          />
+                          <Circle cx={12} cy={19} r={1.2} fill="#777777" />
+                        </Svg>
+                      )}
+                      {product.bluetooth === true && (
+                        <Image
+                          source={require("../../../assets/images/bluetooth-gray.png")}
+                          style={catalogStyles.bluetoothIcon}
+                          contentFit="contain"
+                          accessibilityLabel="蓝牙"
+                        />
+                      )}
+                    </View>
+                  </Pressable>
+                  {!!buyLink && (
+                    <Pressable
+                      accessibilityRole="link"
+                      accessibilityLabel={`购买 ${product.name}`}
+                      disabled={locked}
+                      onPress={() => openBuyLink(product)}
+                      style={({ pressed }) => [
+                        catalogStyles.shop,
+                        pressed && catalogStyles.pressed,
+                      ]}
+                    >
+                      <Text style={catalogStyles.shopText}>Shop</Text>
+                    </Pressable>
+                  )}
+                </View>
+              );
+            })}
+          </View>
+        </View>
       ))}
-      {state.detail.loading && <Busy />}
-      <ErrorText error={state.detail.error} />
-      {state.selectedID && state.detail.error && (
-        <Button
-          title="重新加载产品详情"
-          secondary
-          disabled={locked || state.detail.loading}
-          onPress={() => void catalog.select(state.selectedID!)}
-        />
-      )}
-      {detail && (
-        <Card>
-          <ProductDetails product={detail} />
-          <ErrorText error={pairingIssue} />
-          <ErrorText error={action.error} />
-          <Button
-            title="使用此产品"
-            disabled={
-              locked ||
-              state.detail.loading ||
-              !!state.detail.error ||
-              !!pairingIssue
-            }
-            onPress={useProduct}
-          />
-          {!!catalog.buyLink && (
-            <Button
-              title="Shop"
-              secondary
-              disabled={locked}
-              onPress={openBuyLink}
-            />
-          )}
-          <Button
-            title="返回产品选择"
-            secondary
-            disabled={locked}
+      <Modal
+        visible={!!state.selectedID}
+        transparent
+        animationType="slide"
+        onRequestClose={() => catalog.clearSelection()}
+      >
+        <View style={catalogStyles.backdrop}>
+          <Pressable
+            style={StyleSheet.absoluteFill}
+            accessibilityRole="button"
+            accessibilityLabel="关闭产品详情"
             onPress={() => catalog.clearSelection()}
           />
-        </Card>
-      )}
-    </>
+          <View
+            style={[
+              catalogStyles.detailsSheet,
+              { paddingBottom: Math.max(insets.bottom, 16) },
+            ]}
+          >
+            <View style={catalogStyles.sheetHeader}>
+              <Text style={catalogStyles.sheetTitle}>产品详情</Text>
+              <Pressable
+                accessibilityRole="button"
+                accessibilityLabel="关闭产品详情"
+                onPress={() => catalog.clearSelection()}
+                style={catalogStyles.close}
+              >
+                <Text style={catalogStyles.closeText}>×</Text>
+              </Pressable>
+            </View>
+            <ScrollView contentContainerStyle={catalogStyles.detailsContent}>
+              {state.detail.loading && <Busy />}
+              <ErrorText error={state.detail.error} />
+              {!!state.detail.error && (
+                <Button
+                  title="重新加载产品详情"
+                  secondary
+                  disabled={locked || state.detail.loading}
+                  onPress={() => void catalog.select(state.selectedID!)}
+                />
+              )}
+              {detail && (
+                <>
+                  <ProductDetails product={detail} />
+                  <ErrorText error={pairingIssue} />
+                </>
+              )}
+              <ErrorText error={action.error} />
+            </ScrollView>
+            <Button
+              title="使用此产品"
+              disabled={
+                locked ||
+                !detail ||
+                state.detail.loading ||
+                !!state.detail.error ||
+                !!pairingIssue
+              }
+              onPress={useProduct}
+            />
+          </View>
+        </View>
+      </Modal>
+    </View>
   );
 }
 
 const catalogStyles = StyleSheet.create({
-  image: { height: 160, width: "100%" },
+  catalog: { width: "100%", gap: 20 },
+  section: { gap: 14 },
+  categoryTitle: {
+    fontSize: 14,
+    lineHeight: 20,
+    fontWeight: "600",
+    color: "#111111",
+  },
+  grid: { flexDirection: "row", flexWrap: "wrap", gap: 10 },
+  catalogCard: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    paddingTop: 12,
+    paddingBottom: 12,
+    boxShadow: "0px 2px 12px rgba(0,0,0,0.03)",
+  },
+  product: { alignItems: "center" },
+  thumbnail: { width: "100%", height: 52, marginBottom: 12 },
+  productName: {
+    maxWidth: "100%",
+    fontSize: 14,
+    lineHeight: 20,
+    color: "#333333",
+  },
+  series: {
+    maxWidth: "100%",
+    fontSize: 12,
+    lineHeight: 18,
+    color: "#999999",
+    marginTop: 2,
+  },
+  connections: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 12,
+    height: 24,
+    marginTop: 4,
+  },
+  bluetoothIcon: { width: 14, height: 14 },
+  shop: {
+    marginTop: 6,
+    height: 30,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 8,
+    backgroundColor: "#F2F2F2",
+  },
+  shopText: { fontSize: 14, color: "#1677C8", lineHeight: 20 },
+  empty: {
+    textAlign: "center",
+    fontSize: 13,
+    lineHeight: 22,
+    color: "#999999",
+    paddingVertical: 28,
+  },
+  pressed: { opacity: 0.65 },
+  disabled: { opacity: 0.45 },
+  detailImage: { height: 160, width: "100%" },
+  backdrop: {
+    flex: 1,
+    justifyContent: "flex-end",
+    backgroundColor: "rgba(0,0,0,0.48)",
+  },
+  detailsSheet: {
+    maxHeight: "85%",
+    backgroundColor: "#FFFFFF",
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    paddingHorizontal: 16,
+  },
+  sheetHeader: {
+    height: 56,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  sheetTitle: { fontSize: 17, fontWeight: "600", color: "#111111" },
+  close: {
+    position: "absolute",
+    right: 0,
+    height: 44,
+    width: 44,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  closeText: { fontSize: 26, color: "#777777" },
+  detailsContent: { gap: 14, paddingBottom: 20 },
 });

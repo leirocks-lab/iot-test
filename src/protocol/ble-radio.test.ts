@@ -26,10 +26,25 @@ async function selected(){
 }
 afterEach(()=>{vi.useRealTimers();vi.restoreAllMocks();});
 describe('原生BLE端口编排（注入端口，无真机结论）',()=>{
-  it('retains valid discoveries when readiness consumes part of the overall scan budget',async()=>{
+  it('keeps a full native scan window after readiness and isolates subsequent rounds',async()=>{
     vi.useFakeTimers();const radio=new Radio();radio.ready.mockImplementationOnce(()=>new Promise(resolve=>setTimeout(resolve,8000)));const driver=new Ble0822DeviceTransport(radio),observed=vi.fn(),scan=driver.scan(undefined,observed);
-    await vi.advanceTimersByTimeAsync(8000);radio.listeners[0](null,advert());await vi.advanceTimersByTimeAsync(22001);const discovered=await scan;expect(discovered).toHaveLength(1);expect(observed).toHaveBeenCalledOnce();expect(radio.stopScan).toHaveBeenCalled();
-    const next=driver.scan();await vi.advanceTimersByTimeAsync(0);radio.listeners[0](null,advert());await vi.advanceTimersByTimeAsync(25001);expect(await next).toEqual([]);await driver.dispose();
+    await vi.advanceTimersByTimeAsync(8000);radio.listeners[0](null,advert());await vi.advanceTimersByTimeAsync(59999);expect(radio.stopScan).not.toHaveBeenCalled();
+    await vi.advanceTimersByTimeAsync(1);const discovered=await scan;expect(discovered).toHaveLength(1);expect(observed).toHaveBeenCalledOnce();expect(radio.stopScan).toHaveBeenCalled();
+    const next=driver.scan();await vi.advanceTimersByTimeAsync(0);radio.listeners[0](null,advert());await vi.advanceTimersByTimeAsync(60000);expect(await next).toEqual([]);await driver.dispose();
+  });
+  it.each([false,true])('continues listening for late advertisements until 60000ms, initial discovery=%s',async(initial)=>{
+    vi.useFakeTimers();const radio=new Radio(),driver=new Ble0822DeviceTransport(radio),observed=vi.fn(),scan=driver.scan(undefined,observed);
+    await vi.advanceTimersByTimeAsync(0);if(initial)radio.listeners[0](null,advert());
+    await vi.advanceTimersByTimeAsync(59999);expect(radio.stopScan).not.toHaveBeenCalled();
+    const late=advert();late.manufacturer[8]=0xf0;radio.listeners[0](null,late);
+    expect(observed).toHaveBeenCalledTimes(initial?2:1);
+    await vi.advanceTimersByTimeAsync(1);expect(await scan).toHaveLength(initial?2:1);
+    expect(radio.stopScan).toHaveBeenCalledOnce();await driver.dispose();
+  });
+  it('honors an explicit native scan duration and returns an empty list only at its deadline',async()=>{
+    vi.useFakeTimers();const radio=new Radio(),driver=new Ble0822DeviceTransport(radio,50),scan=driver.scan(undefined,undefined,120000);
+    await vi.advanceTimersByTimeAsync(119999);expect(radio.stopScan).not.toHaveBeenCalled();
+    await vi.advanceTimersByTimeAsync(1);expect(await scan).toEqual([]);expect(radio.stopScan).toHaveBeenCalledOnce();await driver.dispose();
   });
   it('certifies a first-frame MTU rejection as not sent but never certifies errors after a write',async()=>{
     const {radio,driver}=await selected();radio.channel.mtu=23;const started=vi.fn(),first=driver.exchange(input,[encode0822(0,new Uint8Array(16),key)],undefined,started);await expect(first).rejects.toBeInstanceOf(ProvisionNotSentError);await expect(first).rejects.toMatchObject({code:503});expect(started).not.toHaveBeenCalled();expect(radio.channel.write).not.toHaveBeenCalled();

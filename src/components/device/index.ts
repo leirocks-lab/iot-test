@@ -1,4 +1,4 @@
-import type { DeviceCommand, DeviceId, DeviceStatus } from '../../lib/iot';
+import type { DeviceCommand, DeviceId, DeviceStatus } from "../../lib/iot";
 
 export interface DeviceControlProps {
   readonly deviceId: DeviceId;

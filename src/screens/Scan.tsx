@@ -196,7 +196,7 @@ function ScanContent({
       setResultDevices(matched);
     } else {
       router.replace({
-        pathname: "/add",
+        pathname: "/add-provision",
         params: { productID: destination.productID },
       });
     }
@@ -273,7 +273,7 @@ function ScanContent({
         <Label>当前设备还有待完成的添加结果，请先处理当前事务。</Label>
         <Button
           title="返回当前添加流程"
-          onPress={() => router.replace("/add")}
+          onPress={() => router.replace("/add-provision")}
         />
       </Page>
     );

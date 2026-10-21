@@ -2,6 +2,7 @@ import type { DiscoveredDevice } from './ble';
 import { BLE_0822, classify0822, decode0822, expectedAck0822, FrameStream0822, key0822, parseAdvertisement0822 } from './ble-0822';
 import { ApiError } from '../services/models';
 import { ProvisionNotSentError, UnavailableDeviceTransport, withBudget, type ProvisionInput } from './device';
+import { resolveDeviceScanDuration } from '../config/device-discovery';
 
 export interface BleConnection {
   mtu:number;
@@ -31,8 +32,9 @@ export class Ble0822DeviceTransport extends UnavailableDeviceTransport {
   private scanCancel?:()=>void;
   private disposed=false;
   private writing=false;
-  constructor(private radio:BleRadio,private scanWindow=25000,private ackTimeout=5000){super();}
-  async scan(signal?:AbortSignal,onDiscovered?:(device:DiscoveredDevice)=>void):Promise<DiscoveredDevice[]> {
+  constructor(private radio:BleRadio,private scanWindow=resolveDeviceScanDuration(),private ackTimeout=5000){super();}
+  async scan(signal?:AbortSignal,onDiscovered?:(device:DiscoveredDevice)=>void,durationMs=this.scanWindow):Promise<DiscoveredDevice[]> {
+    const duration=resolveDeviceScanDuration(durationMs);
     if(this.disposed)throw new ApiError(503,'蓝牙客户端已关闭');
     if(this.scanCancel)throw new ApiError(409,'已有蓝牙扫描进行中');
     this.found.clear();
@@ -47,7 +49,7 @@ export class Ble0822DeviceTransport extends UnavailableDeviceTransport {
           if(error)reject(error);else resolve([...this.found.values()]);
         };
         const cancel=()=>finish(aborted());
-        const timer=setTimeout(()=>finish(),this.scanWindow);
+        const timer=setTimeout(()=>finish(),duration);
         this.scanCancel=cancel;budget.addEventListener('abort',cancel,{once:true});
         if(budget.aborted){cancel();return;}
         void this.radio.startScan((error,advertisement)=>{
@@ -58,7 +60,7 @@ export class Ble0822DeviceTransport extends UnavailableDeviceTransport {
           catch{/* Unsupported advertisements are not eligible devices in this profile. */}
         }).catch(error=>finish(error instanceof Error?error:new ApiError(65,'蓝牙扫描失败')));
       });
-    },30000,'蓝牙扫描超时',signal).catch(error=>{if(error instanceof ApiError&&error.code===408&&!signal?.aborted&&this.found.size)return [...this.found.values()];throw error;});
+    },Math.min(duration+30000,2_147_483_647),'蓝牙扫描超时',signal).catch(error=>{if(error instanceof ApiError&&error.code===408&&!signal?.aborted&&this.found.size)return [...this.found.values()];throw error;});
   }
   private close(session:Session,error:Error=aborted()) {
     if(session.closed)return;session.closed=true;session.error=error;

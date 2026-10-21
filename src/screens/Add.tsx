@@ -6,16 +6,22 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
-import { AppState, Linking, Platform, View } from "react-native";
-import { WifiStatus } from "../components/device/wifi-status";
+import { AppState, Linking, Platform } from "react-native";
+import { AddDeviceDiscovery } from "../components/add-device-discovery";
+import { AddDeviceProvision } from "../components/add-device-provision";
 import {
   ProductCatalog,
   ProductDetails,
 } from "../components/device/product-catalog";
-import { ApiError, type Product } from "../services/models";
-import { matchesDiscoveredProduct } from "../services/onboarding";
+import { WifiStatus } from "../components/device/wifi-status";
+import {
+  SystemRequirementsSheet,
+  type SystemRequirement,
+} from "../components/system-requirements-sheet";
 import { withBudget } from "../protocol/device";
+import { ApiError, type Product } from "../services/models";
 import { wifiGuidance, type WifiObservation } from "../services/network-policy";
+import { matchesDiscoveredProduct } from "../services/onboarding";
 import { useApp } from "../ui/context";
 import {
   Busy,
@@ -25,19 +31,37 @@ import {
   Field,
   Label,
   Page,
-  styles,
   useAction,
 } from "../ui/kit";
 
 export default function Add() {
   const { runtime } = useApp();
   if (!runtime) return <Busy />;
-  return <AddContent key={runtime.service.sessionRevision} runtime={runtime} />;
+  return (
+    <AddContent
+      key={runtime.service.sessionRevision}
+      runtime={runtime}
+      page="discovery"
+    />
+  );
+}
+export function AddProvision() {
+  const { runtime } = useApp();
+  if (!runtime) return <Busy />;
+  return (
+    <AddContent
+      key={runtime.service.sessionRevision}
+      runtime={runtime}
+      page="provision"
+    />
+  );
 }
 function AddContent({
   runtime,
+  page,
 }: {
   runtime: NonNullable<ReturnType<typeof useApp>["runtime"]>;
+  page: "discovery" | "provision";
 }) {
   const action = useAction(),
     run = action.run;
@@ -66,11 +90,15 @@ function AddContent({
     [nickname, setNickname] = useState("");
   const focused = useRef(false),
     loadController = useRef<AbortController | null>(null);
+  const navigatingToProvision = useRef(false);
   const wifiController = useRef<AbortController | null>(null),
     wifiRound = useRef(0);
   const [wifi, setWifi] = useState<WifiObservation>(),
     [wifiError, setWifiError] = useState(""),
     [wifiBusy, setWifiBusy] = useState(false);
+  const [dismissedRequirement, setDismissedRequirement] =
+    useState<SystemRequirement | null>(null);
+  const [catalogProducts, setCatalogProducts] = useState<Product[]>([]);
   const refreshWifi = useCallback(
     async (requestPermission = false) => {
       if (!runtime.wifi) return;
@@ -106,6 +134,7 @@ function AddContent({
   useFocusEffect(
     useCallback(() => {
       focused.current = true;
+      navigatingToProvision.current = false;
       if (qrPending)
         return () => {
           focused.current = false;
@@ -156,7 +185,21 @@ function AddContent({
             throw error;
           }
         }
-        if (flow.state.candidate) await refreshWifi();
+        if (
+          page === "provision" &&
+          (flow.state.candidate || runtime.config.deviceMode === "real")
+        ) {
+          void refreshWifi();
+        }
+        if (
+          page === "discovery" &&
+          !productID &&
+          !boundDeviceID &&
+          flow.state.stage === "idle" &&
+          !flow.state.message
+        ) {
+          void flow.scan().catch(() => undefined);
+        }
       });
       const subscription = AppState.addEventListener("change", (status) => {
         if (status !== "active") {
@@ -165,7 +208,9 @@ function AddContent({
           setWifi(undefined);
           setPassword("");
           setShowPassword(false);
-        } else if (focused.current) void refreshWifi();
+        } else if (focused.current && page === "provision") {
+          void refreshWifi();
+        }
       });
       return () => {
         focused.current = false;
@@ -173,11 +218,13 @@ function AddContent({
         wifiController.current?.abort();
         loadController.current?.abort();
         subscription.remove();
-        flow.stop();
+        if (!(page === "discovery" && navigatingToProvision.current)) {
+          flow.stop();
+        }
         setPassword("");
         setShowPassword(false);
       };
-    }, [runtime, productID, boundDeviceID, run, flow, refreshWifi, qrPending]),
+    }, [runtime, productID, boundDeviceID, run, flow, refreshWifi, qrPending, page]),
   );
   const busy = state.busy || action.busy,
     product = state.product ?? choice;
@@ -188,15 +235,35 @@ function AddContent({
     state.stage !== "complete" &&
     state.nickname === "pending";
   const error = action.error || state.error;
+  const requirement: SystemRequirement | null =
+    state.scanIssue === "permission"
+      ? "permission"
+      : state.scanIssue === "bluetooth"
+        ? "bluetooth"
+        : wifi && wifi.connection !== "wifi"
+          ? "wifi"
+          : wifi?.ssidAccess === "denied"
+            ? "permission"
+            : null;
   const execute = (work: () => Promise<unknown>) => void run(work);
   const choose = (selected: Product) => {
-    if (!focused.current || busy || state.stage === "unknown") return;
-    flow.reset();
+    if (page !== "discovery") return;
+    if (
+      !focused.current ||
+      (busy && state.stage !== "scanning") ||
+      state.stage === "unknown"
+    )
+      return;
+    flow.stop();
     setChoice(selected);
     setPassword("");
     setShowPassword(false);
   };
-  const scan = () => execute(() => flow.scan());
+  const scan = () => {
+    if (page !== "discovery") return;
+    setDismissedRequirement(null);
+    void flow.scan().catch(() => undefined);
+  };
   const provision = () =>
     execute(async () => {
       try {
@@ -209,7 +276,7 @@ function AddContent({
         setShowPassword(false);
       }
     });
-  const finish = (value: string | null) => execute(() => flow.finish(value));
+  const finish = (value: string | null) => run(() => flow.finish(value));
   const stopCurrent = () => {
     flow.stop();
     loadController.current?.abort();
@@ -224,6 +291,27 @@ function AddContent({
     flow.stop();
     router.replace("/home");
   };
+  const requirementsSheet = (
+    <SystemRequirementsSheet
+      visible={!!requirement && dismissedRequirement !== requirement}
+      requirement={requirement ?? "permission"}
+      error={action.error}
+      busy={action.busy}
+      onCancel={() => setDismissedRequirement(requirement)}
+      onOpenSettings={() => {
+        void run(async () => {
+          if (requirement === "bluetooth" && Platform.OS === "android") {
+            await Linking.sendIntent("android.settings.BLUETOOTH_SETTINGS");
+          } else if (requirement === "wifi" && Platform.OS === "android") {
+            await Linking.sendIntent("android.settings.WIFI_SETTINGS");
+          } else {
+            await Linking.openSettings();
+          }
+          setDismissedRequirement(requirement);
+        });
+      }}
+    />
+  );
   if (qrPending)
     return (
       <Page title="Add device">
@@ -234,31 +322,95 @@ function AddContent({
         />
       </Page>
     );
+  if (
+    page === "discovery" &&
+    !state.binding &&
+    state.stage !== "unknown"
+  ) {
+    const selectionBusy =
+      action.busy || (state.busy && state.stage !== "scanning");
+    return (
+      <AddDeviceDiscovery
+        scanning={state.stage === "scanning"}
+        devices={state.discovered.filter(
+          (device) => !choice || matchesDiscoveredProduct(device, choice),
+        )}
+        products={catalogProducts}
+        disabled={selectionBusy}
+        error={state.scanIssue === "timeout" || requirement ? undefined : error}
+        onBack={() => {
+          flow.stop();
+          if (router.canGoBack()) router.back();
+          else router.replace("/home");
+        }}
+        onRescan={scan}
+        onSelect={(device) => {
+          execute(async () => {
+            flow.stop();
+            await flow.select(device, choice?.id);
+            if (focused.current) {
+              navigatingToProvision.current = true;
+              const selectedProductID = flow.snapshot().product?.id;
+              router.push({
+                pathname: "/add-provision",
+                params: selectedProductID ? { productID: selectedProductID } : undefined,
+              });
+            }
+          });
+        }}
+        catalog={
+          <ProductCatalog
+            service={runtime.service}
+            disabled={selectionBusy}
+            onChoose={choose}
+            onProducts={setCatalogProducts}
+          />
+        }
+        sheet={requirementsSheet}
+      />
+    );
+  }
+  if (page === "provision") {
+    return (
+      <AddDeviceProvision
+        state={state}
+        product={product ?? undefined}
+        wifi={wifi}
+        wifiBusy={wifiBusy}
+        ssid={ssid}
+        password={password}
+        nickname={nickname}
+        busy={busy}
+        error={error}
+        wifiError={wifiError}
+        onSsidChange={setSsid}
+        onPasswordChange={setPassword}
+        onNicknameChange={(value) => setNickname([...value].slice(0, 20).join(""))}
+        onRefreshWifi={() => void refreshWifi(true)}
+        onProvision={provision}
+        onFinish={finish}
+        onRetryProvision={() => {
+          setPassword("");
+          setShowPassword(false);
+        }}
+        onBack={() => {
+          flow.stop();
+          if (router.canGoBack()) router.back();
+          else router.replace("/home");
+        }}
+        onDone={returnHome}
+        service={{
+          rooms: async () => (await runtime.service.rooms()).rooms,
+          moveDevice: (id, roomID) => runtime.service.moveDevice(id, roomID),
+        }}
+      />
+    );
+  }
   return (
     <Page title="Add device">
       {!wifiForm && !nicknameForm && <ErrorText error={error} />}
       {!state.binding && (
         <>
-          <View style={styles.row}>
-            <Button
-              title="Scan QR code"
-              secondary
-              disabled={busy || state.stage === "unknown"}
-              onPress={() => router.push("/scan")}
-            />
-            <Button
-              title="Scan Bluetooth devices"
-              disabled={busy || state.stage === "unknown"}
-              onPress={scan}
-            />
-          </View>
-          {!product && (
-            <ProductCatalog
-              service={runtime.service}
-              disabled={busy || state.stage === "unknown"}
-              onChoose={choose}
-            />
-          )}
           {product && (
             <Card>
               <ProductDetails product={product} />
@@ -276,74 +428,6 @@ function AddContent({
                 />
               )}
             </Card>
-          )}
-          {state.discovered
-            .filter(
-              (device) => !choice || matchesDiscoveredProduct(device, choice),
-            )
-            .map((device) => (
-              <Button
-                key={device.mac.toLowerCase()}
-                secondary={state.candidate?.mac !== device.mac}
-                title={`${device.model} · ${device.mac}`}
-                disabled={busy || state.stage === "unknown"}
-                onPress={() =>
-                  execute(async () => {
-                    await flow.select(device, choice?.id);
-                    if (focused.current) await refreshWifi();
-                  })
-                }
-              />
-            ))}
-          {choice &&
-            state.discovered.length > 0 &&
-            !state.discovered.some((device) =>
-              matchesDiscoveredProduct(device, choice),
-            ) && <Label muted>未发现所选产品，可重新扫描或改选产品。</Label>}
-          {(state.stage === "idle" || state.stage === "failed") &&
-            !!state.message && (
-              <View style={styles.row}>
-                <Button
-                  title="Retry"
-                  secondary
-                  disabled={busy}
-                  onPress={scan}
-                />
-                <Button
-                  title="手动 / 推荐产品"
-                  secondary
-                  disabled={busy}
-                  onPress={() => {
-                    flow.reset();
-                    setChoice(null);
-                    setPassword("");
-                  }}
-                />
-              </View>
-            )}
-          {(state.scanIssue === "permission" ||
-            state.scanIssue === "bluetooth") && (
-            <>
-              <Label muted>
-                {state.scanIssue === "permission"
-                  ? "请在系统设置中允许蓝牙所需权限，再返回重新扫描。"
-                  : "请在系统设置中打开蓝牙，再返回重新扫描。"}
-              </Label>
-              <Button
-                secondary
-                title="打开系统设置"
-                disabled={busy}
-                onPress={() =>
-                  execute(() =>
-                    state.scanIssue === "bluetooth" && Platform.OS === "android"
-                      ? Linking.sendIntent(
-                          "android.settings.BLUETOOTH_SETTINGS",
-                        )
-                      : Linking.openSettings(),
-                  )
-                }
-              />
-            </>
           )}
           {wifiForm && (
             <>
@@ -509,6 +593,7 @@ function AddContent({
       {state.stage === "complete" && (
         <Button title="返回首页" disabled={busy} onPress={returnHome} />
       )}
+      {requirementsSheet}
     </Page>
   );
 }
