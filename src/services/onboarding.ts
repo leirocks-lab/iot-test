@@ -5,6 +5,7 @@ import type { RowanService } from './rowan';
 import { Provisioner0822, type Profile0822, type ProvisionRunner } from '../protocol/provision-0822';
 import { requireCurrentWifi, type WifiReader } from './wifi';
 import { MockDeviceSession, type DeviceSession } from '../protocol/device-session';
+import { resolveDeviceScanDuration } from '../config/device-discovery';
 
 export interface RealAddContract {
   profile:Profile0822;
@@ -31,10 +32,13 @@ export interface AddState {
   realtimeError: string;
   busy: boolean;
   deviceStep?: string;
+  /** Fraction of known device and binding events that actually arrived. */
+  deviceProgress?: number;
   scanIssue?:'permission'|'bluetooth'|'timeout'|'other';
 }
 export interface AddOptions {
   mode: 'mock' | 'real';
+  /** Foreground scan duration in milliseconds; defaults to deviceDiscoveryConfig.scanDurationMs. */
   scanTimeout?: number;
   bindingTimeout?: number;
   pollInterval?: number;
@@ -49,6 +53,16 @@ const initial = (): AddState => ({stage:'idle',message:'',error:'',discovered:[]
 const errorText = (error: unknown) => error instanceof Error ? error.message : String(error);
 const cancelled = () => new ApiError(499,'当前添加操作已停止');
 const stageLabels: Record<string,string> = {A:'连接家庭 Wi-Fi',C:'认证设备',B:'激活设备',D:'绑定账号',E:'获取设备证书',F:'连接设备服务器'};
+const provisionStages = ['A','C','B','D','E','F'] as const;
+const provisionEventCount = provisionStages.length * 2 + 1;
+/** Map only device-reported stage events; unknown status text must not advance UI progress. */
+export function provisionProgress(status: string) {
+  const match = /^([ACBDEF])([01])$/.exec(status);
+  if (!match) return undefined;
+  const stage = provisionStages.indexOf(match[1] as (typeof provisionStages)[number]);
+  if (stage < 0) return undefined;
+  return (stage * 2 + (match[2] === '1' ? 1 : 2)) / provisionEventCount;
+}
 export function describeProvisionStatus(status: string) {
   const match = /^([ACBDEF])([0-9A-F])$/.exec(status);
   return match ? `${stageLabels[match[1]]} · ${match[2]==='0'?'已完成':match[2]==='1'?'进行中':`异常（${status}）`}` : status;
@@ -81,6 +95,7 @@ export class AddDeviceFlow {
   private session?: DeviceSession;
   private sessionUnsubscribe?:()=>void;
   constructor(private service: RowanService, private devices: DeviceTransport, private options: AddOptions) {
+    resolveDeviceScanDuration(options.scanTimeout);
     if((options.pollInterval??mockProfile.bindInterval)<2000)throw new Error('绑定查询间隔不能低于2秒');
   }
   subscribe = (listener: () => void) => {this.listeners.add(listener);return () => {this.listeners.delete(listener);};};
@@ -117,17 +132,27 @@ export class AddDeviceFlow {
     return this.operate(async(round,signal)=>{
       this.update({stage:'scanning',message:'正在扫描蓝牙设备',discovered:[],candidate:undefined,scanIssue:undefined});
       try {
-        const found=await withBudget(budget=>this.devices.scan(budget,device=>{
-          if(round!==this.round||signal.aborted||budget.aborted||this.service.session?.userID!==this.owner||this.service.sessionRevision!==this.revision)return;
-          if(device.mac&&!this.state.discovered.some(item=>item.mac.toLowerCase()===device.mac.toLowerCase()))this.update({discovered:[...this.state.discovered,{...device}]});
-        }),this.options.scanTimeout??mockProfile.scanTimeout,'蓝牙扫描超时',signal);
+        const duration=resolveDeviceScanDuration(this.options.scanTimeout),started=Date.now();
+        const found=await withBudget(async budget=>{
+          const report=(device:DiscoveredDevice)=>{
+            if(round!==this.round||signal.aborted||budget.aborted||this.service.session?.userID!==this.owner||this.service.sessionRevision!==this.revision)return;
+            if(device.mac&&!this.state.discovered.some(item=>item.mac.toLowerCase()===device.mac.toLowerCase()))this.update({discovered:[...this.state.discovered,{...device}]});
+          };
+          const result=await this.devices.scan(budget,report,duration);
+          this.check(round,signal);
+          // Preserve incremental discoveries and adapters that only return a final list.
+          for(const device of result)report(device);
+          // An adapter returning early must not shorten the visible scan window.
+          await pause(Math.max(0,duration-(Date.now()-started)),budget);
+          return this.state.discovered;
+        },duration,'蓝牙扫描超时',signal);
         this.check(round,signal);
         const unique=new Map<string,DiscoveredDevice>();
         for(const device of found)if(device.mac && !unique.has(device.mac.toLowerCase()))unique.set(device.mac.toLowerCase(),device);
         this.update({stage:'idle',discovered:[...unique.values()],message:unique.size?'扫描已结束，请选择设备':'未发现设备，可重试或选择已有产品'});
       } catch(error) {this.check(round,signal);
         const scanIssue=error instanceof ApiError?error.code===403?'permission':error.code===61?'bluetooth':error.code===408?'timeout':'other':'other';
-        if(scanIssue==='timeout'&&this.state.discovered.length){this.update({stage:'idle',scanIssue,message:'扫描时限已到，请选择已发现设备'});return;}
+        if(scanIssue==='timeout'){this.update({stage:'idle',scanIssue,message:this.state.discovered.length?'扫描时限已到，请选择已发现设备':'未发现设备，可重试或选择已有产品'});return;}
         this.update({stage:'failed',scanIssue,message:'扫描未完成'});throw error;
       }
     });
@@ -199,16 +224,16 @@ export class AddDeviceFlow {
           const network=await withBudget(budget=>this.options.wifi!.read(budget),10000,'当前Wi-Fi读取超时',signal);this.check(round,signal);requireCurrentWifi(network,ssid);
         }
         const result=await withBudget(async budget=>{
-          this.update({stage:'provisioning'});
+          this.update({stage:'provisioning',deviceProgress:undefined});
           const markSubmitted=()=>{this.check(round,budget);sent=true;this.submitted=true;};
           const runner:ProvisionRunner=this.options.mode==='real'?new Provisioner0822(this.devices,this.options.real!.profile):new Provisioner(this.devices);
-          return runner.run(input,status=>{this.check(round,budget);if(this.options.mode==='mock')markSubmitted();this.update({message:describeProvisionStatus(status),deviceStep:describeProvisionStatus(status)});},budget,async bindingSignal=>{
+           return runner.run(input,status=>{this.check(round,budget);if(this.options.mode==='mock')markSubmitted();const progress=provisionProgress(status);this.update({message:describeProvisionStatus(status),deviceStep:describeProvisionStatus(status),...(progress===undefined?{}:{deviceProgress:progress})});},budget,async bindingSignal=>{
             this.check(round,budget);this.update({stage:'binding',message:'正在查询云端绑定结果'});
             return this.poll(round,bindingSignal!);
           },markSubmitted);
         },this.options.operationTimeout??this.options.real?.operationTimeout??13*mockProfile.ackTimeout+mockProfile.routerTimeout+mockProfile.bindInterval*mockProfile.bindAttempts,'配网结果等待超时，请核对绑定结果',signal);
         this.check(round,signal);this.validateBinding(result);
-        this.update({binding:result,stage:'bound',message:'绑定已确认，可设置昵称'});
+        this.update({binding:result,stage:'bound',message:'绑定已确认，可设置昵称',deviceProgress:1});
       } catch(error) {
         this.check(round,signal);
         if(error instanceof ProvisionNotSentError){sent=false;this.submitted=false;}

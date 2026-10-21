@@ -3,22 +3,67 @@ import { MockDeviceTransport, ProvisionNotSentError, withBudget } from '../proto
 import type { DiscoveredDevice } from '../protocol/ble';
 import { ApiError } from './models';
 import { MockHttpClient } from './http';
-import { AddDeviceCoordinator, AddDeviceFlow, describeProvisionStatus, matchesDiscoveredProduct, validateWifi } from './onboarding';
+import { AddDeviceCoordinator, AddDeviceFlow, describeProvisionStatus, matchesDiscoveredProduct, provisionProgress, validateWifi } from './onboarding';
 import { RowanService } from './rowan';
 import { MemoryStorage, MockDatabase } from './store';
 import { Provisioner0822 } from '../protocol/provision-0822';
+import { deviceDiscoveryConfig } from '../config/device-discovery';
 
 async function setup() {
   const db=await MockDatabase.open(new MemoryStorage()),http=new MockHttpClient(db);
   const service=new RowanService(http,new MemoryStorage());await service.login('rowan@example.com','Rowan@123','password');
   const driver=new MockDeviceTransport(db,{delay:0});
-  const flow=new AddDeviceFlow(service,driver,{mode:'mock',bindingTimeout:10000});
+  const flow=new AddDeviceFlow(service,driver,{mode:'mock',scanTimeout:10,bindingTimeout:10000});
   return {db,http,service,driver,flow};
 }
 async function selected() {
   const context=await setup();await context.flow.scan();await context.flow.select(context.flow.state.discovered[1]);return context;
 }
 describe('P1审计：扫描与发送证据',()=>{
+  it.each(['incremental','empty','early-result'] as const)('keeps a default scan active for the full minute: %s',async(kind)=>{
+    const {service,driver}=await setup(),flow=new AddDeviceFlow(service,driver,{mode:'mock'});
+    const candidate={handle:'fixture',mac:'80a036d51aad',model:'RW-DH01',service:'0822',productID:'prd_humidity'};
+    const scan=vi.spyOn(driver,'scan');
+    if(kind!=='incremental')scan.mockResolvedValue(kind==='empty'?[]:[candidate]);
+    vi.useFakeTimers();const task=flow.scan();
+    await vi.advanceTimersByTimeAsync(59999);
+    expect(scan).toHaveBeenCalledWith(expect.any(AbortSignal),expect.any(Function),60000);
+    expect(flow.state).toMatchObject({stage:'scanning',busy:true,error:''});
+    expect(flow.state.discovered).toHaveLength(kind==='empty'?0:kind==='incremental'?2:1);
+    await vi.advanceTimersByTimeAsync(1);await task;
+    expect(flow.state).toMatchObject({stage:'idle',busy:false,error:''});
+    expect(flow.state.discovered).toHaveLength(kind==='empty'?0:kind==='incremental'?2:1);
+    if(kind==='empty')expect(flow.state.message).toContain('未发现');
+    flow.stop();
+  });
+  it('uses the configured duration on every retry and immediately cancels the current window',async()=>{
+    const {service,driver}=await setup(),flow=new AddDeviceFlow(service,driver,{mode:'mock',scanTimeout:120000});
+    let report:(device:DiscoveredDevice)=>void=()=>undefined,signal:AbortSignal|undefined;
+    vi.spyOn(driver,'scan').mockImplementation(async(current,onDiscovered,duration)=>{
+      signal=current;report=onDiscovered!;expect(duration).toBe(120000);return [];
+    });
+    vi.useFakeTimers();const first=flow.scan();await vi.advanceTimersByTimeAsync(60000);
+    expect(flow.state.stage).toBe('scanning');const oldReport=report;
+    const rejected=expect(first).rejects.toMatchObject({code:499});flow.stop();await rejected;
+    expect(signal?.aborted).toBe(true);expect(flow.state.busy).toBe(false);
+    const next=flow.scan();await vi.advanceTimersByTimeAsync(119999);
+    oldReport({handle:'late',mac:'late',model:'RW-DH01',service:'0822'});
+    expect(flow.state).toMatchObject({stage:'scanning',discovered:[]});
+    await vi.advanceTimersByTimeAsync(1);await next;expect(flow.state.stage).toBe('idle');
+    expect(signal?.aborted).toBe(true);flow.stop();
+  });
+  it('reads the shared scan configuration and rejects invalid durations before scanning',async()=>{
+    const {service,driver}=await setup();
+    const original=deviceDiscoveryConfig.scanDurationMs;
+    try {
+      deviceDiscoveryConfig.scanDurationMs=45000;
+      const flow=new AddDeviceFlow(service,driver,{mode:'mock'}),scan=vi.spyOn(driver,'scan').mockResolvedValue([]);
+      vi.useFakeTimers();const task=flow.scan();await vi.advanceTimersByTimeAsync(44999);expect(flow.state.stage).toBe('scanning');
+      await vi.advanceTimersByTimeAsync(1);await task;expect(scan).toHaveBeenCalledWith(expect.any(AbortSignal),expect.any(Function),45000);
+      for(const scanTimeout of [0,-1,NaN,Infinity,1.5,2147483648])expect(()=>new AddDeviceFlow(service,driver,{mode:'mock',scanTimeout})).toThrow('正整数');
+      flow.stop();
+    } finally {deviceDiscoveryConfig.scanDurationMs=original;}
+  });
   it('replaces an unsent different-product target but preserves same-product help and binding facts',async()=>{
     const {flow,service}=await selected(),original=flow.state.candidate!,same=flow.state.product!;flow.adoptProduct(same);expect(flow.state.candidate).toBe(original);
     const other=await service.product('prd_wine');flow.adoptProduct(other);expect(flow.state.candidate).toBeUndefined();expect(flow.state.product).toBeUndefined();expect(flow.state.stage).toBe('idle');
@@ -152,12 +197,21 @@ describe('添加设备业务闭环',()=>{
     expect(describeProvisionStatus('A1')).toBe('连接家庭 Wi-Fi · 进行中');
     expect(describeProvisionStatus('F0')).toBe('连接设备服务器 · 已完成');
   });
+  it('maps only real provisioning events to monotonic progress',()=>{
+    const statuses=['A1','A0','C1','C0','B1','B0','D1','D0','E1','E0','F1','F0'];
+    const values=statuses.map(provisionProgress);
+    expect(values[0]).toBeCloseTo(1/13);
+    expect(values.at(-1)).toBeCloseTo(12/13);
+    expect(values.every((value,index)=>index===0||value!>values[index-1]!)).toBe(true);
+    expect(provisionProgress('A4')).toBeUndefined();
+    expect(provisionProgress('binding')).toBeUndefined();
+  });
   it('settles budgets immediately on cancellation even if work never cooperates',async()=>{
     const controller=new AbortController();const task=withBudget(()=>new Promise(()=>undefined),60000,'timeout',controller.signal);
     const rejected=expect(task).rejects.toMatchObject({code:499});controller.abort();await rejected;
   });
   it('resumes an uncertain transaction across route instances until the account changes',async()=>{
-    const {service,driver}=await setup(),coordinator=new AddDeviceCoordinator(service,driver,{mode:'mock'}),flow=coordinator.acquire();
+    const {service,driver}=await setup(),coordinator=new AddDeviceCoordinator(service,driver,{mode:'mock',scanTimeout:10}),flow=coordinator.acquire();
     await flow.scan();await flow.select(flow.state.discovered[1]);
     vi.spyOn(service,'bindStatus').mockRejectedValue(new ApiError(0,'未知'));
     await expect(flow.provision('Test','test')).rejects.toThrow('未知');flow.stop();
@@ -182,7 +236,7 @@ describe('添加设备业务闭环',()=>{
     expect(flow.state.discovered).toHaveLength(0);await expect(flow.scan()).rejects.toMatchObject({code:499});
   });
   it('does not reuse an uncertain context after same-account re-login',async()=>{
-    const {service,driver}=await setup(),coordinator=new AddDeviceCoordinator(service,driver,{mode:'mock'}),flow=coordinator.acquire();
+    const {service,driver}=await setup(),coordinator=new AddDeviceCoordinator(service,driver,{mode:'mock',scanTimeout:10}),flow=coordinator.acquire();
     await flow.scan();await flow.select(flow.state.discovered[1]);await service.login('rowan@example.com','Rowan@123','password');
     expect(coordinator.acquire()).not.toBe(flow);coordinator.clear();
   });

@@ -34,6 +34,7 @@ function Routes() {
           <Stack.Screen name="(tabs)" />
           <Stack.Screen name="device" />
           <Stack.Screen name="add" />
+          <Stack.Screen name="add-provision" />
           <Stack.Screen name="scan" />
           <Stack.Screen name="rooms" />
           <Stack.Screen name="preferences" />
