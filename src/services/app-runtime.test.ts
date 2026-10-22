@@ -59,6 +59,18 @@ describe('P1 App启动装配',()=>{
   it.each([{qr:1},{wifi:{}},{onboarding:{}}])('rejects malformed selected business ports before runtime work %j',async value=>{
     const create=vi.fn(async()=>({dispose:vi.fn()} as unknown as Runtime));await expect(createConfiguredRuntime(config,{registry:registry(value as RuntimeContracts),create})).rejects.toThrow(/无效|不完整/);expect(create).not.toHaveBeenCalled();
   });
+  it('assembles a reviewed real profile without an additional password validator',async()=>{
+    const onboarding={...contracts.onboarding!};delete onboarding.validatePassword;
+    const create=vi.fn(async()=>({dispose:vi.fn()} as unknown as Runtime));
+    await createConfiguredRuntime(config,{registry:registry({...contracts,onboarding}),create});
+    const passed=(create.mock.calls[0] as unknown as [typeof config,undefined,RuntimeContracts])[2];
+    expect(passed.onboarding?.validatePassword).toBeUndefined();expect(passed.onboarding?.makeBindCode).toBe(onboarding.makeBindCode);
+  });
+  it.each([null,42,'invalid'])('rejects an explicitly malformed password validator %j',async validatePassword=>{
+    const create=vi.fn(async()=>({dispose:vi.fn()} as unknown as Runtime));
+    await expect(createConfiguredRuntime(config,{registry:registry({...contracts,onboarding:{...contracts.onboarding!,validatePassword:validatePassword as never}}),create})).rejects.toThrow('契约不完整');
+    expect(create).not.toHaveBeenCalled();
+  });
   it('rejects asynchronous factory declarations before runtime construction',()=>{
     expect(()=>registeredIntegration(config,{'fixture-v1':{environments:['development'],create:(()=>Promise.resolve({contracts})) as unknown as IntegrationRegistry[string]['create']}})).toThrow('无效声明');
   });

@@ -189,13 +189,29 @@ describe('添加设备业务闭环',()=>{
     const {flow,service}=await setup();flow.adoptBinding({deviceID:'dev_wine',userID:service.userID,bindingRole:'sa'});
     await flow.finish(null);expect(flow.state.stage).toBe('complete');flow.stop();
   });
-  it('keeps real Wi-Fi/profile limitations explicit and validates mock input byte limits',()=>{
-    expect(()=>validateWifi('Test','password','real')).toThrow('尚未配置');
+  it('validates mock input byte limits and describes device stages',()=>{
     expect(()=>validateWifi('网'.repeat(11),'test','mock')).toThrow('32字节');
     expect(()=>validateWifi('Test','','mock')).toThrow('模拟');
     expect(()=>validateWifi('Test','test','mock')).not.toThrow();
     expect(describeProvisionStatus('A1')).toBe('连接家庭 Wi-Fi · 进行中');
     expect(describeProvisionStatus('F0')).toBe('连接设备服务器 · 已完成');
+  });
+  it.each(['a',' leading and trailing ','中文密钥','a'.repeat(254),'网'.repeat(84)+'ab'])('accepts documented real Wi-Fi input without an extra validator (case %#)',password=>{
+    expect(()=>validateWifi('Test',password,'real')).not.toThrow();
+  });
+  it.each(['','a'.repeat(255),'网'.repeat(85)])('rejects empty or oversized real Wi-Fi input before additional validation (case %#)',password=>{
+    const validator=vi.fn();expect(()=>validateWifi('Test',password,'real',validator)).toThrow(ApiError);expect(validator).not.toHaveBeenCalled();
+  });
+  it('preserves raw password input and honors explicitly supplied additional rules',()=>{
+    const password=' 原始 input ',validator=vi.fn();validateWifi('Test',password,'real',validator);expect(validator).toHaveBeenCalledExactlyOnceWith(password);
+    expect(()=>validateWifi('Test',password,'real',()=>{throw new ApiError(400,'provided product rule');})).toThrow('provided product rule');
+  });
+  it('reports other missing real contracts without sending Wi-Fi credentials after password validation succeeds',async()=>{
+    const {service,driver}=await setup(),flow=new AddDeviceFlow(service,driver,{mode:'real'});
+    await flow.select({handle:'real',mac:'80a036d51aad',model:'RW-DH01',service:'0822'},'prd_humidity');
+    const exchange=vi.spyOn(driver,'exchange'),connection=vi.spyOn(service,'connection');
+    await expect(flow.provision('Test','a')).rejects.toMatchObject({code:503,message:'真实绑定码及0822工厂确认契约尚未配置'});
+    expect(flow.state.stage).toBe('failed');expect(exchange).not.toHaveBeenCalled();expect(connection).not.toHaveBeenCalled();flow.stop();
   });
   it('maps only real provisioning events to monotonic progress',()=>{
     const statuses=['A1','A0','C1','C0','B1','B0','D1','D0','E1','E0','F1','F0'];
@@ -283,14 +299,14 @@ describe('添加设备业务闭环',()=>{
     await expect(flow.select({handle:'real',mac:'80a036d51aad',model:'Wrong Model',service:'0822'},'prd_humidity')).rejects.toMatchObject({code:503});
     expect(flow.state.candidate).toBeUndefined();
   });
-  it('routes configured real onboarding to 0822 and treats only PAIR-05 as authoritative',async()=>{
+  it('routes real onboarding without an additional password validator to 0822 and treats only PAIR-05 as authoritative',async()=>{
     const {service,driver}=await setup(),wifi=vi.fn(async()=>({source:'system' as const,connection:'wifi' as const,ssid:'actual-WiFi',band:'unknown' as const})),makeBindCode=vi.fn(async()=> 'issued-test-code');
-    const flow=new AddDeviceFlow(service,driver,{mode:'real',wifi:{read:wifi},real:{profile:{factoryReply:new Uint8Array([1]),stageTimeout:60000},bindingTimeout:30000,operationTimeout:165000,makeBindCode,validatePassword:()=>undefined,deviceToken:token=>`confirmed-fixture:${token}`}});
+    const flow=new AddDeviceFlow(service,driver,{mode:'real',wifi:{read:wifi},real:{profile:{factoryReply:new Uint8Array([1]),stageTimeout:60000},bindingTimeout:30000,operationTimeout:165000,makeBindCode,deviceToken:token=>`confirmed-fixture:${token}`}});
     await flow.select({handle:'real',mac:'80a036d51aad',model:'RW-DH01',service:'0822'},'prd_humidity');
     const bind=vi.spyOn(service,'bindStatus').mockResolvedValue({deviceID:'test-bound',userID:service.userID,bindingRole:'sa'}),exchange=vi.spyOn(driver,'exchange');
-    const runner=vi.spyOn(Provisioner0822.prototype,'run').mockImplementation(async(input,onStatus,signal,confirm)=>{expect(input.bindCode).toBe('issued-test-code');expect(input.token).toContain('confirmed-fixture:');onStatus('F0');expect(flow.state.binding).toBeUndefined();return confirm!(signal);});
-    await flow.provision('actual-WiFi','private-input');expect(runner).toHaveBeenCalledOnce();expect(wifi).toHaveBeenCalledTimes(2);expect(makeBindCode).toHaveBeenCalledOnce();expect(bind).toHaveBeenCalledWith('issued-test-code',expect.any(AbortSignal));
-    expect(exchange).not.toHaveBeenCalled();expect(flow.state.stage).toBe('bound');expect(JSON.stringify(flow.state)).not.toContain('private-input');flow.stop();
+    const password=' 原始 private-input ',runner=vi.spyOn(Provisioner0822.prototype,'run').mockImplementation(async(input,onStatus,signal,confirm)=>{expect(input.password).toBe(password);expect(input.bindCode).toBe('issued-test-code');expect(input.token).toContain('confirmed-fixture:');onStatus('F0');expect(flow.state.binding).toBeUndefined();return confirm!(signal);});
+    await flow.provision('actual-WiFi',password);expect(runner).toHaveBeenCalledOnce();expect(wifi).toHaveBeenCalledTimes(2);expect(makeBindCode).toHaveBeenCalledOnce();expect(bind).toHaveBeenCalledWith('issued-test-code',expect.any(AbortSignal));
+    expect(exchange).not.toHaveBeenCalled();expect(flow.state.stage).toBe('bound');expect(JSON.stringify(flow.state)).not.toContain(password);flow.stop();
   });
   it('rechecks the network after fetching connection data before starting the radio',async()=>{
     const {service,driver}=await setup(),wifi=vi.fn().mockResolvedValueOnce({source:'system',connection:'wifi',ssid:'actual-WiFi',band:'unknown'}).mockResolvedValueOnce({source:'system',connection:'wifi',ssid:'changed',band:'unknown'});
