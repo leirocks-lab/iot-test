@@ -47,9 +47,9 @@ describe('document-backed API flows', () => {
     const { service } = await setup();
     const snapshot = await service.rooms();
     await service.createRoom('Office');
-    await expect(service.saveRooms(snapshot.rooms, snapshot.version)).rejects.toMatchObject({ code: 409 });
+    await expect(service.saveRooms(snapshot.rooms, snapshot.rooms)).rejects.toMatchObject({ code: 409 });
     const fresh = await service.rooms();
-    await expect(service.saveRooms(fresh.rooms.filter(r => r.id !== 'room_living'), fresh.version)).rejects.toThrow('房间内仍有设备');
+    await expect(service.saveRooms(fresh.rooms.filter(r => r.id !== 'room_living'), fresh.rooms)).rejects.toThrow('房间内仍有设备');
   });
   it('only unbinds self, immediately removing authorization', async () => {
     const { service } = await setup();

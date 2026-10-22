@@ -1,8 +1,0 @@
-Asset integrity: 23 tracked assets preserved byte for byte.
-.gitignore:7:/android/	android/app/build.gradle
-.gitignore:8:/ios/	ios/Podfile
-.gitignore:23:dist/	dist/android/metadata.json
-
-        applicationId 'com.rowan.iot.dev'
-        versionName "1.0.0"
-

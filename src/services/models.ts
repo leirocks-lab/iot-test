@@ -37,7 +37,7 @@ export interface Settings {
   wallpaper: { id: string; name: Record<Language, string>; image: string } | null;
   homeLayout: string; temperatureUnit: 'C' | 'F'; measurementSystem: 'metric' | 'imperial';
 }
-export interface Room { id: string; name: string; isDefault?: boolean; deviceCount?: number }
+export interface Room { id: string; name: string; isDefault?: boolean; deviceCount?: number; version?: number; updatedAt?: string }
 export interface Product {
   id: string;
   name: string;

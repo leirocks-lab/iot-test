@@ -1,6 +1,6 @@
 import { ApiError } from '../services/models';
 
-export interface MqttCredentials {host:string;endpoint:string;path:string;clientID:string;username:string;password:string;deviceID:string}
+export interface MqttCredentials {host:string;endpoint:string;path:string;clientID:string;username:string;password:string;deviceID:string;sessionToken?:string}
 export interface MqttPort {
   on(event:'connect'|'error'|'close',listener:()=>void):void;
   onMessage(listener:(topic:string,payload:Uint8Array)=>void):void;
@@ -16,6 +16,7 @@ function topicLiteral(topic:string){if(!topic||/[+#\0]/.test(topic))throw new Ap
 export function mqttCredentials(value:Record<string,unknown>,expectedDeviceID:string):MqttCredentials {
   for(const key of ['host','endpoint','path','clientID','username','password','deviceID'])
     if(typeof value[key]!=='string'||!value[key])throw new ApiError(503,'实际MQTT凭据尚未完整提供');
+  if(value.sessionToken!==undefined&&(typeof value.sessionToken!=='string'||!value.sessionToken.trim()))throw new ApiError(503,'AWS STS会话令牌无效');
   const url=new URL(value.host as string);
   if(url.protocol!=='wss:'||url.username||url.password||url.hash)throw new ApiError(503,'MQTT连接必须使用服务端提供的WSS地址');
   if(value.deviceID!==expectedDeviceID||!expectedDeviceID)throw new ApiError(403,'MQTT凭据设备身份不一致');

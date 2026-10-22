@@ -182,11 +182,11 @@ export class MockHttpClient implements HttpClient {
       Object.assign(account.setting,b);return ok();
     }
     if(path==='/api/app/user/locations') {
-      if(method==='GET')return {data:account.rooms.map(r=>({...r,deviceCount:state.devices.filter(d=>d.members[userID]?.roomID===r.id).length})),headers:{etag:String(account.roomVersion)}};
+      if(method==='GET')return {data:account.rooms.map(r=>({...r,version:account.roomVersion,updatedAt:new Date(account.roomVersion*1000).toISOString(),deviceCount:state.devices.filter(d=>d.members[userID]?.roomID===r.id).length}))};
       if(method==='POST') { const name=this.roomName(text('name'),userID);account.rooms.push({id:this.db.id('room'),name,isDefault:false});account.roomVersion++;return ok(); }
       if(method==='PUT') {
-        if(req.headers?.['If-Match']!==String(account.roomVersion))throw new ApiError(409,'房间已变化，请刷新后重新编辑');
-        const rooms=b.rooms as {id:string;name:string}[];if(!Array.isArray(rooms))throw new ApiError(400,'房间列表无效');
+        const rooms=b.rooms as {id:string;name:string;version:number;updatedAt:string}[];if(!Array.isArray(rooms))throw new ApiError(400,'房间列表无效');
+        if(rooms.some(r=>r.version!==account.roomVersion||r.updatedAt!==new Date(account.roomVersion*1000).toISOString()))throw new ApiError(409,'房间已变化，请刷新后重新编辑');
         if(new Set(rooms.map(r=>r.id)).size!==rooms.length||rooms.some(r=>!account.rooms.some(a=>a.id===r.id)))throw new ApiError(400,'房间标识无效');
         const names=rooms.map(r=>r.name.trim());if(names.some(n=>!n)||new Set(names).size!==names.length)throw new ApiError(1432,'房间名称不可为空或重复');
         for(const r of account.rooms)if(!rooms.some(x=>x.id===r.id)&&(r.isDefault||state.devices.some(d=>d.members[userID]?.roomID===r.id)))throw new ApiError(409,'房间内仍有设备或为默认房间');

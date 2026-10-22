@@ -1,9 +1,0 @@
-Foreground:
-    mResumedActivity: ActivityRecord{47e47fd u0 com.miui.home/.launcher.Launcher t2}
-Active Camera Clients:
-[]
-ROWAN Camera Events (newest first):
-  10-10 13:54:12 : DISCONNECT device 0 client for package com.rowan.iot.dev (PID 30535)
-  10-10 13:53:50 : CONNECT device 0 client for package com.rowan.iot.dev (PID 30535)
-  10-10 13:51:41 : DISCONNECT device 0 client for package com.rowan.iot.dev (PID 30535)
-  10-10 13:51:36 : CONNECT device 0 client for package com.rowan.iot.dev (PID 30535)

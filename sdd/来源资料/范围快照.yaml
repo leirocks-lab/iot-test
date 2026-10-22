@@ -1,8 +1,8 @@
 schema_version: 1
 source_id: SRC-SCOPE-001
-source_sha256: dcc3035b750115757596a04c6271c1d4b5b04784a52f1d387632ac197897d9f1
+source_sha256: 2ca9f1049471513659d3326ec886d446a38718485e7ff47153aa8d79fa7b9007
 sheet: APP功能清单
-collected_at: 2026-10-07
+collected_at: 2026-10-18
 policy: 只有本快照条目可进入功能范围；新增须先获得范围变更确认
 requirements:
   - id: 1
@@ -15,7 +15,7 @@ requirements:
     priority: P1
     api_association: 无云端 API（App 本地或原生能力）
     api_refs: []
-    owner: 傅
+    owner: 傅、张
   - id: 2
     sheet: APP功能清单
     row: 3
@@ -27,7 +27,7 @@ requirements:
     api_association: APP-01 获取 App 启动配置（GET /api/app/config）
     api_refs:
       - APP-01
-    owner: 傅
+    owner: 傅、张
   - id: 3
     sheet: APP功能清单
     row: 4
@@ -39,7 +39,7 @@ requirements:
     api_association: AUTH-05 刷新 Token（PATCH /api/app/session）
     api_refs:
       - AUTH-05
-    owner: 傅
+    owner: 傅、张
   - id: 4
     sheet: APP功能清单
     row: 5
@@ -51,7 +51,7 @@ requirements:
     api_association: AUTH-03 注册（PUT /api/app/user）
     api_refs:
       - AUTH-03
-    owner: 傅
+    owner: 傅、张
   - id: 5
     sheet: APP功能清单
     row: 6
@@ -68,7 +68,7 @@ requirements:
       - AUTH-03
       - CONTENT-01
       - CONTENT-02
-    owner: 傅
+    owner: 傅、张
   - id: 6
     sheet: APP功能清单
     row: 7
@@ -80,7 +80,7 @@ requirements:
     api_association: CONTENT-01 获取隐私政策（GET /api/app/privacy）
     api_refs:
       - CONTENT-01
-    owner: 傅
+    owner: 傅、张
   - id: 7
     sheet: APP功能清单
     row: 8
@@ -92,7 +92,7 @@ requirements:
     api_association: CONTENT-02 获取用户协议（GET /api/app/serviceTerms）
     api_refs:
       - CONTENT-02
-    owner: 傅
+    owner: 傅、张
   - id: 8
     sheet: APP功能清单
     row: 9
@@ -104,7 +104,7 @@ requirements:
     api_association: AUTH-03 注册（PUT /api/app/user）
     api_refs:
       - AUTH-03
-    owner: 傅
+    owner: 傅、张
   - id: 9
     sheet: APP功能清单
     row: 10
@@ -115,7 +115,7 @@ requirements:
     priority: P2
     api_association: 无云端 API（App 本地或原生能力）
     api_refs: []
-    owner: 傅
+    owner: 傅、张
   - id: 10
     sheet: APP功能清单
     row: 11
@@ -127,7 +127,7 @@ requirements:
     api_association: AUTH-01 获取验证码（GET /api/app/captcha）
     api_refs:
       - AUTH-01
-    owner: 傅
+    owner: 傅、张
   - id: 11
     sheet: APP功能清单
     row: 12
@@ -139,7 +139,7 @@ requirements:
     api_association: AUTH-02 校验验证码（GET /api/app/captcha/{code}）
     api_refs:
       - AUTH-02
-    owner: 傅
+    owner: 傅、张
   - id: 12
     sheet: APP功能清单
     row: 13
@@ -151,7 +151,7 @@ requirements:
     api_association: AUTH-02 校验验证码（GET /api/app/captcha/{code}）
     api_refs:
       - AUTH-02
-    owner: 傅
+    owner: 傅、张
   - id: 13
     sheet: APP功能清单
     row: 14
@@ -163,7 +163,7 @@ requirements:
     api_association: AUTH-03 注册（PUT /api/app/user）
     api_refs:
       - AUTH-03
-    owner: 傅
+    owner: 傅、张
   - id: 14
     sheet: APP功能清单
     row: 15
@@ -175,7 +175,7 @@ requirements:
     api_association: AUTH-03 注册（PUT /api/app/user）
     api_refs:
       - AUTH-03
-    owner: 傅
+    owner: 傅、张
   - id: 15
     sheet: APP功能清单
     row: 16
@@ -187,7 +187,7 @@ requirements:
     api_association: AUTH-04 登录（POST /api/app/session）
     api_refs:
       - AUTH-04
-    owner: 傅
+    owner: 傅、张
   - id: 16
     sheet: APP功能清单
     row: 17
@@ -204,7 +204,7 @@ requirements:
       - AUTH-04
       - AUTH-01
       - AUTH-02
-    owner: 傅
+    owner: 傅、张
   - id: 17
     sheet: APP功能清单
     row: 18
@@ -216,7 +216,7 @@ requirements:
     api_association: AUTH-04 登录（POST /api/app/session）
     api_refs:
       - AUTH-04
-    owner: 傅
+    owner: 傅、张
   - id: 18
     sheet: APP功能清单
     row: 19
@@ -228,7 +228,7 @@ requirements:
     api_association: AUTH-01 获取验证码（GET /api/app/captcha）
     api_refs:
       - AUTH-01
-    owner: 傅
+    owner: 傅、张
   - id: 19
     sheet: APP功能清单
     row: 20
@@ -240,7 +240,7 @@ requirements:
     api_association: AUTH-02 校验验证码（GET /api/app/captcha/{code}）
     api_refs:
       - AUTH-02
-    owner: 傅
+    owner: 傅、张
   - id: 20
     sheet: APP功能清单
     row: 21
@@ -252,7 +252,7 @@ requirements:
     api_association: AUTH-07 密码重置（PATCH /api/app/user/password）
     api_refs:
       - AUTH-07
-    owner: 傅
+    owner: 傅、张
   - id: 21
     sheet: APP功能清单
     row: 22
@@ -263,7 +263,7 @@ requirements:
     priority: P2
     api_association: 无云端 API（App 本地或原生能力）
     api_refs: []
-    owner: 傅
+    owner: 傅、张
   - id: 22
     sheet: APP功能清单
     row: 23
@@ -275,7 +275,7 @@ requirements:
     api_association: AUTH-06 登出（DELETE /api/app/session）
     api_refs:
       - AUTH-06
-    owner: 傅
+    owner: 傅、张
   - id: 23
     sheet: APP功能清单
     row: 24
@@ -287,7 +287,7 @@ requirements:
     api_association: HOME-01 获取用户绑定的设备列表（GET /api/app/devices）
     api_refs:
       - HOME-01
-    owner: 傅
+    owner: 傅、张
   - id: 24
     sheet: APP功能清单
     row: 25
@@ -299,7 +299,7 @@ requirements:
     api_association: HOME-01 获取用户绑定的设备列表（GET /api/app/devices）
     api_refs:
       - HOME-01
-    owner: 傅
+    owner: 傅、张
   - id: 25
     sheet: APP功能清单
     row: 26
@@ -315,7 +315,7 @@ requirements:
     api_refs:
       - HOME-01
       - DEVICE-01
-    owner: 傅
+    owner: 傅、张
   - id: 26
     sheet: APP功能清单
     row: 27
@@ -327,7 +327,7 @@ requirements:
     api_association: HOME-01 获取用户绑定的设备列表（GET /api/app/devices）
     api_refs:
       - HOME-01
-    owner: 傅
+    owner: 傅、张
   - id: 27
     sheet: APP功能清单
     row: 28
@@ -343,7 +343,7 @@ requirements:
     api_refs:
       - HOME-01
       - DEVICE-01
-    owner: 傅
+    owner: 傅、张
   - id: 28
     sheet: APP功能清单
     row: 29
@@ -357,7 +357,7 @@ requirements:
       property/update 回报
     api_refs:
       - DEVICE-01
-    owner: 傅
+    owner: 傅、张
   - id: 29
     sheet: APP功能清单
     row: 30
@@ -372,7 +372,7 @@ requirements:
       property/update 回报
     api_refs:
       - DEVICE-01
-    owner: 傅
+    owner: 傅、张
   - id: 30
     sheet: APP功能清单
     row: 31
@@ -387,7 +387,7 @@ requirements:
     api_refs:
       - DEVICE-02
       - DEVICE-01
-    owner: 傅
+    owner: 傅、张
   - id: 31
     sheet: APP功能清单
     row: 32
@@ -398,7 +398,7 @@ requirements:
     priority: P2
     api_association: 无云端 API（App 本地或原生能力）
     api_refs: []
-    owner: 傅
+    owner: 傅、张
   - id: 32
     sheet: APP功能清单
     row: 33
@@ -410,7 +410,7 @@ requirements:
     api_association: MORE-02 解绑当前用户（DELETE /api/app/devices/{deviceID}/users/self）
     api_refs:
       - MORE-02
-    owner: 傅
+    owner: 傅、张
   - id: 33
     sheet: APP功能清单
     row: 34
@@ -422,7 +422,7 @@ requirements:
     api_association: HOME-01 获取用户绑定的设备列表（GET /api/app/devices）
     api_refs:
       - HOME-01
-    owner: 傅
+    owner: 傅、张
   - id: 34
     sheet: APP功能清单
     row: 35
@@ -433,7 +433,7 @@ requirements:
     priority: P2
     api_association: 暂无（当前为导航占位）
     api_refs: []
-    owner: 傅
+    owner: 傅、张
   - id: 35
     sheet: APP功能清单
     row: 36
@@ -450,7 +450,7 @@ requirements:
       - USER-01
       - USER-02
       - AUTH-06
-    owner: 傅
+    owner: 傅、张
   - id: 36
     sheet: APP功能清单
     row: 37
@@ -973,7 +973,7 @@ requirements:
     api_association: TIMER-01 获取设备定时日程（GET /api/app/devices/{deviceID}/schedules）
     api_refs:
       - TIMER-01
-    owner: 傅
+    owner: 傅、张
   - id: 75
     sheet: APP功能清单
     row: 76
@@ -985,7 +985,7 @@ requirements:
     api_association: TIMER-02 新增设备定时日程（POST /api/app/devices/{deviceID}/schedules）
     api_refs:
       - TIMER-02
-    owner: 傅
+    owner: 傅、张
   - id: 76
     sheet: APP功能清单
     row: 77
@@ -997,7 +997,7 @@ requirements:
     api_association: TIMER-02 新增设备定时日程（POST /api/app/devices/{deviceID}/schedules）
     api_refs:
       - TIMER-02
-    owner: 傅
+    owner: 傅、张
   - id: 77
     sheet: APP功能清单
     row: 78
@@ -1012,7 +1012,7 @@ requirements:
     api_refs:
       - TIMER-02
       - TIMER-03
-    owner: 傅
+    owner: 傅、张
   - id: 78
     sheet: APP功能清单
     row: 79
@@ -1029,7 +1029,7 @@ requirements:
       - TIMER-02
       - TIMER-03
       - THING-01
-    owner: 傅
+    owner: 傅、张
   - id: 79
     sheet: APP功能清单
     row: 80
@@ -1041,7 +1041,7 @@ requirements:
     api_association: TIMER-03 修改设备定时日程（PATCH /api/app/devices/{deviceID}/schedules/{scheduleID}）
     api_refs:
       - TIMER-03
-    owner: 傅
+    owner: 傅、张
   - id: 80
     sheet: APP功能清单
     row: 81
@@ -1053,7 +1053,7 @@ requirements:
     api_association: TIMER-04 启用或停用定时日程（PUT /api/app/devices/{deviceID}/schedules/{scheduleID}/enabled）
     api_refs:
       - TIMER-04
-    owner: 傅
+    owner: 傅、张
   - id: 81
     sheet: APP功能清单
     row: 82
@@ -1065,7 +1065,7 @@ requirements:
     api_association: TIMER-05 删除设备定时日程（DELETE /api/app/devices/{deviceID}/schedules/{scheduleID}）
     api_refs:
       - TIMER-05
-    owner: 傅
+    owner: 傅、张
   - id: 82
     sheet: APP功能清单
     row: 83
@@ -1080,7 +1080,7 @@ requirements:
     api_refs:
       - TIMER-02
       - TIMER-03
-    owner: 傅
+    owner: 傅、张
   - id: 83
     sheet: APP功能清单
     row: 84
@@ -1088,13 +1088,13 @@ requirements:
     level2: 云端执行
     title: 到点下发
     description: 云端调度到点后通过设备通道/MQTT 下发动作，App 无需保持在线。
-    priority: P2
+    priority: P1
     api_association: |-
       TIMER-01 获取设备定时日程（GET /api/app/devices/{deviceID}/schedules）；
       云端调度后通过 MQTT 下发，App 无直接请求
     api_refs:
       - TIMER-01
-    owner: 傅
+    owner: 傅、张
   - id: 84
     sheet: APP功能清单
     row: 85
@@ -1132,7 +1132,7 @@ requirements:
     level2: 设备分享
     title: 成员列表
     description: 调用 MORE-01 获取管理员、普通成员及观察员等已绑定用户。
-    priority: P2
+    priority: P1
     api_association: MORE-01 获取设备已绑定用户（GET /api/app/devices/{deviceID}/users）
     api_refs:
       - MORE-01
@@ -1144,7 +1144,7 @@ requirements:
     level2: 设备分享
     title: 分享二维码
     description: 管理员调用 SHARE-01 生成 deviceID 与 bindCode，用于分享二维码展示。
-    priority: P2
+    priority: P1
     api_association: SHARE-01 获取设备分享二维码（GET /api/app/devices/{deviceID}/bindCode）
     api_refs:
       - SHARE-01
@@ -1156,7 +1156,7 @@ requirements:
     level2: 设备分享
     title: 成员绑定
     description: 被分享用户扫码后调用 PAIR-06；bindCode 单次有效，绑定角色由云端确定。
-    priority: P2
+    priority: P1
     api_association: PAIR-06 设备绑定用户（PUT /api/app/device/{deviceId}/user）
     api_refs:
       - PAIR-06
@@ -1168,7 +1168,7 @@ requirements:
     level2: 设备分享
     title: 移除成员
     description: 管理员调用 MORE-03 解除普通成员绑定；需校验管理员权限和成员关系。
-    priority: P2
+    priority: P1
     api_association: MORE-03 管理员移除成员（DELETE /api/app/devices/{deviceID}/users/{userID}）
     api_refs:
       - MORE-03
@@ -1268,7 +1268,7 @@ requirements:
     api_association: ROOM-03 获取用户房间（GET /api/app/user/locations）
     api_refs:
       - ROOM-03
-    owner: 傅
+    owner: 傅、张
   - id: 98
     sheet: APP功能清单
     row: 99
@@ -1280,7 +1280,7 @@ requirements:
     api_association: ROOM-04 新增用户房间（POST /api/app/user/locations）
     api_refs:
       - ROOM-04
-    owner: 傅
+    owner: 傅、张
   - id: 99
     sheet: APP功能清单
     row: 100
@@ -1292,7 +1292,7 @@ requirements:
     api_association: ROOM-05 修改房间名称（PATCH /api/app/user/locations/{locationID}）
     api_refs:
       - ROOM-05
-    owner: 傅
+    owner: 傅、张
   - id: 100
     sheet: APP功能清单
     row: 101
@@ -1304,7 +1304,7 @@ requirements:
     api_association: ROOM-06 保存用户房间（PUT /api/app/user/locations）
     api_refs:
       - ROOM-06
-    owner: 傅
+    owner: 傅、张
   - id: 101
     sheet: APP功能清单
     row: 102
@@ -1316,7 +1316,7 @@ requirements:
     api_association: ROOM-06 保存用户房间（PUT /api/app/user/locations）
     api_refs:
       - ROOM-06
-    owner: 傅
+    owner: 傅、张
   - id: 102
     sheet: APP功能清单
     row: 103
@@ -1328,7 +1328,7 @@ requirements:
     api_association: ROOM-06 保存用户房间（PUT /api/app/user/locations）
     api_refs:
       - ROOM-06
-    owner: 傅
+    owner: 傅、张
   - id: 103
     sheet: APP功能清单
     row: 104
@@ -1340,7 +1340,7 @@ requirements:
     api_association: ROOM-01 绑定设备到房间（PUT /api/app/devices/{deviceID}/location）
     api_refs:
       - ROOM-01
-    owner: 傅
+    owner: 傅、张
   - id: 104
     sheet: APP功能清单
     row: 105
@@ -1352,7 +1352,7 @@ requirements:
     api_association: USER-01 获取用户设置（GET /api/app/user/setting）
     api_refs:
       - USER-01
-    owner: 傅
+    owner: 傅、张
   - id: 105
     sheet: APP功能清单
     row: 106
@@ -1364,7 +1364,7 @@ requirements:
     api_association: USER-02 修改用户设置（PATCH /api/app/user/setting）
     api_refs:
       - USER-02
-    owner: 傅
+    owner: 傅、张
   - id: 106
     sheet: APP功能清单
     row: 107
@@ -1376,7 +1376,7 @@ requirements:
     api_association: USER-02 修改用户设置（PATCH /api/app/user/setting）
     api_refs:
       - USER-02
-    owner: 傅
+    owner: 傅、张
   - id: 107
     sheet: APP功能清单
     row: 108
@@ -1388,7 +1388,7 @@ requirements:
     api_association: USER-02 修改用户设置（PATCH /api/app/user/setting）
     api_refs:
       - USER-02
-    owner: 傅
+    owner: 傅、张
   - id: 108
     sheet: APP功能清单
     row: 109
@@ -1403,7 +1403,7 @@ requirements:
     api_refs:
       - USER-01
       - USER-02
-    owner: 傅
+    owner: 傅、张
   - id: 109
     sheet: APP功能清单
     row: 110
@@ -1415,7 +1415,7 @@ requirements:
     api_association: USER-02 修改用户设置（PATCH /api/app/user/setting）
     api_refs:
       - USER-02
-    owner: 傅
+    owner: 傅、张
   - id: 110
     sheet: APP功能清单
     row: 111
@@ -1427,7 +1427,7 @@ requirements:
     api_association: USER-02 修改用户设置（PATCH /api/app/user/setting）
     api_refs:
       - USER-02
-    owner: 傅
+    owner: 傅、张
   - id: 111
     sheet: APP功能清单
     row: 112
@@ -1439,4 +1439,4 @@ requirements:
     api_association: USER-02 修改用户设置（PATCH /api/app/user/setting）
     api_refs:
       - USER-02
-    owner: 傅
+    owner: 傅、张

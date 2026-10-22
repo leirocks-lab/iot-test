@@ -1,9 +1,0 @@
-? Verifying lockfile against supply-chain policies (917 entries)...
-Lockfile is up to date, resolution step is skipped
-Already up to date
-✓ Lockfile passes supply-chain policies (917 entries in 19.7s)
-
-Done in 21.7s using pnpm v11.19.0
-$ expo-doctor
-Running 21 checks on your project...
-21/21 checks passed. No issues detected!

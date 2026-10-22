@@ -172,11 +172,39 @@ export class RowanService {
   }
   async rooms(signal?:AbortSignal) {
     const response=await this.response<Room[]>({method:'GET',path:'/api/app/user/locations',signal});
-    return {rooms:response.data.data,version:response.headers.etag??response.headers.ETag??''};
+    return {rooms:response.data.data};
   }
   async createRoom(name:string) {return this.request({method:'POST',path:'/api/app/user/locations',body:{name}});}
   async renameRoom(id:string,name:string) {return this.request({method:'PATCH',path:`/api/app/user/locations/${id}`,body:{name}});}
-  async saveRooms(rooms:Room[],version:string) {return this.request({method:'PUT',path:'/api/app/user/locations',body:{rooms:rooms.map(({id,name})=>({id,name}))},headers:{'If-Match':version}});}
+  async saveRooms(rooms:readonly Room[],baseline:readonly Room[]) {
+    const epoch=this.epoch;
+    const active=()=>{if(epoch!==this.epoch)throw new ApiError(499,'会话已变化，房间操作已取消');};
+    const original=baseline.map(room=>({...room})),next=rooms.map(room=>({...room}));
+    const valid=(room:Room)=>typeof room.version==='number'&&Number.isSafeInteger(room.version)&&room.version>=0&&
+      typeof room.updatedAt==='string'&&room.updatedAt.endsWith('Z')&&Number.isFinite(Date.parse(room.updatedAt));
+    if(!original.length||original.some(room=>!valid(room)))throw new ApiError(409,'房间版本缺失，请重新读取后编辑');
+    if(!next.length||new Set(next.map(room=>room.id)).size!==next.length||next.some(room=>!original.some(old=>old.id===room.id&&old.name===room.name)))throw new ApiError(400,'请基于完整房间列表排序或删除');
+    const safeDeletion=(list:readonly Room[])=>{
+      for(const room of list)if(!next.some(value=>value.id===room.id)&&
+        (room.isDefault||room.deviceCount!==0))throw new ApiError(409,'房间内仍有设备、设备数未知或为默认房间');
+    };
+    safeDeletion(original);
+    const latest=await this.rooms();
+    active();
+    if(latest.rooms.length!==original.length||latest.rooms.some((room,index)=>{
+      const old=original[index];return !old||room.id!==old.id||room.name!==old.name||room.version!==old.version||room.updatedAt!==old.updatedAt;
+    }))throw new ApiError(409,'房间已变化，请刷新后重新编辑');
+    safeDeletion(latest.rooms);
+    await this.request({method:'PUT',path:'/api/app/user/locations',body:{rooms:next.map(room=>{
+      const old=original.find(value=>value.id===room.id)!;
+      return {id:room.id,name:room.name,version:old.version,updatedAt:old.updatedAt};
+    })}});
+    active();
+    const actual=await this.rooms();
+    active();
+    if(actual.rooms.length!==next.length||actual.rooms.some((room,index)=>room.id!==next[index].id||room.name!==next[index].name))throw new ApiError(409,'保存结果待核对，请重新读取后编辑');
+    return actual;
+  }
   async moveDevice(id:string,roomID:string|null,signal?:AbortSignal) {return this.request({method:'PUT',path:`/api/app/devices/${encodeURIComponent(id)}/location`,body:{id:roomID},signal});}
   async location(id:string,signal?:AbortSignal) {return this.request<{id:string|null;name:string}>({method:'GET',path:`/api/app/devices/${encodeURIComponent(id)}/location`,signal});}
   async settings() {return this.request<Settings>({method:'GET',path:'/api/app/user/setting'});}

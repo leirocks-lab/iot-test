@@ -1,9 +1,11 @@
 import mqtt from 'mqtt';
 import { Buffer } from 'buffer';
 import { MqttConnection, type MqttFactory } from './mqtt-connection';
+import { mqttConnectParameters } from './mqtt-auth';
 
 const factory:MqttFactory=(credentials,options)=>{
-  const client=mqtt.connect(credentials.host,{...options,clientId:credentials.clientID,username:credentials.username,password:credentials.password,log:()=>undefined});
+  const parameters=mqttConnectParameters(credentials);
+  const client=mqtt.connect(parameters.url,{...options,clientId:credentials.clientID,...parameters.authentication,log:()=>undefined});
   return {
     on:(event,listener)=>{client.on(event,listener);},
     onMessage:listener=>{client.on('message',(topic,payload)=>listener(topic,new Uint8Array(payload)));},

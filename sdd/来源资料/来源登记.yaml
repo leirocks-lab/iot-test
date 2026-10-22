@@ -6,8 +6,8 @@ sources:
     path: docs/智能家居物联网项目计划&需求范围（补充API关联及开发人员）.xlsx
     kind: file
     version: null
-    collected_at: 2026-10-07
-    sha256: dcc3035b750115757596a04c6271c1d4b5b04784a52f1d387632ac197897d9f1
+    collected_at: 2026-10-18
+    sha256: 2ca9f1049471513659d3326ec886d446a38718485e7ff47153aa8d79fa7b9007
     role: 唯一功能范围、优先级和负责人依据
   - id: SRC-PRODUCT-001
     path: docs/ROWAN公共App产品功能及API详细设计说明书_V1.4.docx
@@ -374,3 +374,24 @@ sources:
     collected_at: 2026-10-11
     sha256: b6a6b69f408a7217b58d717fe1abc3feed2abf98c4dbec5b8077a12c607aae41
     role: 用户选择的0822新版仿真配网实现依据；真实产品身份、绑定码及MQTT业务能力仍待确认
+  - id: SRC-REAL-API-20261018-PLATFORM
+    path: sdd/迭代变更/变更-20261018-001/联调证据/平台OpenAPI.json
+    kind: file
+    version: 1.0.0
+    collected_at: 2026-10-18
+    sha256: 51cbd663d7366c37b9ef076ef8a83d41b376b7ccd45ba77dd011203943a34804
+    role: http://47.107.80.36/v3/api-docs/all于2026-10-18T14:27:58Z取得；仅本轮19条范围与必要依赖的契约依据，管理端接口不纳入
+  - id: SRC-REAL-API-20261018-IOT
+    path: sdd/迭代变更/变更-20261018-001/联调证据/物联网OpenAPI.json
+    kind: file
+    version: 1.0.0
+    collected_at: 2026-10-18
+    sha256: 878dd7d4d70cf2863033d6c3fd577fefe568919f0ade1ab23b1e7e7cc657130d
+    role: http://47.107.80.36/iot/v3/api-docs/all于2026-10-18T14:27:58Z取得；ROOM-03/06逐行版本及本轮IoT接口契约依据，不扩大业务范围
+  - id: SRC-REAL-API-20261022-MQTT
+    path: sdd/迭代变更/变更-20261022-001/MQTT接口快照.json
+    kind: file
+    version: null
+    collected_at: 2026-10-22
+    sha256: 7b745fd340a7495be6ad2a6a42d0b181607d1db6970e9a880945db551a6dca67
+    role: 当前部署OpenAPI中仅DEVICE-01及AppMqttRespVO的只读摘录；新增sessionToken说明为AWS STS/SigV4，不扩展设备控制或权限事实
