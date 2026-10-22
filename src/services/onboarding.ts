@@ -10,7 +10,8 @@ import { resolveDeviceScanDuration } from '../config/device-discovery';
 export interface RealAddContract {
   profile:Profile0822;
   makeBindCode:(signal:AbortSignal)=>Promise<string>;
-  validatePassword:(password:string)=>void;
+  /** Optional additional rules confirmed for the selected product/firmware. */
+  validatePassword?:(password:string)=>void;
   deviceToken:(accessToken:string)=>string;
   bindingTimeout:number;
   operationTimeout:number;
@@ -72,10 +73,11 @@ export function validateWifi(ssid: string, password: string, mode: 'mock'|'real'
   if(mode==='mock') {
     if(!password || new TextEncoder().encode(password).length>254)throw new ApiError(400,'请输入模拟 Wi-Fi 密码（不超过254字节）');
   } else {
-    // Security type / open-network policy is not frozen: do not assume WPA, WEP or an empty password.
-    if(!validator)throw new ApiError(503,'真实 Wi-Fi 密码规则尚未配置');
+    // README 6.2 rejects empty set_pwd; 6.1 permits at most 254 DATA bytes.
+    // No documented complexity/minimum-length rule; preserve the original UTF-8 input.
+    if(!password)throw new ApiError(400,'请输入 Wi-Fi 密码');
     if(new TextEncoder().encode(password).length>254)throw new ApiError(400,'Wi-Fi 密码超出当前0822协议范围');
-    validator(password);
+    validator?.(password);
   }
 }
 export function matchesDiscoveredProduct(candidate:DiscoveredDevice,product:Product){return candidate.productID?candidate.productID===product.id:candidate.model===product.modelName;}
