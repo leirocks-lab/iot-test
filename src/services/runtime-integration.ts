@@ -41,7 +41,7 @@ export function registeredIntegration(config:CommunicationConfig,registry:Integr
   if(contracts.wifi!==undefined&&(!contracts.wifi||typeof contracts.wifi.read!=='function'))throw new Error('真实接入配置包含无效Wi-Fi读取端口');
   const add=contracts.onboarding;
   if(add!==undefined){
-    if(!add||!add.profile||!(add.profile.factoryReply instanceof Uint8Array)||typeof add.makeBindCode!=='function'||typeof add.validatePassword!=='function'||typeof add.deviceToken!=='function'||[add.profile.stageTimeout,add.bindingTimeout,add.operationTimeout].some(value=>typeof value!=='number'||!Number.isFinite(value)||value<=0))throw new Error('真实配网契约不完整，不能装配');
+    if(!add||!add.profile||!(add.profile.factoryReply instanceof Uint8Array)||typeof add.makeBindCode!=='function'||(add.validatePassword!==undefined&&typeof add.validatePassword!=='function')||typeof add.deviceToken!=='function'||[add.profile.stageTimeout,add.bindingTimeout,add.operationTimeout].some(value=>typeof value!=='number'||!Number.isFinite(value)||value<=0))throw new Error('真实配网契约不完整，不能装配');
     contracts.onboarding=Object.freeze({...add,profile:Object.freeze({...add.profile,factoryReply:add.profile.factoryReply.slice()})});
   }
   return {contracts:Object.freeze(contracts),createDeviceDriver:config.deviceMode==='real'?value.createDeviceDriver:undefined};
