@@ -37,6 +37,7 @@ function Routes() {
           <Stack.Screen name="add-provision" />
           <Stack.Screen name="scan" />
           <Stack.Screen name="rooms" />
+          <Stack.Screen name="add-room" />
           <Stack.Screen name="preferences" />
           <Stack.Screen name="help" />
         </Stack.Protected>
