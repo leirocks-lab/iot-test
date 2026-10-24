@@ -7,6 +7,7 @@ import { AddDeviceCoordinator, AddDeviceFlow, describeProvisionStatus, matchesDi
 import { RowanService } from './rowan';
 import { MemoryStorage, MockDatabase } from './store';
 import { Provisioner0822 } from '../protocol/provision-0822';
+import { Provisioner0922 } from '../protocol/provision-0922';
 import { deviceDiscoveryConfig } from '../config/device-discovery';
 
 async function setup() {
@@ -210,7 +211,7 @@ describe('添加设备业务闭环',()=>{
     const {service,driver}=await setup(),flow=new AddDeviceFlow(service,driver,{mode:'real'});
     await flow.select({handle:'real',mac:'80a036d51aad',model:'RW-DH01',service:'0822'},'prd_humidity');
     const exchange=vi.spyOn(driver,'exchange'),connection=vi.spyOn(service,'connection');
-    await expect(flow.provision('Test','a')).rejects.toMatchObject({code:503,message:'真实绑定码及0822工厂确认契约尚未配置'});
+    await expect(flow.provision('Test','a')).rejects.toMatchObject({code:503,message:'真实配网接入契约尚未配置'});
     expect(flow.state.stage).toBe('failed');expect(exchange).not.toHaveBeenCalled();expect(connection).not.toHaveBeenCalled();flow.stop();
   });
   it('maps only real provisioning events to monotonic progress',()=>{
@@ -307,6 +308,25 @@ describe('添加设备业务闭环',()=>{
     const password=' 原始 private-input ',runner=vi.spyOn(Provisioner0822.prototype,'run').mockImplementation(async(input,onStatus,signal,confirm)=>{expect(input.password).toBe(password);expect(input.bindCode).toBe('issued-test-code');expect(input.token).toContain('confirmed-fixture:');onStatus('F0');expect(flow.state.binding).toBeUndefined();return confirm!(signal);});
     await flow.provision('actual-WiFi',password);expect(runner).toHaveBeenCalledOnce();expect(wifi).toHaveBeenCalledTimes(2);expect(makeBindCode).toHaveBeenCalledOnce();expect(bind).toHaveBeenCalledWith('issued-test-code',expect.any(AbortSignal));
     expect(exchange).not.toHaveBeenCalled();expect(flow.state.stage).toBe('bound');expect(JSON.stringify(flow.state)).not.toContain(password);flow.stop();
+  });
+  it('routes a 0922 broadcast without factory profile or bind-code provider and confirms a unique HOME-01 MAC',async()=>{
+    const {service,driver}=await setup(),flow=new AddDeviceFlow(service,driver,{mode:'real',wifi:{read:async()=>({source:'system',connection:'wifi',ssid:'actual-WiFi',band:'unknown'})},
+      real:{bindingTimeout:30000,operationTimeout:165000,deviceToken:token=>token}});
+    await flow.select({handle:'legacy',mac:'80a036d51aad',model:'RW-DH01',service:'00000922-0000-1000-8000-00805f9b34fb'},'prd_humidity');
+    const bind=vi.spyOn(service,'bindStatus'),home=vi.spyOn(service,'home').mockResolvedValue([{room:null,devices:[{deviceNickname:'fixture',bindingRole:'sa',bindingAt:'2026-10-22T00:00:00Z',device:{id:'bound-by-mac',mac:'80a036d51aad'},product:null}]}]),runner=vi.spyOn(Provisioner0922.prototype,'run').mockImplementation(async(input,onStatus,signal,confirm,submitted)=>{
+      expect(input.service).toBe('00000922-0000-1000-8000-00805f9b34fb');expect(input.bindCode).toBe('');submitted?.();onStatus('D0');return confirm!(signal);
+    });
+    await flow.provision('actual-WiFi','public-password');
+    expect(runner).toHaveBeenCalledOnce();expect(bind).not.toHaveBeenCalled();expect(home).toHaveBeenCalledOnce();expect(flow.state).toMatchObject({stage:'bound',binding:{deviceID:'bound-by-mac'}});flow.stop();
+  });
+  it('does not claim binding when HOME-01 has ambiguous MAC matches',async()=>{
+    const {service,driver}=await setup(),flow=new AddDeviceFlow(service,driver,{mode:'real',wifi:{read:async()=>({source:'system',connection:'wifi',ssid:'actual-WiFi',band:'unknown'})},
+      real:{bindingTimeout:30000,operationTimeout:165000,deviceToken:token=>token}});
+    await flow.select({handle:'legacy',mac:'80a036d51aad',model:'RW-DH01',service:'0922'},'prd_humidity');
+    vi.spyOn(service,'home').mockResolvedValue([{room:null,devices:['first','second'].map(id=>({deviceNickname:id,bindingRole:'sa' as const,bindingAt:'2026-10-22T00:00:00Z',device:{id,mac:'80:a0:36:d5:1a:ad'},product:null}))}]);
+    vi.spyOn(Provisioner0922.prototype,'run').mockImplementation(async(_input,_status,signal,confirm,submitted)=>{submitted?.();return confirm!(signal);});
+    await expect(flow.provision('actual-WiFi','public-password')).rejects.toMatchObject({code:409});
+    expect(flow.state.stage).toBe('unknown');expect(flow.state.binding).toBeUndefined();flow.stop();
   });
   it('rechecks the network after fetching connection data before starting the radio',async()=>{
     const {service,driver}=await setup(),wifi=vi.fn().mockResolvedValueOnce({source:'system',connection:'wifi',ssid:'actual-WiFi',band:'unknown'}).mockResolvedValueOnce({source:'system',connection:'wifi',ssid:'changed',band:'unknown'});

@@ -117,7 +117,7 @@ export function AddDeviceDiscovery({
                 const product = matches.length === 1 ? matches[0] : undefined;
                 return (
                   <Pressable
-                    key={device.mac.toLowerCase()}
+                    key={`${device.service.toLowerCase()}:${device.mac.toLowerCase()}`}
                     accessibilityRole="button"
                     accessibilityLabel={`添加 ${product?.name || device.model}，MAC ${device.mac}`}
                     disabled={disabled}

@@ -20,6 +20,8 @@ import { eventLedger, mockEventProfile, type EventLedger, type EventProfileResol
 import { integrationStatus, type IntegrationStatus } from './runtime-integration';
 import { ApiError } from './models';
 import { DeviceUnbindFlow } from './device-unbind';
+import { createNativeBleTransport } from '../protocol/native-ble';
+import { createWifiReader } from '../protocol/native-wifi';
 export interface RuntimeContracts {onboarding?:RealAddContract;qr?:RowanCodeParser;wifi?:WifiReader;realtime?:DeviceProfileResolver;controls?:ControlProfileResolver;maintenance?:MaintenanceProfileResolver;events?:EventProfileResolver}
 export interface Runtime {
   service:RowanService; devices:DeviceTransport; config:CommunicationConfig;
@@ -49,12 +51,12 @@ export async function createRuntime(input:Partial<CommunicationConfig>, realDevi
   const storage=new SessionStorage(()=>`rowan.${config.httpMode}.${config.httpMode==='mock'?(db?.state.generation??'legacy-v1'):realSessionScope(config)}`);
   const mockHttp=db?new MockHttpClient(db):undefined, mockDevices=db?new MockDeviceTransport(db):undefined;
   const http=config.httpMode==='mock'?mockHttp!:new RealHttpClient(config);
-  const devices:DeviceTransport=config.deviceMode==='mock'?mockDevices!:realDeviceDriver??await (await import('../protocol/native-ble')).createNativeBleTransport();
+  const devices:DeviceTransport=config.deviceMode==='mock'?mockDevices!:realDeviceDriver??await createNativeBleTransport();
   ownedDriver=devices;
   check();
   const cloud=db?new MockCloud(db):undefined;let working=false;
   const service=new RowanService(http,storage);initializingService=service;await service.restore();check();
-  const wifi=config.deviceMode==='real'?contracts?.wifi??(await import('../protocol/native-wifi')).createWifiReader():undefined;
+  const wifi=config.deviceMode==='real'?contracts?.wifi??createWifiReader():undefined;
   check();
   let disposed=false;
   timer=cloud?setInterval(()=>{if(working)return;working=true;void cloud.advance().then(()=>mockDevices?.syncCloud()).catch(()=>undefined).finally(()=>{working=false;});},15000):undefined;
@@ -111,7 +113,7 @@ export async function createRuntime(input:Partial<CommunicationConfig>, realDevi
     });const mock=config.deviceMode==='mock'&&config.httpMode==='mock';session=new ControlledDeviceSession(inner,context,mock?mockControlProfile:contracts?.controls,mock?mockMaintenanceProfile:contracts?.maintenance,ledger,mock?mockEventProfile:contracts?.events,eventState);return session;
   };
   let scanner:QrScanCoordinator;
-  const onboarding=new AddDeviceCoordinator(service,devices,{mode:config.deviceMode,real:contracts?.onboarding,wifi,createSession:createDeviceSession,beforeNewContext:()=>{if(scanner?.pending)throw new ApiError(409,'请先核对或完成当前扫码绑定结果');}});
+  const onboarding=new AddDeviceCoordinator(service,devices,{mode:config.deviceMode,environment:config.environment,real:contracts?.onboarding,wifi,createSession:createDeviceSession,beforeNewContext:()=>{if(scanner?.pending)throw new ApiError(409,'请先核对或完成当前扫码绑定结果');}});
   scanner=new QrScanCoordinator(service,config.httpMode,contracts?.qr,()=>{if(onboarding.pending)throw new ApiError(409,'请先核对或完成当前蓝牙添加结果');});
   let revision=service.sessionRevision;
   const connections=new Set<MqttConnection>();

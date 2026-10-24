@@ -1,11 +1,24 @@
 import { bytesToHex } from '@noble/hashes/utils.js';
 import { describe, expect, it } from 'vitest';
 import { utf8 } from './ble';
-import { appDigest0822, classify0822, decode0822, encode0822, expectedAck0822, factoryReply0822, FrameStream0822, key0822, parseAdvertisement0822, verifyFactory0822 } from './ble-0822';
+import { appDigest0822, classify0822, decode0822, decodeDevice0822, encode0822, expectedAck0822, factoryReply0822, FrameStream0822, key0822, parseAdvertisement0822, verifyFactory0822 } from './ble-0822';
+import { deviceFrame0822 } from './ble-0822-test-fixture';
 
 const mac='aabbccddeeff',model='Cheetah02',key=key0822(mac,model);
 function advertisement(){const bytes=new Uint8Array(25);bytes.set([0x22,0x08,0x1c,0xaa,0xbb,0xcc,0xdd,0xee,0xff,model.length,...utf8(model)]);return bytes;}
 describe('0822仿真固件独立codec',()=>{
+  it('checks both observed hardware reply CRC vectors with the device-side polynomial',()=>{
+    const hardwareKey=key0822('547af4c99f05','RW-WC-01');
+    const ack=deviceFrame0822(0x80,utf8('ok'),hardwareKey);
+    const challenge=deviceFrame0822(0x0f,utf8('2D8B7FB91E6B5D61648E89307381B5E0'),hardwareKey);
+    expect(ack.at(-1)).toBe(0x48);
+    expect(challenge.at(-1)).toBe(0x8f);
+    expect(decodeDevice0822(ack,hardwareKey)).toMatchObject({command:0x80,data:utf8('ok')});
+    expect(decodeDevice0822(challenge,hardwareKey).command).toBe(0x0f);
+    expect(()=>decode0822(ack,hardwareKey)).toThrow('CRC');
+    const corrupted=challenge.slice();corrupted[corrupted.length-1]^=1;
+    expect(()=>decodeDevice0822(corrupted,hardwareKey)).toThrow('CRC');
+  });
   it('uses the actual prefix/MAC offset, never inventing product identity or RSSI',()=>{
     const device=parseAdvertisement0822({handle:'native-id',manufacturer:advertisement()});
     expect(device).toMatchObject({mac,model,handle:'native-id'});expect(device.productID).toBeUndefined();expect(device.rssi).toBeUndefined();
@@ -29,6 +42,17 @@ describe('0822仿真固件独立codec',()=>{
     expect(()=>decode0822(bad,key)).toThrow('CRC');
     expect(()=>decode0822(new Uint8Array([0,...frame]),key)).toThrow();
     expect(()=>decode0822(frame.slice(0,-1),key)).toThrow();
+  });
+  it('writes provisioning parameters with the firmware CRC while preserving handshake framing',()=>{
+    const ssid=utf8('Test-2.4G');
+    const parameter=encode0822(1,ssid,key);
+    expect(parameter).toEqual(deviceFrame0822(1,ssid,key));
+    expect(decode0822(parameter,key)).toMatchObject({command:1,data:ssid});
+    const handshake=encode0822(0,new Uint8Array(16),key);
+    expect(decode0822(handshake,key).command).toBe(0);
+    const factoryReply=encode0822(0x8f,new Uint8Array(),key);
+    expect(decode0822(factoryReply,key).command).toBe(0x8f);
+    expect(factoryReply).toEqual(deviceFrame0822(0x8f,new Uint8Array(),key));
   });
   it('accepts the maximum LEN only at sufficient MTU, without pretending to support long writes',()=>{
     expect(encode0822(2,new Uint8Array(254),key,517)).toHaveLength(259);

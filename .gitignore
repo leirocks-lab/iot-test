@@ -43,6 +43,8 @@ expo-env.d.ts
 *.orig.*
 *.key
 *.pem
+# Public certificate only; private keys remain ignored.
+!certs/rowan-dev-backend.pem
 .metro-health-check*
 npm-debug.*
 yarn-debug.*

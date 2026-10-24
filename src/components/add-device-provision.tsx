@@ -184,6 +184,7 @@ function WifiForm(p: Props) {
           clearable
           style={s.input}
         />
+        {p.error ? <Text style={s.errorText}>{p.error}</Text> : null}
       </View>
       <View style={s.wifiFooter}>
         <Text style={s.faqText}>{"FAQ"}</Text>

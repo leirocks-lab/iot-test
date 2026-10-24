@@ -7,7 +7,7 @@ import type { DeviceEvent, PropertyObservation } from '../services/device-events
 import { resolveDeviceScanDuration } from '../config/device-discovery';
 
 export type DeviceFault='none'|'drop-fragment'|'out-of-order'|'wrong-ack'|'crc'|'disconnect'|'wifi-password'|'wifi-ssid'|'network'|'no-report'|'permission'|'credentials'|'cloud';
-export interface ProvisionInput {userID:string;mac:string;model:string;ssid:string;password:string;token:string;bindCode:string;productID:string;modelID:string;seriesName?:string;urls?:Record<string,string>}
+export interface ProvisionInput {userID:string;mac:string;model:string;service?:string;ssid:string;password:string;token:string;bindCode:string;productID:string;modelID:string;seriesName?:string;urls?:Record<string,string>}
 export interface ShadowMessage {version:number;clientToken?:string;state?:{desired?:Record<string,unknown>;reported?:Record<string,number|string|boolean>;[key:string]:unknown};code?:number}
 /** Certified local failure before any write in this provisioning transaction. Never infer from a status code. */
 export class ProvisionNotSentError extends ApiError {constructor(error:unknown){super(error instanceof ApiError?error.code:503,error instanceof Error?error.message:'配网尚未发送');}}

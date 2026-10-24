@@ -1,7 +1,15 @@
 import type { IntegrationRegistry } from '../services/runtime-integration';
 
-/** Register only reviewed deployment adapters here. No production protocol has been provided yet.
- * Factories assemble typed functions; BLE resource creation belongs in createDeviceDriver.
- * Never register Mock profiles as real adapters or embed accounts, tokens or device secrets.
- */
-export const deploymentIntegrations:IntegrationRegistry=Object.freeze({});
+/** Public development BLE parameters; device responses and cloud data remain authoritative. */
+export const deploymentIntegrations:IntegrationRegistry=Object.freeze({
+  'rowan-ble-dual':{
+    environments:['development','preview'],
+    create:()=>({contracts:{onboarding:{
+      // App writes 0x8F with empty DATA after validating firmware challenge 0x0F.
+      profile:{factoryReply:new Uint8Array(),stageTimeout:120000},
+      deviceToken:(accessToken:string)=>accessToken,
+      bindingTimeout:60000,
+      operationTimeout:240000,
+    }}}),
+  },
+});

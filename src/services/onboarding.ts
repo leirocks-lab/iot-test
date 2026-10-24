@@ -3,13 +3,16 @@ import { mockProfile, pause, Provisioner, ProvisionNotSentError, withBudget, typ
 import { ApiError, type BindingResult, type Product } from './models';
 import type { RowanService } from './rowan';
 import { Provisioner0822, type Profile0822, type ProvisionRunner } from '../protocol/provision-0822';
+import { Provisioner0922 } from '../protocol/provision-0922';
+import { BLE_0822, classify0822 } from '../protocol/ble-0822';
+import { BLE_0922 } from '../protocol/ble-0922';
 import { requireCurrentWifi, type WifiReader } from './wifi';
 import { MockDeviceSession, type DeviceSession } from '../protocol/device-session';
 import { resolveDeviceScanDuration } from '../config/device-discovery';
 
 export interface RealAddContract {
-  profile:Profile0822;
-  makeBindCode:(signal:AbortSignal)=>Promise<string>;
+  profile?:Profile0822;
+  makeBindCode?:(signal:AbortSignal)=>Promise<string>;
   /** Optional additional rules confirmed for the selected product/firmware. */
   validatePassword?:(password:string)=>void;
   deviceToken:(accessToken:string)=>string;
@@ -39,6 +42,8 @@ export interface AddState {
 }
 export interface AddOptions {
   mode: 'mock' | 'real';
+  /** Validated App environment; only development permits HTTP device service URLs. */
+  environment?:string;
   /** Foreground scan duration in milliseconds; defaults to deviceDiscoveryConfig.scanDurationMs. */
   scanTimeout?: number;
   bindingTimeout?: number;
@@ -138,7 +143,7 @@ export class AddDeviceFlow {
         const found=await withBudget(async budget=>{
           const report=(device:DiscoveredDevice)=>{
             if(round!==this.round||signal.aborted||budget.aborted||this.service.session?.userID!==this.owner||this.service.sessionRevision!==this.revision)return;
-            if(device.mac&&!this.state.discovered.some(item=>item.mac.toLowerCase()===device.mac.toLowerCase()))this.update({discovered:[...this.state.discovered,{...device}]});
+            if(device.mac&&!this.state.discovered.some(item=>item.mac.toLowerCase()===device.mac.toLowerCase()&&item.service.toLowerCase()===device.service.toLowerCase()))this.update({discovered:[...this.state.discovered,{...device}]});
           };
           const result=await this.devices.scan(budget,report,duration);
           this.check(round,signal);
@@ -150,7 +155,7 @@ export class AddDeviceFlow {
         },duration,'蓝牙扫描超时',signal);
         this.check(round,signal);
         const unique=new Map<string,DiscoveredDevice>();
-        for(const device of found)if(device.mac && !unique.has(device.mac.toLowerCase()))unique.set(device.mac.toLowerCase(),device);
+        for(const device of found){const key=`${device.service.toLowerCase()}:${device.mac.toLowerCase()}`;if(device.mac&&!unique.has(key))unique.set(key,device);}
         this.update({stage:'idle',discovered:[...unique.values()],message:unique.size?'扫描已结束，请选择设备':'未发现设备，可重试或选择已有产品'});
       } catch(error) {this.check(round,signal);
         const scanIssue=error instanceof ApiError?error.code===403?'permission':error.code===61?'bluetooth':error.code===408?'timeout':'other':'other';
@@ -174,7 +179,7 @@ export class AddDeviceFlow {
           if(!productID)throw new ApiError(503,'设备产品身份尚未解析或不唯一，不能仅凭广播名称配网');
           const product=await withBudget(budget=>this.service.product(productID!,budget),10000,'产品能力读取超时',signal);this.check(round,signal);
         if(this.options.mode==='real'&&(product.modelName!==candidate.model||!product.seriesName))throw new ApiError(503,'实际产品系列或型号与广播身份不一致');
-        if(!product.bluetooth || product.connectType!=='wifi' || !(product.configTypes?.includes('B')??product.configType==='B'))throw new ApiError(503,'当前产品配网路线尚未接入');
+        if(!product.bluetooth || product.connectType!=='wifi' || !(product.configTypes?.some(type=>type==='B'||type==='C')??(product.configType==='B'||product.configType==='C')))throw new ApiError(503,'当前产品配网路线尚未接入');
         this.bindCode=undefined;
         this.update({stage:'selected',candidate,product,message:'设备已选择，请确认 Wi-Fi'});
       } catch(error){this.check(round,signal);this.update({stage:'failed'});throw error;}
@@ -185,7 +190,23 @@ export class AddDeviceFlow {
       for(;;) {
         this.check(round,budget);
         try {
-          const result=await this.service.bindStatus(this.bindCode!,budget);this.check(round,budget);
+          let result:BindingResult;
+          if(this.bindCode)result=await this.service.bindStatus(this.bindCode,budget);
+          else{
+            const mac=this.state.candidate?.mac.replace(/[:-]/g,'').toLowerCase();
+            if(!mac)throw new ApiError(503,'设备MAC不可用，无法核对绑定');
+            const groups=await this.service.home(budget);this.check(round,budget);
+            const matches=new Map<string,BindingResult>();
+            for(const group of groups)for(const entry of group.devices){
+              if(entry.device.mac?.replace(/[:-]/g,'').toLowerCase()===mac&&entry.device.id)
+                matches.set(entry.device.id,{deviceID:entry.device.id,userID:this.owner!,bindingRole:entry.bindingRole});
+            }
+            if(matches.size>1)throw new ApiError(409,'当前账号中多个设备匹配同一MAC，绑定结果待人工核对');
+            const only=matches.values().next().value;
+            if(!only)throw new ApiError(1121,'当前账号设备列表尚未出现该MAC');
+            result=only;
+          }
+          this.check(round,budget);
           this.validateBinding(result);return result;
         } catch(error) {
           this.check(round,budget);
@@ -211,24 +232,38 @@ export class AddDeviceFlow {
       try {
         // Generated codes exist only in the explicitly approved mock-v1 profile.
         if(this.options.mode==='real'){
-          if(!this.options.real||!this.options.wifi)throw new ApiError(503,'真实绑定码及0822工厂确认契约尚未配置');
+          if(!this.options.real||!this.options.wifi)throw new ApiError(503,'真实配网接入契约尚未配置');
           if([this.options.real.bindingTimeout,this.options.real.operationTimeout].some(value=>!Number.isFinite(value)||value<=0))throw new ApiError(503,'真实绑定及配网等待预算未配置');
           const network=await withBudget(budget=>this.options.wifi!.read(budget),10000,'当前Wi-Fi读取超时',signal);this.check(round,signal);
           requireCurrentWifi(network,ssid);
-          this.bindCode=await withBudget(budget=>this.options.real!.makeBindCode(budget),10000,'绑定码获取超时',signal);this.check(round,signal);
-          if(typeof this.bindCode!=='string'||!this.bindCode)throw new ApiError(503,'未获得有效真实绑定码');
+          const provided=this.options.real.makeBindCode?await withBudget(budget=>this.options.real!.makeBindCode!(budget),10000,'绑定码获取超时',signal):'';
+          this.bindCode=typeof provided==='string'?provided:'';
+          this.check(round,signal);
         }else this.bindCode=this.options.makeBindCode?.()??`bind-${this.owner}-${Date.now()}-${++this.serial}`;
         this.update({stage:'selected',message:'正在获取配网服务地址',deviceStep:undefined});
         const urls=await withBudget(budget=>this.service.connection(budget),10000,'配网服务地址读取超时',signal);this.check(round,signal);
+        if(this.options.mode==='real'&&typeof __DEV__!=='undefined'&&__DEV__){
+          const endpointOrigins=Object.fromEntries(Object.entries(urls).map(([name,value])=>{
+            try{const endpoint=new URL(value);return [name,`${endpoint.protocol}//${endpoint.host}`];}
+            catch{return [name,'invalid'];}
+          }));
+          console.info('PAIR-04 device endpoint origins',endpointOrigins);
+        }
         const token=this.options.mode==='real'?this.options.real!.deviceToken(this.service.session!.accessToken):this.service.session!.accessToken;
-        const input={userID:this.owner!,mac:candidate.mac,model:candidate.model,ssid,password,token,bindCode:this.bindCode,productID:product.id,seriesName:product.seriesName,modelID:product.modelName,urls};
+        const input={userID:this.owner!,mac:candidate.mac,model:candidate.model,service:candidate.service,ssid,password,token,bindCode:this.bindCode,productID:product.id,seriesName:product.seriesName,modelID:product.modelName,urls};
         if(this.options.mode==='real'){
           const network=await withBudget(budget=>this.options.wifi!.read(budget),10000,'当前Wi-Fi读取超时',signal);this.check(round,signal);requireCurrentWifi(network,ssid);
         }
         const result=await withBudget(async budget=>{
           this.update({stage:'provisioning',deviceProgress:undefined});
           const markSubmitted=()=>{this.check(round,budget);sent=true;this.submitted=true;};
-          const runner:ProvisionRunner=this.options.mode==='real'?new Provisioner0822(this.devices,this.options.real!.profile):new Provisioner(this.devices);
+          const serviceUUID=candidate.service.toLowerCase();
+          if(this.options.mode==='real'&&(serviceUUID===BLE_0822.service||serviceUUID==='0822')&&!this.options.real!.profile)
+            throw new ApiError(503,'0822工厂确认契约尚未配置');
+          const runner:ProvisionRunner=this.options.mode!=='real'?new Provisioner(this.devices):
+            serviceUUID===BLE_0922.service||serviceUUID==='0922'?new Provisioner0922(this.devices,this.options.real!.operationTimeout,this.options.environment):
+            serviceUUID===BLE_0822.service||serviceUUID==='0822'?new Provisioner0822(this.devices,this.options.real!.profile!,this.options.environment):
+            (()=>{throw new ApiError(503,'设备广播服务UUID不受支持');})();
            return runner.run(input,status=>{this.check(round,budget);if(this.options.mode==='mock')markSubmitted();const progress=provisionProgress(status);this.update({message:describeProvisionStatus(status),deviceStep:describeProvisionStatus(status),...(progress===undefined?{}:{deviceProgress:progress})});},budget,async bindingSignal=>{
             this.check(round,budget);this.update({stage:'binding',message:'正在查询云端绑定结果'});
             return this.poll(round,bindingSignal!);
@@ -239,14 +274,15 @@ export class AddDeviceFlow {
       } catch(error) {
         this.check(round,signal);
         if(error instanceof ProvisionNotSentError){sent=false;this.submitted=false;}
-        const definite=this.state.stage!=='binding' && error instanceof ApiError && [0x63,0x70,0x7f,0xa2,0xa3,0xa4,0xc3,403].includes(error.code);
+        const deviceResult=error instanceof ApiError?classify0822(error.code):undefined;
+        const definite=this.state.stage!=='binding' && error instanceof ApiError && (deviceResult?.kind==='failure'||deviceResult?.kind==='stage'&&deviceResult.outcome==='failure'||[403,2,3,4,6,7,9,10,12].includes(error.code));
         this.update({stage:!sent||definite?'failed':'unknown',message:!sent||definite?'配网未完成，可检查原因后重试':'绑定结果未知，请先核对；不要重复配网'});
         throw error;
       }
     });
   }
   async reconcile() {
-    if(this.state.stage!=='unknown' || !this.bindCode)throw new ApiError(409,'没有待核对的绑定事务');
+    if(this.state.stage!=='unknown' || this.bindCode===undefined)throw new ApiError(409,'没有待核对的绑定事务');
     return this.operate(async(round,signal)=>{
       this.update({stage:'binding',message:'正在核对绑定结果'});
       try {const binding=await this.poll(round,signal);this.update({binding,stage:'bound',message:'绑定已确认，可设置昵称'});}

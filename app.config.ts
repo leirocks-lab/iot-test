@@ -15,6 +15,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     iotApiBaseUrl: process.env.ROWAN_IOT_API_BASE_URL,
     tenantID: process.env.ROWAN_TENANT_ID,
     integrationProfile: process.env.ROWAN_INTEGRATION_PROFILE });
+  const usesDevBackendCertificate = identity.environment === 'development' && communication.httpMode === 'real' &&
+    [communication.apiBaseUrl, communication.iotApiBaseUrl].some(root => root && new URL(root).hostname === '47.107.80.36');
 
   return {
     ...config,
@@ -48,6 +50,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     plugins: [
       ['./src/config/with-api-transport.ts', { environment: identity.environment }],
+      ['./src/config/with-dev-backend-certificate.ts', { enabled: usesDevBackendCertificate }],
       'expo-router',
       'expo-dev-client',
       ['react-native-ble-plx', { isBackgroundEnabled: false, bluetoothAlwaysPermission: '允许 ROWAN 发现并连接配网设备' }],
