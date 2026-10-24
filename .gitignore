@@ -29,6 +29,11 @@ coverage/
 .superpowers/
 .codex-tmp/
 
+# Local caches and one-off task files
+/.cache/
+/.mock-*
+/.worktrees/
+
 # Editors and operating systems
 .idea/
 .DS_Store
