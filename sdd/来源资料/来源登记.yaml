@@ -6,8 +6,8 @@ sources:
     path: docs/智能家居物联网项目计划&需求范围（补充API关联及开发人员）.xlsx
     kind: file
     version: null
-    collected_at: 2026-10-18
-    sha256: 2ca9f1049471513659d3326ec886d446a38718485e7ff47153aa8d79fa7b9007
+    collected_at: 2026-10-24
+    sha256: c947fe61b110b21ed830910aed5734580ffa8f417cbe9bc1c2e422742e28ca31
     role: 唯一功能范围、优先级和负责人依据
   - id: SRC-PRODUCT-001
     path: docs/ROWAN公共App产品功能及API详细设计说明书_V1.4.docx
@@ -395,3 +395,11 @@ sources:
     collected_at: 2026-10-22
     sha256: 7b745fd340a7495be6ad2a6a42d0b181607d1db6970e9a880945db551a6dca67
     role: 当前部署OpenAPI中仅DEVICE-01及AppMqttRespVO的只读摘录；新增sessionToken说明为AWS STS/SigV4，不扩展设备控制或权限事实
+
+  - id: SRC-PRODUCT-016
+    path: docs/ROWAN_AS_App_Spec_V1.6_Corrected.docx
+    kind: file
+    version: V1.6
+    collected_at: 2026-10-24
+    sha256: bda492d70a7495e3a83732e9ba2b3b512643c0b6ad595aa9a357dc3d4857363e
+    role: 仅按用户CHG-20261024-001授权补充既有范围MQTT传输；不授权全部REST或产品业务

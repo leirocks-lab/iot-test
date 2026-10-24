@@ -23,7 +23,7 @@ export function integrationStatus(config:CommunicationConfig,contracts:RuntimeCo
 }
 /** Do not assemble adapters that would be ignored by the selected communication dimensions. */
 export function applicableContracts(config:CommunicationConfig,contracts:RuntimeContracts):RuntimeContracts{
-  return {...(config.httpMode==='real'?{qr:contracts.qr}:{}),...(config.deviceMode==='real'?{onboarding:contracts.onboarding,wifi:contracts.wifi,realtime:contracts.realtime}:{}),
+  return {...(config.httpMode==='real'?{qr:contracts.qr}:{}),...(config.deviceMode==='real'?{onboarding:contracts.onboarding,wifi:contracts.wifi,realtime:contracts.realtime,...(contracts.realtimeModelOptional!==undefined?{realtimeModelOptional:contracts.realtimeModelOptional}:{})}:{}),
     ...(config.httpMode==='real'||config.deviceMode==='real'?{controls:contracts.controls,maintenance:contracts.maintenance,events:contracts.events}:{})};
 }
 export function registeredIntegration(config:CommunicationConfig,registry:IntegrationRegistry){
@@ -37,6 +37,7 @@ export function registeredIntegration(config:CommunicationConfig,registry:Integr
   if(value&&typeof value==='object'&&'then' in value){void Promise.resolve(value).catch(()=>undefined);throw new Error('真实接入配置工厂返回无效声明');}
   if(!value||typeof value!=='object'||!value.contracts||typeof value.contracts!=='object'||Array.isArray(value.contracts)||value.createDeviceDriver!==undefined&&typeof value.createDeviceDriver!=='function')throw new Error('真实接入配置工厂返回无效声明');
   const contracts=applicableContracts(config,value.contracts);
+  if(contracts.realtimeModelOptional!==undefined&&typeof contracts.realtimeModelOptional!=='boolean')throw new Error('只读同步模型策略无效');
   for(const key of ['qr','realtime','controls','maintenance','events'] as const)if(contracts[key]!==undefined&&typeof contracts[key]!=='function')throw new Error('真实接入配置包含无效业务端口');
   if(contracts.wifi!==undefined&&(!contracts.wifi||typeof contracts.wifi.read!=='function'))throw new Error('真实接入配置包含无效Wi-Fi读取端口');
   const add=contracts.onboarding;

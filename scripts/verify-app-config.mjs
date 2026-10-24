@@ -125,6 +125,12 @@ function main() {
 
   const defaultConfig = readExpoConfig();
   assertIdentity(defaultConfig, 'com.rowan.iot.dev', 'development');
+  assert(defaultConfig.extra?.mqttLogLevel === 'debug', 'Development MQTT logs must default to debug');
+  for (const level of ['off', 'error', 'debug']) {
+    const config = readExpoConfig({ ROWAN_MQTT_LOG_LEVEL: level, ROWAN_HTTP_LOG_LEVEL: 'off' });
+    assert(config.extra?.mqttLogLevel === level, 'MQTT log level must reach public extra independently');
+  }
+  assertConfigFailure({ ROWAN_MQTT_LOG_LEVEL: 'verbose' }, 'ROWAN_MQTT_LOG_LEVEL');
 
   assertConfigFailure({ APP_BRAND: 'other' }, 'Unknown APP_BRAND: other');
   assertConfigFailure({ APP_ENV: 'staging' }, 'Unknown APP_ENV: staging');
@@ -146,6 +152,7 @@ function main() {
   ].map(([environment, identifier]) => {
     const config = readExpoConfig({ APP_BRAND: 'rowan', APP_ENV: environment, ...(environment==='production'?{ROWAN_APP_API_BASE_URL:'https://api.example.invalid'}:{}) });
     assertIdentity(config, identifier, environment);
+    assert(config.extra?.mqttLogLevel === (environment === 'production' ? 'off' : 'debug'), `${environment} MQTT log default is wrong`);
     return config;
   });
 

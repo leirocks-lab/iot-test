@@ -1,7 +1,8 @@
 import { allowsHttpApi, validateApiBaseUrl } from './api-transport';
 import type { HttpLogLevel } from './http-logging';
+import type { MqttLogLevel } from '../protocol/mqtt-logging';
 
-export interface CommunicationConfig { httpMode:'mock'|'real'; deviceMode:'mock'|'real'; apiBaseUrl:string; iotApiBaseUrl?:string; tenantID?:string; environment:string; integrationProfile?:string; httpLogLevel?:HttpLogLevel }
+export interface CommunicationConfig { httpMode:'mock'|'real'; deviceMode:'mock'|'real'; apiBaseUrl:string; iotApiBaseUrl?:string; tenantID?:string; environment:string; integrationProfile?:string; httpLogLevel?:HttpLogLevel; mqttLogLevel?:MqttLogLevel }
 /** A public identifier, never a URL, executable module path or credential. */
 export function integrationProfileID(value:unknown):string|undefined {
   if(value===undefined||value==='')return undefined;
@@ -23,5 +24,7 @@ export function communicationConfig(input:Partial<CommunicationConfig>):Communic
   const integrationProfile=integrationProfileID(input.integrationProfile);
   const httpLogLevel=input.httpLogLevel??(environment==='production'?'off':'debug');
   if(!['off','error','debug'].includes(httpLogLevel))throw new Error('Invalid ROWAN_HTTP_LOG_LEVEL; expected off, error or debug');
-  return {environment,httpMode,deviceMode,apiBaseUrl,iotApiBaseUrl,tenantID,...(integrationProfile?{integrationProfile}:{}),httpLogLevel};
+  const mqttLogLevel=input.mqttLogLevel??(environment==='production'?'off':'debug');
+  if(!['off','error','debug'].includes(mqttLogLevel))throw new Error('Invalid ROWAN_MQTT_LOG_LEVEL; expected off, error or debug');
+  return {environment,httpMode,deviceMode,apiBaseUrl,iotApiBaseUrl,tenantID,...(integrationProfile?{integrationProfile}:{}),httpLogLevel,mqttLogLevel};
 }

@@ -30,13 +30,16 @@ export interface DeviceSession {
 }
 export interface Publication {topic:string;payload:Uint8Array}
 export type DeviceReport =
-  | {kind:'full'|'delta';version:number;reported:Values;requestID?:string}
-  | {kind:'rejected';requestID?:string}
+  | {kind:'full'|'delta';version:number;reported:Values;deleted?:string[];clearReported?:boolean;requestID?:string}
+  | {kind:'accepted';version:number;requestID:string}
+  | {kind:'rejected';requestID?:string;operation?:'query'|'update';code?:number}
   | {kind:'serviceResult';requestID:string;identifier:string;success:boolean}
   | {kind:'event';event:DeviceEvent}
   | {kind:'revoked';requestID?:string};
 /** Supplied only after the deployment's identity, topics, payloads and permissions are confirmed. */
 export interface DeviceSyncProfile {
+  confirmation?:'shadow';
+  online?:(reported:Values)=>boolean;
   topics:readonly string[];
   query(requestID:string):Publication;
   /** Validate current-device identity, complete-vs-delta semantics and wire correlation before normalizing. */
@@ -82,19 +85,20 @@ export class RealtimeDeviceSession implements DeviceSession {
   private listeners=new Set<()=>void>();
   private eventListeners=new Set<(event:DeviceEvent)=>void>();
   private propertyListeners=new Set<(observation:PropertyObservation)=>void>();
-  private waiting?:{id:string;expected?:Values;service?:{identifier:string;result:boolean};resolve:()=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>};
+  private waiting?:{id:string;expected?:Values;service?:{identifier:string;result:boolean};acceptedVersion?:number;observed?:Record<string,{version:number;value:number|string|boolean}>;resolve:()=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>};
   private timeout:number;
   private identity:string;
-  constructor(private options:RealSessionOptions){this.timeout=options.timeout??10000;this.identity=`${options.userID}-${Date.now()}-${++sessionSequence}`;}
+  private shadowIdentity:string;
+  constructor(private options:RealSessionOptions){this.timeout=options.timeout??10000;this.identity=`${options.userID}-${Date.now()}-${++sessionSequence}`;this.shadowIdentity=`app-${Date.now().toString(36)}-${sessionSequence}`;}
   get sending(){return !!(this.waiting?.expected||this.waiting?.service);}
-  get canWrite(){return this.writable&&!!this.profile?.command;}
-  get canInvokeService(){return this.writable&&!!this.profile?.service;}
+  get canWrite(){return this.writable&&!!this.profile?.command&&(!this.profile.online||this.profile.online(this.confirmed));}
+  get canInvokeService(){return this.writable&&!!this.profile?.service&&(!this.profile.online||this.profile.online(this.confirmed));}
   onChange(listener:()=>void){this.listeners.add(listener);return ()=>{this.listeners.delete(listener);};}
   onEvent(listener:(event:DeviceEvent)=>void){this.eventListeners.add(listener);return ()=>{this.eventListeners.delete(listener);};}
   onProperties(listener:(observation:PropertyObservation)=>void){this.propertyListeners.add(listener);return ()=>{this.propertyListeners.delete(listener);};}
   private notify(){for(const listener of this.listeners)listener();}
   private check(round:number,signal:AbortSignal){if(round!==this.round||signal.aborted||!this.options.current())throw cancelled();}
-  private requestID(){return `${this.identity}-${++this.sequence}`;}
+  private requestID(){return `${this.profile?.confirmation==='shadow'?this.shadowIdentity:this.identity}-${++this.sequence}`;}
   private rejectWaiting(error:Error){const waiting=this.waiting;if(!waiting)return;this.waiting=undefined;clearTimeout(waiting.timer);waiting.reject(error);}
   private wait(id:string,expected?:Values,service?:{identifier:string;result:boolean}){
     return new Promise<void>((resolve,reject)=>{this.waiting={id,expected,service,resolve,reject,timer:setTimeout(()=>{
@@ -152,6 +156,13 @@ export class RealtimeDeviceSession implements DeviceSession {
     this.check(round,signal);
   }
   private receive(report:DeviceReport){
+    if(report.kind==='accepted'){
+      const w=this.waiting;
+      if(this.profile?.confirmation!=='shadow'||!w?.expected||report.requestID!==w.id||!Number.isSafeInteger(report.version)||report.version<0)return;
+      w.acceptedVersion=report.version;
+      if(this.shadowConfirmed())this.completeWaiting();
+      return;
+    }
     if(report.kind==='event'){for(const listener of this.eventListeners)listener(report.event);return;}
     if(report.kind==='serviceResult'){
       const waiting=this.waiting;
@@ -164,31 +175,50 @@ export class RealtimeDeviceSession implements DeviceSession {
       this.close();this.error='设备权限已失效';this.notify();return;
     }
     if(report.kind==='rejected'){
-      if(this.waiting&&report.requestID===this.waiting.id){this.rejectWaiting(this.waiting.service?new ServiceRejectedError():new ApiError(403,'设备请求被拒绝'));this.ready=false;this.error='设备请求被拒绝';this.notify();}
+      const w=this.waiting,query=w&&!w.expected&&!w.service;
+      if(w&&(report.requestID===w.id||this.profile?.confirmation==='shadow'&&query&&report.operation==='query'&&report.requestID===undefined)){
+        const code=report.code??403;
+        this.rejectWaiting(w.service?new ServiceRejectedError():new ApiError(code,code===404?'设备影子尚未创建':code===409?'影子版本冲突，请重新同步':'设备请求被拒绝'));
+        this.ready=false;this.error=code===404?'设备影子尚未创建':code===409?'影子版本冲突，请重新同步':'设备请求被拒绝';this.notify();
+      }
       return;
     }
     if(report.kind!=='full'&&report.kind!=='delta')return;
     if(!Number.isSafeInteger(report.version)||report.version<0||!report.reported||typeof report.reported!=='object'||Array.isArray(report.reported)||
       Object.values(report.reported).some(value=>!['number','string','boolean'].includes(typeof value)||typeof value==='number'&&!Number.isFinite(value)))return;
     if(!this.ready){
-      if(report.kind!=='full'||!this.waiting||this.waiting.expected||report.requestID!==this.waiting.id)return;
+      if(report.kind!=='full'||!this.waiting||this.waiting.expected||!(report.requestID===this.waiting.id||this.profile?.confirmation==='shadow'&&report.requestID===undefined))return;
       this.confirmed={...report.reported};this.version=report.version;this.ready=true;
     } else {
       // A second/foreign GET response is not an incremental device report.
       if(report.kind==='full')return;
       if(report.version<=this.version)return;
-      this.confirmed={...this.confirmed,...report.reported};this.version=report.version;
+      this.confirmed={...(report.clearReported?{}:this.confirmed),...report.reported};this.version=report.version;
     }
+    for(const key of report.deleted??[])delete this.confirmed[key];
     for(const listener of this.propertyListeners)listener({reported:{...report.reported},full:report.kind==='full'});
     const waiting=this.waiting;
-    if(waiting&&!waiting.service?.result&&report.requestID===waiting.id&&(!waiting.expected||Object.entries(waiting.expected).every(([key,value])=>report.reported[key]===value))){
+    if(waiting?.expected&&this.profile?.confirmation==='shadow'){
+      if(this.profile.online&&!this.profile.online(this.confirmed)){
+        this.rejectWaiting(new ApiError(409,'设备离线，结果未确认'));this.error='设备离线，结果未确认';this.notify();return;
+      }
+      waiting.observed??={};
+      if(report.clearReported)waiting.observed={};
+      for(const key of report.deleted??[])delete waiting.observed[key];
+      for(const key of Object.keys(waiting.expected))if(Object.hasOwn(report.reported,key))waiting.observed[key]={version:report.version,value:report.reported[key]};
+      if(this.shadowConfirmed())this.completeWaiting();
+      this.notify();return;
+    }
+    if(waiting&&!waiting.service?.result&&(report.requestID===waiting.id||this.profile?.confirmation==='shadow'&&report.kind==='full'&&!waiting.expected&&report.requestID===undefined)&&(!waiting.expected||Object.entries(waiting.expected).every(([key,value])=>report.reported[key]===value))){
       clearTimeout(waiting.timer);this.waiting=undefined;waiting.resolve();this.error='';
     }
     this.notify();
   }
+  private shadowConfirmed(){const w=this.waiting;return !!w?.expected&&w.acceptedVersion!==undefined&&Object.entries(w.expected).every(([key,value])=>w.observed?.[key]?.value===value&&w.observed[key].version>w.acceptedVersion!);}
+  private completeWaiting(){const w=this.waiting;if(!w)return;clearTimeout(w.timer);this.waiting=undefined;w.resolve();this.error='';this.notify();}
   async command(properties:Record<string,unknown>){
     if(!this.options.current()){this.close();throw cancelled();}
-    if(!this.ready||this.waiting||!this.connection||!this.profile?.command||!this.writable)throw new ApiError(409,'设备未同步、权限未确认或正在等待回报');
+    if(!this.ready||this.waiting||!this.connection||!this.profile?.command||!this.canWrite)throw new ApiError(409,'设备未同步、离线、权限未确认或正在等待回报');
     const round=this.round,signal=this.controller!.signal,id=this.requestID(),publication=this.profile.command(properties,id);
     const expected=confirmationValues(publication.expected,'控制确认规则尚未配置');
     const received=this.wait(id,expected);this.notify();
@@ -197,7 +227,7 @@ export class RealtimeDeviceSession implements DeviceSession {
   }
   async invokeService(call:ServiceCall){
     if(!this.options.current()){this.close();throw cancelled();}
-    if(!this.ready||this.waiting||!this.connection||!this.profile?.service||!this.writable)throw new ApiError(409,'设备未同步、服务权限未确认或正在等待回报');
+    if(!this.ready||this.waiting||!this.connection||!this.profile?.service||!this.canInvokeService)throw new ApiError(409,'设备未同步、离线、服务权限未确认或正在等待回报');
     const round=this.round,signal=this.controller!.signal,id=this.requestID(),publication=this.profile.service(call,id),confirmation=publication.confirmation;
     if(!confirmation||!['result','reported'].includes(confirmation.kind))throw new ApiError(503,'维护服务确认规则尚未配置');
     const expected=confirmation.kind==='reported'?confirmationValues(confirmation.expected,'维护服务确认规则尚未配置'):undefined;

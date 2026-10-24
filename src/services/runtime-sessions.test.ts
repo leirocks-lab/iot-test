@@ -26,13 +26,20 @@ vi.mock('../protocol/mqtt-browser',async()=>{
 // Fixture protocol, intentionally unrelated to either pending production route.
 const resolver:DeviceProfileResolver=async()=>({topics:['fixture/state'],query:id=>({topic:'fixture/query',payload:new TextEncoder().encode(id)}),decode:(_topic,payload)=>JSON.parse(new TextDecoder().decode(payload)),canWrite:false});
 const runtimes:Runtime[]=[];
-async function setup(profile:DeviceProfileResolver|undefined=resolver,controls?:ControlProfileResolver,maintenance?:MaintenanceProfileResolver,events?:EventProfileResolver){
+async function setup(profile:DeviceProfileResolver|undefined=resolver,controls?:ControlProfileResolver,maintenance?:MaintenanceProfileResolver,events?:EventProfileResolver,realtimeModelOptional=false){
   const driver=new MockDeviceTransport(await MockDatabase.open(new MemoryStorage()),{delay:0});
-  const runtime=await createRuntime({httpMode:'mock',deviceMode:'real'},driver,{realtime:profile,controls,maintenance,events,wifi:{read:async()=>({connection:'wifi',band:'unknown',source:'system',ssid:'fixture'})}});
+  const runtime=await createRuntime({httpMode:'mock',deviceMode:'real'},driver,{realtime:profile,controls,maintenance,events,realtimeModelOptional,wifi:{read:async()=>({connection:'wifi',band:'unknown',source:'system',ssid:'fixture'})}});
   runtimes.push(runtime);await runtime.service.login('rowan@example.com','Rowan@123','password');return runtime;
 }
 afterEach(()=>{for(const runtime of runtimes)runtime.dispose();runtimes.length=0;testPorts.ports.length=0;testPorts.issued.length=0;testPorts.reports.length=0;vi.restoreAllMocks();});
 describe('Runtime设备会话接线（Mock HTTP/构造MQTT）',()=>{
+  it('allows explicitly configured read-only sync when model is unavailable without granting controls',async()=>{
+    const runtime=await setup(resolver,undefined,undefined,undefined,true);
+    vi.spyOn(runtime.service,'model').mockRejectedValue(new ApiError(503,'物模型不可用'));
+    const session=runtime.createDeviceSession('dev_wine');await session.connect();
+    expect(session.ready).toBe(true);expect(session.controls).toBeUndefined();expect(session.canWrite).toBe(false);
+    expect(session.confirmed.Power).toBe(0);await expect(session.command({Power:1})).rejects.toThrow();session.close();
+  });
   it('releases only the unbound device MQTT subscription and connection', async () => {
     const runtime = await setup();
     const devices = runtime.developer!.http.db.state.devices;

@@ -15,7 +15,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     iotApiBaseUrl: process.env.ROWAN_IOT_API_BASE_URL,
     tenantID: process.env.ROWAN_TENANT_ID,
     integrationProfile: process.env.ROWAN_INTEGRATION_PROFILE,
-    httpLogLevel: process.env.ROWAN_HTTP_LOG_LEVEL as 'off' | 'error' | 'debug' | undefined });
+    httpLogLevel: process.env.ROWAN_HTTP_LOG_LEVEL as 'off' | 'error' | 'debug' | undefined,
+    mqttLogLevel: process.env.ROWAN_MQTT_LOG_LEVEL as 'off' | 'error' | 'debug' | undefined });
 
   return {
     ...config,

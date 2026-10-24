@@ -82,6 +82,9 @@ function snapshot(value: unknown): unknown {
   } catch { return '[UNREADABLE]'; }
 }
 
+/** Shared bounded redaction for transport diagnostics; HTTP formatting is unchanged. */
+export { snapshot as diagnosticSnapshot };
+
 /** Formats snapshots into one console call so concurrent requests do not interleave lines. */
 export class ConsoleLogger implements Logger {
   debug(message: string, context?: Readonly<Record<string, unknown>>) { console.debug(message + '\n' + JSON.stringify(context, null, 2)); }

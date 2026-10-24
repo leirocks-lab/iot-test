@@ -21,7 +21,7 @@ import { integrationStatus, type IntegrationStatus } from './runtime-integration
 import { ApiError } from './models';
 import { HttpDiagnostics, LoggedHttpClient } from './http-logging';
 import { DeviceUnbindFlow } from './device-unbind';
-export interface RuntimeContracts {onboarding?:RealAddContract;qr?:RowanCodeParser;wifi?:WifiReader;realtime?:DeviceProfileResolver;controls?:ControlProfileResolver;maintenance?:MaintenanceProfileResolver;events?:EventProfileResolver}
+export interface RuntimeContracts {onboarding?:RealAddContract;qr?:RowanCodeParser;wifi?:WifiReader;realtime?:DeviceProfileResolver;realtimeModelOptional?:boolean;controls?:ControlProfileResolver;maintenance?:MaintenanceProfileResolver;events?:EventProfileResolver}
 export interface Runtime {
   service:RowanService; devices:DeviceTransport; config:CommunicationConfig;
   integration:IntegrationStatus;
@@ -105,10 +105,18 @@ export async function createRuntime(input:Partial<CommunicationConfig>, realDevi
       stop:()=>{if(sessions.get(id)===session)sessions.delete(id);},
       credentials:(signal:AbortSignal)=>service.mqtt(id,signal),
     };
-    const context=async(signal:AbortSignal)=>{const device=await service.device(id,signal);if(device.device.id!==id)throw new Error('产品控制设备身份不一致');if(!device.product)throw new Error('产品信息尚未确认');return {device,model:await service.model(device.product.id,signal)};};
+    const context=async(signal:AbortSignal,optionalModel=false)=>{
+      const device=await service.device(id,signal);if(device.device.id!==id)throw new Error('产品控制设备身份不一致');
+      try{if(!device.product)throw new ApiError(503,'产品信息尚未确认');return {device,model:await service.model(device.product.id,signal)};}
+      catch(error){
+        if(!optionalModel||signal.aborted||error instanceof ApiError&&[401,403,499].includes(error.code))throw error;
+        // An empty, unversioned model authorizes no product controls; metadata errors stay visible in the wrapper.
+        return {device,model:{version:'',attributes:[],services:[],events:[]}};
+      }
+    };
     const inner=config.deviceMode==='mock'?new MockDeviceSession(devices,id,userID,lifecycle):new RealtimeDeviceSession({...lifecycle,deviceID:id,userID,
-      connection:async()=> (await import('../protocol/mqtt-browser')).createMqttConnection(),
-      context,
+      connection:async()=> (await import('../protocol/mqtt-browser')).createMqttConnection({level:config.mqttLogLevel}),
+      context:signal=>context(signal,contracts?.realtimeModelOptional===true),
       profile:contracts?.realtime,
     });const mock=config.deviceMode==='mock'&&config.httpMode==='mock';session=new ControlledDeviceSession(inner,context,mock?mockControlProfile:contracts?.controls,mock?mockMaintenanceProfile:contracts?.maintenance,ledger,mock?mockEventProfile:contracts?.events,eventState);return session;
   };
@@ -157,7 +165,7 @@ export async function createRuntime(input:Partial<CommunicationConfig>, realDevi
             const sessionRevision = service.sessionRevision;
             const connection = (
               await import('../protocol/mqtt-browser')
-            ).createMqttConnection();
+            ).createMqttConnection({level:config.mqttLogLevel});
             if (
               disposed ||
               service.session?.userID !== userID ||

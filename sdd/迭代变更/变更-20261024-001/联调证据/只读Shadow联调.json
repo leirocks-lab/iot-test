@@ -1,0 +1,50 @@
+{
+  "time": "2026-10-24T01:02:16.393Z",
+  "scope": "read-only REST metadata, MQTT subscribe and Shadow get; no control",
+  "stages": [
+    {
+      "stage": "home",
+      "authorizedDeviceCount": 11,
+      "selectedDevice": "dev_209"
+    },
+    {
+      "stage": "device",
+      "deviceID": "dev_209",
+      "productID": "prd_208",
+      "role": "sa"
+    },
+    {
+      "stage": "model",
+      "result": "unavailable"
+    },
+    {
+      "stage": "credentials",
+      "fields": [
+        "host",
+        "endpoint",
+        "path",
+        "clientID",
+        "username",
+        "password",
+        "deviceID",
+        "sessionToken"
+      ],
+      "deviceIdentityMatches": true,
+      "sessionTokenPresent": true
+    },
+    {
+      "stage": "connect",
+      "connected": true
+    },
+    {
+      "stage": "subscriptions",
+      "result": "failed",
+      "code": 499,
+      "causeCode": null
+    },
+    {
+      "stage": "logout",
+      "result": "passed"
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "time": "2026-10-24T02:08:20.689Z",
+  "environment": "Windows Node / actual App STS-WSS and Classic Shadow adapter",
+  "scope": "authorized-device four SUBACKs + zero-byte Shadow get only; no physical controls",
+  "stages": [
+    {
+      "elapsedMs": 372,
+      "stage": "http",
+      "path": "/app-api/session",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 678,
+      "stage": "http",
+      "path": "/iot/app-api/devices",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 680,
+      "stage": "home",
+      "authorizedDeviceCount": 11,
+      "deviceID": "dev_1"
+    },
+    {
+      "elapsedMs": 1651,
+      "stage": "http",
+      "path": "/iot/app-api/devices/dev_1/mqtt",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 1652,
+      "stage": "credentials",
+      "deviceIdentityMatches": true,
+      "fields": [
+        "host",
+        "endpoint",
+        "path",
+        "clientID",
+        "username",
+        "password",
+        "deviceID",
+        "sessionToken"
+      ],
+      "sts": true
+    },
+    {
+      "elapsedMs": 4890,
+      "stage": "connection",
+      "connected": true
+    },
+    {
+      "elapsedMs": 5063,
+      "stage": "http",
+      "path": "/iot/app-api/devices/dev_1",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 5225,
+      "stage": "http",
+      "path": "/iot/app-api/products/prd_1/thing-model",
+      "status": 200,
+      "code": 1050186001
+    },
+    {
+      "elapsedMs": 5226,
+      "stage": "model",
+      "available": false,
+      "code": 1050186001
+    },
+    {
+      "elapsedMs": 5228,
+      "stage": "subscribe",
+      "topic": "$aws/things/dev_1/shadow/get/accepted"
+    },
+    {
+      "elapsedMs": 5515,
+      "stage": "connection",
+      "connected": false
+    },
+    {
+      "elapsedMs": 5519,
+      "stage": "subscribe",
+      "result": "failed",
+      "code": 499,
+      "causeCode": null
+    },
+    {
+      "elapsedMs": 5665,
+      "stage": "http",
+      "path": "/app-api/session",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 5666,
+      "stage": "logout",
+      "result": "passed"
+    }
+  ],
+  "deviceID": "dev_1",
+  "productID": "prd_1",
+  "synchronized": false
+}

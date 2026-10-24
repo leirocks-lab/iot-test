@@ -1,8 +1,8 @@
 schema_version: 1
 source_id: SRC-SCOPE-001
-source_sha256: 2ca9f1049471513659d3326ec886d446a38718485e7ff47153aa8d79fa7b9007
+source_sha256: c947fe61b110b21ed830910aed5734580ffa8f417cbe9bc1c2e422742e28ca31
 sheet: APP功能清单
-collected_at: 2026-10-18
+collected_at: 2026-10-24
 policy: 只有本快照条目可进入功能范围；新增须先获得范围变更确认
 requirements:
   - id: 1
@@ -774,12 +774,12 @@ requirements:
     level1: 设备控制
     level2: 通用控制
     title: 开关控制
-    description: 通过 MQTT property/set 下发；UI 先进入发送中状态，最终按 property/update 刷新。
+    description: 通过 MQTT Shadow update desired 下发；UI 先进入发送中状态，最终按 Shadow update/accepted reported 刷新。
     priority: P1
     api_association: |-
       DEVICE-01 获取设备 MQTT 连接（GET /api/app/devices/{deviceID}/mqtt）；
-      property/set 下发；
-      property/update 回报
+      Shadow update desired 下发；
+      Shadow update/accepted reported 回报
     api_refs:
       - DEVICE-01
     owner: 李
@@ -793,8 +793,8 @@ requirements:
     priority: P1
     api_association: |-
       DEVICE-01 获取设备 MQTT 连接（GET /api/app/devices/{deviceID}/mqtt）；
-      property/set 下发；
-      property/update 回报
+      Shadow update desired 下发；
+      Shadow update/accepted reported 回报
     api_refs:
       - DEVICE-01
     owner: 李
@@ -808,8 +808,8 @@ requirements:
     priority: P1
     api_association: |-
       DEVICE-01 获取设备 MQTT 连接（GET /api/app/devices/{deviceID}/mqtt）；
-      property/set 下发；
-      property/update 回报
+      Shadow update desired 下发；
+      Shadow update/accepted reported 回报
     api_refs:
       - DEVICE-01
     owner: 李
@@ -824,8 +824,8 @@ requirements:
     api_association: |-
       DEVICE-01 获取设备 MQTT 连接（GET /api/app/devices/{deviceID}/mqtt）；
       THING-01 获取已发布物模型（GET /api/app/products/{productID}/thing-model）；
-      property/set 下发；
-      property/update 回报
+      Shadow update desired 下发；
+      Shadow update/accepted reported 回报
     api_refs:
       - DEVICE-01
       - THING-01
@@ -840,8 +840,8 @@ requirements:
     priority: P1
     api_association: |-
       DEVICE-01 获取设备 MQTT 连接（GET /api/app/devices/{deviceID}/mqtt）；
-      property/set 下发；
-      property/update 回报
+      Shadow update desired 下发；
+      Shadow update/accepted reported 回报
     api_refs:
       - DEVICE-01
     owner: 李
@@ -855,8 +855,8 @@ requirements:
     priority: P1
     api_association: |-
       DEVICE-01 获取设备 MQTT 连接（GET /api/app/devices/{deviceID}/mqtt）；
-      property/set 下发；
-      property/update 回报
+      Shadow update desired 下发；
+      Shadow update/accepted reported 回报
     api_refs:
       - DEVICE-01
     owner: 李
@@ -870,8 +870,8 @@ requirements:
     priority: P1
     api_association: |-
       DEVICE-01 获取设备 MQTT 连接（GET /api/app/devices/{deviceID}/mqtt）；
-      property/set 下发；
-      property/update 回报
+      Shadow update desired 下发；
+      Shadow update/accepted reported 回报
     api_refs:
       - DEVICE-01
     owner: 李
@@ -885,7 +885,7 @@ requirements:
     priority: P1
     api_association: |-
       DEVICE-01 获取设备 MQTT 连接（GET /api/app/devices/{deviceID}/mqtt）；
-      property/update 回报
+      Shadow update/accepted reported 回报
     api_refs:
       - DEVICE-01
     owner: 李
@@ -895,12 +895,10 @@ requirements:
     level1: 设备控制
     level2: 维护状态
     title: 清洁重置
-    description: 通过 MQTT service/call 执行一次性重置；需确认后下发并等待设备结果。
+    description: 通过 AWS Classic Shadow desired 下发原产品一次性重置动作字段；需确认后下发，按原次数、清零或流水号语义等待设备真实 reported 结果，不自动重放。
     priority: P1
     api_association: |-
-      DEVICE-01 获取设备 MQTT 连接（GET /api/app/devices/{deviceID}/mqtt）；
-      service/call 服务调用；
-      event/property/update 结果回报
+      DEVICE-01 获取设备 MQTT 连接（GET /api/app/devices/{deviceID}/mqtt）；Shadow update desired 原动作字段；update/accepted reported 结果确认（V1.6 §10）
     api_refs:
       - DEVICE-01
     owner: 李
@@ -910,11 +908,10 @@ requirements:
     level1: 设备控制
     level2: 实时状态
     title: 属性同步
-    description: 订阅 property/update，展示运行状态、当前温湿度、目标值及维护状态。
+    description: 订阅 AWS Classic Shadow update/accepted，合并 state.reported，展示运行状态、当前温湿度、目标值及维护状态；desired accepted 不表示设备执行成功。
     priority: P1
     api_association: |-
-      DEVICE-01 获取设备 MQTT 连接（GET /api/app/devices/{deviceID}/mqtt）；
-      property/update 回报
+      DEVICE-01 获取设备 MQTT 连接（GET /api/app/devices/{deviceID}/mqtt）；Shadow get/accepted、get/rejected、update/accepted、update/rejected（V1.6 §10）
     api_refs:
       - DEVICE-01
     owner: 李
@@ -924,11 +921,10 @@ requirements:
     level1: 设备控制
     level2: 实时状态
     title: 故障与告警
-    description: 通过 MQTT 事件上报展示故障或告警；App 应保留事件上下文，不自行推断已恢复。
+    description: 云端处理 notice；App 从已有云端接口展示同一设备告警，保留上下文及明确恢复依据；接口缺失待接入，不直接订阅 notice，不新增消息中心。
     priority: P1
     api_association: |-
-      DEVICE-01 获取设备 MQTT 连接（GET /api/app/devices/{deviceID}/mqtt）；
-      event 事件上报
+      原有云端消息/设备接口（实际契约待核实）；Shadow reported 中明确故障状态依产品字典；不新增 event/post（V1.6 §10）
     api_refs:
       - DEVICE-01
     owner: 李
@@ -942,8 +938,8 @@ requirements:
     priority: P1
     api_association: |-
       DEVICE-01 获取设备 MQTT 连接（GET /api/app/devices/{deviceID}/mqtt）；
-      property/set 下发；
-      property/update 回报
+      Shadow update desired 下发；
+      Shadow update/accepted reported 回报
     api_refs:
       - DEVICE-01
     owner: 李
@@ -953,12 +949,10 @@ requirements:
     level1: 设备控制
     level2: 异常处理
     title: 断线重连
-    description: 重新获取过期凭证、恢复 Topic 订阅，并执行一次全量 property/get。
+    description: 重新获取有效凭证、恢复四个 Shadow 响应 Topic 订阅，再发布 Shadow get 读取影子快照；不强制设备即时全量上报，不重放未确认控制。
     priority: P1
     api_association: |-
-      DEVICE-01 获取设备 MQTT 连接（GET /api/app/devices/{deviceID}/mqtt）；
-      property/get 全量查询；
-      property/update 回报
+      DEVICE-01 获取设备 MQTT 连接（GET /api/app/devices/{deviceID}/mqtt）；Shadow get 快照查询及四个 accepted/rejected 响应（V1.6 §10）
     api_refs:
       - DEVICE-01
     owner: 李
