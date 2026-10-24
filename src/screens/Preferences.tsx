@@ -3,15 +3,7 @@ import { useEffect, useState } from "react";
 import { Linking, Platform, Switch, View } from "react-native";
 import type { Settings } from "../services/models";
 import { useApp } from "../ui/context";
-import {
-  Button,
-  Card,
-  ErrorText,
-  Label,
-  Page,
-  styles,
-  useAction,
-} from "../ui/kit";
+import { Button, Card, ErrorText, Label, Page, styles, useAction } from "../ui/kit";
 export default function Preferences() {
   const { runtime, refreshSettings } = useApp(),
     action = useAction(),
@@ -46,11 +38,7 @@ export default function Preferences() {
                 <Button
                   secondary={setting.language !== value}
                   key={value}
-                  title={
-                    { "zh-CN": "简体中文", "zh-TW": "繁體中文", en: "English" }[
-                      value
-                    ]
-                  }
+                  title={{ "zh-CN": "简体中文", "zh-TW": "繁體中文", en: "English" }[value]}
                   disabled={action.busy}
                   onPress={() => void update({ language: value })}
                 />

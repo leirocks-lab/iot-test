@@ -1,10 +1,5 @@
 import { withBudget } from "../protocol/device";
-import {
-  ApiError,
-  type Product,
-  type ProductCategory,
-  type ProductGroup,
-} from "./models";
+import { ApiError, type Product, type ProductCategory, type ProductGroup } from "./models";
 import type { RowanService } from "./rowan";
 
 export interface ProductCatalogOptions {
@@ -14,9 +9,7 @@ export interface ProductCatalogOptions {
 }
 
 export type CatalogFilter =
-  | { kind: "recommended" }
-  | { kind: "manual" }
-  | { kind: "category"; value: string };
+  { kind: "recommended" } | { kind: "manual" } | { kind: "category"; value: string };
 
 interface ReadState<T> {
   value?: T;
@@ -42,10 +35,7 @@ const initialState = (): ProductCatalogState => ({
   active: false,
 });
 
-export function catalogProducts(
-  groups: ProductGroup[],
-  filter: CatalogFilter,
-): Product[] {
+export function catalogProducts(groups: ProductGroup[], filter: CatalogFilter): Product[] {
   const all = groups.flatMap((group) => group.products);
   const products =
     filter.kind === "recommended"
@@ -54,10 +44,7 @@ export function catalogProducts(
         ? all.filter((product) => product.category === filter.value)
         : all;
   if (
-    products.every(
-      (product) =>
-        typeof product.sort === "number" && Number.isFinite(product.sort),
-    )
+    products.every((product) => typeof product.sort === "number" && Number.isFinite(product.sort))
   ) {
     // Q2: preserve response order for ties; never manufacture a missing sort value.
     return [...products].sort((left, right) => left.sort! - right.sort!);
@@ -67,34 +54,21 @@ export function catalogProducts(
 
 /** Mirrors the already implemented add route; other capabilities remain visible, not executable. */
 export function catalogPairingIssue(product: Product): string {
-  const configTypes =
-    product.configTypes ?? (product.configType ? [product.configType] : []);
-  if (
-    product.bluetooth === undefined ||
-    !product.connectType ||
-    !configTypes.length
-  ) {
+  const configTypes = product.configTypes ?? (product.configType ? [product.configType] : []);
+  if (product.bluetooth === undefined || !product.connectType || !configTypes.length) {
     return "产品配网能力未完整提供，暂不能继续";
   }
-  if (
-    !product.bluetooth ||
-    product.connectType !== "wifi" ||
-    !configTypes.includes("B")
-  ) {
+  if (!product.bluetooth || product.connectType !== "wifi" || !configTypes.includes("B")) {
     return "该产品的配网方式暂未接入，可返回选择其他产品";
   }
   return "";
 }
 
-export function trustedBuyLink(
-  link: string,
-  origins: readonly string[] = [],
-): string | undefined {
+export function trustedBuyLink(link: string, origins: readonly string[] = []): string | undefined {
   if (!link || !origins.length) return undefined;
   try {
     const url = new URL(link);
-    if (url.protocol !== "https:" || url.username || url.password)
-      return undefined;
+    if (url.protocol !== "https:" || url.username || url.password) return undefined;
     const trusted = origins.some((origin) => {
       try {
         const allowed = new URL(origin);
@@ -170,8 +144,7 @@ export class ProductCatalogFlow {
     this.stop();
     if (!this.service.session) return;
     const changed =
-      this.owner !== this.service.userID ||
-      this.revision !== this.service.sessionRevision;
+      this.owner !== this.service.userID || this.revision !== this.service.sessionRevision;
     if (changed) this.state = initialState();
     this.owner = this.service.userID;
     this.revision = this.service.sessionRevision;
@@ -204,9 +177,7 @@ export class ProductCatalogFlow {
 
   private async read<K extends ReadKey>(
     key: K,
-    work: (
-      signal: AbortSignal,
-    ) => Promise<NonNullable<ProductCatalogState[K]["value"]>>,
+    work: (signal: AbortSignal) => Promise<NonNullable<ProductCatalogState[K]["value"]>>,
   ): Promise<NonNullable<ProductCatalogState[K]["value"]> | undefined> {
     if (!this.current()) return undefined;
     this.cancel(key);
@@ -214,16 +185,9 @@ export class ProductCatalogFlow {
     this.requests.set(key, controller);
     this.update({ [key]: { loading: true, error: "" } });
     const current = () =>
-      this.current() &&
-      !controller.signal.aborted &&
-      this.requests.get(key) === controller;
+      this.current() && !controller.signal.aborted && this.requests.get(key) === controller;
     try {
-      const value = await withBudget(
-        work,
-        this.budget,
-        "产品读取超时，请重试",
-        controller.signal,
-      );
+      const value = await withBudget(work, this.budget, "产品读取超时，请重试", controller.signal);
       if (!current()) return undefined;
       this.update({ [key]: { value, loading: false, error: "" } });
       return value;
@@ -232,8 +196,7 @@ export class ProductCatalogFlow {
         this.update({
           [key]: {
             loading: false,
-            error:
-              error instanceof Error ? error.message : "产品读取失败，请重试",
+            error: error instanceof Error ? error.message : "产品读取失败，请重试",
           },
         });
       }
@@ -258,18 +221,14 @@ export class ProductCatalogFlow {
   }
 
   async loadProducts() {
-    await this.read("products", (signal) =>
-      this.service.products(signal, this.options.brandId),
-    );
+    await this.read("products", (signal) => this.service.products(signal, this.options.brandId));
   }
 
   async filter(filter: CatalogFilter) {
     if (!this.current()) return;
     if (
       filter.kind === "category" &&
-      !this.state.categories.value?.some(
-        (category) => category.value === filter.value,
-      )
+      !this.state.categories.value?.some((category) => category.value === filter.value)
     ) {
       this.update({
         categories: {
@@ -294,8 +253,7 @@ export class ProductCatalogFlow {
     this.update({ selectedID: id });
     return this.read("detail", async (signal) => {
       const product = await this.service.product(id, signal);
-      if (product.id !== id)
-        throw new ApiError(502, "产品详情身份不一致，请重新选择");
+      if (product.id !== id) throw new ApiError(502, "产品详情身份不一致，请重新选择");
       return product;
     });
   }
@@ -321,11 +279,7 @@ export class ProductCatalogFlow {
   }
 
   get buyLink() {
-    if (!this.current() || this.state.detail.loading || this.state.detail.error)
-      return undefined;
-    return trustedBuyLink(
-      this.state.detail.value?.buyLink ?? "",
-      this.options.trustedBuyOrigins,
-    );
+    if (!this.current() || this.state.detail.loading || this.state.detail.error) return undefined;
+    return trustedBuyLink(this.state.detail.value?.buyLink ?? "", this.options.trustedBuyOrigins);
   }
 }

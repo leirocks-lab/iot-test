@@ -1,0 +1,14 @@
+node_modules/
+.git/
+.expo/
+.worktrees/
+.codex-tmp/
+.superpowers/
+dist/
+coverage/
+android/
+ios/
+docs/
+sdd/
+expo-env.d.ts
+pnpm-lock.yaml

@@ -1,15 +1,6 @@
 import { Image } from "expo-image";
 import { useEffect, useMemo, useRef, useState } from "react";
-import {
-    Alert,
-    Linking,
-    Modal,
-    Platform,
-    Pressable,
-    StyleSheet,
-    Text,
-    View,
-} from "react-native";
+import { Alert, Linking, Modal, Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Svg, { Path } from "react-native-svg";
 import type { Product, Room } from "../services/models";
@@ -57,8 +48,7 @@ const ARC_LENGTH = Math.PI * 113;
 function openWifiSettings() {
   void (async () => {
     try {
-      if (Platform.OS === "android")
-        await Linking.sendIntent("android.settings.WIFI_SETTINGS");
+      if (Platform.OS === "android") await Linking.sendIntent("android.settings.WIFI_SETTINGS");
       else await Linking.openSettings();
     } catch {
       await Linking.openSettings();
@@ -108,19 +98,12 @@ function useWifiWarnings(wifi?: WifiObservation) {
   const shown = useRef<string | undefined>(undefined);
   useEffect(() => {
     if (!wifi) return;
-    const warning =
-      wifi.connection !== "wifi"
-        ? "offline"
-        : wifi.band === "5"
-          ? "5g"
-          : undefined;
+    const warning = wifi.connection !== "wifi" ? "offline" : wifi.band === "5" ? "5g" : undefined;
     if (!warning || warning === shown.current) return;
     shown.current = warning;
     Alert.alert(
       "未连接Wi-Fi",
-      warning === "5g"
-        ? "请不要使用5GHz的Wi-Fi网络"
-        : "手机连接家庭Wi-Fi后才能添加设备",
+      warning === "5g" ? "请不要使用5GHz的Wi-Fi网络" : "手机连接家庭Wi-Fi后才能添加设备",
       [
         { text: "取消", style: "cancel" },
         { text: "去连接", onPress: openWifiSettings },
@@ -131,16 +114,11 @@ function useWifiWarnings(wifi?: WifiObservation) {
 
 function WifiForm(p: Props) {
   const ssid = p.wifi?.ssid ?? p.ssid;
-  const valid =
-    !!ssid && !!p.password && !p.busy && !p.wifiBusy && p.wifi?.band !== "5";
+  const valid = !!ssid && !!p.password && !p.busy && !p.wifiBusy && p.wifi?.band !== "5";
   return (
     <View style={s.screen}>
       <View style={s.wifiHero}>
-        <Image
-          source={CONNECT_ICON}
-          contentFit="contain"
-          style={s.connectIcon}
-        />
+        <Image source={CONNECT_ICON} contentFit="contain" style={s.connectIcon} />
         <Text style={s.sectionTitle}>{"连接Wi-Fi网络"}</Text>
         <Text style={s.heroHint}>
           {"*注意：本产品仅支持2.4GHz的Wi-Fi网络，\n请勿开启5GHz频段。"}
@@ -163,15 +141,11 @@ function WifiForm(p: Props) {
         <Text
           style={[
             s.warning,
-            p.wifi?.connection === "wifi" &&
-              p.wifi.band !== "5" &&
-              s.hiddenWarning,
+            p.wifi?.connection === "wifi" && p.wifi.band !== "5" && s.hiddenWarning,
           ]}
         >
           {p.wifiError ||
-            (p.wifi?.band === "5"
-              ? "请不要使用5GHz的Wi-Fi网络"
-              : "没有连接到家庭Wi-Fi")}
+            (p.wifi?.band === "5" ? "请不要使用5GHz的Wi-Fi网络" : "没有连接到家庭Wi-Fi")}
         </Text>
         <Input
           prefixIcon={PASSWORD_ICON}
@@ -186,23 +160,13 @@ function WifiForm(p: Props) {
       </View>
       <View style={s.wifiFooter}>
         <Text style={s.faqText}>{"FAQ"}</Text>
-        <ActionButton
-          full
-          title="下一步"
-          disabled={!valid}
-          onPress={p.onProvision}
-        />
+        <ActionButton full title="下一步" disabled={!valid} onPress={p.onProvision} />
       </View>
     </View>
   );
 }
 
-const STEPS = [
-  "连接至设备热点",
-  "发送Wi-Fi认证至设备",
-  "连接至家庭Wi-Fi",
-  "绑定设备",
-];
+const STEPS = ["连接至设备热点", "发送Wi-Fi认证至设备", "连接至家庭Wi-Fi", "绑定设备"];
 function stepCount(state: AddState) {
   if (state.stage === "failed") {
     const step = state.deviceStep ?? "";
@@ -270,29 +234,15 @@ function Arc({ progress, failed }: { progress: number; failed: boolean }) {
     </View>
   );
 }
-function Progress({
-  state,
-  error,
-  retry,
-}: {
-  state: AddState;
-  error?: string;
-  retry: () => void;
-}) {
+function Progress({ state, error, retry }: { state: AddState; error?: string; retry: () => void }) {
   const failed = state.stage === "failed";
-  const progress = failed ? 0 : state.deviceProgress ?? 0;
+  const progress = failed ? 0 : (state.deviceProgress ?? 0);
   const count = stepCount(state);
   return (
     <View style={s.screen}>
       <View style={s.progressHero}>
         <Arc progress={progress} failed={failed} />
-        {failed && (
-          <Image
-            source={CONNECT_ERROR}
-            contentFit="contain"
-            style={s.progressImage}
-          />
-        )}
+        {failed && <Image source={CONNECT_ERROR} contentFit="contain" style={s.progressImage} />}
         <Text style={[s.progressStatus, failed && s.failedStatus]}>
           {failed ? "添加失败" : "连接中..."}
         </Text>
@@ -306,13 +256,7 @@ function Progress({
           return (
             <View style={s.stepRow} key={label}>
               <Text style={s.stepLabel}>{label}</Text>
-              <Text
-                style={[
-                  s.stepMark,
-                  complete && s.completeMark,
-                  failedStep && s.failedMark,
-                ]}
-              >
+              <Text style={[s.stepMark, complete && s.completeMark, failedStep && s.failedMark]}>
                 {failedStep ? "×" : complete ? "✓" : current ? "◌" : "·"}
               </Text>
             </View>
@@ -344,9 +288,7 @@ function Nickname(p: Props) {
         clearable
         style={s.nicknameInput}
       />
-      <Text style={s.nicknameHint}>
-        {"默认设备类型，可在此修改并设置设备名称"}
-      </Text>
+      <Text style={s.nicknameHint}>{"默认设备类型，可在此修改并设置设备名称"}</Text>
       <View style={s.nicknameFooter}>
         <ActionButton
           title="不设置，跳过"
@@ -354,11 +296,7 @@ function Nickname(p: Props) {
           disabled={p.busy}
           onPress={() => p.onFinish(null)}
         />
-        <ActionButton
-          title="下一步"
-          disabled={p.busy}
-          onPress={() => p.onFinish(p.nickname)}
-        />
+        <ActionButton title="下一步" disabled={p.busy} onPress={() => p.onFinish(p.nickname)} />
       </View>
     </View>
   );
@@ -403,12 +341,7 @@ function RoomSheet({
     done();
   };
   return (
-    <Modal
-      visible={visible}
-      transparent
-      animationType="slide"
-      onRequestClose={close}
-    >
+    <Modal visible={visible} transparent animationType="slide" onRequestClose={close}>
       <View style={s.sheetBackdrop}>
         <Pressable style={StyleSheet.absoluteFill} onPress={close} />
         <View style={[s.sheet, { paddingBottom: Math.max(insets.bottom, 12) }]}>
@@ -420,9 +353,7 @@ function RoomSheet({
               onPress={() => setSelected(room.id)}
               style={[s.roomRow, selected === room.id && s.selectedRoom]}
             >
-              <Text
-                style={[s.roomName, selected === room.id && s.selectedRoomText]}
-              >
+              <Text style={[s.roomName, selected === room.id && s.selectedRoomText]}>
                 {room.name}
               </Text>
               {selected === room.id && <Text style={s.roomCheck}>{"✓"}</Text>}
@@ -450,8 +381,7 @@ export function AddDeviceProvision(p: Props) {
     if (retrying) return "wifi";
     if (p.state.binding && p.state.stage !== "complete") return "nickname";
     if (
-      (p.busy &&
-        ["selected", "provisioning", "binding"].includes(p.state.stage)) ||
+      (p.busy && ["selected", "provisioning", "binding"].includes(p.state.stage)) ||
       ["provisioning", "binding", "failed"].includes(p.state.stage)
     )
       return "progress";

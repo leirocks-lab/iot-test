@@ -25,11 +25,7 @@ export default function AddRoom() {
     <Page
       title="添加房间"
       action={
-        <Pressable
-          disabled={!valid || action.busy}
-          onPress={submit}
-          style={{ padding: 8 }}
-        >
+        <Pressable disabled={!valid || action.busy} onPress={submit} style={{ padding: 8 }}>
           <Text
             style={{
               color: valid ? colors.font.primary : colors.font.subtitle2,
@@ -60,9 +56,7 @@ export default function AddRoom() {
           >
             房间名称
           </Text>
-          <Text style={{ color: colors.font.subtitle2, fontSize: 13 }}>
-            {name.length}/20
-          </Text>
+          <Text style={{ color: colors.font.subtitle2, fontSize: 13 }}>{name.length}/20</Text>
         </View>
         <View
           style={{

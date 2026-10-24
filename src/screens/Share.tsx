@@ -12,10 +12,7 @@ function ShareContent({
   id: string;
   runtime: NonNullable<ReturnType<typeof useApp>["runtime"]>;
 }) {
-  const flow = useMemo(
-    () => new DeviceShareFlow(runtime.service, id),
-    [runtime, id],
-  );
+  const flow = useMemo(() => new DeviceShareFlow(runtime.service, id), [runtime, id]);
   const state = useSyncExternalStore(flow.subscribe, flow.snapshot, flow.snapshot);
 
   useFocusEffect(
@@ -68,10 +65,6 @@ export default function Share() {
     );
   }
   return (
-    <ShareContent
-      key={`${id}-${runtime.service.sessionRevision}`}
-      id={id}
-      runtime={runtime}
-    />
+    <ShareContent key={`${id}-${runtime.service.sessionRevision}`} id={id} runtime={runtime} />
   );
 }

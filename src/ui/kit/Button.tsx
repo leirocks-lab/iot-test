@@ -37,9 +37,7 @@ export function Button({
             : danger
               ? colors.background.danger
               : colors.background.black,
-          borderColor: danger
-            ? colors.background.danger
-            : colors.background.control,
+          borderColor: danger ? colors.background.danger : colors.background.control,
           opacity: disabled ? 0.2 : pressed ? 0.75 : 1,
         },
       ]}

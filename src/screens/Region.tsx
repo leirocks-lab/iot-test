@@ -24,10 +24,7 @@ const regions = [
 export default function Region() {
   const params = useLocalSearchParams<{ selected?: string }>();
   const [query, setQuery] = useState("");
-  const filtered = useMemo(
-    () => regions.filter((name) => name.includes(query)),
-    [query],
-  );
+  const filtered = useMemo(() => regions.filter((name) => name.includes(query)), [query]);
   const choose = (name: string) =>
     router.replace({
       pathname: "/auth/register",

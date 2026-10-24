@@ -1,13 +1,6 @@
 import { Image } from "expo-image";
 import { useRef, useState, type ReactNode } from "react";
-import {
-  Animated,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Animated, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import type { DiscoveredDevice } from "../protocol/ble";
 import type { Product } from "../services/models";
@@ -52,11 +45,7 @@ export function AddDeviceDiscovery({
       outputRange,
       extrapolate: "clamp",
     });
-  const label = devices.length
-    ? "已发现"
-    : scanning
-      ? "正在扫描附近蓝牙设备"
-      : "未发现设备";
+  const label = devices.length ? "已发现" : scanning ? "正在扫描附近蓝牙设备" : "未发现设备";
   const rescan = () => {
     scrollRef.current?.scrollTo({ y: 0, animated: true });
     onRescan();
@@ -94,13 +83,10 @@ export function AddDeviceDiscovery({
           scrollEventThrottle={16}
           keyboardShouldPersistTaps="handled"
           onScroll={(event) => {
-            Animated.event(
-              [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-              { useNativeDriver: false },
-            )(event);
-            setCollapsed(
-              event.nativeEvent.contentOffset.y >= COLLAPSE_DISTANCE - 1,
-            );
+            Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], {
+              useNativeDriver: false,
+            })(event);
+            setCollapsed(event.nativeEvent.contentOffset.y >= COLLAPSE_DISTANCE - 1);
           }}
         >
           {!!error && (
@@ -154,10 +140,7 @@ export function AddDeviceDiscovery({
           {catalog}
         </Animated.ScrollView>
         <Animated.View
-          style={[
-            styles.searchPanel,
-            { height: interpolate([EXPANDED, COMPACT]) },
-          ]}
+          style={[styles.searchPanel, { height: interpolate([EXPANDED, COMPACT]) }]}
           pointerEvents="box-none"
         >
           <Animated.View
@@ -181,9 +164,7 @@ export function AddDeviceDiscovery({
           <Animated.View
             pointerEvents="none"
             accessibilityElementsHidden={collapsed}
-            importantForAccessibility={
-              collapsed ? "no-hide-descendants" : "auto"
-            }
+            importantForAccessibility={collapsed ? "no-hide-descendants" : "auto"}
             style={[
               styles.searchCopy,
               { top: 16, left: 0, right: 0, opacity: interpolate([1, 0]) },
@@ -191,9 +172,7 @@ export function AddDeviceDiscovery({
           >
             <Text numberOfLines={1} style={styles.searchTitle}>
               {label}
-              {devices.length > 0 && (
-                <Text style={styles.count}> {devices.length} </Text>
-              )}
+              {devices.length > 0 && <Text style={styles.count}> {devices.length} </Text>}
               {devices.length > 0 ? "个设备" : ""}
             </Text>
             <Text numberOfLines={1} style={styles.searchSubtitle}>
@@ -203,9 +182,7 @@ export function AddDeviceDiscovery({
           <Animated.View
             pointerEvents="none"
             accessibilityElementsHidden={!collapsed}
-            importantForAccessibility={
-              !collapsed ? "no-hide-descendants" : "auto"
-            }
+            importantForAccessibility={!collapsed ? "no-hide-descendants" : "auto"}
             style={[
               styles.searchCopy,
               styles.compactCopy,
@@ -218,9 +195,7 @@ export function AddDeviceDiscovery({
           >
             <Text numberOfLines={1} style={styles.compactTitle}>
               {label}
-              {devices.length > 0 && (
-                <Text style={styles.count}> {devices.length} </Text>
-              )}
+              {devices.length > 0 && <Text style={styles.count}> {devices.length} </Text>}
               {devices.length > 0 ? "个设备" : ""}
             </Text>
             {scanning && !devices.length && (
@@ -233,9 +208,7 @@ export function AddDeviceDiscovery({
             <Animated.View
               pointerEvents={collapsed ? "auto" : "none"}
               accessibilityElementsHidden={!collapsed}
-              importantForAccessibility={
-                !collapsed ? "no-hide-descendants" : "auto"
-              }
+              importantForAccessibility={!collapsed ? "no-hide-descendants" : "auto"}
               style={[styles.rescanWrap, { opacity: interpolate([0, 1]) }]}
             >
               <Pressable
@@ -243,10 +216,7 @@ export function AddDeviceDiscovery({
                 accessibilityLabel="重新扫描"
                 disabled={disabled}
                 onPress={rescan}
-                style={({ pressed }) => [
-                  styles.rescan,
-                  pressed && styles.pressed,
-                ]}
+                style={({ pressed }) => [styles.rescan, pressed && styles.pressed]}
               >
                 <Text style={styles.rescanText}>重新扫描</Text>
               </Pressable>

@@ -2,13 +2,7 @@ import { withBudget } from "../protocol/device";
 import { ApiError, type HomeGroup } from "./models";
 import type { RowanService } from "./rowan";
 
-export type UnbindPhase =
-  | "idle"
-  | "submitting"
-  | "checking"
-  | "unknown"
-  | "failed"
-  | "complete";
+export type UnbindPhase = "idle" | "submitting" | "checking" | "unknown" | "failed" | "complete";
 
 export interface DeviceUnbindState {
   phase: UnbindPhase;
@@ -16,11 +10,9 @@ export interface DeviceUnbindState {
 }
 
 const initial = (): DeviceUnbindState => ({ phase: "idle", error: "" });
-const errorText = (error: unknown) =>
-  error instanceof Error ? error.message : String(error);
+const errorText = (error: unknown) => (error instanceof Error ? error.message : String(error));
 const definiteFailure = (error: unknown) =>
-  error instanceof ApiError &&
-  [400, 401, 403, 404, 1361, 1362].includes(error.code);
+  error instanceof ApiError && [400, 401, 403, 404, 1361, 1362].includes(error.code);
 
 function homeContains(groups: HomeGroup[], deviceID: string) {
   if (
@@ -34,9 +26,7 @@ function homeContains(groups: HomeGroup[], deviceID: string) {
   ) {
     throw new ApiError(502, "首页设备关系无法辨识，请稍后核对");
   }
-  return groups.some((group) =>
-    group.devices.some((item) => item.device.id === deviceID),
-  );
+  return groups.some((group) => group.devices.some((item) => item.device.id === deviceID));
 }
 
 /** A pending DELETE belongs to one device and one authenticated session. */
@@ -54,11 +44,7 @@ export class DeviceUnbindFlow {
   constructor(
     private service: RowanService,
     readonly deviceID: string,
-    private releaseDevice: (
-      deviceID: string,
-      owner: string,
-      revision: number,
-    ) => boolean,
+    private releaseDevice: (deviceID: string, owner: string, revision: number) => boolean,
     private budget = 10000,
   ) {}
 
@@ -83,9 +69,7 @@ export class DeviceUnbindFlow {
 
   get busy() {
     return (
-      !!this.controller ||
-      this.state.phase === "submitting" ||
-      this.state.phase === "checking"
+      !!this.controller || this.state.phase === "submitting" || this.state.phase === "checking"
     );
   }
 
@@ -121,10 +105,7 @@ export class DeviceUnbindFlow {
     this.unsubscribeSession = undefined;
     this.controller?.abort();
     this.controller = undefined;
-    if (
-      this.state.phase === "submitting" ||
-      this.state.phase === "checking"
-    ) {
+    if (this.state.phase === "submitting" || this.state.phase === "checking") {
       this.update({
         phase: "unknown",
         error: "解绑结果待核对，请先检查当前绑定关系",
@@ -155,12 +136,7 @@ export class DeviceUnbindFlow {
   }
 
   async submit() {
-    if (
-      !this.current() ||
-      this.busy ||
-      this.pending ||
-      this.state.phase === "complete"
-    ) {
+    if (!this.current() || this.busy || this.pending || this.state.phase === "complete") {
       return false;
     }
     const generation = this.generation;
@@ -172,10 +148,7 @@ export class DeviceUnbindFlow {
       if (!this.current(generation)) return false;
       if (definiteFailure(error)) {
         this.update({ phase: "failed", error: errorText(error) });
-        if (
-          error instanceof ApiError &&
-          (error.code === 1361 || error.code === 1362)
-        ) {
+        if (error instanceof ApiError && (error.code === 1361 || error.code === 1362)) {
           await this.refreshRelationship(generation);
         }
         return false;

@@ -1,1 +1,1 @@
-export { default } from '../screens/Add';
+export { default } from "../screens/Add";

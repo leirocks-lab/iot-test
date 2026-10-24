@@ -1,25 +1,9 @@
 /* eslint-disable react-hooks/refs */
 import { Image } from "expo-image";
 import { router, useFocusEffect } from "expo-router";
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  type ReactNode,
-} from "react";
-import {
-  Animated,
-  Modal,
-  PanResponder,
-  Pressable,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
-import DraggableFlatList, {
-  type RenderItemParams,
-} from "react-native-draggable-flatlist";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { Animated, Modal, PanResponder, Pressable, Text, TextInput, View } from "react-native";
+import DraggableFlatList, { type RenderItemParams } from "react-native-draggable-flatlist";
 import { ApiError, type DeviceView, type HomeGroup, type Room } from "../services/models";
 import { useApp, useColors } from "../ui/context";
 import { DeviceGlyph } from "../ui/device-glyph";
@@ -59,17 +43,12 @@ function reorderRows(rows: Row[], from: number, to: number): Row[] {
   if (source.kind === "room") {
     const block: Row[] = [source];
     let cursor = from + 1;
-    while (cursor < rows.length && rows[cursor].kind === "device")
-      block.push(rows[cursor++]);
-    const remaining = rows.filter(
-      (_, index) => index < from || index >= cursor,
-    );
+    while (cursor < rows.length && rows[cursor].kind === "device") block.push(rows[cursor++]);
+    const remaining = rows.filter((_, index) => index < from || index >= cursor);
     const target = rows[to];
     if (!target || target.id === source.id) return rows;
     const roomId = target.kind === "room" ? target.room.id : target.roomId;
-    const insertAt = remaining.findIndex(
-      (row) => row.kind === "room" && row.room.id === roomId,
-    );
+    const insertAt = remaining.findIndex((row) => row.kind === "room" && row.room.id === roomId);
     remaining.splice(insertAt < 0 ? remaining.length : insertAt, 0, ...block);
     return remaining;
   }
@@ -179,32 +158,20 @@ function RoomHeader({
 }) {
   const count = room.devices.length || room.deviceCount || 0;
   const content = (
-    <View
-      style={[styles.roomRow, { backgroundColor: colors.background.invert }]}
-    >
+    <View style={[styles.roomRow, { backgroundColor: colors.background.invert }]}>
       {editing && (
         <Pressable onPress={onDelete} style={styles.deleteIconButton}>
-          <Image
-            source={require("../../assets/images/del-icon.png")}
-            style={styles.deleteIcon}
-          />
+          <Image source={require("../../assets/images/del-icon.png")} style={styles.deleteIcon} />
         </Pressable>
       )}
       <Pressable onPress={onToggle} style={styles.roomMain}>
         <View style={styles.roomText}>
-          <Text style={{ color: colors.font.title, fontSize: 16 }}>
-            {room.name}
-          </Text>
-          <Text style={{ color: colors.font.subtitle2, fontSize: 12 }}>
-            {count} 个设备
-          </Text>
+          <Text style={{ color: colors.font.title, fontSize: 16 }}>{room.name}</Text>
+          <Text style={{ color: colors.font.subtitle2, fontSize: 12 }}>{count} 个设备</Text>
         </View>
       </Pressable>
       <Pressable onPress={onRename} style={styles.iconButton}>
-        <Image
-          source={require("../../assets/images/edit-icon.png")}
-          style={styles.editIcon}
-        />
+        <Image source={require("../../assets/images/edit-icon.png")} style={styles.editIcon} />
       </Pressable>
       {!editing && (
         <Pressable onPress={onToggle} style={styles.openButton}>
@@ -258,15 +225,11 @@ export default function Rooms() {
       const next = roomResult.rooms.map((room) => ({
         ...room,
         devices: byRoom.get(room.id) ?? [],
-        expanded:
-          roomsRef.current.find((item) => item.id === room.id)?.expanded ??
-          true,
+        expanded: roomsRef.current.find((item) => item.id === room.id)?.expanded ?? true,
       }));
       baseline.current = roomResult.rooms.map((room) => ({ ...room }));
       originalLocations.current = new Map(
-        next.flatMap((room) =>
-          room.devices.map((device) => [device.device.id, room.id] as const),
-        ),
+        next.flatMap((room) => room.devices.map((device) => [device.device.id, room.id] as const)),
       );
       updateRooms(next);
     } finally {
@@ -279,14 +242,29 @@ export default function Rooms() {
       await runtime!.service.saveRooms(next, baseline.current);
     } catch (error) {
       let reloaded = false;
-      try { await load(); reloaded = true; } catch { /* Preserve the original write error. */ }
+      try {
+        await load();
+        reloaded = true;
+      } catch {
+        /* Preserve the original write error. */
+      }
       if ((error as { code?: number }).code === 409)
-        throw new ApiError(409, reloaded ? "房间已发生变化，请基于最新列表重新编辑" : "无法确认房间状态，请重新加载后再编辑");
+        throw new ApiError(
+          409,
+          reloaded
+            ? "房间已发生变化，请基于最新列表重新编辑"
+            : "无法确认房间状态，请重新加载后再编辑",
+        );
       throw error;
     }
   };
   const remove = (room: RoomEntry) => {
-    if (room.isDefault || room.deviceCount === undefined || room.devices.length || room.deviceCount > 0) {
+    if (
+      room.isDefault ||
+      room.deviceCount === undefined ||
+      room.devices.length ||
+      room.deviceCount > 0
+    ) {
       showToast("当前房间还有设备无法删除");
       return;
     }
@@ -362,10 +340,7 @@ export default function Rooms() {
       }
       footer={
         !editing && (
-          <Pressable
-            onPress={() => router.push("/add-room")}
-            style={styles.addButton}
-          >
+          <Pressable onPress={() => router.push("/add-room")} style={styles.addButton}>
             <Text style={styles.white}>添加房间</Text>
           </Pressable>
         )
@@ -383,10 +358,7 @@ export default function Rooms() {
           {rooms.map((room) => (
             <View
               key={room.id}
-              style={[
-                styles.card,
-                { backgroundColor: colors.background.invert },
-              ]}
+              style={[styles.card, { backgroundColor: colors.background.invert }]}
             >
               <RoomHeader
                 room={room}
@@ -417,9 +389,7 @@ export default function Rooms() {
           ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
           scrollEnabled={false}
           activationDistance={8}
-          onDragEnd={({ from, to }) =>
-            updateRooms(regroup(reorderRows(data, from, to)))
-          }
+          onDragEnd={({ from, to }) => updateRooms(regroup(reorderRows(data, from, to)))}
         />
       )}
       <Modal
@@ -429,10 +399,7 @@ export default function Rooms() {
         onRequestClose={() => setRenameRoom(null)}
       >
         <View style={styles.modalRoot}>
-          <Pressable
-            style={styles.modalBackdrop}
-            onPress={() => setRenameRoom(null)}
-          />
+          <Pressable style={styles.modalBackdrop} onPress={() => setRenameRoom(null)} />
           <View style={styles.sheet}>
             <Text style={styles.sheetTitle}>房间名称</Text>
             <TextInput
@@ -443,20 +410,14 @@ export default function Rooms() {
               placeholder="请输入房间名称"
             />
             <View style={styles.actions}>
-              <Pressable
-                onPress={() => setRenameRoom(null)}
-                style={styles.cancel}
-              >
+              <Pressable onPress={() => setRenameRoom(null)} style={styles.cancel}>
                 <Text>取消</Text>
               </Pressable>
               <Pressable
                 disabled={!draftName.trim() || action.busy}
                 onPress={() =>
                   void action.run(async () => {
-                    await runtime?.service.renameRoom(
-                      renameRoom!.id,
-                      draftName.trim(),
-                    );
+                    await runtime?.service.renameRoom(renameRoom!.id, draftName.trim());
                     setRenameRoom(null);
                     await load();
                   })

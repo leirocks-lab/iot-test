@@ -3,13 +3,7 @@ import { ApiError } from "./models";
 import type { RowanService } from "./rowan";
 
 export type DeviceSharePhase =
-  | "idle"
-  | "loading"
-  | "ready"
-  | "expired"
-  | "unsupported"
-  | "blocked"
-  | "failed";
+  "idle" | "loading" | "ready" | "expired" | "unsupported" | "blocked" | "failed";
 
 export interface DeviceShareState {
   phase: DeviceSharePhase;
@@ -140,13 +134,16 @@ export class DeviceShareFlow {
         this.update({ phase: "expired", expiresAt: share.expiresAt });
         return;
       }
-      this.update({phase:'unsupported',expiresAt:share.expiresAt,error:'正式分享二维码协议待确认，暂不能展示可扫码二维码'});
+      this.update({
+        phase: "unsupported",
+        expiresAt: share.expiresAt,
+        error: "正式分享二维码协议待确认，暂不能展示可扫码二维码",
+      });
     } catch (error) {
       if (!this.current(generation) || controller.signal.aborted) return;
       this.update({
         phase:
-          error instanceof ApiError &&
-          [401, 403, 404, 1461, 1462].includes(error.code)
+          error instanceof ApiError && [401, 403, 404, 1461, 1462].includes(error.code)
             ? "blocked"
             : "failed",
         qrValue: undefined,

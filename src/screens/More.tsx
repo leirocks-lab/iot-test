@@ -3,16 +3,7 @@ import { useCallback, useMemo, useState } from "react";
 import { DeviceSettingsFlow } from "../services/device-settings";
 import { translate } from "../ui/i18n";
 import { useApp } from "../ui/context";
-import {
-  Busy,
-  Button,
-  Card,
-  ErrorText,
-  Field,
-  Label,
-  Page,
-  confirm,
-} from "../ui/kit";
+import { Busy, Button, Card, ErrorText, Field, Label, Page, confirm } from "../ui/kit";
 
 export default function More() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -21,15 +12,11 @@ export default function More() {
   const service = runtime?.service,
     revision = service?.sessionRevision;
   const flow = useMemo(
-    () =>
-      service && revision !== undefined
-        ? new DeviceSettingsFlow(service, id)
-        : null,
+    () => (service && revision !== undefined ? new DeviceSettingsFlow(service, id) : null),
     [service, id, revision],
   );
   const unbindFlow = useMemo(
-    () =>
-      runtime && id && revision !== undefined ? runtime.unbindFlow(id) : null,
+    () => (runtime && id && revision !== undefined ? runtime.unbindFlow(id) : null),
     [runtime, id, revision],
   );
   useFocusEffect(
@@ -58,10 +45,8 @@ export default function More() {
     device = state.device.value;
   const language = service?.language ?? "zh-CN",
     unassigned = translate("Unassigned", language);
-  const pendingName =
-    state.name.phase === "unknown" || state.name.phase === "checking";
-  const pendingRoom =
-    state.room.phase === "unknown" || state.room.phase === "checking";
+  const pendingName = state.name.phase === "unknown" || state.name.phase === "checking";
+  const pendingRoom = state.room.phase === "unknown" || state.room.phase === "checking";
   const roomEditable =
     flow.writable &&
     !flow.busy &&
@@ -170,9 +155,7 @@ export default function More() {
               />
             ))}
             {state.rooms.value.length === 0 && (
-              <Label muted>
-                No room choices. You can leave the device unassigned.
-              </Label>
+              <Label muted>No room choices. You can leave the device unassigned.</Label>
             )}
           </>
         )}
@@ -182,9 +165,7 @@ export default function More() {
           >{`${translate("Pending room choice", language)}: ${state.room.draft === null ? unassigned : state.rooms.value?.find((room) => room.id === state.room.draft)?.name || state.room.draft}`}</Label>
         )}
         <ErrorText error={state.room.error} />
-        {state.roomNeedsSelection && (
-          <Label>Room unavailable. Choose again.</Label>
-        )}
+        {state.roomNeedsSelection && <Label>Room unavailable. Choose again.</Label>}
         {state.room.phase === "saved" && <Label>Room save verified</Label>}
         {pendingRoom ? (
           <Button
@@ -235,9 +216,7 @@ export default function More() {
         {state.members.loading && <Busy />}
         <ErrorText error={state.members.error} />
         <ErrorText error={state.memberRemoval.error} />
-        {state.memberRemoval.phase === "removed" && (
-          <Label>成员已不在当前绑定列表</Label>
-        )}
+        {state.memberRemoval.phase === "removed" && <Label>成员已不在当前绑定列表</Label>}
         {state.memberRemoval.phase === "unknown" && (
           <Button
             secondary
@@ -258,20 +237,13 @@ export default function More() {
         {state.members.value && (
           <>
             <Label muted>
-              {
-                state.members.value.filter(
-                  (member) => member.bindingRole === "mbr",
-                ).length
-              }{" "}
-              members
+              {state.members.value.filter((member) => member.bindingRole === "mbr").length} members
             </Label>
             {state.members.value.map((member) => {
               const nickname = member.nickname?.trim();
-              const removalPending = [
-                "removing",
-                "checking",
-                "unknown",
-              ].includes(state.memberRemoval.phase);
+              const removalPending = ["removing", "checking", "unknown"].includes(
+                state.memberRemoval.phase,
+              );
               return (
                 <Card key={member.userID}>
                   {nickname && <Label>{nickname}</Label>}
@@ -283,27 +255,26 @@ export default function More() {
                         ? "普通成员"
                         : "观察员"}
                   </Label>
-                  {device?.bindingRole === "sa" &&
-                    member.bindingRole === "mbr" && (
-                      <Button
-                        secondary
-                        danger
-                        title="Remove member"
-                        disabled={
-                          removalPending ||
-                          state.members.loading ||
-                          !!state.members.error ||
-                          !!state.device.error
-                        }
-                        onPress={() =>
-                          confirm(
-                            "Remove member",
-                            `设备：${device.deviceNickname} (${device.device.id})\n成员：${nickname ? `${nickname} ` : ""}(${member.userID})`,
-                            () => void flow.removeMember(member.userID),
-                          )
-                        }
-                      />
-                    )}
+                  {device?.bindingRole === "sa" && member.bindingRole === "mbr" && (
+                    <Button
+                      secondary
+                      danger
+                      title="Remove member"
+                      disabled={
+                        removalPending ||
+                        state.members.loading ||
+                        !!state.members.error ||
+                        !!state.device.error
+                      }
+                      onPress={() =>
+                        confirm(
+                          "Remove member",
+                          `设备：${device.deviceNickname} (${device.device.id})\n成员：${nickname ? `${nickname} ` : ""}(${member.userID})`,
+                          () => void flow.removeMember(member.userID),
+                        )
+                      }
+                    />
+                  )}
                 </Card>
               );
             })}
@@ -314,9 +285,7 @@ export default function More() {
           <Button
             title="Share device"
             disabled={!!state.device.error}
-            onPress={() =>
-              router.push({ pathname: "/device/[id]/share", params: { id } })
-            }
+            onPress={() => router.push({ pathname: "/device/[id]/share", params: { id } })}
           />
         )}
       </Card>
@@ -330,9 +299,7 @@ export default function More() {
           <Button
             secondary
             title="Firmware updates"
-            onPress={() =>
-              router.push({ pathname: "/device/[id]/ota", params: { id } })
-            }
+            onPress={() => router.push({ pathname: "/device/[id]/ota", params: { id } })}
           />
           <Button
             danger

@@ -1,18 +1,18 @@
-import { useFocusEffect, useLocalSearchParams } from 'expo-router';
-import { useCallback, useMemo, useSyncExternalStore } from 'react';
-import { AppState, View } from 'react-native';
-import { DeviceOtaFlow } from '../services/device-ota';
-import type { OtaStatus } from '../services/models';
-import { useApp } from '../ui/context';
-import { Busy, Button, Card, ErrorText, Label, Page, confirm, styles } from '../ui/kit';
+import { useFocusEffect, useLocalSearchParams } from "expo-router";
+import { useCallback, useMemo, useSyncExternalStore } from "react";
+import { AppState, View } from "react-native";
+import { DeviceOtaFlow } from "../services/device-ota";
+import type { OtaStatus } from "../services/models";
+import { useApp } from "../ui/context";
+import { Busy, Button, Card, ErrorText, Label, Page, confirm, styles } from "../ui/kit";
 
 const statusLabel: Record<OtaStatus, string> = {
-  waiting: '等待升级',
-  downloading: '下载中',
-  upgrading: '安装中',
-  success: '升级成功',
-  failed: '升级失败',
-  cancelled: '已取消',
+  waiting: "等待升级",
+  downloading: "下载中",
+  upgrading: "安装中",
+  success: "升级成功",
+  failed: "升级失败",
+  cancelled: "已取消",
 };
 
 function OtaContent({
@@ -20,42 +20,54 @@ function OtaContent({
   runtime,
 }: {
   id: string;
-  runtime: NonNullable<ReturnType<typeof useApp>['runtime']>;
+  runtime: NonNullable<ReturnType<typeof useApp>["runtime"]>;
 }) {
   const flow = useMemo(() => new DeviceOtaFlow(runtime.service, id), [runtime, id]);
   const state = useSyncExternalStore(flow.subscribe, flow.snapshot, flow.snapshot);
 
-  useFocusEffect(useCallback(() => {
-    if (AppState.currentState === 'active') flow.start();
-    const subscription = AppState.addEventListener('change', (status) => {
-      if (status === 'active') flow.start();
-      else flow.stop();
-    });
-    const timer = setInterval(() => {
-      if (AppState.currentState === 'active') void flow.poll();
-    }, 5000);
-    return () => {
-      clearInterval(timer);
-      subscription.remove();
-      flow.stop();
-    };
-  }, [flow]));
+  useFocusEffect(
+    useCallback(() => {
+      if (AppState.currentState === "active") flow.start();
+      const subscription = AppState.addEventListener("change", (status) => {
+        if (status === "active") flow.start();
+        else flow.stop();
+      });
+      const timer = setInterval(() => {
+        if (AppState.currentState === "active") void flow.poll();
+      }, 5000);
+      return () => {
+        clearInterval(timer);
+        subscription.remove();
+        flow.stop();
+      };
+    }, [flow]),
+  );
 
-  const running = state.task?.result === 'updating';
-  const canCreate = state.active && !state.busy && !state.unknown &&
-    state.checked && !!state.check?.hasUpdate && !!state.check.firmware &&
-    !running && (!state.taskID || !!state.task);
-  const canCancel = state.active && !state.busy && !state.cancelPending &&
-    running && ['waiting', 'downloading', 'upgrading'].includes(state.task?.status ?? '');
+  const running = state.task?.result === "updating";
+  const canCreate =
+    state.active &&
+    !state.busy &&
+    !state.unknown &&
+    state.checked &&
+    !!state.check?.hasUpdate &&
+    !!state.check.firmware &&
+    !running &&
+    (!state.taskID || !!state.task);
+  const canCancel =
+    state.active &&
+    !state.busy &&
+    !state.cancelPending &&
+    running &&
+    ["waiting", "downloading", "upgrading"].includes(state.task?.status ?? "");
 
   return (
     <Page title="Firmware updates">
       {!!state.deviceName && <Label large>{state.deviceName}</Label>}
       <View style={styles.row}>
-        {(['mcu', 'wifi'] as const).map((type) => (
+        {(["mcu", "wifi"] as const).map((type) => (
           <Button
             key={type}
-            title={type === 'mcu' ? 'MCU' : 'Wi-Fi'}
+            title={type === "mcu" ? "MCU" : "Wi-Fi"}
             secondary={state.type !== type}
             disabled={!state.active || state.busy}
             onPress={() => flow.select(type)}
@@ -78,14 +90,18 @@ function OtaContent({
               <Button
                 title="开始升级"
                 disabled={!canCreate}
-                onPress={() => confirm(
-                  '确认升级',
-                  `将 ${state.deviceName || id} 的 ${state.type.toUpperCase()} 升级至 ${state.check!.firmware!.version}。请保持设备电源和网络连接。`,
-                  () => void flow.create(),
-                )}
+                onPress={() =>
+                  confirm(
+                    "确认升级",
+                    `将 ${state.deviceName || id} 的 ${state.type.toUpperCase()} 升级至 ${state.check!.firmware!.version}。请保持设备电源和网络连接。`,
+                    () => void flow.create(),
+                  )
+                }
               />
             </>
-          ) : <Label>已是最新版本</Label>}
+          ) : (
+            <Label>已是最新版本</Label>
+          )}
         </Card>
       )}
       {state.unknown && (
@@ -106,15 +122,19 @@ function OtaContent({
                 <Button
                   secondary
                   title="请求取消升级"
-                  onPress={() => confirm(
-                    '确认取消升级',
-                    '将请求取消当前升级任务，最终结果以任务状态为准。',
-                    () => void flow.cancel(),
-                  )}
+                  onPress={() =>
+                    confirm(
+                      "确认取消升级",
+                      "将请求取消当前升级任务，最终结果以任务状态为准。",
+                      () => void flow.cancel(),
+                    )
+                  }
                 />
               )}
             </>
-          ) : <Label>正在查询升级任务状态…</Label>}
+          ) : (
+            <Label>正在查询升级任务状态…</Label>
+          )}
         </Card>
       )}
     </Page>
@@ -124,6 +144,11 @@ function OtaContent({
 export default function Ota() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { runtime, revision } = useApp();
-  if (!runtime) return <Page title="Firmware updates"><Busy /></Page>;
+  if (!runtime)
+    return (
+      <Page title="Firmware updates">
+        <Busy />
+      </Page>
+    );
   return <OtaContent key={`${id}-${revision}`} id={id} runtime={runtime} />;
 }

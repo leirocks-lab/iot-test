@@ -1,1 +1,1 @@
-export { default } from '../../../screens/Ota';
+export { default } from "../../../screens/Ota";

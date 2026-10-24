@@ -8,12 +8,7 @@ import {
   catalogProducts,
   trustedBuyLink,
 } from "./product-catalog";
-import {
-  productData,
-  productGroupName,
-  productGroups,
-  productParameterRows,
-} from "./product-data";
+import { productData, productGroupName, productGroups, productParameterRows } from "./product-data";
 import { RealHttpClient } from "./real-http";
 import { RowanService } from "./rowan";
 import { MemoryStorage, defaultSettings } from "../test-support/settings-fixture";
@@ -25,15 +20,46 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
-async function setup(
-  options: ConstructorParameters<typeof ProductCatalogFlow>[1] = {},
-) {
-  const http = {request:vi.fn(async()=>({status:200,data:{success:true,code:0,data:{accessToken:'fixture',refreshToken:'fixture-refresh',userID:'user_demo',expiresIn:3600,tokenType:'bearer',setting:defaultSettings()}},headers:{}}))};
+async function setup(options: ConstructorParameters<typeof ProductCatalogFlow>[1] = {}) {
+  const http = {
+    request: vi.fn(async () => ({
+      status: 200,
+      data: {
+        success: true,
+        code: 0,
+        data: {
+          accessToken: "fixture",
+          refreshToken: "fixture-refresh",
+          userID: "user_demo",
+          expiresIn: 3600,
+          tokenType: "bearer",
+          setting: defaultSettings(),
+        },
+      },
+      headers: {},
+    })),
+  };
   const service = new RowanService(http as never, new MemoryStorage());
-  service.session={userID:'user_demo',accessToken:'fixture',refreshToken:'fixture-refresh',tokenType:'bearer',expiresIn:3600,setting:defaultSettings()};
-  vi.spyOn(service,'categories').mockResolvedValue([{name:'WineCooler',value:'WineCooler'},{name:'Dehumidifier',value:'Dehumidifier'}]);
-  vi.spyOn(service,'products').mockResolvedValue([{category:'WineCooler',products:[productData(wineWire)]},{category:'Dehumidifier',products:[]}]);
-  vi.spyOn(service,'product').mockImplementation(async id=>{if(id==='deleted-product')throw new ApiError(1091,'产品不存在');return productData({...wineWire,id});});
+  service.session = {
+    userID: "user_demo",
+    accessToken: "fixture",
+    refreshToken: "fixture-refresh",
+    tokenType: "bearer",
+    expiresIn: 3600,
+    setting: defaultSettings(),
+  };
+  vi.spyOn(service, "categories").mockResolvedValue([
+    { name: "WineCooler", value: "WineCooler" },
+    { name: "Dehumidifier", value: "Dehumidifier" },
+  ]);
+  vi.spyOn(service, "products").mockResolvedValue([
+    { category: "WineCooler", products: [productData(wineWire)] },
+    { category: "Dehumidifier", products: [] },
+  ]);
+  vi.spyOn(service, "product").mockImplementation(async (id) => {
+    if (id === "deleted-product") throw new ApiError(1091, "产品不存在");
+    return productData({ ...wineWire, id });
+  });
   const flow = new ProductCatalogFlow(service, options);
   flows.push(flow);
   return { http, service, flow };
@@ -68,7 +94,6 @@ const wineWire = {
 };
 
 describe("RF-0018 catalog and request lifecycle", () => {
-
   it("keeps categories and products independently retryable, without inserting demo products", async () => {
     const { flow, service } = await setup();
     const categories = vi
@@ -96,9 +121,7 @@ describe("RF-0018 catalog and request lifecycle", () => {
       .spyOn(service, "products")
       .mockRejectedValueOnce(new Error("products offline"));
     const start = flow.start();
-    await vi.waitFor(() =>
-      expect(flow.state.products.error).toBe("products offline"),
-    );
+    await vi.waitFor(() => expect(flow.state.products.error).toBe("products offline"));
     await flow.loadProducts();
     expect(products).toHaveBeenCalledTimes(2);
     expect(flow.state.categories.loading).toBe(true);
@@ -123,9 +146,7 @@ describe("RF-0018 catalog and request lifecycle", () => {
     b.resolve([
       {
         category: "Dehumidifier",
-        products: [
-          productData({ ...wineWire, id: "b", category: "Dehumidifier" }),
-        ],
+        products: [productData({ ...wineWire, id: "b", category: "Dehumidifier" })],
       },
     ]);
     await second;
@@ -153,9 +174,7 @@ describe("RF-0018 catalog and request lifecycle", () => {
   it("rejects a detail identity mismatch instead of using the previous product", async () => {
     const { service, flow } = await setup();
     await flow.start();
-    vi.spyOn(service, "product").mockResolvedValue(
-      productData({ ...wineWire, id: "other" }),
-    );
+    vi.spyOn(service, "product").mockResolvedValue(productData({ ...wineWire, id: "other" }));
     expect(await flow.select("prd_wine")).toBeUndefined();
     expect(flow.state.detail.value).toBeUndefined();
     expect(flow.state.detail.error).toContain("身份不一致");
@@ -195,9 +214,7 @@ describe("RF-0018 catalog and request lifecycle", () => {
     await flow.start();
     const wait = deferred<Product>();
     vi.mocked(service.product).mockClear();
-    const detail = vi
-      .spyOn(service, "product")
-      .mockReturnValueOnce(wait.promise);
+    const detail = vi.spyOn(service, "product").mockReturnValueOnce(wait.promise);
     const selected = flow.select("prd_wine");
     flow.stop();
     expect(detail.mock.calls[0][1]?.aborted).toBe(true);
@@ -251,22 +268,17 @@ describe("RF-0018 catalog and request lifecycle", () => {
       recommended: false,
     });
     const groups = [{ category: "WineCooler", products: [a, b, c] }];
-    expect(
-      catalogProducts(groups, { kind: "manual" }).map((product) => product.id),
-    ).toEqual(["b", "c", "a"]);
-    expect(
-      catalogProducts(groups, { kind: "recommended" }).map(
-        (product) => product.id,
-      ),
-    ).toEqual(["b", "a"]);
-    expect(
-      catalogProducts(groups, { kind: "category", value: "酒柜" }),
-    ).toEqual([]);
-    expect(groups[0].products.map((product) => product.id)).toEqual([
-      "a",
+    expect(catalogProducts(groups, { kind: "manual" }).map((product) => product.id)).toEqual([
       "b",
       "c",
+      "a",
     ]);
+    expect(catalogProducts(groups, { kind: "recommended" }).map((product) => product.id)).toEqual([
+      "b",
+      "a",
+    ]);
+    expect(catalogProducts(groups, { kind: "category", value: "酒柜" })).toEqual([]);
+    expect(groups[0].products.map((product) => product.id)).toEqual(["a", "b", "c"]);
     const missing = { ...b, sort: undefined };
     expect(
       catalogProducts([{ category: "WineCooler", products: [a, missing, c] }], {
@@ -276,20 +288,16 @@ describe("RF-0018 catalog and request lifecycle", () => {
   });
 
   it("does not invent Bluetooth capability or use an unsupported route", () => {
-    expect(
-      catalogPairingIssue(productData({ ...wineWire, bluetooth: undefined })),
-    ).toContain("未完整提供");
-    expect(
-      catalogPairingIssue(productData({ ...wineWire, configType: ["A", "C"] })),
-    ).toContain("暂未接入");
-    expect(
-      catalogPairingIssue(
-        productData({ ...wineWire, connectType: "bluetooth" }),
-      ),
-    ).toContain("暂未接入");
-    expect(
-      catalogPairingIssue(productData({ ...wineWire, configType: ["A", "B"] })),
-    ).toBe("");
+    expect(catalogPairingIssue(productData({ ...wineWire, bluetooth: undefined }))).toContain(
+      "未完整提供",
+    );
+    expect(catalogPairingIssue(productData({ ...wineWire, configType: ["A", "C"] }))).toContain(
+      "暂未接入",
+    );
+    expect(catalogPairingIssue(productData({ ...wineWire, connectType: "bluetooth" }))).toContain(
+      "暂未接入",
+    );
+    expect(catalogPairingIssue(productData({ ...wineWire, configType: ["A", "B"] }))).toBe("");
   });
 
   it("exposes a buy link only for an active, confirmed detail and an explicitly trusted HTTPS origin", async () => {
@@ -315,20 +323,13 @@ describe("RF-0018 catalog and request lifecycle", () => {
     "https://user:password@shop.example.test/a",
     "https://shop.example.test:8443/a",
     "//shop.example.test/a",
-  ])(
-    "does not trust a missing, malformed, credentialed or external buy link: %s",
-    (link) => {
-      expect(
-        trustedBuyLink(link, ["https://shop.example.test"]),
-      ).toBeUndefined();
-    },
-  );
+  ])("does not trust a missing, malformed, credentialed or external buy link: %s", (link) => {
+    expect(trustedBuyLink(link, ["https://shop.example.test"])).toBeUndefined();
+  });
 
   it("keeps all links unavailable when no trust configuration has been supplied", () => {
     expect(trustedBuyLink(wineWire.buyLink)).toBeUndefined();
-    expect(
-      trustedBuyLink(wineWire.buyLink, ["https://shop.example.test/path"]),
-    ).toBeUndefined();
+    expect(trustedBuyLink(wineWire.buyLink, ["https://shop.example.test/path"])).toBeUndefined();
   });
 });
 
@@ -363,9 +364,7 @@ describe("RF-0018 real HTTP source mapping", () => {
 
   it("handles category before the generic detail matcher and preserves all detail content", async () => {
     const { service, fetcher } = realSetup({
-      "/module/app-api/products/category": [
-        { name: "酒柜", value: "WineCooler" },
-      ],
+      "/module/app-api/products/category": [{ name: "酒柜", value: "WineCooler" }],
       "/module/app-api/products": [
         {
           category: "WineCooler",
@@ -375,9 +374,7 @@ describe("RF-0018 real HTTP source mapping", () => {
       ],
       "/module/app-api/products/prd_wine": wineWire,
     });
-    expect(await service.categories()).toEqual([
-      { name: "酒柜", value: "WineCooler" },
-    ]);
+    expect(await service.categories()).toEqual([{ name: "酒柜", value: "WineCooler" }]);
     const groups = await service.products();
     expect(productGroupName(groups[0], "zh-CN")).toBe("酒柜");
     const detail = await service.product("prd_wine");
@@ -404,9 +401,7 @@ describe("RF-0018 real HTTP source mapping", () => {
   });
 
   it("preserves explicit null text rather than falling back to a different introduction form", () => {
-    expect(
-      productData({ ...wineWire, introduction: null }).introduction,
-    ).toBeNull();
+    expect(productData({ ...wineWire, introduction: null }).introduction).toBeNull();
     expect(
       productData({
         ...wineWire,
@@ -429,35 +424,26 @@ describe("RF-0018 real HTTP source mapping", () => {
     [{ ...wineWire, introduction: { text: "unexpected" } }],
     [{ ...wineWire, recommended: "true" }],
     [{ ...wineWire, sort: "1" }],
-  ])(
-    "rejects malformed product payloads without a fixture fallback",
-    (value) => {
-      expect(() => productData(value)).toThrow(ApiError);
-    },
-  );
+  ])("rejects malformed product payloads without a fixture fallback", (value) => {
+    expect(() => productData(value)).toThrow(ApiError);
+  });
 
   it("rejects duplicate products and mismatched group identities", () => {
     expect(() =>
-      productGroups([
-        { category: "WineCooler", products: [wineWire, wineWire] },
-      ]),
+      productGroups([{ category: "WineCooler", products: [wineWire, wineWire] }]),
     ).toThrow("重复");
-    expect(() =>
-      productGroups([{ category: "Dehumidifier", products: [wineWire] }]),
-    ).toThrow("品类不一致");
+    expect(() => productGroups([{ category: "Dehumidifier", products: [wineWire] }])).toThrow(
+      "品类不一致",
+    );
   });
 
   it("preserves real product-not-found errors and refuses malformed category data", async () => {
     const { client, service } = realSetup({
-      "/module/app-api/products/category": [
-        { name: { en: "invalid" }, value: "WineCooler" },
-      ],
+      "/module/app-api/products/category": [{ name: { en: "invalid" }, value: "WineCooler" }],
     });
     await expect(service.categories()).rejects.toMatchObject({ code: 502 });
     const fetcher: HttpFetcher = async () =>
-      new Response(
-        JSON.stringify({ code: 1091, message: "产品不存在", data: null }),
-      );
+      new Response(JSON.stringify({ code: 1091, message: "产品不存在", data: null }));
     const real = new RealHttpClient(
       { apiBaseUrl: "https://api.example.test", tenantID: "42" },
       fetcher,

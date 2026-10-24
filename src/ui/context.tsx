@@ -36,10 +36,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     [error, setError] = useState(""),
     [revision, setRevision] = useState(0),
     [navigationLocked, setNavigationLocked] = useState(false);
-  const lockNavigation = useCallback(
-    (value: boolean) => setNavigationLocked(value),
-    [],
-  );
+  const lockNavigation = useCallback((value: boolean) => setNavigationLocked(value), []);
   useEffect(() => {
     let active = true;
     let created: Runtime | undefined;
@@ -47,7 +44,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const extra = Constants.expoConfig?.extra ?? {};
     Promise.resolve()
       .then(() =>
-        createConfiguredRuntime(extra as Partial<CommunicationConfig>, { signal: controller.signal }),
+        createConfiguredRuntime(extra as Partial<CommunicationConfig>, {
+          signal: controller.signal,
+        }),
       )
       .then((r) => {
         created = r;
@@ -63,10 +62,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       created?.dispose();
     };
   }, []);
-  useEffect(
-    () => runtime?.service.onSessionChange(() => setRevision((r) => r + 1)),
-    [runtime],
-  );
+  useEffect(() => runtime?.service.onSessionChange(() => setRevision((r) => r + 1)), [runtime]);
   const value = useMemo(
     () => ({
       runtime,
@@ -87,9 +83,7 @@ export function useApp() {
 export function useColors() {
   const { settings } = useApp(),
     system = useColorScheme();
-  const dark =
-    settings?.theme === "dark" ||
-    (settings?.theme === "system" && system === "dark");
+  const dark = settings?.theme === "dark" || (settings?.theme === "system" && system === "dark");
   return dark
     ? {
         // background: "#111C22",

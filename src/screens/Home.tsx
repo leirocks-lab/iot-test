@@ -15,15 +15,7 @@ import { withBudget } from "../protocol/device";
 import type { DeviceView, HomeGroup } from "../services/models";
 import { useApp, useColors } from "../ui/context";
 import { DeviceGlyph } from "../ui/device-glyph";
-import {
-  Busy,
-  Button,
-  Empty,
-  ErrorText,
-  Page,
-  confirm,
-  useAction,
-} from "../ui/kit";
+import { Busy, Button, Empty, ErrorText, Page, confirm, useAction } from "../ui/kit";
 
 const homeLogo = require("../../assets/images/home-logo.png");
 const powerOn = require("../../assets/images/poweron-icon.png");
@@ -47,59 +39,62 @@ function DeviceCard({
   const { runtime } = useApp();
   const colors = useColors();
   const action = useAction();
-  const [shadow, setShadow] = useState<import("../protocol/device-session").DeviceSession | null>(null);
+  const [shadow, setShadow] = useState<import("../protocol/device-session").DeviceSession | null>(
+    null,
+  );
   const [, rerender] = useState(0);
-  useFocusEffect(useCallback(() => {
-    if (!runtime?.service.session) return;
-    let active = true;
-    let current: import("../protocol/device-session").DeviceSession | undefined;
-    let unsubscribe: (() => void) | undefined;
-    const stop = () => {
-      unsubscribe?.();
-      unsubscribe = undefined;
-      current?.close();
-      current = undefined;
-      if (active) setShadow(null);
-    };
-    const start = () => {
-      stop();
-      const session = runtime.createDeviceSession(device.device.id);
-      current = session;
-      unsubscribe = session.onChange(() => {
-        if (active && current === session) rerender((value) => value + 1);
+  useFocusEffect(
+    useCallback(() => {
+      if (!runtime?.service.session) return;
+      let active = true;
+      let current: import("../protocol/device-session").DeviceSession | undefined;
+      let unsubscribe: (() => void) | undefined;
+      const stop = () => {
+        unsubscribe?.();
+        unsubscribe = undefined;
+        current?.close();
+        current = undefined;
+        if (active) setShadow(null);
+      };
+      const start = () => {
+        stop();
+        const session = runtime.createDeviceSession(device.device.id);
+        current = session;
+        unsubscribe = session.onChange(() => {
+          if (active && current === session) rerender((value) => value + 1);
+        });
+        void session
+          .connect()
+          .then(() => {
+            if (active && current === session) setShadow(session);
+          })
+          .catch(() => undefined);
+      };
+      if (AppState.currentState === "active") start();
+      const subscription = AppState.addEventListener("change", (state) => {
+        if (state === "active") start();
+        else stop();
       });
-      void session.connect().then(() => {
-        if (active && current === session) setShadow(session);
-      }).catch(() => undefined);
-    };
-    if (AppState.currentState === "active") start();
-    const subscription = AppState.addEventListener("change", (state) => {
-      if (state === "active") start();
-      else stop();
-    });
-    return () => {
-      active = false;
-      subscription.remove();
-      stop();
-    };
-  }, [runtime, device.device.id]));
-  const powered =
-    shadow?.controls?.list().some(control=>control.kind==='power') ? shadow.controls.isOn('power') === true : false;
+      return () => {
+        active = false;
+        subscription.remove();
+        stop();
+      };
+    }, [runtime, device.device.id]),
+  );
+  const powered = shadow?.controls?.list().some((control) => control.kind === "power")
+    ? shadow.controls.isOn("power") === true
+    : false;
   const canControl =
     !!shadow?.ready &&
-    !!shadow.controls?.list().some(control=>control.kind==='power') &&
-    !shadow.controls.reason('power') &&
+    !!shadow.controls?.list().some((control) => control.kind === "power") &&
+    !shadow.controls.reason("power") &&
     !shadow.sending &&
     device.online !== false &&
     device.bindingRole !== "obs";
   return (
     <View style={styles.cardWrap}>
-      <View
-        style={[
-          styles.deviceCard,
-          { backgroundColor: colors.background.invert },
-        ]}
-      >
+      <View style={[styles.deviceCard, { backgroundColor: colors.background.invert }]}>
         <Pressable
           accessibilityRole="button"
           accessibilityLabel={device.deviceNickname}
@@ -116,10 +111,7 @@ function DeviceCard({
         >
           <View style={styles.cardTop}>
             <View
-              style={[
-                styles.onlineDot,
-                { backgroundColor: device.online ? "#1CC787" : "#B9BDBE" },
-              ]}
+              style={[styles.onlineDot, { backgroundColor: device.online ? "#1CC787" : "#B9BDBE" }]}
             />
             {editing && (
               <Image
@@ -136,21 +128,12 @@ function DeviceCard({
               style={styles.productImage}
             />
           ) : (
-            <DeviceGlyph
-              humidity={device.product?.category === "Dehumidifier"}
-              size={78}
-            />
+            <DeviceGlyph humidity={device.product?.category === "Dehumidifier"} size={78} />
           )}
-          <Text
-            numberOfLines={1}
-            style={[styles.productName, { color: colors.font.title }]}
-          >
+          <Text numberOfLines={1} style={[styles.productName, { color: colors.font.title }]}>
             {device.product?.name || device.deviceNickname || device.device.id}
           </Text>
-          <Text
-            numberOfLines={1}
-            style={[styles.productModel, { color: colors.font.subtitle2 }]}
-          >
+          <Text numberOfLines={1} style={[styles.productModel, { color: colors.font.subtitle2 }]}>
             {device.product?.modelName || ""}
           </Text>
         </Pressable>
@@ -160,22 +143,17 @@ function DeviceCard({
           disabled={editing || !canControl}
           onPress={() =>
             void action.run(async () => {
-              await shadow!.controls!.toggle('power');
+              await shadow!.controls!.toggle("power");
             })
           }
-          style={[
-            styles.powerButton,
-            { opacity: !canControl || editing ? 0.45 : 1 },
-          ]}
+          style={[styles.powerButton, { opacity: !canControl || editing ? 0.45 : 1 }]}
         >
           <View
             style={{
               width: 38,
               height: 38,
               borderRadius: "50%",
-              backgroundColor: powered
-                ? colors.brand.blue
-                : colors.background.control,
+              backgroundColor: powered ? colors.brand.blue : colors.background.control,
               alignItems: "center",
               justifyContent: "center",
             }}
@@ -213,12 +191,7 @@ export default function Home() {
     return () => lockNavigation(false);
   }, [editing, lockNavigation]);
   const load = useCallback(async () => {
-    if (
-      !runtime?.service.session ||
-      sessionRevision === undefined ||
-      !focused.current
-    )
-      return;
+    if (!runtime?.service.session || sessionRevision === undefined || !focused.current) return;
     const userID = runtime.service.userID,
       context = `${userID}:${sessionRevision}`;
     if (readOwner.current !== context) {
@@ -255,12 +228,9 @@ export default function Home() {
       );
       if (!current()) return;
       setGroups(data);
-      setRoom(
-        saved && data.some((group) => group.room?.id === saved) ? saved : "all",
-      );
+      setRoom(saved && data.some((group) => group.room?.id === saved) ? saved : "all");
     } catch (error) {
-      if (current())
-        setLoadError(error instanceof Error ? error.message : String(error));
+      if (current()) setLoadError(error instanceof Error ? error.message : String(error));
     } finally {
       if (current()) {
         setLoading(false);
@@ -285,16 +255,12 @@ export default function Home() {
   );
   const devices = groups?.flatMap((group) => group.devices) ?? [],
     visible =
-      room === "all"
-        ? devices
-        : (groups?.find((group) => group.room?.id === room)?.devices ?? []);
+      room === "all" ? devices : (groups?.find((group) => group.room?.id === room)?.devices ?? []);
   const toggle = (id: string) => {
     setRoomMenu(false);
     setEditing(true);
     setSelected((current) =>
-      current.includes(id)
-        ? current.filter((value) => value !== id)
-        : [...current, id],
+      current.includes(id) ? current.filter((value) => value !== id) : [...current, id],
     );
   };
   const exitEditing = () => {
@@ -319,8 +285,7 @@ export default function Home() {
           }
           setSelected(failures);
           await load();
-          if (failures.length)
-            throw new Error("部分设备解绑未确认，请刷新核对后重试");
+          if (failures.length) throw new Error("部分设备解绑未确认，请刷新核对后重试");
         }),
     );
   };
@@ -331,9 +296,7 @@ export default function Home() {
           <Pressable onPress={exitEditing} style={styles.headerAction}>
             <Text style={styles.cancel}>取消</Text>
           </Pressable>
-          <Text style={styles.selectionTitle}>
-            已选中 {selected.length} 个设备
-          </Text>
+          <Text style={styles.selectionTitle}>已选中 {selected.length} 个设备</Text>
           <Pressable onPress={exitEditing} style={styles.headerAction}>
             <Text style={styles.done}>完成</Text>
           </Pressable>
@@ -404,11 +367,7 @@ export default function Home() {
             }}
             style={styles.roomTab}
           >
-            <Text
-              style={[styles.roomText, room === "all" && styles.roomTextActive]}
-            >
-              全屋
-            </Text>
+            <Text style={[styles.roomText, room === "all" && styles.roomTextActive]}>全屋</Text>
             {room === "all" && <View style={styles.tabLine} />}
           </Pressable>
           {groups
@@ -425,12 +384,7 @@ export default function Home() {
                   }}
                   style={styles.roomTab}
                 >
-                  <Text
-                    style={[
-                      styles.roomText,
-                      room === id && styles.roomTextActive,
-                    ]}
-                  >
+                  <Text style={[styles.roomText, room === id && styles.roomTextActive]}>
                     {group.room!.name}
                   </Text>
                   {room === id && <View style={styles.tabLine} />}
@@ -446,11 +400,7 @@ export default function Home() {
           style={styles.roomMenuButton}
         >
           {/* <Text style={styles.menuIcon}>☰</Text> */}
-          <Image
-            source={homeMore}
-            style={{ width: 24, height: 24 }}
-            contentFit="contain"
-          />
+          <Image source={homeMore} style={{ width: 24, height: 24 }} contentFit="contain" />
         </Pressable>
       </View>
       <Modal
@@ -459,14 +409,8 @@ export default function Home() {
         animationType="fade"
         onRequestClose={() => setRoomMenu(false)}
       >
-        <Pressable
-          style={styles.roomOverlay}
-          onPress={() => setRoomMenu(false)}
-        >
-          <Pressable
-            style={styles.roomPopover}
-            onPress={(event) => event.stopPropagation()}
-          >
+        <Pressable style={styles.roomOverlay} onPress={() => setRoomMenu(false)}>
+          <Pressable style={styles.roomPopover} onPress={(event) => event.stopPropagation()}>
             <Pressable
               style={styles.roomOption}
               onPress={() => {
@@ -475,12 +419,7 @@ export default function Home() {
                 void runtime?.service.preference("homeRoom", "all");
               }}
             >
-              <Text
-                style={[
-                  styles.roomOptionName,
-                  room === "all" && styles.roomOptionActive,
-                ]}
-              >
+              <Text style={[styles.roomOptionName, room === "all" && styles.roomOptionActive]}>
                 全屋
               </Text>
               <Text style={styles.roomCount}>{devices.length}</Text>
@@ -500,10 +439,7 @@ export default function Home() {
                     }}
                   >
                     <Text
-                      style={[
-                        styles.roomOptionName,
-                        room === id && styles.roomOptionActive,
-                      ]}
+                      style={[styles.roomOptionName, room === id && styles.roomOptionActive]}
                       numberOfLines={1}
                     >
                       {group.room!.name}
@@ -529,11 +465,7 @@ export default function Home() {
       {groups && devices.length === 0 && (
         <>
           <Empty text="No devices yet. Add your first device." />
-          <Button
-            title="添加设备"
-            disabled={editing}
-            onPress={() => router.push("/add")}
-          />
+          <Button title="添加设备" disabled={editing} onPress={() => router.push("/add")} />
         </>
       )}
       {groups && devices.length > 0 && visible.length === 0 && (

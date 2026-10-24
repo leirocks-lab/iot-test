@@ -20,10 +20,7 @@ export interface SearchDevicesLoadingProps {
 }
 
 /** Bluetooth search animation with a fixed center icon and rotating radar. */
-export function SearchDevicesLoading({
-  size = 240,
-  active = true,
-}: SearchDevicesLoadingProps) {
+export function SearchDevicesLoading({ size = 240, active = true }: SearchDevicesLoadingProps) {
   const rotation = useSharedValue(0);
   const centerSize = size >= 100 ? size / 4 : size;
   const iconSize = centerSize * 0.58;
@@ -57,11 +54,7 @@ export function SearchDevicesLoading({
         accessibilityIgnoresInvertColors
         resizeMode="contain"
         source={searchImage}
-        style={[
-          styles.searchImage,
-          { width: size, height: size, opacity: 0.48 },
-          rotatingStyle,
-        ]}
+        style={[styles.searchImage, { width: size, height: size, opacity: 0.48 }, rotatingStyle]}
       />
       <View
         style={[

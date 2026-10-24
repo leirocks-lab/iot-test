@@ -26,21 +26,8 @@ export function ProductThumbnail({
           onError={() => setFailed(source)}
         />
       ) : (
-        <Svg
-          width={32}
-          height={44}
-          viewBox="0 0 32 44"
-          accessibilityLabel={`${name}，暂无图片`}
-        >
-          <Rect
-            x={5}
-            y={2}
-            width={22}
-            height={38}
-            rx={3}
-            fill="#F2F2F2"
-            stroke="#CCCCCC"
-          />
+        <Svg width={32} height={44} viewBox="0 0 32 44" accessibilityLabel={`${name}，暂无图片`}>
+          <Rect x={5} y={2} width={22} height={38} rx={3} fill="#F2F2F2" stroke="#CCCCCC" />
           <Path
             d="M9 9h14M9 13h14M9 17h14M9 36h14M9 40v3m14-3v3"
             stroke="#C1C1C1"

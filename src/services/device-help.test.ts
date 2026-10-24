@@ -18,7 +18,6 @@ const article = (content = "正文", id = "help_1"): HelpArticle => ({
   content,
 });
 
-
 function deferred<T>() {
   let resolve!: (value: T) => void;
   let reject!: (error: Error) => void;
@@ -32,11 +31,9 @@ function deferred<T>() {
 function flowService() {
   const listeners = new Set<() => void>();
   const help = vi.fn(
-    async (
-      _id: string,
-      _product = false,
-      _signal?: AbortSignal,
-    ): Promise<HelpArticle[]> => [article()],
+    async (_id: string, _product = false, _signal?: AbortSignal): Promise<HelpArticle[]> => [
+      article(),
+    ],
   );
   let revision = 0;
   const service = {
@@ -62,7 +59,6 @@ function flowService() {
 }
 
 describe("RF-0044 device manual and FAQ", () => {
-
   it("maps the deployed array response without opening or rewriting content", async () => {
     const fetcher = vi.fn<HttpFetcher>().mockResolvedValue(
       new Response(
@@ -70,10 +66,7 @@ describe("RF-0044 device manual and FAQ", () => {
           code: 0,
           success: true,
           message: "成功",
-          data: [
-            article("https://outside.example.test/help"),
-            article("文字", "help_2"),
-          ],
+          data: [article("https://outside.example.test/help"), article("文字", "help_2")],
         }),
         { status: 200, headers: { "Content-Type": "application/json" } },
       ),
@@ -208,9 +201,7 @@ describe("RF-0044 device manual and FAQ", () => {
 
   it("ends a hung request with a visible timeout and allows retry", async () => {
     const { service, help } = flowService();
-    help.mockImplementationOnce(
-      () => new Promise<HelpArticle[]>(() => undefined),
-    );
+    help.mockImplementationOnce(() => new Promise<HelpArticle[]>(() => undefined));
     const flow = new DeviceHelpFlow(service, "dev-a", 20);
     await flow.start();
     expect(flow.state.error).toContain("超时");

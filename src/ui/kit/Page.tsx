@@ -75,9 +75,7 @@ export function Page({
                 accessibilityRole="button"
                 accessibilityLabel="Back"
                 style={styles.back}
-                onPress={() =>
-                  router.canGoBack() ? router.back() : router.replace("/home")
-                }
+                onPress={() => (router.canGoBack() ? router.back() : router.replace("/home"))}
               >
                 <Image
                   source={require("../../../assets/images/back-icon.png")}
@@ -92,9 +90,7 @@ export function Page({
             {action}
           </View>
         )}
-        {image === failedImage && !!image && (
-          <Label muted>Wallpaper is unavailable</Label>
-        )}
+        {image === failedImage && !!image && <Label muted>Wallpaper is unavailable</Label>}
         {loadingContent}
         <ScrollView
           keyboardShouldPersistTaps="handled"

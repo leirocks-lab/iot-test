@@ -1,1 +1,1 @@
-export { default } from '../../../screens/Schedules';
+export { default } from "../../../screens/Schedules";

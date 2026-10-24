@@ -1,14 +1,7 @@
 import { Camera, CameraView, useCameraPermissions } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 import { router, useFocusEffect } from "expo-router";
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  useSyncExternalStore,
-} from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import {
   Animated,
   AppState,
@@ -21,10 +14,7 @@ import {
   View,
   useWindowDimensions,
 } from "react-native";
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import Svg, { Defs, LinearGradient, Rect, Stop } from "react-native-svg";
 import type { DeviceView } from "../services/models";
 import type { ScanDestination } from "../services/scan-flow";
@@ -34,31 +24,16 @@ import { Busy, Button, Card, Label, Page, useAction } from "../ui/kit";
 export default function Scan() {
   const { runtime } = useApp();
   if (!runtime) return <Busy />;
-  return (
-    <ScanContent key={runtime.service.sessionRevision} runtime={runtime} />
-  );
+  return <ScanContent key={runtime.service.sessionRevision} runtime={runtime} />;
 }
 
-function ScanContent({
-  runtime,
-}: {
-  runtime: NonNullable<ReturnType<typeof useApp>["runtime"]>;
-}) {
+function ScanContent({ runtime }: { runtime: NonNullable<ReturnType<typeof useApp>["runtime"]> }) {
   const action = useAction();
-  const [permission, requestPermission, refreshPermission] =
-    useCameraPermissions();
+  const [permission, requestPermission, refreshPermission] = useCameraPermissions();
   const flow = useMemo(() => runtime.scanner.acquire(), [runtime]);
   const addFlow = useMemo(() => runtime.onboarding.acquire(), [runtime]);
-  const addState = useSyncExternalStore(
-    addFlow.subscribe,
-    addFlow.snapshot,
-    addFlow.snapshot,
-  );
-  const state = useSyncExternalStore(
-    flow.subscribe,
-    flow.snapshot,
-    flow.snapshot,
-  );
+  const addState = useSyncExternalStore(addFlow.subscribe, addFlow.snapshot, addFlow.snapshot);
+  const state = useSyncExternalStore(flow.subscribe, flow.snapshot, flow.snapshot);
   const [active, setActive] = useState(false);
   const [picking, setPicking] = useState(false);
   const [value] = useState("");
@@ -74,8 +49,7 @@ function ScanContent({
   const { width, height } = useWindowDimensions();
   const insets = useSafeAreaInsets();
   const frameSize = Math.min(width * 0.65, height * 0.38, 280);
-  const frameTop =
-    56 + insets.top + Math.max(28, height * 0.09) + 14;
+  const frameTop = 56 + insets.top + Math.max(28, height * 0.09) + 14;
   const sideWidth = (width - frameSize) / 2;
 
   const showToast = useCallback((message: string) => {
@@ -121,14 +95,7 @@ function ScanContent({
       animation.stop();
       scanLine.setValue(0);
     };
-  }, [
-    active,
-    frameSize,
-    permission?.granted,
-    picking,
-    resultDevices,
-    scanLine,
-  ]);
+  }, [active, frameSize, permission?.granted, picking, resultDevices, scanLine]);
 
   useFocusEffect(
     useCallback(() => {
@@ -137,21 +104,9 @@ function ScanContent({
       const attempt = permissionAttempt.current;
       setActive(AppState.currentState === "active");
       void refreshPermission().then(async (current) => {
-        if (
-          !focused.current ||
-          permissionAttempt.current !== attempt ||
-          current.granted
-        )
-          return;
-        const result = current.canAskAgain
-          ? await requestPermission()
-          : current;
-        if (
-          result.granted ||
-          !focused.current ||
-          permissionAttempt.current !== attempt
-        )
-          return;
+        if (!focused.current || permissionAttempt.current !== attempt || current.granted) return;
+        const result = current.canAskAgain ? await requestPermission() : current;
+        if (result.granted || !focused.current || permissionAttempt.current !== attempt) return;
         showToast("暂无相机权限");
         setTimeout(() => {
           if (focused.current && permissionAttempt.current === attempt) {
@@ -191,8 +146,7 @@ function ScanContent({
       const matched = groups
         .flatMap((group) => group.devices)
         .filter((device) => device.device.id === destination.binding.deviceID);
-      if (!matched.length)
-        throw new Error("设备绑定成功，但设备列表暂未返回该设备，请稍后核对");
+      if (!matched.length) throw new Error("设备绑定成功，但设备列表暂未返回该设备，请稍后核对");
       setResultDevices(matched);
     } else {
       router.replace({
@@ -214,20 +168,15 @@ function ScanContent({
           allowsEditing: false,
           quality: 1,
         });
-        if (!focused.current || round !== albumRound.current || photo.canceled)
-          return;
-        const scanned = await Camera.scanFromURLAsync(photo.assets[0].uri, [
-          "qr",
-        ]);
+        if (!focused.current || round !== albumRound.current || photo.canceled) return;
+        const scanned = await Camera.scanFromURLAsync(photo.assets[0].uri, ["qr"]);
         if (focused.current && round === albumRound.current)
           readCodes(scanned.map((code) => code.data));
         if (!scanned.length && focused.current && round === albumRound.current)
           showToast("未识别到二维码，请重新选择图片");
       } catch (error) {
         if (focused.current && round === albumRound.current)
-          showToast(
-            error instanceof Error ? error.message : "图片识别失败，请重试",
-          );
+          showToast(error instanceof Error ? error.message : "图片识别失败，请重试");
       } finally {
         pickingRef.current = false;
         if (focused.current) {
@@ -252,14 +201,10 @@ function ScanContent({
                 .flatMap((group) => group.devices)
                 .filter((device) => device.device.id === resultDeviceID);
               if (!matched.length)
-                throw new Error(
-                  "设备绑定成功，但设备列表暂未返回该设备，请稍后重试",
-                );
+                throw new Error("设备绑定成功，但设备列表暂未返回该设备，请稍后重试");
               setResultDevices(matched);
             } catch (error) {
-              showToast(
-                error instanceof Error ? error.message : "设备列表加载失败",
-              );
+              showToast(error instanceof Error ? error.message : "设备列表加载失败");
             }
           })
         }
@@ -271,10 +216,7 @@ function ScanContent({
     return (
       <Page title="Scan QR code">
         <Label>当前设备还有待完成的添加结果，请先处理当前事务。</Label>
-        <Button
-          title="返回当前添加流程"
-          onPress={() => router.replace("/add-provision")}
-        />
+        <Button title="返回当前添加流程" onPress={() => router.replace("/add-provision")} />
       </Page>
     );
   }
@@ -294,14 +236,9 @@ function ScanContent({
         />
       )}
       <View pointerEvents="none" style={StyleSheet.absoluteFill}>
+        <View style={[styles.scrim, { left: 0, top: 0, width, height: frameTop }]} />
         <View
-          style={[styles.scrim, { left: 0, top: 0, width, height: frameTop }]}
-        />
-        <View
-          style={[
-            styles.scrim,
-            { left: 0, top: frameTop, width: sideWidth, height: frameSize },
-          ]}
+          style={[styles.scrim, { left: 0, top: frameTop, width: sideWidth, height: frameSize }]}
         />
         <View
           style={[
@@ -328,18 +265,11 @@ function ScanContent({
       </View>
 
       <View style={styles.safeOverlay}>
-        <View
-          style={[
-            styles.scanHeader,
-            { height: 56 + insets.top, paddingTop: insets.top },
-          ]}
-        >
+        <View style={[styles.scanHeader, { height: 56 + insets.top, paddingTop: insets.top }]}>
           <Pressable
             accessibilityRole="button"
             accessibilityLabel="返回"
-            onPress={() =>
-              router.canGoBack() ? router.back() : router.replace("/home")
-            }
+            onPress={() => (router.canGoBack() ? router.back() : router.replace("/home"))}
             style={styles.backButton}
           >
             <Text style={styles.backChevron}>‹</Text>
@@ -347,15 +277,8 @@ function ScanContent({
           <Text style={styles.scanTitle}>扫一扫</Text>
           <View style={styles.backButton} />
         </View>
-        <View
-          style={[
-            styles.scanArea,
-            { marginTop: Math.max(28, height * 0.09) + 14 },
-          ]}
-        >
-          <View
-            style={[styles.scanFrame, { width: frameSize, height: frameSize }]}
-          >
+        <View style={[styles.scanArea, { marginTop: Math.max(28, height * 0.09) + 14 }]}>
+          <View style={[styles.scanFrame, { width: frameSize, height: frameSize }]}>
             {[
               ["top", "left"],
               ["top", "right"],
@@ -366,64 +289,37 @@ function ScanContent({
                 key={`${vertical}-${horizontal}`}
                 style={[
                   styles.corner,
-                  styles[
-                    `corner_${vertical}_${horizontal}` as keyof typeof styles
-                  ] as object,
+                  styles[`corner_${vertical}_${horizontal}` as keyof typeof styles] as object,
                 ]}
               />
             ))}
-            {active &&
-              permission?.granted &&
-              state.phase === "idle" &&
-              !picking && (
-                <Animated.View
-                  style={[
-                    styles.scanBeam,
-                    { width: frameSize },
-                    { transform: [{ translateY: scanLine }] },
-                  ]}
-                >
-                  <Svg
-                    width={frameSize}
-                    height={2}
-                    viewBox={`0 0 ${frameSize} 2`}
-                  >
-                    <Defs>
-                      <LinearGradient
-                        id="scanBeamGradient"
-                        x1="0"
-                        y1="0"
-                        x2="1"
-                        y2="0"
-                      >
-                        <Stop offset="0%" stopColor="#EE9D31" stopOpacity={0} />
-                        <Stop offset="40.76%" stopColor="#EE9D31" />
-                        <Stop offset="50.01%" stopColor="#FFE9CC" />
-                        <Stop offset="59.83%" stopColor="#EE9D31" />
-                        <Stop
-                          offset="100%"
-                          stopColor="#EE9D31"
-                          stopOpacity={0}
-                        />
-                      </LinearGradient>
-                    </Defs>
-                    <Rect
-                      x="0"
-                      y="0"
-                      width={frameSize}
-                      height="2"
-                      fill="url(#scanBeamGradient)"
-                    />
-                  </Svg>
-                </Animated.View>
-              )}
+            {active && permission?.granted && state.phase === "idle" && !picking && (
+              <Animated.View
+                style={[
+                  styles.scanBeam,
+                  { width: frameSize },
+                  { transform: [{ translateY: scanLine }] },
+                ]}
+              >
+                <Svg width={frameSize} height={2} viewBox={`0 0 ${frameSize} 2`}>
+                  <Defs>
+                    <LinearGradient id="scanBeamGradient" x1="0" y1="0" x2="1" y2="0">
+                      <Stop offset="0%" stopColor="#EE9D31" stopOpacity={0} />
+                      <Stop offset="40.76%" stopColor="#EE9D31" />
+                      <Stop offset="50.01%" stopColor="#FFE9CC" />
+                      <Stop offset="59.83%" stopColor="#EE9D31" />
+                      <Stop offset="100%" stopColor="#EE9D31" stopOpacity={0} />
+                    </LinearGradient>
+                  </Defs>
+                  <Rect x="0" y="0" width={frameSize} height="2" fill="url(#scanBeamGradient)" />
+                </Svg>
+              </Animated.View>
+            )}
           </View>
         </View>
         <View style={styles.instructions}>
           <Text style={styles.instructionTitle}>扫描设备二维码</Text>
-          <Text style={styles.instructionBody}>
-            在配件、包装或说明书上查找产品二维码，
-          </Text>
+          <Text style={styles.instructionBody}>在配件、包装或说明书上查找产品二维码，</Text>
           <Text style={styles.instructionBody}>并将其放在上方相机取景框内</Text>
         </View>
         {state.phase === "choosing" || state.phase === "unknown" ? (
@@ -445,8 +341,7 @@ function ScanContent({
                     try {
                       await showDestination(await flow.confirm());
                     } catch (error) {
-                      const message =
-                        error instanceof Error ? error.message : String(error);
+                      const message = error instanceof Error ? error.message : String(error);
                       showToast(message);
                       if (flow.state.phase === "choosing") flow.reset();
                     }
@@ -462,9 +357,7 @@ function ScanContent({
                     try {
                       await showDestination(await flow.reconcile());
                     } catch (error) {
-                      showToast(
-                        error instanceof Error ? error.message : String(error),
-                      );
+                      showToast(error instanceof Error ? error.message : String(error));
                     }
                   })
                 }
@@ -479,9 +372,7 @@ function ScanContent({
             onPress={pickPhoto}
             style={[styles.albumButton, { bottom: height * 0.215 }]}
           >
-            <Text style={styles.albumText}>
-              {picking ? "正在识别图片…" : "使用相册"}
-            </Text>
+            <Text style={styles.albumText}>{picking ? "正在识别图片…" : "使用相册"}</Text>
           </Pressable>
         )}
         {!!toast && (
@@ -541,10 +432,7 @@ function ResultList({
           ) : (
             <View style={styles.resultImagePlaceholder}>
               <Text style={styles.resultImageLetter}>
-                {(item.product?.name || item.deviceNickname || "设").slice(
-                  0,
-                  1,
-                )}
+                {(item.product?.name || item.deviceNickname || "设").slice(0, 1)}
               </Text>
             </View>
           )}
@@ -565,14 +453,8 @@ function ResultList({
       ))}
       {devices.length === 0 && (
         <View style={styles.resultEmpty}>
-          <Text style={styles.resultEmptyText}>
-            设备绑定已确认，暂时无法加载设备信息
-          </Text>
-          <Pressable
-            accessibilityRole="button"
-            onPress={onRetry}
-            style={styles.retryButton}
-          >
+          <Text style={styles.resultEmptyText}>设备绑定已确认，暂时无法加载设备信息</Text>
+          <Pressable accessibilityRole="button" onPress={onRetry} style={styles.retryButton}>
             <Text style={styles.retryText}>重新加载</Text>
           </Pressable>
         </View>

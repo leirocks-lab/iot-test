@@ -1,7 +1,7 @@
-import type { ReactNode } from 'react';
-import { Text } from 'react-native';
-import { useApp, useColors } from '../context';
-import { translate } from '../i18n';
+import type { ReactNode } from "react";
+import { Text } from "react-native";
+import { useApp, useColors } from "../context";
+import { translate } from "../i18n";
 
 type LabelProps = {
   children: ReactNode;
@@ -19,11 +19,11 @@ export function Label({ children, muted = false, large = false }: LabelProps) {
         color: muted ? colors.font.subtitle : colors.font.title,
         fontSize: large ? 26 : 16,
         lineHeight: large ? 34 : 24,
-        fontWeight: large ? '700' : '400',
+        fontWeight: large ? "700" : "400",
       }}
     >
-      {typeof children === 'string'
-        ? translate(children, runtime?.service.language ?? 'zh-CN')
+      {typeof children === "string"
+        ? translate(children, runtime?.service.language ?? "zh-CN")
         : children}
     </Text>
   );

@@ -119,8 +119,7 @@ export class DeviceHelpFlow {
       this.update({
         value: accessLost(error) ? null : this.state.value,
         loading: false,
-        error:
-          error instanceof Error ? error.message : "设备帮助读取失败，请重试",
+        error: error instanceof Error ? error.message : "设备帮助读取失败，请重试",
       });
     } finally {
       if (this.controller === controller) this.controller = undefined;

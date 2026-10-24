@@ -38,8 +38,7 @@ export function Input({
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [focused, setFocused] = useState(false);
   const hasValue = Boolean(value);
-  const hasTrailingAction =
-    (clearable && hasValue && editable) || secureTextEntry;
+  const hasTrailingAction = (clearable && hasValue && editable) || secureTextEntry;
   const containerStyle: ViewStyle = {
     minHeight: 48,
     borderRadius: 9,
@@ -59,9 +58,7 @@ export function Input({
     >
       {prefixIcon ? (
         isValidElement(prefixIcon) ? (
-          <View style={{ width: iconSize, height: iconSize, marginRight: 10 }}>
-            {prefixIcon}
-          </View>
+          <View style={{ width: iconSize, height: iconSize, marginRight: 10 }}>{prefixIcon}</View>
         ) : (
           <Image
             source={prefixIcon}

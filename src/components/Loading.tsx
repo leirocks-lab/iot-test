@@ -7,13 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import {
-  Image,
-  StyleSheet,
-  View,
-  type ImageSourcePropType,
-  type ViewStyle,
-} from "react-native";
+import { Image, StyleSheet, View, type ImageSourcePropType, type ViewStyle } from "react-native";
 import { useColors } from "../ui/context";
 
 const LOADING_FRAMES: ImageSourcePropType[] = [
@@ -87,12 +81,7 @@ export type LoadingProps = {
 };
 
 /** Displays the loading key-frame animation bundled with the app. */
-export function Loading({
-  visible = true,
-  interval = 30,
-  size = 48,
-  style,
-}: LoadingProps) {
+export function Loading({ visible = true, interval = 30, size = 48, style }: LoadingProps) {
   const [frame, setFrame] = useState(0);
   const [ready, setReady] = useState(false);
   const loadedFrames = useRef(new Set<number>());
@@ -155,11 +144,7 @@ export function Loading({
   return (
     <>
       {preload}
-      <View
-        accessibilityLabel="Loading"
-        accessible
-        style={[styles.container, style]}
-      >
+      <View accessibilityLabel="Loading" accessible style={[styles.container, style]}>
         <Image
           accessibilityIgnoresInvertColors
           source={LOADING_FRAMES[frame]}

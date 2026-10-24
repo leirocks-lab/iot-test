@@ -1,18 +1,9 @@
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
-import {
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-  useSyncExternalStore,
-} from "react";
+import { useCallback, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { AppState, Linking, Platform } from "react-native";
 import { AddDeviceDiscovery } from "../components/add-device-discovery";
 import { AddDeviceProvision } from "../components/add-device-provision";
-import {
-  ProductCatalog,
-  ProductDetails,
-} from "../components/device/product-catalog";
+import { ProductCatalog, ProductDetails } from "../components/device/product-catalog";
 import { WifiStatus } from "../components/device/wifi-status";
 import {
   SystemRequirementsSheet,
@@ -23,38 +14,17 @@ import { ApiError, type Product } from "../services/models";
 import { wifiGuidance, type WifiObservation } from "../services/network-policy";
 import { matchesDiscoveredProduct } from "../services/onboarding";
 import { useApp } from "../ui/context";
-import {
-  Busy,
-  Button,
-  Card,
-  ErrorText,
-  Field,
-  Label,
-  Page,
-  useAction,
-} from "../ui/kit";
+import { Busy, Button, Card, ErrorText, Field, Label, Page, useAction } from "../ui/kit";
 
 export default function Add() {
   const { runtime } = useApp();
   if (!runtime) return <Busy />;
-  return (
-    <AddContent
-      key={runtime.service.sessionRevision}
-      runtime={runtime}
-      page="discovery"
-    />
-  );
+  return <AddContent key={runtime.service.sessionRevision} runtime={runtime} page="discovery" />;
 }
 export function AddProvision() {
   const { runtime } = useApp();
   if (!runtime) return <Busy />;
-  return (
-    <AddContent
-      key={runtime.service.sessionRevision}
-      runtime={runtime}
-      page="provision"
-    />
-  );
+  return <AddContent key={runtime.service.sessionRevision} runtime={runtime} page="provision" />;
 }
 function AddContent({
   runtime,
@@ -71,18 +41,9 @@ function AddContent({
   }>();
   const flow = useMemo(() => runtime.onboarding.acquire(), [runtime]);
   const qrFlow = useMemo(() => runtime.scanner.acquire(), [runtime]);
-  const qrState = useSyncExternalStore(
-    qrFlow.subscribe,
-    qrFlow.snapshot,
-    qrFlow.snapshot,
-  );
-  const qrPending =
-    qrState.phase === "confirming" || qrState.phase === "unknown";
-  const state = useSyncExternalStore(
-    flow.subscribe,
-    flow.snapshot,
-    flow.snapshot,
-  );
+  const qrState = useSyncExternalStore(qrFlow.subscribe, qrFlow.snapshot, qrFlow.snapshot);
+  const qrPending = qrState.phase === "confirming" || qrState.phase === "unknown";
+  const state = useSyncExternalStore(flow.subscribe, flow.snapshot, flow.snapshot);
   const [choice, setChoice] = useState<Product | null>(null);
   const [password, setPassword] = useState(""),
     [showPassword, setShowPassword] = useState(false),
@@ -95,8 +56,7 @@ function AddContent({
   const [wifi, setWifi] = useState<WifiObservation>(),
     [wifiError, setWifiError] = useState(""),
     [wifiBusy, setWifiBusy] = useState(false);
-  const [dismissedRequirement, setDismissedRequirement] =
-    useState<SystemRequirement | null>(null);
+  const [dismissedRequirement, setDismissedRequirement] = useState<SystemRequirement | null>(null);
   const [catalogProducts, setCatalogProducts] = useState<Product[]>([]);
   const refreshWifi = useCallback(
     async (requestPermission = false) => {
@@ -111,9 +71,7 @@ function AddContent({
       setPassword("");
       setShowPassword(false);
       const check = () =>
-        focused.current &&
-        !controller.signal.aborted &&
-        round === wifiRound.current;
+        focused.current && !controller.signal.aborted && round === wifiRound.current;
       try {
         const current = await withBudget(
           (signal) => runtime.wifi!.read(signal, requestPermission),
@@ -145,10 +103,7 @@ function AddContent({
       loadController.current = controller;
       void run(async () => {
         if (boundDeviceID && !flow.state.binding) {
-          const view = await runtime.service.device(
-            boundDeviceID,
-            controller.signal,
-          );
+          const view = await runtime.service.device(boundDeviceID, controller.signal);
           if (!focused.current || controller.signal.aborted) return;
           flow.adoptBinding({
             deviceID: view.device.id,
@@ -158,10 +113,7 @@ function AddContent({
         }
         if (productID) {
           try {
-            const product = await runtime.service.product(
-              productID,
-              controller.signal,
-            );
+            const product = await runtime.service.product(productID, controller.signal);
             if (!controller.signal.aborted && focused.current) {
               if (product.id !== productID) {
                 throw new ApiError(502, "产品详情身份不一致，请重新选择");
@@ -173,20 +125,14 @@ function AddContent({
             if (!controller.signal.aborted && focused.current) {
               setChoice(null);
               // Preserve confirmed/uncertain binding facts; only clear an unsent product choice.
-              if (
-                !flow.state.busy &&
-                !flow.state.binding &&
-                flow.state.stage !== "unknown"
-              ) {
+              if (!flow.state.busy && !flow.state.binding && flow.state.stage !== "unknown") {
                 flow.reset();
               }
             }
             throw error;
           }
         }
-        if (
-          page === "provision"
-        ) {
+        if (page === "provision") {
           void refreshWifi();
         }
         if (
@@ -226,12 +172,9 @@ function AddContent({
   );
   const busy = state.busy || action.busy,
     product = state.product ?? choice;
-  const wifiForm =
-    !!state.candidate && !state.binding && state.stage !== "unknown";
+  const wifiForm = !!state.candidate && !state.binding && state.stage !== "unknown";
   const nicknameForm =
-    !!state.binding &&
-    state.stage !== "complete" &&
-    state.nickname === "pending";
+    !!state.binding && state.stage !== "complete" && state.nickname === "pending";
   const error = action.error || state.error;
   const requirement: SystemRequirement | null =
     state.scanIssue === "permission"
@@ -246,11 +189,7 @@ function AddContent({
   const execute = (work: () => Promise<unknown>) => void run(work);
   const choose = (selected: Product) => {
     if (page !== "discovery") return;
-    if (
-      !focused.current ||
-      (busy && state.stage !== "scanning") ||
-      state.stage === "unknown"
-    )
+    if (!focused.current || (busy && state.stage !== "scanning") || state.stage === "unknown")
       return;
     flow.stop();
     setChoice(selected);
@@ -265,10 +204,7 @@ function AddContent({
   const provision = () =>
     execute(async () => {
       try {
-        await flow.provision(
-          wifi?.ssid ?? "",
-          password,
-        );
+        await flow.provision(wifi?.ssid ?? "", password);
       } finally {
         setPassword("");
         setShowPassword(false);
@@ -314,19 +250,11 @@ function AddContent({
     return (
       <Page title="Add device">
         <Label>当前扫码绑定结果尚未完成，请先返回原扫码流程核对。</Label>
-        <Button
-          title="返回扫码核对结果"
-          onPress={() => router.replace("/scan")}
-        />
+        <Button title="返回扫码核对结果" onPress={() => router.replace("/scan")} />
       </Page>
     );
-  if (
-    page === "discovery" &&
-    !state.binding &&
-    state.stage !== "unknown"
-  ) {
-    const selectionBusy =
-      action.busy || (state.busy && state.stage !== "scanning");
+  if (page === "discovery" && !state.binding && state.stage !== "unknown") {
+    const selectionBusy = action.busy || (state.busy && state.stage !== "scanning");
     return (
       <AddDeviceDiscovery
         scanning={state.stage === "scanning"}
@@ -428,31 +356,25 @@ function AddContent({
           )}
           {wifiForm && (
             <>
-              <Label muted>
-                Use a 2.4 GHz Wi-Fi network. Keep your device in pairing mode.
-              </Label>
+              <Label muted>Use a 2.4 GHz Wi-Fi network. Keep your device in pairing mode.</Label>
               <WifiStatus />
-                <>
-                  <Label muted>
-                    {wifi
-                      ? wifiGuidance(wifi)
-                      : wifiBusy
-                        ? "正在读取当前Wi-Fi"
-                        : "请读取当前Wi-Fi后输入密码。"}
-                  </Label>
-                  <Field
-                    label="Current Wi-Fi name"
-                    value={wifi?.ssid ?? ""}
-                    editable={false}
-                  />
-                  <Button
-                    secondary
-                    title="Read current Wi-Fi"
-                    disabled={busy || wifiBusy}
-                    onPress={() => void refreshWifi(true)}
-                  />
-                  <ErrorText error={wifiError} />
-                </>
+              <>
+                <Label muted>
+                  {wifi
+                    ? wifiGuidance(wifi)
+                    : wifiBusy
+                      ? "正在读取当前Wi-Fi"
+                      : "请读取当前Wi-Fi后输入密码。"}
+                </Label>
+                <Field label="Current Wi-Fi name" value={wifi?.ssid ?? ""} editable={false} />
+                <Button
+                  secondary
+                  title="Read current Wi-Fi"
+                  disabled={busy || wifiBusy}
+                  onPress={() => void refreshWifi(true)}
+                />
+                <ErrorText error={wifiError} />
+              </>
               <Field
                 label="Wi-Fi password"
                 secureTextEntry={!showPassword}
@@ -469,10 +391,7 @@ function AddContent({
               <ErrorText error={error} />
               <Button
                 title={busy ? "Pairing…" : "Connect device"}
-                disabled={
-                  busy ||
-                  (!wifi?.ssid || wifiBusy)
-                }
+                disabled={busy || !wifi?.ssid || wifiBusy}
                 onPress={provision}
               />
               {product && (
@@ -520,9 +439,7 @@ function AddContent({
           {busy && <Busy />}
         </Card>
       )}
-      {busy && (
-        <Button secondary title="停止当前客户端操作" onPress={stopCurrent} />
-      )}
+      {busy && <Button secondary title="停止当前客户端操作" onPress={stopCurrent} />}
       {state.binding && state.stage !== "complete" && (
         <>
           <Label muted>绑定已确认；昵称或首页刷新失败不会重新配网。</Label>
@@ -546,25 +463,16 @@ function AddContent({
                   : "重试添加结果"
             }
             disabled={busy}
-            onPress={() =>
-              finish(state.nickname === "pending" ? nickname : null)
-            }
+            onPress={() => finish(state.nickname === "pending" ? nickname : null)}
           />
           {state.nickname === "pending" && !state.nicknameUnknown && (
-            <Button
-              secondary
-              title="Skip nickname"
-              disabled={busy}
-              onPress={() => finish(null)}
-            />
+            <Button secondary title="Skip nickname" disabled={busy} onPress={() => finish(null)} />
           )}
         </>
       )}
       {state.binding && state.realtime === "failed" && (
         <Card>
-          <ErrorText
-            error={`设备已绑定，实时连接未完成：${state.realtimeError}`}
-          />
+          <ErrorText error={`设备已绑定，实时连接未完成：${state.realtimeError}`} />
           <Button
             secondary
             title="重试实时连接"

@@ -5,7 +5,12 @@ import type { HttpFetcher } from "./http";
 import type { HomeGroup } from "./models";
 import { RealHttpClient } from "./real-http";
 import { RowanService } from "./rowan";
-import {  defaultSettings, MemoryStorage, SettingsFixture , SettingsHttp } from '../test-support/settings-fixture';
+import {
+  defaultSettings,
+  MemoryStorage,
+  SettingsFixture,
+  SettingsHttp,
+} from "../test-support/settings-fixture";
 
 const flows: DeviceUnbindFlow[] = [];
 
@@ -50,11 +55,7 @@ describe("RF-0046 本人解绑", () => {
     expect(remove).toHaveBeenCalledOnce();
     expect(db.state.devices[0].members.user_demo).toBeUndefined();
     expect(db.state.devices[0].members.user_member).toBeDefined();
-    expect(release).toHaveBeenCalledWith(
-      "dev_wine",
-      "user_demo",
-      service.sessionRevision,
-    );
+    expect(release).toHaveBeenCalledWith("dev_wine", "user_demo", service.sessionRevision);
     expect(flow.state.phase).toBe("complete");
   });
 
@@ -75,9 +76,7 @@ describe("RF-0046 本人解绑", () => {
 
   it("keeps an unknown result when the device remains or the read-back fails", async () => {
     const { service, release, flow } = await setup();
-    const remove = vi
-      .spyOn(service, "unbind")
-      .mockRejectedValue(new Error("response lost"));
+    const remove = vi.spyOn(service, "unbind").mockRejectedValue(new Error("response lost"));
     const home = vi.spyOn(service, "home");
 
     expect(await flow.submit()).toBe(false);
@@ -136,9 +135,7 @@ describe("RF-0046 本人解绑", () => {
   it("keeps an interrupted request pending across the same-page focus cycle", async () => {
     const { service, release, flow } = await setup();
     const pending = deferred<void>();
-    const remove = vi
-      .spyOn(service, "unbind")
-      .mockImplementation(() => pending.promise);
+    const remove = vi.spyOn(service, "unbind").mockImplementation(() => pending.promise);
 
     const submission = flow.submit();
     flow.stop();
@@ -183,10 +180,9 @@ describe("RF-0046 本人解绑", () => {
     expect(calls[0].path).toBe("/api/app/devices/dev%2Fa/users/self");
 
     const fetcher = vi.fn<HttpFetcher>().mockResolvedValue(
-      new Response(
-        JSON.stringify({ code: 0, success: true, message: "ok", data: null }),
-        { status: 200 },
-      ),
+      new Response(JSON.stringify({ code: 0, success: true, message: "ok", data: null }), {
+        status: 200,
+      }),
     );
     const real = new RealHttpClient(
       {

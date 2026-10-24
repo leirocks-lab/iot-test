@@ -42,8 +42,7 @@ function Login() {
   );
   const region = params.region ?? "US";
   const regionName = params.regionName ?? "美国";
-  const emailError =
-    email.length > 0 && !EMAIL.test(email) ? "请输入正确的邮箱格式" : "";
+  const emailError = email.length > 0 && !EMAIL.test(email) ? "请输入正确的邮箱格式" : "";
   const valid = EMAIL.test(email) && password.length > 0 && accepted;
   if (!runtime) return <Busy />;
   const submit = () => {
@@ -63,9 +62,7 @@ function Login() {
   return (
     <Page title="" back>
       <View style={loginStyles.container}>
-        <Text style={[loginStyles.title, { color: colors.font.title }]}>
-          登录
-        </Text>
+        <Text style={[loginStyles.title, { color: colors.font.title }]}>登录</Text>
         <Field
           label=""
           placeholder="请输入您的邮箱账号"
@@ -95,12 +92,7 @@ function Login() {
             hitSlop={10}
             style={registerStyles.checkboxTouch}
           >
-            <View
-              style={[
-                registerStyles.checkbox,
-                accepted && registerStyles.checkboxChecked,
-              ]}
-            >
+            <View style={[registerStyles.checkbox, accepted && registerStyles.checkboxChecked]}>
               {accepted && <Text style={registerStyles.checkmark}>✓</Text>}
             </View>
           </Pressable>
@@ -138,15 +130,8 @@ function Login() {
           </Pressable>
         </View>
         <ErrorText error={action.error} />
-        <Button
-          title="登录"
-          disabled={!valid || action.busy}
-          onPress={() => void submit()}
-        />
-        <Pressable
-          style={loginStyles.forgot}
-          onPress={() => router.push("/auth/reset")}
-        >
+        <Button title="登录" disabled={!valid || action.busy} onPress={() => void submit()} />
+        <Pressable style={loginStyles.forgot} onPress={() => router.push("/auth/reset")}>
           <Text style={loginStyles.forgotText}>忘记密码</Text>
         </Pressable>
       </View>
@@ -180,27 +165,14 @@ function Register() {
 
   if (!runtime) return <Busy />;
   if (verification) {
-    return (
-      <EmailVerification
-        {...verification}
-        onBack={() => setVerification(null)}
-      />
-    );
+    return <EmailVerification {...verification} onBack={() => setVerification(null)} />;
   }
-  const emailError =
-    email.length > 0 && !EMAIL.test(email) ? "请输入正确的邮箱格式" : "";
+  const emailError = email.length > 0 && !EMAIL.test(email) ? "请输入正确的邮箱格式" : "";
   const passwordError =
-    password.length > 0 && !/^\S{8,12}$/.test(password)
-      ? "8-12个字符，包括数字和英文"
-      : "";
-  const repeatError =
-    repeat.length > 0 && repeat !== password ? "两次输入的密码不一致" : "";
+    password.length > 0 && !/^\S{8,12}$/.test(password) ? "8-12个字符，包括数字和英文" : "";
+  const repeatError = repeat.length > 0 && repeat !== password ? "两次输入的密码不一致" : "";
   const valid = Boolean(
-    region &&
-    EMAIL.test(email) &&
-    /^\S{8,12}$/.test(password) &&
-    password === repeat &&
-    accepted,
+    region && EMAIL.test(email) && /^\S{8,12}$/.test(password) && password === repeat && accepted,
   );
   const commit = () =>
     action.run(async () => {
@@ -216,9 +188,7 @@ function Register() {
   return (
     <Page title="" back>
       <View style={registerStyles.container}>
-        <Text style={[registerStyles.title, { color: colors.font.title }]}>
-          注册
-        </Text>
+        <Text style={[registerStyles.title, { color: colors.font.title }]}>注册</Text>
         <Pressable
           style={registerStyles.inputRow}
           onPress={() =>
@@ -253,9 +223,7 @@ function Register() {
           onChangeText={setPassword}
           style={passwordError ? registerStyles.invalid : undefined}
         />
-        {!!passwordError && (
-          <Text style={registerStyles.error}>{passwordError}</Text>
-        )}
+        {!!passwordError && <Text style={registerStyles.error}>{passwordError}</Text>}
         <Field
           label=""
           placeholder="请再次确认密码"
@@ -266,9 +234,7 @@ function Register() {
           onChangeText={setRepeat}
           style={repeatError ? registerStyles.invalid : undefined}
         />
-        {!!repeatError && (
-          <Text style={registerStyles.error}>{repeatError}</Text>
-        )}
+        {!!repeatError && <Text style={registerStyles.error}>{repeatError}</Text>}
         <View style={registerStyles.agreement}>
           <Pressable
             accessibilityRole="checkbox"
@@ -278,12 +244,7 @@ function Register() {
             hitSlop={10}
             style={registerStyles.checkboxTouch}
           >
-            <View
-              style={[
-                registerStyles.checkbox,
-                accepted && registerStyles.checkboxChecked,
-              ]}
-            >
+            <View style={[registerStyles.checkbox, accepted && registerStyles.checkboxChecked]}>
               {accepted && <Text style={registerStyles.checkmark}>✓</Text>}
             </View>
           </Pressable>
@@ -321,11 +282,7 @@ function Register() {
           </Pressable>
         </View>
         <ErrorText error={action.error} />
-        <Button
-          title="注册"
-          disabled={!valid || action.busy}
-          onPress={() => void commit()}
-        />
+        <Button title="注册" disabled={!valid || action.busy} onPress={() => void commit()} />
       </View>
     </Page>
   );
@@ -369,8 +326,7 @@ function EmailVerification({
         showToast("发送成功");
       })
       .catch((error: unknown) => {
-        if (active)
-          showToast(error instanceof Error ? error.message : "发送失败");
+        if (active) showToast(error instanceof Error ? error.message : "发送失败");
       })
       .finally(() => {
         if (active) {
@@ -387,10 +343,7 @@ function EmailVerification({
 
   useEffect(() => {
     if (remaining <= 0) return;
-    const timer = setTimeout(
-      () => setRemaining((value) => Math.max(value - 1, 0)),
-      1000,
-    );
+    const timer = setTimeout(() => setRemaining((value) => Math.max(value - 1, 0)), 1000);
     return () => clearTimeout(timer);
   }, [remaining]);
 
@@ -472,15 +425,10 @@ function EmailVerification({
             />
           </View>
           <View style={verifyStyles.message}>
-            <Text style={verifyStyles.messageTitle}>
-              验证码已发送到您的邮箱
-            </Text>
+            <Text style={verifyStyles.messageTitle}>验证码已发送到您的邮箱</Text>
             <View style={verifyStyles.emailLine}>
               <Text style={verifyStyles.emailText}>{email}</Text>
-              <Text style={verifyStyles.instruction}>
-                {" "}
-                请输入验证码进行验证
-              </Text>
+              <Text style={verifyStyles.instruction}> 请输入验证码进行验证</Text>
             </View>
           </View>
           <Pressable
@@ -527,8 +475,7 @@ function EmailVerification({
             onPress={() => void confirm()}
             style={[
               verifyStyles.confirmButton,
-              (code.length !== 6 || busy || sending) &&
-                verifyStyles.confirmDisabled,
+              (code.length !== 6 || busy || sending) && verifyStyles.confirmDisabled,
             ]}
           >
             <Text style={verifyStyles.confirmText}>确认</Text>
@@ -547,11 +494,7 @@ function EmailVerification({
                   remaining === 0 && !sending && verifyStyles.resendEnabled,
                 ]}
               >
-                {sending
-                  ? "发送中"
-                  : remaining > 0
-                    ? `${remaining}S 重新发送`
-                    : "重新发送"}
+                {sending ? "发送中" : remaining > 0 ? `${remaining}S 重新发送` : "重新发送"}
               </Text>
             </Pressable>
           </View>
@@ -801,11 +744,7 @@ function ForgotPassword() {
           style={error ? forgotStyles.invalid : undefined}
         />
         {!!error && <Text style={forgotStyles.error}>{error}</Text>}
-        <Button
-          title="下一步"
-          disabled={busy || !email}
-          onPress={() => void findAccount()}
-        />
+        <Button title="下一步" disabled={busy || !email} onPress={() => void findAccount()} />
         <Pressable style={forgotStyles.forgot} onPress={() => router.back()}>
           <Text style={loginStyles.forgotText}>忘记账号</Text>
         </Pressable>

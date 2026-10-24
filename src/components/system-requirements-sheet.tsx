@@ -61,21 +61,13 @@ export function SystemRequirementsSheet({
           <Text style={[styles.heading, { color: colors.font.title }]}>
             {"\u6743\u9650\u4e0e\u670d\u52a1"}
           </Text>
-          <Text style={[styles.label, { color: colors.font.subtitle }]}>
-            {title[requirement]}
-          </Text>
+          <Text style={[styles.label, { color: colors.font.subtitle }]}>{title[requirement]}</Text>
           <Text style={[styles.copy, { color: colors.font.subtitle2 }]}>
             {description[requirement]}
           </Text>
-          <View
-            style={styles.placeholder}
-            accessibilityLabel="system settings placeholder"
-          />
+          <View style={styles.placeholder} accessibilityLabel="system settings placeholder" />
           {!!error && (
-            <Text
-              accessibilityRole="alert"
-              style={[styles.copy, { color: colors.font.danger }]}
-            >
+            <Text accessibilityRole="alert" style={[styles.copy, { color: colors.font.danger }]}>
               {error}
             </Text>
           )}
@@ -83,14 +75,9 @@ export function SystemRequirementsSheet({
             <Pressable
               accessibilityRole="button"
               onPress={onCancel}
-              style={[
-                styles.action,
-                { backgroundColor: colors.background.split },
-              ]}
+              style={[styles.action, { backgroundColor: colors.background.split }]}
             >
-              <Text style={{ color: colors.font.subtitle }}>
-                {"\u53d6\u6d88"}
-              </Text>
+              <Text style={{ color: colors.font.subtitle }}>{"\u53d6\u6d88"}</Text>
             </Pressable>
             <Pressable
               accessibilityRole="button"
@@ -104,9 +91,7 @@ export function SystemRequirementsSheet({
                 },
               ]}
             >
-              <Text style={{ color: colors.font.base }}>
-                {"\u53bb\u7cfb\u7edf\u8bbe\u7f6e"}
-              </Text>
+              <Text style={{ color: colors.font.base }}>{"\u53bb\u7cfb\u7edf\u8bbe\u7f6e"}</Text>
             </Pressable>
           </View>
         </View>

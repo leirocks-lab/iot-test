@@ -1,1 +1,1 @@
-export { default } from '../screens/Scan';
+export { default } from "../screens/Scan";

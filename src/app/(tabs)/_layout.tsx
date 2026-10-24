@@ -1,13 +1,6 @@
 import { Redirect, Tabs, router } from "expo-router";
 import { useState } from "react";
-import {
-  Image,
-  Platform,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Image, Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Svg, { Path } from "react-native-svg";
 
@@ -30,9 +23,7 @@ function BottomBar({ state, navigation }: any) {
   if (navigationLocked) return null;
   return (
     <View style={[styles.host, { height: barHeight }]}>
-      {open && (
-        <Pressable style={styles.scrim} onPress={() => setOpen(false)} />
-      )}
+      {open && <Pressable style={styles.scrim} onPress={() => setOpen(false)} />}
       {open && (
         <View
           style={[
@@ -75,41 +66,21 @@ function BottomBar({ state, navigation }: any) {
         </View>
       )}
       <View style={[styles.bar, { height: barHeight }]}>
-        <Svg
-          width="100%"
-          height="58"
-          viewBox="0 0 375 58"
-          preserveAspectRatio="none"
-        >
+        <Svg width="100%" height="58" viewBox="0 0 375 58" preserveAspectRatio="none">
           <Path
             d="M0 0H375V58H0Z M140 0H151 C158 0 160 4 161 11 C164 30 174 43 187.5 43 C201 43 211 30 214 11 C215 4 217 0 224 0H235Z"
             fill={color.background.invert}
             fillRule="evenodd"
           />
         </Svg>
-        <View
-          pointerEvents="none"
-          style={[styles.safeAreaFill, { height: bottomInset }]}
-        />
+        <View pointerEvents="none" style={[styles.safeAreaFill, { height: bottomInset }]} />
         <View style={[styles.barContent, { bottom: bottomInset, height: 43 }]}>
-          <Pressable
-            style={styles.tab}
-            onPress={() => navigation.navigate("home")}
-          >
-            <Image
-              source={current === "home" ? homeSelected : home}
-              style={styles.icon}
-            />
+          <Pressable style={styles.tab} onPress={() => navigation.navigate("home")}>
+            <Image source={current === "home" ? homeSelected : home} style={styles.icon} />
           </Pressable>
           <View style={styles.centerSpace} />
-          <Pressable
-            style={styles.tab}
-            onPress={() => navigation.navigate("mine")}
-          >
-            <Image
-              source={current === "mine" ? mineSelected : mine}
-              style={styles.icon}
-            />
+          <Pressable style={styles.tab} onPress={() => navigation.navigate("mine")}>
+            <Image source={current === "mine" ? mineSelected : mine} style={styles.icon} />
           </Pressable>
         </View>
       </View>

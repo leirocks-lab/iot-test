@@ -1,12 +1,11 @@
-import Svg, {
-    Circle,
-    Defs,
-    LinearGradient,
-    Path,
-    Rect,
-    Stop,
-} from "react-native-svg";
-export function DeviceGlyph({ humidity = false, size = 112 }: { humidity?: boolean; size?: number }) {
+import Svg, { Circle, Defs, LinearGradient, Path, Rect, Stop } from "react-native-svg";
+export function DeviceGlyph({
+  humidity = false,
+  size = 112,
+}: {
+  humidity?: boolean;
+  size?: number;
+}) {
   return (
     <Svg
       width={size}
@@ -20,22 +19,11 @@ export function DeviceGlyph({ humidity = false, size = 112 }: { humidity?: boole
           <Stop offset="1" stopColor="#BFCBD2" />
         </LinearGradient>
       </Defs>
-      <Rect
-        x="26"
-        y="12"
-        width="60"
-        height="102"
-        rx={humidity ? 16 : 5}
-        fill="url(#body)"
-      />
+      <Rect x="26" y="12" width="60" height="102" rx={humidity ? 16 : 5} fill="url(#body)" />
       <Path d="M86 16 L96 24 L96 109 L86 114 Z" fill="#A7B5BD" />
       {humidity ? (
         <>
-          <Path
-            d="M35 28 H77 M35 35 H77 M35 42 H77 M35 49 H77"
-            stroke="#8B9DA8"
-            strokeWidth="2"
-          />
+          <Path d="M35 28 H77 M35 35 H77 M35 42 H77 M35 49 H77" stroke="#8B9DA8" strokeWidth="2" />
           <Rect x="36" y="72" width="38" height="31" rx="5" fill="#E5ECEF" />
           <Circle cx="66" cy="20" r="2" fill="#208DC4" />
         </>

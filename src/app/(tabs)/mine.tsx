@@ -1,1 +1,1 @@
-export { default } from '../../screens/Mine';
+export { default } from "../../screens/Mine";

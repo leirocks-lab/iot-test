@@ -4,10 +4,7 @@ const translations: Record<string, readonly [string, string]> = {
   "Welcome home.": ["欢迎回家", "歡迎回家"],
   "Connecting your everyday spaces.": ["连接你的日常生活", "連接你的日常生活"],
   "Welcome back": ["欢迎回来", "歡迎回來"],
-  "One account. A connected home.": [
-    "一个账号，连接整个家",
-    "一個帳號，連接整個家",
-  ],
+  "One account. A connected home.": ["一个账号，连接整个家", "一個帳號，連接整個家"],
   "Create your account": ["创建账号", "建立帳號"],
   "Reset your password": ["重置密码", "重設密碼"],
   Email: ["邮箱", "電子郵件"],
@@ -82,7 +79,10 @@ const translations: Record<string, readonly [string, string]> = {
   "Room save verified": ["房间归属已核对保存", "房間歸屬已核對儲存"],
   "Home result synchronized": ["首页结果已同步", "首頁結果已同步"],
   "Room unavailable. Choose again.": ["房间已失效，请重新选择", "房間已失效，請重新選擇"],
-  "No room choices. You can leave the device unassigned.": ["暂无候选房间，可选择未分房", "暫無候選房間，可選擇未分房"],
+  "No room choices. You can leave the device unassigned.": [
+    "暂无候选房间，可选择未分房",
+    "暫無候選房間，可選擇未分房",
+  ],
   Rename: ["重命名", "重新命名"],
   Delete: ["删除", "刪除"],
   "Save order": ["保存排序", "儲存排序"],
@@ -104,14 +104,8 @@ const translations: Record<string, readonly [string, string]> = {
   imperial: ["英制", "英制"],
   Wallpaper: ["壁纸", "桌布"],
   "Home layout": ["首页布局", "首頁版面"],
-  "Wallpaper options are not yet defined": [
-    "壁纸候选尚未定义",
-    "桌布選項尚未定義",
-  ],
-  "Layout options are not yet defined": [
-    "布局样式尚未定义",
-    "版面樣式尚未定義",
-  ],
+  "Wallpaper options are not yet defined": ["壁纸候选尚未定义", "桌布選項尚未定義"],
+  "Layout options are not yet defined": ["布局样式尚未定义", "版面樣式尚未定義"],
   "Find your device": ["找到你的设备", "尋找你的裝置"],
   Recommended: ["推荐产品", "推薦產品"],
   "Select product": ["选择产品", "選擇產品"],
@@ -139,10 +133,7 @@ const translations: Record<string, readonly [string, string]> = {
   Device: ["设备", "裝置"],
   More: ["更多", "更多"],
   "Online · Synced": ["在线 · 已同步", "在線 · 已同步"],
-  "Not synced · Last confirmed values": [
-    "未同步 · 显示最近确认值",
-    "未同步 · 顯示最近確認值",
-  ],
+  "Not synced · Last confirmed values": ["未同步 · 显示最近确认值", "未同步 · 顯示最近確認值"],
   "Waiting for device…": ["等待设备回报…", "等待裝置回報…"],
   "Alarm is active until a recovery report arrives.": [
     "收到设备恢复回报前，告警保持有效。",

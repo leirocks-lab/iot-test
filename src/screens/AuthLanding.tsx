@@ -15,15 +15,9 @@ export default function AuthLanding() {
             accessibilityLabel="ROWAN logo"
           />
         </View>
-        <View
-          style={{ gap: 16, justifyContent: "center", alignItems: "center" }}
-        >
+        <View style={{ gap: 16, justifyContent: "center", alignItems: "center" }}>
           <Button title="Sign in" onPress={() => router.push("/auth/login")} />
-          <Button
-            secondary
-            title="Create account"
-            onPress={() => router.push("/auth/register")}
-          />
+          <Button secondary title="Create account" onPress={() => router.push("/auth/register")} />
         </View>
       </View>
     </Page>

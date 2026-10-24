@@ -1,13 +1,6 @@
 import { Image } from "expo-image";
 import { useFocusEffect } from "expo-router";
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  useSyncExternalStore,
-} from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import {
   AppState,
   Linking,
@@ -53,8 +46,7 @@ function ProductImage({ source, name }: { source?: string; name: string }) {
 
 export function ProductDetails({ product }: { product: Product }) {
   const parameterRows = productParameterRows(product.parameters);
-  const configTypes =
-    product.configTypes ?? (product.configType ? [product.configType] : []);
+  const configTypes = product.configTypes ?? (product.configType ? [product.configType] : []);
   const images = product.images ?? (product.image ? [product.image] : []);
   return (
     <>
@@ -62,11 +54,7 @@ export function ProductDetails({ product }: { product: Product }) {
       {!!product.modelName && <Label muted>{product.modelName}</Label>}
       {images.length ? (
         images.map((source, index) => (
-          <ProductImage
-            key={`${source}-${index}`}
-            source={source}
-            name={product.name}
-          />
+          <ProductImage key={`${source}-${index}`} source={source} name={product.name} />
         ))
       ) : (
         <ProductImage name={product.name} />
@@ -79,9 +67,7 @@ export function ProductDetails({ product }: { product: Product }) {
       <Label large>产品参数</Label>
       {parameterRows.length ? (
         parameterRows.map((row, index) => (
-          <Label
-            key={`${row.name}-${index}`}
-          >{`${row.name}：${row.value}`}</Label>
+          <Label key={`${row.name}-${index}`}>{`${row.name}：${row.value}`}</Label>
         ))
       ) : (
         <Label muted>暂无产品参数</Label>
@@ -103,15 +89,8 @@ export function ProductCatalog({
   onChoose: (product: Product) => void;
   onProducts?: (products: Product[]) => void;
 }) {
-  const catalog = useMemo(
-    () => new ProductCatalogFlow(service, productCatalogOptions),
-    [service],
-  );
-  const state = useSyncExternalStore(
-    catalog.subscribe,
-    catalog.snapshot,
-    catalog.snapshot,
-  );
+  const catalog = useMemo(() => new ProductCatalogFlow(service, productCatalogOptions), [service]);
+  const state = useSyncExternalStore(catalog.subscribe, catalog.snapshot, catalog.snapshot);
   const focused = useRef(false);
   const action = useAction();
   const { settings } = useApp();
@@ -122,16 +101,9 @@ export function ProductCatalog({
 
   useFocusEffect(
     useCallback(() => {
-      if (
-        service.language !== language ||
-        service.sessionRevision !== sessionRevision
-      )
-        return;
+      if (service.language !== language || service.sessionRevision !== sessionRevision) return;
       focused.current = true;
-      if (
-        AppState.currentState !== "background" &&
-        AppState.currentState !== "inactive"
-      )
+      if (AppState.currentState !== "background" && AppState.currentState !== "inactive")
         void catalog.start();
       const subscription = AppState.addEventListener("change", (status) => {
         if (status === "active" && focused.current) void catalog.start();
@@ -146,8 +118,7 @@ export function ProductCatalog({
   );
 
   useEffect(() => {
-    if (state.products.value)
-      onProducts?.(state.products.value.flatMap((group) => group.products));
+    if (state.products.value) onProducts?.(state.products.value.flatMap((group) => group.products));
   }, [onProducts, state.products.value]);
 
   const products = catalogProducts(state.products.value ?? [], {
@@ -165,8 +136,7 @@ export function ProductCatalog({
       key,
       name:
         categories.find((category) => category.value === key)?.name ||
-        state.products.value?.find((group) => group.category === key)
-          ?.categoryName?.[language] ||
+        state.products.value?.find((group) => group.category === key)?.categoryName?.[language] ||
         key,
       products: products.filter((product) => product.category === key),
     }))
@@ -184,10 +154,7 @@ export function ProductCatalog({
     });
   const openBuyLink = (product: Product) =>
     void action.run(async () => {
-      const link = trustedBuyLink(
-        product.buyLink,
-        productCatalogOptions.trustedBuyOrigins,
-      );
+      const link = trustedBuyLink(product.buyLink, productCatalogOptions.trustedBuyOrigins);
       if (link && focused.current) await Linking.openURL(link);
     });
 
@@ -219,9 +186,7 @@ export function ProductCatalog({
       {!state.products.loading &&
         !state.products.error &&
         state.products.value &&
-        !products.length && (
-          <Text style={catalogStyles.empty}>暂无推荐设备</Text>
-        )}
+        !products.length && <Text style={catalogStyles.empty}>暂无推荐设备</Text>}
       {sections.map((section) => (
         <View key={section.key} style={catalogStyles.section}>
           <Text style={catalogStyles.categoryTitle}>{section.name}：</Text>
@@ -265,12 +230,7 @@ export function ProductCatalog({
                     )}
                     <View style={catalogStyles.connections}>
                       {product.connectType === "wifi" && (
-                        <Svg
-                          width={16}
-                          height={16}
-                          viewBox="0 0 24 24"
-                          accessibilityLabel="Wi-Fi"
-                        >
+                        <Svg width={16} height={16} viewBox="0 0 24 24" accessibilityLabel="Wi-Fi">
                           <Path
                             d="M2 8c5.5-5.3 14.5-5.3 20 0M5.5 11.5a9.3 9.3 0 0 1 13 0M9 15a4.3 4.3 0 0 1 6 0"
                             stroke="#777777"
@@ -325,10 +285,7 @@ export function ProductCatalog({
             onPress={() => catalog.clearSelection()}
           />
           <View
-            style={[
-              catalogStyles.detailsSheet,
-              { paddingBottom: Math.max(insets.bottom, 16) },
-            ]}
+            style={[catalogStyles.detailsSheet, { paddingBottom: Math.max(insets.bottom, 16) }]}
           >
             <View style={catalogStyles.sheetHeader}>
               <Text style={catalogStyles.sheetTitle}>产品详情</Text>
@@ -363,11 +320,7 @@ export function ProductCatalog({
             <Button
               title="使用此产品"
               disabled={
-                locked ||
-                !detail ||
-                state.detail.loading ||
-                !!state.detail.error ||
-                !!pairingIssue
+                locked || !detail || state.detail.loading || !!state.detail.error || !!pairingIssue
               }
               onPress={useProduct}
             />

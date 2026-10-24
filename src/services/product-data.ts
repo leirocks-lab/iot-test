@@ -56,9 +56,7 @@ function boolean(value: unknown, field: string): boolean | undefined {
 
 function parameters(value: unknown): ProductParameters | undefined {
   if (value === undefined || value === null) return undefined;
-  return Array.isArray(value)
-    ? value.map((item) => ({ ...object(item) }))
-    : { ...object(value) };
+  return Array.isArray(value) ? value.map((item) => ({ ...object(item) })) : { ...object(value) };
 }
 
 export function productCategories(value: unknown): ProductCategory[] {
@@ -81,27 +79,20 @@ export function productData(value: unknown, category = ""): Product {
   const productID = identifier(wire.id);
   const imagesValue = wire.images ?? wire.image;
   const images =
-    imagesValue === undefined || imagesValue === null
-      ? []
-      : strings(imagesValue, "产品图片");
+    imagesValue === undefined || imagesValue === null ? [] : strings(imagesValue, "产品图片");
   const configValue = wire.configTypes ?? wire.configType;
   const configTypes =
     configValue === undefined || configValue === null
       ? undefined
       : strings(configValue, "产品配网方式");
   const sort = wire.sort;
-  if (
-    sort !== undefined &&
-    sort !== null &&
-    (typeof sort !== "number" || !Number.isFinite(sort))
-  ) {
+  if (sort !== undefined && sort !== null && (typeof sort !== "number" || !Number.isFinite(sort))) {
     throw new ApiError(502, "产品排序值格式不支持");
   }
   const bluetooth = boolean(wire.bluetooth, "蓝牙能力");
   const recommended = boolean(wire.recommended, "推荐标识");
   const detailParameters = parameters(wire.parameters);
-  const introduction =
-    wire.introduction === null ? null : text(wire.introduction, "产品介绍");
+  const introduction = wire.introduction === null ? null : text(wire.introduction, "产品介绍");
 
   return {
     id: productID,
@@ -149,18 +140,11 @@ export function productGroups(value: unknown): ProductGroup[] {
   });
 }
 
-export function productGroupName(
-  group: ProductGroup,
-  language: Language,
-): string {
-  return (
-    group.categoryName?.[language] || group.categoryName?.en || group.category
-  );
+export function productGroupName(group: ProductGroup, language: Language): string {
+  return group.categoryName?.[language] || group.categoryName?.en || group.category;
 }
 
-export function productParameterRows(
-  value?: ProductParameters,
-): { name: string; value: string }[] {
+export function productParameterRows(value?: ProductParameters): { name: string; value: string }[] {
   if (!value) return [];
   const entries = Array.isArray(value) ? value : [value];
   return entries.flatMap((entry) => {
