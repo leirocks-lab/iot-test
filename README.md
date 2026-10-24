@@ -113,6 +113,47 @@ pnpm ios
 
 仅修改 TypeScript、React 组件、样式或业务逻辑时，通常不需要重新构建 Development Build。
 
+## HTTP 请求调试日志
+
+应用装配统一记录真实和 Mock 请求，包含登录、Token 刷新、平台/IoT 分流。development/preview 默认 `debug`，production 默认 `off`；可以在 `.env` 显式配置：
+
+```dotenv
+ROWAN_HTTP_LOG_LEVEL=debug
+```
+
+`debug` 输出请求、响应和异常；`error` 仅输出 HTTP/业务错误及请求异常；`off` 完全关闭。主动取消仅在 debug 下输出。修改配置后重启 Metro（Web 使用 `pnpm web`，包含清缓存），并完整刷新页面。此开关经现有 Expo `extra` 公共配置传入，不保存凭据；配置机制见 [Expo 配置说明](https://docs.expo.dev/workflow/configuration/)。
+
+Web 在浏览器开发者工具 Console 查看，启用 Debug/Verbose 级别后按 `[HTTP]` 或 `req-数字` 筛选。原生在开发构建的 JavaScript 调试控制台查看，具体日志转发取决于当前开发工具。该能力不需要额外原生模块。
+
+```text
+[HTTP] → [req-1] POST https://api.example.com/app-api/session
+{
+  "requestId": "req-1",
+  "target": "platform",
+  "sourcePath": "/api/app/session",
+  "timestamp": "2026-10-24T06:30:00.123Z",
+  "event": "request",
+  "body": { "account": "l***@example.com", "pin": "[REDACTED]", "verify": "password" }
+}
+[HTTP] ← [req-1] POST https://api.example.com/app-api/session
+{
+  "requestId": "req-1",
+  "event": "response",
+  "status": 200,
+  "durationMs": 186,
+  "result": "success",
+  "body": { "code": 0, "data": { "accessToken": "[REDACTED]", "refreshToken": "[REDACTED]" } }
+}
+```
+
+示例省略部分重复字段；实际返回也包含 method、url、target、sourcePath、timestamp 和 headers。时间使用 ISO UTC，耗时以毫秒记录。请求 ID 为当前 JavaScript 运行中的本地标识，不增加后台协议头。
+
+真实请求输出转换后的 URL 和适配前的原始 JSON 包络；Mock 标记 `target: mock`。`result` 区分 `success`、`business_error`（HTTP 200 但业务失败）、`http_error`、`network_error`、`request_error`（序列化或 Mock 异常）、`response_parse_error`、`response_adapter_error` 和 `cancelled`。无 HTTP 响应时 status 为 null；解析失败仍保留已收到的状态码。
+
+输出前对 headers、query、URL 路径及嵌套 JSON 脱敏，隐藏密码、pin、验证码、Token、Cookie、API key 等常见敏感字段，邮箱掩码。每个日志字段最多约 4096 字符，超出显示 `[TRUNCATED]`；递归、数组长度和字段数量也有限制。日志使用独立快照，sink 抛错不会改变请求结果，响应流只解析一次。
+
+异常只输出类型，不输出可能夹带凭据的自由文本堆栈；非 JSON 正文不输出。任意业务字符串中的自定义秘密无法全部自动识别，分享日志前仍需核对。不开启远程上传或文件持久化；直接构造客户端默认关闭，可显式注入 `HttpDiagnostics` 使用同一能力。
+
 ## 品牌与环境
 
 复制环境示例：

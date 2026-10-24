@@ -1,6 +1,7 @@
 import { allowsHttpApi, validateApiBaseUrl } from './api-transport';
+import type { HttpLogLevel } from './http-logging';
 
-export interface CommunicationConfig { httpMode:'mock'|'real'; deviceMode:'mock'|'real'; apiBaseUrl:string; iotApiBaseUrl?:string; tenantID?:string; environment:string; integrationProfile?:string }
+export interface CommunicationConfig { httpMode:'mock'|'real'; deviceMode:'mock'|'real'; apiBaseUrl:string; iotApiBaseUrl?:string; tenantID?:string; environment:string; integrationProfile?:string; httpLogLevel?:HttpLogLevel }
 /** A public identifier, never a URL, executable module path or credential. */
 export function integrationProfileID(value:unknown):string|undefined {
   if(value===undefined||value==='')return undefined;
@@ -20,5 +21,7 @@ export function communicationConfig(input:Partial<CommunicationConfig>):Communic
   const tenantID=input.tenantID?.trim()||undefined;
   if(tenantID!==undefined&&!/^\d+$/.test(tenantID))throw new Error('tenant-id must be an integer supplied by the backend');
   const integrationProfile=integrationProfileID(input.integrationProfile);
-  return {environment,httpMode,deviceMode,apiBaseUrl,iotApiBaseUrl,tenantID,...(integrationProfile?{integrationProfile}:{})};
+  const httpLogLevel=input.httpLogLevel??(environment==='production'?'off':'debug');
+  if(!['off','error','debug'].includes(httpLogLevel))throw new Error('Invalid ROWAN_HTTP_LOG_LEVEL; expected off, error or debug');
+  return {environment,httpMode,deviceMode,apiBaseUrl,iotApiBaseUrl,tenantID,...(integrationProfile?{integrationProfile}:{}),httpLogLevel};
 }

@@ -4,6 +4,7 @@ import { MockDatabase, defaultSettings, digest, products } from "./store";
 import { nextExecution, validateSchedule } from "./scheduler";
 import { validateAttributeValue } from "./device-controls";
 import { validateApiBaseUrl } from './api-transport';
+import { HttpDiagnostics, isHttpCancellation, type HttpFailure, type HttpLogContext } from './http-logging';
 import {
   mockProductCategories,
   mockProductDetail,
@@ -19,13 +20,32 @@ export function requestUrl(base: string, req: HttpRequest) {
 }
 export type HttpFetcher=(url:string,init?:RequestInit)=>Promise<Response>;
 export class FetchHttpClient implements HttpClient {
-  constructor(private base: string, private fetcher: HttpFetcher = (url, init) => globalThis.fetch(url, init), environment?: string) {
+  constructor(private base: string, private fetcher: HttpFetcher = (url, init) => globalThis.fetch(url, init), environment?: string, private diagnostics = new HttpDiagnostics()) {
     validateApiBaseUrl(base, environment);
   }
-  async request<T>(req: HttpRequest): Promise<HttpResponse<T>> {
-    const response=await this.fetcher(requestUrl(this.base,req),{method:req.method, headers:{Accept:'application/json',...(req.body!==undefined?{'Content-Type':'application/json'}:{}),...req.headers}, body:req.body===undefined?undefined:JSON.stringify(req.body), signal:req.signal});
-    const data=response.status===204 ? {success:true,code:0,message:'',data:{}} : await response.json();
-    return {status:response.status,data:data as T,headers:Object.fromEntries(response.headers.entries())};
+  async request<T>(req: HttpRequest, context: HttpLogContext & { adapt?: (response: HttpResponse<unknown>) => HttpResponse<T> } = {}): Promise<HttpResponse<T>> {
+    const url = requestUrl(this.base, req);
+    const headers = { Accept: 'application/json', ...(req.body !== undefined ? { 'Content-Type': 'application/json' } : {}), ...req.headers };
+    const span = this.diagnostics.start({ ...req, headers }, { ...context, url });
+    let phase: HttpFailure = 'request_error';
+    let raw: HttpResponse<unknown> | undefined;
+    let status: number | undefined;
+    try {
+      const body = req.body === undefined ? undefined : JSON.stringify(req.body);
+      phase = 'network_error';
+      const response = await this.fetcher(url, { method: req.method, headers, body, signal: req.signal });
+      status = response.status;
+      phase = 'response_parse_error';
+      const data = status === 204 ? { success: true, code: 0, message: '', data: {} } : await response.json();
+      raw = { status, data, headers: Object.fromEntries(response.headers.entries()) };
+      phase = 'response_adapter_error';
+      const result = context.adapt ? context.adapt(raw) : raw as HttpResponse<T>;
+      span.response(raw);
+      return result;
+    } catch (error) {
+      span.failure(error, isHttpCancellation(error, req) ? 'cancelled' : phase, raw, status);
+      throw error;
+    }
   }
 }
 export type HttpFault = 'none' | 'offline' | 'server' | 'timeout';

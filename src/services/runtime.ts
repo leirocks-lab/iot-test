@@ -19,6 +19,7 @@ import { maintenanceLedger, mockMaintenanceProfile, type MaintenanceLedger, type
 import { eventLedger, mockEventProfile, type EventLedger, type EventProfileResolver } from './device-events';
 import { integrationStatus, type IntegrationStatus } from './runtime-integration';
 import { ApiError } from './models';
+import { HttpDiagnostics, LoggedHttpClient } from './http-logging';
 import { DeviceUnbindFlow } from './device-unbind';
 export interface RuntimeContracts {onboarding?:RealAddContract;qr?:RowanCodeParser;wifi?:WifiReader;realtime?:DeviceProfileResolver;controls?:ControlProfileResolver;maintenance?:MaintenanceProfileResolver;events?:EventProfileResolver}
 export interface Runtime {
@@ -48,7 +49,8 @@ export async function createRuntime(input:Partial<CommunicationConfig>, realDevi
   check();
   const storage=new SessionStorage(()=>`rowan.${config.httpMode}.${config.httpMode==='mock'?(db?.state.generation??'legacy-v1'):realSessionScope(config)}`);
   const mockHttp=db?new MockHttpClient(db):undefined, mockDevices=db?new MockDeviceTransport(db):undefined;
-  const http=config.httpMode==='mock'?mockHttp!:new RealHttpClient(config);
+  const diagnostics=new HttpDiagnostics({level:config.httpLogLevel});
+  const http=config.httpMode==='mock'?new LoggedHttpClient(mockHttp!,diagnostics):new RealHttpClient(config,undefined,diagnostics);
   const devices:DeviceTransport=config.deviceMode==='mock'?mockDevices!:realDeviceDriver??await (await import('../protocol/native-ble')).createNativeBleTransport();
   ownedDriver=devices;
   check();
