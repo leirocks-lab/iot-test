@@ -3,6 +3,7 @@ import { createConfiguredRuntime } from './app-runtime';
 import { createRuntime, type Runtime, type RuntimeContracts } from './runtime';
 import { integrationStatus, registeredIntegration, type IntegrationRegistry } from './runtime-integration';
 import { communicationConfig } from './config';
+import { deploymentIntegrations } from '../config/deployment-integrations';
 import { UnavailableDeviceTransport } from '../protocol/device';
 import { defaultSettings, MemoryStorage } from '../test-support/settings-fixture';
 import { RowanService } from './rowan';
@@ -29,10 +30,17 @@ const registry=(value:RuntimeContracts=contracts):IntegrationRegistry=>({'fixtur
 const runtimes:Runtime[]=[];
 afterEach(()=>{runtimes.splice(0).forEach(runtime=>runtime.dispose());testPorts.ports.length=0;vi.useRealTimers();vi.restoreAllMocks();});
 describe('P1 App启动装配',()=>{
+  it('registers the dual BLE development contract with optional binding code and empty 8F payload',()=>{
+    const selected=registeredIntegration({...config,integrationProfile:'rowan-ble-dual'},deploymentIntegrations);
+    expect(selected.contracts.onboarding).toMatchObject({profile:{stageTimeout:120000},bindingTimeout:60000,operationTimeout:240000});
+    expect(selected.contracts.onboarding?.profile?.factoryReply).toEqual(new Uint8Array());
+    expect(selected.contracts.onboarding?.makeBindCode).toBeUndefined();
+    expect(selected.contracts.onboarding?.deviceToken('public-access-token')).toBe('public-access-token');
+  });
   it('passes all seven reviewed ports to the runtime factory without reading executable extra',async()=>{
     const fake={dispose:vi.fn()} as unknown as Runtime,create=vi.fn(async()=>fake);
     await createConfiguredRuntime({...config,qr:()=>{throw new Error('untrusted extra');}} as typeof config,{registry:registry(),create});
-    const passed=(create.mock.calls[0] as unknown as [typeof config,undefined,RuntimeContracts])[2];expect(passed).toMatchObject(contracts);expect(passed.qr).toBe(qr);expect(passed.onboarding!.profile.factoryReply).not.toBe(contracts.onboarding!.profile.factoryReply);
+    const passed=(create.mock.calls[0] as unknown as [typeof config,undefined,RuntimeContracts])[2];expect(passed).toMatchObject(contracts);expect(passed.qr).toBe(qr);expect(passed.onboarding!.profile!.factoryReply).not.toBe(contracts.onboarding!.profile!.factoryReply);
   });
   it('selects only the named profile and rejects inherited/unknown names without executing a factory',async()=>{
     const create=vi.fn(async()=>({dispose:vi.fn()} as unknown as Runtime));await expect(createConfiguredRuntime({...config,integrationProfile:'constructor'},{registry:registry(),create})).rejects.toThrow('尚未注册');expect(create).not.toHaveBeenCalled();

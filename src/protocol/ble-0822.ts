@@ -1,7 +1,8 @@
 import { sha256 } from '@noble/hashes/sha2.js';
+import { ctr } from '@noble/ciphers/aes.js';
 import { bytesToHex, hexToBytes } from '@noble/hashes/utils.js';
 import { ApiError } from '../services/models';
-import { decodeFrame, encodeFrame, utf8, type DiscoveredDevice } from './ble';
+import { crc8, encodeFrame, utf8, type DiscoveredDevice } from './ble';
 
 export const BLE_0822={service:'00000822-0000-1000-8000-00805f9b34fb',write:'0000aab1-0000-1000-8000-00805f9b34fb',notify:'0000aab2-0000-1000-8000-00805f9b34fb'};
 export interface Frame0822 { command:number; data:Uint8Array }
@@ -37,13 +38,41 @@ export function parseAdvertisement0822(input:{handle:string;manufacturer:Uint8Ar
 export function encode0822(command:number,data:Uint8Array,key:Uint8Array,mtu?:number) {
   if(!Number.isInteger(command)||command<0||command>255||data.length>254||key.length!==16)throw new ApiError(400,'0822帧字段超出协议范围');
   const frame=encodeFrame(command,data,key);
+  if(command>=1&&command<=10||command===0x8f){
+    const payload=new Uint8Array([command,...data]);
+    frame[frame.length-1]=crcDevicePayload0822(payload);payload.fill(0);
+  }
   if(mtu!==undefined&&(!Number.isInteger(mtu)||mtu<23||frame.length>mtu-3))
     throw new ApiError(503,'当前BLE MTU无法发送完整0822帧；长写规则尚未确认');
   return frame;
 }
 export function decode0822(frame:Uint8Array,key:Uint8Array):Frame0822 {
   if(key.length!==16)throw new ApiError(400,'0822 Key长度无效');
-  try{return decodeFrame(frame,key);}catch{throw new ApiError(0x63,'0822通知帧LEN或CRC校验失败');}
+  if(frame.length<5||frame[0]!==0xa5||frame[1]!==0x5a||frame[2]!==frame.length-4)
+    throw new ApiError(0x63,'0822通知帧LEN或CRC校验失败');
+  const plain=ctr(key,new Uint8Array(16)).decrypt(frame.slice(3,-1));
+  try{
+    const crc=plain[0]>=1&&plain[0]<=10||plain[0]===0x8f?crcDevicePayload0822(plain):crc8(plain);
+    if(crc!==frame[frame.length-1])throw new ApiError(0x63,'0822通知帧LEN或CRC校验失败');
+    return {command:plain[0],data:plain.slice(1)};
+  }finally{plain.fill(0);}
+}
+function crcDevicePayload0822(plain:Uint8Array) {
+  let crc=0;
+  for(const byte of plain){crc^=byte;for(let bit=0;bit<8;bit++)crc=crc&0x80?((crc<<1)^0x31)&0xff:(crc<<1)&0xff;}
+  return crc;
+}
+/** Firmware notifications use the observed non-reflected CRC-8/0x31 table. */
+export function decodeDevice0822(frame:Uint8Array,key:Uint8Array):Frame0822 {
+  if(key.length!==16)throw new ApiError(400,'0822 Key长度无效');
+  if(frame.length<5||frame[0]!==0xa5||frame[1]!==0x5a||frame[2]!==frame.length-4)
+    throw new ApiError(0x63,'0822通知帧LEN或CRC校验失败');
+  const plain=ctr(key,new Uint8Array(16)).decrypt(frame.slice(3,-1));
+  try{
+    const crc=crcDevicePayload0822(plain);
+    if(crc!==frame[frame.length-1])throw new ApiError(0x63,'0822通知帧LEN或CRC校验失败');
+    return {command:plain[0],data:plain.slice(1)};
+  }finally{plain.fill(0);}
 }
 export function factoryReply0822(payload:Uint8Array,key:Uint8Array,mtu?:number) {
   // Firmware documentation leaves DATA unspecified. The caller must supply the confirmed payload.

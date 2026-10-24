@@ -112,7 +112,7 @@ export async function createRuntime(input:Partial<CommunicationConfig>, realDevi
     });session=new ControlledDeviceSession(inner,context,contracts?.controls,contracts?.maintenance,ledger,contracts?.events,eventState);return session;
   };
   let scanner:QrScanCoordinator;
-  const onboarding=new AddDeviceCoordinator(service,devices,{real:contracts?.onboarding,wifi,createSession:createDeviceSession,beforeNewContext:()=>{if(scanner?.pending)throw new ApiError(409,'请先核对或完成当前扫码绑定结果');}});
+  const onboarding=new AddDeviceCoordinator(service,devices,{environment:config.environment,real:contracts?.onboarding,wifi,createSession:createDeviceSession,beforeNewContext:()=>{if(scanner?.pending)throw new ApiError(409,'请先核对或完成当前扫码绑定结果');}});
   scanner=new QrScanCoordinator(service,contracts?.qr,()=>{if(onboarding.pending)throw new ApiError(409,'请先核对或完成当前蓝牙添加结果');});
   let revision=service.sessionRevision;
   const connections=new Set<MqttConnection>();

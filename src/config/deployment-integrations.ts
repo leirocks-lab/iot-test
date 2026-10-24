@@ -11,4 +11,14 @@ export const deploymentIntegrations:IntegrationRegistry=Object.freeze({
     // No product dictionary has been supplied: synchronization works, physical controls remain unavailable.
     create:()=>({contracts:{realtime:createClassicShadowResolver(),realtimeModelOptional:true}}),
   },
+  'rowan-ble-dual':{
+    environments:['development','preview'],
+    create:()=>({contracts:{onboarding:{
+      // App writes 0x8F with empty DATA after validating firmware challenge 0x0F.
+      profile:{factoryReply:new Uint8Array(),stageTimeout:120000},
+      deviceToken:(accessToken:string)=>accessToken,
+      bindingTimeout:60000,
+      operationTimeout:240000,
+    }}}),
+  },
 });

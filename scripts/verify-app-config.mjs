@@ -171,6 +171,22 @@ function main() {
     assert(config._internal.modResults.ios.infoPlist.NSAppTransportSecurity.NSAllowsArbitraryLoads === expected, `${environment} iOS ATS policy is wrong`);
   }
 
+  const devBackendConfig = readExpoConfig({
+    APP_ENV: 'development', ROWAN_HTTP_MODE: 'real',
+    ROWAN_APP_API_BASE_URL: 'https://47.107.80.36', ROWAN_IOT_API_BASE_URL: 'https://47.107.80.36/iot',
+  }, 'introspect');
+  const devBackendApplication = devBackendConfig._internal.modResults.android.manifest.manifest.application[0];
+  assert(devBackendApplication.$['android:networkSecurityConfig'] === '@xml/rowan_dev_network_security_config',
+    'Only the current development backend must receive the debug certificate configuration');
+  for (const environment of ['preview', 'production']) {
+    const config = readExpoConfig({
+      APP_ENV: environment, ROWAN_HTTP_MODE: 'real',
+      ROWAN_APP_API_BASE_URL: 'https://47.107.80.36', ROWAN_IOT_API_BASE_URL: 'https://47.107.80.36/iot',
+    }, 'introspect');
+    const application = config._internal.modResults.android.manifest.manifest.application[0];
+    assert(!application.$['android:networkSecurityConfig'], `${environment} must not trust the development certificate`);
+  }
+
   assert(
     new Set(variants.map((config) => config.android.package)).size === 3,
     'Android application identifiers must be unique',

@@ -2,7 +2,7 @@ import { ApiError, type Role } from '../services/models';
 import type { DiscoveredDevice } from './ble';
 import type { DeviceEvent } from '../services/device-events';
 
-export interface ProvisionInput {userID:string;mac:string;model:string;ssid:string;password:string;token:string;bindCode:string;productID:string;modelID:string;seriesName?:string;urls?:Record<string,string>}
+export interface ProvisionInput {userID:string;mac:string;model:string;service?:string;ssid:string;password:string;token:string;bindCode:string;productID:string;modelID:string;seriesName?:string;urls?:Record<string,string>}
 export interface ShadowMessage {version:number;clientToken?:string;state?:{desired?:Record<string,unknown>;reported?:Record<string,number|string|boolean>;[key:string]:unknown};code?:number}
 /** Certified local failure before any write in this provisioning transaction. Never infer from a status code. */
 export class ProvisionNotSentError extends ApiError {constructor(error:unknown){super(error instanceof ApiError?error.code:503,error instanceof Error?error.message:'配网尚未发送');}}

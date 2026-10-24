@@ -4,6 +4,7 @@ import { UnavailableDeviceTransport } from '../protocol/device';
 import { ControlledDeviceSession } from '../protocol/controlled-session';
 import type { DeviceSession } from '../protocol/device-session';
 import { Provisioner0822 } from '../protocol/provision-0822';
+import { Provisioner0922 } from '../protocol/provision-0922';
 import { MemoryStorage, defaultSettings } from '../test-support/settings-fixture';
 import { ApiError, type DeviceView, type Product } from './models';
 import { RowanService } from './rowan';
@@ -51,6 +52,37 @@ describe('real-only device onboarding',()=>{
   it('does not accept a different system Wi-Fi or fabricate a binding',async()=>{
     const {service}=setup(),flow=new AddDeviceFlow(service,new UnavailableDeviceTransport(),{real:contract,wifi});await flow.select(candidate);
     await expect(flow.provision('Other WiFi','pass')).rejects.toThrow('Wi-Fi已变化');expect(flow.state.binding).toBeUndefined();flow.stop();
+  });
+  it('routes a 0922 broadcast without a factory profile or bind-code provider and confirms a unique HOME-01 MAC',async()=>{
+    const {service}=setup(),driver=new UnavailableDeviceTransport();
+    const flow=new AddDeviceFlow(service,driver,{environment:'development',wifi,real:{bindingTimeout:1000,operationTimeout:1000,deviceToken:token=>token}});
+    const legacy={...candidate,service:'00000922-0000-1000-8000-00805f9b34fb'};
+    await flow.select(legacy);
+    vi.spyOn(service,'connection').mockResolvedValue({certificationURL:'https://device.test/cert'});
+    const bind=vi.spyOn(service,'bindStatus');
+    const home=vi.spyOn(service,'home').mockResolvedValue([{room:null,devices:[{...view,device:{id:view.device.id,mac:candidate.mac}}]}]);
+    const runner=vi.spyOn(Provisioner0922.prototype,'run').mockImplementation(async(input,onStatus,signal,confirm,submitted)=>{
+      expect(input.service).toBe(legacy.service);expect(input.bindCode).toBe('');submitted?.();onStatus('D0');
+      expect(flow.state.binding).toBeUndefined();return confirm!(signal);
+    });
+    const runner0822=vi.spyOn(Provisioner0822.prototype,'run');
+    try {
+      await flow.provision('Actual WiFi','public-password');
+      expect(runner).toHaveBeenCalledOnce();expect(runner0822).not.toHaveBeenCalled();expect(bind).not.toHaveBeenCalled();expect(home).toHaveBeenCalledOnce();
+      expect(flow.state).toMatchObject({stage:'bound',binding:{deviceID:view.device.id}});
+    } finally {flow.stop();}
+  });
+  it('does not claim binding when HOME-01 has ambiguous MAC matches',async()=>{
+    const {service}=setup();
+    const flow=new AddDeviceFlow(service,new UnavailableDeviceTransport(),{wifi,real:{bindingTimeout:1000,operationTimeout:1000,deviceToken:token=>token}});
+    await flow.select({...candidate,service:'0922'});
+    vi.spyOn(service,'connection').mockResolvedValue({certificationURL:'https://device.test/cert'});
+    vi.spyOn(service,'home').mockResolvedValue([{room:null,devices:['first','second'].map(id=>({...view,device:{id,mac:'aa:bb:cc:dd:ee:ff'}}))}]);
+    vi.spyOn(Provisioner0922.prototype,'run').mockImplementation(async(_input,_status,signal,confirm,submitted)=>{submitted?.();return confirm!(signal);});
+    try {
+      await expect(flow.provision('Actual WiFi','public-password')).rejects.toMatchObject({code:409});
+      expect(flow.state.stage).toBe('unknown');expect(flow.state.binding).toBeUndefined();
+    } finally {flow.stop();}
   });
   it('keeps the firmware byte limits and explicit product password validation',()=>{
     expect(()=>validateWifi('wifi','')).toThrow('密码');expect(()=>validateWifi('wifi','a'.repeat(255))).toThrow('0822');

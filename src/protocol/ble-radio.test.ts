@@ -1,13 +1,15 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ApiError } from '../services/models';
 import { utf8 } from './ble';
-import { BLE_0822, decode0822, encode0822, key0822 } from './ble-0822';
+import { BLE_0822, decodeDevice0822, encode0822, key0822 } from './ble-0822';
+import { deviceFrame0822 } from './ble-0822-test-fixture';
+import { BLE_0922 } from './ble-0922';
 import { Ble0822DeviceTransport, type BleConnection, type BleRadio } from './ble-radio';
 import { ProvisionNotSentError } from './device';
 
 const input={userID:'node-user',mac:'aabbccddeeff',model:'Cheetah02',ssid:'public-wifi',password:'public-test',token:'public-token',bindCode:'provided-fixture',productID:'prd-fixture',modelID:'Cheetah02'};
 const key=key0822(input.mac,input.model);
-const advert=()=>{const manufacturer=new Uint8Array(25);manufacturer.set([0x22,0x08,0x1c,0xaa,0xbb,0xcc,0xdd,0xee,0xff,input.model.length,...utf8(input.model)]);return {handle:'native-handle',manufacturer};};
+const advert=()=>{const manufacturer=new Uint8Array(25);manufacturer.set([0x22,0x08,0x1c,0xaa,0xbb,0xcc,0xdd,0xee,0xff,input.model.length,...utf8(input.model)]);return {handle:'native-handle',manufacturer,services:[BLE_0822.service]};};
 class Radio implements BleRadio {
   listeners:Parameters<BleRadio['startScan']>[0][]=[];
   bytes?:(data:Uint8Array)=>void;
@@ -24,8 +26,19 @@ async function selected(){
   const scan=driver.scan();await vi.advanceTimersByTimeAsync(0);radio.listeners[0](null,advert());
   await vi.advanceTimersByTimeAsync(51);await scan;return {radio,driver};
 }
-afterEach(()=>{vi.useRealTimers();vi.restoreAllMocks();});
+afterEach(()=>{vi.useRealTimers();vi.restoreAllMocks();vi.unstubAllGlobals();});
 describe('原生BLE端口编排（注入端口，无真机结论）',()=>{
+  it('selects both protocol routes by advertised service UUID and rejects absent or mismatched UUIDs',async()=>{
+    vi.useFakeTimers();const radio=new Radio(),driver=new Ble0822DeviceTransport(radio,10),scan=driver.scan();
+    await vi.advanceTimersByTimeAsync(0);
+    const old=advert();old.manufacturer[1]=0x09;old.services=[BLE_0922.service];radio.listeners[0](null,old);
+    radio.listeners[0](null,advert());
+    radio.listeners[0](null,{...advert(),services:[]});
+    radio.listeners[0](null,{...advert(),services:[BLE_0922.service]});
+    await vi.advanceTimersByTimeAsync(11);
+    expect((await scan).map(device=>device.service)).toEqual([BLE_0922.service,BLE_0822.service]);
+    await driver.dispose();
+  });
   it('keeps a full native scan window after readiness and isolates subsequent rounds',async()=>{
     vi.useFakeTimers();const radio=new Radio();radio.ready.mockImplementationOnce(()=>new Promise(resolve=>setTimeout(resolve,8000)));const driver=new Ble0822DeviceTransport(radio),observed=vi.fn(),scan=driver.scan(undefined,observed);
     await vi.advanceTimersByTimeAsync(8000);radio.listeners[0](null,advert());await vi.advanceTimersByTimeAsync(59999);expect(radio.stopScan).not.toHaveBeenCalled();
@@ -48,7 +61,7 @@ describe('原生BLE端口编排（注入端口，无真机结论）',()=>{
   });
   it('certifies a first-frame MTU rejection as not sent but never certifies errors after a write',async()=>{
     const {radio,driver}=await selected();radio.channel.mtu=23;const started=vi.fn(),first=driver.exchange(input,[encode0822(0,new Uint8Array(16),key)],undefined,started);await expect(first).rejects.toBeInstanceOf(ProvisionNotSentError);await expect(first).rejects.toMatchObject({code:503});expect(started).not.toHaveBeenCalled();expect(radio.channel.write).not.toHaveBeenCalled();
-    radio.channel.mtu=517;radio.channel.write=vi.fn(async()=>radio.bytes!(encode0822(0x80,new Uint8Array(),key)));await driver.exchange(input,[encode0822(0,new Uint8Array(16),key)],undefined,started);expect(started).toHaveBeenCalledOnce();
+    radio.channel.mtu=517;radio.channel.write=vi.fn(async()=>radio.bytes!(deviceFrame0822(0x80,new Uint8Array(),key)));await driver.exchange(input,[encode0822(0,new Uint8Array(16),key)],undefined,started);expect(started).toHaveBeenCalledOnce();
     radio.channel.mtu=23;let failure:unknown;try{await driver.exchange(input,[encode0822(1,new Uint8Array(32),key)],undefined,started);}catch(error){failure=error;}
     expect(failure).toMatchObject({code:503});expect(failure).not.toBeInstanceOf(ProvisionNotSentError);expect(started).toHaveBeenCalledOnce();await driver.dispose();
   });
@@ -79,11 +92,24 @@ describe('原生BLE端口编排（注入端口，无真机结论）',()=>{
   });
   it('retains the separate factory response when ACK and challenge arrive together',async()=>{
     const {radio,driver}=await selected();
-    radio.channel.write=vi.fn(async()=>radio.bytes!(new Uint8Array([...encode0822(0x80,utf8('ack'),key),...encode0822(0x0f,utf8('factory'),key)])));
+    radio.channel.write=vi.fn(async()=>radio.bytes!(new Uint8Array([...deviceFrame0822(0x80,utf8('ack'),key),...deviceFrame0822(0x0f,utf8('factory'),key)])));
     const ack=await driver.exchange(input,[encode0822(0,utf8('digest-fixture'),key)]);
-    expect(decode0822(ack[0],key).command).toBe(0x80);
-    const challenge=await driver.challenge(input);expect(decode0822(challenge[0],key).command).toBe(0x0f);
+    expect(decodeDevice0822(ack[0],key).command).toBe(0x80);
+    const challenge=await driver.challenge(input);expect(decodeDevice0822(challenge[0],key).command).toBe(0x0f);
     driver.releaseProvision(input.bindCode);expect(radio.channel.close).toHaveBeenCalledOnce();await driver.dispose();
+  });
+  it('rejects an invalid device CRC without sending credentials',async()=>{
+    const {radio,driver}=await selected();
+    radio.channel.write=vi.fn(async()=>{
+      const bad=deviceFrame0822(0x80,utf8('ok'),key);bad[bad.length-1]^=1;
+      radio.bytes!(bad);
+    });
+    const pending=driver.exchange(input,[encode0822(0,new Uint8Array(16),key)]);
+    const rejected=expect(pending).rejects.toMatchObject({code:0x63});
+    await vi.advanceTimersByTimeAsync(0);await rejected;
+    expect(radio.channel.write).toHaveBeenCalledOnce();
+    expect(radio.channel.close).toHaveBeenCalledOnce();
+    await driver.dispose();
   });
   it('rejects insufficient MTU before any parameter write',async()=>{
     const {radio,driver}=await selected();radio.channel.mtu=23;
@@ -91,8 +117,8 @@ describe('原生BLE端口编排（注入端口，无真机结论）',()=>{
     expect(radio.channel.write).not.toHaveBeenCalled();expect(radio.channel.close).toHaveBeenCalled();await driver.dispose();
   });
   it('preserves parameter rejection codes and clears the connection',async()=>{
-    const {radio,driver}=await selected();radio.channel.write=vi.fn(async()=>radio.bytes!(encode0822(0x73,new Uint8Array(),key)));
-    await expect(driver.exchange(input,[encode0822(3,utf8('public-token'),key)])).rejects.toMatchObject({code:0x73});
+    const {radio,driver}=await selected();radio.channel.write=vi.fn(async()=>radio.bytes!(deviceFrame0822(0x73,new Uint8Array(),key)));
+    await expect(driver.exchange(input,[encode0822(3,utf8('public-token'),key)])).rejects.toMatchObject({code:0x73,message:'设备拒绝配网参数（73）'});
     expect(radio.channel.close).toHaveBeenCalled();await driver.dispose();
   });
   it('terminates missing ACK waits without automatically retransmitting',async()=>{
