@@ -14,7 +14,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useApp, useColors } from "../ui/context";
-import { Busy, Button, ErrorText, Field, Page, useAction } from "../ui/kit";
+import { Busy, Button, ErrorText, Field, Page, useAction, useToast } from "../ui/kit";
 
 type AuthProps = { forcedMode: "login" | "register" | "reset" };
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -352,17 +352,10 @@ function EmailVerification({
   const [invalid, setInvalid] = useState(false);
   const [busy, setBusy] = useState(false);
   const [sending, setSending] = useState(true);
-  const [toast, setToast] = useState("");
+  const { toast, showToast } = useToast();
   const inputRef = useRef<TextInput>(null);
-  const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const sendLock = useRef(false);
   const submitLock = useRef(false);
-
-  function setToastMessage(message: string) {
-    setToast(message);
-    if (toastTimer.current) clearTimeout(toastTimer.current);
-    toastTimer.current = setTimeout(() => setToast(""), 1800);
-  }
 
   useEffect(() => {
     if (!runtime) return;
@@ -373,11 +366,11 @@ function EmailVerification({
       .then(() => {
         if (!active) return;
         setRemaining(60);
-        setToastMessage("发送成功");
+        showToast("发送成功");
       })
       .catch((error: unknown) => {
         if (active)
-          setToastMessage(error instanceof Error ? error.message : "发送失败");
+          showToast(error instanceof Error ? error.message : "发送失败");
       })
       .finally(() => {
         if (active) {
@@ -389,9 +382,8 @@ function EmailVerification({
     return () => {
       active = false;
       clearTimeout(focusTimer);
-      if (toastTimer.current) clearTimeout(toastTimer.current);
     };
-  }, [runtime, email, purpose]);
+  }, [runtime, email, purpose, showToast]);
 
   useEffect(() => {
     if (remaining <= 0) return;
@@ -411,10 +403,10 @@ function EmailVerification({
       setCode("");
       setInvalid(false);
       setRemaining(60);
-      setToastMessage("发送成功");
+      showToast("发送成功");
       inputRef.current?.focus();
     } catch (error) {
-      setToastMessage(error instanceof Error ? error.message : "发送失败");
+      showToast(error instanceof Error ? error.message : "发送失败");
     } finally {
       sendLock.current = false;
       setSending(false);
@@ -436,9 +428,9 @@ function EmailVerification({
       const message = error instanceof Error ? error.message : "注册失败";
       if (/验证码|captcha/i.test(message)) {
         setInvalid(true);
-        setToastMessage("验证码错误，请重新发送验证");
+        showToast("验证码错误，请重新发送验证");
       } else {
-        setToastMessage(message);
+        showToast(message);
       }
     } finally {
       submitLock.current = false;
@@ -700,13 +692,9 @@ function ForgotPassword() {
   const [password, setPassword] = useState("");
   const [repeat, setRepeat] = useState("");
   const [error, setError] = useState("");
-  const [toast, setToast] = useState("");
+  const { toast, showToast } = useToast();
   const [busy, setBusy] = useState(false);
   if (!runtime) return <Busy />;
-  const showToast = (message: string) => {
-    setToast(message);
-    setTimeout(() => setToast(""), 1800);
-  };
   const findAccount = async () => {
     const account = email.trim();
     setError("");

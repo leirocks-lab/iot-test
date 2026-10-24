@@ -9,3 +9,4 @@ export { Page } from './kit/Page';
 export { confirm } from './kit/confirm';
 export { styles } from './kit/styles';
 export { useAction } from './kit/use-action';
+export { useToast } from './kit/use-toast';
