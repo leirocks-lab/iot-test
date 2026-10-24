@@ -53,10 +53,10 @@ describe('real MQTT console diagnostics',()=>{
 });
 describe('MQTT log configuration',()=>{
   it('defaults independently from HTTP, disables production logging and rejects invalid values',()=>{
-    expect(communicationConfig({httpLogLevel:'off'}).mqttLogLevel).toBe('debug');
-    expect(communicationConfig({environment:'preview'}).mqttLogLevel).toBe('debug');
-    expect(communicationConfig({environment:'production',apiBaseUrl:'https://api.test'}).mqttLogLevel).toBe('off');
-    expect(communicationConfig({mqttLogLevel:'off',httpLogLevel:'debug'}).mqttLogLevel).toBe('off');
-    expect(()=>communicationConfig({mqttLogLevel:'invalid' as never})).toThrow('ROWAN_MQTT_LOG_LEVEL');
+    expect(communicationConfig({apiBaseUrl:'https://api.test',httpLogLevel:'off'}).mqttLogLevel).toBe('debug');
+    expect(communicationConfig({apiBaseUrl:'https://api.test',environment:'preview'}).mqttLogLevel).toBe('debug');
+    expect(communicationConfig({apiBaseUrl:'https://api.test',environment:'production'}).mqttLogLevel).toBe('off');
+    expect(communicationConfig({apiBaseUrl:'https://api.test',mqttLogLevel:'off',httpLogLevel:'debug'}).mqttLogLevel).toBe('off');
+    expect(()=>communicationConfig({apiBaseUrl:'https://api.test',mqttLogLevel:'invalid' as never})).toThrow('ROWAN_MQTT_LOG_LEVEL');
   });
 });

@@ -4,9 +4,9 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { communicationConfig } from '../src/services/config.ts';
 import { RealHttpClient } from '../src/services/real-http.ts';
 import { RowanService } from '../src/services/rowan.ts';
-import { MemoryStorage } from '../src/services/store.ts';
+import { MemoryStorage } from '../src/services/memory-storage.ts';
 
-const config=communicationConfig({environment:'development',httpMode:'real',deviceMode:'mock',
+const config=communicationConfig({environment:'development',
   apiBaseUrl:'http://47.107.80.36',iotApiBaseUrl:'http://47.107.80.36/iot',tenantID:process.env.ROWAN_TENANT_ID});
 const account=process.env.ROWAN_TEST_ACCOUNT??'zhanglei@verveso.com';
 const password=process.env.ROWAN_TEST_PASSWORD;
@@ -47,7 +47,7 @@ if(password){
 const target='sdd/迭代变更/变更-20261013-001/联调证据';
 await mkdir(target,{recursive:true});
 const report={change:'CHG-20261013-001',execution:'Windows Node / RowanService / RealHttpClient / actual fetch',
-  environment:'development HTTP real / device mock',tenantConfigured:!!config.tenantID,
+  environment:'development real HTTP / device unavailable in Node',tenantConfigured:!!config.tenantID,
   notes:['No passwords, tokens or captcha values are persisted.','Unauthenticated HOME-01 denial is not a successful device-list acceptance.','Native mobile UI and MQTT were not exercised.'],results};
 await writeFile(`${target}/App服务层实测.json`,JSON.stringify(report,null,2)+'\n','utf8');
 for(const row of results)console.log(`${row.api}: ${row.result}; HTTP ${row.httpStatus??'-'}; code ${row.code??row.errorCode??'-'}; ${row.message??row.errorMessage??''}`);

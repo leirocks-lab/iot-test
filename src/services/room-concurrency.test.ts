@@ -1,7 +1,7 @@
 import {describe,it,expect,vi} from 'vitest';
 import {RealHttpClient} from './real-http';
 import {RowanService} from './rowan';
-import {MemoryStorage} from './store';
+import {MemoryStorage} from './memory-storage';
 import type {Room} from './models';
 
 const rooms=[{id:'default',name:'Default',isDefault:true,deviceCount:0,version:0,updatedAt:'2026-10-18T00:00:00Z'},

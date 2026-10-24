@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { HttpRequest } from "../lib/core";
-import { MockHttpClient, type HttpFetcher } from "./http";
+import { type HttpFetcher } from "./http";
 import { ApiError, type ApiEnvelope, type Product } from "./models";
 import {
   ProductCatalogFlow,
@@ -16,7 +16,7 @@ import {
 } from "./product-data";
 import { RealHttpClient } from "./real-http";
 import { RowanService } from "./rowan";
-import { MemoryStorage, MockDatabase, defaultSettings } from "./store";
+import { MemoryStorage, defaultSettings } from "../test-support/settings-fixture";
 
 const flows: ProductCatalogFlow[] = [];
 afterEach(() => {
@@ -28,13 +28,15 @@ afterEach(() => {
 async function setup(
   options: ConstructorParameters<typeof ProductCatalogFlow>[1] = {},
 ) {
-  const db = await MockDatabase.open(new MemoryStorage());
-  const http = new MockHttpClient(db);
-  const service = new RowanService(http, new MemoryStorage());
-  await service.login("rowan@example.com", "Rowan@123", "password");
+  const http = {request:vi.fn(async()=>({status:200,data:{success:true,code:0,data:{accessToken:'fixture',refreshToken:'fixture-refresh',userID:'user_demo',expiresIn:3600,tokenType:'bearer',setting:defaultSettings()}},headers:{}}))};
+  const service = new RowanService(http as never, new MemoryStorage());
+  service.session={userID:'user_demo',accessToken:'fixture',refreshToken:'fixture-refresh',tokenType:'bearer',expiresIn:3600,setting:defaultSettings()};
+  vi.spyOn(service,'categories').mockResolvedValue([{name:'WineCooler',value:'WineCooler'},{name:'Dehumidifier',value:'Dehumidifier'}]);
+  vi.spyOn(service,'products').mockResolvedValue([{category:'WineCooler',products:[productData(wineWire)]},{category:'Dehumidifier',products:[]}]);
+  vi.spyOn(service,'product').mockImplementation(async id=>{if(id==='deleted-product')throw new ApiError(1091,'产品不存在');return productData({...wineWire,id});});
   const flow = new ProductCatalogFlow(service, options);
   flows.push(flow);
-  return { db, http, service, flow };
+  return { http, service, flow };
 }
 
 function deferred<T>() {
@@ -66,88 +68,6 @@ const wineWire = {
 };
 
 describe("RF-0018 catalog and request lifecycle", () => {
-  it.each([
-    ["zh-CN", "酒柜"],
-    ["zh-TW", "酒櫃"],
-    ["en", "Wine cooler"],
-  ] as const)(
-    "loads PAIR-03 names and details in %s with auth and no guessed brand",
-    async (language, name) => {
-      const { service, http, flow } = await setup();
-      service.session!.setting.language = language;
-      const requests = vi.spyOn(http, "request");
-      await flow.start();
-      expect(flow.state.categories.value?.[0]).toEqual({
-        name,
-        value: "WineCooler",
-      });
-      expect(flow.state.products.value?.[0].categoryName?.[language]).toBe(
-        name,
-      );
-      const product = await flow.select("prd_wine");
-      expect(product?.parameters).toEqual([{ key: "model", value: "ADD6830" }]);
-      expect(product?.introduction).toContain("Mock");
-      for (const [request] of requests.mock.calls) {
-        expect(request.headers).toMatchObject({
-          "Accept-Language": language,
-          Authorization: `Bearer ${service.session!.accessToken}`,
-        });
-        expect(request.query?.brandId).toBeUndefined();
-      }
-      expect(requests).toHaveBeenCalledWith(
-        expect.objectContaining({
-          path: "/api/app/products/prd_wine",
-          query: { type: "text" },
-          signal: expect.any(AbortSignal),
-        }),
-      );
-    },
-  );
-
-  it("sends only an explicitly configured catalog brand to the list and category endpoints", async () => {
-    const { flow, http } = await setup({ brandId: "as" });
-    const requests = vi.spyOn(http, "request");
-    await flow.start();
-    expect(requests.mock.calls.map(([req]) => req.query)).toEqual([
-      { brandId: "as" },
-      { brandId: "as" },
-    ]);
-  });
-
-  it.each(
-    [
-      "/api/app/products/category",
-      "/api/app/products",
-      "/api/app/products/prd_wine",
-    ].flatMap((path) =>
-      ["missing", "bare", "refresh", "expired", "invalid"].map((kind) => [
-        path,
-        kind,
-      ]),
-    ),
-  )("rejects %s with %s authorization", async (path, kind) => {
-    const { http, db, service } = await setup();
-    const session = service.session!;
-    const headers: Record<string, string> = {};
-    if (kind === "bare") headers.Authorization = session.accessToken;
-    if (kind === "refresh")
-      headers.Authorization = `Bearer ${session.refreshToken}`;
-    if (kind === "expired") {
-      db.state.tokens[session.accessToken].expiresAt = 0;
-      headers.Authorization = `Bearer ${session.accessToken}`;
-    }
-    if (kind === "invalid") headers.Authorization = "Bearer invalid";
-    const response = await http.request<ApiEnvelope<unknown>>({
-      method: "GET",
-      path,
-      query: { type: "text" },
-      headers,
-    });
-    expect(response).toMatchObject({
-      status: 401,
-      data: { success: false, code: 401 },
-    });
-  });
 
   it("keeps categories and products independently retryable, without inserting demo products", async () => {
     const { flow, service } = await setup();
@@ -219,33 +139,6 @@ describe("RF-0018 catalog and request lifecycle", () => {
     expect(flow.state.products.error).toBe("");
   });
 
-  it.each(["resolve", "reject"] as const)(
-    "ignores a late A detail %s after B was selected",
-    async (outcome) => {
-      const { service, flow } = await setup();
-      await flow.start();
-      const a = deferred<Product>();
-      const b = productData({ ...wineWire, id: "b" });
-      const requests = vi
-        .spyOn(service, "product")
-        .mockReturnValueOnce(a.promise)
-        .mockResolvedValueOnce(b);
-      const first = flow.select("prd_wine");
-      const second = flow.select("b");
-      expect(requests.mock.calls[0][1]?.aborted).toBe(true);
-      await second;
-      if (outcome === "resolve") a.resolve(productData(wineWire));
-      else a.reject(new Error("late A failure"));
-      await first;
-      expect(flow.state.detail).toMatchObject({
-        value: b,
-        error: "",
-        loading: false,
-      });
-      expect(flow.state.selectedID).toBe("b");
-    },
-  );
-
   it("clears an old executable target when the new detail does not exist and retries the selected ID", async () => {
     const { flow } = await setup();
     await flow.start();
@@ -272,6 +165,7 @@ describe("RF-0018 catalog and request lifecycle", () => {
     const { service, flow } = await setup();
     await flow.start();
     await flow.select("prd_wine");
+    vi.mocked(service.product).mockClear();
     const detail = vi
       .spyOn(service, "product")
       .mockResolvedValue(productData({ ...wineWire, configType: ["A"] }));
@@ -300,6 +194,7 @@ describe("RF-0018 catalog and request lifecycle", () => {
     const { service, flow } = await setup();
     await flow.start();
     const wait = deferred<Product>();
+    vi.mocked(service.product).mockClear();
     const detail = vi
       .spyOn(service, "product")
       .mockReturnValueOnce(wait.promise);

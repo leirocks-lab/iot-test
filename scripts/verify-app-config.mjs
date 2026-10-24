@@ -75,7 +75,7 @@ function createBuildEnvironment(overrides = {}) {
     if (key === 'APP_BRAND' || key === 'APP_ENV' || key.startsWith('ROWAN_')) delete environment[key];
   }
 
-  return { ...environment, ...overrides };
+  return { ...environment, ROWAN_APP_API_BASE_URL:'https://api.example.invalid', ...overrides };
 }
 
 function executeExpoConfig(overrides = {}, type = 'public') {
@@ -136,7 +136,8 @@ function main() {
   assertConfigFailure({ APP_ENV: 'staging' }, 'Unknown APP_ENV: staging');
   assertConfigFailure({ APP_ENV: '' }, 'Unknown APP_ENV:');
 
-  assertConfigFailure({APP_ENV:'production',ROWAN_HTTP_MODE:'mock'},'Production requires real transports');
+  for(const key of ['ROWAN_HTTP_MODE','ROWAN_DEVICE_MODE'])assertConfigFailure({[key]:'mock'},'mock 运行模式已移除');
+  assert(!('httpMode' in defaultConfig.extra)&&!('deviceMode' in defaultConfig.extra),'Removed modes must not reach public extra');
   assertConfigFailure({APP_ENV:'production',ROWAN_HTTP_MODE:'real',ROWAN_APP_API_BASE_URL:'http://insecure.invalid'},'HTTPS');
   assertConfigFailure({APP_ENV:'production',ROWAN_HTTP_MODE:'real',ROWAN_APP_API_BASE_URL:'https://api.example.invalid',ROWAN_IOT_API_BASE_URL:'http://iot.example.invalid'},'HTTPS');
   assertConfigFailure({APP_ENV:'preview',ROWAN_HTTP_MODE:'real',ROWAN_APP_API_BASE_URL:'http://user:password@example.invalid'},'无凭据');
@@ -158,7 +159,7 @@ function main() {
 
   for (const environment of ['development', 'preview']) {
     const config = readExpoConfig({ APP_ENV: environment, ROWAN_HTTP_MODE: 'real', ROWAN_APP_API_BASE_URL: 'http://api.example.invalid', ROWAN_IOT_API_BASE_URL: 'http://iot.example.invalid/iot' });
-    assert(config.extra.httpMode === 'real' && config.extra.apiBaseUrl.startsWith('http://') && config.extra.iotApiBaseUrl.startsWith('http://'), `${environment} must support both real HTTP roots`);
+    assert(config.extra.apiBaseUrl.startsWith('http://') && config.extra.iotApiBaseUrl.startsWith('http://'), `${environment} must support both real HTTP roots`);
   }
 
   for (const environment of ['development', 'preview', 'production']) {

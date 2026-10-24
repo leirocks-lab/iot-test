@@ -1,6 +1,5 @@
 import { withBudget } from "../protocol/device";
 import { ApiError } from "./models";
-import { encodeShareCode } from "./qr";
 import type { RowanService } from "./rowan";
 
 export type DeviceSharePhase =
@@ -41,7 +40,6 @@ export class DeviceShareFlow {
   constructor(
     private service: RowanService,
     readonly deviceID: string,
-    private mode: "mock" | "real",
     private budget = 10000,
     private now: () => number = Date.now,
   ) {}
@@ -142,19 +140,7 @@ export class DeviceShareFlow {
         this.update({ phase: "expired", expiresAt: share.expiresAt });
         return;
       }
-      if (this.mode === "real") {
-        this.update({
-          phase: "unsupported",
-          expiresAt: share.expiresAt,
-          error: "正式分享二维码协议待确认，暂不能展示可扫码二维码",
-        });
-        return;
-      }
-      this.update({
-        phase: "ready",
-        qrValue: encodeShareCode(share),
-        expiresAt: share.expiresAt,
-      });
+      this.update({phase:'unsupported',expiresAt:share.expiresAt,error:'正式分享二维码协议待确认，暂不能展示可扫码二维码'});
     } catch (error) {
       if (!this.current(generation) || controller.signal.aborted) return;
       this.update({

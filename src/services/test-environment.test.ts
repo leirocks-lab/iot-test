@@ -3,14 +3,14 @@ import { communicationConfig } from './config';
 import { RealHttpClient } from './real-http';
 import { FetchHttpClient } from './http';
 import { RowanService } from './rowan';
-import { MemoryStorage } from './store';
+import { MemoryStorage } from './memory-storage';
 
 const testConfig={environment:'development',apiBaseUrl:'http://47.107.80.36',iotApiBaseUrl:'http://47.107.80.36/iot',tenantID:'42'};
 const reply=(data:unknown,code=0)=>new Response(JSON.stringify({code,data,msg:code?'failed':'ok'}));
 
 describe('confirmed development HTTP environment',()=>{
   it('routes real platform and IoT calls with the issued tenant without using Mock',async()=>{
-    const config=communicationConfig({...testConfig,httpMode:'real',deviceMode:'mock'});
+    const config=communicationConfig({...testConfig,});
     const fetcher=vi.fn().mockResolvedValueOnce(reply({configVersion:'live'})).mockResolvedValueOnce(reply([]));
     const service=new RowanService(new RealHttpClient(config,fetcher),new MemoryStorage());
     expect(await service.config('android')).toEqual({configVersion:'live'});
@@ -21,10 +21,10 @@ describe('confirmed development HTTP environment',()=>{
   it('allows development/preview HTTP roots while rejecting production HTTP and malformed roots',()=>{
     for(const environment of ['development','preview'])
       for(const apiBaseUrl of ['http://47.107.80.37','http://47.107.80.36:8080','http://47.107.80.36/other'])
-        expect(()=>communicationConfig({...testConfig,environment,httpMode:'real',apiBaseUrl})).not.toThrow();
-    expect(()=>communicationConfig({...testConfig,environment:'production',httpMode:'real',deviceMode:'real'})).toThrow();
+        expect(()=>communicationConfig({...testConfig,environment,apiBaseUrl})).not.toThrow();
+    expect(()=>communicationConfig({...testConfig,environment:'production',})).toThrow();
     for(const apiBaseUrl of ['http://u:p@47.107.80.36','http://47.107.80.36?x=1'])
-      expect(()=>communicationConfig({...testConfig,httpMode:'real',apiBaseUrl})).toThrow();
+      expect(()=>communicationConfig({...testConfig,apiBaseUrl})).toThrow();
     expect(()=>new RealHttpClient({...testConfig,environment:'production'})).toThrow();
     expect(()=>new FetchHttpClient('http://47.107.80.36')).toThrow();
   });

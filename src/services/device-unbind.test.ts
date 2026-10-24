@@ -1,11 +1,11 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { HttpClient, HttpRequest, HttpResponse } from "../lib/core";
 import { DeviceUnbindFlow } from "./device-unbind";
-import { MockHttpClient, type HttpFetcher } from "./http";
+import type { HttpFetcher } from "./http";
 import type { HomeGroup } from "./models";
 import { RealHttpClient } from "./real-http";
 import { RowanService } from "./rowan";
-import { defaultSettings, MemoryStorage, MockDatabase } from "./store";
+import {  defaultSettings, MemoryStorage, SettingsFixture , SettingsHttp } from '../test-support/settings-fixture';
 
 const flows: DeviceUnbindFlow[] = [];
 
@@ -15,8 +15,8 @@ afterEach(() => {
 });
 
 async function setup(deviceID = "dev_wine") {
-  const db = await MockDatabase.open(new MemoryStorage());
-  const http = new MockHttpClient(db);
+  const db = await SettingsFixture.open(new MemoryStorage());
+  const http = new SettingsHttp(db);
   const service = new RowanService(http, new MemoryStorage());
   await service.login("rowan@example.com", "Rowan@123", "password");
   const release = vi.fn(() => true);

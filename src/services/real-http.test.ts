@@ -3,9 +3,9 @@ import { ApiError, type ApiEnvelope, type Product } from './models';
 import { communicationConfig } from './config';
 import { RealHttpClient, realSessionScope } from './real-http';
 import { RowanService } from './rowan';
-import { MemoryStorage, MockDatabase, defaultSettings } from './store';
+import { MemoryStorage, defaultSettings } from '../test-support/settings-fixture';
 import { AddDeviceFlow } from './onboarding';
-import { MockDeviceTransport } from '../protocol/device';
+import { UnavailableDeviceTransport } from '../protocol/device';
 import type { HttpFetcher } from './http';
 
 const config={apiBaseUrl:'https://platform.example.test',iotApiBaseUrl:'https://iot.example.test/module',tenantID:'42'};
@@ -104,8 +104,8 @@ describe('真实HTTP边界',()=>{
   it('rejects HTTP, embedded credentials and ambiguous app-api roots',()=>{
     for(const apiBaseUrl of ['http://api.example.test','https://u:p@api.example.test','https://api.example.test/app-api'])
       expect(()=>new RealHttpClient({...config,apiBaseUrl})).toThrow();
-    expect(()=>communicationConfig({environment:'production',httpMode:'real',apiBaseUrl:config.apiBaseUrl,iotApiBaseUrl:'http://iot.example.test'})).toThrow('HTTPS');
-    expect(()=>communicationConfig({tenantID:'not-issued'})).toThrow('integer');
+    expect(()=>communicationConfig({environment:'production',apiBaseUrl:config.apiBaseUrl,iotApiBaseUrl:'http://iot.example.test'})).toThrow('HTTPS');
+    expect(()=>communicationConfig({apiBaseUrl:'https://api.test',tenantID:'not-issued'})).toThrow('integer');
   });
   it('does not normalize cancelled late results even if fetch ignores abort',async()=>{
     let resolve!:(value:Response)=>void;
@@ -128,7 +128,7 @@ describe('真实HTTP边界',()=>{
     await expect(setup(ok({})).client.request({method:'GET',path:'/api/app/devices'})).rejects.toMatchObject({code:502});
   });
   it('keeps all product capabilities and does not invent Bluetooth from a list',async()=>{
-    const data={id:'prd',name:'Device',modelName:'MODEL',image:['https://img.example.test/one'],configType:['A','B','C'],connectType:'wifi'};
+    const data={id:'prd',name:'Device',seriesName:'Backend Series',modelName:'MODEL',image:['https://img.example.test/one'],configType:['A','B','C'],connectType:'wifi'};
     const list=setup(ok([{category:'Dehumidifier',products:[data]}]));
     const groups=(await list.client.request<ApiEnvelope<{products:Product[]}[]>>({method:'GET',path:'/api/app/products'})).data.data;
     expect(groups[0].products[0]).toMatchObject({id:'prd',category:'Dehumidifier',configTypes:['A','B','C'],image:'https://img.example.test/one'});
@@ -138,10 +138,10 @@ describe('真实HTTP边界',()=>{
     const detail=setup(ok({...data,bluetooth:true,category:'Dehumidifier'}));
     const product=(await detail.client.request<ApiEnvelope<Product>>({method:'GET',path:'/api/app/products/prd'})).data.data;
     expect(product.bluetooth).toBe(true);expect(product.configTypes).toEqual(['A','B','C']);
-    const db=await MockDatabase.open(new MemoryStorage()),driver=new MockDeviceTransport(db,{delay:0});
+    const driver=new UnavailableDeviceTransport();
     const service=new RowanService(detail.client,new MemoryStorage());
     service.session={accessToken:'a',refreshToken:'r',userID:'u',tokenType:'Bearer',expiresIn:1,setting:defaultSettings()};
-    const flow=new AddDeviceFlow(service,driver,{mode:'mock'});
+    const flow=new AddDeviceFlow(service,driver,{});
     await flow.select({handle:'handle',mac:'aabbccddeeff',model:'MODEL',service:'0822',rssi:-50,productID:'prd'});
     expect(flow.state.stage).toBe('selected');flow.stop();
   });

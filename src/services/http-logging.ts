@@ -1,7 +1,7 @@
 import type { HttpClient, HttpRequest, HttpResponse, Logger } from '../lib/core';
 
 export type HttpLogLevel = 'off' | 'error' | 'debug';
-type Target = 'platform' | 'iot' | 'mock' | 'http';
+type Target = 'platform' | 'iot' | 'http';
 export type HttpFailure = 'network_error' | 'request_error' | 'response_parse_error' | 'response_adapter_error' | 'cancelled';
 export interface HttpLogContext {
   target?: Target;
@@ -157,18 +157,3 @@ export function isHttpCancellation(error: unknown, req: HttpRequest) {
   return req.signal?.aborted === true || error instanceof Error && (error.name === 'AbortError' || 'code' in error && error.code === 499);
 }
 
-/** Mock uses the same lifecycle and sink without pretending to perform a network fetch. */
-export class LoggedHttpClient implements HttpClient {
-  constructor(private inner: HttpClient, private diagnostics: HttpDiagnostics) {}
-  async request<T>(req: HttpRequest): Promise<HttpResponse<T>> {
-    const span = this.diagnostics.start(req, { target: 'mock' });
-    try {
-      const response = await this.inner.request<T>(req);
-      span.response(response);
-      return response;
-    } catch (error) {
-      span.failure(error, isHttpCancellation(error, req) ? 'cancelled' : 'request_error');
-      throw error;
-    }
-  }
-}

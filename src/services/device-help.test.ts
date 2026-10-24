@@ -1,6 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
 import type { HttpFetcher } from "./http";
-import { MockHttpClient } from "./http";
 import { DeviceHelpFlow } from "./device-help";
 import {
   ApiError,
@@ -11,7 +10,7 @@ import {
 } from "./models";
 import { RealHttpClient } from "./real-http";
 import { RowanService } from "./rowan";
-import { MemoryStorage, MockDatabase, defaultSettings } from "./store";
+import { MemoryStorage, defaultSettings } from "../test-support/settings-fixture";
 
 const article = (content = "正文", id = "help_1"): HelpArticle => ({
   id,
@@ -19,13 +18,6 @@ const article = (content = "正文", id = "help_1"): HelpArticle => ({
   content,
 });
 
-async function mockSetup() {
-  const db = await MockDatabase.open(new MemoryStorage());
-  const http = new MockHttpClient(db);
-  const service = new RowanService(http, new MemoryStorage());
-  await service.login("rowan@example.com", "Rowan@123", "password");
-  return { db, http, service };
-}
 
 function deferred<T>() {
   let resolve!: (value: T) => void;
@@ -70,63 +62,6 @@ function flowService() {
 }
 
 describe("RF-0044 device manual and FAQ", () => {
-  it.each([
-    ["zh-CN", "设备使用帮助", "常见问题"],
-    ["zh-TW", "裝置使用說明", "常見問題"],
-    ["en", "Device help", "FAQ"],
-  ] as const)(
-    "reads authenticated text help in %s as ordered articles",
-    async (language, first, second) => {
-      const { http, service } = await mockSetup();
-      service.session!.setting.language = language as Language;
-      const request = vi.spyOn(http, "request");
-      const result = await service.help("dev_wine");
-
-      expect(result.map((item) => item.title)).toEqual([first, second]);
-      expect(request).toHaveBeenCalledWith(
-        expect.objectContaining({
-          method: "GET",
-          path: "/api/app/devices/dev_wine/helping",
-          query: { type: "text" },
-          headers: expect.objectContaining({
-            Authorization: `Bearer ${service.session!.accessToken}`,
-            "Accept-Language": language,
-          }),
-        }),
-      );
-    },
-  );
-
-  it("requires Bearer authentication and the text shape in Mock", async () => {
-    const { http, service } = await mockSetup();
-    const path = "/api/app/devices/dev_wine/helping";
-    const missing = await http.request<ApiEnvelope<unknown>>({
-      method: "GET",
-      path,
-      query: { type: "text" },
-    });
-    expect(missing.data.code).toBe(401);
-
-    const wrongShape = await http.request<ApiEnvelope<unknown>>({
-      method: "GET",
-      path,
-      query: { type: "url" },
-      headers: { Authorization: `Bearer ${service.session!.accessToken}` },
-    });
-    expect(wrongShape.data.code).toBe(400);
-  });
-
-  it("preserves the source's missing-device and unbound errors", async () => {
-    const { db, service } = await mockSetup();
-    await expect(service.help("missing-device")).rejects.toMatchObject({
-      code: 1451,
-    });
-
-    delete db.state.devices[0].members[service.userID];
-    await expect(service.help("dev_wine")).rejects.toMatchObject({
-      code: 1452,
-    });
-  });
 
   it("maps the deployed array response without opening or rewriting content", async () => {
     const fetcher = vi.fn<HttpFetcher>().mockResolvedValue(

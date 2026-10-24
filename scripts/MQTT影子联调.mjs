@@ -4,7 +4,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 const unwrap=async path=>{const m=await import(path);return m.default??m;};
 const {RowanService}=await unwrap('../src/services/rowan.ts');
 const {RealHttpClient}=await unwrap('../src/services/real-http.ts');
-const {MemoryStorage}=await unwrap('../src/services/store.ts');
+const {MemoryStorage}=await unwrap('../src/services/memory-storage.ts');
 const {createMqttConnection}=await unwrap('../src/protocol/mqtt-browser.ts');
 const {RealtimeDeviceSession}=await unwrap('../src/protocol/device-session.ts');
 const {createClassicShadowResolver}=await unwrap('../src/protocol/classic-shadow.ts');

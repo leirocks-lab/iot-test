@@ -1,10 +1,10 @@
 import type { DiscoveredDevice } from '../protocol/ble';
-import { mockProfile, pause, Provisioner, ProvisionNotSentError, withBudget, type DeviceTransport } from '../protocol/device';
+import { deviceTimeouts, pause, ProvisionNotSentError, withBudget, type DeviceTransport } from '../protocol/device';
 import { ApiError, type BindingResult, type Product } from './models';
 import type { RowanService } from './rowan';
 import { Provisioner0822, type Profile0822, type ProvisionRunner } from '../protocol/provision-0822';
 import { requireCurrentWifi, type WifiReader } from './wifi';
-import { MockDeviceSession, type DeviceSession } from '../protocol/device-session';
+import { type DeviceSession } from '../protocol/device-session';
 import { resolveDeviceScanDuration } from '../config/device-discovery';
 
 export interface RealAddContract {
@@ -38,13 +38,11 @@ export interface AddState {
   scanIssue?:'permission'|'bluetooth'|'timeout'|'other';
 }
 export interface AddOptions {
-  mode: 'mock' | 'real';
   /** Foreground scan duration in milliseconds; defaults to deviceDiscoveryConfig.scanDurationMs. */
   scanTimeout?: number;
   bindingTimeout?: number;
   pollInterval?: number;
   operationTimeout?: number;
-  makeBindCode?: () => string;
   real?:RealAddContract;
   wifi?:WifiReader;
   createSession?:(id:string)=>DeviceSession;
@@ -68,17 +66,11 @@ export function describeProvisionStatus(status: string) {
   const match = /^([ACBDEF])([0-9A-F])$/.exec(status);
   return match ? `${stageLabels[match[1]]} · ${match[2]==='0'?'已完成':match[2]==='1'?'进行中':`异常（${status}）`}` : status;
 }
-export function validateWifi(ssid: string, password: string, mode: 'mock'|'real',validator?:(password:string)=>void) {
-  if(!ssid || new TextEncoder().encode(ssid).length>32)throw new ApiError(400,'Wi-Fi 名称不能为空或超过32字节');
-  if(mode==='mock') {
-    if(!password || new TextEncoder().encode(password).length>254)throw new ApiError(400,'请输入模拟 Wi-Fi 密码（不超过254字节）');
-  } else {
-    // README 6.2 rejects empty set_pwd; 6.1 permits at most 254 DATA bytes.
-    // No documented complexity/minimum-length rule; preserve the original UTF-8 input.
-    if(!password)throw new ApiError(400,'请输入 Wi-Fi 密码');
-    if(new TextEncoder().encode(password).length>254)throw new ApiError(400,'Wi-Fi 密码超出当前0822协议范围');
-    validator?.(password);
-  }
+export function validateWifi(ssid:string,password:string,validator?:(password:string)=>void) {
+  if(!ssid||new TextEncoder().encode(ssid).length>32)throw new ApiError(400,'Wi-Fi 名称不能为空或超过32字节');
+  if(!password)throw new ApiError(400,'请输入 Wi-Fi 密码');
+  if(new TextEncoder().encode(password).length>254)throw new ApiError(400,'Wi-Fi 密码超出当前0822协议范围');
+  validator?.(password);
 }
 export function matchesDiscoveredProduct(candidate:DiscoveredDevice,product:Product){return candidate.productID?candidate.productID===product.id:candidate.model===product.modelName;}
 
@@ -93,12 +85,11 @@ export class AddDeviceFlow {
   private revision?:number;
   private submitted=false;
   private pendingNickname?:string;
-  private serial = 0;
   private session?: DeviceSession;
   private sessionUnsubscribe?:()=>void;
   constructor(private service: RowanService, private devices: DeviceTransport, private options: AddOptions) {
     resolveDeviceScanDuration(options.scanTimeout);
-    if((options.pollInterval??mockProfile.bindInterval)<2000)throw new Error('绑定查询间隔不能低于2秒');
+    if((options.pollInterval??deviceTimeouts.bindInterval)<2000)throw new Error('绑定查询间隔不能低于2秒');
   }
   subscribe = (listener: () => void) => {this.listeners.add(listener);return () => {this.listeners.delete(listener);};};
   snapshot = () => this.state;
@@ -166,14 +157,14 @@ export class AddDeviceFlow {
       this.update({stage:'selecting',message:'正在确认产品能力',candidate:undefined,product:undefined,scanIssue:undefined});
       try {
           let productID=selectedProductID??candidate.productID;
-          if(!productID&&this.options.mode==='real'){
+          if(!productID){
             const groups=await withBudget(budget=>this.service.products(budget),10000,'产品目录读取超时',signal);this.check(round,signal);
             const matches=groups.flatMap(group=>group.products).filter(product=>product.modelName===candidate.model);
             if(matches.length===1)productID=matches[0].id;
           }
           if(!productID)throw new ApiError(503,'设备产品身份尚未解析或不唯一，不能仅凭广播名称配网');
           const product=await withBudget(budget=>this.service.product(productID!,budget),10000,'产品能力读取超时',signal);this.check(round,signal);
-        if(this.options.mode==='real'&&(product.modelName!==candidate.model||!product.seriesName))throw new ApiError(503,'实际产品系列或型号与广播身份不一致');
+        if((product.modelName!==candidate.model||!product.seriesName))throw new ApiError(503,'实际产品系列或型号与广播身份不一致');
         if(!product.bluetooth || product.connectType!=='wifi' || !(product.configTypes?.includes('B')??product.configType==='B'))throw new ApiError(503,'当前产品配网路线尚未接入');
         this.bindCode=undefined;
         this.update({stage:'selected',candidate,product,message:'设备已选择，请确认 Wi-Fi'});
@@ -190,10 +181,10 @@ export class AddDeviceFlow {
         } catch(error) {
           this.check(round,budget);
           if(!(error instanceof ApiError) || error.code!==1121)throw error;
-          await pause(this.options.pollInterval??mockProfile.bindInterval,budget);
+          await pause(this.options.pollInterval??deviceTimeouts.bindInterval,budget);
         }
       }
-    },this.options.bindingTimeout??this.options.real?.bindingTimeout??mockProfile.bindInterval*mockProfile.bindAttempts,'绑定结果等待超时，请核对结果',signal);
+    },this.options.bindingTimeout??this.options.real?.bindingTimeout??deviceTimeouts.bindingTimeout,'绑定结果等待超时，请核对结果',signal);
     this.check(round,signal);return result;
   }
   private validateBinding(result: BindingResult) {
@@ -204,36 +195,35 @@ export class AddDeviceFlow {
     if(this.state.binding || this.state.stage==='unknown')throw new ApiError(409,'已有绑定结果或结果待确认，请勿重复配网');
     const {candidate,product}=this.state;
     if(!candidate || !product)throw new ApiError(400,'请先选择已确认产品的设备');
-    validateWifi(ssid,password,this.options.mode,this.options.real?.validatePassword);
+    validateWifi(ssid,password,this.options.real?.validatePassword);
     return this.operate(async(round,signal)=>{
       let sent=false;
       this.submitted=false;
       try {
-        // Generated codes exist only in the explicitly approved mock-v1 profile.
-        if(this.options.mode==='real'){
+        {
           if(!this.options.real||!this.options.wifi)throw new ApiError(503,'真实绑定码及0822工厂确认契约尚未配置');
           if([this.options.real.bindingTimeout,this.options.real.operationTimeout].some(value=>!Number.isFinite(value)||value<=0))throw new ApiError(503,'真实绑定及配网等待预算未配置');
           const network=await withBudget(budget=>this.options.wifi!.read(budget),10000,'当前Wi-Fi读取超时',signal);this.check(round,signal);
           requireCurrentWifi(network,ssid);
           this.bindCode=await withBudget(budget=>this.options.real!.makeBindCode(budget),10000,'绑定码获取超时',signal);this.check(round,signal);
           if(typeof this.bindCode!=='string'||!this.bindCode)throw new ApiError(503,'未获得有效真实绑定码');
-        }else this.bindCode=this.options.makeBindCode?.()??`bind-${this.owner}-${Date.now()}-${++this.serial}`;
+        }
         this.update({stage:'selected',message:'正在获取配网服务地址',deviceStep:undefined});
         const urls=await withBudget(budget=>this.service.connection(budget),10000,'配网服务地址读取超时',signal);this.check(round,signal);
-        const token=this.options.mode==='real'?this.options.real!.deviceToken(this.service.session!.accessToken):this.service.session!.accessToken;
+        const token=this.options.real!.deviceToken(this.service.session!.accessToken);
         const input={userID:this.owner!,mac:candidate.mac,model:candidate.model,ssid,password,token,bindCode:this.bindCode,productID:product.id,seriesName:product.seriesName,modelID:product.modelName,urls};
-        if(this.options.mode==='real'){
+        {
           const network=await withBudget(budget=>this.options.wifi!.read(budget),10000,'当前Wi-Fi读取超时',signal);this.check(round,signal);requireCurrentWifi(network,ssid);
         }
         const result=await withBudget(async budget=>{
           this.update({stage:'provisioning',deviceProgress:undefined});
           const markSubmitted=()=>{this.check(round,budget);sent=true;this.submitted=true;};
-          const runner:ProvisionRunner=this.options.mode==='real'?new Provisioner0822(this.devices,this.options.real!.profile):new Provisioner(this.devices);
-           return runner.run(input,status=>{this.check(round,budget);if(this.options.mode==='mock')markSubmitted();const progress=provisionProgress(status);this.update({message:describeProvisionStatus(status),deviceStep:describeProvisionStatus(status),...(progress===undefined?{}:{deviceProgress:progress})});},budget,async bindingSignal=>{
+          const runner:ProvisionRunner=new Provisioner0822(this.devices,this.options.real!.profile);
+           return runner.run(input,status=>{this.check(round,budget);const progress=provisionProgress(status);this.update({message:describeProvisionStatus(status),deviceStep:describeProvisionStatus(status),...(progress===undefined?{}:{deviceProgress:progress})});},budget,async bindingSignal=>{
             this.check(round,budget);this.update({stage:'binding',message:'正在查询云端绑定结果'});
             return this.poll(round,bindingSignal!);
           },markSubmitted);
-        },this.options.operationTimeout??this.options.real?.operationTimeout??13*mockProfile.ackTimeout+mockProfile.routerTimeout+mockProfile.bindInterval*mockProfile.bindAttempts,'配网结果等待超时，请核对绑定结果',signal);
+        },this.options.operationTimeout??this.options.real!.operationTimeout,'配网结果等待超时，请核对绑定结果',signal);
         this.check(round,signal);this.validateBinding(result);
         this.update({binding:result,stage:'bound',message:'绑定已确认，可设置昵称',deviceProgress:1});
       } catch(error) {
@@ -292,10 +282,6 @@ export class AddDeviceFlow {
     let session:DeviceSession|undefined;
     try {
       if(this.options.createSession)session=this.options.createSession(id);
-      else if(this.options.mode==='mock')session=new MockDeviceSession(this.devices,id,this.owner!,{
-        current:()=>round===this.round&&!signal.aborted&&this.service.session?.userID===this.owner&&this.service.sessionRevision===this.revision,
-        start:()=>undefined,stop:()=>undefined,credentials:budget=>this.service.mqtt(id,budget),
-      });
       else throw new ApiError(503,'真实MQTT会话尚未配置');
       await session.connect(signal);
       this.check(round,signal);if(!session.ready)throw new ApiError(503,'完整属性尚未确认');

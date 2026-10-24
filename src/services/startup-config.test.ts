@@ -1,6 +1,6 @@
 import { expect, it, vi } from 'vitest';
 import { RowanService } from './rowan';
-import { MemoryStorage } from './store';
+import { MemoryStorage } from './memory-storage';
 import { ApiError } from './models';
 
 it('uses a last valid startup configuration after failure, isolated by platform',async()=>{

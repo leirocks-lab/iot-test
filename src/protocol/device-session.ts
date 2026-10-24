@@ -1,5 +1,5 @@
 import { ApiError, type DeviceView, type ThingModel } from '../services/models';
-import { ShadowSession, withBudget, type DeviceTransport } from './device';
+import { withBudget } from './device';
 import type { MqttConnection } from './mqtt-connection';
 import type { PropertyControls } from '../services/device-controls';
 import { ServiceRejectedError, type MaintenanceControls, type ServiceCall } from '../services/device-maintenance';
@@ -243,31 +243,3 @@ export class RealtimeDeviceSession implements DeviceSession {
   }
 }
 
-/** Mock keeps its transport contract but follows the same credential and ownership boundary. */
-export class MockDeviceSession extends ShadowSession {
-  get canWrite(){return this.ready;}
-  get canInvokeService(){return this.ready;}
-  private controller?:AbortController;
-  private flight?:Promise<void>;
-  private eventListeners=new Set<(event:DeviceEvent)=>void>();
-  private eventUnsub?:()=>void;
-  constructor(private driver:DeviceTransport,private id:string,private user:string,private lifecycle:Lifecycle){super(driver,id,user);}
-  onEvent(listener:(event:DeviceEvent)=>void){this.eventListeners.add(listener);return ()=>{this.eventListeners.delete(listener);};}
-  override connect(signal?:AbortSignal):Promise<void>{
-    if(signal?.aborted||!this.lifecycle.current())return Promise.reject(cancelled());
-    if(this.flight)return this.flight;
-    this.close();this.lifecycle.start();const controller=new AbortController();this.controller=controller;
-    const abort=()=>this.close();signal?.addEventListener('abort',abort,{once:true});
-    const flight=Promise.resolve().then(async()=>{
-      await withBudget(budget=>this.lifecycle.credentials(budget),10000,'设备连接凭据读取超时',controller.signal);
-      if(controller.signal.aborted||!this.lifecycle.current())throw cancelled();
-      this.eventUnsub=this.driver.subscribeEvents?.(this.id,this.user,event=>{if(this.controller===controller&&!controller.signal.aborted&&this.lifecycle.current())for(const listener of this.eventListeners)listener(event);});
-      await super.connect(controller.signal);
-    }).catch(error=>{if(this.controller===controller)this.close();throw error;}).finally(()=>{
-      signal?.removeEventListener('abort',abort);if(this.flight===flight)this.flight=undefined;
-    });this.flight=flight;return flight;
-  }
-  override close(){const controller=this.controller;this.controller=undefined;controller?.abort();this.flight=undefined;this.eventUnsub?.();this.eventUnsub=undefined;super.close();this.lifecycle.stop();}
-  override async command(properties:Record<string,unknown>){if(!this.lifecycle.current()){this.close();throw cancelled();}return super.command(properties);}
-  async invokeService(call:ServiceCall){if(call.identifier!=='CleanReset'||Object.keys(call.params).length)throw new ApiError(400,'Mock维护服务或参数不支持');await this.command({Service:'CleanReset'});}
-}

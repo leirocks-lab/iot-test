@@ -8,7 +8,7 @@ const moduleExports = async path => {
 };
 const { RowanService } = await moduleExports('../src/services/rowan.ts');
 const { RealHttpClient } = await moduleExports('../src/services/real-http.ts');
-const { MemoryStorage } = await moduleExports('../src/services/store.ts');
+const { MemoryStorage } = await moduleExports('../src/services/memory-storage.ts');
 const { createMqttConnection } = await moduleExports('../src/protocol/mqtt-browser.ts');
 try { process.loadEnvFile('.env.local'); } catch (error) {
   if (error.code !== 'ENOENT') throw new Error('本地环境文件无法读取');

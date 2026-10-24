@@ -1,4 +1,4 @@
-import { mockProfile, withBudget } from '../protocol/device';
+import { deviceTimeouts, withBudget } from '../protocol/device';
 import { ApiError, type BindingResult } from './models';
 import { parseRowanCandidates, type CodeIdentity, type RowanCodeParser } from './qr';
 import type { RowanService } from './rowan';
@@ -14,9 +14,9 @@ export class QrScanCoordinator {
   private current?:QrScanFlow;
   private owner?:string;
   private revision?:number;
-  constructor(private service:RowanService,private codecMode:'mock'|'real',private realParser?:RowanCodeParser,private beforeNewContext?:()=>void){}
+  constructor(private service:RowanService,private realParser?:RowanCodeParser,private beforeNewContext?:()=>void){}
   get pending(){return this.owner===this.service.session?.userID&&this.revision===this.service.sessionRevision&&!!this.current&&['confirming','unknown'].includes(this.current.state.phase);}
-  acquire(){const owner=this.service.userID;if(!this.current||this.owner!==owner||this.revision!==this.service.sessionRevision||this.current.state.phase==='done'){this.current?.stop();this.owner=owner;this.revision=this.service.sessionRevision;this.current=new QrScanFlow(this.service,this.codecMode,this.realParser,this.beforeNewContext);}return this.current;}
+  acquire(){const owner=this.service.userID;if(!this.current||this.owner!==owner||this.revision!==this.service.sessionRevision||this.current.state.phase==='done'){this.current?.stop();this.owner=owner;this.revision=this.service.sessionRevision;this.current=new QrScanFlow(this.service,this.realParser,this.beforeNewContext);}return this.current;}
   clear(){this.current?.stop();this.current=undefined;this.owner=undefined;}
 }
 export type ScanDestination={productID:string}|{binding:BindingResult};
@@ -29,15 +29,15 @@ export class QrScanFlow {
   private submitted=false;
   private owner?:string;
   private revision:number;
-  constructor(private service:RowanService,private codecMode:'mock'|'real',private realParser?:RowanCodeParser,private beforeNewContext?:()=>void){this.revision=service.sessionRevision;}
+  constructor(private service:RowanService,private realParser?:RowanCodeParser,private beforeNewContext?:()=>void){this.revision=service.sessionRevision;}
   snapshot=()=>this.state;
   subscribe=(listener:()=>void)=>{this.listeners.add(listener);return()=>{this.listeners.delete(listener);};};
   private update(patch:Partial<ScanState>){this.state={...this.state,...patch};for(const listener of this.listeners)listener();}
   read(values:readonly string[]) {
     if(this.state.phase!=='idle')return;
     try {
-      if(this.codecMode==='real'&&!this.realParser)throw new ApiError(503,'正式二维码协议尚未冻结，不能使用模拟格式绑定');
-      this.codes=parseRowanCandidates(values,this.codecMode==='real'?this.realParser:undefined);
+      if(!this.realParser)throw new ApiError(503,'正式二维码协议尚未配置，暂不能扫码绑定');
+      this.codes=parseRowanCandidates(values,this.realParser!);
       this.update({phase:'choosing',choices:this.codes.map(code=>({type:code.type,label:code.type==='product'?code.productID:code.deviceID})),selected:this.codes.length===1?0:undefined,error:''});
     }catch(error){this.update({error:(error as Error).message});}
   }
@@ -65,7 +65,7 @@ export class QrScanFlow {
         if(code.type==='product'){await this.service.product(code.productID,signal);this.check(round,signal);return {productID:code.productID};}
         this.submitted=true;
         const binding=await this.service.acceptShare(code.deviceID,code.bindCode,signal);this.check(round,signal);this.binding(binding,code.deviceID);return {binding};
-      },mockProfile.scanTimeout,'扫码结果等待超时，请核对绑定结果',controller.signal);
+      },deviceTimeouts.scanTimeout,'扫码结果等待超时，请核对绑定结果',controller.signal);
       this.check(round,controller.signal);this.update({phase:'done'});return destination;
     } catch (error) {
       if (round === this.round) {
@@ -112,7 +112,7 @@ export class QrScanFlow {
     try {
       const groups = await withBudget(
         (signal) => this.service.home(signal),
-        mockProfile.scanTimeout,
+        deviceTimeouts.scanTimeout,
         "设备结果核对超时",
         controller.signal,
       );

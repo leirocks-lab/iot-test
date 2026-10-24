@@ -704,9 +704,6 @@ function ForgotPassword() {
     }
     setBusy(true);
     try {
-      // Mock-only account existence check until the account lookup API is available.
-      if (account !== "rowan@example.com")
-        throw new Error("此账号无效或不受支持");
       setStep("verify");
     } catch (e) {
       setError(e instanceof Error ? e.message : "查询失败，请稍后重试");

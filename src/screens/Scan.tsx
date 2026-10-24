@@ -484,19 +484,6 @@ function ScanContent({
             </Text>
           </Pressable>
         )}
-        {runtime.developer && (
-          <View style={styles.developerTools}>
-            <Card>
-              <Label>开发者工具</Label>
-              <Button
-                secondary
-                title="Read code"
-                disabled={action.busy}
-                onPress={() => readCodes([value])}
-              />
-            </Card>
-          </View>
-        )}
         {!!toast && (
           <View
             pointerEvents="none"

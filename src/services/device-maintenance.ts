@@ -76,8 +76,3 @@ export class MaintenanceControls {
     else if(this.ledger.phase==='confirming')this.ledger.phase='idle';++this.ledger.serial;this.changed();}
 }
 
-/** Only selected when both HTTP and device modes are mock. */
-export const mockMaintenanceProfile:MaintenanceProfileResolver=async({device})=>{
-  if(!['prd_wine','prd_humidity'].includes(device.product?.id??''))return null;
-  return {attribute:'CleanHours',reset:{identifier:'CleanReset',params:{},roles:['sa','mbr'],conditions:[]}};
-};

@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {mkdir,writeFile,readFile} from 'node:fs/promises';
 import {RowanService} from '../src/services/rowan.ts';
 import {RealHttpClient} from '../src/services/real-http.ts';
-import {MemoryStorage} from '../src/services/store.ts';
+import {MemoryStorage} from '../src/services/memory-storage.ts';
 import {cleanupTemporaryRooms} from './联调房间清理.ts';
 try{process.loadEnvFile('.env.local');}catch{/* invoking process can supply configuration */}
 const phase=process.argv[2];

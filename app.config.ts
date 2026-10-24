@@ -3,14 +3,13 @@ import 'tsx/cjs';
 import type { ConfigContext, ExpoConfig } from 'expo/config';
 
 import { getAppIdentity } from './src/config/brand';
-import { communicationConfig } from './src/services/config';
+import { communicationConfig, rejectRemovedMockModes } from './src/services/config';
 import { allowsHttpApi } from './src/services/api-transport';
 
 export default ({ config }: ConfigContext): ExpoConfig => {
   const identity = getAppIdentity(process.env.APP_BRAND, process.env.APP_ENV);
+  rejectRemovedMockModes({httpMode:process.env.ROWAN_HTTP_MODE,deviceMode:process.env.ROWAN_DEVICE_MODE});
   const communication = communicationConfig({ environment: identity.environment,
-    httpMode: process.env.ROWAN_HTTP_MODE as 'mock' | 'real' | undefined,
-    deviceMode: process.env.ROWAN_DEVICE_MODE as 'mock' | 'real' | undefined,
     apiBaseUrl: process.env.ROWAN_APP_API_BASE_URL,
     iotApiBaseUrl: process.env.ROWAN_IOT_API_BASE_URL,
     tenantID: process.env.ROWAN_TENANT_ID,

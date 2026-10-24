@@ -1,6 +1,6 @@
 # ROWAN IoT App
 
-ROWAN 移动端工程基于 Expo Development Build、React Native 新架构、Expo Router、TypeScript 和 pnpm 单项目。当前版本提供可验证的工程底座，不包含登录、配网、MQTT、OTA 或正式设备控制功能。
+ROWAN 移动端工程基于 Expo Development Build、React Native 新架构、Expo Router、TypeScript 和 pnpm 单项目。当前版本仅使用真实通信；已接入的页面与接口、仍缺协议的能力以及真机验证状态分别记录，不将页面或构建成功视为业务交付。
 
 ## 环境要求
 
@@ -71,8 +71,6 @@ pnpm specs:test
 
 ```dotenv
 APP_ENV=development
-ROWAN_HTTP_MODE=real
-ROWAN_DEVICE_MODE=real
 ROWAN_APP_API_BASE_URL=http://47.107.80.36
 ROWAN_IOT_API_BASE_URL=http://47.107.80.36/iot
 ROWAN_TENANT_ID=1
@@ -80,7 +78,7 @@ ROWAN_TENANT_ID=1
 
 租户须与目标后台确认；密码和 Token 通过正常登录取得，不写入配置。未装配正式设备协议时仍会提示具体缺项；真实 API 不会因失败回落 Mock。网页可用 `pnpm web` 查看，HTTP 测试 API 应从本地 HTTP 页面联调，浏览器的 CORS/混合内容规则仍生效。
 
-Web 的 Expo Constants 配置会内嵌到编译后的 JavaScript；切换 Mock/real、API 根或租户后，旧 Metro 转换缓存可能仍保留之前配置，即使服务端 manifest 已更新。`pnpm web` 默认带 `--clear`：修改环境后先停止旧服务、重新启动，再完整刷新浏览器页面。手动运行 Expo CLI 时也需加 `--clear`。验证 Web 通信模式应核对实际网页包和浏览器请求，不能只查原生 manifest 或根路由是否跳到登录页。
+Web 的 Expo Constants 配置会内嵌到编译后的 JavaScript；修改 API 根、租户或真实接入配置后，旧 Metro 转换缓存可能仍保留之前配置，即使服务端 manifest 已更新。`pnpm web` 默认带 `--clear`：修改环境后先停止旧服务、重新启动，再完整刷新浏览器页面。手动运行 Expo CLI 时也需加 `--clear`。验证 Web 通信模式应核对实际网页包和浏览器请求，不能只查原生 manifest 或根路由是否跳到登录页。
 
 Android 明文策略由 Config Plugin/CNG 按环境生成，preview 的 release 测试包也适用；production 关闭明文。iOS ATS 配置遵循同一环境边界，平台运行验收单独记录。**原生网络策略改变后须重新构建并安装开发/测试包，仅重启 Metro 不会更新已安装包。** MQTT、外部链接及模组自身协议仍遵守原规则。详见 [CHG-20261016-002](<sdd/迭代变更/变更-20261016-002/变更提案.md>)。
 
@@ -115,7 +113,7 @@ pnpm ios
 
 ## HTTP 请求调试日志
 
-应用装配统一记录真实和 Mock 请求，包含登录、Token 刷新、平台/IoT 分流。development/preview 默认 `debug`，production 默认 `off`；可以在 `.env` 显式配置：
+应用装配统一记录真实请求，包含登录、Token 刷新、平台/IoT 分流。development/preview 默认 `debug`，production 默认 `off`；可以在 `.env` 显式配置：
 
 ```dotenv
 ROWAN_HTTP_LOG_LEVEL=debug
@@ -148,7 +146,7 @@ Web 在浏览器开发者工具 Console 查看，启用 Debug/Verbose 级别后�
 
 示例省略部分重复字段；实际返回也包含 method、url、target、sourcePath、timestamp 和 headers。时间使用 ISO UTC，耗时以毫秒记录。请求 ID 为当前 JavaScript 运行中的本地标识，不增加后台协议头。
 
-真实请求输出转换后的 URL 和适配前的原始 JSON 包络；Mock 标记 `target: mock`。`result` 区分 `success`、`business_error`（HTTP 200 但业务失败）、`http_error`、`network_error`、`request_error`（序列化或 Mock 异常）、`response_parse_error`、`response_adapter_error` 和 `cancelled`。无 HTTP 响应时 status 为 null；解析失败仍保留已收到的状态码。
+真实请求输出转换后的 URL 和适配前的原始 JSON 包络。`result` 区分 `success`、`business_error`（HTTP 200 但业务失败）、`http_error`、`network_error`、`request_error`（序列化异常）、`response_parse_error`、`response_adapter_error` 和 `cancelled`。无 HTTP 响应时 status 为 null；解析失败仍保留已收到的状态码。
 
 输出前对 headers、query、URL 路径及嵌套 JSON 脱敏，隐藏密码、pin、验证码、Token、Cookie、API key 等常见敏感字段，邮箱掩码。每个日志字段最多约 4096 字符，超出显示 `[TRUNCATED]`；递归、数组长度和字段数量也有限制。日志使用独立快照，sink 抛错不会改变请求结果，响应流只解析一次。
 
@@ -213,3 +211,11 @@ pnpm 配置使用 `nodeLinker: hoisted`，将原生依赖安装到根目录 `nod
 
 Windows 上建议使用 Ninja 1.12 或更高版本，参见 [Reanimated Windows 构建说明](https://docs.swmansion.com/react-native-reanimated/docs/guides/building-on-windows/)。本机 SDK 的 CMake 3.22.1 附带 Ninja 1.10.2，实际兼容性以原生构建结果为准。
 
+
+## 仅真实通信（CHG-20261024-002）
+
+所有构建环境均已删除运行时模拟 HTTP、设备驱动、Shadow 会话、本地云调度、模拟 MCU、演示数据库、产品/帮助、二维码及故障注入。旧 ROWAN_HTTP_MODE/ROWAN_DEVICE_MODE 不再选择传输；若仍设置为 mock，启动配置明确报迁移错误。API 根必须显式配置，可从 `.env.example` 创建本地配置。
+
+真实 HTTP、Android/iOS 原生 BLE 和系统 Wi-Fi 保留。`ROWAN_INTEGRATION_PROFILE=rowan-v16-shadow` 仅在 development/preview 显式选择时启用已有只读 Shadow 同步，不自动启用。缺少真实配网、二维码或产品控制/维护/告警契约时，页面明确提示缺项并阻止相应操作；Web 不提供原生 BLE。真实 API、租户隔离的会话继续使用，旧模拟数据不读取、不迁移为真实业务数据。
+
+自动化测试使用的 fixture/端口替身放在测试文件或 `src/test-support`，不能被运行时依赖图导入。运行 `pnpm verify:runtime` 检查源码；Android/iOS 导出后运行 `pnpm verify:runtime dist/android dist/ios` 同时检查产物。真实联调仍须实际后台、已确认契约、手机和物理设备；本轮移除不代表这些验收已通过。

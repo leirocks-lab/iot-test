@@ -1,14 +1,14 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { DeviceSettingsFlow } from './device-settings';
-import { MockHttpClient } from './http';
+
 import { ApiError, type DeviceView } from './models';
 import { RowanService } from './rowan';
-import { MemoryStorage, MockDatabase } from './store';
+import {  MemoryStorage, SettingsFixture , SettingsHttp } from '../test-support/settings-fixture';
 
 const flows: DeviceSettingsFlow[] = [];
 afterEach(() => { for (const flow of flows.splice(0)) flow.stop(); vi.useRealTimers(); vi.restoreAllMocks(); });
 async function setup(start = true) {
-  const db = await MockDatabase.open(new MemoryStorage()), http = new MockHttpClient(db);
+  const db = await SettingsFixture.open(new MemoryStorage()), http = new SettingsHttp(db);
   const service = new RowanService(http, new MemoryStorage());
   await service.login('rowan@example.com', 'Rowan@123', 'password');
   const flow = new DeviceSettingsFlow(service, 'dev_wine'); flows.push(flow);

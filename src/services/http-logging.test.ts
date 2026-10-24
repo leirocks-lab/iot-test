@@ -1,12 +1,19 @@
 import { describe, expect, it, vi } from 'vitest';
 import type { HttpResponse, Logger } from '../lib/core';
-import { HttpDiagnostics, LoggedHttpClient } from './http-logging';
-import { FetchHttpClient, MockHttpClient } from './http';
+import { HttpDiagnostics } from './http-logging';
+import { FetchHttpClient } from './http';
 import { RealHttpClient } from './real-http';
 import { communicationConfig } from './config';
 import { RowanService } from './rowan';
-import { MemoryStorage, MockDatabase } from './store';
+import { MemoryStorage } from './memory-storage';
 
+class TestLoggedClient {
+  constructor(private inner:import('../lib/core').HttpClient,private diagnostics:HttpDiagnostics){}
+  async request<T>(req:import('../lib/core').HttpRequest){
+    const span=this.diagnostics.start(req,{target:'http'});
+    const response=await this.inner.request<T>(req);span.response(response);return response;
+  }
+}
 function capture(level: 'debug' | 'error' | 'off' = 'debug') {
   const logger: Logger = { debug: vi.fn(), info: vi.fn(), warn: vi.fn(), error: vi.fn() };
   const diagnostics = new HttpDiagnostics({ level, logger });
@@ -94,7 +101,7 @@ describe('HTTP diagnostic lifecycle', () => {
   it('does not inspect log-only fields when off and omits successful/error-mode cancellation logs', async () => {
     const log = capture('off');
     const response = { status: 200, data: { get token() { throw new Error('must not inspect'); } }, headers: {} };
-    await expect(new LoggedHttpClient({ request: async <T>() => response as HttpResponse<T> }, log.diagnostics).request(request)).resolves.toBe(response);
+    await expect(new TestLoggedClient({ request: async <T>() => response as HttpResponse<T> }, log.diagnostics).request(request)).resolves.toBe(response);
     expect(log.entries()).toHaveLength(0);
     const errors = capture('error');
     const client = new FetchHttpClient('https://api.test', async () => json({ code: 0 }), undefined, errors.diagnostics);
@@ -109,23 +116,9 @@ describe('HTTP diagnostic lifecycle', () => {
     const getter = vi.fn(() => { throw new Error('do not invoke'); });
     const data = Object.defineProperty({}, 'code', { get: getter, enumerable: true });
     const response = { status: 200, data, headers: {} };
-    const client = new LoggedHttpClient({ request: async <T>() => response as HttpResponse<T> }, log.diagnostics);
+    const client = new TestLoggedClient({ request: async <T>() => response as HttpResponse<T> }, log.diagnostics);
     await expect(client.request(request)).resolves.toBe(response);
     expect(getter).not.toHaveBeenCalled();
-  });
-
-  it('covers mock login and refresh including direct RowanService HTTP calls', async () => {
-    const log = capture();
-    const db = await MockDatabase.open(new MemoryStorage());
-    const service = new RowanService(new LoggedHttpClient(new MockHttpClient(db), log.diagnostics), new MemoryStorage());
-    await service.login('rowan@example.com', 'Rowan@123', 'password');
-    await service.refresh();
-    const sent = log.entries().filter(entry => entry.event === 'request');
-    expect(sent.map(entry => entry.method)).toEqual(['POST', 'PATCH']);
-    expect(sent.every(entry => entry.target === 'mock')).toBe(true);
-    expect(log.text()).not.toContain('Rowan@123');
-    expect(log.text()).not.toContain(service.session!.accessToken);
-    expect(log.text()).not.toContain(service.session!.refreshToken);
   });
 });
 
@@ -156,7 +149,7 @@ describe('HTTP diagnostic redaction', () => {
     const log = capture();
     const data: Record<string, unknown> = { text: 'a'.repeat(20000), password: 'hidden' };
     data.self = data;
-    const client = new LoggedHttpClient({ request: async <T>() => ({ status: 200, data: data as T, headers: {} }) }, log.diagnostics);
+    const client = new TestLoggedClient({ request: async <T>() => ({ status: 200, data: data as T, headers: {} }) }, log.diagnostics);
     await client.request(request);
     data.text = 'changed-after-log';
     expect(log.text()).toContain('TRUNCATED');
@@ -171,9 +164,9 @@ describe('HTTP log configuration', () => {
     expect(communicationConfig({ environment, apiBaseUrl: 'https://api.test' }).httpLogLevel).toBe(expected);
   });
   it.each(['off', 'error', 'debug'] as const)('allows explicit level %s', httpLogLevel => {
-    expect(communicationConfig({ httpLogLevel }).httpLogLevel).toBe(httpLogLevel);
+    expect(communicationConfig({ apiBaseUrl:'https://api.test', httpLogLevel }).httpLogLevel).toBe(httpLogLevel);
   });
   it('rejects invalid levels', () => {
-    expect(() => communicationConfig({ httpLogLevel: 'verbose' as 'debug' })).toThrow('ROWAN_HTTP_LOG_LEVEL');
+    expect(() => communicationConfig({ apiBaseUrl:'https://api.test', httpLogLevel: 'verbose' as 'debug' })).toThrow('ROWAN_HTTP_LOG_LEVEL');
   });
 });

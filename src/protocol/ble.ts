@@ -1,15 +1,8 @@
-import { ctr } from '@noble/ciphers/aes.js';
-import { sha256 } from '@noble/hashes/sha2.js';
 import { bytesToHex } from '@noble/hashes/utils.js';
+import { ctr } from '@noble/ciphers/aes.js';
 
 export const BLE_UUID = { services:['00000822-0000-1000-8000-00805f9b34fb','00000922-0000-1000-8000-00805f9b34fb'], write:'0000aab1-0000-1000-8000-00805f9b34fb', notify:'0000aab2-0000-1000-8000-00805f9b34fb' };
 export const utf8 = (value:string) => new TextEncoder().encode(value);
-export function deriveKey(mac:string,model:string) {
-  const normalized=mac.replaceAll(':','').toLowerCase();
-  if(!/^[0-9a-f]{12}$/.test(normalized)||model.length<4||!/^[\x20-\x7e]+$/.test(model))throw new Error('Mock Key profile requires MAC and ASCII model');
-  return utf8(normalized+model.slice(0,4));
-}
-export const handshakeDigest = (value:string) => bytesToHex(sha256(utf8(value)).slice(0,16)).toUpperCase();
 export function crc8(data:Uint8Array) {
   let crc=0;
   for(const byte of data) {crc^=byte;for(let i=0;i<8;i++)crc=crc&1?(crc>>>1)^0x8c:crc>>>1;}

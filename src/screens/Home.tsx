@@ -11,7 +11,7 @@ import {
   Text,
   View,
 } from "react-native";
-import { ShadowSession, withBudget } from "../protocol/device";
+import { withBudget } from "../protocol/device";
 import type { DeviceView, HomeGroup } from "../services/models";
 import { useApp, useColors } from "../ui/context";
 import { DeviceGlyph } from "../ui/device-glyph";
@@ -47,36 +47,48 @@ function DeviceCard({
   const { runtime } = useApp();
   const colors = useColors();
   const action = useAction();
-  const [shadow, setShadow] = useState<ShadowSession | null>(null);
+  const [shadow, setShadow] = useState<import("../protocol/device-session").DeviceSession | null>(null);
   const [, rerender] = useState(0);
-  useEffect(() => {
-    if (!runtime?.service.session || runtime.config.httpMode !== "mock" || runtime.config.deviceMode !== "mock") return;
+  useFocusEffect(useCallback(() => {
+    if (!runtime?.service.session) return;
     let active = true;
-    const session = new ShadowSession(
-      runtime.devices,
-      device.device.id,
-      runtime.service.userID,
-    );
-    const unsub = session.onChange(() => {
-      if (active) rerender((n) => n + 1);
+    let current: import("../protocol/device-session").DeviceSession | undefined;
+    let unsubscribe: (() => void) | undefined;
+    const stop = () => {
+      unsubscribe?.();
+      unsubscribe = undefined;
+      current?.close();
+      current = undefined;
+      if (active) setShadow(null);
+    };
+    const start = () => {
+      stop();
+      const session = runtime.createDeviceSession(device.device.id);
+      current = session;
+      unsubscribe = session.onChange(() => {
+        if (active && current === session) rerender((value) => value + 1);
+      });
+      void session.connect().then(() => {
+        if (active && current === session) setShadow(session);
+      }).catch(() => undefined);
+    };
+    if (AppState.currentState === "active") start();
+    const subscription = AppState.addEventListener("change", (state) => {
+      if (state === "active") start();
+      else stop();
     });
-    runtime.service
-      .mqtt(device.device.id)
-      .then(() => session.connect())
-      .then(() => {
-        if (active) setShadow(session);
-      })
-      .catch(() => undefined);
     return () => {
       active = false;
-      unsub();
-      session.close();
+      subscription.remove();
+      stop();
     };
-  }, [runtime, device.device.id]);
+  }, [runtime, device.device.id]));
   const powered =
-    shadow?.confirmed.Power === 1 || shadow?.confirmed.Power === true;
+    shadow?.controls?.list().some(control=>control.kind==='power') ? shadow.controls.isOn('power') === true : false;
   const canControl =
     !!shadow?.ready &&
+    !!shadow.controls?.list().some(control=>control.kind==='power') &&
+    !shadow.controls.reason('power') &&
     !shadow.sending &&
     device.online !== false &&
     device.bindingRole !== "obs";
@@ -133,13 +145,13 @@ function DeviceCard({
             numberOfLines={1}
             style={[styles.productName, { color: colors.font.title }]}
           >
-            {device.product?.name || device.deviceNickname || "Air Conditioner"}
+            {device.product?.name || device.deviceNickname || device.device.id}
           </Text>
           <Text
             numberOfLines={1}
             style={[styles.productModel, { color: colors.font.subtitle2 }]}
           >
-            {device.product?.modelName || "RW-400PRO"}
+            {device.product?.modelName || ""}
           </Text>
         </Pressable>
         <Pressable
@@ -148,7 +160,7 @@ function DeviceCard({
           disabled={editing || !canControl}
           onPress={() =>
             void action.run(async () => {
-              await shadow!.command({ Power: powered ? 0 : 1 });
+              await shadow!.controls!.toggle('power');
             })
           }
           style={[

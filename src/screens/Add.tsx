@@ -84,8 +84,7 @@ function AddContent({
     flow.snapshot,
   );
   const [choice, setChoice] = useState<Product | null>(null);
-  const [ssid, setSsid] = useState(""),
-    [password, setPassword] = useState(""),
+  const [password, setPassword] = useState(""),
     [showPassword, setShowPassword] = useState(false),
     [nickname, setNickname] = useState("");
   const focused = useRef(false),
@@ -186,8 +185,7 @@ function AddContent({
           }
         }
         if (
-          page === "provision" &&
-          (flow.state.candidate || runtime.config.deviceMode === "real")
+          page === "provision"
         ) {
           void refreshWifi();
         }
@@ -268,7 +266,7 @@ function AddContent({
     execute(async () => {
       try {
         await flow.provision(
-          runtime.config.deviceMode === "real" ? (wifi?.ssid ?? "") : ssid,
+          wifi?.ssid ?? "",
           password,
         );
       } finally {
@@ -377,13 +375,12 @@ function AddContent({
         product={product ?? undefined}
         wifi={wifi}
         wifiBusy={wifiBusy}
-        ssid={ssid}
+        ssid={wifi?.ssid ?? ""}
         password={password}
         nickname={nickname}
         busy={busy}
         error={error}
         wifiError={wifiError}
-        onSsidChange={setSsid}
         onPasswordChange={setPassword}
         onNicknameChange={(value) => setNickname([...value].slice(0, 20).join(""))}
         onRefreshWifi={() => void refreshWifi(true)}
@@ -435,14 +432,6 @@ function AddContent({
                 Use a 2.4 GHz Wi-Fi network. Keep your device in pairing mode.
               </Label>
               <WifiStatus />
-              {runtime.config.deviceMode === "mock" ? (
-                <Field
-                  label="模拟 Wi-Fi 名称"
-                  value={ssid}
-                  editable={!busy}
-                  onChangeText={setSsid}
-                />
-              ) : (
                 <>
                   <Label muted>
                     {wifi
@@ -464,13 +453,8 @@ function AddContent({
                   />
                   <ErrorText error={wifiError} />
                 </>
-              )}
               <Field
-                label={
-                  runtime.config.deviceMode === "mock"
-                    ? "模拟 Wi-Fi 密码"
-                    : "Wi-Fi password"
-                }
+                label="Wi-Fi password"
                 secureTextEntry={!showPassword}
                 value={password}
                 editable={!busy}
@@ -487,8 +471,7 @@ function AddContent({
                 title={busy ? "Pairing…" : "Connect device"}
                 disabled={
                   busy ||
-                  (runtime.config.deviceMode === "real" &&
-                    (!wifi?.ssid || wifiBusy))
+                  (!wifi?.ssid || wifiBusy)
                 }
                 onPress={provision}
               />

@@ -2,7 +2,7 @@ export interface WifiObservation {
   connection:'wifi'|'other'|'offline'|'unknown';
   ssid?:string;
   band:'2.4'|'5'|'unknown';
-  source:'system'|'mock';
+  source:'system';
   ssidAccess?:'denied';
 }
 export function observeNetwork(input:{type?:string;isConnected?:boolean}):WifiObservation {

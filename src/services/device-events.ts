@@ -63,5 +63,3 @@ export class EventControls {
   dismiss(key:string,dismissed=true){if(!this.current())return;const record=this.ledger.records.find(item=>item.key===key);if(record){record.dismissed=dismissed;this.changed();}}
   stop(){for(const record of this.ledger.records)if(record.state==='active')record.needsCheck=true;this.changed();}
 }
-/** Mock-only definitions, never selected as production fallback. */
-export const mockEventProfile:EventProfileResolver=async()=>({definitions:[{identifier:'Alarm',title:'模拟设备告警',level:'warning',recovery:{event:'AlarmRecovered'}}]});

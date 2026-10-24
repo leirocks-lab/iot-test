@@ -1,12 +1,12 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { DeviceSettingsFlow } from "./device-settings";
 import type { HttpFetcher } from "./http";
-import { MockHttpClient } from "./http";
+
 import { ApiError } from "./models";
 import { deviceMembers } from "./real-api-data";
 import { RealHttpClient } from "./real-http";
 import { RowanService } from "./rowan";
-import { MemoryStorage, MockDatabase, defaultSettings } from "./store";
+import {  MemoryStorage, SettingsFixture, defaultSettings , SettingsHttp } from '../test-support/settings-fixture';
 
 const flows: DeviceSettingsFlow[] = [];
 
@@ -17,7 +17,7 @@ afterEach(() => {
 });
 
 async function setup() {
-  const db = await MockDatabase.open(new MemoryStorage());
+  const db = await SettingsFixture.open(new MemoryStorage());
   db.state.devices[0].members.user_member = {
     role: "mbr",
     nickname: "Member device name",
@@ -28,7 +28,7 @@ async function setup() {
     nickname: "Observer device name",
     roomID: null,
   };
-  const service = new RowanService(new MockHttpClient(db), new MemoryStorage());
+  const service = new RowanService(new SettingsHttp(db), new MemoryStorage());
   await service.login("rowan@example.com", "Rowan@123", "password");
   const flow = new DeviceSettingsFlow(service, "dev_wine");
   flows.push(flow);

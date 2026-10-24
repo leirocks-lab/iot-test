@@ -135,12 +135,3 @@ export class PropertyControls {
   }
 }
 
-/** mock-v1 identities and policies only; never resolve a production product by name/category. */
-export const mockControlProfile:ControlProfileResolver=async({device})=>{
-  if(!['prd_wine','prd_humidity'].includes(device.product?.id??''))throw new ApiError(503,'Mock产品控制配置不存在');
-  const switchBinding=(identifier:string):ControlBinding=>({identifier,roles:['sa','mbr'],switch:{on:1,off:0},whenLocked:'blocked'});
-  return {bindings:{power:switchBinding('Power'),[device.product!.id==='prd_humidity'?'humidity':'temperature']:{identifier:device.product!.id==='prd_humidity'?'TargetHumidity':'TargetTemperature',roles:['sa','mbr'],whenLocked:'blocked'},
-    mode:{identifier:'Mode',roles:['sa','mbr'],conditions:[],whenLocked:'blocked'},light:switchBinding('Light'),brightness:{identifier:'Brightness',roles:['sa','mbr'],whenLocked:'blocked',allowWhenLightOff:true,unitless:true},
-    childLock:{...switchBinding('ChildLock'),whenLocked:'allowed'},mute:{identifier:'Mute',roles:['sa','mbr'],switch:{on:true,off:false},whenLocked:'blocked'},
-  }};
-};

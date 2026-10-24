@@ -28,7 +28,6 @@ type Props = {
   busy: boolean;
   error?: string;
   wifiError?: string;
-  onSsidChange: (v: string) => void;
   onPasswordChange: (v: string) => void;
   onNicknameChange: (v: string) => void;
   onRefreshWifi: () => void;
@@ -152,8 +151,7 @@ function WifiForm(p: Props) {
           <Input
             prefixIcon={WIFI_ICON}
             value={ssid}
-            editable={!p.wifi?.ssid}
-            onChangeText={p.onSsidChange}
+            editable={false}
             placeholder="请选择您的家庭Wi-Fi"
             clearable={false}
             style={s.input}

@@ -1,7 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { MockDeviceSession, RealtimeDeviceSession, type DeviceProfileResolver, type DeviceSyncProfile } from './device-session';
+import { RealtimeDeviceSession, type DeviceProfileResolver, type DeviceSyncProfile } from './device-session';
 import { MqttConnection, type MqttCredentials, type MqttPort } from './mqtt-connection';
-import { ShadowSession, type DeviceTransport, type ShadowMessage } from './device';
 import type { DeviceView, ThingModel } from '../services/models';
 
 // Synthetic wire contract only: never selected by the production Runtime.
@@ -160,23 +159,3 @@ describe('真实MQTT会话（构造协议/端口）',()=>{
   });
 });
 
-describe('Mock会话关闭与完整快照隔离',()=>{
-  function mockTransport(){return {subscribe:vi.fn(()=>()=>undefined),shadowGet:vi.fn(async()=>({version:1,state:{reported:{Power:0}}})),publish:vi.fn(async()=>undefined)} as unknown as DeviceTransport;}
-  it('cannot be revived by an old query after close/reconnect',async()=>{
-    const transport=mockTransport();let resolve:(value:ShadowMessage)=>void=()=>undefined;vi.spyOn(transport,'shadowGet').mockImplementationOnce(()=>new Promise(done=>{resolve=done;}));
-    const session=new ShadowSession(transport,'dev','user'),old=session.connect(),rejected=expect(old).rejects.toMatchObject({code:499});session.close();await session.connect();
-    resolve({version:999,state:{reported:{Power:9}}});await rejected;expect(session.confirmed).toEqual({Power:0});expect(session.ready).toBe(true);session.close();
-  });
-  it('replaces complete snapshots and refuses missing reported data',async()=>{
-    const transport=mockTransport(),session=new ShadowSession(transport,'dev','user');await session.connect();
-    vi.spyOn(transport,'shadowGet').mockResolvedValueOnce({version:2,state:{reported:{Temperature:20}}});await session.connect();expect(session.confirmed).toEqual({Temperature:20});
-    vi.spyOn(transport,'shadowGet').mockResolvedValueOnce({version:3,state:{desired:{Power:1}}});await expect(session.connect()).rejects.toThrow('完整属性');expect(session.ready).toBe(false);session.close();
-  });
-  it('managed mock refreshes credentials on every resume and stops a cancelled query',async()=>{
-    const transport=mockTransport(),read=vi.fn(async()=>credentials),stop=vi.fn();const session=new MockDeviceSession(transport,'dev','user',{current:()=>true,start:()=>undefined,stop,credentials:read});
-    await session.connect();expect(session.ready).toBe(true);session.close();await session.connect();expect(read).toHaveBeenCalledTimes(2);
-    const controller=new AbortController();let resolve:(value:ShadowMessage)=>void=()=>undefined;vi.spyOn(transport,'shadowGet').mockImplementationOnce(()=>new Promise(done=>{resolve=done;}));
-    const pending=session.connect(controller.signal),rejected=expect(pending).rejects.toMatchObject({code:499});await vi.waitFor(()=>expect(transport.shadowGet).toHaveBeenCalledTimes(3));controller.abort();await rejected;
-    resolve({version:99,state:{reported:{Power:9}}});expect(session.ready).toBe(false);expect(session.confirmed.Power).toBe(0);expect(stop).toHaveBeenCalled();
-  });
-});

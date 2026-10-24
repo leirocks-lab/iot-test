@@ -4,13 +4,13 @@ import { communicationConfig } from './config';
 import { FetchHttpClient, type HttpFetcher } from './http';
 import { RealHttpClient } from './real-http';
 import { RowanService } from './rowan';
-import { MemoryStorage } from './store';
+import { MemoryStorage } from './memory-storage';
 
 const roots = { apiBaseUrl: 'http://platform.example.test', iotApiBaseUrl: 'http://iot.example.test/iot', tenantID: '1' };
 
 describe('business API environment policy', () => {
   it.each(['development', 'preview'])('routes actual HTTP requests through all layers in %s', async (environment) => {
-    const config = communicationConfig({ ...roots, environment, httpMode: 'real', deviceMode: 'real' });
+    const config = communicationConfig({ ...roots, environment,   });
     const fetcher = vi.fn<HttpFetcher>().mockResolvedValue(new Response(JSON.stringify({ code: 401, msg: '未登录', data: null }), { status: 200 }));
     const service = new RowanService(new RealHttpClient(config, fetcher), new MemoryStorage());
     await expect(service.request({ method: 'GET', path: '/api/app/config', query: { brandId: 'rowan' } })).rejects.toMatchObject({ code: 401 });
@@ -26,12 +26,12 @@ describe('business API environment policy', () => {
   });
 
   it.each(['development', 'preview', 'production'])('retains HTTPS support in %s', (environment) => {
-    const config = communicationConfig({ environment, httpMode: 'real', deviceMode: 'real', apiBaseUrl: 'https://api.example.test' });
+    const config = communicationConfig({ environment,   apiBaseUrl: 'https://api.example.test' });
     expect(() => new RealHttpClient(config)).not.toThrow();
   });
 
   it.each(['apiBaseUrl', 'iotApiBaseUrl'] as const)('rejects a production HTTP %s before fetch', (key) => {
-    const config = { environment: 'production', httpMode: 'real' as const, deviceMode: 'real' as const, apiBaseUrl: 'https://platform.example.test', iotApiBaseUrl: 'https://iot.example.test', [key]: 'http://insecure.example.test' };
+    const config = { environment: 'production', apiBaseUrl: 'https://platform.example.test', iotApiBaseUrl: 'https://iot.example.test', [key]: 'http://insecure.example.test' };
     const fetcher = vi.fn<HttpFetcher>();
     expect(() => communicationConfig(config)).toThrow('HTTPS');
     expect(() => new RealHttpClient(config, fetcher)).toThrow('HTTPS');
@@ -44,7 +44,7 @@ describe('business API environment policy', () => {
     expect(allowsHttpApi()).toBe(false);
     expect(() => new FetchHttpClient(roots.apiBaseUrl, undefined, 'preview')).not.toThrow();
     expect(() => new FetchHttpClient(roots.apiBaseUrl, undefined, 'production')).toThrow('HTTPS');
-    expect(communicationConfig({}).environment).toBe('development');
+    expect(communicationConfig({apiBaseUrl:'https://api.test'}).environment).toBe('development');
   });
 
   it.each(['', 'Production', 'staging', 'prod', null, true])('rejects unknown environment %s', (environment) => {
@@ -60,7 +60,7 @@ describe('business API environment policy', () => {
     'http://api.example.test?', 'http://api.example.test#', 'http://api.example.test/app-api/',
   ])('does not accept ambiguous API roots in preview: %s', (base) => {
     expect(() => validateApiBaseUrl(base, 'preview')).toThrow();
-    expect(() => communicationConfig({ httpMode: 'real', apiBaseUrl: base, environment: 'preview' })).toThrow();
+    expect(() => communicationConfig({  apiBaseUrl: base, environment: 'preview' })).toThrow();
   });
 
   it('propagates a real HTTP transport failure without a successful fallback', async () => {
