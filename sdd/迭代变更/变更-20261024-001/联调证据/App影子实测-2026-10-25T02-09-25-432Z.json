@@ -1,0 +1,161 @@
+{
+  "time": "2026-10-25T02:09:25.432Z",
+  "environment": "Windows Node / actual App STS-WSS and Classic Shadow adapter",
+  "scope": "authorized-device four SUBACKs + zero-byte Shadow get only; no physical controls",
+  "stages": [
+    {
+      "elapsedMs": 248,
+      "stage": "http",
+      "path": "/app-api/session",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 499,
+      "stage": "http",
+      "path": "/iot/app-api/devices",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 500,
+      "stage": "home",
+      "authorizedDeviceCount": 11,
+      "deviceID": "dev_209"
+    },
+    {
+      "elapsedMs": 1691,
+      "stage": "http",
+      "path": "/iot/app-api/devices/dev_209/mqtt",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 1692,
+      "stage": "credentials",
+      "deviceIdentityMatches": true,
+      "fields": [
+        "host",
+        "endpoint",
+        "path",
+        "clientID",
+        "username",
+        "password",
+        "deviceID",
+        "sessionToken",
+        "expiresAt"
+      ],
+      "sts": true
+    },
+    {
+      "elapsedMs": 4475,
+      "stage": "connection",
+      "connected": true
+    },
+    {
+      "elapsedMs": 4581,
+      "stage": "http",
+      "path": "/iot/app-api/devices/dev_209",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 4681,
+      "stage": "http",
+      "path": "/iot/app-api/products/prd_208/thing-model",
+      "status": 200,
+      "code": 1050186001
+    },
+    {
+      "elapsedMs": 4681,
+      "stage": "model",
+      "available": false,
+      "code": 1050186001
+    },
+    {
+      "elapsedMs": 4683,
+      "stage": "subscribe",
+      "topic": "$aws/things/dev_209/shadow/get/accepted"
+    },
+    {
+      "elapsedMs": 4958,
+      "stage": "SUBACK",
+      "topic": "$aws/things/dev_209/shadow/get/accepted"
+    },
+    {
+      "elapsedMs": 4958,
+      "stage": "subscribe",
+      "topic": "$aws/things/dev_209/shadow/get/rejected"
+    },
+    {
+      "elapsedMs": 5232,
+      "stage": "SUBACK",
+      "topic": "$aws/things/dev_209/shadow/get/rejected"
+    },
+    {
+      "elapsedMs": 5232,
+      "stage": "subscribe",
+      "topic": "$aws/things/dev_209/shadow/update/accepted"
+    },
+    {
+      "elapsedMs": 5505,
+      "stage": "SUBACK",
+      "topic": "$aws/things/dev_209/shadow/update/accepted"
+    },
+    {
+      "elapsedMs": 5505,
+      "stage": "subscribe",
+      "topic": "$aws/things/dev_209/shadow/update/rejected"
+    },
+    {
+      "elapsedMs": 5780,
+      "stage": "SUBACK",
+      "topic": "$aws/things/dev_209/shadow/update/rejected"
+    },
+    {
+      "elapsedMs": 5780,
+      "stage": "get",
+      "topic": "$aws/things/dev_209/shadow/get",
+      "bytes": 0
+    },
+    {
+      "elapsedMs": 6040,
+      "stage": "PUBACK",
+      "topic": "$aws/things/dev_209/shadow/get"
+    },
+    {
+      "elapsedMs": 6128,
+      "stage": "response",
+      "topic": "$aws/things/dev_209/shadow/get/rejected",
+      "code": 404,
+      "reportedKeys": []
+    },
+    {
+      "elapsedMs": 6131,
+      "stage": "connection",
+      "connected": false
+    },
+    {
+      "elapsedMs": 6131,
+      "stage": "get",
+      "result": "failed",
+      "code": 404,
+      "causeCode": null
+    },
+    {
+      "elapsedMs": 6218,
+      "stage": "http",
+      "path": "/app-api/session",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 6218,
+      "stage": "logout",
+      "result": "passed"
+    }
+  ],
+  "deviceID": "dev_209",
+  "productID": "prd_208",
+  "synchronized": false
+}

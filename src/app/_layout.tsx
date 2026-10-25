@@ -4,6 +4,13 @@ import { Busy, ErrorText } from "@/ui/kit";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
+
+// Metro removes this branch in release builds; install capture before app initialization.
+const DebugConsole = __DEV__
+  ? // eslint-disable-next-line @typescript-eslint/no-require-imports -- Remove this module from release bundles.
+    (require("../components/debug-console/FloatingConsole")
+      .default as typeof import("../components/debug-console/FloatingConsole").default)
+  : () => null;
 function Routes() {
   const { runtime, error } = useApp(),
     c = useColors();
@@ -52,6 +59,7 @@ export default function RootLayout() {
       <LoadingProvider>
         <Routes />
       </LoadingProvider>
+      <DebugConsole />
     </AppProvider>
   );
 }

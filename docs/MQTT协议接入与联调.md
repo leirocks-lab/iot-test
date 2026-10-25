@@ -61,11 +61,26 @@ JSON 内容先脱敏；凭据、Token、密码和签名 URL 不输出。消息�
 
 ## 当前外部联调缺口（实测状态）
 
-1. dev_209/prd_208：真实CONNACK成功，首个get/accepted订阅阶段连接关闭，未获得SUBACK；尚不能归因为具体Policy配置。需服务端/云端提交对应时间的AWS连接/授权日志及签发策略核对。
+1. 2026-10-24历史实测在首个get/accepted订阅阶段断连。用户调整权限后，2026-10-25的dev_209复测已获得四个SUBACK、get PUBACK及get/rejected 404，当前阻塞为所请求的Classic Shadow不存在，详见下节；dev_1本轮未复测。
 2. 只读链路需要Subscribe四个精确topicfilter、Receive对应四个topic、Publish本设备shadow/get。现有STS鉴权应核对IAM/会话策略及其他适用限制，不应直接套用设备证书Policy或放宽到全设备通配权限。
 3. prd_208的thing-model返回业务码1050186001。需提供实际已发布模型及原产品字典，不能拿目录存在或源码中的旧错误码推断该接口可用。
-4. DEVICE-01实际响应和公开schema均未提供topics及凭证到期字段。900秒签名窗口不是凭证有效期，不据此新增自动续期调度。
+4. 2026-10-24的DEVICE-01响应和公开schema未提供topics及凭证到期字段；2026-10-25实际响应已新增expiresAt，未返回topics。本轮只记录字段存在，未验收有效期语义或续期行为；900秒签名窗口不是凭证有效期。
 5. 告警读取/恢复接口、原动作字段和OTA触发路径仍需接口方资料。真机和100次/网络的性能验收尚未执行。
+
+## 权限调整后真实复测（2026-10-25）
+
+北京时间10:09:25启动，使用现有实际App栈、重新签发的STS凭据，指定dev_209，只读执行四响应订阅及零字节get。证据：[App影子实测-2026-10-25T02-09-25-432Z.json](../sdd/迭代变更/变更-20261024-001/联调证据/App影子实测-2026-10-25T02-09-25-432Z.json)。
+
+| 阶段 | 实际结果 |
+| --- | --- |
+| CONNACK | 成功 |
+| get/accepted、get/rejected、update/accepted、update/rejected | 四个精确Topic均获得SUBACK |
+| shadow/get | 发布0字节，收到PUBACK |
+| 响应 | 收到shadow/get/rejected，消息为`{"code":404,"message":"No shadow exists with name: 'dev_209'"}` |
+| 会话 | 收到404后App主动关闭并登出，不是此前的订阅阶段断连；synchronized=false |
+| prd_208模型 | 仍返回1050186001，未获得正式模型 |
+
+结论：该设备本轮订阅确认和get请求/错误响应链路已通；update两个响应Topic只验证了订阅确认，未发布update，未验证其消息投递或设备执行。404不能作为同步成功。下一步核对AWS账号/区域、实际ThingName与App设备ID映射、Classic或Named Shadow类型，并由设备端按真实状态初始化/上报正确Shadow。未创建Shadow、未写desired/reported、未控制设备，也未修改云端权限。相关行为参见[AWS Shadow错误说明](https://docs.aws.amazon.com/iot/latest/developerguide/device-shadow-error-messages.html)及[设备Shadow初始化](https://docs.aws.amazon.com/iot/latest/developerguide/device-shadow-comms-device.html)。
 
 ## 本地验证
 

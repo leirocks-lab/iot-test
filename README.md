@@ -179,6 +179,18 @@ copy .env.example .env
 
 `APP_BRAND` 和 `APP_ENV` 只能承载公开的构建选择。不要将访问令牌、签名私钥、服务端密钥、设备密钥或其他敏感信息写入 `.env`、`EXPO_PUBLIC_*`、源码或客户端构建配置。
 
+## 手机悬浮日志控制台
+
+开发构建连接 `pnpm dev` 后显示可拖动的 `LOG` 按钮。点击打开面板，按级别及关键词筛选 HTTP、MQTT、蓝牙和其他 JavaScript console 日志；最新日志在前，可清空、长按正文复制，或使用“复制筛选结果”复制当前结果。
+
+- **收起**：关闭面板并保留悬浮按钮；Android 返回键效果相同。
+- **隐藏入口**：同时隐藏面板和悬浮按钮，继续采集本次会话日志。摇一摇打开 Expo 开发菜单，选择“显示日志控制台”恢复；重新加载/启动应用也会恢复入口。Web 开发时通过刷新页面恢复。
+- **发布构建**：以 `__DEV__` 隔离，不加载面板、不包装 console。`APP_ENV=preview` 的 release 构建也不启用。
+
+面板只采集 JavaScript 启动后 console 的 log/debug/info/warn/error，不包含原生 Logcat、进程崩溃或被现有 HTTP/MQTT 日志级别开关关闭的内容。电脑 console 保留原有输出。只在内存保留最近 500 条，每条最多 8192 字符，通知批量更新；不落盘、不上传，重载后清空。沿用现有结构化脱敏，任意自由文本中的秘密仍须分享前核对。
+
+一键复制新增 Expo 官方 `expo-clipboard` 原生模块，已有开发客户端需要重新构建并安装以完整启用。未更新客户端仍可打开面板，复制失败时提示长按正文复制或重新构建。复制 API 参见 [Expo SDK 57 Clipboard](https://docs.expo.dev/versions/v57.0.0/sdk/clipboard/)。
+
 ## CNG 与原生目录
 
 项目使用 Expo Continuous Native Generation。`android/` 和 `ios/` 是由配置生成的目录，不提交到仓库。需要重新生成时运行：

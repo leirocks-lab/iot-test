@@ -91,8 +91,20 @@ function snapshot(value: unknown): unknown {
     if (seen.has(item)) return "[CIRCULAR]";
     seen.add(item);
     if (Array.isArray(item)) {
-      const result = item.slice(0, 30).map((child) => walk(child, depth + 1));
-      if (item.length > 30) result.push(TRUNCATED);
+      // Read descriptors rather than elements: diagnostics must not execute indexed getters.
+      const length = Object.getOwnPropertyDescriptor(item, "length")?.value as number;
+      const result: unknown[] = [];
+      for (let index = 0; index < Math.min(length, 30); index++) {
+        const descriptor = Object.getOwnPropertyDescriptor(item, String(index));
+        result.push(
+          !descriptor
+            ? undefined
+            : "value" in descriptor
+              ? walk(descriptor.value, depth + 1)
+              : "[ACCESSOR]",
+        );
+      }
+      if (length > 30) result.push(TRUNCATED);
       return result;
     }
     const result: Record<string, unknown> = {};
