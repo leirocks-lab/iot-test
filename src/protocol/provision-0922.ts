@@ -5,7 +5,7 @@ import { withBudget, type DeviceTransport, type ProvisionInput } from "./device"
 import type { ProvisionRunner } from "./provision-0822";
 import { provisionAddresses } from "./provision-urls";
 
-/** SOFTSTART=4 JSON/AES-CBC route. The cipher transition needs board-level verification. */
+/** SOFTSTART=4 JSON/AES-CBC route. The repaired cipher-first transition needs board-level verification. */
 export class Provisioner0922 implements ProvisionRunner {
   constructor(
     private transport: DeviceTransport,
@@ -38,7 +38,7 @@ export class Provisioner0922 implements ProvisionRunner {
       data: {
         ssid: input.ssid,
         password: input.password,
-        binding_code: input.bindCode,
+        binding_code: input.bindCode || "null",
         user_token: input.token,
         activate_url: urls!.activationURL,
         certificationUrl: urls!.certificationURL,
@@ -49,19 +49,18 @@ export class Provisioner0922 implements ProvisionRunner {
         extraData: input.productID,
       },
     });
-    const note = utf8(JSON.stringify({ type: "encrypt_note" })),
-      cipherBytes = encrypt0922(cipher, key),
+    const cipherBytes = utf8(cipher),
+      note = utf8(JSON.stringify({ type: "encrypt_note", data: { error_code: 0 } })),
       encrypted = encrypt0922(apinfo, key);
     try {
       // Validate payload size before any BLE write. Transport refragments to the negotiated MTU.
-      for (const payload of [note, cipherBytes, encrypted]) packets0922(payload, 128);
+      for (const payload of [cipherBytes, note, encrypted]) packets0922(payload, 128);
       const send = async (payload: Uint8Array) => {
         if (signal?.aborted) throw new ApiError(499, "0922客户端操作已停止");
         if (this.transport.reportsProvisionWriteStart !== true) onSubmitted?.();
         return this.transport.exchange(input, packets0922(payload, 128), signal, onSubmitted);
       };
       onStatus("校验设备");
-      await send(note);
       const replies = await send(cipherBytes);
       try {
         if (replies.length !== 1) throw new ApiError(0x63, "0922身份应答数量无效");
@@ -74,6 +73,7 @@ export class Provisioner0922 implements ProvisionRunner {
       } finally {
         for (const reply of replies) reply.fill(0);
       }
+      await send(note);
       onStatus("发送 Wi-Fi 参数");
       await send(encrypted);
       await withBudget(

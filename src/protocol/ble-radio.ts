@@ -11,6 +11,7 @@ import {
 } from "./ble-0822";
 import {
   BLE_0922,
+  decryptRaw0922,
   decrypt0922,
   packets0922,
   PacketStream0922,
@@ -580,7 +581,7 @@ export class Ble0822DeviceTransport extends UnavailableDeviceTransport {
             else {
               const key = deriveKey(input.mac, input.model);
               try {
-                plain = decrypt0922(payload, key);
+                plain = decryptRaw0922(payload, key);
               } finally {
                 key.fill(0);
               }

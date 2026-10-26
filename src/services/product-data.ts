@@ -91,11 +91,13 @@ export function productData(value: unknown, category = ""): Product {
   }
   const bluetooth = boolean(wire.bluetooth, "蓝牙能力");
   const recommended = boolean(wire.recommended, "推荐标识");
+  const deviceProductID = text(wire.productid ?? wire.deviceProductID, "设备端产品标识");
   const detailParameters = parameters(wire.parameters);
   const introduction = wire.introduction === null ? null : text(wire.introduction, "产品介绍");
 
   return {
     id: productID,
+    ...(deviceProductID !== undefined ? { deviceProductID } : {}),
     name: text(wire.name, "产品名称") || productID,
     category: text(wire.category, "产品品类") ?? category,
     seriesName: text(wire.seriesName, "产品系列") ?? "",

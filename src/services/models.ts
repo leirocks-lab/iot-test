@@ -56,6 +56,8 @@ export interface Room {
 }
 export interface Product {
   id: string;
+  /** Product ID used by the device firmware and its cloud certification request. */
+  deviceProductID?: string;
   name: string;
   category: string;
   seriesName: string;

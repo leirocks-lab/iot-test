@@ -67,7 +67,7 @@ export class Provisioner0822 implements ProvisionRunner {
         input.ssid,
         input.password,
         input.token,
-        input.bindCode || "0",
+        input.bindCode || "null",
         input.productID,
         input.modelID,
         ...(addresses as string[]),

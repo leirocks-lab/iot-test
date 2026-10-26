@@ -166,7 +166,7 @@ describe("0822真实编排端口验证（非固件/云端验收）", () => {
     }
     await driver.dispose();
   });
-  it("sends command 04 with the firmware placeholder when no optional binding code was obtained", async () => {
+  it("sends command 04 with the null string when no optional binding code was obtained", async () => {
     const { radio, driver, runner } = await setup();
     expect(
       await runner.run(
@@ -176,7 +176,7 @@ describe("0822真实编排端口验证（非固件/云端验收）", () => {
         async () => binding,
       ),
     ).toEqual(binding);
-    expect(radio.sent.find((frame) => frame.command === 4)?.data).toEqual(utf8("0"));
+    expect(radio.sent.find((frame) => frame.command === 4)?.data).toEqual(utf8("null"));
     await driver.dispose();
   });
   it("writes binary handshake and raw ordered parameters, drains coalesced stages, then confirms HTTP binding", async () => {
