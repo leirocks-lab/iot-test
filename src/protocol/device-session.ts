@@ -1,6 +1,7 @@
 import { ApiError, type DeviceView, type ThingModel } from "../services/models";
 import { withBudget } from "./device";
 import type { MqttConnection } from "./mqtt-connection";
+import { sessionFailure, type SessionFailure } from "./session-failure";
 import type { PropertyControls } from "../services/device-controls";
 import {
   ServiceRejectedError,
@@ -15,7 +16,10 @@ export interface DeviceSession {
   readonly ready: boolean;
   readonly sending: boolean;
   readonly connected?: boolean;
+  /** Only a confirmed protocol mapping may determine online; missing/stale state is unknown. */
+  readonly online?: boolean;
   readonly error?: string;
+  readonly failure?: SessionFailure;
   readonly canWrite?: boolean;
   readonly controls?: PropertyControls;
   readonly controlError?: string;
@@ -53,7 +57,7 @@ export type DeviceReport =
 /** Supplied only after the deployment's identity, topics, payloads and permissions are confirmed. */
 export interface DeviceSyncProfile {
   confirmation?: "shadow";
-  online?: (reported: Values) => boolean;
+  online?: (reported: Values) => boolean | undefined;
   topics: readonly string[];
   query(requestID: string): Publication;
   /** Validate current-device identity, complete-vs-delta semantics and wire correlation before normalizing. */
@@ -111,6 +115,7 @@ export class RealtimeDeviceSession implements DeviceSession {
   ready = false;
   connected = false;
   error = "";
+  failure?: SessionFailure;
   private version = -1;
   private round = 0;
   private sequence = 0;
@@ -144,18 +149,21 @@ export class RealtimeDeviceSession implements DeviceSession {
   get sending() {
     return !!(this.waiting?.expected || this.waiting?.service);
   }
+  get online() {
+    return this.ready && this.connected ? this.profile?.online?.(this.confirmed) : undefined;
+  }
   get canWrite() {
     return (
       this.writable &&
       !!this.profile?.command &&
-      (!this.profile.online || this.profile.online(this.confirmed))
+      (!this.profile.online || this.profile.online(this.confirmed) === true)
     );
   }
   get canInvokeService() {
     return (
       this.writable &&
       !!this.profile?.service &&
-      (!this.profile.online || this.profile.online(this.confirmed))
+      (!this.profile.online || this.profile.online(this.confirmed) === true)
     );
   }
   onChange(listener: () => void) {
@@ -221,6 +229,7 @@ export class RealtimeDeviceSession implements DeviceSession {
       round = this.round;
     this.controller = controller;
     this.error = "";
+    this.failure = undefined;
     this.notify();
     const abort = () => this.close();
     signal?.addEventListener("abort", abort, { once: true });
@@ -231,6 +240,7 @@ export class RealtimeDeviceSession implements DeviceSession {
         if (round === this.round) {
           this.close();
           this.error = text(error);
+          this.failure = sessionFailure(error);
           this.notify();
         }
         throw error;
@@ -278,12 +288,14 @@ export class RealtimeDeviceSession implements DeviceSession {
       if (!connected) {
         this.close();
         this.error = "设备通信中断，请重新同步";
+        this.failure = connection.failure ?? { kind: "transient", code: 0 };
       }
       this.notify();
     });
     await connection.connect(credentials, this.options.deviceID, signal);
     this.check(round, signal);
-    if (!this.options.profile) throw new ApiError(503, "MQTT同步协议尚未配置，属性待同步");
+    if (!this.options.profile)
+      throw new ApiError(503, "MQTT同步协议尚未配置，属性待同步", "configuration");
     const context = await withBudget(
       (budget) => this.options.context(budget),
       this.timeout,
@@ -305,7 +317,7 @@ export class RealtimeDeviceSession implements DeviceSession {
     );
     this.check(round, signal);
     if (!profile.topics.length || new Set(profile.topics).size !== profile.topics.length)
-      throw new ApiError(503, "设备订阅协议不完整");
+      throw new ApiError(503, "设备订阅协议不完整", "configuration");
     this.profile = profile;
     this.writable = profile.canWrite === true && context.device.bindingRole !== "obs";
     for (const topic of profile.topics) {
@@ -374,6 +386,7 @@ export class RealtimeDeviceSession implements DeviceSession {
     if (report.kind === "revoked") {
       this.close();
       this.error = "设备权限已失效";
+      this.failure = { kind: "authorization", code: 403 };
       this.notify();
       return;
     }
@@ -402,6 +415,7 @@ export class RealtimeDeviceSession implements DeviceSession {
               ),
         );
         this.ready = false;
+        this.failure = sessionFailure(new ApiError(code, "设备请求被拒绝"));
         this.error =
           code === 404
             ? "设备影子尚未创建"
@@ -531,6 +545,7 @@ export class RealtimeDeviceSession implements DeviceSession {
         this.rejectWaiting(error instanceof Error ? error : new Error(text(error)));
         if (error instanceof ApiError && [0, 401, 403, 499].includes(error.code)) this.close();
         this.error = text(error);
+        this.failure ??= sessionFailure(error);
         this.notify();
       }
       throw error;

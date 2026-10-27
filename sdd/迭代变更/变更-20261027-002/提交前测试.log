@@ -1,0 +1,221 @@
+
+ RUN  v4.1.11 D:/workspace/rowaniot/rowan-iot-app
+
+ ❯ src/config/deployment-integrations.test.ts (0 test)
+ ❯ src/protocol/ble-0822.test.ts (0 test)
+ ❯ src/protocol/ble-radio.test.ts (0 test)
+ ❯ src/protocol/classic-shadow.test.ts (0 test)
+ ❯ src/protocol/device-session.test.ts (0 test)
+ ❯ src/protocol/managed-session.test.ts (0 test)
+ ❯ src/protocol/mqtt-auth.test.ts (0 test)
+ ❯ src/protocol/mqtt-browser.test.ts (0 test)
+ ❯ src/protocol/mqtt-connection.test.ts (0 test)
+ ❯ src/protocol/mqtt-logging.test.ts (0 test)
+ ❯ src/protocol/native-ble.native.test.ts (0 test)
+ ❯ src/protocol/native-wifi.test.ts (0 test)
+ ❯ src/protocol/provision-0822.test.ts (0 test)
+ ❯ src/protocol/provision-0922.test.ts (0 test)
+ ❯ src/protocol/provision-urls.test.ts (0 test)
+ ❯ src/services/api-transport.test.ts (0 test)
+ ❯ src/services/app-runtime.test.ts (0 test)
+ ❯ src/services/device-controls.test.ts (0 test)
+ ❯ src/services/device-events.test.ts (0 test)
+ ❯ src/services/device-help.test.ts (0 test)
+ ❯ src/services/device-maintenance.test.ts (0 test)
+ ❯ src/services/device-members.test.ts (0 test)
+ ❯ src/services/device-ota.test.ts (0 test)
+ ❯ src/services/device-settings.test.ts (0 test)
+ ❯ src/services/device-unbind.test.ts (0 test)
+ ❯ src/services/http-logging.test.ts (0 test)
+ ❯ src/services/http.test.ts (0 test)
+ ❯ src/services/integration-cleanup.test.ts (0 test)
+ ❯ src/services/password-recovery.test.ts (0 test)
+ ❯ src/services/product-catalog.test.ts (0 test)
+ ❯ src/services/real-http.test.ts (0 test)
+ ❯ src/services/real-only-flows.test.ts (0 test)
+ ❯ src/services/real-only-runtime.test.ts (0 test)
+ ❯ src/services/real-only.test.ts (0 test)
+ ❯ src/services/room-concurrency.test.ts (0 test)
+ ❯ src/services/startup-config.test.ts (0 test)
+ ❯ src/services/test-environment.test.ts (0 test)
+ ❯ src/services/wifi.test.ts (0 test)
+ ❯ src/theme/index.test.ts (0 test)
+ ❯ src/components/debug-console/log-store.test.ts (0 test)
+ ❯ src/components/debug-console/runtime.test.ts (0 test)
+ ❯ src/config/brand/index.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 42 ⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/config/deployment-integrations.test.ts [ src/config/deployment-integrations.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062335107-34lzilsm6ag' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\79b23f0b2b0c109e8a688615488a0727b6cad0a4'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/42]⎯
+
+ FAIL  src/protocol/ble-0822.test.ts [ src/protocol/ble-0822.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062335150-jh62hv4rtu' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\c327409ec7cc26214a93de1bac05543dc0262198'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/42]⎯
+
+ FAIL  src/protocol/ble-radio.test.ts [ src/protocol/ble-radio.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062336104-9emuys33zu7' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\3a9cdc1bf513e12e566f92c4a693260741d62a63'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/42]⎯
+
+ FAIL  src/protocol/classic-shadow.test.ts [ src/protocol/classic-shadow.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062336187-p51deyslmv' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\2f538eb57a4f91f904e1d5263b26513598ddd817'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/42]⎯
+
+ FAIL  src/protocol/device-session.test.ts [ src/protocol/device-session.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062337386-689n6vhbsqy' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\9d91597fddb606d1e1d32c2b8b54ce038600ef94'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/42]⎯
+
+ FAIL  src/protocol/managed-session.test.ts [ src/protocol/managed-session.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062337455-yeifnfze8g' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\10b749cc6f683eedaacc92adab25ddbcc6305709'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/42]⎯
+
+ FAIL  src/protocol/mqtt-auth.test.ts [ src/protocol/mqtt-auth.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062338413-q7v4r19i90j' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\5dc1a2b10e2e6666cec45d265ed07c7738fed535'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/42]⎯
+
+ FAIL  src/protocol/mqtt-browser.test.ts [ src/protocol/mqtt-browser.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062338526-yfcujqy636m' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\002ab82ed578b7e2623dbdb7d1a9b611b120e49f'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/42]⎯
+
+ FAIL  src/protocol/mqtt-connection.test.ts [ src/protocol/mqtt-connection.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062339253-h9627xa7gmk' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\728e7d53003595f6073f7aee5f2ca69c0d652df5'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/42]⎯
+
+ FAIL  src/protocol/mqtt-logging.test.ts [ src/protocol/mqtt-logging.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062339385-njz0qldc4jm' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\038accaf8eb3112e7f03082ef93cc985420418a5'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/42]⎯
+
+ FAIL  src/protocol/native-ble.native.test.ts [ src/protocol/native-ble.native.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062340171-r4ufpeyzn3k' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\64a4126cf08b5489e2b7a504d61c008df846e2a0'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/42]⎯
+
+ FAIL  src/protocol/native-wifi.test.ts [ src/protocol/native-wifi.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062340237-rg00ilki18e' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\d226b8f249f55b936a24848c0d8baf20a33b91ac'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/42]⎯
+
+ FAIL  src/protocol/provision-0822.test.ts [ src/protocol/provision-0822.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062341015-bm39zyscamt' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\bf8c7303f4f38682be324aaabe1b3c7937572417'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/42]⎯
+
+ FAIL  src/protocol/provision-0922.test.ts [ src/protocol/provision-0922.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062341106-ibs1flassge' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\0fb2187c4040b2fb19d270e08e3d1068253ce07e'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/42]⎯
+
+ FAIL  src/protocol/provision-urls.test.ts [ src/protocol/provision-urls.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062342011-sx174pluynt' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\f248c055565c36b8b8d99bd60a3583131ac5166e'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/42]⎯
+
+ FAIL  src/services/api-transport.test.ts [ src/services/api-transport.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062342175-dmfiihnfuns' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\1ca298f29bfd526b161dab69244cba13203d8140'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/42]⎯
+
+ FAIL  src/services/app-runtime.test.ts [ src/services/app-runtime.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062343509-t8tt84pippg' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\26fc83b5f285f99fe0c10853c0169da59783948d'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/42]⎯
+
+ FAIL  src/services/device-controls.test.ts [ src/services/device-controls.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062343722-hjylx60ei4e' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\ae4827067e07d092deac103bef5fa3612f1b4b57'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/42]⎯
+
+ FAIL  src/services/device-events.test.ts [ src/services/device-events.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062344659-bvf9cwepybp' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\916084b7b562bb22ce712e3c48c6233997e33bfe'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/42]⎯
+
+ FAIL  src/services/device-help.test.ts [ src/services/device-help.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062344877-5lb4vdmzjeu' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\49196eeb933bb9941bcce3ccb5e0db5d3ae119e4'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[20/42]⎯
+
+ FAIL  src/services/device-maintenance.test.ts [ src/services/device-maintenance.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062345759-jctudblu2u' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\88d4f2fda01105f5acde2ceaf0c2d2e94cd744e5'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[21/42]⎯
+
+ FAIL  src/services/device-members.test.ts [ src/services/device-members.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062345888-kxxgaa0cqro' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\9d9eecefe33ed39aa7e0cd71a6b8b42cd68f5f7e'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22/42]⎯
+
+ FAIL  src/services/device-ota.test.ts [ src/services/device-ota.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062346758-v1gszfw6f5r' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\34b78a7a62cc3a197c6d722e157923338da18da7'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[23/42]⎯
+
+ FAIL  src/services/device-settings.test.ts [ src/services/device-settings.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062346906-sthmmqu9g6' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\3184381bd0dfc7b30dc41b68d381349f8386c4d3'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[24/42]⎯
+
+ FAIL  src/services/device-unbind.test.ts [ src/services/device-unbind.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062347668-sd9ol676z3' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\ec5f78a3cd38342070b71a6934232d96dabd926e'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[25/42]⎯
+
+ FAIL  src/services/http-logging.test.ts [ src/services/http-logging.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062347868-h8sdx9kefgh' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\359e5f767f8bf3a6425d7cb8aec42fe308ecd9da'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[26/42]⎯
+
+ FAIL  src/services/http.test.ts [ src/services/http.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062348566-p6qot5gu0q' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\eb9aadb0d190b6d88183a827884afd941deccb22'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[27/42]⎯
+
+ FAIL  src/services/integration-cleanup.test.ts [ src/services/integration-cleanup.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062348766-pas80iot' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\37bb6916fa34d7ab6c3632123ff3cfe2c47706ac'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[28/42]⎯
+
+ FAIL  src/services/password-recovery.test.ts [ src/services/password-recovery.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062349491-vldpptnkmy' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\6675775359c6ac9a537cddbbc9bd7c463edd1c14'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[29/42]⎯
+
+ FAIL  src/services/product-catalog.test.ts [ src/services/product-catalog.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062349651-3h35wjex092' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\2207c6345326cae88415bf3b15db1bab7ff3ae8c'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[30/42]⎯
+
+ FAIL  src/services/real-http.test.ts [ src/services/real-http.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062350336-ri718r8xp2r' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\5b0c38a72cbde10564f8469748f2bb32957f53ae'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[31/42]⎯
+
+ FAIL  src/services/real-only-flows.test.ts [ src/services/real-only-flows.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062350509-j4h88om1s2e' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\c73f9ff99f497e6ff804e1b6ec3fe2b027c9ea5d'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[32/42]⎯
+
+ FAIL  src/services/real-only-runtime.test.ts [ src/services/real-only-runtime.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062351312-fdzclpra5k9' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\ba57dbe35a1786b20d4774953ea2df5b4057361b'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[33/42]⎯
+
+ FAIL  src/services/real-only.test.ts [ src/services/real-only.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062351464-w4pk7h0jfya' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\b01d50c3c7b6128cddb5933497516226c68997c1'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[34/42]⎯
+
+ FAIL  src/services/room-concurrency.test.ts [ src/services/room-concurrency.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062352159-r52togsoe6n' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\b6c5f5a7735fc4c96b84108144ac07e77a071022'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[35/42]⎯
+
+ FAIL  src/services/startup-config.test.ts [ src/services/startup-config.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062352287-bxqkukw4th' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\1558391cb853b673c8d4c590f5ed3aea48c5dc69'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[36/42]⎯
+
+ FAIL  src/services/test-environment.test.ts [ src/services/test-environment.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062353036-2xg08d4fdwm' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\cdd6450919ca3dd830cfbc98505e3dd30ca22589'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[37/42]⎯
+
+ FAIL  src/services/wifi.test.ts [ src/services/wifi.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062353210-xsu7y5hi0mp' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\ae2293b134d9c700348fe27cdd993479d26b04c5'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[38/42]⎯
+
+ FAIL  src/theme/index.test.ts [ src/theme/index.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062354177-gcmsmylxsi' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\d3e00804a065530dee61cf26e0c086db6db7117f'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[39/42]⎯
+
+ FAIL  src/components/debug-console/log-store.test.ts [ src/components/debug-console/log-store.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062354186-hy0swlpisf' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\ee58f8367b41e37899cee764cffaa3fb4fec6f13'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[40/42]⎯
+
+ FAIL  src/components/debug-console/runtime.test.ts [ src/components/debug-console/runtime.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062354980-cbdrkrg0d5t' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\00e31e7664d47de7795a8d79675085d8b52e745a'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[41/42]⎯
+
+ FAIL  src/config/brand/index.test.ts [ src/config/brand/index.test.ts ]
+Error: EPERM: operation not permitted, rename 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\.tmp-1793062355033-g9yzsxixkda' -> 'C:\Users\Leon\AppData\Local\Packages\sandbox.{ceb42124-82f8-417f-963f-608564c1e221}\AC\Temp\P_cn8jzea-2dBS4Pb7ZvR\ssr\0211b913ae94d473ba70ac12296824f26d0ebdb7'
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[42/42]⎯
+
+
+ Test Files  42 failed (42)
+      Tests  no tests
+   Start at  08:52:14
+   Duration  20.93s (transform 0ms, setup 0ms, import 0ms, tests 0ms, environment 13ms)

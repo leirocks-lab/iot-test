@@ -1,0 +1,129 @@
+{
+  "timestamp": "2026-10-26T23:46:47.075Z",
+  "source": "src/screens/Home.tsx (real DeviceCard function)",
+  "method": "TypeScript transpile + VM, controlled hooks/native/session substitutes; no native renderer or real broker",
+  "limits": "Does not verify React effect scheduling, actual native rendering, taps, or AWS delivery. UI-01/04 isolate component behavior with a control-capable session, not the deployed readonly profile.",
+  "summary": {
+    "passed": 12,
+    "failed": 0,
+    "errors": 0
+  },
+  "results": [
+    {
+      "id": "UI-01",
+      "requirement": "RF-0012-AC-003：MQTT在线值更新卡片在线标识",
+      "result": "PASS",
+      "expected": "#1CC787",
+      "actual": "#1CC787"
+    },
+    {
+      "id": "UI-02",
+      "requirement": "RF-0012-AC-004：实时状态未知时不能显示为已确认关机",
+      "result": "PASS",
+      "expected": "未知状态或最近确认值标识",
+      "actual": "开关状态未知"
+    },
+    {
+      "id": "UI-03",
+      "requirement": "RF-0012异常流程：连接失败应展示状态不可确认",
+      "result": "PASS",
+      "expected": "显示连接错误或状态不可确认",
+      "actual": "显示错误"
+    },
+    {
+      "id": "UI-04",
+      "requirement": "RF-0013：MQTT在线且具备能力时不应被REST旧离线值阻断",
+      "result": "PASS",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "id": "UI-05",
+      "requirement": "RF-0013-AC-004：发送期间禁止再次点击",
+      "result": "PASS",
+      "expected": {
+        "idleDisabled": false,
+        "sendingDisabled": true
+      },
+      "actual": {
+        "idleDisabled": false,
+        "sendingDisabled": true
+      }
+    },
+    {
+      "id": "UI-06",
+      "requirement": "RF-0013-AC-004：发送期间可见等待指示",
+      "result": "PASS",
+      "expected": "等待组件或busy语义",
+      "actual": "存在"
+    },
+    {
+      "id": "UI-07",
+      "requirement": "RF-0012-AC-005/006：离线卡片可进入正确设备页",
+      "result": "PASS",
+      "expected": "/device/[id], id=dev_666666",
+      "actual": {
+        "pathname": "/device/[id]",
+        "params": {
+          "id": "dev_666666"
+        }
+      }
+    },
+    {
+      "id": "UI-08",
+      "requirement": "首页退后台释放会话、回前台重建连接",
+      "result": "PASS",
+      "expected": "后台关闭且前台第二次连接",
+      "actual": {
+        "connectCount": 2,
+        "closeCount": 1
+      }
+    },
+    {
+      "id": "UI-09",
+      "requirement": "RF-0012-AC-005：开关事件只调用控制，不触发跳转",
+      "result": "PASS",
+      "expected": {
+        "commands": 1,
+        "navigations": 0
+      },
+      "actual": {
+        "commands": 1,
+        "navigations": 0
+      }
+    },
+    {
+      "id": "UI-10",
+      "requirement": "RF-0012-AC-007：MQTT断开后不继续呈现可确认在线",
+      "result": "PASS",
+      "expected": "禁用控制并显示未知/通信中断，不继续显示绿色在线",
+      "actual": {
+        "color": "#B9BDBE",
+        "errorVisible": true,
+        "disabled": true
+      }
+    },
+    {
+      "id": "UI-11",
+      "requirement": "没有在线协议映射时保持未知且禁止控制",
+      "result": "PASS",
+      "expected": "灰色、状态未知、禁止控制",
+      "actual": {
+        "color": "#B9BDBE",
+        "disabled": true,
+        "unknown": true
+      }
+    },
+    {
+      "id": "UI-12",
+      "requirement": "已确认离线覆盖REST在线缓存并禁止控制",
+      "result": "PASS",
+      "expected": "灰色、离线、禁止控制",
+      "actual": {
+        "color": "#B9BDBE",
+        "disabled": true,
+        "offline": true
+      }
+    }
+  ]
+}

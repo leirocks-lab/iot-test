@@ -1,4 +1,4 @@
-import { expect, it, vi } from "vitest";
+import { expect, it } from "vitest";
 import type { HttpRequest } from "../lib/core";
 import { RowanService } from "./rowan";
 import { MemoryStorage } from "./memory-storage";
@@ -7,10 +7,10 @@ it("uses the entered email, forget purpose and current language across recovery 
   const requests: HttpRequest[] = [];
   const service = new RowanService(
     {
-      request: vi.fn(async <T>(request: HttpRequest) => {
+      async request<T>(request: HttpRequest) {
         requests.push(request);
         return { status: 200, data: { success: true, code: 0, data: {} } as T, headers: {} };
-      }),
+      },
     },
     new MemoryStorage(),
   );

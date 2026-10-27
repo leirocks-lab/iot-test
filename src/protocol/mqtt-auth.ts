@@ -49,7 +49,7 @@ export function mqttConnectParameters(
     !credentials.password ||
     !Number.isFinite(now.getTime())
   ) {
-    throw new ApiError(503, "AWS STS连接参数不完整或目标不受支持");
+    throw new ApiError(503, "AWS STS连接参数不完整或目标不受支持", "configuration");
   }
   const time = now.toISOString().replace(/[:-]|\.\d{3}/g, "");
   const date = time.slice(0, 8);

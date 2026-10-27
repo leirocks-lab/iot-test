@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { createClassicShadowResolver, shadowTopics } from "./classic-shadow";
 import { RealtimeDeviceSession } from "./device-session";
+import { ManagedDeviceSession } from "./managed-session";
 import { MqttConnection, type MqttPort } from "./mqtt-connection";
 import type { DeviceView, ThingModel } from "../services/models";
 
@@ -48,6 +49,14 @@ describe("V1.6 Classic Shadow adapter", () => {
     expect(p.canWrite).toBe(false);
     expect(p.command).toBeUndefined();
     expect(p.service).toBeUndefined();
+    expect(p.online).toBeUndefined();
+  });
+  it("keeps missing and unrecognized connection values unknown", async () => {
+    const p = await profile();
+    expect(p.online?.({})).toBeUndefined();
+    expect(p.online?.({ ConnectType: "unexpected" })).toBeUndefined();
+    expect(p.online?.({ ConnectType: "online" })).toBe(true);
+    expect(p.online?.({ ConnectType: "offline" })).toBe(false);
   });
   it("encodes original case and control envelope; rejects readonly, unknown and illegal values", async () => {
     const p = await profile();
@@ -156,16 +165,16 @@ describe("V1.6 Classic Shadow adapter", () => {
 });
 
 class Port implements MqttPort {
-  handlers = new Map<string, (() => void)[]>();
+  handlers = new Map<string, ((error?: unknown) => void)[]>();
   message?: (topic: string, payload: Uint8Array) => void;
-  on(event: string, fn: () => void) {
+  on(event: string, fn: (error?: unknown) => void) {
     this.handlers.set(event, [...(this.handlers.get(event) ?? []), fn]);
   }
   onMessage(fn: (topic: string, payload: Uint8Array) => void) {
     this.message = fn;
   }
-  emit(event: string) {
-    for (const fn of this.handlers.get(event) ?? []) fn();
+  emit(event: string, error?: unknown) {
+    for (const fn of this.handlers.get(event) ?? []) fn(error);
   }
   report(suffix: string, body: unknown) {
     this.message?.(`${prefix}/${suffix}`, encode(body));
@@ -218,6 +227,83 @@ function commandToken(port: Port) {
   return JSON.parse(new TextDecoder().decode(port.publish.mock.calls.at(-1)![1])).clientToken;
 }
 describe("V1.6 Shadow session integration (synthetic broker/device)", () => {
+  it("does not recover an established connection rejected by broker authorization", async () => {
+    const c = await ready();
+    const managed = new ManagedDeviceSession(c.session, {
+      logicalSessionID: "auth",
+      random: () => 0,
+    });
+    try {
+      await managed.connect();
+      vi.useFakeTimers();
+      c.port.emit("error", { code: 5 });
+      await vi.advanceTimersByTimeAsync(60000);
+      expect(managed.failure?.kind).toBe("authorization");
+      expect(c.port.publish.mock.calls.filter(([topic]) => topic.endsWith("/get"))).toHaveLength(1);
+    } finally {
+      managed.close();
+      vi.useRealTimers();
+    }
+  });
+  it("recovers a transport drop during initial full-state synchronization", async () => {
+    const c = await setup();
+    const managed = new ManagedDeviceSession(c.session, {
+      logicalSessionID: "initial-drop",
+      random: () => 0,
+    });
+    const original = expect(c.pending).rejects.toMatchObject({ code: 499 });
+    const observing = managed.connect();
+    const failed = expect(observing).rejects.toMatchObject({ code: 499 });
+    await Promise.resolve();
+    vi.useFakeTimers();
+    try {
+      c.port.emit("close");
+      await original;
+      await failed;
+      await vi.advanceTimersByTimeAsync(1000);
+      expect(c.port.publish.mock.calls.filter(([topic]) => topic.endsWith("/get"))).toHaveLength(2);
+      c.port.report("get/accepted", {
+        version: 21,
+        state: { reported: { Power: 0, ConnectType: "online" } },
+      });
+      await vi.advanceTimersByTimeAsync(0);
+      expect(managed.ready).toBe(true);
+    } finally {
+      managed.close();
+      vi.useRealTimers();
+    }
+  });
+  it("managed recovery resynchronizes the full snapshot without replaying a pending command", async () => {
+    const c = await ready();
+    const managed = new ManagedDeviceSession(c.session, {
+      logicalSessionID: "recovery",
+      random: () => 0,
+    });
+    try {
+      await managed.connect();
+      vi.useFakeTimers();
+      const pending = managed.command({ Power: 1 });
+      const rejected = expect(pending).rejects.toMatchObject({ code: 499 });
+      const updates = () =>
+        c.port.publish.mock.calls.filter(([topic]) => topic.endsWith("/update")).length;
+      expect(updates()).toBe(1);
+      c.port.emit("close");
+      await rejected;
+      await vi.advanceTimersByTimeAsync(1000);
+      expect(c.port.publish.mock.calls.at(-1)![0]).toBe(`${prefix}/get`);
+      c.port.report("get/accepted", {
+        version: 20,
+        state: { reported: { Power: 0, ConnectType: "online" } },
+      });
+      await vi.advanceTimersByTimeAsync(0);
+      expect(managed.ready).toBe(true);
+      expect(managed.confirmed).toEqual({ Power: 0, ConnectType: "online" });
+      expect(updates()).toBe(1);
+    } finally {
+      managed.close();
+      vi.useRealTimers();
+    }
+  });
   it("generates bounded correlation tokens independently of long account IDs", async () => {
     const c = await ready("u".repeat(120));
     try {

@@ -210,7 +210,6 @@ export class AddDeviceFlow {
     this.controller = undefined;
     this.sessionUnsubscribe?.();
     this.sessionUnsubscribe = undefined;
-    this.session?.close();
     this.session = undefined;
     this.update({
       busy: false,
@@ -488,7 +487,11 @@ export class AddDeviceFlow {
           this.bindCode = typeof provided === "string" ? provided : "";
           this.check(round, signal);
         }
-        this.update({ stage: "selected", message: "正在确认设备端产品标识", deviceStep: undefined });
+        this.update({
+          stage: "selected",
+          message: "正在确认设备端产品标识",
+          deviceStep: undefined,
+        });
         const groups = await withBudget(
           (budget) => this.service.products(budget),
           10000,
@@ -740,7 +743,6 @@ export class AddDeviceFlow {
   private async connectRealtime(round: number, signal: AbortSignal, id: string) {
     this.sessionUnsubscribe?.();
     this.sessionUnsubscribe = undefined;
-    this.session?.close();
     this.session = undefined;
     let session: DeviceSession | undefined;
     try {
@@ -761,7 +763,6 @@ export class AddDeviceFlow {
       });
       this.update({ realtime: "ready", realtimeError: "" });
     } catch (error) {
-      session?.close();
       this.check(round, signal);
       this.update({ realtime: "failed", realtimeError: errorText(error) });
     }

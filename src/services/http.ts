@@ -1,6 +1,5 @@
 import type { HttpClient, HttpRequest, HttpResponse } from "../lib/core";
 import { validateApiBaseUrl } from "./api-transport";
-import { ApiError } from "./models";
 import {
   HttpDiagnostics,
   isHttpCancellation,

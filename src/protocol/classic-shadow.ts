@@ -81,8 +81,13 @@ function profile(
     canWrite: writable,
     query: () => ({ topic: topics.get, payload: new Uint8Array() }),
     online: contract
-      ? (values) => values[contract.connection.identifier] === contract.connection.online
-      : () => false,
+      ? (values) => {
+          const value = values[contract.connection.identifier];
+          if (value === contract.connection.online) return true;
+          if (value === contract.connection.offline) return false;
+          return undefined;
+        }
+      : undefined,
     decode: (topic, payload) => {
       if (!topics.responses.includes(topic)) return;
       try {

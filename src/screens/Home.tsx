@@ -2,6 +2,7 @@ import { Image } from "expo-image";
 import { router, useFocusEffect } from "expo-router";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
+  ActivityIndicator,
   AppState,
   Modal,
   Pressable,
@@ -43,6 +44,7 @@ function DeviceCard({
     null,
   );
   const [, rerender] = useState(0);
+  const [connectionError, setConnectionError] = useState("");
   useFocusEffect(
     useCallback(() => {
       if (!runtime?.service.session) return;
@@ -52,46 +54,60 @@ function DeviceCard({
       const stop = () => {
         unsubscribe?.();
         unsubscribe = undefined;
-        current?.close();
         current = undefined;
-        if (active) setShadow(null);
+        if (active) {
+          setShadow(null);
+          setConnectionError("");
+        }
       };
       const start = () => {
         stop();
         const session = runtime.createDeviceSession(device.device.id);
         current = session;
+        setShadow(session);
         unsubscribe = session.onChange(() => {
-          if (active && current === session) rerender((value) => value + 1);
+          if (active && current === session) {
+            if (session.ready && session.connected) setConnectionError("");
+            rerender((value) => value + 1);
+          }
         });
         void session
           .connect()
           .then(() => {
             if (active && current === session) setShadow(session);
           })
-          .catch(() => undefined);
+          .catch((error: unknown) => {
+            if (active && current === session)
+              setConnectionError(error instanceof Error ? error.message : "设备状态不可确认");
+          });
       };
-      if (AppState.currentState === "active") start();
-      const subscription = AppState.addEventListener("change", (state) => {
-        if (state === "active") start();
-        else stop();
-      });
+      start();
       return () => {
         active = false;
-        subscription.remove();
         stop();
       };
     }, [runtime, device.device.id]),
   );
-  const powered = shadow?.controls?.list().some((control) => control.kind === "power")
-    ? shadow.controls.isOn("power") === true
-    : false;
+  const reportedOnline = shadow?.confirmed.Online;
+  const online =
+    shadow?.ready && shadow.connected
+      ? reportedOnline === "online"
+        ? true
+        : reportedOnline === "offline"
+          ? false
+          : undefined
+      : undefined;
+  const hasPower = !!shadow?.controls?.list().some((control) => control.kind === "power");
+  const powered = shadow?.ready && hasPower ? shadow.controls!.isOn("power") : undefined;
   const canControl =
     !!shadow?.ready &&
-    !!shadow.controls?.list().some((control) => control.kind === "power") &&
-    !shadow.controls.reason("power") &&
+    online === true &&
+    powered !== undefined &&
+    hasPower &&
+    !shadow.controls!.reason("power") &&
     !shadow.sending &&
-    device.online !== false &&
     device.bindingRole !== "obs";
+  const statusError = connectionError || shadow?.error || shadow?.controlError;
   return (
     <View style={styles.cardWrap}>
       <View style={[styles.deviceCard, { backgroundColor: colors.background.invert }]}>
@@ -111,7 +127,12 @@ function DeviceCard({
         >
           <View style={styles.cardTop}>
             <View
-              style={[styles.onlineDot, { backgroundColor: device.online ? "#1CC787" : "#B9BDBE" }]}
+              accessible
+              accessibilityLabel={online === undefined ? "状态未知" : online ? "在线" : "离线"}
+              style={[
+                styles.onlineDot,
+                { backgroundColor: online === true ? "#1CC787" : "#B9BDBE" },
+              ]}
             />
             {editing && (
               <Image
@@ -139,7 +160,10 @@ function DeviceCard({
         </Pressable>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel={powered ? "Turn off" : "Turn on"}
+          accessibilityLabel={
+            powered === undefined ? "开关状态未知" : powered ? "Turn off" : "Turn on"
+          }
+          accessibilityState={{ disabled: editing || !canControl, busy: !!shadow?.sending }}
           disabled={editing || !canControl}
           onPress={() =>
             void action.run(async () => {
@@ -158,14 +182,21 @@ function DeviceCard({
               justifyContent: "center",
             }}
           >
-            <Image
-              source={powered ? powerOn : powerOff}
-              style={styles.powerIcon}
-              contentFit="contain"
-            />
+            {shadow?.sending ? (
+              <ActivityIndicator size="small" accessibilityLabel="正在等待设备回报" />
+            ) : powered === undefined ? (
+              <Text style={{ color: colors.font.subtitle2 }}>?</Text>
+            ) : (
+              <Image
+                source={powered ? powerOn : powerOff}
+                style={styles.powerIcon}
+                contentFit="contain"
+              />
+            )}
           </View>
         </Pressable>
         {!!action.error && <Text style={styles.error}>{action.error}</Text>}
+        {!!statusError && <Text style={styles.error}>{statusError}</Text>}
       </View>
     </View>
   );

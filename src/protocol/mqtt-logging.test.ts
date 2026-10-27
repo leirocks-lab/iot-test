@@ -14,6 +14,32 @@ function capture(level: "off" | "error" | "debug" = "debug") {
   return { logger, connection, entries, text: () => JSON.stringify(entries()) };
 }
 describe("real MQTT console diagnostics", () => {
+  it("correlates physical attempts and closure reasons with the stable logical session", () => {
+    const logger: Logger = { debug: vi.fn(), info: vi.fn(), warn: vi.fn(), error: vi.fn() };
+    const state = {
+      logicalSessionID: "session-fixture",
+      attempt: 1,
+      closeReason: "communication_failure",
+    };
+    const connection = new MqttDiagnostics({
+      level: "debug",
+      logger,
+      sessionContext: () => ({ ...state }),
+    }).connection("dev_fixture");
+    connection.event("connect_attempt");
+    state.closeReason = "device_unbound";
+    connection.event("close_requested");
+    expect(vi.mocked(logger.debug).mock.calls[0][1]).toMatchObject({
+      logicalSessionID: "session-fixture",
+      attempt: 1,
+      closeReason: "communication_failure",
+    });
+    expect(vi.mocked(logger.debug).mock.calls[1][1]).toMatchObject({
+      logicalSessionID: "session-fixture",
+      attempt: 1,
+      closeReason: "device_unbound",
+    });
+  });
   it("records one detached Topic/body snapshot with direction, bytes, device and connection", () => {
     const c = capture(),
       bytes = encode({ state: { desired: { Power: 1 } } });

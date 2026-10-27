@@ -1,0 +1,29 @@
+$ expo lint
+env: load .env.local
+env: export APP_BRAND APP_ENV ROWAN_ALLOW_TEST_HTTP ROWAN_APP_API_BASE_URL ROWAN_INTEGRATION_PROFILE ROWAN_IOT_API_BASE_URL ROWAN_LOGIN_ACCOUNT ROWAN_LOGIN_LANGUAGE ROWAN_LOGIN_PIN ROWAN_LOGIN_REGISTRATION_ID ROWAN_LOGIN_SYSTEM ROWAN_LOGIN_TENANT ROWAN_LOGIN_VERIFY ROWAN_TENANT_ID
+
+D:\workspace\rowaniot\rowan-iot-app\src\screens\Scan.tsx
+  22:24  warning  'Card' is defined but never used            @typescript-eslint/no-unused-vars
+  39:10  warning  'value' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\workspace\rowaniot\rowan-iot-app\src\services\app-runtime.test.ts
+   3:10  warning  'createRuntime' is defined but never used    @typescript-eslint/no-unused-vars
+  12:10  warning  'defaultSettings' is defined but never used  @typescript-eslint/no-unused-vars
+  12:27  warning  'MemoryStorage' is defined but never used    @typescript-eslint/no-unused-vars
+  13:10  warning  'RowanService' is defined but never used     @typescript-eslint/no-unused-vars
+
+D:\workspace\rowaniot\rowan-iot-app\src\services\device-help.test.ts
+  6:8  warning  'ApiEnvelope' is defined but never used  @typescript-eslint/no-unused-vars
+  8:8  warning  'Language' is defined but never used     @typescript-eslint/no-unused-vars
+
+D:\workspace\rowaniot\rowan-iot-app\src\services\http-logging.test.ts
+  7:10  warning  'RowanService' is defined but never used   @typescript-eslint/no-unused-vars
+  8:10  warning  'MemoryStorage' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\workspace\rowaniot\rowan-iot-app\src\services\http-logging.ts
+  1:15  warning  'HttpClient' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\workspace\rowaniot\rowan-iot-app\src\services\http.ts
+  3:10  warning  'ApiError' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 12 problems (0 errors, 12 warnings)

@@ -4,8 +4,6 @@ import { HttpDiagnostics } from "./http-logging";
 import { FetchHttpClient } from "./http";
 import { RealHttpClient } from "./real-http";
 import { communicationConfig } from "./config";
-import { RowanService } from "./rowan";
-import { MemoryStorage } from "./memory-storage";
 
 class TestLoggedClient {
   constructor(

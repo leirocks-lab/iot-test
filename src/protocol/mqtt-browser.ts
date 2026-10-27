@@ -3,6 +3,7 @@ import { Buffer } from "buffer";
 import { MqttConnection, type MqttFactory } from "./mqtt-connection";
 import { mqttConnectParameters } from "./mqtt-auth";
 import { MqttDiagnostics, type MqttLogOptions } from "./mqtt-logging";
+import { ApiError } from "../services/models";
 
 export function createMqttConnection(logOptions: MqttLogOptions = {}) {
   const diagnostics = new MqttDiagnostics(logOptions);
@@ -46,7 +47,7 @@ export function createMqttConnection(logOptions: MqttLogOptions = {}) {
             const failure =
               error ||
               (!grants?.some((grant) => grant.topic === topic && grant.qos !== 128)
-                ? new Error("subscribe rejected")
+                ? new ApiError(403, "MQTT订阅未授权")
                 : undefined);
             if (failure) log.failure("subscribe_error", topic, failure);
             else log.event("suback", topic);

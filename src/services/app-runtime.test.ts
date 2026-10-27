@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { createConfiguredRuntime } from "./app-runtime";
-import { createRuntime, type Runtime, type RuntimeContracts } from "./runtime";
+import type { Runtime, RuntimeContracts } from "./runtime";
 import {
   integrationStatus,
   registeredIntegration,
@@ -9,10 +9,9 @@ import {
 import { communicationConfig } from "./config";
 import { deploymentIntegrations } from "../config/deployment-integrations";
 import { UnavailableDeviceTransport } from "../protocol/device";
-import { defaultSettings, MemoryStorage } from "../test-support/settings-fixture";
-import { RowanService } from "./rowan";
 import type { DeviceProfileResolver } from "../protocol/device-session";
 import type { MqttPort } from "../protocol/mqtt-connection";
+import { defaultSettings } from "../test-support/settings-fixture";
 
 vi.mock("./native-storage", async () => {
   const { MemoryStorage } = await import("../test-support/settings-fixture");
@@ -33,7 +32,7 @@ vi.mock("../protocol/mqtt-browser", async () => {
           onMessage: (fn) => {
             message = fn;
           },
-          subscribe: (_topic, done) => done(),
+          subscribe: vi.fn((_topic, done) => done()),
           unsubscribe: vi.fn(),
           end: vi.fn(),
           publish: vi.fn((_topic, value, done) => {
@@ -101,6 +100,96 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 describe("P1 App启动装配", () => {
+  it("reuses one device session across consumers and closes only on unbind or runtime disposal", async () => {
+    const runtime = await createConfiguredRuntime(config, { registry: registry() });
+    runtimes.push(runtime);
+    runtime.service.session = {
+      userID: "pool-owner",
+      accessToken: "fixture",
+      refreshToken: "fixture",
+      expiresIn: 3600,
+      tokenType: "bearer",
+      setting: defaultSettings(),
+    };
+    vi.spyOn(runtime.service, "device").mockResolvedValue({
+      deviceNickname: "fixture",
+      bindingRole: "sa",
+      bindingAt: "",
+      device: { id: "pool-device" },
+      product: { id: "pool-product" },
+    });
+    vi.spyOn(runtime.service, "model").mockResolvedValue({
+      version: "1",
+      attributes: [],
+      services: [],
+      events: [],
+    });
+    const issued = vi.spyOn(runtime.service, "mqtt").mockResolvedValue({
+      host: "wss://broker.example.test/mqtt",
+      endpoint: "broker.example.test",
+      path: "/mqtt",
+      clientID: "issued",
+      username: "fixture",
+      password: "fixture",
+      deviceID: "pool-device",
+    });
+    const first = runtime.createDeviceSession("pool-device"),
+      second = runtime.createDeviceSession("pool-device");
+    expect(first).toBe(second);
+    const controller = new AbortController();
+    const one = first.connect(controller.signal),
+      two = second.connect();
+    const cancelled = expect(one).rejects.toMatchObject({ code: 499 });
+    controller.abort();
+    await cancelled;
+    await two;
+    await runtime.createDeviceSession("pool-device").connect();
+    expect(issued).toHaveBeenCalledTimes(1);
+    expect(testPorts.ports).toHaveLength(1);
+    const port = testPorts.ports[0];
+    expect(port.subscribe).toHaveBeenCalledTimes(1);
+    expect(port.publish).toHaveBeenCalledTimes(1);
+    const stop = first.onChange(() => {});
+    stop();
+    runtime.setForeground?.(false);
+    runtime.setForeground?.(true);
+    expect(port.end).not.toHaveBeenCalled();
+    expect(runtime.releaseDevice("pool-device", "wrong-owner", 0)).toBe(false);
+    expect(
+      runtime.releaseDevice("pool-device", runtime.service.userID, runtime.service.sessionRevision),
+    ).toBe(true);
+    expect(port.end).toHaveBeenCalledTimes(1);
+    const replacement = runtime.createDeviceSession("pool-device");
+    expect(replacement).not.toBe(first);
+    await replacement.connect();
+    const login = runtime.service.session!;
+    await runtime.service.clearLocal();
+    expect(testPorts.ports[1].end).toHaveBeenCalledTimes(1);
+    expect(replacement.ready).toBe(false);
+    runtime.service.session = { ...login, userID: "new-owner" };
+    const newOwner = runtime.createDeviceSession("pool-device");
+    expect(newOwner).not.toBe(replacement);
+    await newOwner.connect();
+    runtime.dispose();
+    expect(testPorts.ports[2].end).toHaveBeenCalledTimes(1);
+    await expect(replacement.connect()).rejects.toMatchObject({ code: 499 });
+  });
+  it("does not reuse sessions across a changed login generation even before a session notification", async () => {
+    const runtime = await createConfiguredRuntime(config, { registry: registry() });
+    runtimes.push(runtime);
+    runtime.service.session = {
+      userID: "pool-owner",
+      accessToken: "fixture",
+      refreshToken: "fixture",
+      expiresIn: 3600,
+      tokenType: "bearer",
+      setting: defaultSettings(),
+    };
+    const first = runtime.createDeviceSession("pool-device");
+    runtime.service.cancelAuthentication();
+    expect(runtime.createDeviceSession("pool-device")).not.toBe(first);
+    await expect(first.connect()).rejects.toMatchObject({ code: 499 });
+  });
   it("registers the dual BLE development contract with optional binding code and empty 8F payload", () => {
     const selected = registeredIntegration(
       { ...config, integrationProfile: "rowan-ble-dual" },

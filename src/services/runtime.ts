@@ -15,6 +15,7 @@ import type { RowanCodeParser } from "./qr";
 import { QrScanCoordinator } from "./scan-flow";
 import type { MqttConnection } from "../protocol/mqtt-connection";
 import { ControlledDeviceSession } from "../protocol/controlled-session";
+import { ManagedDeviceSession, type SessionCloseReason } from "../protocol/managed-session";
 import {
   maintenanceLedger,
   type MaintenanceLedger,
@@ -48,7 +49,9 @@ export interface Runtime {
   createDeviceSession: (id: string) => DeviceSession;
   unbindFlow: (id: string) => DeviceUnbindFlow;
   releaseDevice: (id: string, owner: string, revision: number) => boolean;
+  setForeground?: (foreground: boolean) => void;
 }
+let logicalSessionSequence = 0;
 export async function createRuntime(
   input: Partial<CommunicationConfig>,
   realDeviceDriver?: DeviceTransport,
@@ -91,7 +94,8 @@ export async function createRuntime(
     const wifi = contracts?.wifi ?? (await import("../protocol/native-wifi")).createWifiReader();
     check();
     let disposed = false;
-    const sessions = new Map<string, DeviceSession>();
+    const sessions = new Map<string, ManagedDeviceSession>();
+    let foreground = true;
     const maintenanceStates = new Map<string, MaintenanceLedger>();
     const eventStates = new Map<string, EventLedger>();
     const deviceEpochs = new Map<string, number>();
@@ -101,7 +105,7 @@ export async function createRuntime(
         return false;
       }
       deviceEpochs.set(id, (deviceEpochs.get(id) ?? 0) + 1);
-      sessions.get(id)?.close();
+      sessions.get(id)?.close("device_unbound");
       sessions.delete(id);
       maintenanceStates.delete(id);
       eventStates.delete(id);
@@ -117,6 +121,10 @@ export async function createRuntime(
       return flow;
     };
     const createDeviceSession = (id: string): DeviceSession => {
+      if (disposed) throw new ApiError(499, "App运行时已关闭");
+      const existing = sessions.get(id);
+      if (existing?.isCurrent) return existing;
+      existing?.close("logout_or_account_changed");
       const userID = service.userID,
         revision = service.sessionRevision;
       const deviceEpoch = deviceEpochs.get(id) ?? 0;
@@ -130,7 +138,7 @@ export async function createRuntime(
         eventState = eventLedger();
         eventStates.set(id, eventState);
       }
-      let session: DeviceSession;
+      let session: ManagedDeviceSession;
       const lifecycle = {
         current: () =>
           !disposed &&
@@ -139,20 +147,15 @@ export async function createRuntime(
           (deviceEpochs.get(id) ?? 0) === deviceEpoch,
         start: () => {
           if (!lifecycle.current()) throw new Error("设备连接上下文已变更");
-          const previous = sessions.get(id);
-          if (previous && previous !== session) previous.close();
-          sessions.set(id, session);
         },
-        stop: () => {
-          if (sessions.get(id) === session) sessions.delete(id);
-        },
+        stop: () => {},
         credentials: (signal: AbortSignal) => service.mqtt(id, signal),
       };
       const context = async (signal: AbortSignal, optionalModel = false) => {
         const device = await service.device(id, signal);
         if (device.device.id !== id) throw new Error("产品控制设备身份不一致");
         try {
-          if (!device.product) throw new ApiError(503, "产品信息尚未确认");
+          if (!device.product) throw new ApiError(503, "产品信息尚未确认", "configuration");
           return { device, model: await service.model(device.product.id, signal) };
         } catch (error) {
           if (
@@ -172,11 +175,12 @@ export async function createRuntime(
         connection: async () =>
           (await import("../protocol/mqtt-browser")).createMqttConnection({
             level: config.mqttLogLevel,
+            sessionContext: () => ({ ...session.diagnostics }),
           }),
         context: (signal) => context(signal, contracts?.realtimeModelOptional === true),
         profile: contracts?.realtime,
       });
-      session = new ControlledDeviceSession(
+      const controlled = new ControlledDeviceSession(
         inner,
         context,
         contracts?.controls,
@@ -185,6 +189,12 @@ export async function createRuntime(
         contracts?.events,
         eventState,
       );
+      session = new ManagedDeviceSession(controlled, {
+        logicalSessionID: `session-${++logicalSessionSequence}`,
+        current: lifecycle.current,
+      });
+      session.setForeground(foreground);
+      sessions.set(id, session);
       return session;
     };
     let scanner: QrScanCoordinator;
@@ -202,10 +212,10 @@ export async function createRuntime(
     });
     let revision = service.sessionRevision;
     const connections = new Set<MqttConnection>();
-    const closeConnections = () => {
+    const closeConnections = (reason: SessionCloseReason) => {
       for (const flow of unbindFlows.values()) flow.stop();
       unbindFlows.clear();
-      for (const session of [...sessions.values()]) session.close();
+      for (const session of [...sessions.values()]) session.close(reason);
       sessions.clear();
       maintenanceStates.clear();
       eventStates.clear();
@@ -218,7 +228,7 @@ export async function createRuntime(
       if (next !== revision) {
         onboarding.clear();
         scanner.clear();
-        closeConnections();
+        closeConnections("logout_or_account_changed");
         revision = next;
       }
     });
@@ -230,7 +240,7 @@ export async function createRuntime(
         unsubscribe();
         onboarding.clear();
         scanner.clear();
-        closeConnections();
+        closeConnections("runtime_disposed");
         void releaseDriver();
       },
       service,
@@ -241,6 +251,10 @@ export async function createRuntime(
       scanner,
       wifi,
       createDeviceSession,
+      setForeground: (active: boolean) => {
+        foreground = active;
+        for (const session of sessions.values()) session.setForeground(active);
+      },
       unbindFlow,
       releaseDevice,
       ...{

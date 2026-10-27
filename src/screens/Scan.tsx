@@ -19,7 +19,7 @@ import Svg, { Defs, LinearGradient, Rect, Stop } from "react-native-svg";
 import type { DeviceView } from "../services/models";
 import type { ScanDestination } from "../services/scan-flow";
 import { useApp } from "../ui/context";
-import { Busy, Button, Card, Label, Page, useAction } from "../ui/kit";
+import { Busy, Button, Label, Page, useAction } from "../ui/kit";
 
 export default function Scan() {
   const { runtime } = useApp();
@@ -36,7 +36,6 @@ function ScanContent({ runtime }: { runtime: NonNullable<ReturnType<typeof useAp
   const state = useSyncExternalStore(flow.subscribe, flow.snapshot, flow.snapshot);
   const [active, setActive] = useState(false);
   const [picking, setPicking] = useState(false);
-  const [value] = useState("");
   const [toast, setToast] = useState("");
   const [resultDevices, setResultDevices] = useState<DeviceView[] | null>(null);
   const [resultDeviceID, setResultDeviceID] = useState("");

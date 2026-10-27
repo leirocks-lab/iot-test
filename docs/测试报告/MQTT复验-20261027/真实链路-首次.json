@@ -1,0 +1,266 @@
+{
+  "timestamp": "2026-10-26T23:55:59.615Z",
+  "mode": "live-readonly",
+  "events": [
+    {
+      "elapsedMs": 8778,
+      "operation": "HTTP",
+      "method": "POST",
+      "path": "/app-api/session",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 8993,
+      "operation": "HTTP",
+      "method": "GET",
+      "path": "/iot/app-api/devices",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 8995,
+      "operation": "HOME_METADATA",
+      "deviceID": "dev_666666",
+      "online": true,
+      "productID": "prd_100",
+      "role": "sa"
+    },
+    {
+      "elapsedMs": 8997,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 8997,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 9002,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 9003,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 9006,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 9006,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 9006,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 9006,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 9006,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 9147,
+      "operation": "HTTP",
+      "method": "GET",
+      "path": "/iot/app-api/devices/dev_666666",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 9262,
+      "operation": "HTTP",
+      "method": "GET",
+      "path": "/iot/app-api/products/prd_100/thing-model",
+      "status": 200,
+      "code": 1050186001
+    },
+    {
+      "elapsedMs": 9262,
+      "operation": "MODEL_UNAVAILABLE",
+      "code": 1050186001
+    },
+    {
+      "elapsedMs": 9262,
+      "operation": "MODEL",
+      "productID": "prd_100",
+      "version": "",
+      "attributes": []
+    },
+    {
+      "elapsedMs": 10078,
+      "operation": "HTTP",
+      "method": "GET",
+      "path": "/iot/app-api/devices/dev_666666/mqtt",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 10079,
+      "operation": "ISSUED_CREDENTIALS",
+      "deviceMatches": true,
+      "fields": [
+        "host",
+        "endpoint",
+        "path",
+        "clientID",
+        "username",
+        "password",
+        "deviceID",
+        "sessionToken",
+        "expiresAt"
+      ],
+      "sts": true,
+      "expiresAt": 1793062569
+    },
+    {
+      "elapsedMs": 20174,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 20174,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 20175,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 20175,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 20176,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 20176,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 20176,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 20176,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 20306,
+      "operation": "HTTP",
+      "method": "DELETE",
+      "path": "/app-api/session",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 20307,
+      "operation": "LOGOUT",
+      "result": "PASS"
+    },
+    {
+      "elapsedMs": 20307,
+      "operation": "FAILED",
+      "name": "ApiError",
+      "code": 408,
+      "causeCode": null
+    }
+  ],
+  "assertions": [],
+  "deviceID": "dev_666666",
+  "scope": "Login + authorized device list + issued MQTT credentials + four subscriptions + zero-byte GET + 35s observation. No desired/reported writes.",
+  "execution": "FAIL",
+  "failure": {
+    "name": "ApiError",
+    "code": 408,
+    "causeCode": null
+  }
+}

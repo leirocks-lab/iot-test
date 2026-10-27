@@ -5,6 +5,7 @@ export type MqttLogLevel = "off" | "error" | "debug";
 export interface MqttLogOptions {
   level?: MqttLogLevel;
   logger?: Logger;
+  sessionContext?: () => { logicalSessionID: string; attempt: number; closeReason: string };
 }
 type Event =
   | "connect_attempt"
@@ -104,9 +105,11 @@ function errorInfo(error: unknown) {
 export class MqttDiagnostics {
   private level: MqttLogLevel;
   private logger: Logger;
+  private sessionContext?: MqttLogOptions["sessionContext"];
   constructor(options: MqttLogOptions = {}) {
     this.level = options.level ?? "off";
     this.logger = options.logger ?? new ConsoleLogger();
+    this.sessionContext = options.sessionContext;
     if (!["off", "error", "debug"].includes(this.level))
       throw new Error("Invalid ROWAN_MQTT_LOG_LEVEL; expected off, error or debug");
   }
@@ -127,6 +130,7 @@ export class MqttDiagnostics {
           connectionID,
           deviceID: metadata(deviceID),
           event,
+          ...this.sessionContext?.(),
           ...(safeTopic !== undefined ? { topic: safeTopic } : {}),
           ...details(),
         };

@@ -1,0 +1,256 @@
+{
+  "deviceID": "dev_666666",
+  "baseline": {
+    "connectAttempts": 1,
+    "connected": 1,
+    "subacks": 4,
+    "queries": 1,
+    "closes": 0,
+    "disconnects": 0,
+    "logicalSessionIDs": [
+      "session-1"
+    ],
+    "connectionIDs": [
+      "mqtt-1"
+    ]
+  },
+  "steps": [
+    {
+      "step": "首页进入设备页",
+      "url": "http://localhost:8081/device/dev_666666",
+      "counts": {
+        "connectAttempts": 1,
+        "connected": 1,
+        "subacks": 4,
+        "queries": 1,
+        "closes": 0,
+        "disconnects": 0,
+        "logicalSessionIDs": [
+          "session-1"
+        ],
+        "connectionIDs": [
+          "mqtt-1"
+        ]
+      }
+    },
+    {
+      "step": "设备页返回首页",
+      "url": "http://localhost:8081/home",
+      "counts": {
+        "connectAttempts": 1,
+        "connected": 1,
+        "subacks": 4,
+        "queries": 1,
+        "closes": 0,
+        "disconnects": 0,
+        "logicalSessionIDs": [
+          "session-1"
+        ],
+        "connectionIDs": [
+          "mqtt-1"
+        ]
+      }
+    },
+    {
+      "step": "再次进入设备页并打开更多页",
+      "url": "http://localhost:8081/device/dev_666666/more",
+      "counts": {
+        "connectAttempts": 1,
+        "connected": 1,
+        "subacks": 4,
+        "queries": 1,
+        "closes": 0,
+        "disconnects": 0,
+        "logicalSessionIDs": [
+          "session-1"
+        ],
+        "connectionIDs": [
+          "mqtt-1"
+        ]
+      }
+    },
+    {
+      "step": "更多页经设备页返回首页",
+      "url": "http://localhost:8081/home",
+      "counts": {
+        "connectAttempts": 1,
+        "connected": 1,
+        "subacks": 4,
+        "queries": 1,
+        "closes": 0,
+        "disconnects": 0,
+        "logicalSessionIDs": [
+          "session-1"
+        ],
+        "connectionIDs": [
+          "mqtt-1"
+        ]
+      }
+    },
+    {
+      "step": "原页面进入后台",
+      "visibility": "visible",
+      "counts": {
+        "connectAttempts": 1,
+        "connected": 1,
+        "subacks": 4,
+        "queries": 1,
+        "closes": 0,
+        "disconnects": 0,
+        "logicalSessionIDs": [
+          "session-1"
+        ],
+        "connectionIDs": [
+          "mqtt-1"
+        ]
+      }
+    }
+  ],
+  "backgroundStartedAt": "2026-10-27T00:45:42.112Z",
+  "final": {
+    "connectAttempts": 1,
+    "connected": 1,
+    "subacks": 4,
+    "queries": 1,
+    "closes": 0,
+    "disconnects": 0,
+    "logicalSessionIDs": [
+      "session-1"
+    ],
+    "connectionIDs": [
+      "mqtt-1"
+    ]
+  },
+  "finishedAt": "2026-10-27T00:46:41.849Z",
+  "events": [
+    {
+      "timestamp": "2026-10-27T00:44:10.182Z",
+      "event": "connect_attempt",
+      "logicalSessionID": "session-1",
+      "connectionID": "mqtt-1",
+      "attempt": 1,
+      "closeReason": "communication_failure"
+    },
+    {
+      "timestamp": "2026-10-27T00:44:13.112Z",
+      "event": "connected",
+      "logicalSessionID": "session-1",
+      "connectionID": "mqtt-1",
+      "attempt": 1,
+      "closeReason": "communication_failure"
+    },
+    {
+      "timestamp": "2026-10-27T00:44:13.313Z",
+      "event": "subscribe",
+      "logicalSessionID": "session-1",
+      "connectionID": "mqtt-1",
+      "attempt": 1,
+      "closeReason": "communication_failure",
+      "topic": "$aws/things/dev_666666/shadow/get/accepted"
+    },
+    {
+      "timestamp": "2026-10-27T00:44:13.898Z",
+      "event": "suback",
+      "logicalSessionID": "session-1",
+      "connectionID": "mqtt-1",
+      "attempt": 1,
+      "closeReason": "communication_failure",
+      "topic": "$aws/things/dev_666666/shadow/get/accepted"
+    },
+    {
+      "timestamp": "2026-10-27T00:44:13.898Z",
+      "event": "subscribe",
+      "logicalSessionID": "session-1",
+      "connectionID": "mqtt-1",
+      "attempt": 1,
+      "closeReason": "communication_failure",
+      "topic": "$aws/things/dev_666666/shadow/get/rejected"
+    },
+    {
+      "timestamp": "2026-10-27T00:44:14.560Z",
+      "event": "suback",
+      "logicalSessionID": "session-1",
+      "connectionID": "mqtt-1",
+      "attempt": 1,
+      "closeReason": "communication_failure",
+      "topic": "$aws/things/dev_666666/shadow/get/rejected"
+    },
+    {
+      "timestamp": "2026-10-27T00:44:14.561Z",
+      "event": "subscribe",
+      "logicalSessionID": "session-1",
+      "connectionID": "mqtt-1",
+      "attempt": 1,
+      "closeReason": "communication_failure",
+      "topic": "$aws/things/dev_666666/shadow/update/accepted"
+    },
+    {
+      "timestamp": "2026-10-27T00:44:15.589Z",
+      "event": "suback",
+      "logicalSessionID": "session-1",
+      "connectionID": "mqtt-1",
+      "attempt": 1,
+      "closeReason": "communication_failure",
+      "topic": "$aws/things/dev_666666/shadow/update/accepted"
+    },
+    {
+      "timestamp": "2026-10-27T00:44:15.591Z",
+      "event": "subscribe",
+      "logicalSessionID": "session-1",
+      "connectionID": "mqtt-1",
+      "attempt": 1,
+      "closeReason": "communication_failure",
+      "topic": "$aws/things/dev_666666/shadow/update/rejected"
+    },
+    {
+      "timestamp": "2026-10-27T00:44:16.217Z",
+      "event": "suback",
+      "logicalSessionID": "session-1",
+      "connectionID": "mqtt-1",
+      "attempt": 1,
+      "closeReason": "communication_failure",
+      "topic": "$aws/things/dev_666666/shadow/update/rejected"
+    },
+    {
+      "timestamp": "2026-10-27T00:44:16.218Z",
+      "event": "publish_attempt",
+      "logicalSessionID": "session-1",
+      "connectionID": "mqtt-1",
+      "attempt": 1,
+      "closeReason": "communication_failure",
+      "topic": "$aws/things/dev_666666/shadow/get"
+    },
+    {
+      "timestamp": "2026-10-27T00:44:16.787Z",
+      "event": "puback",
+      "logicalSessionID": "session-1",
+      "connectionID": "mqtt-1",
+      "attempt": 1,
+      "closeReason": "communication_failure",
+      "topic": "$aws/things/dev_666666/shadow/get"
+    },
+    {
+      "timestamp": "2026-10-27T00:44:16.834Z",
+      "event": "message",
+      "logicalSessionID": "session-1",
+      "connectionID": "mqtt-1",
+      "attempt": 1,
+      "closeReason": "communication_failure",
+      "topic": "$aws/things/dev_666666/shadow/get/accepted"
+    }
+  ],
+  "received": [
+    {
+      "topic": "$aws/things/dev_666666/shadow/get/accepted",
+      "version": 41,
+      "reported": {
+        "Online": "online",
+        "Power": "on",
+        "TargetTemp": 10,
+        "TempCurrent": 10
+      }
+    }
+  ],
+  "backgroundResult": "未验收：临时页未激活，原页面visibility仍为visible；tabs.update(active)不受支持，未绕过限制。",
+  "roomSwitchResult": "仅全屋可选，未创建房间或更改设备归属。"
+}

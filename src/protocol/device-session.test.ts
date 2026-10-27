@@ -5,6 +5,7 @@ import {
   type DeviceSyncProfile,
 } from "./device-session";
 import { MqttConnection, type MqttCredentials, type MqttPort } from "./mqtt-connection";
+import { ControlledDeviceSession } from "./controlled-session";
 import type { DeviceView, ThingModel } from "../services/models";
 
 // Synthetic wire contract only: never selected by the production Runtime.
@@ -136,6 +137,46 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 describe("真实MQTT会话（构造协议/端口）", () => {
+  it("passes protocol online state through the runtime's controlled session wrapper", async () => {
+    const c = setup();
+    c.profile.online = (values) => values.Connection === 1;
+    const wrapper = new ControlledDeviceSession(c.session, async () => ({ device, model }));
+    const pending = wrapper.connect();
+    await vi.waitFor(() => expect(c.ports).toHaveLength(1));
+    const port = c.ports[0];
+    port.emit("connect");
+    await c.full(port, pending, { Connection: 1 });
+    expect(wrapper.online).toBe(true);
+    port.report({ kind: "delta", version: 6, reported: { Connection: 0 } });
+    expect(wrapper.online).toBe(false);
+    wrapper.close();
+    expect(wrapper.online).toBeUndefined();
+  });
+  it("exposes online only through an explicit protocol mapping while synchronized", async () => {
+    const c = setup();
+    c.profile.online = (values) =>
+      typeof values.Connection === "boolean" ? values.Connection : undefined;
+    expect(c.session.online).toBeUndefined();
+    const { pending, port } = await c.begin();
+    await c.full(port, pending, { Power: 0 });
+    expect(c.session.online).toBeUndefined();
+    port.report({ kind: "delta", version: 6, reported: { Connection: true } });
+    expect(c.session.online).toBe(true);
+    port.report({ kind: "delta", version: 7, reported: { Connection: false } });
+    expect(c.session.online).toBe(false);
+    port.report({ kind: "delta", version: 8, reported: { Connection: true } });
+    port.emit("close");
+    expect(c.session.online).toBeUndefined();
+    expect(c.session.confirmed.Connection).toBe(true);
+    c.session.close();
+  });
+  it("does not infer online from a reported field without a protocol mapping", async () => {
+    const c = setup();
+    const { pending, port } = await c.begin();
+    await c.full(port, pending, { Online: 1 });
+    expect(c.session.online).toBeUndefined();
+    c.session.close();
+  });
   it.each([
     undefined,
     null,

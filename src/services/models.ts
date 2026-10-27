@@ -172,6 +172,7 @@ export class ApiError extends Error {
   constructor(
     public code: number,
     message: string,
+    public failureKind?: import("../protocol/session-failure").SessionFailureKind,
   ) {
     super(message);
     this.name = "ApiError";
