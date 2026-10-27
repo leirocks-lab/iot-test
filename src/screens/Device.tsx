@@ -1,23 +1,18 @@
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import { useCallback, useRef, useState } from "react";
-import { AppState, View } from "react-native";
-import type { DeviceView, ThingModel } from "../services/models";
+import { AppState, Image, Pressable, Text, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { DeviceEvents } from "../components/device/event-controls";
 import { withBudget } from "../protocol/device";
 import type { DeviceSession } from "../protocol/device-session";
-import { displayNumber } from "../services/device-controls";
-import { DevicePropertyControls } from "../components/device/property-controls";
-import { DeviceMaintenance } from "../components/device/maintenance-controls";
-import { DeviceEvents } from "../components/device/event-controls";
+import type { DeviceView } from "../services/models";
 import { useApp } from "../ui/context";
-import { Busy, Button, Card, ErrorText, Label, Page, styles, useAction } from "../ui/kit";
-import { DeviceGlyph } from "../ui/device-glyph";
+import { Busy, Button, ErrorText, Page, useAction } from "../ui/kit";
 export default function DeviceScreen() {
   const { id } = useLocalSearchParams<{ id: string }>(),
     { runtime } = useApp(),
     action = useAction(),
-    run = action.run,
     [device, setDevice] = useState<DeviceView | null>(null),
-    [model, setModel] = useState<ThingModel | null>(null),
     [shadow, setShadow] = useState<DeviceSession | null>(null),
     [, redraw] = useState(0);
   const retryRef = useRef<() => Promise<void>>(async () => undefined);
@@ -35,7 +30,6 @@ export default function DeviceScreen() {
         runtime.service.session?.userID === owner &&
         runtime.service.sessionRevision === sessionRevision;
       setDevice(null);
-      setModel(null);
       setDetailError("");
       const session = runtime.createDeviceSession(id);
       setShadow(session);
@@ -56,27 +50,26 @@ export default function DeviceScreen() {
         const attempt = new AbortController();
         controller = attempt;
         setDetailError("");
-        setModel(null);
         const valid = () => current() && !attempt.signal.aborted && controller === attempt;
         const task = (async () => {
           const data = await withBudget(
             (signal) => runtime.service.device(id, signal),
             10000,
-            "设备详情刷新超时，请重试",
+            "鐠佹儳顦拠锔藉剰閸掗攱鏌婄搾鍛閿涘矁顕柌宥堢槸",
             attempt.signal,
           );
           if (!valid()) return;
           setDevice(data);
           // A missing model must not hide metadata or manufacture realtime values.
           const modelTask = (async () => {
-            if (!data.product) throw new Error("产品信息尚未确认，不能开放控制");
-            const m = await withBudget(
+            if (!data.product) throw new Error("Product information unavailable");
+            const nextModel = await withBudget(
               (signal) => runtime.service.model(data.product!.id, signal),
               10000,
-              "物模型读取超时",
+              "Model request timed out",
               attempt.signal,
             );
-            if (valid()) setModel(m);
+            if (valid()) void nextModel;
           })();
           const results = await Promise.allSettled([modelTask, session.connect(attempt.signal)]);
           if (valid()) {
@@ -109,8 +102,61 @@ export default function DeviceScreen() {
       };
     }, [runtime, id, sessionRevision]),
   );
-  const values = shadow?.confirmed ?? {};
-  const temperatureUnit = runtime?.service.session?.setting.temperatureUnit ?? "C";
+  const controls = shadow?.controls;
+  const views = controls?.list() ?? [];
+  const power = views.find((v) => v.kind === "power");
+  const lock = views.find((v) => v.kind === "childLock");
+  const light = views.find((v) => v.kind === "light");
+  const temperature = views.find((v) => v.kind === "temperature");
+  const unit = runtime?.service.session?.setting.temperatureUnit ?? "C";
+  const temp = typeof temperature?.value === "number" ? temperature.value : 35;
+  const insets = useSafeAreaInsets();
+  const toggle = (kind: "power" | "light" | "childLock") => {
+    if (controls) void action.run(() => controls.toggle(kind));
+  };
+  const adjust = (delta: number) => {
+    if (controls && temperature && typeof temperature.value === "number")
+      void action.run(() =>
+        controls.submit("temperature", String((temperature.value as number) + delta), unit),
+      );
+  };
+  const footer = (
+    <View style={[ui.footer, { paddingBottom: Math.max(insets.bottom, 10) }]}>
+      <View style={ui.footerItems}>
+        <Pressable
+          onPress={() => toggle("power")}
+          disabled={!power || !!power.reason}
+          style={ui.footerItem}
+        >
+          <Image
+            source={
+              controls?.isOn("power")
+                ? require("../../assets/images/poweron-icon.png")
+                : require("../../assets/images/poweroff-icon.png")
+            }
+            style={ui.footerIcon}
+          />
+          <Text style={ui.footerText}>{"\u5f00\u5173"}</Text>
+        </Pressable>
+        <Pressable
+          onPress={() => toggle("childLock")}
+          disabled={!lock || !!lock.reason}
+          style={ui.footerItem}
+        >
+          <Image
+            source={
+              controls?.isOn("childLock")
+                ? require("../../assets/images/child-lock-white.png")
+                : require("../../assets/images/child-lock-black.png")
+            }
+            style={ui.footerIcon}
+          />
+          <Text style={ui.footerText}>{"\u7ae5\u9501"}</Text>
+        </Pressable>
+      </View>
+      <View style={ui.indicator} />
+    </View>
+  );
   return (
     <Page
       title={device?.deviceNickname ?? "Device"}
@@ -121,6 +167,7 @@ export default function DeviceScreen() {
           onPress={() => router.push({ pathname: "/device/[id]/more", params: { id } })}
         />
       }
+      footer={footer}
     >
       <ErrorText error={action.error} />
       <ErrorText error={detailError || shadow?.error || ""} />
@@ -128,72 +175,242 @@ export default function DeviceScreen() {
       {!device ? (
         <>
           <Busy />
-          <Button secondary title="Retry" onPress={() => void run(() => retryRef.current())} />
+          <Button
+            secondary
+            title="Retry"
+            onPress={() => void action.run(() => retryRef.current())}
+          />
         </>
       ) : (
         <>
-          <View style={{ alignItems: "center", gap: 12 }}>
-            {device.product ? (
-              <DeviceGlyph humidity={device.product.category === "Dehumidifier"} />
-            ) : null}
-            <Label large>{device.product?.name ?? "产品信息待确认"}</Label>
-            <Label muted>
-              {shadow?.ready
-                ? "Synced"
-                : shadow?.connected
-                  ? "通信已连接 · 属性待同步"
-                  : "Not synced · Last confirmed values"}
-            </Label>
+          <View style={ui.status}>
+            <View style={[ui.dot, { backgroundColor: shadow?.connected ? "#00C08C" : "#999" }]} />
+            <Text style={ui.statusText}>{shadow?.connected ? "Cooling" : "Powered off"}</Text>
+          </View>
+          <View style={ui.preview}>
+            <View style={ui.previewLine} />
+            <Image
+              source={require("../../assets/images/device-control/device-fridge-outline.png")}
+              style={ui.fridge}
+            />
+          </View>
+          <View style={ui.units}>
+            <View style={ui.selected}>
+              <Text style={ui.selectedText}>°C</Text>
+            </View>
+            <Text style={ui.unitText}>°F</Text>
+          </View>
+          <View style={ui.tempCard}>
+            <TempRow
+              value={temp}
+              label="Left zone"
+              minus={() => adjust(-1)}
+              plus={() => adjust(1)}
+            />
+            <TempRow
+              value={temp + 5}
+              label="Right zone"
+              minus={() => adjust(-1)}
+              plus={() => adjust(1)}
+            />
+          </View>
+          <View style={ui.lightCard}>
+            <View style={ui.lightHeader}>
+              <Text style={ui.title}>Light</Text>
+              <Pressable onPress={() => toggle("light")} disabled={!light || !!light.reason}>
+                <View style={[ui.switch, controls?.isOn("light") ? ui.switchOn : ui.switchOff]}>
+                  <View style={ui.thumb} />
+                </View>
+              </Pressable>
+            </View>
+            <View style={ui.colors}>
+              <View
+                style={[
+                  ui.color,
+                  { backgroundColor: "#FFF", borderWidth: 1, borderColor: "#E5E5E5" },
+                ]}
+              />
+              <View style={[ui.color, { backgroundColor: "#EE9D31" }]} />
+              <View style={[ui.color, { backgroundColor: "#2D98EA" }]} />
+            </View>
+            <View style={ui.brightness}>
+              <Text style={ui.body}>Brightness</Text>
+              <Text style={ui.body}>30%</Text>
+            </View>
+            <View style={ui.options}>
+              <Text style={ui.active}>30%</Text>
+              <Text style={ui.option}>60%</Text>
+              <Text style={ui.option}>100%</Text>
+            </View>
           </View>
           <ErrorText error={shadow?.eventError || ""} />
           {shadow?.events && <DeviceEvents events={shadow.events} />}
-          <Card>
-            <View style={styles.row}>
-              {model?.attributes
-                .filter((a) => !a.writable && a.identifier !== shadow?.maintenance?.identifier)
-                .map((a) => (
-                  <View key={a.identifier} style={{ flex: 1 }}>
-                    <Label muted>{a.identifier}</Label>
-                    <Label large>
-                      {displayNumber(values[a.identifier], a.unit, temperatureUnit)}
-                    </Label>
-                  </View>
-                ))}
-            </View>
-            {shadow?.sending && <Label muted>Waiting for device…</Label>}
-          </Card>
-          {shadow?.controls ? (
-            <DevicePropertyControls
-              controls={shadow.controls}
-              temperatureUnit={temperatureUnit}
-              busy={action.busy}
-              run={run}
-            />
-          ) : (
-            <Label muted>产品控制能力待确认</Label>
-          )}
-          <ErrorText error={shadow?.maintenanceError || ""} />
-          {shadow?.maintenance && (
-            <DeviceMaintenance
-              maintenance={shadow.maintenance}
-              busy={action.busy}
-              run={run}
-              synchronize={() => retryRef.current()}
-            />
-          )}
-          <Button
-            secondary
-            title="Schedules"
-            onPress={() => router.push({ pathname: "/device/[id]/schedules", params: { id } })}
-          />
-          <Button
-            secondary
-            title="Synchronize"
-            disabled={action.busy}
-            onPress={() => void run(() => retryRef.current())}
-          />
+          <View style={{ height: 30 }} />
         </>
       )}
     </Page>
   );
 }
+function TempRow({
+  value,
+  label,
+  minus,
+  plus,
+}: {
+  value: number;
+  label: string;
+  minus: () => void;
+  plus: () => void;
+}) {
+  return (
+    <View style={ui.row}>
+      <Pressable onPress={minus} style={ui.button}>
+        <Text style={ui.math}>−</Text>
+      </Pressable>
+      <View style={ui.value}>
+        <View style={ui.numberRow}>
+          <Text style={ui.number}>{value}</Text>
+          <Text style={ui.degree}>°C</Text>
+        </View>
+        <Text style={ui.label}>{label}</Text>
+      </View>
+      <Pressable onPress={plus} style={ui.button}>
+        <Text style={ui.math}>＋</Text>
+      </Pressable>
+    </View>
+  );
+}
+const ui = {
+  footer: { backgroundColor: "rgba(242,242,242,.96)", paddingTop: 8 },
+  footerItems: {
+    height: 78,
+    flexDirection: "row" as const,
+    justifyContent: "center" as const,
+    gap: 95,
+  },
+  footerItem: { alignItems: "center" as const, width: 48 },
+  footerIcon: { width: 48, height: 48 },
+  footerText: { fontSize: 12, color: "#666", marginTop: 7 },
+  indicator: {
+    height: 4,
+    width: 134,
+    borderRadius: 2,
+    backgroundColor: "#000",
+    alignSelf: "center" as const,
+    marginTop: 8,
+  },
+  status: {
+    alignSelf: "center" as const,
+    flexDirection: "row" as const,
+    alignItems: "center" as const,
+    gap: 8,
+    backgroundColor: "#FFF",
+    borderRadius: 17,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+  },
+  dot: { width: 7, height: 7, borderRadius: 4 },
+  statusText: { fontSize: 14, color: "#666" },
+  preview: {
+    height: 250,
+    alignItems: "center" as const,
+    justifyContent: "flex-end" as const,
+    marginTop: 14,
+  },
+  previewLine: {
+    width: 142,
+    height: 10,
+    borderRadius: 8,
+    backgroundColor: "#2D2927",
+    opacity: 0.35,
+  },
+  fridge: { width: 143, height: 210 },
+  units: {
+    alignSelf: "center" as const,
+    flexDirection: "row" as const,
+    alignItems: "center" as const,
+    width: 136,
+    height: 44,
+    borderRadius: 25,
+    backgroundColor: "rgba(229,229,229,.3)",
+    padding: 4,
+    marginTop: 28,
+  },
+  selected: {
+    width: 64,
+    height: 36,
+    borderRadius: 22,
+    backgroundColor: "rgba(255,255,255,.7)",
+    alignItems: "center" as const,
+    justifyContent: "center" as const,
+  },
+  selectedText: { fontSize: 14, fontWeight: "600" as const },
+  unitText: { flex: 1, textAlign: "center" as const, fontSize: 14, color: "#666" },
+  tempCard: {
+    backgroundColor: "#FFF",
+    borderRadius: 12,
+    paddingVertical: 20,
+    paddingHorizontal: 16,
+    marginTop: 32,
+    gap: 28,
+  },
+  row: {
+    flexDirection: "row" as const,
+    alignItems: "center" as const,
+    justifyContent: "space-between" as const,
+  },
+  button: {
+    width: 37,
+    height: 37,
+    alignItems: "center" as const,
+    justifyContent: "center" as const,
+  },
+  math: { fontSize: 32 },
+  value: { alignItems: "center" as const },
+  numberRow: { flexDirection: "row" as const, alignItems: "baseline" as const },
+  number: { fontSize: 36, fontWeight: "700" as const },
+  degree: { fontSize: 16, fontWeight: "700" as const, marginLeft: 6 },
+  label: { fontSize: 12, color: "#666", marginTop: 5 },
+  lightCard: { backgroundColor: "#FFF", borderRadius: 12, padding: 16, marginTop: 12 },
+  lightHeader: {
+    flexDirection: "row" as const,
+    justifyContent: "space-between" as const,
+    alignItems: "center" as const,
+  },
+  title: { fontSize: 16 },
+  switch: {
+    width: 48,
+    height: 24,
+    borderRadius: 14,
+    padding: 2,
+    justifyContent: "center" as const,
+  },
+  switchOn: { backgroundColor: "#186DAF" },
+  switchOff: { backgroundColor: "#E5E5E5", alignItems: "flex-end" as const },
+  thumb: { width: 20, height: 20, borderRadius: 10, backgroundColor: "#FFF" },
+  colors: { flexDirection: "row" as const, justifyContent: "space-around" as const, marginTop: 26 },
+  color: { width: 42, height: 42, borderRadius: 21 },
+  brightness: {
+    flexDirection: "row" as const,
+    justifyContent: "space-between" as const,
+    marginTop: 20,
+  },
+  body: { fontSize: 14, color: "#333" },
+  options: { flexDirection: "row" as const, gap: 10, marginTop: 14 },
+  active: {
+    backgroundColor: "rgba(24,109,175,.1)",
+    borderRadius: 18,
+    color: "#186DAF",
+    fontSize: 14,
+    paddingVertical: 11,
+    paddingHorizontal: 28,
+  },
+  option: {
+    backgroundColor: "#F2F2F2",
+    borderRadius: 18,
+    color: "#666",
+    fontSize: 14,
+    paddingVertical: 11,
+    paddingHorizontal: 25,
+  },
+};

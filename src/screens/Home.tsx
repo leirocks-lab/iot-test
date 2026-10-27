@@ -15,7 +15,7 @@ import { withBudget } from "../protocol/device";
 import type { DeviceView, HomeGroup } from "../services/models";
 import { useApp, useColors } from "../ui/context";
 import { DeviceGlyph } from "../ui/device-glyph";
-import { Busy, Button, Empty, ErrorText, Page, confirm, useAction } from "../ui/kit";
+import { Busy, ErrorText, Page, confirm, useAction } from "../ui/kit";
 
 const homeLogo = require("../../assets/images/home-logo.png");
 const powerOn = require("../../assets/images/poweron-icon.png");
@@ -24,6 +24,7 @@ const choice = require("../../assets/images/multiple-choice.png");
 const choiceSelected = require("../../assets/images/multiple-choice-selected.png");
 const delect = require("../../assets/images/delect.png");
 const homeMore = require("../../assets/images/home-more.png");
+const emptyDevice = require("../../assets/images/none-device.png");
 
 function DeviceCard({
   device,
@@ -462,14 +463,17 @@ export default function Home() {
         </Pressable>
       </Modal>
       <ErrorText error={loadError} />
-      {groups && devices.length === 0 && (
-        <>
-          <Empty text="No devices yet. Add your first device." />
-          <Button title="添加设备" disabled={editing} onPress={() => router.push("/add")} />
-        </>
-      )}
-      {groups && devices.length > 0 && visible.length === 0 && (
-        <Empty text="No devices in this room" />
+      {groups && visible.length === 0 && (
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="添加设备"
+          disabled={editing}
+          onPress={() => router.push("/add")}
+          style={styles.emptyState}
+        >
+          <Image source={emptyDevice} contentFit="contain" style={styles.emptyDevice} />
+          <Text style={styles.emptyText}>暂无设备，请添加</Text>
+        </Pressable>
       )}
       <View style={styles.grid}>
         {visible.map((device) => (
@@ -565,6 +569,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     rowGap: 10,
   },
+  emptyState: { alignItems: "center", marginTop: 189 },
+  emptyDevice: { width: 60, height: 60 },
+  emptyText: { color: "#999", fontSize: 14, lineHeight: 24, marginTop: 9 },
   cardWrap: { width: "48.5%" },
   deviceCard: {
     borderRadius: 12,

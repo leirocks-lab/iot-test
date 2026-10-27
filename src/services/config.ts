@@ -1,6 +1,6 @@
+import type { MqttLogLevel } from "../protocol/mqtt-logging";
 import { allowsHttpApi, validateApiBaseUrl } from "./api-transport";
 import type { HttpLogLevel } from "./http-logging";
-import type { MqttLogLevel } from "../protocol/mqtt-logging";
 
 export interface CommunicationConfig {
   apiBaseUrl: string;
