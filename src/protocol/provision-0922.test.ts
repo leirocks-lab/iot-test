@@ -1,7 +1,15 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Buffer } from "buffer";
+import { cbc } from "@noble/ciphers/aes.js";
 import { utf8 } from "./ble";
-import { BLE_0922, cipherDigest0922, decryptRaw0922, encrypt0922, PacketStream0922 } from "./ble-0922";
+import {
+  BLE_0922,
+  cipherDigest0922,
+  decrypt0922,
+  decryptRaw0922,
+  encrypt0922,
+  PacketStream0922,
+} from "./ble-0922";
 import { Ble0822DeviceTransport, type BleConnection, type BleRadio } from "./ble-radio";
 import { Provisioner0922 } from "./provision-0922";
 
@@ -103,9 +111,16 @@ class LegacyRadio implements BleRadio {
   );
   reply(type: string, error_code: number) {
     const response = JSON.stringify({ type, data: { error_code } });
+    const plain = utf8(response);
+    const padded = new Uint8Array((Math.floor(plain.length / 16) + 1) * 16);
+    padded.set(plain);
     const payload = this.encrypted
-      ? utf8(Buffer.from(encrypt0922(response, key)).toString("base64"))
-      : utf8(response);
+      ? utf8(
+          Buffer.from(
+            cbc(key, utf8("0000000000000000"), { disablePadding: true }).encrypt(padded),
+          ).toString("base64"),
+        )
+      : plain;
     this.bytes!(new Uint8Array([0, ...payload]));
   }
 }
@@ -123,6 +138,18 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 describe("0922 legacy provisioning port (synthetic firmware only)", () => {
+  it("decodes zero-filled firmware notifications and older PKCS#7 notifications", () => {
+    const response = JSON.stringify({ type: "status_update", data: { error_code: 0 } });
+    const padded = new Uint8Array((Math.floor(utf8(response).length / 16) + 1) * 16);
+    padded.set(utf8(response));
+    const zeroFilled = cbc(key, utf8("0000000000000000"), {
+      disablePadding: true,
+    }).encrypt(padded);
+    expect(decrypt0922(utf8(Buffer.from(zeroFilled).toString("base64")), key)).toBe(response);
+    expect(decrypt0922(utf8(Buffer.from(encrypt0922(response, key)).toString("base64")), key)).toBe(
+      response,
+    );
+  });
   it("matches the uppercase digest in the firmware reference log", () => {
     expect(cipherDigest0922("fc8d3d029760", "CheetahIOT", "Cheetah02")).toBe(
       "B721D14AEABE28FB6DD000AAC06261B5",

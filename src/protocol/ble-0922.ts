@@ -67,13 +67,34 @@ export function decryptRaw0922(payload: Uint8Array, key: Uint8Array) {
     throw new ApiError(0x63, "0922通知解密或编码失败");
   }
 }
-/** Device → App notifications are Base64 text around the AES-CBC ciphertext. */
+/** Device → App notifications are Base64 text. Firmware uses zero-filled CBC blocks. */
 export function decrypt0922(payload: Uint8Array, key: Uint8Array) {
   const base64 = new TextDecoder().decode(payload).replace(/\s/g, "");
   const raw = new Uint8Array(Buffer.from(base64, "base64"));
+  let plain: Uint8Array | undefined;
   try {
-    return decryptRaw0922(raw, key);
+    plain = cbc(key, iv, { disablePadding: true }).decrypt(raw);
+    let end = plain.length;
+    const padding = plain[end - 1];
+    if (padding === 0) {
+      while (end > 0 && plain[end - 1] === 0) end--;
+    } else if (
+      padding !== undefined &&
+      padding >= 1 &&
+      padding <= 16 &&
+      plain.subarray(end - padding).every((byte) => byte === padding)
+    ) {
+      // Keep decoding older PKCS#7 notifications as well as observed zero-filled ones.
+      end -= padding;
+    } else {
+      throw new Error("Unsupported 0922 notification padding");
+    }
+    if (end === 0) throw new Error("Empty 0922 notification");
+    return new TextDecoder("utf-8", { fatal: true }).decode(plain.subarray(0, end));
+  } catch {
+    throw new ApiError(0x63, "0922通知解密或编码失败");
   } finally {
+    plain?.fill(0);
     raw.fill(0);
   }
 }
