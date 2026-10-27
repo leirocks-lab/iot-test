@@ -25,4 +25,16 @@ describe("V1.6 deployment registration", () => {
     });
     expect(() => registeredIntegration(config, deploymentIntegrations)).toThrow("环境");
   });
+  it("keeps read-only Shadow synchronization available in the dual BLE deployment", () => {
+    const config = communicationConfig({
+      environment: "development",
+      apiBaseUrl: "https://api.example.test",
+      integrationProfile: "rowan-ble-dual",
+    });
+    const { contracts } = registeredIntegration(config, deploymentIntegrations);
+    expect(contracts.onboarding).toBeDefined();
+    expect(contracts.realtime).toBeTypeOf("function");
+    expect(contracts.realtimeModelOptional).toBe(true);
+    expect(contracts.controls).toBeUndefined();
+  });
 });

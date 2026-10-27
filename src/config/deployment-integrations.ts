@@ -17,6 +17,8 @@ export const deploymentIntegrations: IntegrationRegistry = Object.freeze({
     environments: ["development", "preview"],
     create: () => ({
       contracts: {
+        realtime: createClassicShadowResolver(),
+        realtimeModelOptional: true,
         onboarding: {
           // App writes 0x8F with empty DATA after validating firmware challenge 0x0F.
           profile: { factoryReply: new Uint8Array(), stageTimeout: 120000 },
