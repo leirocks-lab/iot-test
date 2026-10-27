@@ -89,12 +89,12 @@ function DeviceCard({
       };
     }, [runtime, device.device.id]),
   );
-  const reportedOnline = shadow?.confirmed.Online;
+  const reportedConnection = shadow?.confirmed.ConnectType;
   const online =
     shadow?.ready && shadow.connected
-      ? reportedOnline === "online"
+      ? reportedConnection === "online"
         ? true
-        : reportedOnline === "offline"
+        : reportedConnection === "offline"
           ? false
           : undefined
       : undefined;

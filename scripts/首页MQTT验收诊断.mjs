@@ -29,7 +29,7 @@ function harness({
   sending = false,
   controls = true,
   realtimeOnline = true,
-  confirmed = { Online: "online", Power: "on" },
+  confirmed = { ConnectType: "online", Power: "on" },
 } = {}) {
   const slots = [],
     effects = [],
@@ -318,7 +318,7 @@ await check("UI-10", "RF-0012-AC-007：MQTT断开后不继续呈现可确认在�
 });
 await check(
   "UI-11",
-  "CHG-20261027-001：无产品在线映射仍按reported.Online显示绿点，不开放控制",
+  "CHG-20261027-003：无产品在线映射仍按reported.ConnectType显示绿点，不开放控制",
   async () => {
     const h = harness({ online: true, controls: false });
     // Simulate a session whose product has no confirmed online mapping.
@@ -340,7 +340,7 @@ await check("UI-12", "已确认离线覆盖REST在线缓存并禁止控制", asy
   const h = harness({
     online: true,
     realtimeOnline: false,
-    confirmed: { Online: "offline", Power: "on" },
+    confirmed: { ConnectType: "offline", Power: "on" },
   });
   await flush(h);
   const actual = {
@@ -354,9 +354,14 @@ await check("UI-12", "已确认离线覆盖REST在线缓存并禁止控制", asy
     pass: actual.color === "#B9BDBE" && actual.disabled && actual.offline,
   };
 });
-await check("UI-13", "缺少或未知Online时灰点且不开放控制", async () => {
+await check("UI-13", "缺少或未知ConnectType、仅有旧Online时灰点且不开放控制", async () => {
   const actual = [];
-  for (const confirmed of [{}, { Online: "invalid" }, { Online: true }]) {
+  for (const confirmed of [
+    {},
+    { ConnectType: "invalid" },
+    { ConnectType: true },
+    { Online: "online" },
+  ]) {
     const h = harness({ online: true, confirmed });
     await flush(h);
     actual.push({ color: dot(h), disabled: power(h).props.disabled, label: dotLabel(h) });
@@ -369,7 +374,7 @@ await check("UI-13", "缺少或未知Online时灰点且不开放控制", async (
 });
 await check("UI-14", "RF-0012-AC-011：圆点旁无可见状态文字", async () => {
   const actual = [];
-  for (const confirmed of [{ Online: "online" }, { Online: "offline" }, {}]) {
+  for (const confirmed of [{ ConnectType: "online" }, { ConnectType: "offline" }, {}]) {
     const h = harness({ confirmed });
     await flush(h);
     actual.push(
@@ -380,7 +385,7 @@ await check("UI-14", "RF-0012-AC-011：圆点旁无可见状态文字", async ()
   }
   return { expected: [0, 0, 0], actual, pass: actual.every((v) => v === 0) };
 });
-await check("UI-15", "RF-0012-AC-007：已同步但断连时忽略影子旧online", async () => {
+await check("UI-15", "RF-0012-AC-007：已同步但断连时忽略影子旧ConnectType", async () => {
   const h = harness();
   await flush(h);
   h.session.connected = false;
@@ -406,6 +411,23 @@ await check("UI-16", "共享会话自动恢复后清除首次连接错误", asyn
     expected: "恢复后清除错误并显示绿点",
     actual,
     pass: initiallyVisible && !actual.errorAfterRecovery && actual.color === "#1CC787",
+  };
+});
+await check("UI-17", "新旧在线字段冲突时只采用ConnectType", async () => {
+  const cases = [
+    { confirmed: { ConnectType: "online", Online: "offline" }, color: "#1CC787" },
+    { confirmed: { ConnectType: "offline", Online: "online" }, color: "#B9BDBE" },
+  ];
+  const actual = [];
+  for (const item of cases) {
+    const h = harness({ confirmed: item.confirmed });
+    await flush(h);
+    actual.push(dot(h));
+  }
+  return {
+    expected: cases.map((item) => item.color),
+    actual,
+    pass: actual.every((color, index) => color === cases[index].color),
   };
 });
 const report = {
