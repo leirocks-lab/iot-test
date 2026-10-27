@@ -1,0 +1,749 @@
+{
+  "timestamp": "2026-10-26T23:57:09.901Z",
+  "mode": "live-readonly",
+  "events": [
+    {
+      "elapsedMs": 1052,
+      "operation": "HTTP",
+      "method": "POST",
+      "path": "/app-api/session",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 1211,
+      "operation": "HTTP",
+      "method": "GET",
+      "path": "/iot/app-api/devices",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 1213,
+      "operation": "HOME_METADATA",
+      "deviceID": "dev_666666",
+      "online": true,
+      "productID": "prd_100",
+      "role": "sa"
+    },
+    {
+      "elapsedMs": 1215,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 1216,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 1223,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 1224,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 1228,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 1228,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 1229,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 1229,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 1229,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 1328,
+      "operation": "HTTP",
+      "method": "GET",
+      "path": "/iot/app-api/devices/dev_666666",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 1442,
+      "operation": "HTTP",
+      "method": "GET",
+      "path": "/iot/app-api/products/prd_100/thing-model",
+      "status": 200,
+      "code": 1050186001
+    },
+    {
+      "elapsedMs": 1442,
+      "operation": "MODEL_UNAVAILABLE",
+      "code": 1050186001
+    },
+    {
+      "elapsedMs": 1443,
+      "operation": "MODEL",
+      "productID": "prd_100",
+      "version": "",
+      "attributes": []
+    },
+    {
+      "elapsedMs": 2216,
+      "operation": "HTTP",
+      "method": "GET",
+      "path": "/iot/app-api/devices/dev_666666/mqtt",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 2217,
+      "operation": "ISSUED_CREDENTIALS",
+      "deviceMatches": true,
+      "fields": [
+        "host",
+        "endpoint",
+        "path",
+        "clientID",
+        "username",
+        "password",
+        "deviceID",
+        "sessionToken",
+        "expiresAt"
+      ],
+      "sts": true,
+      "expiresAt": 1793062631
+    },
+    {
+      "elapsedMs": 2218,
+      "operation": "TRANSPORT_FACTORY"
+    },
+    {
+      "elapsedMs": 2222,
+      "operation": "CONNECT_BEGIN"
+    },
+    {
+      "elapsedMs": 2225,
+      "operation": "MQTT_DIAGNOSTIC",
+      "entry": {
+        "timestamp": "2026-10-26T23:57:12.127Z",
+        "mode": "real",
+        "connectionID": "mqtt-1",
+        "deviceID": "dev_666666",
+        "event": "connect_attempt"
+      }
+    },
+    {
+      "elapsedMs": 4274,
+      "operation": "MQTT_DIAGNOSTIC",
+      "entry": {
+        "timestamp": "2026-10-26T23:57:14.177Z",
+        "mode": "real",
+        "connectionID": "mqtt-1",
+        "deviceID": "dev_666666",
+        "event": "connected"
+      }
+    },
+    {
+      "elapsedMs": 4274,
+      "operation": "CONNECTION",
+      "connected": true
+    },
+    {
+      "elapsedMs": 4274,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": true,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 4274,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": true,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 4275,
+      "operation": "CONNECT_OK"
+    },
+    {
+      "elapsedMs": 4372,
+      "operation": "HTTP",
+      "method": "GET",
+      "path": "/iot/app-api/devices/dev_666666",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 4452,
+      "operation": "HTTP",
+      "method": "GET",
+      "path": "/iot/app-api/products/prd_100/thing-model",
+      "status": 200,
+      "code": 1050186001
+    },
+    {
+      "elapsedMs": 4452,
+      "operation": "MODEL_UNAVAILABLE",
+      "code": 1050186001
+    },
+    {
+      "elapsedMs": 4452,
+      "operation": "MODEL",
+      "productID": "prd_100",
+      "version": "",
+      "attributes": []
+    },
+    {
+      "elapsedMs": 4453,
+      "operation": "SUBSCRIBE",
+      "topic": "$aws/things/dev_666666/shadow/get/accepted"
+    },
+    {
+      "elapsedMs": 4454,
+      "operation": "MQTT_DIAGNOSTIC",
+      "entry": {
+        "timestamp": "2026-10-26T23:57:14.358Z",
+        "mode": "real",
+        "connectionID": "mqtt-1",
+        "deviceID": "dev_666666",
+        "event": "subscribe",
+        "topic": "$aws/things/dev_666666/shadow/get/accepted"
+      }
+    },
+    {
+      "elapsedMs": 4809,
+      "operation": "MQTT_DIAGNOSTIC",
+      "entry": {
+        "timestamp": "2026-10-26T23:57:14.713Z",
+        "mode": "real",
+        "connectionID": "mqtt-1",
+        "deviceID": "dev_666666",
+        "event": "suback",
+        "topic": "$aws/things/dev_666666/shadow/get/accepted"
+      }
+    },
+    {
+      "elapsedMs": 4810,
+      "operation": "SUBACK",
+      "topic": "$aws/things/dev_666666/shadow/get/accepted"
+    },
+    {
+      "elapsedMs": 4810,
+      "operation": "SUBSCRIBE",
+      "topic": "$aws/things/dev_666666/shadow/get/rejected"
+    },
+    {
+      "elapsedMs": 4810,
+      "operation": "MQTT_DIAGNOSTIC",
+      "entry": {
+        "timestamp": "2026-10-26T23:57:14.714Z",
+        "mode": "real",
+        "connectionID": "mqtt-1",
+        "deviceID": "dev_666666",
+        "event": "subscribe",
+        "topic": "$aws/things/dev_666666/shadow/get/rejected"
+      }
+    },
+    {
+      "elapsedMs": 5171,
+      "operation": "MQTT_DIAGNOSTIC",
+      "entry": {
+        "timestamp": "2026-10-26T23:57:15.075Z",
+        "mode": "real",
+        "connectionID": "mqtt-1",
+        "deviceID": "dev_666666",
+        "event": "suback",
+        "topic": "$aws/things/dev_666666/shadow/get/rejected"
+      }
+    },
+    {
+      "elapsedMs": 5171,
+      "operation": "SUBACK",
+      "topic": "$aws/things/dev_666666/shadow/get/rejected"
+    },
+    {
+      "elapsedMs": 5171,
+      "operation": "SUBSCRIBE",
+      "topic": "$aws/things/dev_666666/shadow/update/accepted"
+    },
+    {
+      "elapsedMs": 5171,
+      "operation": "MQTT_DIAGNOSTIC",
+      "entry": {
+        "timestamp": "2026-10-26T23:57:15.075Z",
+        "mode": "real",
+        "connectionID": "mqtt-1",
+        "deviceID": "dev_666666",
+        "event": "subscribe",
+        "topic": "$aws/things/dev_666666/shadow/update/accepted"
+      }
+    },
+    {
+      "elapsedMs": 5527,
+      "operation": "MQTT_DIAGNOSTIC",
+      "entry": {
+        "timestamp": "2026-10-26T23:57:15.431Z",
+        "mode": "real",
+        "connectionID": "mqtt-1",
+        "deviceID": "dev_666666",
+        "event": "suback",
+        "topic": "$aws/things/dev_666666/shadow/update/accepted"
+      }
+    },
+    {
+      "elapsedMs": 5527,
+      "operation": "SUBACK",
+      "topic": "$aws/things/dev_666666/shadow/update/accepted"
+    },
+    {
+      "elapsedMs": 5527,
+      "operation": "SUBSCRIBE",
+      "topic": "$aws/things/dev_666666/shadow/update/rejected"
+    },
+    {
+      "elapsedMs": 5528,
+      "operation": "MQTT_DIAGNOSTIC",
+      "entry": {
+        "timestamp": "2026-10-26T23:57:15.432Z",
+        "mode": "real",
+        "connectionID": "mqtt-1",
+        "deviceID": "dev_666666",
+        "event": "subscribe",
+        "topic": "$aws/things/dev_666666/shadow/update/rejected"
+      }
+    },
+    {
+      "elapsedMs": 5896,
+      "operation": "MQTT_DIAGNOSTIC",
+      "entry": {
+        "timestamp": "2026-10-26T23:57:15.800Z",
+        "mode": "real",
+        "connectionID": "mqtt-1",
+        "deviceID": "dev_666666",
+        "event": "suback",
+        "topic": "$aws/things/dev_666666/shadow/update/rejected"
+      }
+    },
+    {
+      "elapsedMs": 5896,
+      "operation": "SUBACK",
+      "topic": "$aws/things/dev_666666/shadow/update/rejected"
+    },
+    {
+      "elapsedMs": 5897,
+      "direction": "app-to-broker",
+      "operation": "PUBLISH",
+      "topic": "$aws/things/dev_666666/shadow/get",
+      "bytes": 0,
+      "payload": "[EMPTY:0 bytes]"
+    },
+    {
+      "elapsedMs": 5898,
+      "operation": "MQTT_DIAGNOSTIC",
+      "entry": {
+        "timestamp": "2026-10-26T23:57:15.801Z",
+        "mode": "real",
+        "connectionID": "mqtt-1",
+        "deviceID": "dev_666666",
+        "event": "publish_attempt",
+        "topic": "$aws/things/dev_666666/shadow/get",
+        "direction": "out",
+        "bytes": 0,
+        "payload": "[EMPTY]",
+        "payloadType": "empty",
+        "truncated": false
+      }
+    },
+    {
+      "elapsedMs": 6237,
+      "operation": "MQTT_DIAGNOSTIC",
+      "entry": {
+        "timestamp": "2026-10-26T23:57:16.141Z",
+        "mode": "real",
+        "connectionID": "mqtt-1",
+        "deviceID": "dev_666666",
+        "event": "puback",
+        "topic": "$aws/things/dev_666666/shadow/get"
+      }
+    },
+    {
+      "elapsedMs": 6238,
+      "operation": "PUBACK",
+      "topic": "$aws/things/dev_666666/shadow/get"
+    },
+    {
+      "elapsedMs": 6375,
+      "operation": "MQTT_DIAGNOSTIC",
+      "entry": {
+        "timestamp": "2026-10-26T23:57:16.277Z",
+        "mode": "real",
+        "connectionID": "mqtt-1",
+        "deviceID": "dev_666666",
+        "event": "message",
+        "topic": "$aws/things/dev_666666/shadow/get/accepted",
+        "direction": "in",
+        "bytes": 1107,
+        "payload": {
+          "state": {
+            "desired": {
+              "Power": "off",
+              "TargetTemp": 14,
+              "DeviceId": "dev_666666",
+              "CommandType": "app"
+            },
+            "reported": {
+              "DeviceId": "dev_666666",
+              "Power": "on",
+              "Mode": "cool",
+              "TargetTemp": 10,
+              "TargetHumidity": 60,
+              "TempCurrent": 10,
+              "HumidityCurrent": 58,
+              "LightSwitch": true,
+              "LightBrightness": 30,
+              "ChildLock": false,
+              "Mute": false,
+              "Online": "online",
+              "MockTest": "rowan"
+            },
+            "delta": {
+              "Power": "off",
+              "TargetTemp": 14,
+              "CommandType": "app"
+            }
+          },
+          "metadata": {
+            "desired": {
+              "Power": {
+                "timestamp": 1793029617
+              },
+              "TargetTemp": {
+                "timestamp": 1793029617
+              },
+              "DeviceId": {
+                "timestamp": 1793029617
+              },
+              "CommandType": {
+                "timestamp": 1793029617
+              }
+            },
+            "reported": {
+              "DeviceId": {
+                "timestamp": 1793030230
+              },
+              "Power": {
+                "timestamp": 1793030020
+              },
+              "Mode": {
+                "timestamp": 1793030020
+              },
+              "TargetTemp": {
+                "timestamp": 1793030020
+              },
+              "TargetHumidity": {
+                "timestamp": 1793030020
+              },
+              "TempCurrent": {
+                "timestamp": 1793030230
+              },
+              "HumidityCurrent": {
+                "timestamp": 1793030230
+              },
+              "LightSwitch": {
+                "timestamp": 1793030020
+              },
+              "LightBrightness": {
+                "timestamp": 1793030020
+              },
+              "ChildLock": {
+                "timestamp": 1793030020
+              },
+              "Mute": {
+                "timestamp": 1793030020
+              },
+              "Online": {
+                "timestamp": 1793030020
+              },
+              "MockTest": {
+                "timestamp": 1793030019
+              }
+            }
+          },
+          "version": 41,
+          "timestamp": 1793059035
+        },
+        "truncated": false,
+        "payloadType": "json"
+      }
+    },
+    {
+      "elapsedMs": 6377,
+      "direction": "broker-to-app",
+      "topic": "$aws/things/dev_666666/shadow/get/accepted",
+      "bytes": 1107,
+      "payload": {
+        "state": {
+          "desired": {
+            "Power": "off",
+            "TargetTemp": 14,
+            "DeviceId": "dev_666666",
+            "CommandType": "app"
+          },
+          "reported": {
+            "DeviceId": "dev_666666",
+            "Power": "on",
+            "Mode": "cool",
+            "TargetTemp": 10,
+            "TargetHumidity": 60,
+            "TempCurrent": 10,
+            "HumidityCurrent": 58,
+            "LightSwitch": true,
+            "LightBrightness": 30,
+            "ChildLock": false,
+            "Mute": false,
+            "Online": "online",
+            "MockTest": "rowan"
+          },
+          "delta": {
+            "Power": "off",
+            "TargetTemp": 14,
+            "CommandType": "app"
+          }
+        },
+        "metadata": {
+          "desired": {
+            "Power": {
+              "timestamp": 1793029617
+            },
+            "TargetTemp": {
+              "timestamp": 1793029617
+            },
+            "DeviceId": {
+              "timestamp": 1793029617
+            },
+            "CommandType": {
+              "timestamp": 1793029617
+            }
+          },
+          "reported": {
+            "DeviceId": {
+              "timestamp": 1793030230
+            },
+            "Power": {
+              "timestamp": 1793030020
+            },
+            "Mode": {
+              "timestamp": 1793030020
+            },
+            "TargetTemp": {
+              "timestamp": 1793030020
+            },
+            "TargetHumidity": {
+              "timestamp": 1793030020
+            },
+            "TempCurrent": {
+              "timestamp": 1793030230
+            },
+            "HumidityCurrent": {
+              "timestamp": 1793030230
+            },
+            "LightSwitch": {
+              "timestamp": 1793030020
+            },
+            "LightBrightness": {
+              "timestamp": 1793030020
+            },
+            "ChildLock": {
+              "timestamp": 1793030020
+            },
+            "Mute": {
+              "timestamp": 1793030020
+            },
+            "Online": {
+              "timestamp": 1793030020
+            },
+            "MockTest": {
+              "timestamp": 1793030019
+            }
+          }
+        },
+        "version": 41,
+        "timestamp": 1793059035
+      }
+    },
+    {
+      "elapsedMs": 6379,
+      "operation": "SESSION_STATE",
+      "ready": true,
+      "connected": true,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 6381,
+      "operation": "INITIAL_REPORTED",
+      "ready": true,
+      "connected": true,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false,
+      "confirmed": {
+        "Power": "on",
+        "Mode": "cool",
+        "TargetTemp": 10,
+        "TargetHumidity": 60,
+        "TempCurrent": 10,
+        "HumidityCurrent": 58,
+        "LightSwitch": true,
+        "LightBrightness": 30,
+        "ChildLock": false,
+        "Mute": false,
+        "Online": "online",
+        "MockTest": "rowan"
+      },
+      "controlError": "产品控制映射尚未配置"
+    },
+    {
+      "elapsedMs": 41398,
+      "operation": "FINAL_REPORTED",
+      "ready": true,
+      "connected": true,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false,
+      "confirmed": {
+        "Power": "on",
+        "Mode": "cool",
+        "TargetTemp": 10,
+        "TargetHumidity": 60,
+        "TempCurrent": 10,
+        "HumidityCurrent": 58,
+        "LightSwitch": true,
+        "LightBrightness": 30,
+        "ChildLock": false,
+        "Mute": false,
+        "Online": "online",
+        "MockTest": "rowan"
+      },
+      "controlError": "产品控制映射尚未配置"
+    },
+    {
+      "elapsedMs": 41400,
+      "operation": "MQTT_DIAGNOSTIC",
+      "entry": {
+        "timestamp": "2026-10-26T23:57:51.304Z",
+        "mode": "real",
+        "connectionID": "mqtt-1",
+        "deviceID": "dev_666666",
+        "event": "close_requested"
+      }
+    },
+    {
+      "elapsedMs": 41403,
+      "operation": "CONNECTION",
+      "connected": false
+    },
+    {
+      "elapsedMs": 41403,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 41403,
+      "operation": "SESSION_STATE",
+      "ready": false,
+      "connected": false,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false
+    },
+    {
+      "elapsedMs": 41411,
+      "operation": "MQTT_DIAGNOSTIC",
+      "entry": {
+        "timestamp": "2026-10-26T23:57:51.315Z",
+        "mode": "real",
+        "connectionID": "mqtt-1",
+        "deviceID": "dev_666666",
+        "event": "disconnected"
+      }
+    },
+    {
+      "elapsedMs": 41502,
+      "operation": "HTTP",
+      "method": "DELETE",
+      "path": "/app-api/session",
+      "status": 200,
+      "code": 0
+    },
+    {
+      "elapsedMs": 41502,
+      "operation": "LOGOUT",
+      "result": "PASS"
+    }
+  ],
+  "assertions": [],
+  "deviceID": "dev_666666",
+  "scope": "Login + authorized device list + issued MQTT credentials + four subscriptions + zero-byte GET + 35s observation. No desired/reported writes.",
+  "initialSynchronized": true,
+  "finalSynchronized": true,
+  "execution": "PASS"
+}

@@ -14,6 +14,7 @@ import { DeviceShareFlow } from "./device-share";
 
 const product: Product = {
   id: "actual-product",
+  deviceProductID: "LF-WM05",
   name: "Backend product",
   modelName: "Actual01",
   seriesName: "Actual",
@@ -45,6 +46,9 @@ function setup() {
     setting: defaultSettings(),
   };
   vi.spyOn(service, "product").mockResolvedValue(product);
+  vi.spyOn(service, "products").mockResolvedValue([
+    { category: product.category, products: [product] },
+  ]);
   vi.spyOn(service, "device").mockResolvedValue(view);
   return { service, http };
 }
@@ -97,6 +101,25 @@ describe("real-only device onboarding", () => {
     expect(flow.state.binding).toBeUndefined();
     flow.stop();
   });
+  it("does not substitute the catalog ID when the product list omits device productid", async () => {
+    const { service } = setup();
+    vi.spyOn(service, "products").mockResolvedValue([
+      { category: product.category, products: [{ ...product, deviceProductID: undefined }] },
+    ]);
+    const connection = vi.spyOn(service, "connection");
+    const runner = vi.spyOn(Provisioner0822.prototype, "run");
+    const flow = new AddDeviceFlow(service, new UnavailableDeviceTransport(), {
+      real: contract,
+      wifi,
+    });
+    await flow.select(candidate);
+    await expect(flow.provision("Actual WiFi", "pass")).rejects.toThrow(
+      "产品列表未提供设备端 productid",
+    );
+    expect(connection).not.toHaveBeenCalled();
+    expect(runner).not.toHaveBeenCalled();
+    flow.stop();
+  });
   it("uses issued bind codes and confirmed runner; reconciles uncertain results without another write", async () => {
     const { service } = setup();
     vi.spyOn(service, "connection").mockResolvedValue({
@@ -129,6 +152,7 @@ describe("real-only device onboarding", () => {
     expect(flow.state.binding).toEqual(binding);
     expect(status).toHaveBeenCalledTimes(2);
     expect(runner).toHaveBeenCalledOnce();
+    expect(runner.mock.calls[0][0].productID).toBe("LF-WM05");
     expect(runner.mock.calls[0][0].bindCode).toBe("issued-bind");
     flow.stop();
   });
@@ -163,6 +187,7 @@ describe("real-only device onboarding", () => {
       .spyOn(Provisioner0922.prototype, "run")
       .mockImplementation(async (input, onStatus, signal, confirm, submitted) => {
         expect(input.service).toBe(legacy.service);
+        expect(input.productID).toBe("LF-WM05");
         expect(input.bindCode).toBe("");
         submitted?.();
         onStatus("D0");

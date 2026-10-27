@@ -1,4 +1,5 @@
 import { ApiError } from "../services/models";
+import { sessionFailure, type SessionFailure } from "./session-failure";
 
 export interface MqttCredentials {
   host: string;
@@ -11,7 +12,7 @@ export interface MqttCredentials {
   sessionToken?: string;
 }
 export interface MqttPort {
-  on(event: "connect" | "error" | "close", listener: () => void): void;
+  on(event: "connect" | "error" | "close", listener: (error?: unknown) => void): void;
   onMessage(listener: (topic: string, payload: Uint8Array) => void): void;
   subscribe(topic: string, done: (error?: Error) => void): void;
   unsubscribe(topic: string): void;
@@ -36,15 +37,15 @@ export function mqttCredentials(
 ): MqttCredentials {
   for (const key of ["host", "endpoint", "path", "clientID", "username", "password", "deviceID"])
     if (typeof value[key] !== "string" || !value[key])
-      throw new ApiError(503, "实际MQTT凭据尚未完整提供");
+      throw new ApiError(503, "实际MQTT凭据尚未完整提供", "configuration");
   if (
     value.sessionToken !== undefined &&
     (typeof value.sessionToken !== "string" || !value.sessionToken.trim())
   )
-    throw new ApiError(503, "AWS STS会话令牌无效");
+    throw new ApiError(503, "AWS STS会话令牌无效", "configuration");
   const url = new URL(value.host as string);
   if (url.protocol !== "wss:" || url.username || url.password || url.hash)
-    throw new ApiError(503, "MQTT连接必须使用服务端提供的WSS地址");
+    throw new ApiError(503, "MQTT连接必须使用服务端提供的WSS地址", "configuration");
   if (value.deviceID !== expectedDeviceID || !expectedDeviceID)
     throw new ApiError(403, "MQTT凭据设备身份不一致");
   return { ...value } as unknown as MqttCredentials;
@@ -52,6 +53,7 @@ export function mqttCredentials(
 
 /** Transport acknowledgement only. Topic/profile mapping and reported-state confirmation belong to the device session. */
 export class MqttConnection {
+  failure?: SessionFailure;
   private port?: MqttPort;
   private connected = false;
   private round = 0;
@@ -104,14 +106,15 @@ export class MqttConnection {
       signal?.addEventListener("abort", abort, { once: true });
       try {
         start(finish);
-      } catch {
-        finish(new ApiError(0, "MQTT传输操作失败"));
+      } catch (error) {
+        finish(error instanceof ApiError ? error : new ApiError(0, "MQTT传输操作失败"));
         this.close();
       }
     });
   }
   async connect(value: Record<string, unknown>, deviceID: string, signal?: AbortSignal) {
     this.close();
+    this.failure = undefined;
     const credentials = mqttCredentials(value, deviceID),
       round = this.round;
     await this.operation((done) => {
@@ -134,14 +137,23 @@ export class MqttConnection {
         done();
         this.notify();
       });
-      port.on("error", () => {
+      port.on("error", (error) => {
         if (round === this.round) {
-          done(new ApiError(0, "MQTT连接失败，请核对实际凭据"));
+          const code =
+            error && typeof error === "object" && "code" in error ? error.code : undefined;
+          const rejected = [4, 5, 0x86, 0x87, 401, 403].includes(code as number);
+          const failure =
+            error instanceof ApiError
+              ? error
+              : new ApiError(rejected ? 403 : 0, "MQTT连接失败，请核对实际凭据");
+          this.failure = sessionFailure(failure);
+          done(failure);
           this.close();
         }
       });
       port.on("close", () => {
         if (round === this.round) {
+          this.failure ??= { kind: "transient", code: 0 };
           done(new ApiError(0, "MQTT连接已断开"));
           this.close();
         }
@@ -180,7 +192,13 @@ export class MqttConnection {
       await this.operation(
         (done) =>
           port.subscribe(topic, (error) =>
-            done(error ? new ApiError(0, "MQTT订阅未确认") : undefined),
+            done(
+              error
+                ? error instanceof ApiError
+                  ? error
+                  : new ApiError(0, "MQTT订阅未确认")
+                : undefined,
+            ),
           ),
         signal,
       );

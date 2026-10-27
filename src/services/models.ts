@@ -56,6 +56,8 @@ export interface Room {
 }
 export interface Product {
   id: string;
+  /** Product ID used by the device firmware and its cloud certification request. */
+  deviceProductID?: string;
   name: string;
   category: string;
   seriesName: string;
@@ -170,6 +172,7 @@ export class ApiError extends Error {
   constructor(
     public code: number,
     message: string,
+    public failureKind?: import("../protocol/session-failure").SessionFailureKind,
   ) {
     super(message);
     this.name = "ApiError";

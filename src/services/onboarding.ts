@@ -210,7 +210,6 @@ export class AddDeviceFlow {
     this.controller = undefined;
     this.sessionUnsubscribe?.();
     this.sessionUnsubscribe = undefined;
-    this.session?.close();
     this.session = undefined;
     this.update({
       busy: false,
@@ -488,7 +487,29 @@ export class AddDeviceFlow {
           this.bindCode = typeof provided === "string" ? provided : "";
           this.check(round, signal);
         }
-        this.update({ stage: "selected", message: "正在获取配网服务地址", deviceStep: undefined });
+        this.update({
+          stage: "selected",
+          message: "正在确认设备端产品标识",
+          deviceStep: undefined,
+        });
+        const groups = await withBudget(
+          (budget) => this.service.products(budget),
+          10000,
+          "产品目录读取超时",
+          signal,
+        );
+        this.check(round, signal);
+        const listedProduct = groups
+          .flatMap((group) => group.products)
+          .find((item) => item.id === product.id);
+        if (!listedProduct || listedProduct.modelName !== product.modelName)
+          throw new ApiError(503, "产品列表与当前设备型号不一致，无法确认设备端产品标识");
+        const deviceProductID = listedProduct.deviceProductID;
+        if (!deviceProductID)
+          throw new ApiError(503, "产品列表未提供设备端 productid，无法开始配网");
+        if (product.deviceProductID && product.deviceProductID !== deviceProductID)
+          throw new ApiError(503, "产品详情与列表的设备端 productid 不一致");
+        this.update({ message: "正在获取配网服务地址" });
         const urls = await withBudget(
           (budget) => this.service.connection(budget),
           10000,
@@ -519,7 +540,7 @@ export class AddDeviceFlow {
           password,
           token,
           bindCode: this.bindCode,
-          productID: product.id,
+          productID: deviceProductID,
           seriesName: product.seriesName,
           modelID: product.modelName,
           urls,
@@ -722,7 +743,6 @@ export class AddDeviceFlow {
   private async connectRealtime(round: number, signal: AbortSignal, id: string) {
     this.sessionUnsubscribe?.();
     this.sessionUnsubscribe = undefined;
-    this.session?.close();
     this.session = undefined;
     let session: DeviceSession | undefined;
     try {
@@ -743,7 +763,6 @@ export class AddDeviceFlow {
       });
       this.update({ realtime: "ready", realtimeError: "" });
     } catch (error) {
-      session?.close();
       this.check(round, signal);
       this.update({ realtime: "failed", realtimeError: errorText(error) });
     }

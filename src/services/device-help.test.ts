@@ -1,13 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import type { HttpFetcher } from "./http";
 import { DeviceHelpFlow } from "./device-help";
-import {
-  ApiError,
-  type ApiEnvelope,
-  type HelpArticle,
-  type Language,
-  type Session,
-} from "./models";
+import { ApiError, type HelpArticle, type Session } from "./models";
 import { RealHttpClient } from "./real-http";
 import { RowanService } from "./rowan";
 import { MemoryStorage, defaultSettings } from "../test-support/settings-fixture";

@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { Buffer } from "buffer";
 import { utf8 } from "./ble";
-import { BLE_0922, decrypt0922, encrypt0922, PacketStream0922 } from "./ble-0922";
+import { BLE_0922, cipherDigest0922, decryptRaw0922, encrypt0922, PacketStream0922 } from "./ble-0922";
 import { Ble0822DeviceTransport, type BleConnection, type BleRadio } from "./ble-radio";
 import { Provisioner0922 } from "./provision-0922";
 
@@ -29,8 +30,12 @@ class LegacyRadio implements BleRadio {
   bytes?: (bytes: Uint8Array) => void;
   request = new PacketStream0922();
   sent: string[] = [];
+  wireEncrypted: boolean[] = [];
   service?: string;
   failCode?: number;
+  cipherCode?: number;
+  authenticated = false;
+  encrypted = false;
   ready = vi.fn(async () => undefined);
   startScan = vi.fn(async (listener: Parameters<BleRadio["startScan"]>[0]) => {
     const manufacturer = new Uint8Array(25);
@@ -56,12 +61,26 @@ class LegacyRadio implements BleRadio {
     close: vi.fn(async () => undefined),
     write: vi.fn(async (frame) => {
       for (const payload of this.request.push(frame)) {
-        const text = new TextDecoder().decode(payload),
-          plain = text.startsWith("{") ? text : decrypt0922(payload, key),
+        const wireEncrypted = payload[0] !== 0x7b,
+          plain = wireEncrypted ? decryptRaw0922(payload, key) : new TextDecoder().decode(payload),
           type = (JSON.parse(plain) as { type: string }).type;
         this.sent.push(plain);
-        if (type === "cipher") this.reply("cipher_reply", 0);
+        this.wireEncrypted.push(wireEncrypted);
+        if (type === "cipher") {
+          if (this.authenticated || this.encrypted || wireEncrypted) throw new Error("cipher must be first and plaintext");
+          const digest = (JSON.parse(plain) as { data: { cipher: string } }).data.cipher;
+          if (digest !== cipherDigest0922(input.mac, input.seriesName, input.modelID))
+            throw new Error("cipher digest mismatch");
+          this.authenticated = this.cipherCode === undefined || this.cipherCode === 0;
+          this.reply("cipher_reply", this.cipherCode ?? 0);
+        }
+        if (type === "encrypt_note") {
+          if (!this.authenticated || this.encrypted || wireEncrypted)
+            throw new Error("encrypt_note must follow the plaintext cipher reply");
+          this.encrypted = true;
+        }
         if (type === "apinfo") {
+          if (!this.encrypted || !wireEncrypted) throw new Error("apinfo must be encrypted after encrypt_note");
           this.reply("status_update", 0);
           this.reply("wifi_reply", 0);
           this.reply("cloud_reply", this.failCode ?? 8);
@@ -83,7 +102,10 @@ class LegacyRadio implements BleRadio {
     },
   );
   reply(type: string, error_code: number) {
-    const payload = encrypt0922(JSON.stringify({ type, data: { error_code } }), key);
+    const response = JSON.stringify({ type, data: { error_code } });
+    const payload = this.encrypted
+      ? utf8(Buffer.from(encrypt0922(response, key)).toString("base64"))
+      : utf8(response);
     this.bytes!(new Uint8Array([0, ...payload]));
   }
 }
@@ -101,6 +123,11 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 describe("0922 legacy provisioning port (synthetic firmware only)", () => {
+  it("matches the uppercase digest in the firmware reference log", () => {
+    expect(cipherDigest0922("fc8d3d029760", "CheetahIOT", "Cheetah02")).toBe(
+      "B721D14AEABE28FB6DD000AAC06261B5",
+    );
+  });
   it("sends original HTTPS addresses and rejects HTTP before any BLE write", async () => {
     const { radio, driver } = await setup();
     const urls = Object.fromEntries(
@@ -132,7 +159,7 @@ describe("0922 legacy provisioning port (synthetic firmware only)", () => {
     }
     await driver.dispose();
   });
-  it("uses the advertised GATT service and sends the empty optional binding_code in encrypted apinfo", async () => {
+  it('uses the advertised GATT service and sends literal "null" for an unavailable binding_code', async () => {
     const { radio, driver } = await setup(),
       statuses: string[] = [];
     const result = await new Provisioner0922(driver, 1000).run(
@@ -144,17 +171,18 @@ describe("0922 legacy provisioning port (synthetic firmware only)", () => {
     expect(result).toEqual(binding);
     expect(radio.service).toBe(BLE_0922.service);
     expect(radio.sent).toHaveLength(3);
-    expect(JSON.parse(radio.sent[0])).toEqual({ type: "encrypt_note" });
-    expect(JSON.parse(radio.sent[1])).toMatchObject({
+    expect(JSON.parse(radio.sent[0])).toMatchObject({
       type: "cipher",
-      data: { cipher: expect.stringMatching(/^[0-9a-f]{32}$/) },
+      data: { cipher: expect.stringMatching(/^[0-9A-F]{32}$/) },
     });
+    expect(JSON.parse(radio.sent[1])).toEqual({ type: "encrypt_note", data: { error_code: 0 } });
+    expect(radio.wireEncrypted).toEqual([false, false, true]);
     expect(JSON.parse(radio.sent[2])).toMatchObject({
       type: "apinfo",
       data: {
         ssid: input.ssid,
         password: input.password,
-        binding_code: "",
+        binding_code: "null",
         certificationUrl: input.urls.certificationURL,
         activate_url: input.urls.activationURL,
         bindUrl: input.urls.bindingURL,
@@ -171,6 +199,17 @@ describe("0922 legacy provisioning port (synthetic firmware only)", () => {
     await expect(
       new Provisioner0922(driver, 1000).run(input, () => undefined, undefined, confirm),
     ).rejects.toMatchObject({ code: 10 });
+    expect(confirm).not.toHaveBeenCalled();
+    await driver.dispose();
+  });
+  it("does not send encrypt_note or Wi-Fi credentials after identity rejection", async () => {
+    const { radio, driver } = await setup();
+    radio.cipherCode = 1;
+    const confirm = vi.fn(async () => binding);
+    await expect(
+      new Provisioner0922(driver, 1000).run(input, () => undefined, undefined, confirm),
+    ).rejects.toMatchObject({ code: 0x70 });
+    expect(radio.sent.map((message) => JSON.parse(message).type)).toEqual(["cipher"]);
     expect(confirm).not.toHaveBeenCalled();
     await driver.dispose();
   });

@@ -42,7 +42,6 @@ export default function DeviceScreen() {
         controller = undefined;
         previous?.abort();
         flight = undefined;
-        session.close();
       };
       const refresh = (): Promise<void> => {
         if (!current()) return Promise.resolve();
@@ -91,7 +90,12 @@ export default function DeviceScreen() {
       const app = AppState.addEventListener("change", (state) => {
         foreground = state === "active";
         if (foreground) void refresh();
-        else stop();
+        // Runtime owns MQTT while backgrounded; cancel only page metadata work.
+        else {
+          controller?.abort();
+          controller = undefined;
+          flight = undefined;
+        }
       });
       return () => {
         active = false;

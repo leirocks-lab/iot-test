@@ -44,20 +44,20 @@ export function cipherDigest0922(mac: string, series: string, model: string) {
   if (!series || !model) throw new ApiError(503, "实际产品系列及型号尚未提供");
   const normalized = mac.replaceAll(":", "").toLowerCase();
   if (!/^[0-9a-f]{12}$/.test(normalized)) throw new ApiError(400, "0922设备MAC格式无效");
-  return bytesToHex(sha256(utf8(`${normalized},${series},${model}`)).slice(0, 16));
+  return bytesToHex(sha256(utf8(`${normalized},${series},${model}`)).slice(0, 16)).toUpperCase();
 }
 export function encrypt0922(value: string, key: Uint8Array) {
   const plain = utf8(value);
   try {
-    return utf8(Buffer.from(cbc(key, iv).encrypt(plain)).toString("base64"));
+    return cbc(key, iv).encrypt(plain);
   } finally {
     plain.fill(0);
   }
 }
-export function decrypt0922(payload: Uint8Array, key: Uint8Array) {
-  const base64 = new TextDecoder().decode(payload).replace(/\s/g, "");
+/** App → device requests use the raw AES-CBC ciphertext bytes. */
+export function decryptRaw0922(payload: Uint8Array, key: Uint8Array) {
   try {
-    const plain = cbc(key, iv).decrypt(new Uint8Array(Buffer.from(base64, "base64")));
+    const plain = cbc(key, iv).decrypt(payload);
     try {
       return new TextDecoder("utf-8", { fatal: true }).decode(plain);
     } finally {
@@ -65,6 +65,16 @@ export function decrypt0922(payload: Uint8Array, key: Uint8Array) {
     }
   } catch {
     throw new ApiError(0x63, "0922通知解密或编码失败");
+  }
+}
+/** Device → App notifications are Base64 text around the AES-CBC ciphertext. */
+export function decrypt0922(payload: Uint8Array, key: Uint8Array) {
+  const base64 = new TextDecoder().decode(payload).replace(/\s/g, "");
+  const raw = new Uint8Array(Buffer.from(base64, "base64"));
+  try {
+    return decryptRaw0922(raw, key);
+  } finally {
+    raw.fill(0);
   }
 }
 export function packets0922(payload: Uint8Array, mtu: number) {

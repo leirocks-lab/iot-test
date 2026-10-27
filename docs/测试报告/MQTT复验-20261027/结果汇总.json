@@ -1,0 +1,74 @@
+{
+  "unitFiles": 41,
+  "unitPassed": 526,
+  "unitFailed": 0,
+  "component": {
+    "passed": 12,
+    "failed": 0,
+    "errors": 0
+  },
+  "businessAssertions": 12,
+  "businessExecution": "PASS",
+  "liveExecution": "PASS",
+  "liveSubacks": 4,
+  "livePublications": [
+    {
+      "topic": "$aws/things/dev_666666/shadow/get",
+      "bytes": 0
+    }
+  ],
+  "liveResponses": [
+    {
+      "topic": "$aws/things/dev_666666/shadow/get/accepted",
+      "version": 41
+    }
+  ],
+  "initial": {
+    "elapsedMs": 6381,
+    "operation": "INITIAL_REPORTED",
+    "ready": true,
+    "connected": true,
+    "online": "unknown",
+    "canWrite": false,
+    "sending": false,
+    "confirmed": {
+      "Power": "on",
+      "Mode": "cool",
+      "TargetTemp": 10,
+      "TargetHumidity": 60,
+      "TempCurrent": 10,
+      "HumidityCurrent": 58,
+      "LightSwitch": true,
+      "LightBrightness": 30,
+      "ChildLock": false,
+      "Mute": false,
+      "Online": "online",
+      "MockTest": "rowan"
+    },
+    "controlError": "产品控制映射尚未配置"
+  },
+  "final": {
+    "elapsedMs": 41398,
+    "operation": "FINAL_REPORTED",
+    "ready": true,
+    "connected": true,
+    "online": "unknown",
+    "canWrite": false,
+    "sending": false,
+    "confirmed": {
+      "Power": "on",
+      "Mode": "cool",
+      "TargetTemp": 10,
+      "TargetHumidity": 60,
+      "TempCurrent": 10,
+      "HumidityCurrent": 58,
+      "LightSwitch": true,
+      "LightBrightness": 30,
+      "ChildLock": false,
+      "Mute": false,
+      "Online": "online",
+      "MockTest": "rowan"
+    },
+    "controlError": "产品控制映射尚未配置"
+  }
+}

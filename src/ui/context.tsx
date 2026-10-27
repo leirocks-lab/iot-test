@@ -8,7 +8,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { useColorScheme } from "react-native";
+import { AppState, useColorScheme } from "react-native";
 import type { CommunicationConfig } from "../services/config";
 import type { Settings } from "../services/models";
 import type { Runtime } from "../services/runtime";
@@ -63,6 +63,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     };
   }, []);
   useEffect(() => runtime?.service.onSessionChange(() => setRevision((r) => r + 1)), [runtime]);
+  useEffect(() => {
+    if (!runtime) return;
+    const update = (state: string | null) =>
+      runtime.setForeground?.(state === null || state === "active");
+    update(AppState.currentState);
+    const listener = AppState.addEventListener("change", update);
+    return () => listener.remove();
+  }, [runtime]);
   const value = useMemo(
     () => ({
       runtime,

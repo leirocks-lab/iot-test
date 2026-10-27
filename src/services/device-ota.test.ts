@@ -28,31 +28,33 @@ async function setup() {
     bindingAt: "",
     online: true,
     device: { id: "actual-device" },
+    product: { id: "actual-product" },
   };
   vi.spyOn(service, "device").mockResolvedValue(view);
   vi.spyOn(service, "firmware").mockResolvedValue({
     hasUpdate: true,
     firmware: { id: "issued-firmware", version: "actual-version", remark: "Backend release" },
-    device: { id: view.device.id, name: "Actual device", mac: "aabbccddeeff" },
+    deviceID: view.device.id,
   });
+  const taskID = "issued-task";
   const task: OtaTask = {
-    taskID: "issued-task",
     result: "updating",
     status: "downloading",
-    type: "mcu",
+    progress: 30,
+    startedAt: "2026-10-27T00:00:00Z",
   };
-  const start = vi.spyOn(service, "startOta").mockResolvedValue({ taskID: task.taskID });
+  const start = vi.spyOn(service, "startOta").mockResolvedValue({ taskID });
   const read = vi.spyOn(service, "otaTask").mockResolvedValue(task);
   const cancel = vi.spyOn(service, "cancelOta").mockResolvedValue(undefined);
   const flow = new DeviceOtaFlow(service, view.device.id);
   flows.push(flow);
   flow.start();
   await vi.waitFor(() => expect(flow.state.busy).toBe(false));
-  return { service, view, task, flow, start, read, cancel };
+  return { service, view, task, taskID, flow, start, read, cancel };
 }
 describe("real OTA flow with endpoint doubles", () => {
   it("displays returned progress, restores a known task and does not create another task", async () => {
-    const { service, flow, start, read, task } = await setup();
+    const { service, flow, start, read, task, taskID } = await setup();
     await flow.check();
     await flow.create();
     expect(flow.state.task).toEqual(task);
@@ -61,7 +63,7 @@ describe("real OTA flow with endpoint doubles", () => {
     const restored = new DeviceOtaFlow(service, "actual-device");
     flows.push(restored);
     restored.start();
-    await vi.waitFor(() => expect(restored.state.taskID).toBe(task.taskID));
+    await vi.waitFor(() => expect(restored.state.taskID).toBe(taskID));
     await restored.create();
     expect(start).toHaveBeenCalledOnce();
     expect(read).toHaveBeenCalled();

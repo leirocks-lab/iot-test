@@ -1,0 +1,13 @@
+$ tsc --noEmit
+src/services/device-ota.test.ts(25,9): error TS2741: Property 'product' is missing in type '{ deviceNickname: string; bindingRole: "sa"; bindingAt: string; online: true; device: { id: string; }; }' but required in type 'DeviceView'.
+src/services/device-ota.test.ts(36,5): error TS2561: Object literal may only specify known properties, but 'device' does not exist in type 'OtaCheck'. Did you mean to write 'deviceID'?
+src/services/device-ota.test.ts(39,5): error TS2353: Object literal may only specify known properties, and 'taskID' does not exist in type 'OtaTask'.
+src/services/device-ota.test.ts(44,80): error TS2339: Property 'taskID' does not exist on type 'OtaTask'.
+src/services/device-ota.test.ts(64,68): error TS2339: Property 'taskID' does not exist on type 'OtaTask'.
+src/services/password-recovery.test.ts(10,7): error TS2322: Type 'Mock<(<T>(request: HttpRequest) => Promise<{ status: number; data: T; headers: {}; }>)>' is not assignable to type '<T>(request: HttpRequest) => Promise<HttpResponse<T>>'.
+  Type 'Promise<{ status: number; data: unknown; headers: {}; }>' is not assignable to type 'Promise<HttpResponse<T>>'.
+    Type '{ status: number; data: unknown; headers: {}; }' is not assignable to type 'HttpResponse<T>'.
+      Types of property 'data' are incompatible.
+        Type 'unknown' is not assignable to type 'T'.
+          'T' could be instantiated with an arbitrary type which could be unrelated to 'unknown'.
+[ELIFECYCLE] Command failed with exit code 2.

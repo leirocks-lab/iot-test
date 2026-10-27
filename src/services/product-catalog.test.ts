@@ -369,7 +369,7 @@ describe("RF-0018 real HTTP source mapping", () => {
         {
           category: "WineCooler",
           categoryName: { "zh-CN": "酒柜", en: "Wine cooler" },
-          products: [wineWire],
+          products: [{ ...wineWire, productid: "LF-WM05" }],
         },
       ],
       "/module/app-api/products/prd_wine": wineWire,
@@ -377,6 +377,7 @@ describe("RF-0018 real HTTP source mapping", () => {
     expect(await service.categories()).toEqual([{ name: "酒柜", value: "WineCooler" }]);
     const groups = await service.products();
     expect(productGroupName(groups[0], "zh-CN")).toBe("酒柜");
+    expect(groups[0].products[0].deviceProductID).toBe("LF-WM05");
     const detail = await service.product("prd_wine");
     expect(detail).toMatchObject({
       images: wineWire.image,
@@ -414,6 +415,14 @@ describe("RF-0018 real HTTP source mapping", () => {
       configTypes: ["B"],
       parameters: { volume: "120L" },
     });
+  });
+
+  it("keeps the catalog ID separate from the device certification productid", () => {
+    const listed = productData({ ...wineWire, productid: "LF-WM05" });
+    expect(listed.id).toBe("prd_wine");
+    expect(listed.deviceProductID).toBe("LF-WM05");
+    expect(productData(listed).deviceProductID).toBe("LF-WM05");
+    expect(productData(wineWire).deviceProductID).toBeUndefined();
   });
 
   it.each([

@@ -1,0 +1,376 @@
+{
+  "timestamp": "2026-10-26T23:57:43.103Z",
+  "mode": "synthetic-broker-real-app-code",
+  "events": [
+    {
+      "elapsedMs": 4,
+      "scenario": "deployed-readonly-profile",
+      "operation": "SUBSCRIBE",
+      "topic": "$aws/things/audit-device/shadow/get/accepted"
+    },
+    {
+      "elapsedMs": 4,
+      "scenario": "deployed-readonly-profile",
+      "operation": "SUBACK",
+      "topic": "$aws/things/audit-device/shadow/get/accepted"
+    },
+    {
+      "elapsedMs": 5,
+      "scenario": "deployed-readonly-profile",
+      "operation": "SUBSCRIBE",
+      "topic": "$aws/things/audit-device/shadow/get/rejected"
+    },
+    {
+      "elapsedMs": 5,
+      "scenario": "deployed-readonly-profile",
+      "operation": "SUBACK",
+      "topic": "$aws/things/audit-device/shadow/get/rejected"
+    },
+    {
+      "elapsedMs": 5,
+      "scenario": "deployed-readonly-profile",
+      "operation": "SUBSCRIBE",
+      "topic": "$aws/things/audit-device/shadow/update/accepted"
+    },
+    {
+      "elapsedMs": 5,
+      "scenario": "deployed-readonly-profile",
+      "operation": "SUBACK",
+      "topic": "$aws/things/audit-device/shadow/update/accepted"
+    },
+    {
+      "elapsedMs": 5,
+      "scenario": "deployed-readonly-profile",
+      "operation": "SUBSCRIBE",
+      "topic": "$aws/things/audit-device/shadow/update/rejected"
+    },
+    {
+      "elapsedMs": 5,
+      "scenario": "deployed-readonly-profile",
+      "operation": "SUBACK",
+      "topic": "$aws/things/audit-device/shadow/update/rejected"
+    },
+    {
+      "elapsedMs": 5,
+      "scenario": "deployed-readonly-profile",
+      "direction": "app-to-broker",
+      "operation": "PUBLISH",
+      "topic": "$aws/things/audit-device/shadow/get",
+      "bytes": 0,
+      "payload": "[EMPTY:0 bytes]"
+    },
+    {
+      "elapsedMs": 5,
+      "scenario": "deployed-readonly-profile",
+      "operation": "PUBACK",
+      "topic": "$aws/things/audit-device/shadow/get"
+    },
+    {
+      "elapsedMs": 5,
+      "scenario": "deployed-readonly-profile",
+      "direction": "broker-to-app",
+      "topic": "$aws/things/audit-device/shadow/get/accepted",
+      "payload": {
+        "version": 10,
+        "state": {
+          "reported": {
+            "Online": "online",
+            "Power": "on",
+            "TempCurrent": 10
+          }
+        }
+      }
+    },
+    {
+      "elapsedMs": 6,
+      "scenario": "deployed-readonly-profile",
+      "operation": "STATE",
+      "ready": true,
+      "connected": true,
+      "online": "unknown",
+      "canWrite": false,
+      "sending": false,
+      "confirmed": {
+        "Online": "online",
+        "Power": "on",
+        "TempCurrent": 10
+      },
+      "controlError": "产品控制映射尚未配置"
+    },
+    {
+      "elapsedMs": 9,
+      "scenario": "deployed-readonly-profile",
+      "operation": "CLOSE"
+    },
+    {
+      "elapsedMs": 11,
+      "scenario": "explicit-synthetic-control-contract",
+      "operation": "SUBSCRIBE",
+      "topic": "$aws/things/audit-device/shadow/get/accepted"
+    },
+    {
+      "elapsedMs": 11,
+      "scenario": "explicit-synthetic-control-contract",
+      "operation": "SUBACK",
+      "topic": "$aws/things/audit-device/shadow/get/accepted"
+    },
+    {
+      "elapsedMs": 12,
+      "scenario": "explicit-synthetic-control-contract",
+      "operation": "SUBSCRIBE",
+      "topic": "$aws/things/audit-device/shadow/get/rejected"
+    },
+    {
+      "elapsedMs": 12,
+      "scenario": "explicit-synthetic-control-contract",
+      "operation": "SUBACK",
+      "topic": "$aws/things/audit-device/shadow/get/rejected"
+    },
+    {
+      "elapsedMs": 12,
+      "scenario": "explicit-synthetic-control-contract",
+      "operation": "SUBSCRIBE",
+      "topic": "$aws/things/audit-device/shadow/update/accepted"
+    },
+    {
+      "elapsedMs": 12,
+      "scenario": "explicit-synthetic-control-contract",
+      "operation": "SUBACK",
+      "topic": "$aws/things/audit-device/shadow/update/accepted"
+    },
+    {
+      "elapsedMs": 12,
+      "scenario": "explicit-synthetic-control-contract",
+      "operation": "SUBSCRIBE",
+      "topic": "$aws/things/audit-device/shadow/update/rejected"
+    },
+    {
+      "elapsedMs": 12,
+      "scenario": "explicit-synthetic-control-contract",
+      "operation": "SUBACK",
+      "topic": "$aws/things/audit-device/shadow/update/rejected"
+    },
+    {
+      "elapsedMs": 12,
+      "scenario": "explicit-synthetic-control-contract",
+      "direction": "app-to-broker",
+      "operation": "PUBLISH",
+      "topic": "$aws/things/audit-device/shadow/get",
+      "bytes": 0,
+      "payload": "[EMPTY:0 bytes]"
+    },
+    {
+      "elapsedMs": 12,
+      "scenario": "explicit-synthetic-control-contract",
+      "operation": "PUBACK",
+      "topic": "$aws/things/audit-device/shadow/get"
+    },
+    {
+      "elapsedMs": 12,
+      "scenario": "explicit-synthetic-control-contract",
+      "direction": "broker-to-app",
+      "topic": "$aws/things/audit-device/shadow/get/accepted",
+      "payload": {
+        "version": 10,
+        "state": {
+          "reported": {
+            "Online": "online",
+            "Power": "on",
+            "TempCurrent": 10
+          }
+        }
+      }
+    },
+    {
+      "elapsedMs": 12,
+      "scenario": "explicit-synthetic-control-contract",
+      "operation": "STATE",
+      "ready": true,
+      "connected": true,
+      "online": true,
+      "canWrite": true,
+      "sending": false,
+      "confirmed": {
+        "Online": "online",
+        "Power": "on",
+        "TempCurrent": 10
+      },
+      "controlError": ""
+    },
+    {
+      "elapsedMs": 14,
+      "scenario": "explicit-synthetic-control-contract",
+      "direction": "app-to-broker",
+      "operation": "PUBLISH",
+      "topic": "$aws/things/audit-device/shadow/update",
+      "bytes": 145,
+      "payload": {
+        "state": {
+          "desired": {
+            "EnduserId": "synthetic-user",
+            "DeviceId": "audit-device",
+            "CommandType": "app",
+            "Power": "off"
+          }
+        },
+        "clientToken": "app-mvpx2jpn-2-2"
+      }
+    },
+    {
+      "elapsedMs": 14,
+      "scenario": "explicit-synthetic-control-contract",
+      "operation": "PUBACK",
+      "topic": "$aws/things/audit-device/shadow/update"
+    },
+    {
+      "elapsedMs": 14,
+      "scenario": "explicit-synthetic-control-contract",
+      "operation": "AFTER_PUBACK",
+      "ready": true,
+      "connected": true,
+      "online": true,
+      "canWrite": true,
+      "sending": true,
+      "confirmed": {
+        "Online": "online",
+        "Power": "on",
+        "TempCurrent": 10
+      },
+      "controlError": ""
+    },
+    {
+      "elapsedMs": 14,
+      "scenario": "explicit-synthetic-control-contract",
+      "direction": "broker-to-app",
+      "topic": "$aws/things/audit-device/shadow/update/accepted",
+      "payload": {
+        "version": 11,
+        "clientToken": "app-mvpx2jpn-2-2",
+        "state": {
+          "desired": {
+            "EnduserId": "synthetic-user",
+            "DeviceId": "audit-device",
+            "CommandType": "app",
+            "Power": "off"
+          }
+        }
+      }
+    },
+    {
+      "elapsedMs": 15,
+      "scenario": "explicit-synthetic-control-contract",
+      "direction": "broker-to-app",
+      "topic": "$aws/things/audit-device/shadow/update/accepted",
+      "payload": {
+        "version": 12,
+        "clientToken": "synthetic-device-report",
+        "state": {
+          "reported": {
+            "Power": "off",
+            "TempCurrent": 11
+          }
+        }
+      }
+    },
+    {
+      "elapsedMs": 15,
+      "scenario": "explicit-synthetic-control-contract",
+      "operation": "CONFIRMED",
+      "ready": true,
+      "connected": true,
+      "online": true,
+      "canWrite": true,
+      "sending": false,
+      "confirmed": {
+        "Online": "online",
+        "Power": "off",
+        "TempCurrent": 11
+      },
+      "controlError": ""
+    },
+    {
+      "elapsedMs": 15,
+      "scenario": "explicit-synthetic-control-contract",
+      "direction": "broker-to-app",
+      "topic": "$aws/things/audit-device/shadow/update/accepted",
+      "payload": {
+        "version": 11,
+        "state": {
+          "reported": {
+            "Power": "on"
+          }
+        }
+      }
+    },
+    {
+      "elapsedMs": 15,
+      "scenario": "explicit-synthetic-control-contract",
+      "direction": "broker-to-app",
+      "topic": "$aws/things/audit-device/shadow/update/accepted",
+      "payload": {
+        "version": 13,
+        "state": {
+          "reported": {
+            "Online": "offline"
+          }
+        }
+      }
+    },
+    {
+      "elapsedMs": 15,
+      "scenario": "explicit-synthetic-control-contract",
+      "operation": "CLOSE"
+    }
+  ],
+  "assertions": [
+    {
+      "name": "current deployment synchronizes reported values",
+      "result": "PASS"
+    },
+    {
+      "name": "current deployment does not infer online or enable controls",
+      "result": "PASS"
+    },
+    {
+      "name": "blocked readonly control publishes no desired",
+      "result": "PASS"
+    },
+    {
+      "name": "mapped online overrides stale REST offline",
+      "result": "PASS"
+    },
+    {
+      "name": "control publishes desired off with bounded clientToken",
+      "result": "PASS"
+    },
+    {
+      "name": "PUBACK does not confirm execution",
+      "result": "PASS"
+    },
+    {
+      "name": "own desired acceptance still does not confirm execution",
+      "result": "PASS"
+    },
+    {
+      "name": "newer reported confirms operation",
+      "result": "PASS"
+    },
+    {
+      "name": "old version cannot overwrite confirmed state",
+      "result": "PASS"
+    },
+    {
+      "name": "offline mapping disables writes",
+      "result": "PASS"
+    },
+    {
+      "name": "offline attempt creates no additional publish",
+      "result": "PASS"
+    },
+    {
+      "name": "closed connection has unknown online status",
+      "result": "PASS"
+    }
+  ],
+  "execution": "PASS"
+}

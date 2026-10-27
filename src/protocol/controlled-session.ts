@@ -50,6 +50,9 @@ export class ControlledDeviceSession implements DeviceSession {
   get connected() {
     return !!this.controller && !this.controller.signal.aborted && this.inner.connected;
   }
+  get online() {
+    return this.ready && this.connected ? this.inner.online : undefined;
+  }
   get canWrite() {
     return this.controller && !this.controller.signal.aborted ? this.inner.canWrite : false;
   }
@@ -58,6 +61,9 @@ export class ControlledDeviceSession implements DeviceSession {
   }
   get error() {
     return this.inner.error;
+  }
+  get failure() {
+    return this.inner.failure;
   }
   onChange(listener: () => void) {
     this.listeners.add(listener);

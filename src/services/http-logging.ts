@@ -1,4 +1,4 @@
-import type { HttpClient, HttpRequest, HttpResponse, Logger } from "../lib/core";
+import type { HttpRequest, HttpResponse, Logger } from "../lib/core";
 
 export type HttpLogLevel = "off" | "error" | "debug";
 type Target = "platform" | "iot" | "http";
