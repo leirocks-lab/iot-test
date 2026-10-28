@@ -365,6 +365,89 @@ describe("真实HTTP边界", () => {
     ]);
     expect(fetcher.mock.calls.every((call) => call[1]?.signal === controller.signal)).toBe(true);
   });
+  it("adapts the deployed dataType/access/range model without inventing numeric steps", async () => {
+    const { client } = setup(
+      ok({
+        version: "tm_1",
+        attributes: [
+          { identifier: "Power", dataType: "enum", access: "rw", range: ["on", "off"] },
+          {
+            identifier: "TargetTemp",
+            dataType: "integer",
+            access: "rw",
+            range: [5, 20],
+            unit: "C",
+          },
+          {
+            identifier: "TempCurrent",
+            dataType: "integer",
+            access: "r",
+            range: [0, 50],
+            unit: "C",
+          },
+          { identifier: "LightSwitch", dataType: "boolean", access: "rw" },
+        ],
+        services: [{ identifier: "CleanReset", inputs: [], outputs: [] }],
+        events: [{ identifier: "Fault", level: "error", params: [] }],
+      }),
+    );
+    const result = await client.request<ApiEnvelope<unknown>>({
+      method: "GET",
+      path: "/api/app/products/prd_100/thing-model",
+    });
+    expect(result.data.data).toEqual({
+      version: "tm_1",
+      attributes: [
+        { identifier: "Power", type: "enum", writable: true, values: ["on", "off"] },
+        { identifier: "TargetTemp", type: "number", writable: true, min: 5, max: 20, unit: "C" },
+        { identifier: "TempCurrent", type: "number", writable: false, min: 0, max: 50, unit: "C" },
+        { identifier: "LightSwitch", type: "boolean", writable: true },
+      ],
+      services: [{ identifier: "CleanReset" }],
+      events: [{ identifier: "Fault", level: "error" }],
+    });
+  });
+  it.each([
+    { dataType: "enum", access: "unknown", range: ["on", "off"] },
+    { dataType: "enum", access: "rw", range: [1, 0] },
+    { dataType: "integer", access: "rw", range: [20, 5] },
+    { dataType: "integer", access: "rw", range: [5, "20"] },
+    { dataType: "boolean", access: "rw", type: "boolean", writable: false },
+  ])("rejects ambiguous deployed model attributes %j", async (attribute) => {
+    const { client } = setup(
+      ok({
+        version: "tm_1",
+        attributes: [{ identifier: "Power", ...attribute }],
+        services: [],
+        events: [],
+      }),
+    );
+    await expect(
+      client.request({
+        method: "GET",
+        path: "/api/app/products/prd_100/thing-model",
+      }),
+    ).rejects.toMatchObject({ code: 503 });
+  });
+  it("preserves explicitly supplied deployed numeric steps", async () => {
+    const { client } = setup(
+      ok({
+        version: "tm_1",
+        attributes: [
+          { identifier: "TargetTemp", dataType: "integer", access: "rw", range: [5, 20], step: 1 },
+        ],
+        services: [],
+        events: [],
+      }),
+    );
+    const result = await client.request<ApiEnvelope<{ attributes: unknown[] }>>({
+      method: "GET",
+      path: "/api/app/products/prd_100/thing-model",
+    });
+    expect(result.data.data.attributes).toEqual([
+      { identifier: "TargetTemp", type: "number", writable: true, min: 5, max: 20, step: 1 },
+    ]);
+  });
   it("rejects unrecognised model structure rather than allowing Mock fields to enable control", async () => {
     const result = ok({
       version: "v1",

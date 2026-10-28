@@ -134,7 +134,48 @@ function thingModel(value: unknown): ThingModel {
   const wire = object(value);
   if (typeof wire.version !== "string") throw new ApiError(502, "物模型版本未确认");
   const attributes = array(wire.attributes).map((item) => {
-    const a = object(item);
+    let a = object(item);
+    if (Object.hasOwn(a, "dataType") || Object.hasOwn(a, "access")) {
+      // The deployed HTTP schema differs from the internal model. Never infer business bindings.
+      if (
+        ["type", "writable", "values", "min", "max"].some((key) => Object.hasOwn(a, key)) ||
+        !["integer", "boolean", "enum"].includes(String(a.dataType)) ||
+        !["r", "rw"].includes(String(a.access)) ||
+        (a.unit !== undefined && typeof a.unit !== "string")
+      )
+        throw new ApiError(503, "真实物模型属性格式尚未适配，不能开放控制");
+      const normalized: Record<string, unknown> = {
+        identifier: a.identifier,
+        type: a.dataType === "integer" ? "number" : a.dataType,
+        writable: a.access === "rw",
+      };
+      if (a.unit !== undefined) normalized.unit = a.unit;
+      if (a.dataType === "enum") {
+        if (
+          !Array.isArray(a.range) ||
+          !a.range.length ||
+          a.range.some((value) => typeof value !== "string") ||
+          new Set(a.range).size !== a.range.length
+        )
+          throw new ApiError(503, "真实物模型枚举尚未适配");
+        normalized.values = a.range;
+      }
+      if (a.dataType === "integer") {
+        if (
+          !Array.isArray(a.range) ||
+          a.range.length !== 2 ||
+          a.range.some((value) => !Number.isSafeInteger(value)) ||
+          a.range[0] > a.range[1] ||
+          (a.step !== undefined && (!Number.isSafeInteger(a.step) || Number(a.step) <= 0))
+        )
+          throw new ApiError(503, "真实物模型数值约束尚未适配");
+        normalized.min = a.range[0];
+        normalized.max = a.range[1];
+        // An integer type does not supply a product's adjustment step.
+        if (a.step !== undefined) normalized.step = a.step;
+      }
+      a = normalized;
+    }
     if (
       typeof a.identifier !== "string" ||
       !["number", "boolean", "enum"].includes(String(a.type)) ||

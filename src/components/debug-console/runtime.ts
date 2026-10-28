@@ -1,4 +1,4 @@
-import { DevSettings, Platform } from "react-native";
+import { DevSettings, LogBox, Platform } from "react-native";
 import { createLogStore, installConsoleCapture, type LogStore } from "./log-store";
 
 // Survive Fast Refresh without wrapping console again or registering duplicate menu items.
@@ -13,6 +13,9 @@ const state = (globalState.__rowanDebugConsole ??= {
 if (__DEV__) {
   // Install only once, even if this module is re-evaluated by Fast Refresh.
   if (!state.captureInstalled) {
+    // Transport failures are handled by callers and retained in both consoles.
+    // Keep their diagnostic output from opening LogBox over the recovery UI.
+    LogBox.ignoreLogs([/^\[HTTP\] ✕ /]);
     installConsoleCapture(console, state.store);
     state.captureInstalled = true;
   }

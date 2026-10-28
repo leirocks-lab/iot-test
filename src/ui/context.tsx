@@ -13,6 +13,7 @@ import type { CommunicationConfig } from "../services/config";
 import type { Settings } from "../services/models";
 import type { Runtime } from "../services/runtime";
 import { createConfiguredRuntime } from "../services/app-runtime";
+import { createRuntimeLifecycle, type RuntimeState } from "../services/runtime-lifecycle";
 
 const Context = createContext<{
   runtime: Runtime | null;
@@ -32,36 +33,21 @@ const Context = createContext<{
   lockNavigation: () => undefined,
 });
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [runtime, setRuntime] = useState<Runtime | null>(null),
-    [error, setError] = useState(""),
+  const [{ runtime, error }, setRuntimeState] = useState<RuntimeState>({
+      runtime: null,
+      error: "",
+    }),
     [revision, setRevision] = useState(0),
     [navigationLocked, setNavigationLocked] = useState(false);
   const lockNavigation = useCallback((value: boolean) => setNavigationLocked(value), []);
-  useEffect(() => {
-    let active = true;
-    let created: Runtime | undefined;
-    const controller = new AbortController();
-    const extra = Constants.expoConfig?.extra ?? {};
-    Promise.resolve()
-      .then(() =>
-        createConfiguredRuntime(extra as Partial<CommunicationConfig>, {
-          signal: controller.signal,
-        }),
-      )
-      .then((r) => {
-        created = r;
-        if (active) setRuntime(r);
-        else r.dispose();
-      })
-      .catch((e) => {
-        if (active) setError(e instanceof Error ? e.message : "App初始化失败，请核对通信配置");
-      });
-    return () => {
-      active = false;
-      controller.abort();
-      created?.dispose();
-    };
-  }, []);
+  const [lifecycle] = useState(() =>
+    createRuntimeLifecycle((signal) =>
+      createConfiguredRuntime((Constants.expoConfig?.extra ?? {}) as Partial<CommunicationConfig>, {
+        signal,
+      }),
+    ),
+  );
+  useEffect(() => lifecycle.subscribe(setRuntimeState), [lifecycle]);
   useEffect(() => runtime?.service.onSessionChange(() => setRevision((r) => r + 1)), [runtime]);
   useEffect(() => {
     if (!runtime) return;
