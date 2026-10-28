@@ -8,6 +8,10 @@ import { allowsHttpApi } from "./src/services/api-transport";
 
 export default ({ config }: ConfigContext): ExpoConfig => {
   const identity = getAppIdentity(process.env.APP_BRAND, process.env.APP_ENV);
+  const personalTeam = process.env.ROWAN_IOS_PERSONAL_TEAM === "1";
+  if (personalTeam && identity.environment !== "development") {
+    throw new Error("Personal Team 签名仅用于 development 本地测试");
+  }
   rejectRemovedMockModes({
     httpMode: process.env.ROWAN_HTTP_MODE,
     deviceMode: process.env.ROWAN_DEVICE_MODE,
@@ -39,6 +43,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     ios: {
       icon: "./assets/expo.icon",
       bundleIdentifier: identity.iosBundleIdentifier,
+      entitlements: personalTeam ? {} : { "com.apple.developer.networking.wifi-info": true },
       infoPlist: {
         NSAppTransportSecurity: { NSAllowsArbitraryLoads: allowsHttpApi(identity.environment) },
       },
@@ -68,6 +73,15 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       ],
       "expo-secure-store",
       [
+        "expo-location",
+        {
+          locationWhenInUsePermission: "允许 ROWAN 使用精确位置以读取当前 Wi-Fi 名称，用于设备配网",
+          locationAlwaysPermission: false,
+          locationAlwaysAndWhenInUsePermission: false,
+          motionUsagePermission: false,
+        },
+      ],
+      [
         "expo-camera",
         { cameraPermission: "允许 ROWAN 扫描设备及分享二维码", recordAudioAndroid: false },
       ],
@@ -94,6 +108,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       androidPackage: identity.androidPackage,
       iosBundleIdentifier: identity.iosBundleIdentifier,
       themeId: identity.themeId,
+      iosWifiInfoEnabled: !personalTeam,
       ...communication,
     },
   };
