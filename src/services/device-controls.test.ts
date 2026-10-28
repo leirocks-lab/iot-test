@@ -94,6 +94,28 @@ function setup(
   return { state, publish, controls };
 }
 describe("七项产品属性控制（显式合成映射）", () => {
+  it.each(["power", "childLock", "light"] as const)(
+    "renders an absent %s capability as unknown and still rejects its commands",
+    async (kind) => {
+      const p = structuredClone(profile);
+      delete p.bindings[kind];
+      const { controls, publish } = setup({ profile: p });
+      expect(controls.list().some((view) => view.kind === kind)).toBe(false);
+      expect(controls.isOn(kind)).toBeUndefined();
+      await expect(controls.toggle(kind)).rejects.toThrow("当前产品未提供此控制能力");
+      expect(publish).not.toHaveBeenCalled();
+    },
+  );
+
+  it("distinguishes confirmed switch values from an unknown state", () => {
+    const { controls, state } = setup();
+    expect(controls.isOn("power")).toBe(false);
+    state.confirmed.relay = true;
+    expect(controls.isOn("power")).toBe(true);
+    delete state.confirmed.relay;
+    expect(controls.isOn("power")).toBeUndefined();
+  });
+
   it.each(["sa", ["sa", "unconfirmed-role"]])(
     "does not interpret malformed or unconfirmed role declarations as authorization: %j",
     (roles) => {
