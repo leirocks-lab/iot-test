@@ -1,5 +1,6 @@
 import mqtt from "mqtt";
 import { Buffer } from "buffer";
+import { Platform } from "react-native";
 import { MqttConnection, type MqttFactory } from "./mqtt-connection";
 import { mqttConnectParameters } from "./mqtt-auth";
 import { MqttDiagnostics, type MqttLogOptions } from "./mqtt-logging";
@@ -19,6 +20,10 @@ export function createMqttConnection(logOptions: MqttLogOptions = {}) {
         ...options,
         clientId: credentials.clientID,
         ...parameters.authentication,
+        // MQTT.js adds :443; iOS preserves it in Host, invalidating the AWS signature.
+        ...(Platform.OS === "ios" && credentials.sessionToken !== undefined
+          ? { transformWsUrl: () => parameters.url }
+          : {}),
         log: () => undefined,
       });
     } catch (error) {
