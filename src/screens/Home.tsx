@@ -499,7 +499,10 @@ export default function Home() {
           accessibilityRole="button"
           accessibilityLabel="添加设备"
           disabled={editing}
-          onPress={() => router.push("/add")}
+          onPress={() => {
+            runtime?.onboarding.enterFromHome();
+            router.push("/add");
+          }}
           style={styles.emptyState}
         >
           <Image source={emptyDevice} contentFit="contain" style={styles.emptyDevice} />
