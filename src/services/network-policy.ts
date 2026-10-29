@@ -20,7 +20,7 @@ export function observeNetwork(input: { type?: string; isConnected?: boolean }):
 }
 export function wifiGuidance(network: WifiObservation) {
   if (network.connection === "wifi" && network.ssidAccess === "denied")
-    return "已连接 Wi-Fi，SSID读取权限尚未授予；请允许权限或在系统设置中检查。";
+    return "已连接 Wi-Fi，SSID读取权限尚未授予；请在系统设置中检查定位权限，iOS 需开启精确位置。";
   if (network.band === "5") return "当前网络为5GHz，请切换至设备支持的2.4GHz网络。";
   if (network.connection === "offline" || network.connection === "other")
     return "当前未检测到 Wi-Fi 连接，请在系统设置中连接2.4GHz网络。";

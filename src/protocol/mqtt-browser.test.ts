@@ -1,11 +1,16 @@
 import { EventEmitter } from "node:events";
 import mqtt from "mqtt";
+import { Platform } from "react-native";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { Logger } from "../lib/core";
 import { createMqttConnection } from "./mqtt-browser";
 
 vi.mock("mqtt", () => ({ default: { connect: vi.fn() } }));
-afterEach(() => vi.restoreAllMocks());
+vi.mock("react-native", () => ({ Platform: { OS: "ios" } }));
+afterEach(() => {
+  vi.restoreAllMocks();
+  Platform.OS = "ios";
+});
 
 function fixture(level: "debug" | "error" | "off" = "debug", broken = false) {
   const client = Object.assign(new EventEmitter(), {
@@ -50,6 +55,7 @@ function fixture(level: "debug" | "error" | "off" = "debug", broken = false) {
     const pending = connection.connect(credentials, credentials.deviceID);
     client.emit("connect");
     await pending;
+    expect(vi.mocked(mqtt.connect).mock.calls.at(-1)![1]).not.toHaveProperty("transformWsUrl");
   };
   const entries = () =>
     [...vi.mocked(logger.debug).mock.calls, ...vi.mocked(logger.error).mock.calls].map(
@@ -121,35 +127,51 @@ describe("App真实MQTT工厂认证接线", () => {
     }).not.toThrow();
     expect(c.client.end).toHaveBeenCalledOnce();
   });
-  it("signs the WebSocket URL without sending STS secrets in MQTT CONNECT", async () => {
-    const client = Object.assign(new EventEmitter(), { end: vi.fn() });
-    vi.mocked(mqtt.connect).mockReturnValue(client as unknown as ReturnType<typeof mqtt.connect>);
-    const connection = createMqttConnection();
-    const credentials = {
-      host: "wss://example-ats.iot.ap-southeast-2.amazonaws.com/mqtt",
-      endpoint: "example-ats.iot.ap-southeast-2.amazonaws.com",
-      path: "/mqtt",
-      clientID: "backend-issued-client",
-      username: "AKIDEXAMPLE",
-      password: "fixture-secret",
-      deviceID: "dev_test",
-      sessionToken: "fixture-token",
-    };
-    const pending = connection.connect(credentials, "dev_test");
-    try {
-      client.emit("connect");
-      await pending;
-      const [url, options] = vi.mocked(mqtt.connect).mock.calls.at(-1)!;
-      expect(new URL(url as string).searchParams.has("X-Amz-Signature")).toBe(true);
-      expect(options).not.toHaveProperty("username");
-      expect(options).not.toHaveProperty("password");
-      expect(options).toMatchObject({
-        clientId: credentials.clientID,
-        reconnectPeriod: 0,
-        resubscribe: false,
-      });
-    } finally {
-      connection.close();
-    }
-  });
+  it.each(["ios", "android", "web"] as const)(
+    "preserves STS authentication and the signed URL on %s",
+    async (platform) => {
+      Platform.OS = platform;
+      const client = Object.assign(new EventEmitter(), { end: vi.fn() });
+      vi.mocked(mqtt.connect).mockReturnValue(client as unknown as ReturnType<typeof mqtt.connect>);
+      const connection = createMqttConnection();
+      const credentials = {
+        host: "wss://example-ats.iot.ap-southeast-2.amazonaws.com/mqtt",
+        endpoint: "example-ats.iot.ap-southeast-2.amazonaws.com",
+        path: "/mqtt",
+        clientID: "backend-issued-client",
+        username: "AKIDEXAMPLE",
+        password: "fixture-secret",
+        deviceID: "dev_test",
+        sessionToken: "fixture-token",
+      };
+      const pending = connection.connect(credentials, "dev_test");
+      try {
+        client.emit("connect");
+        await pending;
+        const [url, options] = vi.mocked(mqtt.connect).mock.calls.at(-1)!;
+        expect(new URL(url as string).searchParams.has("X-Amz-Signature")).toBe(true);
+        expect(options).not.toHaveProperty("username");
+        expect(options).not.toHaveProperty("password");
+        if (platform === "ios") {
+          const rewritten = (url as string).replace("/mqtt?", ":443/mqtt?");
+          const transform = options!.transformWsUrl!;
+          expect(
+            transform(rewritten, options!, client as unknown as ReturnType<typeof mqtt.connect>),
+          ).toBe(url);
+          expect(
+            transform(rewritten, options!, client as unknown as ReturnType<typeof mqtt.connect>),
+          ).not.toContain(":443/");
+        } else {
+          expect(options).not.toHaveProperty("transformWsUrl");
+        }
+        expect(options).toMatchObject({
+          clientId: credentials.clientID,
+          reconnectPeriod: 0,
+          resubscribe: false,
+        });
+      } finally {
+        connection.close();
+      }
+    },
+  );
 });

@@ -1,4 +1,5 @@
 import NetInfo from "@react-native-community/netinfo";
+import Constants from "expo-constants";
 import { PermissionsAndroid, Platform } from "react-native";
 import { ApiError } from "../services/models";
 import { observeWifi, type WifiReader } from "../services/wifi";
@@ -21,7 +22,23 @@ export function createWifiReader(): WifiReader {
           check();
         }
       }
-      // iOS SSID entitlement/location conditions are not yet available: do not enable shouldFetchWiFiSSID.
+      if (Platform.OS === "ios") {
+        if (Constants.expoConfig?.extra?.iosWifiInfoEnabled !== true)
+          throw new ApiError(
+            503,
+            "当前 iOS 测试包未启用 Wi-Fi 信息能力，请使用支持该能力的开发者团队签名并重新安装",
+          );
+        const location = await import("expo-location");
+        check();
+        let permission = await location.getForegroundPermissionsAsync();
+        check();
+        if (!permission.granted && permission.canAskAgain && requestPermission) {
+          permission = await location.requestForegroundPermissionsAsync();
+          check();
+        }
+        granted = permission.granted && permission.ios?.accuracy === "full";
+        NetInfo.configure({ shouldFetchWiFiSSID: granted });
+      }
       const state = await NetInfo.fetch("wifi");
       check();
       const observation = observeWifi({

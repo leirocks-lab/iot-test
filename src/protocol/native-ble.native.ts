@@ -1,6 +1,13 @@
 import { Buffer } from "buffer";
 import { PermissionsAndroid, Platform } from "react-native";
-import { BleManager, LogLevel, State, type Device, type Subscription } from "react-native-ble-plx";
+import {
+  BleManager,
+  LogLevel,
+  ScanMode,
+  State,
+  type Device,
+  type Subscription,
+} from "react-native-ble-plx";
 import { ApiError } from "../services/models";
 import { BLE_0822 } from "./ble-0822";
 import { BLE_0922 } from "./ble-0922";
@@ -32,7 +39,10 @@ export class NativeRadio implements BleRadio {
   async startScan(listener: Parameters<BleRadio["startScan"]>[0]) {
     await this.manager.startDeviceScan(
       [BLE_0822.service, BLE_0922.service],
-      { allowDuplicates: true },
+      {
+        allowDuplicates: true,
+        ...(Platform.OS === "android" ? { scanMode: ScanMode.LowLatency } : {}),
+      },
       (error, device) => {
         if (error) {
           listener(new ApiError(65, "蓝牙扫描失败"));
@@ -85,7 +95,21 @@ export class NativeRadio implements BleRadio {
     };
     try {
       check();
-      device = await this.manager.connectToDevice(handle, { timeout: 15000, requestMTU: 517 });
+      // Android may still be finishing the discovery scan when the user selects a device.
+      await this.manager.stopDeviceScan().catch(() => undefined);
+      check();
+      const options = { timeout: 15000, requestMTU: 517 };
+      try {
+        device = await this.manager.connectToDevice(handle, options);
+      } catch (error) {
+        const androidCode = (error as { androidErrorCode?: unknown })?.androidErrorCode;
+        if (Platform.OS !== "android" || ![62, 133].includes(Number(androidCode))) throw error;
+        // Retry only a failed initial link. No provisioning bytes have been written yet.
+        await this.manager.cancelDeviceConnection(handle).catch(() => undefined);
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        check();
+        device = await this.manager.connectToDevice(handle, options);
+      }
       if (closed || signal?.aborted) {
         await this.manager.cancelDeviceConnection(handle).catch(() => undefined);
         throw new ApiError(499, "蓝牙连接已停止");
@@ -106,8 +130,13 @@ export class NativeRadio implements BleRadio {
         (!writable.isWritableWithResponse && !writable.isWritableWithoutResponse)
       )
         throw new ApiError(503, "设备GATT能力尚未确认");
-      disconnect = device.onDisconnected(() => {
+      disconnect = device.onDisconnected((error) => {
         if (!closed) {
+          if (__DEV__)
+            console.warn("BLE disconnected", {
+              errorCode: error?.errorCode ?? null,
+              androidErrorCode: error?.androidErrorCode ?? null,
+            });
           void close();
           onDisconnect(new ApiError(65, "蓝牙连接已断开"));
         }

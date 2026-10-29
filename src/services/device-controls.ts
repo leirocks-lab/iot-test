@@ -198,6 +198,9 @@ export class PropertyControls {
     return value === binding.switch.on;
   }
   isOn(kind: ControlKind) {
+    // Screens may query optional switches while rendering any product.
+    // An absent capability has no known state; command validation stays strict.
+    if (!this.profile.bindings[kind]) return undefined;
     return this.switchValue(kind);
   }
   reason(kind: ControlKind): string {

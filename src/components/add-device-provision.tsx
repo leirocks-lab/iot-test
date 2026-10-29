@@ -4,7 +4,7 @@ import { Alert, Linking, Modal, Platform, Pressable, StyleSheet, Text, View } fr
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Svg, { Path } from "react-native-svg";
 import type { Product, Room } from "../services/models";
-import type { WifiObservation } from "../services/network-policy";
+import { wifiGuidance, type WifiObservation } from "../services/network-policy";
 import type { AddState } from "../services/onboarding";
 import { Input } from "../ui/kit/Input";
 
@@ -139,14 +139,15 @@ function WifiForm(p: Props) {
           </Pressable>
         </View>
         <Text
-          style={[
-            s.warning,
-            p.wifi?.connection === "wifi" && p.wifi.band !== "5" && s.hiddenWarning,
-          ]}
+          style={[s.warning, !p.wifiError && !!ssid && p.wifi?.band !== "5" && s.hiddenWarning]}
         >
-          {p.wifiError ||
-            (p.wifi?.band === "5" ? "请不要使用5GHz的Wi-Fi网络" : "没有连接到家庭Wi-Fi")}
+          {p.wifiError || (p.wifi ? wifiGuidance(p.wifi) : "请点击右侧按钮读取当前 Wi-Fi")}
         </Text>
+        {p.wifi?.ssidAccess === "denied" && (
+          <Pressable accessibilityRole="button" onPress={() => void Linking.openSettings()}>
+            <Text style={s.refreshText}>打开系统设置</Text>
+          </Pressable>
+        )}
         <Input
           prefixIcon={PASSWORD_ICON}
           value={p.password}
