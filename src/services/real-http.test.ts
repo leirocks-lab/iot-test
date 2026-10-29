@@ -133,7 +133,7 @@ describe("真实HTTP边界", () => {
     );
     expect(fetcher.mock.calls[0][1]?.signal).toBe(controller.signal);
   });
-  it("omits absent tenants and preserves the actual gateway denial", async () => {
+  it("defaults absent tenants to 1 and preserves the actual gateway denial", async () => {
     const fetcher = vi
         .fn<HttpFetcher>()
         .mockResolvedValue(response({ code: 400, msg: "请求的租户标识未传递", data: null })),
@@ -143,7 +143,7 @@ describe("真实HTTP边界", () => {
       path: "/api/app/devices",
     });
     expect(result.data).toMatchObject({ code: 400, success: false });
-    expect(fetcher.mock.calls[0][1]?.headers).not.toHaveProperty("tenant-id");
+    expect(fetcher.mock.calls[0][1]?.headers).toMatchObject({ "tenant-id": "1" });
   });
   it("adapts SHARE-01 fields and never replays PAIR-06 after a 401", async () => {
     const shareResponse = {

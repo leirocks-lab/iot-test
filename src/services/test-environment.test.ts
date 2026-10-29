@@ -59,7 +59,7 @@ describe("confirmed development HTTP environment", () => {
       expect(url.searchParams.get("account")).toBe("zhanglei@verveso.com");
     },
   );
-  it("omits an unspecified tenant instead of blocking the confirmed registration flow locally", async () => {
+  it("defaults an unspecified tenant to 1 instead of blocking the confirmed registration flow locally", async () => {
     const fetcher = vi.fn().mockResolvedValue(reply(null));
     const service = new RowanService(
       new RealHttpClient({ apiBaseUrl: "https://platform.test" }, fetcher),
@@ -67,6 +67,6 @@ describe("confirmed development HTTP environment", () => {
     );
     await service.sendCaptcha("zhanglei@verveso.com", "register");
     expect(fetcher).toHaveBeenCalledOnce();
-    expect(fetcher.mock.calls[0][1].headers).not.toHaveProperty("tenant-id");
+    expect(fetcher.mock.calls[0][1].headers).toMatchObject({ "tenant-id": "1" });
   });
 });

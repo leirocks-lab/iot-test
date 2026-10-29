@@ -21,13 +21,13 @@ export function realSessionScope(config: RealHttpConfig) {
 export class RealHttpClient implements HttpClient {
   private platform: FetchHttpClient;
   private iot: FetchHttpClient;
-  private tenantID?: string;
+  private tenantID: string;
   constructor(config: RealHttpConfig, fetcher?: HttpFetcher, diagnostics = new HttpDiagnostics()) {
     for (const root of [config.apiBaseUrl, config.iotApiBaseUrl ?? config.apiBaseUrl]) {
       validateApiBaseUrl(root, config.environment);
     }
-    this.tenantID = config.tenantID;
-    if (this.tenantID !== undefined && !/^\d+$/.test(this.tenantID))
+    this.tenantID = config.tenantID ?? "1";
+    if (!/^\d+$/.test(this.tenantID))
       throw new Error("tenant-id must be an integer supplied by the backend");
     this.platform = new FetchHttpClient(
       config.apiBaseUrl,
@@ -62,7 +62,7 @@ export class RealHttpClient implements HttpClient {
         body,
         headers: {
           ...req.headers,
-          ...(this.tenantID !== undefined ? { "tenant-id": this.tenantID } : {}),
+          "tenant-id": this.tenantID,
         },
       },
       {
