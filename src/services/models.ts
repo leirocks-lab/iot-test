@@ -147,6 +147,13 @@ export interface Session {
   userID: string;
   setting: Settings;
 }
+export interface UserProfile {
+  userID: string;
+  nickname: string;
+  emailMasked: string;
+  identities: string[];
+  deletionStatus: string;
+}
 export interface Schedule {
   id: string;
   type: "once" | "periodic";

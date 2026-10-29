@@ -8,6 +8,7 @@ import {
   type HelpArticle,
   type HomeGroup,
   type ThingModel,
+  type UserProfile,
 } from "./models";
 
 type ObjectValue = Record<string, unknown>;
@@ -205,6 +206,37 @@ function thingModel(value: unknown): ThingModel {
   });
   return { version: wire.version, attributes, services, events };
 }
+function userProfile(value: unknown): UserProfile {
+  const wire = object(value);
+  const identities =
+    Array.isArray(wire.identities)
+      ? wire.identities
+      : typeof wire.identities === "string"
+        ? (() => {
+            try {
+              const parsed: unknown = JSON.parse(wire.identities as string);
+              return Array.isArray(parsed) ? parsed : [];
+            } catch {
+              return [];
+            }
+          })()
+        : [];
+  if (
+    typeof wire.userID !== "string" ||
+    typeof wire.nickname !== "string" ||
+    typeof wire.emailMasked !== "string" ||
+    identities.some((entry) => typeof entry !== "string") ||
+    typeof wire.deletionStatus !== "string"
+  )
+    throw new ApiError(502, "个人信息响应字段格式不支持");
+  return {
+    userID: wire.userID,
+    nickname: wire.nickname,
+    emailMasked: wire.emailMasked,
+    identities: identities as string[],
+    deletionStatus: wire.deletionStatus,
+  };
+}
 
 export function realResponseData(req: HttpRequest, value: unknown): unknown {
   if (req.method !== "GET") return value;
@@ -219,6 +251,7 @@ export function realResponseData(req: HttpRequest, value: unknown): unknown {
     return productData(value);
   }
   if (path === "/api/app/devices") return home(value);
+  if (path === "/api/app/user/profile") return userProfile(value);
   if (/^\/api\/app\/devices\/[^/]+$/.test(path)) return device(value);
   if (path.endsWith("/connectHelping") || path.endsWith("/helping")) return helpArticles(value);
   if (path.endsWith("/thing-model")) return thingModel(value);

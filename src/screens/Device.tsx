@@ -3,6 +3,7 @@ import { useCallback, useRef, useState } from "react";
 import { AppState, Image, Pressable, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { DeviceEvents } from "../components/device/event-controls";
+import { createMockDeviceSession, mockDeviceView } from "../dev/mock-device";
 import { withBudget } from "../protocol/device";
 import type { DeviceSession } from "../protocol/device-session";
 import type { DeviceView } from "../services/models";
@@ -21,6 +22,19 @@ export default function DeviceScreen() {
   const sessionRevision = runtime?.service.sessionRevision;
   useFocusEffect(
     useCallback(() => {
+      if (__DEV__) {
+        const session = createMockDeviceSession();
+        setDevice(mockDeviceView(id));
+        setDetailError("");
+        setShadow(session);
+        const unsub = session.onChange(() => redraw((n) => n + 1));
+        retryRef.current = async () => undefined;
+        return () => {
+          unsub();
+          session.close();
+          retryRef.current = async () => undefined;
+        };
+      }
       if (!runtime?.service.session || sessionRevision === undefined) return;
       let active = true,
         foreground = AppState.currentState === null || AppState.currentState === "active";
@@ -490,11 +504,10 @@ const ui = {
   dot: { width: 7, height: 7, borderRadius: 4 },
   statusText: { fontSize: 14, color: "#666" },
   preview: {
-    // height: 210,
-    // display: "flex" as const,
-    // alignItems: "center" as const,
-    // justifyContent: "center" as const,
-    // marginTop: 0,
+    height: 210,
+    display: "flex" as const,
+    alignItems: "center" as const,
+    justifyContent: "center" as const,
   },
   previewLine: {
     width: 142,

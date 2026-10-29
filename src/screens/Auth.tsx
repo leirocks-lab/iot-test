@@ -288,7 +288,7 @@ function Register() {
   );
 }
 
-function EmailVerification({
+export function EmailVerification({
   email,
   password,
   region,
@@ -300,7 +300,7 @@ function EmailVerification({
   password: string;
   region: string;
   onBack: () => void;
-  purpose?: "register" | "forget";
+  purpose?: "register" | "forget" | "changeEmail";
   onVerified?: (code: string) => void;
 }) {
   const { runtime } = useApp();
@@ -319,7 +319,7 @@ function EmailVerification({
     let active = true;
     sendLock.current = true;
     void runtime.service
-      .sendCaptcha(email, purpose)
+      .sendCaptcha(email, purpose === "changeEmail" ? "register" : purpose)
       .then(() => {
         if (!active) return;
         setRemaining(60);
@@ -352,7 +352,7 @@ function EmailVerification({
     sendLock.current = true;
     setSending(true);
     try {
-      await runtime.service.sendCaptcha(email, purpose);
+      await runtime.service.sendCaptcha(email, purpose === "changeEmail" ? "register" : purpose);
       setCode("");
       setInvalid(false);
       setRemaining(60);
@@ -372,7 +372,7 @@ function EmailVerification({
     setBusy(true);
     try {
       await runtime.service.checkCaptcha(email, code);
-      if (purpose === "forget") onVerified?.(code);
+      if (purpose !== "register") onVerified?.(code);
       else {
         await runtime.service.register(email, password, code, region);
         router.replace("/auth/login");
@@ -420,7 +420,7 @@ function EmailVerification({
         >
           <View style={verifyStyles.illustration}>
             <Image
-              source={require("../../assets/images/email-send.png")}
+              source={require("../../assets/images/email.png")}
               style={{ width: 160, height: 160 }}
             />
           </View>
