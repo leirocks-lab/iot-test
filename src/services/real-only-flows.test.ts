@@ -164,48 +164,61 @@ describe("real-only device onboarding", () => {
     expect(flow.state.binding).toBeUndefined();
     flow.stop();
   });
-  it("routes a 0922 broadcast without a factory profile or bind-code provider and confirms a unique HOME-01 MAC", async () => {
-    const { service } = setup(),
-      driver = new UnavailableDeviceTransport();
-    const flow = new AddDeviceFlow(service, driver, {
-      environment: "development",
-      wifi,
-      real: { bindingTimeout: 1000, operationTimeout: 1000, deviceToken: (token) => token },
-    });
-    const legacy = { ...candidate, service: "00000922-0000-1000-8000-00805f9b34fb" };
-    await flow.select(legacy);
-    vi.spyOn(service, "connection").mockResolvedValue({
-      certificationURL: "https://device.test/cert",
-    });
-    const bind = vi.spyOn(service, "bindStatus");
-    const home = vi
-      .spyOn(service, "home")
-      .mockResolvedValue([
-        { room: null, devices: [{ ...view, device: { id: view.device.id, mac: candidate.mac } }] },
-      ]);
-    const runner = vi
-      .spyOn(Provisioner0922.prototype, "run")
-      .mockImplementation(async (input, onStatus, signal, confirm, submitted) => {
-        expect(input.service).toBe(legacy.service);
-        expect(input.productID).toBe("LF-WM05");
-        expect(input.bindCode).toBe("");
-        submitted?.();
-        onStatus("D0");
-        expect(flow.state.binding).toBeUndefined();
-        return confirm!(signal);
+  it.each([false, true])(
+    "routes 0922 and confirms actual binding (manual SSID: %s)",
+    async (manual) => {
+      const { service } = setup(),
+        driver = new UnavailableDeviceTransport();
+      const flow = new AddDeviceFlow(service, driver, {
+        environment: "development",
+        wifi: manual
+          ? {
+              supportsManualSSID: true,
+              read: vi.fn().mockRejectedValue(new Error("SSID unavailable")),
+            }
+          : wifi,
+        real: { bindingTimeout: 1000, operationTimeout: 1000, deviceToken: (token) => token },
       });
-    const runner0822 = vi.spyOn(Provisioner0822.prototype, "run");
-    try {
-      await flow.provision("Actual WiFi", "public-password");
-      expect(runner).toHaveBeenCalledOnce();
-      expect(runner0822).not.toHaveBeenCalled();
-      expect(bind).not.toHaveBeenCalled();
-      expect(home).toHaveBeenCalledOnce();
-      expect(flow.state).toMatchObject({ stage: "bound", binding: { deviceID: view.device.id } });
-    } finally {
-      flow.stop();
-    }
-  });
+      const legacy = { ...candidate, service: "00000922-0000-1000-8000-00805f9b34fb" };
+      await flow.select(legacy);
+      vi.spyOn(service, "connection").mockResolvedValue({
+        certificationURL: "https://device.test/cert",
+      });
+      const bind = vi.spyOn(service, "bindStatus");
+      const home = vi
+        .spyOn(service, "home")
+        .mockResolvedValue([
+          {
+            room: null,
+            devices: [{ ...view, device: { id: view.device.id, mac: candidate.mac } }],
+          },
+        ]);
+      const runner = vi
+        .spyOn(Provisioner0922.prototype, "run")
+        .mockImplementation(async (input, onStatus, signal, confirm, submitted) => {
+          expect(input.ssid).toBe("Actual WiFi");
+          expect(input.password).toBe("public-password");
+          expect(input.service).toBe(legacy.service);
+          expect(input.productID).toBe("LF-WM05");
+          expect(input.bindCode).toBe("");
+          submitted?.();
+          onStatus("D0");
+          expect(flow.state.binding).toBeUndefined();
+          return confirm!(signal);
+        });
+      const runner0822 = vi.spyOn(Provisioner0822.prototype, "run");
+      try {
+        await flow.provision("Actual WiFi", "public-password", manual);
+        expect(runner).toHaveBeenCalledOnce();
+        expect(runner0822).not.toHaveBeenCalled();
+        expect(bind).not.toHaveBeenCalled();
+        expect(home).toHaveBeenCalledOnce();
+        expect(flow.state).toMatchObject({ stage: "bound", binding: { deviceID: view.device.id } });
+      } finally {
+        flow.stop();
+      }
+    },
+  );
   it("does not claim binding when HOME-01 has ambiguous MAC matches", async () => {
     const { service } = setup();
     const flow = new AddDeviceFlow(service, new UnavailableDeviceTransport(), {

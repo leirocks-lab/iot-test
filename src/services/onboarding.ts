@@ -16,7 +16,7 @@ import {
 import { Provisioner0922 } from "../protocol/provision-0922";
 import { BLE_0822, classify0822 } from "../protocol/ble-0822";
 import { BLE_0922 } from "../protocol/ble-0922";
-import { requireCurrentWifi, type WifiReader } from "./wifi";
+import { checkProvisionWifi, type WifiReader } from "./wifi";
 import { type DeviceSession } from "../protocol/device-session";
 import { resolveDeviceScanDuration } from "../config/device-discovery";
 
@@ -448,7 +448,7 @@ export class AddDeviceFlow {
     )
       throw new ApiError(0, "绑定响应身份或角色不一致，请核对结果");
   }
-  async provision(ssid: string, password: string) {
+  async provision(ssid: string, password: string, manualSSID = false) {
     this.options.beforeNewContext?.();
     if (this.state.binding || this.state.stage === "unknown")
       throw new ApiError(409, "已有绑定结果或结果待确认，请勿重复配网");
@@ -468,14 +468,13 @@ export class AddDeviceFlow {
             )
           )
             throw new ApiError(503, "真实绑定及配网等待预算未配置");
-          const network = await withBudget(
-            (budget) => this.options.wifi!.read(budget),
+          await withBudget(
+            (budget) => checkProvisionWifi(this.options.wifi!, ssid, manualSSID, budget),
             10000,
             "当前Wi-Fi读取超时",
             signal,
           );
           this.check(round, signal);
-          requireCurrentWifi(network, ssid);
           const provided = this.options.real.makeBindCode
             ? await withBudget(
                 (budget) => this.options.real!.makeBindCode!(budget),
@@ -546,14 +545,13 @@ export class AddDeviceFlow {
           urls,
         };
         {
-          const network = await withBudget(
-            (budget) => this.options.wifi!.read(budget),
+          await withBudget(
+            (budget) => checkProvisionWifi(this.options.wifi!, ssid, manualSSID, budget),
             10000,
             "当前Wi-Fi读取超时",
             signal,
           );
           this.check(round, signal);
-          requireCurrentWifi(network, ssid);
         }
         const result = await withBudget(
           async (budget) => {

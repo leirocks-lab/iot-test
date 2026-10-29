@@ -45,6 +45,7 @@ function AddContent({
   const qrPending = qrState.phase === "confirming" || qrState.phase === "unknown";
   const state = useSyncExternalStore(flow.subscribe, flow.snapshot, flow.snapshot);
   const [choice, setChoice] = useState<Product | null>(null);
+  const [manualSSID, setManualSSID] = useState("");
   const [password, setPassword] = useState(""),
     [showPassword, setShowPassword] = useState(false),
     [nickname, setNickname] = useState("");
@@ -69,6 +70,7 @@ function AddContent({
       setWifiError("");
       setWifiBusy(true);
       setPassword("");
+      setManualSSID("");
       setShowPassword(false);
       const check = () =>
         focused.current && !controller.signal.aborted && round === wifiRound.current;
@@ -97,6 +99,7 @@ function AddContent({
           focused.current = false;
           flow.stop();
           setPassword("");
+          setManualSSID("");
           setShowPassword(false);
         };
       const controller = new AbortController();
@@ -151,6 +154,7 @@ function AddContent({
           wifiController.current?.abort();
           setWifi(undefined);
           setPassword("");
+          setManualSSID("");
           setShowPassword(false);
         } else if (focused.current && page === "provision") {
           void refreshWifi();
@@ -166,6 +170,7 @@ function AddContent({
           flow.stop();
         }
         setPassword("");
+        setManualSSID("");
         setShowPassword(false);
       };
     }, [runtime, productID, boundDeviceID, run, flow, refreshWifi, qrPending, page]),
@@ -194,6 +199,7 @@ function AddContent({
     flow.stop();
     setChoice(selected);
     setPassword("");
+    setManualSSID("");
     setShowPassword(false);
   };
   const scan = () => {
@@ -201,12 +207,19 @@ function AddContent({
     setDismissedRequirement(null);
     void flow.scan().catch(() => undefined);
   };
+  const manualWifi =
+    Platform.OS === "ios" &&
+    runtime.wifi?.supportsManualSSID === true &&
+    !wifiBusy &&
+    !wifi?.ssid &&
+    (!!wifi || !!wifiError);
   const provision = () =>
     execute(async () => {
       try {
-        await flow.provision(wifi?.ssid ?? "", password);
+        await flow.provision(manualWifi ? manualSSID : (wifi?.ssid ?? ""), password, manualWifi);
       } finally {
         setPassword("");
+        setManualSSID("");
         setShowPassword(false);
       }
     });
@@ -219,6 +232,7 @@ function AddContent({
     ++wifiRound.current;
     setWifiBusy(false);
     setPassword("");
+    setManualSSID("");
     setShowPassword(false);
   };
   const returnHome = () => {
@@ -303,7 +317,12 @@ function AddContent({
         product={product ?? undefined}
         wifi={wifi}
         wifiBusy={wifiBusy}
-        ssid={wifi?.ssid ?? ""}
+        ssid={manualWifi ? manualSSID : (wifi?.ssid ?? "")}
+        manualWifi={manualWifi}
+        onSSIDChange={(value) => {
+          setManualSSID(value);
+          setPassword("");
+        }}
         password={password}
         nickname={nickname}
         busy={busy}
@@ -316,6 +335,7 @@ function AddContent({
         onFinish={finish}
         onRetryProvision={() => {
           setPassword("");
+          setManualSSID("");
           setShowPassword(false);
         }}
         onBack={() => {
@@ -425,6 +445,7 @@ function AddContent({
                 flow.reset();
                 setChoice(null);
                 setPassword("");
+                setManualSSID("");
               }}
             />
           )}

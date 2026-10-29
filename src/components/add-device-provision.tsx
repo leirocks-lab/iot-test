@@ -14,6 +14,8 @@ type Props = {
   wifi?: WifiObservation;
   wifiBusy: boolean;
   ssid: string;
+  manualWifi: boolean;
+  onSSIDChange: (value: string) => void;
   password: string;
   nickname: string;
   busy: boolean;
@@ -129,8 +131,9 @@ function WifiForm(p: Props) {
           <Input
             prefixIcon={WIFI_ICON}
             value={ssid}
-            editable={false}
-            placeholder="请选择您的家庭Wi-Fi"
+            editable={p.manualWifi && !p.busy && !p.wifiBusy}
+            onChangeText={p.onSSIDChange}
+            placeholder={p.manualWifi ? "请输入2.4GHz Wi-Fi名称" : "请选择您的家庭Wi-Fi"}
             clearable={false}
             style={s.input}
           />
@@ -139,9 +142,14 @@ function WifiForm(p: Props) {
           </Pressable>
         </View>
         <Text
-          style={[s.warning, !p.wifiError && !!ssid && p.wifi?.band !== "5" && s.hiddenWarning]}
+          style={[
+            s.warning,
+            !p.manualWifi && !p.wifiError && !!ssid && p.wifi?.band !== "5" && s.hiddenWarning,
+          ]}
         >
-          {p.wifiError || (p.wifi ? wifiGuidance(p.wifi) : "请点击右侧按钮读取当前 Wi-Fi")}
+          {p.manualWifi
+            ? "无法自动核对 Wi-Fi。请输入目标名称和密码；点击下一步即确认目标为2.4GHz网络。"
+            : p.wifiError || (p.wifi ? wifiGuidance(p.wifi) : "请点击右侧按钮读取当前 Wi-Fi")}
         </Text>
         {p.wifi?.ssidAccess === "denied" && (
           <Pressable accessibilityRole="button" onPress={() => void Linking.openSettings()}>
@@ -377,7 +385,7 @@ function RoomSheet({
 export function AddDeviceProvision(p: Props) {
   const [roomVisible, setRoomVisible] = useState(false);
   const [retrying, setRetrying] = useState(false);
-  useWifiWarnings(p.wifi);
+  useWifiWarnings(p.manualWifi ? undefined : p.wifi);
   const mode = useMemo(() => {
     if (retrying) return "wifi";
     if (p.state.binding && p.state.stage !== "complete") return "nickname";

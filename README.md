@@ -102,6 +102,10 @@ pnpm android
 pnpm ios
 ```
 
+使用免费 Apple Personal Team 进行本地真机测试时，在本地 `.env` 设置
+`ROWAN_IOS_PERSONAL_TEAM=1` 和 `ROWAN_APPLE_TEAM_ID=<Xcode 中的 Team ID>`。
+此开关仅允许 `development` 环境，通过 Config Plugin 移除 APNs 签名权限，因此该测试包不能验收远程推送；未启用开关的构建保留原有推送配置。切换开关后须重新生成并构建 iOS 工程。
+
 以下变化需要重新构建 Development Build：
 
 - 新增、删除或升级包含原生代码的依赖

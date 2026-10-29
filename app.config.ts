@@ -44,6 +44,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       icon: "./assets/expo.icon",
       bundleIdentifier: identity.iosBundleIdentifier,
       entitlements: personalTeam ? {} : { "com.apple.developer.networking.wifi-info": true },
+      ...(process.env.ROWAN_APPLE_TEAM_ID ? { appleTeamId: process.env.ROWAN_APPLE_TEAM_ID } : {}),
       infoPlist: {
         NSAppTransportSecurity: { NSAllowsArbitraryLoads: allowsHttpApi(identity.environment) },
       },
@@ -63,6 +64,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       favicon: "./assets/images/favicon.png",
     },
     plugins: [
+      // Mods run in reverse registration order; remove APNs after notifications configures it.
+      ["./src/config/with-personal-team.ts", { enabled: personalTeam }],
       ["./src/config/with-api-transport.ts", { environment: identity.environment }],
       ["./src/config/with-dev-backend-certificate.ts", { enabled: usesDevBackendCertificate }],
       "expo-router",

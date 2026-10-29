@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
-import { observeWifi, requireCurrentWifi } from "./wifi";
+import { describe, expect, it, vi } from "vitest";
+import { checkProvisionWifi, observeWifi, requireCurrentWifi } from "./wifi";
 import { wifiGuidance } from "./network-policy";
 
 describe("系统Wi-Fi事实与凭据守卫", () => {
@@ -56,5 +56,42 @@ describe("系统Wi-Fi事实与凭据守卫", () => {
     });
     expect(wifi.ssid).toBeUndefined();
     expect(() => requireCurrentWifi(wifi)).toThrow("无法读取");
+  });
+});
+
+describe("iOS manual SSID guard", () => {
+  const signal = () => new AbortController().signal;
+  it("permits unavailable SSID only for an explicit supported manual path", async () => {
+    const read = vi.fn().mockRejectedValue(new Error("SSID unavailable"));
+    await expect(
+      checkProvisionWifi({ read, supportsManualSSID: true }, " Target ", true, signal()),
+    ).resolves.toBeUndefined();
+    await expect(
+      checkProvisionWifi({ read, supportsManualSSID: true }, "Target", false, signal()),
+    ).rejects.toThrow("SSID unavailable");
+    await expect(checkProvisionWifi({ read }, "Target", true, signal())).rejects.toThrow(
+      "不支持手动",
+    );
+  });
+  it("accepts a missing name but preserves known network guards", async () => {
+    const read = vi
+      .fn()
+      .mockResolvedValue({ connection: "wifi", band: "unknown", source: "system" });
+    const reader = { read, supportsManualSSID: true };
+    await expect(checkProvisionWifi(reader, "Target", true, signal())).resolves.toBeUndefined();
+    read.mockResolvedValue({ connection: "wifi", band: "2.4", source: "system", ssid: "Other" });
+    await expect(checkProvisionWifi(reader, "Target", true, signal())).rejects.toThrow(
+      "Wi-Fi已变化",
+    );
+    read.mockResolvedValue({ connection: "wifi", band: "5", source: "system" });
+    await expect(checkProvisionWifi(reader, "Target", true, signal())).rejects.toThrow("2.4GHz");
+  });
+  it("never treats cancellation as permission to send", async () => {
+    const controller = new AbortController();
+    controller.abort();
+    const read = vi.fn().mockRejectedValue(new Error("cancelled"));
+    await expect(
+      checkProvisionWifi({ read, supportsManualSSID: true }, "Target", true, controller.signal),
+    ).rejects.toThrow("cancelled");
   });
 });

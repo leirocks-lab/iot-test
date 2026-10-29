@@ -6,6 +6,7 @@ import { observeWifi, type WifiReader } from "../services/wifi";
 
 export function createWifiReader(): WifiReader {
   return {
+    supportsManualSSID: Platform.OS === "ios",
     read: async (signal, requestPermission = false) => {
       const check = () => {
         if (signal?.aborted) throw new ApiError(499, "网络读取已停止");
