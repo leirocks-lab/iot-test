@@ -4,6 +4,7 @@ export { Card } from "./kit/Card";
 export { Empty } from "./kit/Empty";
 export { ErrorText } from "./kit/ErrorText";
 export { Field } from "./kit/Field";
+export { Input } from "./kit/Input";
 export { Label } from "./kit/Label";
 export { Page } from "./kit/Page";
 export { confirm } from "./kit/confirm";

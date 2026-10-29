@@ -20,6 +20,7 @@ import {
   type Settings,
   type ShareBinding,
   type ThingModel,
+  type UserProfile,
 } from "./models";
 
 export class RowanService {
@@ -222,6 +223,19 @@ export class RowanService {
       { method: "PATCH", path: "/api/app/user/password", body: { account, password, captcha } },
       false,
     );
+  }
+  async updateNickname(nickname: string) {
+    return this.request({ method: "PATCH", path: "/api/app/user", body: { nickname } });
+  }
+  async updateEmail(account: string, captcha: string) {
+    return this.request({ method: "PATCH", path: "/api/app/user", body: { account, captcha, type: "email" } });
+  }
+  async changePassword(oldPassword: string, password: string) {
+    return this.request({ method: "PATCH", path: "/api/app/user/password", body: { oldPassword, password } });
+  }
+  async deleteAccount(password: string) {
+    await this.request({ method: "DELETE", path: "/api/app/user", body: { password } }, false);
+    await this.clear();
   }
   async config(platform: string, signal?: AbortSignal) {
     return this.request<{ configVersion: string }>({
@@ -459,6 +473,9 @@ export class RowanService {
   }
   async settings() {
     return this.request<Settings>({ method: "GET", path: "/api/app/user/setting" });
+  }
+  async profile() {
+    return this.request<UserProfile>({ method: "GET", path: "/api/app/user/profile" });
   }
   async updateSettings(patch: Partial<Settings>) {
     const round = this.epoch;

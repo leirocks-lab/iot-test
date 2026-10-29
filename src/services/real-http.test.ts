@@ -28,6 +28,64 @@ function setup(data: unknown = ok({})) {
 }
 
 describe("真实HTTP边界", () => {
+  it("logs out through AUTH-06, sends the bearer token, and clears the saved session", async () => {
+    const { fetcher, client } = setup(ok({}));
+    const storage = new MemoryStorage();
+    const service = new RowanService(client, storage);
+    service.session = {
+      accessToken: "access-token",
+      refreshToken: "refresh-token",
+      expiresIn: 3600,
+      tokenType: "Bearer",
+      userID: "user-demo",
+      setting: defaultSettings(),
+    };
+    await storage.set("session", JSON.stringify(service.session));
+
+    await service.logout();
+
+    expect(fetcher).toHaveBeenCalledWith(
+      "https://platform.example.test/app-api/session",
+      expect.objectContaining({
+        method: "DELETE",
+        headers: expect.objectContaining({ Authorization: "Bearer access-token", "tenant-id": "42" }),
+        body: undefined,
+      }),
+    );
+    expect(service.session).toBeNull();
+    expect(await storage.get("session")).toBeNull();
+  });
+
+  it("loads USER-03 profile data from the platform endpoint and normalizes identities", async () => {
+    const { fetcher, client } = setup(
+      ok({
+        userID: "10001",
+        nickname: "JACK",
+        emailMasked: "59***@qq.com",
+        identities: '["wechat_open"]',
+        deletionStatus: "none",
+      }),
+    );
+    const service = new RowanService(client, new MemoryStorage());
+    service.session = {
+      accessToken: "access-token",
+      refreshToken: "refresh-token",
+      expiresIn: 3600,
+      tokenType: "Bearer",
+      userID: "10001",
+      setting: defaultSettings(),
+    };
+
+    await expect(service.profile()).resolves.toEqual({
+      userID: "10001",
+      nickname: "JACK",
+      emailMasked: "59***@qq.com",
+      identities: ["wechat_open"],
+      deletionStatus: "none",
+    });
+    expect(fetcher.mock.calls[0][0]).toBe("https://platform.example.test/app-api/user/profile");
+  });
+
   it.each([
     ["/api/app/session", "https://platform.example.test/app-api/session"],
     ["/api/app/user/setting", "https://platform.example.test/app-api/user/setting"],
@@ -75,7 +133,7 @@ describe("真实HTTP边界", () => {
     );
     expect(fetcher.mock.calls[0][1]?.signal).toBe(controller.signal);
   });
-  it("omits absent tenants and preserves the actual gateway denial", async () => {
+  it("defaults absent tenants to 1 and preserves the actual gateway denial", async () => {
     const fetcher = vi
         .fn<HttpFetcher>()
         .mockResolvedValue(response({ code: 400, msg: "请求的租户标识未传递", data: null })),
@@ -85,7 +143,7 @@ describe("真实HTTP边界", () => {
       path: "/api/app/devices",
     });
     expect(result.data).toMatchObject({ code: 400, success: false });
-    expect(fetcher.mock.calls[0][1]?.headers).not.toHaveProperty("tenant-id");
+    expect(fetcher.mock.calls[0][1]?.headers).toMatchObject({ "tenant-id": "1" });
   });
   it("adapts SHARE-01 fields and never replays PAIR-06 after a 401", async () => {
     const shareResponse = {

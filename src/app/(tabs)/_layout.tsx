@@ -19,7 +19,7 @@ function BottomBar({ state, navigation }: any) {
   const [open, setOpen] = useState(false),
     current = state.routes[state.index]?.name;
   const { bottom: bottomInset } = useSafeAreaInsets();
-  const { navigationLocked } = useApp();
+  const { runtime, navigationLocked } = useApp();
   const color = useColors();
   const barHeight = 43 + bottomInset;
   if (navigationLocked) return null;
@@ -45,6 +45,7 @@ function BottomBar({ state, navigation }: any) {
             ]}
             onPress={() => {
               setOpen(false);
+              runtime?.onboarding.enterFromHome();
               router.push("/add");
             }}
           >

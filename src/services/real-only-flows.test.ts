@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { HttpClient } from "../lib/core";
-import { UnavailableDeviceTransport } from "../protocol/device";
+import { UnavailableDeviceTransport, type DeviceTransport } from "../protocol/device";
 import { ControlledDeviceSession } from "../protocol/controlled-session";
 import type { DeviceSession } from "../protocol/device-session";
 import { Provisioner0822 } from "../protocol/provision-0822";
@@ -8,7 +8,7 @@ import { Provisioner0922 } from "../protocol/provision-0922";
 import { MemoryStorage, defaultSettings } from "../test-support/settings-fixture";
 import { ApiError, type DeviceView, type Product } from "./models";
 import { RowanService } from "./rowan";
-import { AddDeviceFlow, validateWifi } from "./onboarding";
+import { AddDeviceCoordinator, AddDeviceFlow, validateWifi } from "./onboarding";
 import { QrScanFlow } from "./scan-flow";
 import { DeviceShareFlow } from "./device-share";
 
@@ -260,6 +260,200 @@ describe("real-only device onboarding", () => {
     const validate = vi.fn();
     validateWifi("wifi", "short", validate);
     expect(validate).toHaveBeenCalledWith("short");
+  });
+});
+
+describe("add device entry from Home", () => {
+  it("starts a fresh discovery after an ended scan and ignores its late callbacks", async () => {
+    vi.useFakeTimers();
+    const { service } = setup();
+    const driver: DeviceTransport = new UnavailableDeviceTransport();
+    const reports: Parameters<DeviceTransport["scan"]>[1][] = [];
+    const scan = vi.spyOn(driver, "scan").mockImplementation(async (_signal, report) => {
+      reports.push(report);
+      report?.(candidate);
+      return [candidate];
+    });
+    const coordinator = new AddDeviceCoordinator(service, driver, { scanTimeout: 1000 });
+    const flow = coordinator.enterFromHome();
+    const firstScan = flow.scan();
+    await vi.advanceTimersByTimeAsync(1000);
+    await firstScan;
+    expect(flow.state.discovered).toEqual([candidate]);
+    flow.stop();
+    // Returning within the same add flow still preserves that round's discoveries.
+    expect(coordinator.acquire().state.discovered).toEqual([candidate]);
+
+    const next = coordinator.enterFromHome();
+    expect(next.state).toMatchObject({ stage: "idle", message: "", error: "", discovered: [] });
+    const nextCandidate = { ...candidate, mac: "112233445566", handle: "new-handle" };
+    scan.mockImplementation(async (_signal, report) => {
+      report?.(nextCandidate);
+      return [nextCandidate];
+    });
+    const secondScan = next.scan();
+    reports[0]?.(candidate);
+    expect(next.state).toMatchObject({ stage: "scanning", discovered: [nextCandidate] });
+    await vi.advanceTimersByTimeAsync(1000);
+    await secondScan;
+    expect(next.state.discovered).toEqual([nextCandidate]);
+    expect(scan).toHaveBeenCalledTimes(2);
+    coordinator.clear();
+  });
+
+  it.each([403, 61, 65])(
+    "clears a previous scan failure (%s) on a new Home entry",
+    async (code) => {
+      const { service } = setup();
+      const driver: DeviceTransport = new UnavailableDeviceTransport();
+      const scan = vi.spyOn(driver, "scan").mockRejectedValue(new ApiError(code, "old scan error"));
+      const coordinator = new AddDeviceCoordinator(service, driver, {});
+      const flow = coordinator.enterFromHome();
+      await expect(flow.scan()).rejects.toThrow("old scan error");
+      flow.stop();
+      expect(coordinator.acquire().state.error).toBe("old scan error");
+      const next = coordinator.enterFromHome();
+      expect(next.state).toMatchObject({
+        stage: "idle",
+        message: "",
+        error: "",
+        discovered: [],
+      });
+      expect(next.state.scanIssue).toBeUndefined();
+      // Entry prepares a clean state; the focused search page starts the permission check/scan.
+      expect(scan).toHaveBeenCalledOnce();
+      coordinator.clear();
+    },
+  );
+
+  it("clears a definite C3 failure and the selected device when entering from Home", async () => {
+    const { service } = setup();
+    vi.spyOn(service, "connection").mockResolvedValue({
+      certificationURL: "https://device.test/cert",
+    });
+    const runner = vi
+      .spyOn(Provisioner0822.prototype, "run")
+      .mockImplementation(async (_input, onStatus, _signal, _readBinding, onWrite) => {
+        onWrite?.();
+        onStatus("C3");
+        throw new ApiError(0xc3, "配网未完成（C3）");
+      });
+    const coordinator = new AddDeviceCoordinator(service, new UnavailableDeviceTransport(), {
+      real: contract,
+      wifi,
+    });
+    const flow = coordinator.enterFromHome();
+    await flow.select(candidate);
+    await expect(flow.provision("Actual WiFi", "pass")).rejects.toThrow("C3");
+    flow.stop();
+    expect(flow.state).toMatchObject({ stage: "failed", error: "配网未完成（C3）" });
+    const next = coordinator.enterFromHome();
+    expect(next.state).toMatchObject({
+      stage: "idle",
+      message: "",
+      error: "",
+      discovered: [],
+    });
+    expect(next.state.candidate).toBeUndefined();
+    expect(next.state.product).toBeUndefined();
+    expect(next.state.deviceStep).toBeUndefined();
+    expect(next.state.deviceProgress).toBeUndefined();
+    expect(runner).toHaveBeenCalledOnce();
+    coordinator.clear();
+  });
+
+  it("resumes unknown and confirmed binding results without new scanning or provisioning", async () => {
+    const { service } = setup();
+    vi.spyOn(service, "connection").mockResolvedValue({
+      certificationURL: "https://device.test/cert",
+    });
+    const binding = {
+      deviceID: view.device.id,
+      userID: service.userID,
+      bindingRole: "sa" as const,
+    };
+    const status = vi
+      .spyOn(service, "bindStatus")
+      .mockRejectedValueOnce(new ApiError(0, "response lost"))
+      .mockResolvedValue(binding);
+    const runner = vi
+      .spyOn(Provisioner0822.prototype, "run")
+      .mockImplementation(async (_input, _status, signal, readBinding, onWrite) => {
+        onWrite?.();
+        return readBinding!(signal);
+      });
+    const driver = new UnavailableDeviceTransport();
+    const scan = vi.spyOn(driver, "scan");
+    const makeBindCode = vi.fn(async () => "original-bind-code");
+    const coordinator = new AddDeviceCoordinator(service, driver, {
+      real: { ...contract, makeBindCode },
+      wifi,
+    });
+    const flow = coordinator.enterFromHome();
+    await flow.select(candidate);
+    await expect(flow.provision("Actual WiFi", "pass")).rejects.toThrow("response lost");
+    flow.stop();
+    const resumed = coordinator.enterFromHome();
+    expect(resumed).toBe(flow);
+    expect(resumed.state).toMatchObject({ stage: "unknown", candidate, error: "response lost" });
+    await expect(resumed.scan()).rejects.toThrow("当前绑定结果");
+    await expect(resumed.provision("Actual WiFi", "pass")).rejects.toThrow("结果待确认");
+    await resumed.reconcile();
+    const bound = coordinator.enterFromHome();
+    expect(bound).toBe(flow);
+    expect(bound.state).toMatchObject({ stage: "bound", binding, nickname: "pending" });
+    await expect(bound.scan()).rejects.toThrow("当前绑定结果");
+    await expect(bound.provision("Actual WiFi", "pass")).rejects.toThrow("已有绑定结果");
+    expect(makeBindCode).toHaveBeenCalledOnce();
+    expect(runner).toHaveBeenCalledOnce();
+    expect(status).toHaveBeenCalledTimes(2);
+    expect(status.mock.calls.map(([code]) => code)).toEqual([
+      "original-bind-code",
+      "original-bind-code",
+    ]);
+    expect(scan).not.toHaveBeenCalled();
+    coordinator.clear();
+  });
+
+  it("protects an in-flight submission and ignores a late result when entering from Home", async () => {
+    const { service } = setup();
+    vi.spyOn(service, "connection").mockResolvedValue({
+      certificationURL: "https://device.test/cert",
+    });
+    const binding = {
+      deviceID: view.device.id,
+      userID: service.userID,
+      bindingRole: "sa" as const,
+    };
+    let resolve!: (result: typeof binding) => void;
+    let signal: AbortSignal | undefined;
+    vi.spyOn(Provisioner0822.prototype, "run").mockImplementation(
+      async (_input, _status, budget, _readBinding, onWrite) => {
+        signal = budget;
+        onWrite?.();
+        return new Promise<typeof binding>((done) => {
+          resolve = done;
+        });
+      },
+    );
+    const coordinator = new AddDeviceCoordinator(service, new UnavailableDeviceTransport(), {
+      real: contract,
+      wifi,
+    });
+    const flow = coordinator.enterFromHome();
+    await flow.select(candidate);
+    const pending = flow.provision("Actual WiFi", "pass");
+    const cancelled = expect(pending).rejects.toMatchObject({ code: 499 });
+    await vi.waitFor(() => expect(resolve).toBeDefined());
+    const resumed = coordinator.enterFromHome();
+    expect(signal?.aborted).toBe(true);
+    expect(resumed.state).toMatchObject({ stage: "unknown", candidate });
+    expect(resumed.state.binding).toBeUndefined();
+    resolve(binding);
+    await cancelled;
+    expect(resumed.state).toMatchObject({ stage: "unknown", busy: false });
+    expect(resumed.state.binding).toBeUndefined();
+    coordinator.clear();
   });
 });
 

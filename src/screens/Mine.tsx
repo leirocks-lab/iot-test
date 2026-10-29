@@ -1,5 +1,6 @@
 import { Image } from "expo-image";
-import { router } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
+import { useCallback, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useApp } from "../ui/context";
@@ -60,8 +61,28 @@ const rowActions = [
 
 export default function Mine() {
   const { runtime } = useApp();
+  const [profile, setProfile] = useState<{ nickname: string; emailMasked: string } | null>(null);
+  useFocusEffect(
+    useCallback(() => {
+      if (!runtime) return undefined;
+      let active = true;
+      void runtime.service
+        .profile()
+        .then((value) => {
+          if (active) setProfile({ nickname: value.nickname, emailMasked: value.emailMasked });
+        })
+        .catch(() => {
+          // Keep the session-derived fallback when the profile request fails.
+        });
+      return () => {
+        active = false;
+      };
+    }, [runtime]),
+  );
   const user = runtime?.service.session?.userID ?? "jack";
-  const email = user.includes("@") ? user : "1***9@gmail.com";
+  const fallbackName = user.split("@")[0] || "jack";
+  const name = profile?.nickname || fallbackName;
+  const email = profile?.emailMasked || (user.includes("@") ? user : "1***9@gmail.com");
   return (
     <SafeAreaView style={styles.safe} edges={["top"]}>
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
@@ -72,7 +93,7 @@ export default function Mine() {
             contentFit="contain"
           />
           <View style={styles.profileText}>
-            <Text style={styles.name}>{user.split("@")[0].toUpperCase()}</Text>
+            <Text style={styles.name}>{name}</Text>
             <Text style={styles.email}>{email}</Text>
           </View>
           <Pressable

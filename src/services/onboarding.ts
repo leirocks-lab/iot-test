@@ -809,6 +809,14 @@ export class AddDeviceCoordinator {
     }
     return this.current;
   }
+  /** A Home entry starts fresh unless the previous binding still needs attention. */
+  enterFromHome() {
+    const flow = this.acquire();
+    // Stopping first preserves an in-flight submission as an unknown binding result.
+    flow.stop();
+    if (flow.state.stage !== "unknown" && !flow.state.binding) flow.reset();
+    return flow;
+  }
   clear() {
     this.current?.stop();
     this.current = undefined;
