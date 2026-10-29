@@ -6,9 +6,10 @@ import { DeviceEvents } from "../components/device/event-controls";
 import { withBudget } from "../protocol/device";
 import type { DeviceSession } from "../protocol/device-session";
 import type { DeviceView } from "../services/models";
-import { useApp } from "../ui/context";
+import { useApp, useColors } from "../ui/context";
 import { Busy, Button, ErrorText, Page, useAction } from "../ui/kit";
 export default function DeviceScreen() {
+  const colors = useColors();
   const { id } = useLocalSearchParams<{ id: string }>(),
     { runtime } = useApp(),
     action = useAction(),
@@ -42,6 +43,7 @@ export default function DeviceScreen() {
         controller = undefined;
         previous?.abort();
         flight = undefined;
+        session.close();
       };
       const refresh = (): Promise<void> => {
         if (!current()) return Promise.resolve();
@@ -90,12 +92,7 @@ export default function DeviceScreen() {
       const app = AppState.addEventListener("change", (state) => {
         foreground = state === "active";
         if (foreground) void refresh();
-        // Runtime owns MQTT while backgrounded; cancel only page metadata work.
-        else {
-          controller?.abort();
-          controller = undefined;
-          flight = undefined;
-        }
+        else stop();
       });
       return () => {
         active = false;
@@ -112,17 +109,29 @@ export default function DeviceScreen() {
   const lock = views.find((v) => v.kind === "childLock");
   const light = views.find((v) => v.kind === "light");
   const temperature = views.find((v) => v.kind === "temperature");
-  const unit = runtime?.service.session?.setting.temperatureUnit ?? "C";
-  const temp = typeof temperature?.value === "number" ? temperature.value : 35;
+  const configuredUnit = runtime?.service.session?.setting.temperatureUnit ?? "C";
+  const [displayUnit, setDisplayUnit] = useState<"C" | "F">(configuredUnit);
+  const [lightColor, setLightColor] = useState<"white" | "orange" | "blue">("blue");
+  const [brightness, setBrightness] = useState<30 | 60 | 100>(30);
+  const unit = displayUnit;
+  const rawTemp = typeof temperature?.value === "number" ? temperature.value : 35;
+  const temp = displayUnit === "F" ? (rawTemp * 9) / 5 + 32 : rawTemp;
   const insets = useSafeAreaInsets();
   const toggle = (kind: "power" | "light" | "childLock") => {
     if (controls) void action.run(() => controls.toggle(kind));
   };
   const adjust = (delta: number) => {
     if (controls && temperature && typeof temperature.value === "number")
-      void action.run(() =>
-        controls.submit("temperature", String((temperature.value as number) + delta), unit),
-      );
+      void action.run(() => controls.submit("temperature", String(temp + delta), unit));
+  };
+  const changeUnit = (next: "C" | "F") => {
+    if (next === displayUnit) return;
+    setDisplayUnit(next);
+    if (runtime) {
+      void action.run(async () => {
+        await runtime.service.updateSettings({ temperatureUnit: next });
+      });
+    }
   };
   const footer = (
     <View style={[ui.footer, { paddingBottom: Math.max(insets.bottom, 10) }]}>
@@ -132,30 +141,44 @@ export default function DeviceScreen() {
           disabled={!power || !!power.reason}
           style={ui.footerItem}
         >
-          <Image
-            source={
-              controls?.isOn("power")
-                ? require("../../assets/images/poweron-icon.png")
-                : require("../../assets/images/poweroff-icon.png")
-            }
-            style={ui.footerIcon}
-          />
-          <Text style={ui.footerText}>{"\u5f00\u5173"}</Text>
+          <View
+            style={[
+              ui.footerItemIcon,
+              { backgroundColor: controls?.isOn("power") ? colors.brand.blue : undefined },
+            ]}
+          >
+            <Image
+              source={
+                controls?.isOn("power")
+                  ? require("../../assets/images/poweron-icon.png")
+                  : require("../../assets/images/poweroff-icon.png")
+              }
+              style={ui.footerIcon}
+            />
+          </View>
+          <Text style={ui.footerText}>开关</Text>
         </Pressable>
         <Pressable
           onPress={() => toggle("childLock")}
           disabled={!lock || !!lock.reason}
           style={ui.footerItem}
         >
-          <Image
-            source={
-              controls?.isOn("childLock")
-                ? require("../../assets/images/child-lock-white.png")
-                : require("../../assets/images/child-lock-black.png")
-            }
-            style={ui.footerIcon}
-          />
-          <Text style={ui.footerText}>{"\u7ae5\u9501"}</Text>
+          <View
+            style={[
+              ui.footerItemIcon,
+              { backgroundColor: controls?.isOn("childLock") ? colors.brand.blue : undefined },
+            ]}
+          >
+            <Image
+              source={
+                controls?.isOn("childLock")
+                  ? require("../../assets/images/child-lock-white.png")
+                  : require("../../assets/images/child-lock-black.png")
+              }
+              style={ui.footerIcon}
+            />
+          </View>
+          <Text style={ui.footerText}>童锁</Text>
         </Pressable>
       </View>
       <View style={ui.indicator} />
@@ -163,13 +186,23 @@ export default function DeviceScreen() {
   );
   return (
     <Page
-      title={device?.deviceNickname ?? "Device"}
-      action={
-        <Button
-          secondary
-          title="More"
-          onPress={() => router.push({ pathname: "/device/[id]/more", params: { id } })}
-        />
+      title={device?.deviceNickname ?? "设备"}
+      header={
+        <View style={ui.header}>
+          <Pressable
+            style={ui.headerButton}
+            onPress={() => (router.canGoBack() ? router.back() : router.replace("/home"))}
+          >
+            <Image source={require("../../assets/images/back-icon.png")} style={ui.headerIcon} />
+          </Pressable>
+          <Text style={ui.headerTitle}>酒柜</Text>
+          <Pressable
+            style={ui.headerButton}
+            onPress={() => router.push({ pathname: "/device/[id]/more", params: { id } })}
+          >
+            <Image source={require("../../assets/images/more-icon.png")} style={ui.headerIcon} />
+          </Pressable>
+        </View>
       }
       footer={footer}
     >
@@ -187,67 +220,141 @@ export default function DeviceScreen() {
         </>
       ) : (
         <>
-          <View style={ui.status}>
-            <View style={[ui.dot, { backgroundColor: shadow?.connected ? "#00C08C" : "#999" }]} />
-            <Text style={ui.statusText}>{shadow?.connected ? "Cooling" : "Powered off"}</Text>
-          </View>
           <View style={ui.preview}>
-            <View style={ui.previewLine} />
             <Image
               source={require("../../assets/images/device-control/device-fridge-outline.png")}
               style={ui.fridge}
             />
           </View>
-          <View style={ui.units}>
-            <View style={ui.selected}>
-              <Text style={ui.selectedText}>°C</Text>
+          <View style={ui.controlCard}>
+            <View style={[ui.units, { backgroundColor: colors.background.control }]}>
+              {(["C", "F"] as const).map((option) => (
+                <Pressable
+                  key={option}
+                  style={[ui.unitTextWrap, displayUnit === option && ui.selected]}
+                  onPress={() => changeUnit(option)}
+                  accessibilityRole="button"
+                  accessibilityState={{ selected: displayUnit === option }}
+                >
+                  <Text style={[ui.unitText, displayUnit === option && ui.selectedText]}>
+                    °{option}
+                  </Text>
+                </Pressable>
+              ))}
             </View>
-            <Text style={ui.unitText}>°F</Text>
-          </View>
-          <View style={ui.tempCard}>
             <TempRow
               value={temp}
-              label="Left zone"
+              unit={displayUnit}
+              label={`左温区温度设置（当前 ${Math.round(temp)}°${displayUnit}）`}
               minus={() => adjust(-1)}
               plus={() => adjust(1)}
             />
             <TempRow
               value={temp + 5}
-              label="Right zone"
+              unit={displayUnit}
+              label={`右温区温度设置（当前 ${Math.round(temp + 5)}°${displayUnit}）`}
               minus={() => adjust(-1)}
               plus={() => adjust(1)}
             />
           </View>
           <View style={ui.lightCard}>
             <View style={ui.lightHeader}>
-              <Text style={ui.title}>Light</Text>
-              <Pressable onPress={() => toggle("light")} disabled={!light || !!light.reason}>
-                <View style={[ui.switch, controls?.isOn("light") ? ui.switchOn : ui.switchOff]}>
-                  <View style={ui.thumb} />
-                </View>
-              </Pressable>
-            </View>
-            <View style={ui.colors}>
-              <View
-                style={[
-                  ui.color,
-                  { backgroundColor: "#FFF", borderWidth: 1, borderColor: "#E5E5E5" },
-                ]}
+              <View style={ui.lightLabel}>
+                <Image
+                  source={require("../../assets/images/device-control/light-icon.png")}
+                  style={ui.lightIcon}
+                />
+                <Text style={ui.title}>灯光</Text>
+              </View>
+              <LightSwitch
+                value={!!controls?.isOn("light")}
+                disabled={!light || !!light.reason}
+                onValueChange={() => toggle("light")}
               />
-              <View style={[ui.color, { backgroundColor: "#EE9D31" }]} />
-              <View style={[ui.color, { backgroundColor: "#2D98EA" }]} />
             </View>
-            <View style={ui.brightness}>
-              <Text style={ui.body}>Brightness</Text>
-              <Text style={ui.body}>30%</Text>
-            </View>
-            <View style={ui.options}>
-              <Text style={ui.active}>30%</Text>
-              <Text style={ui.option}>60%</Text>
-              <Text style={ui.option}>100%</Text>
-            </View>
+            {!!controls?.isOn("light") && (
+              <>
+                <View style={ui.lightDivider} />
+                <View style={ui.colors}>
+                  <Pressable style={ui.colorChoice} onPress={() => setLightColor("white")}>
+                    <View
+                      style={[
+                        ui.color,
+                        ui.whiteColor,
+                        lightColor === "white" && ui.colorChoiceSelected,
+                      ]}
+                    >
+                      {lightColor === "white" && (
+                        <Image
+                          source={require("../../assets/images/light-gray.png")}
+                          style={ui.colorSelectionIcon}
+                        />
+                      )}
+                    </View>
+                    <Text style={[ui.colorLabel, lightColor === "white" && ui.colorLabelSelected]}>
+                      白色
+                    </Text>
+                  </Pressable>
+                  <Pressable style={ui.colorChoice} onPress={() => setLightColor("orange")}>
+                    <View
+                      style={[
+                        ui.color,
+                        ui.orangeColor,
+                        lightColor === "orange" && ui.colorChoiceSelected,
+                      ]}
+                    >
+                      {lightColor === "orange" && (
+                        <Image
+                          source={require("../../assets/images/light-white.png")}
+                          style={ui.colorSelectionIcon}
+                        />
+                      )}
+                    </View>
+                    <Text style={[ui.colorLabel, lightColor === "orange" && ui.colorLabelSelected]}>
+                      琥珀色
+                    </Text>
+                  </Pressable>
+                  <Pressable style={ui.colorChoice} onPress={() => setLightColor("blue")}>
+                    <View
+                      style={[
+                        ui.color,
+                        ui.blueColor,
+                        lightColor === "blue" && ui.colorChoiceSelected,
+                      ]}
+                    >
+                      {lightColor === "blue" && (
+                        <Image
+                          source={require("../../assets/images/light-white.png")}
+                          style={ui.colorSelectionIcon}
+                        />
+                      )}
+                    </View>
+                    <Text style={[ui.colorLabel, lightColor === "blue" && ui.colorLabelSelected]}>
+                      蓝色
+                    </Text>
+                  </Pressable>
+                </View>
+                <View style={ui.brightnessHeader}>
+                  <Text style={ui.body}>灯光亮度</Text>
+                  <Text style={ui.body}>{brightness}%</Text>
+                </View>
+                <View style={ui.options}>
+                  {([30, 60, 100] as const).map((option) => (
+                    <Pressable
+                      key={option}
+                      style={[ui.option, brightness === option && ui.active]}
+                      onPress={() => setBrightness(option)}
+                    >
+                      <Text style={[ui.optionText, brightness === option && ui.activeText]}>
+                        {option}%
+                      </Text>
+                    </Pressable>
+                  ))}
+                </View>
+              </>
+            )}
           </View>
-          <ErrorText error={shadow?.eventError || ""} />
+          {shadow?.eventError && <ErrorText error={shadow.eventError} />}
           {shadow?.events && <DeviceEvents events={shadow.events} />}
           <View style={{ height: 30 }} />
         </>
@@ -257,34 +364,94 @@ export default function DeviceScreen() {
 }
 function TempRow({
   value,
+  unit,
   label,
   minus,
   plus,
 }: {
   value: number;
+  unit: "C" | "F";
   label: string;
   minus: () => void;
   plus: () => void;
 }) {
+  const colors = useColors();
   return (
-    <View style={ui.row}>
-      <Pressable onPress={minus} style={ui.button}>
-        <Text style={ui.math}>−</Text>
-      </Pressable>
-      <View style={ui.value}>
-        <View style={ui.numberRow}>
-          <Text style={ui.number}>{value}</Text>
-          <Text style={ui.degree}>°C</Text>
+    <View>
+      <Text style={[ui.label, { color: colors.font.subtitle }]}>{label}</Text>
+      <View style={ui.row}>
+        <Pressable
+          onPress={minus}
+          style={[ui.button, { backgroundColor: colors.background.split, borderRadius: 37 }]}
+        >
+          <Image
+            source={require("../../assets/images/control-subtract.png")}
+            style={ui.controlIcon}
+          />
+        </Pressable>
+        <View style={ui.value}>
+          <View style={ui.numberRow}>
+            <Text style={ui.number}>{Math.round(value)}</Text>
+            <Text style={ui.degree}>°{unit}</Text>
+          </View>
         </View>
-        <Text style={ui.label}>{label}</Text>
+        <Pressable
+          onPress={plus}
+          style={[ui.button, { backgroundColor: colors.background.split, borderRadius: 37 }]}
+        >
+          <Image source={require("../../assets/images/control-add.png")} style={ui.controlIcon} />
+        </Pressable>
       </View>
-      <Pressable onPress={plus} style={ui.button}>
-        <Text style={ui.math}>＋</Text>
-      </Pressable>
     </View>
   );
 }
+
+function LightSwitch({
+  value,
+  disabled,
+  onValueChange,
+}: {
+  value: boolean;
+  disabled?: boolean;
+  onValueChange: () => void;
+}) {
+  return (
+    <Pressable
+      accessibilityRole="switch"
+      accessibilityState={{ checked: value, disabled }}
+      disabled={disabled}
+      onPress={onValueChange}
+      style={ui.lightSwitchHitTarget}
+    >
+      <View
+        style={[
+          ui.lightSwitchTrack,
+          value ? ui.lightSwitchTrackOn : ui.lightSwitchTrackOff,
+          disabled && ui.lightSwitchTrackDisabled,
+        ]}
+      >
+        <View style={ui.lightSwitchThumb} />
+      </View>
+    </Pressable>
+  );
+}
+
 const ui = {
+  header: {
+    height: 52,
+    paddingHorizontal: 12,
+    flexDirection: "row" as const,
+    alignItems: "center" as const,
+    justifyContent: "space-between" as const,
+  },
+  headerButton: {
+    width: 44,
+    height: 44,
+    alignItems: "center" as const,
+    justifyContent: "center" as const,
+  },
+  headerIcon: { width: 28, height: 28 },
+  headerTitle: { fontSize: 17, fontWeight: "600" as const, color: "#111" },
   footer: { backgroundColor: "rgba(242,242,242,.96)", paddingTop: 8 },
   footerItems: {
     height: 78,
@@ -293,7 +460,14 @@ const ui = {
     gap: 95,
   },
   footerItem: { alignItems: "center" as const, width: 48 },
-  footerIcon: { width: 48, height: 48 },
+  footerItemIcon: {
+    alignItems: "center" as const,
+    justifyContent: "center" as const,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+  },
+  footerIcon: { width: 32, height: 32 },
   footerText: { fontSize: 12, color: "#666", marginTop: 7 },
   indicator: {
     height: 4,
@@ -316,10 +490,11 @@ const ui = {
   dot: { width: 7, height: 7, borderRadius: 4 },
   statusText: { fontSize: 14, color: "#666" },
   preview: {
-    height: 250,
-    alignItems: "center" as const,
-    justifyContent: "flex-end" as const,
-    marginTop: 14,
+    // height: 210,
+    // display: "flex" as const,
+    // alignItems: "center" as const,
+    // justifyContent: "center" as const,
+    // marginTop: 0,
   },
   previewLine: {
     width: 142,
@@ -328,7 +503,7 @@ const ui = {
     backgroundColor: "#2D2927",
     opacity: 0.35,
   },
-  fridge: { width: 143, height: 210 },
+  fridge: { width: 143, height: 210, marginBottom: -36 },
   units: {
     alignSelf: "center" as const,
     flexDirection: "row" as const,
@@ -336,26 +511,23 @@ const ui = {
     width: 136,
     height: 44,
     borderRadius: 25,
-    backgroundColor: "rgba(229,229,229,.3)",
     padding: 4,
-    marginTop: 28,
   },
-  selected: {
+  unitTextWrap: {
     width: 64,
     height: 36,
     borderRadius: 22,
-    backgroundColor: "rgba(255,255,255,.7)",
     alignItems: "center" as const,
     justifyContent: "center" as const,
   },
   selectedText: { fontSize: 14, fontWeight: "600" as const },
-  unitText: { flex: 1, textAlign: "center" as const, fontSize: 14, color: "#666" },
-  tempCard: {
+  selected: { backgroundColor: "#FFF" },
+  unitText: { textAlign: "center" as const, fontSize: 14, color: "#666" },
+  controlCard: {
     backgroundColor: "#FFF",
     borderRadius: 12,
-    paddingVertical: 20,
+    paddingVertical: 27,
     paddingHorizontal: 16,
-    marginTop: 32,
     gap: 28,
   },
   row: {
@@ -369,52 +541,107 @@ const ui = {
     alignItems: "center" as const,
     justifyContent: "center" as const,
   },
-  math: { fontSize: 32 },
+  controlIcon: { width: 24, height: 24 },
   value: { alignItems: "center" as const },
   numberRow: { flexDirection: "row" as const, alignItems: "baseline" as const },
   number: { fontSize: 36, fontWeight: "700" as const },
   degree: { fontSize: 16, fontWeight: "700" as const, marginLeft: 6 },
-  label: { fontSize: 12, color: "#666", marginTop: 5 },
-  lightCard: { backgroundColor: "#FFF", borderRadius: 12, padding: 16, marginTop: 12 },
+  label: { fontSize: 12, marginBottom: 20 },
+  lightCard: { backgroundColor: "#FFF", borderRadius: 12, padding: 16 },
   lightHeader: {
     flexDirection: "row" as const,
     justifyContent: "space-between" as const,
     alignItems: "center" as const,
   },
-  title: { fontSize: 16 },
-  switch: {
-    width: 48,
-    height: 24,
-    borderRadius: 14,
-    padding: 2,
+  lightLabel: { flexDirection: "row" as const, alignItems: "center" as const, gap: 12 },
+  lightIcon: { width: 22, height: 22, resizeMode: "contain" as const },
+  title: { fontSize: 16, color: "#222" },
+  lightDivider: {
+    height: 1,
+    backgroundColor: "#F0F0F0",
+    marginTop: 16,
+  },
+  colors: {
+    flexDirection: "row" as const,
+    justifyContent: "space-between" as const,
+    paddingHorizontal: 8,
+    marginTop: 16,
+  },
+  colorChoice: {
+    alignItems: "center" as const,
+    justifyContent: "center" as const,
+    width: 64,
+  },
+  colorChoiceSelected: { borderWidth: 1, borderColor: "#DCEBFA" },
+  color: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    alignItems: "center" as const,
     justifyContent: "center" as const,
   },
-  switchOn: { backgroundColor: "#186DAF" },
-  switchOff: { backgroundColor: "#E5E5E5", alignItems: "flex-end" as const },
-  thumb: { width: 20, height: 20, borderRadius: 10, backgroundColor: "#FFF" },
-  colors: { flexDirection: "row" as const, justifyContent: "space-around" as const, marginTop: 26 },
-  color: { width: 42, height: 42, borderRadius: 21 },
+  whiteColor: { backgroundColor: "#FFF", borderWidth: 1, borderColor: "#DDD" },
+  orangeColor: { backgroundColor: "#F39A28" },
+  blueColor: { backgroundColor: "#2D98EA" },
+  colorSelectionIcon: { width: 20, height: 20, position: "absolute" as const },
+  colorLabel: { marginTop: 8, fontSize: 11, color: "#999" },
+  colorLabelSelected: { color: "#333", fontWeight: "600" as const },
+  brightnessHeader: {
+    flexDirection: "row" as const,
+    justifyContent: "space-between" as const,
+    marginTop: 14,
+  },
   brightness: {
     flexDirection: "row" as const,
     justifyContent: "space-between" as const,
     marginTop: 20,
   },
   body: { fontSize: 14, color: "#333" },
-  options: { flexDirection: "row" as const, gap: 10, marginTop: 14 },
+  options: { flexDirection: "row" as const, gap: 8, marginTop: 12 },
   active: {
-    backgroundColor: "rgba(24,109,175,.1)",
+    backgroundColor: "#E8F3FB",
     borderRadius: 18,
-    color: "#186DAF",
-    fontSize: 14,
-    paddingVertical: 11,
-    paddingHorizontal: 28,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
   },
+  optionText: { color: "#999", fontSize: 12, textAlign: "center" as const },
+  activeText: { color: "#1677FF" },
   option: {
     backgroundColor: "#F2F2F2",
     borderRadius: 18,
-    color: "#666",
-    fontSize: 14,
-    paddingVertical: 11,
-    paddingHorizontal: 25,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    flex: 1,
+    alignItems: "center" as const,
+  },
+  lightSwitchHitTarget: {
+    width: 48,
+    height: 32,
+    alignItems: "flex-end" as const,
+    justifyContent: "center" as const,
+  },
+  lightSwitchTrack: {
+    width: 48,
+    height: 24,
+    borderRadius: 12,
+    padding: 2,
+    justifyContent: "center" as const,
+  },
+  lightSwitchTrackOn: {
+    backgroundColor: "#227DBB",
+    alignItems: "flex-end" as const,
+  },
+  lightSwitchTrackOff: {
+    backgroundColor: "#D9D9D9",
+    alignItems: "flex-start" as const,
+  },
+  lightSwitchTrackDisabled: {
+    opacity: 0.65,
+  },
+  lightSwitchThumb: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: "#FFFFFF",
   },
 };
