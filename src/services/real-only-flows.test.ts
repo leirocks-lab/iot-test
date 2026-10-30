@@ -469,12 +469,196 @@ describe("real-only QR boundaries", () => {
   });
   it("uses only the supplied parser and asks for selection when multiple identities remain", async () => {
     const { service } = setup(),
-      flow = new QrScanFlow(service, (value) => ({ type: "product", productID: value }));
+      flow = new QrScanFlow(service, (value) => ({ type: "device", deviceID: `${value}-device`, deviceProductID: value }));
+    vi.mocked(service.products).mockResolvedValue([
+      {
+        category: product.category,
+        products: [
+          { ...product, id: "one-cloud", deviceProductID: "one" },
+          { ...product, id: "two-cloud", deviceProductID: "two" },
+        ],
+      },
+    ]);
+    vi.mocked(service.product).mockResolvedValue({ ...product, id: "two-cloud", deviceProductID: "two" });
     flow.read(["one", "two", "one"]);
     expect(flow.state.choices).toHaveLength(2);
     await expect(flow.confirm()).rejects.toThrow("请先选择");
     flow.choose(1);
-    expect(await flow.confirm()).toEqual({ productID: "two" });
+    expect(await flow.confirm()).toEqual({
+      deviceID: "two-device",
+      product: { ...product, id: "two-cloud", deviceProductID: "two" },
+    });
+    expect(service.product).toHaveBeenCalledWith("two-cloud", expect.any(AbortSignal));
+  });
+  it("maps a scanned device productId to the catalog id before showing its card", async () => {
+    const { service } = setup();
+    vi.mocked(service.products).mockResolvedValue([
+      { category: product.category, products: [{ ...product, id: "prd_100" }] },
+    ]);
+    vi.mocked(service.product).mockResolvedValue({ ...product, id: "prd_100" });
+    const accept = vi.spyOn(service, "acceptShare");
+    const flow = new QrScanFlow(service, () => ({
+      type: "device",
+      deviceID: "dev_1900000000000004",
+      deviceProductID: "LF-WM05",
+    }));
+    flow.read(["first-binding-device-code"]);
+    expect(await flow.confirm()).toEqual({
+      deviceID: "dev_1900000000000004",
+      product: { ...product, id: "prd_100" },
+    });
+    expect(service.product).toHaveBeenCalledWith("prd_100", expect.any(AbortSignal));
+    expect(accept).not.toHaveBeenCalled();
+  });
+  it("binds a scanned device once without bindCode and confirms HOME before completion", async () => {
+    const { service, http } = setup();
+    const identity = { type: "device" as const, deviceID: view.device.id, deviceProductID: "LF-WM05" };
+    const flow = new QrScanFlow(service, () => identity);
+    vi.mocked(http.request).mockResolvedValue({
+      status: 200,
+      headers: {},
+      data: { code: 0, success: true, message: "", data: {
+        deviceID: identity.deviceID, userID: service.userID, bindingRole: "sa",
+      } },
+    });
+    vi.spyOn(service, "home").mockResolvedValue([{ room: null, devices: [view] }]);
+    flow.read(["device-code"]);
+    await flow.confirm();
+    expect(await flow.bindScannedDevice()).toEqual({
+      binding: { deviceID: identity.deviceID, userID: service.userID, bindingRole: "sa" },
+    });
+    expect(http.request).toHaveBeenCalledWith(expect.objectContaining({
+      method: "PUT", path: `/api/app/device/${identity.deviceID}/user`,
+    }));
+    const write = vi.mocked(http.request).mock.calls[0][0];
+    expect(write.body).toBeUndefined();
+    await expect(flow.bindScannedDevice()).rejects.toThrow("勿重复提交");
+    expect(http.request).toHaveBeenCalledOnce();
+  });
+  it("keeps a scanned card on a definite PAIR-06 failure", async () => {
+    const { service } = setup();
+    const bind = vi.spyOn(service, "bindFirstDevice").mockRejectedValue(new ApiError(403, "无权限绑定"));
+    const flow = new QrScanFlow(service, () => ({
+      type: "device", deviceID: view.device.id, deviceProductID: "LF-WM05",
+    }));
+    flow.read(["device-code"]);
+    await flow.confirm();
+    await expect(flow.bindScannedDevice()).rejects.toThrow("无权限绑定");
+    expect(flow.state.phase).toBe("done");
+    expect(bind).toHaveBeenCalledOnce();
+  });
+  it("reconciles an uncertain first binding by HOME without resubmitting PAIR-06", async () => {
+    const { service } = setup();
+    const bind = vi.spyOn(service, "bindFirstDevice").mockRejectedValue(new ApiError(0, "response lost"));
+    vi.spyOn(service, "home")
+      .mockResolvedValueOnce([])
+      .mockResolvedValue([{ room: null, devices: [view] }]);
+    const flow = new QrScanFlow(service, () => ({
+      type: "device", deviceID: view.device.id, deviceProductID: "LF-WM05",
+    }));
+    flow.read(["device-code"]);
+    await flow.confirm();
+    await expect(flow.bindScannedDevice()).rejects.toThrow("response lost");
+    expect(flow.state.phase).toBe("unknown");
+    await expect(flow.bindScannedDevice()).rejects.toThrow("勿重复提交");
+    expect(await flow.reconcile()).toEqual({
+      binding: { deviceID: view.device.id, userID: service.userID, bindingRole: "sa" },
+    });
+    expect(bind).toHaveBeenCalledOnce();
+  });
+  it("keeps a successful PAIR-06 response pending until HOME lists the device", async () => {
+    const { service } = setup();
+    const bind = vi.spyOn(service, "bindFirstDevice").mockResolvedValue({
+      deviceID: view.device.id, userID: service.userID, bindingRole: "sa",
+    });
+    const home = vi.spyOn(service, "home")
+      .mockResolvedValueOnce([])
+      .mockResolvedValue([{ room: null, devices: [view] }]);
+    const flow = new QrScanFlow(service, () => ({
+      type: "device", deviceID: view.device.id, deviceProductID: "LF-WM05",
+    }));
+    flow.read(["device-code"]);
+    await flow.confirm();
+    await expect(flow.bindScannedDevice()).rejects.toThrow("首页尚未显示");
+    expect(flow.state.phase).toBe("unknown");
+    expect(await flow.reconcile()).toMatchObject({ binding: { deviceID: view.device.id } });
+    expect(bind).toHaveBeenCalledOnce();
+    expect(home).toHaveBeenCalledTimes(2);
+  });
+  it("does not accept a PAIR-06 response for a different device or role", async () => {
+    for (const response of [
+      { deviceID: "other", userID: "actual-user", bindingRole: "sa" as const },
+      { deviceID: view.device.id, userID: "actual-user", bindingRole: "mbr" as const },
+    ]) {
+      const { service } = setup();
+      vi.spyOn(service, "bindFirstDevice").mockResolvedValue(response);
+      const home = vi.spyOn(service, "home");
+      const flow = new QrScanFlow(service, () => ({
+        type: "device", deviceID: view.device.id, deviceProductID: "LF-WM05",
+      }));
+      flow.read(["device-code"]);
+      await flow.confirm();
+      await expect(flow.bindScannedDevice()).rejects.toThrow(
+        response.deviceID === "other" ? "设备 ID 与二维码不一致" : "普通成员角色，首绑应为管理员",
+      );
+      expect(flow.state.phase).toBe("unknown");
+      expect(home).not.toHaveBeenCalled();
+    }
+  });
+  it("ignores a first-binding response from a prior login context", async () => {
+    const { service } = setup();
+    let resolve!: (binding: { deviceID: string; userID: string; bindingRole: "sa" }) => void;
+    vi.spyOn(service, "bindFirstDevice").mockReturnValue(new Promise((done) => { resolve = done; }));
+    const home = vi.spyOn(service, "home");
+    const flow = new QrScanFlow(service, () => ({
+      type: "device", deviceID: view.device.id, deviceProductID: "LF-WM05",
+    }));
+    flow.read(["device-code"]);
+    await flow.confirm();
+    const pending = flow.bindScannedDevice();
+    await vi.waitFor(() => expect(resolve).toBeDefined());
+    await service.clearLocal();
+    resolve({ deviceID: view.device.id, userID: "actual-user", bindingRole: "sa" });
+    await expect(pending).rejects.toMatchObject({ code: 499 });
+    expect(flow.state.phase).toBe("unknown");
+    expect(home).not.toHaveBeenCalled();
+  });
+  it("blocks missing or ambiguous device productid mappings before PAIR-02", async () => {
+    for (const products of [
+      [],
+      [
+        { ...product, id: "prd_100" },
+        { ...product, id: "prd_101" },
+      ],
+    ]) {
+      const { service } = setup();
+      vi.mocked(service.products).mockResolvedValue([{ category: product.category, products }]);
+      const flow = new QrScanFlow(service, () => ({
+        type: "device",
+        deviceID: "dev_1900000000000004",
+        deviceProductID: "LF-WM05",
+      }));
+      flow.read(["first-binding-device-code"]);
+      await expect(flow.confirm()).rejects.toThrow("产品");
+      expect(service.product).not.toHaveBeenCalled();
+    }
+  });
+  it("does not show a scanned device card when PAIR-02 disagrees with PAIR-01", async () => {
+    const { service } = setup();
+    vi.mocked(service.products).mockResolvedValue([
+      { category: product.category, products: [{ ...product, id: "prd_100" }] },
+    ]);
+    vi.mocked(service.product).mockResolvedValue({ ...product, id: "another-cloud-product" });
+    const accept = vi.spyOn(service, "acceptShare");
+    const flow = new QrScanFlow(service, () => ({
+      type: "device",
+      deviceID: "dev_1900000000000004",
+      deviceProductID: "LF-WM05",
+    }));
+    flow.read(["first-binding-device-code"]);
+    await expect(flow.confirm()).rejects.toThrow("产品详情与二维码标识不一致");
+    expect(flow.state.phase).toBe("choosing");
+    expect(accept).not.toHaveBeenCalled();
   });
   it("reconciles a lost share response by reading HOME and never repeats the single-use code", async () => {
     const { service } = setup(),
@@ -504,7 +688,11 @@ describe("real-only QR boundaries", () => {
         resolve = done;
       }),
     );
-    const flow = new QrScanFlow(service, () => ({ type: "product", productID: product.id }));
+    const flow = new QrScanFlow(service, () => ({
+      type: "device",
+      deviceID: "dev_1900000000000004",
+      deviceProductID: "LF-WM05",
+    }));
     flow.read(["actual"]);
     const result = flow.confirm();
     const rejected = expect(result).rejects.toMatchObject({ code: 499 });

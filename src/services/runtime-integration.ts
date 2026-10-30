@@ -47,7 +47,7 @@ export function integrationStatus(
           label: "蓝牙驱动",
           source: driverProvided ? ("provided" as const) : ("native" as const),
         }),
-        capability("qr", "二维码解析"),
+        capability("qr", "首绑设备二维码解析", true),
         capability("onboarding", "Wi-Fi配网协议"),
         capability("wifi", "系统Wi-Fi读取", true),
         capability("realtime", "MQTT同步协议"),

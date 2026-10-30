@@ -569,6 +569,16 @@ export class RowanService {
       false,
     );
   }
+  async bindFirstDevice(id: string, signal?: AbortSignal): Promise<BindingResult> {
+    return this.request<BindingResult>(
+      {
+        method: "PUT",
+        path: `/api/app/device/${encodeURIComponent(id)}/user`,
+        signal,
+      },
+      false,
+    );
+  }
   async help(id: string, product = false, signal?: AbortSignal) {
     const path = product
       ? `/api/app/products/${encodeURIComponent(id)}/connectHelping`

@@ -3,7 +3,6 @@ import { useCallback, useRef, useState } from "react";
 import { AppState, Image, Pressable, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { DeviceEvents } from "../components/device/event-controls";
-import { createMockDeviceSession, mockDeviceView } from "../dev/mock-device";
 import { withBudget } from "../protocol/device";
 import type { DeviceSession } from "../protocol/device-session";
 import type { DeviceView } from "../services/models";
@@ -22,19 +21,6 @@ export default function DeviceScreen() {
   const sessionRevision = runtime?.service.sessionRevision;
   useFocusEffect(
     useCallback(() => {
-      if (__DEV__) {
-        const session = createMockDeviceSession();
-        setDevice(mockDeviceView(id));
-        setDetailError("");
-        setShadow(session);
-        const unsub = session.onChange(() => redraw((n) => n + 1));
-        retryRef.current = async () => undefined;
-        return () => {
-          unsub();
-          session.close();
-          retryRef.current = async () => undefined;
-        };
-      }
       if (!runtime?.service.session || sessionRevision === undefined) return;
       let active = true,
         foreground = AppState.currentState === null || AppState.currentState === "active";

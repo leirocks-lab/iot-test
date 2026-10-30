@@ -16,7 +16,8 @@ import {
 } from "react-native";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import Svg, { Defs, LinearGradient, Rect, Stop } from "react-native-svg";
-import type { DeviceView } from "../services/models";
+import { ProductThumbnail } from "../components/device/product-thumbnail";
+import type { DeviceView, Product } from "../services/models";
 import type { ScanDestination } from "../services/scan-flow";
 import { useApp } from "../ui/context";
 import { Busy, Button, Label, Page, useAction } from "../ui/kit";
@@ -39,6 +40,8 @@ function ScanContent({ runtime }: { runtime: NonNullable<ReturnType<typeof useAp
   const [toast, setToast] = useState("");
   const [resultDevices, setResultDevices] = useState<DeviceView[] | null>(null);
   const [resultDeviceID, setResultDeviceID] = useState("");
+  const [scannedDevice, setScannedDevice] = useState<{ deviceID: string; product: Product } | null>(null);
+  const [cardNotice, setCardNotice] = useState("");
   const focused = useRef(false);
   const pickingRef = useRef(false);
   const permissionAttempt = useRef(0);
@@ -65,15 +68,30 @@ function ScanContent({ runtime }: { runtime: NonNullable<ReturnType<typeof useAp
   );
 
   const readCodes = (values: readonly string[]) => {
+    const idle = flow.state.phase === "idle";
     flow.read(values);
     if (flow.state.error && flow.state.phase === "idle") {
       showToast(flow.state.error);
       flow.reset();
+    } else if (
+      idle &&
+      flow.state.phase === "choosing" &&
+      flow.state.choices.length === 1 &&
+      flow.state.choices[0].type === "device"
+    ) {
+      void (async () => {
+        try {
+          await showDestination(await flow.confirm());
+        } catch (error) {
+          showToast(error instanceof Error ? error.message : String(error));
+          if (flow.state.phase === "choosing") flow.reset();
+        }
+      })();
     }
   };
 
   useEffect(() => {
-    if (!active || !permission?.granted || picking || resultDevices) return;
+    if (!active || !permission?.granted || picking || resultDevices || scannedDevice) return;
     const animation = Animated.loop(
       Animated.sequence([
         Animated.timing(scanLine, {
@@ -94,7 +112,7 @@ function ScanContent({ runtime }: { runtime: NonNullable<ReturnType<typeof useAp
       animation.stop();
       scanLine.setValue(0);
     };
-  }, [active, frameSize, permission?.granted, picking, resultDevices, scanLine]);
+  }, [active, frameSize, permission?.granted, picking, resultDevices, scannedDevice, scanLine]);
 
   useFocusEffect(
     useCallback(() => {
@@ -147,12 +165,7 @@ function ScanContent({ runtime }: { runtime: NonNullable<ReturnType<typeof useAp
         .filter((device) => device.device.id === destination.binding.deviceID);
       if (!matched.length) throw new Error("设备绑定成功，但设备列表暂未返回该设备，请稍后核对");
       setResultDevices(matched);
-    } else {
-      router.replace({
-        pathname: "/add-provision",
-        params: { productID: destination.productID },
-      });
-    }
+    } else setScannedDevice(destination);
   };
 
   const pickPhoto = () =>
@@ -186,6 +199,49 @@ function ScanContent({ runtime }: { runtime: NonNullable<ReturnType<typeof useAp
         }
       }
     });
+
+  if (scannedDevice)
+    return (
+      <ScannedDeviceCard
+        deviceID={scannedDevice.deviceID}
+        product={scannedDevice.product}
+        notice={cardNotice}
+        busy={action.busy || state.phase === "confirming"}
+        unknown={state.phase === "unknown"}
+        onBack={() => {
+          if (state.phase === "unknown" || state.phase === "confirming") {
+            flow.stop();
+            router.replace("/home");
+            return;
+          }
+          setScannedDevice(null);
+          setCardNotice("");
+          flow.reset();
+        }}
+        onPress={() =>
+          void action.run(async () => {
+            try {
+              await flow.bindScannedDevice();
+              if (focused.current) router.replace("/home");
+            } catch (error) {
+              if (focused.current)
+                setCardNotice(error instanceof Error ? error.message : String(error));
+            }
+          })
+        }
+        onReconcile={() =>
+          void action.run(async () => {
+            try {
+              await flow.reconcile();
+              if (focused.current) router.replace("/home");
+            } catch (error) {
+              if (focused.current)
+                setCardNotice(error instanceof Error ? error.message : String(error));
+            }
+          })
+        }
+      />
+    );
 
   if (resultDevices)
     return (
@@ -223,7 +279,7 @@ function ScanContent({ runtime }: { runtime: NonNullable<ReturnType<typeof useAp
   return (
     <View style={styles.scanner}>
       <StatusBar hidden />
-      {active && permission?.granted && !resultDevices && (
+      {active && permission?.granted && state.phase === "idle" && !resultDevices && !scannedDevice && (
         <CameraView
           style={StyleSheet.absoluteFill}
           facing="back"
@@ -318,15 +374,20 @@ function ScanContent({ runtime }: { runtime: NonNullable<ReturnType<typeof useAp
         </View>
         <View style={styles.instructions}>
           <Text style={styles.instructionTitle}>扫描设备二维码</Text>
-          <Text style={styles.instructionBody}>在配件、包装或说明书上查找产品二维码，</Text>
+          <Text style={styles.instructionBody}>在配件、包装或说明书上查找设备二维码，</Text>
           <Text style={styles.instructionBody}>并将其放在上方相机取景框内</Text>
         </View>
-        {state.phase === "choosing" || state.phase === "unknown" ? (
+        {confirming ? (
+          <View style={styles.choices}>
+            <Busy />
+            <Text style={styles.confirmingText}>正在核验设备信息…</Text>
+          </View>
+        ) : state.phase === "choosing" || state.phase === "unknown" ? (
           <View style={styles.choices}>
             {state.choices.map((choice, index) => (
               <Button
                 key={`${choice.type}-${choice.label}-${index}`}
-                title={`${choice.type === "share" ? "设备" : "产品"} · ${choice.label}`}
+                title={`${choice.type === "share" ? "分享设备" : "设备"} · ${choice.label}`}
                 secondary={state.selected !== index}
                 onPress={() => flow.choose(index)}
               />
@@ -354,7 +415,10 @@ function ScanContent({ runtime }: { runtime: NonNullable<ReturnType<typeof useAp
                 onPress={() =>
                   void action.run(async () => {
                     try {
-                      await showDestination(await flow.reconcile());
+                      const destination = await flow.reconcile();
+                      if (state.choices[state.selected ?? -1]?.type === "device") {
+                        if (focused.current) router.replace("/home");
+                      } else await showDestination(destination);
                     } catch (error) {
                       showToast(error instanceof Error ? error.message : String(error));
                     }
@@ -362,7 +426,6 @@ function ScanContent({ runtime }: { runtime: NonNullable<ReturnType<typeof useAp
                 }
               />
             )}
-            {confirming && <Busy />}
           </View>
         ) : (
           <Pressable
@@ -384,6 +447,65 @@ function ScanContent({ runtime }: { runtime: NonNullable<ReturnType<typeof useAp
         )}
       </View>
     </View>
+  );
+}
+
+function ScannedDeviceCard({
+  deviceID,
+  product,
+  notice,
+  busy,
+  unknown,
+  onBack,
+  onPress,
+  onReconcile,
+}: {
+  deviceID: string;
+  product: Product;
+  notice: string;
+  busy: boolean;
+  unknown: boolean;
+  onBack: () => void;
+  onPress: () => void;
+  onReconcile: () => void;
+}) {
+  return (
+    <SafeAreaView style={styles.resultPage} edges={["top", "bottom"]}>
+      <StatusBar hidden={false} barStyle="dark-content" />
+      <View style={styles.resultHeader}>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="返回扫码"
+          onPress={onBack}
+          style={styles.resultBack}
+        >
+          <Text style={styles.resultChevron}>‹</Text>
+        </Pressable>
+        <Text style={styles.resultTitle}>扫一扫</Text>
+        <View style={styles.resultBack} />
+      </View>
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={`绑定设备 ${deviceID}`}
+        disabled={busy || unknown}
+        onPress={onPress}
+        style={styles.resultCard}
+      >
+        <ProductThumbnail source={product.image} name={product.name} style={styles.resultImage} />
+        <View style={styles.resultInfo}>
+          <Text numberOfLines={1} style={styles.resultName}>{product.name}</Text>
+          <Text numberOfLines={1} style={styles.resultModel}>{product.modelName}</Text>
+          <Text style={styles.resultSerial}>设备 ID：{deviceID}</Text>
+        </View>
+      </Pressable>
+      {busy && <Busy />}
+      {unknown && (
+        <Pressable accessibilityRole="button" disabled={busy} onPress={onReconcile} style={styles.retryButton}>
+          <Text style={styles.retryText}>核对绑定结果</Text>
+        </Pressable>
+      )}
+      {!!notice && <Text accessibilityRole="alert" style={styles.resultNotice}>{notice}</Text>}
+    </SafeAreaView>
   );
 }
 
@@ -558,6 +680,7 @@ const styles = StyleSheet.create({
     right: "7%",
     gap: 10,
   },
+  confirmingText: { color: "#FFFFFF", textAlign: "center", fontSize: 14 },
   toast: {
     position: "absolute",
     alignSelf: "center",
@@ -616,6 +739,7 @@ const styles = StyleSheet.create({
   resultName: { color: "#333", fontSize: 16, fontWeight: "500" },
   resultModel: { color: "#666", fontSize: 12 },
   resultSerial: { color: "#A7A7A7", fontSize: 12 },
+  resultNotice: { marginHorizontal: 18, marginTop: 16, color: "#555", fontSize: 14 },
   resultEmpty: { marginTop: 28, alignItems: "center", gap: 14 },
   resultEmptyText: { color: "#777", fontSize: 14 },
   retryButton: {

@@ -11,7 +11,7 @@ import { SessionStorage } from "./native-storage";
 import { RowanService } from "./rowan";
 import { AddDeviceCoordinator, type RealAddContract } from "./onboarding";
 import type { WifiReader } from "./wifi";
-import type { RowanCodeParser } from "./qr";
+import { rowanCodeParser, type RowanCodeParser } from "./qr";
 import { QrScanCoordinator } from "./scan-flow";
 import type { MqttConnection } from "../protocol/mqtt-connection";
 import { ControlledDeviceSession } from "../protocol/controlled-session";
@@ -207,7 +207,7 @@ export async function createRuntime(
         if (scanner?.pending) throw new ApiError(409, "请先核对或完成当前扫码绑定结果");
       },
     });
-    scanner = new QrScanCoordinator(service, contracts?.qr, () => {
+    scanner = new QrScanCoordinator(service, rowanCodeParser(contracts?.qr), () => {
       if (onboarding.pending) throw new ApiError(409, "请先核对或完成当前蓝牙添加结果");
     });
     let revision = service.sessionRevision;

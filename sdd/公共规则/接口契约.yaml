@@ -578,9 +578,14 @@ apis:
             - Array
             - "-"
             - 该品类下的产品；至少包含 id、name、modelName、image、connectType、configType、recommended、buyLink、sort、cloudPlatform。
+          - - data.products[].productid
+            - String
+            - LF-WM05
+            - 设备侧产品标识；与产品记录 id 不同。CHG-20261029-002 用户提供的当前后端响应确认该字段。
     rules:
       - 专属错误：无；通用错误见第 6.4 节。
       - UI规则：仅当不同 App 可添加的产品目录不同才传 brandId；推荐商品、排序、Shop 链接和配网方式必须由云端配置，App 不按型号写死。
+      - 本 App 首绑设备测试码的 productId 按 data.products[].productid 唯一映射产品记录 id；零个或多个匹配均阻断，PAIR-02 路径仍使用产品记录 id。扫码卡片后续联网/绑定待确认。
   - id: PAIR-02
     title: 获取产品详情
     method: GET

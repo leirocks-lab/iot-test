@@ -13,7 +13,6 @@ import {
   View,
 } from "react-native";
 import { withBudget } from "../protocol/device";
-import { mockHomeGroups } from "../dev/mock-device";
 import type { DeviceView, HomeGroup } from "../services/models";
 import { useApp, useColors } from "../ui/context";
 import { DeviceGlyph } from "../ui/device-glyph";
@@ -224,13 +223,6 @@ export default function Home() {
     return () => lockNavigation(false);
   }, [editing, lockNavigation]);
   const load = useCallback(async () => {
-    if (__DEV__) {
-      setGroups(mockHomeGroups());
-      setRoom("all");
-      setLoadError("");
-      setLoading(false);
-      return;
-    }
     if (!runtime?.service.session || sessionRevision === undefined || !focused.current) return;
     const userID = runtime.service.userID,
       context = `${userID}:${sessionRevision}`;

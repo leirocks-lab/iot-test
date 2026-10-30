@@ -64,7 +64,7 @@ const config = communicationConfig({
   tenantID: "42",
   integrationProfile: "fixture-v1",
 });
-const qr: RuntimeContracts["qr"] = () => ({ type: "product", productID: "fixture-product" });
+const qr: RuntimeContracts["qr"] = () => ({ type: "device", deviceID: "fixture-device", deviceProductID: "fixture-product" });
 const realtime: DeviceProfileResolver = async () => ({
   topics: ["fixture/state"],
   canWrite: false,
@@ -248,7 +248,8 @@ describe("P1 App启动装配", () => {
     const status = integrationStatus(config, { wifi: contracts.wifi });
     expect(
       status.capabilities.filter((item) => item.source === "missing").map((item) => item.key),
-    ).toEqual(["qr", "onboarding", "realtime", "controls", "maintenance", "events"]);
+    ).toEqual(["onboarding", "realtime", "controls", "maintenance", "events"]);
+    expect(status.capabilities.find((item) => item.key === "qr")?.source).toBe("native");
   });
   it("factory failure is retained and never invokes a fallback runtime or profile", async () => {
     const create = vi.fn(async () => ({ dispose: vi.fn() }) as unknown as Runtime);

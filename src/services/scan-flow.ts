@@ -1,11 +1,11 @@
 import { deviceTimeouts, withBudget } from "../protocol/device";
-import { ApiError, type BindingResult } from "./models";
+import { ApiError, type BindingResult, type Product } from "./models";
 import { parseRowanCandidates, type CodeIdentity, type RowanCodeParser } from "./qr";
 import type { RowanService } from "./rowan";
 
 export interface ScanState {
   phase: "idle" | "choosing" | "confirming" | "unknown" | "done";
-  choices: { type: "product" | "share"; label: string }[];
+  choices: { type: "device" | "share"; label: string }[];
   selected?: number;
   error: string;
 }
@@ -48,7 +48,7 @@ export class QrScanCoordinator {
     this.owner = undefined;
   }
 }
-export type ScanDestination = { productID: string } | { binding: BindingResult };
+export type ScanDestination = { deviceID: string; product: Product } | { binding: BindingResult };
 export class QrScanFlow {
   state: ScanState = { phase: "idle", choices: [], error: "" };
   private codes: CodeIdentity[] = [];
@@ -85,7 +85,7 @@ export class QrScanFlow {
         phase: "choosing",
         choices: this.codes.map((code) => ({
           type: code.type,
-          label: code.type === "product" ? code.productID : code.deviceID,
+          label: code.deviceID,
         })),
         selected: this.codes.length === 1 ? 0 : undefined,
         error: "",
@@ -121,13 +121,60 @@ export class QrScanFlow {
     )
       throw new ApiError(499, "扫码操作已停止");
   }
-  private binding(result: BindingResult, deviceID: string) {
-    if (
-      result.deviceID !== deviceID ||
-      result.userID !== this.owner ||
-      !["sa", "mbr", "obs"].includes(result.bindingRole)
-    ) {
-      throw new ApiError(502, "绑定结果不一致，请核对设备");
+  private binding(result: BindingResult, deviceID: string, first = false) {
+    if (result.deviceID !== deviceID)
+      throw new ApiError(502, "后台返回的设备 ID 与二维码不一致，请核对设备");
+    if (result.userID !== this.owner)
+      throw new ApiError(502, "后台返回的用户与当前账号不一致，请核对账号");
+    if (first && result.bindingRole !== "sa") {
+      const role = result.bindingRole === "mbr" ? "普通成员" : result.bindingRole === "obs" ? "观察员" : "未知角色";
+      throw new ApiError(502, `后台返回${role}角色，首绑应为管理员；请返回首页核对设备是否已被绑定`);
+    }
+    if (!first && !["sa", "mbr", "obs"].includes(result.bindingRole))
+      throw new ApiError(502, "后台返回的设备角色无效，请核对设备");
+  }
+  async bindScannedDevice(): Promise<ScanDestination> {
+    if (this.state.phase !== "done" || this.state.selected === undefined || this.submitted)
+      throw new ApiError(409, "请先完成设备识别，勿重复提交绑定");
+    const code = this.codes[this.state.selected];
+    if (code?.type !== "device") throw new ApiError(409, "当前不是首绑设备码");
+    if (this.service.sessionRevision !== this.revision)
+      throw new ApiError(499, "登录上下文已变更，请重新扫码");
+    this.beforeNewContext?.();
+    const round = ++this.round,
+      controller = new AbortController();
+    this.controller = controller;
+    this.owner = this.service.userID;
+    this.submitted = true;
+    this.update({ phase: "confirming", error: "" });
+    try {
+      const binding = await withBudget(
+        (signal) => this.service.bindFirstDevice(code.deviceID, signal),
+        deviceTimeouts.scanTimeout,
+        "绑定结果等待超时，请核对首页设备列表",
+        controller.signal,
+      );
+      this.check(round, controller.signal);
+      this.binding(binding, code.deviceID, true);
+      this.update({ phase: "unknown" });
+      return await this.reconcile();
+    } catch (error) {
+      if (round === this.round) {
+        const definite =
+          error instanceof ApiError && [400, 401, 403, 404, 1131, 1132, 1133].includes(error.code);
+        this.update({ phase: definite ? "done" : "unknown", error: (error as Error).message });
+        if (definite) this.submitted = false;
+        else if (!(error instanceof ApiError && [499, 502].includes(error.code))) {
+          try {
+            return await this.reconcile();
+          } catch {
+            // Read-only reconciliation must not resubmit PAIR-06.
+          }
+        }
+      }
+      throw error;
+    } finally {
+      if (round === this.round) this.controller = undefined;
     }
   }
   async confirm(): Promise<ScanDestination> {
@@ -146,10 +193,25 @@ export class QrScanFlow {
     try {
       const destination = await withBudget(
         async (signal) => {
-          if (code.type === "product") {
-            await this.service.product(code.productID, signal);
+          if (code.type === "device") {
+            const groups = await this.service.products(signal);
             this.check(round, signal);
-            return { productID: code.productID };
+            const matches = groups
+              .flatMap((group) => group.products)
+              .filter((product) => product.deviceProductID === code.deviceProductID);
+            if (matches.length !== 1)
+              throw new ApiError(
+                409,
+                matches.length ? "设备侧产品标识对应多个产品，请核对产品目录" : "产品目录中没有该设备侧产品标识",
+              );
+            const product = await this.service.product(matches[0].id, signal);
+            this.check(round, signal);
+            if (
+              product.id !== matches[0].id ||
+              (product.deviceProductID && product.deviceProductID !== code.deviceProductID)
+            )
+              throw new ApiError(502, "产品详情与二维码标识不一致");
+            return { deviceID: code.deviceID, product };
           }
           this.submitted = true;
           const binding = await this.service.acceptShare(code.deviceID, code.bindCode, signal);
@@ -199,7 +261,6 @@ export class QrScanFlow {
     if (this.state.phase !== "unknown" || this.state.selected === undefined)
       throw new ApiError(409, "没有待核对的扫码事务");
     const code = this.codes[this.state.selected];
-    if (code.type !== "share") throw new ApiError(409, "当前不是扫码绑定");
     // Retain the original account. A different account cannot claim this uncertain transaction.
     if (this.service.userID !== this.owner || this.service.sessionRevision !== this.revision)
       throw new ApiError(499, "账号上下文已变更，请返回首页核对");
@@ -237,7 +298,7 @@ export class QrScanFlow {
         userID: this.owner!,
         bindingRole: view.bindingRole,
       };
-      this.binding(binding, code.deviceID);
+      this.binding(binding, code.deviceID, code.type === "device");
       this.update({ phase: "done", error: "" });
       return { binding };
     } catch (error) {

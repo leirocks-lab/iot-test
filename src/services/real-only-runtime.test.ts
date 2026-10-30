@@ -79,6 +79,28 @@ describe("real-only runtime resource boundaries", () => {
     expect(session.confirmed).toEqual({});
     session.close();
   });
+  it("recognizes the App first-binding device code without a deployment share parser", async () => {
+    const runtime = await createRuntime(config, driver());
+    runtimes.push(runtime);
+    runtime.service.session = {
+      userID: "backend-user",
+      accessToken: "fixture-access",
+      refreshToken: "fixture-refresh",
+      expiresIn: 3600,
+      tokenType: "bearer",
+      setting: defaultSettings(),
+    };
+    const flow = runtime.scanner.acquire();
+    flow.read([JSON.stringify({ type: "rowan.device", v: 1, deviceId: "dev_1900000000000004", productId: "LF-WM05" })]);
+    expect(flow.state).toMatchObject({
+      phase: "choosing",
+      selected: 0,
+      choices: [{ type: "device", label: "dev_1900000000000004" }],
+    });
+    expect(runtime.integration.capabilities.find((item) => item.key === "qr")?.source).toBe(
+      "native",
+    );
+  });
   it("isolates actual API/tenant namespaces", () => {
     const scope = realSessionScope(config);
     expect(realSessionScope({ ...config, tenantID: "43" })).not.toBe(scope);
