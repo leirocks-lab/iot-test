@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 // Run with: node --import tsx scripts/公共账号首页联调.mjs
 // Credentials are read only from the current process environment, never from source or a result file.
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -44,7 +45,7 @@ if(password){
     await run('AUTH-06',()=>service.logout());
   }
 }
-const target='docs/联调证据/公共账号首页联调';
+const target=fileURLToPath(new URL("../../docs/联调证据/公共账号首页联调", import.meta.url));
 await mkdir(target,{recursive:true});
 const report={change:'CHG-20261013-001',execution:'Windows Node / RowanService / RealHttpClient / actual fetch',
   environment:'development real HTTP / device unavailable in Node',tenantConfigured:!!config.tenantID,

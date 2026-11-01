@@ -14,7 +14,7 @@
 
 ## 离线验证
 
-从仓库根目录使用 JDK 17 和现有 Android Wrapper：
+从 `app-rn/` 使用 JDK 17 和现有 Android Wrapper：
 
 ```powershell
 $env:JAVA_HOME='D:\Android\Java\jdk-17.0.20.1+1'

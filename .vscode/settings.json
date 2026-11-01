@@ -1,4 +1,8 @@
 {
+  "eslint.workingDirectories": ["./app-rn"],
+  "typescript.tsdk": "app-rn/node_modules/typescript/lib",
+  "prettier.configPath": "app-rn/.prettierrc.json",
+  "prettier.ignorePath": "app-rn/.prettierignore",
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit",

@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 // node --import tsx scripts/AWS连接实测.mjs
 // Uses local login configuration and the App's actual WSS transport. No publish/subscribe.
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -76,7 +77,7 @@ try {
     try { await service.logout(); record({ stage: 'logout', result: 'passed' }); }
     catch { record({ stage: 'logout', result: 'failed' }); process.exitCode = 1; }
   }
-  const directory = 'docs/联调证据/AWS连接实测';
+  const directory = fileURLToPath(new URL("../../docs/联调证据/AWS连接实测", import.meta.url));
   await mkdir(directory, { recursive: true });
   await writeFile(`${directory}/连接实测结果.json`, JSON.stringify(report, null, 2) + '\n');
 }

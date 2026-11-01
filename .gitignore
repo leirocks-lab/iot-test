@@ -6,6 +6,8 @@ node_modules/
 .expo/
 /android/
 /ios/
+/app-rn/android/
+/app-rn/ios/
 web-build/
 
 # Local environment and secrets
@@ -31,6 +33,7 @@ coverage/
 
 # Local caches and one-off task files
 /.cache/
+/app-rn/.cache/
 /.mock-*
 /.worktrees/
 
@@ -49,7 +52,7 @@ expo-env.d.ts
 *.key
 *.pem
 # Public certificate only; private keys remain ignored.
-!certs/rowan-dev-backend.pem
+!app-rn/certs/rowan-dev-backend.pem
 .metro-health-check*
 npm-debug.*
 yarn-debug.*

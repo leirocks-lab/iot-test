@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 // node --import tsx scripts/设备列表MQTT复验.mjs [--live]
 // Default: synthetic broker exercising real App sessions, no network.
 // --live: issued-account login, authorized target device, read-only Shadow GET/observation.
@@ -17,7 +18,7 @@ const { deploymentIntegrations } = await unwrap("../src/config/deployment-integr
 const encode = (body) => new TextEncoder().encode(JSON.stringify(body));
 const decode = (payload) =>
   payload.length ? JSON.parse(new TextDecoder().decode(payload)) : "[EMPTY:0 bytes]";
-const directory = "docs/测试报告/MQTT复验-20261027";
+const directory = fileURLToPath(new URL("../../docs/测试报告/MQTT复验-20261027", import.meta.url));
 const live = process.argv.includes("--live");
 const report = {
   timestamp: new Date().toISOString(),

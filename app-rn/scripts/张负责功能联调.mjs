@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 // node --import tsx scripts/张负责功能联调.mjs before|after
 import process from 'node:process';
 import assert from 'node:assert/strict';
@@ -9,7 +10,7 @@ import {cleanupTemporaryRooms} from './联调房间清理.ts';
 try{process.loadEnvFile('.env.local');}catch{/* invoking process can supply configuration */}
 const phase=process.argv[2];
 if(!['before','after'].includes(phase))throw new Error('请选择before或after；after会创建并清理临时房间');
-const base='docs/联调证据/张负责功能联调';
+const base=fileURLToPath(new URL("../../docs/联调证据/张负责功能联调", import.meta.url));
 const runID=`${phase}-${new Date().toISOString().replaceAll(/[:.]/g,'-')}`;
 const dir=`${base}/联调证据/${runID}`;await mkdir(dir,{recursive:true});
 const account=process.env.ROWAN_LOGIN_ACCOUNT,pin=process.env.ROWAN_LOGIN_PIN;
