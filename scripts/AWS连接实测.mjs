@@ -76,7 +76,7 @@ try {
     try { await service.logout(); record({ stage: 'logout', result: 'passed' }); }
     catch { record({ stage: 'logout', result: 'failed' }); process.exitCode = 1; }
   }
-  const directory = 'sdd/迭代变更/变更-20261022-001';
+  const directory = 'docs/联调证据/AWS连接实测';
   await mkdir(directory, { recursive: true });
   await writeFile(`${directory}/连接实测结果.json`, JSON.stringify(report, null, 2) + '\n');
 }

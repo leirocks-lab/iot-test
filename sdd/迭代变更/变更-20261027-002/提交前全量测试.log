@@ -1,8 +1,0 @@
-
- RUN  v4.1.11 D:/workspace/rowaniot/rowan-iot-app
-
-
- Test Files  42 passed (42)
-      Tests  542 passed (542)
-   Start at  08:52:53
-   Duration  37.00s (transform 7.73s, setup 0ms, import 12.13s, tests 17.82s, environment 15ms)

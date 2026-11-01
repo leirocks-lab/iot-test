@@ -9,9 +9,9 @@ import {cleanupTemporaryRooms} from './联调房间清理.ts';
 try{process.loadEnvFile('.env.local');}catch{/* invoking process can supply configuration */}
 const phase=process.argv[2];
 if(!['before','after'].includes(phase))throw new Error('请选择before或after；after会创建并清理临时房间');
-const base='sdd/迭代变更/变更-20261018-001';
+const base='docs/联调证据/张负责功能联调';
 const runID=`${phase}-${new Date().toISOString().replaceAll(/[:.]/g,'-')}`;
-const dir=`${base}/联调证据/${runID}`;await mkdir(dir);
+const dir=`${base}/联调证据/${runID}`;await mkdir(dir,{recursive:true});
 const account=process.env.ROWAN_LOGIN_ACCOUNT,pin=process.env.ROWAN_LOGIN_PIN;
 const secrets=[account,pin].filter(Boolean);
 const sensitive=/^(authorization|cookie|set-cookie|account|pin|password|captcha|accessToken|refreshToken|username|email)$/i;

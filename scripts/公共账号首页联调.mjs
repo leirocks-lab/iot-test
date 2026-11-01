@@ -44,7 +44,7 @@ if(password){
     await run('AUTH-06',()=>service.logout());
   }
 }
-const target='sdd/迭代变更/变更-20261013-001/联调证据';
+const target='docs/联调证据/公共账号首页联调';
 await mkdir(target,{recursive:true});
 const report={change:'CHG-20261013-001',execution:'Windows Node / RowanService / RealHttpClient / actual fetch',
   environment:'development real HTTP / device unavailable in Node',tenantConfigured:!!config.tenantID,

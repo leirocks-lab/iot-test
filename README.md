@@ -35,7 +35,6 @@ assets                   图片、图标等静态资源
 scripts                  工程维护与验证脚本
 tests                    工程工具测试
 docs                     原始需求与设计资料
-sdd                      功能规范、变更与验收证据
 app.config.ts            Expo、原生及构建配置
 package.json             唯一应用清单与命令入口
 pnpm-lock.yaml           单项目依赖锁文件
@@ -46,22 +45,9 @@ tsconfig.json            继承 Expo 的 TypeScript 配置
 
 `src/app` 只保存路由与布局，非路由组件、hooks、业务实现放在其外。随着已确认功能实现，按需增加 `src/features`、`src/hooks` 等目录。品牌与主题已接入应用；core、iot、device 目前仍是接口和类型占位，不代表正式业务功能已实现。
 
-应用包和 Expo 配置的版本均为 `1.0.0`，SDD 功能版本单独管理。`node_modules`、`.expo`、`dist`、`android` 和 `ios` 是安装或生成内容，由根目录 `.gitignore` 忽略。原生配置通过 `app.config.ts`、Config Plugin 或 Expo Module 维护。
+应用包和 Expo 配置的版本均为 `1.0.0`。`node_modules`、`.expo`、`dist`、`android` 和 `ios` 是安装或生成内容，由根目录 `.gitignore` 忽略。原生配置通过 `app.config.ts`、Config Plugin 或 Expo Module 维护。
 
 迁移前的本地生成工程和缓存保留在 `.codex-tmp/单项目迁移-20261007`，仅供恢复或排查，正式命令使用当前根目录配置。首次原生运行请从根目录重新生成和构建 Development Build。
-
-## 业务规范与 SDD
-
-业务规范入口为 [sdd/使用说明.md](<sdd/使用说明.md>)，功能导航为 [sdd/功能索引.md](<sdd/功能索引.md>)。功能范围仅以补充 API 及开发人员的 Excel 为准，UI、产品文档和流程图只补充范围内细节。
-
-```bash
-pnpm specs:index
-pnpm specs:check
-pnpm specs:search RF-0020
-pnpm specs:test
-```
-
-规范、交付和 App 发布分别记录状态；初版草稿不代表功能已经实现。产品需求层面的迭代通过 `sdd/迭代变更/` 记录需求与规范差异、相关实施任务和验收证据；按既有需求进行的正常开发代码变更无需创建或补写迭代变更记录。
 
 ## Development Build
 
@@ -80,7 +66,7 @@ ROWAN_TENANT_ID=1
 
 Web 的 Expo Constants 配置会内嵌到编译后的 JavaScript；修改 API 根、租户或真实接入配置后，旧 Metro 转换缓存可能仍保留之前配置，即使服务端 manifest 已更新。`pnpm web` 默认带 `--clear`：修改环境后先停止旧服务、重新启动，再完整刷新浏览器页面。手动运行 Expo CLI 时也需加 `--clear`。验证 Web 通信模式应核对实际网页包和浏览器请求，不能只查原生 manifest 或根路由是否跳到登录页。
 
-Android 明文策略由 Config Plugin/CNG 按环境生成，preview 的 release 测试包也适用；production 关闭明文。iOS ATS 配置遵循同一环境边界，平台运行验收单独记录。**原生网络策略改变后须重新构建并安装开发/测试包，仅重启 Metro 不会更新已安装包。** MQTT、外部链接及模组自身协议仍遵守原规则。详见 [CHG-20261016-002](<sdd/迭代变更/变更-20261016-002/变更提案.md>)。
+Android 明文策略由 Config Plugin/CNG 按环境生成，preview 的 release 测试包也适用；production 关闭明文。iOS ATS 配置遵循同一环境边界，平台运行验收单独记录。**原生网络策略改变后须重新构建并安装开发/测试包，仅重启 Metro 不会更新已安装包。** MQTT、外部链接及模组自身协议仍遵守原规则。
 
 本项目使用 `expo-dev-client`，不将 Expo Go 作为正式开发运行环境。首次运行或原生配置变化后，需要重新构建 Development Build。
 
@@ -228,7 +214,7 @@ pnpm 配置使用 `nodeLinker: hoisted`，将原生依赖安装到根目录 `nod
 Windows 上建议使用 Ninja 1.12 或更高版本，参见 [Reanimated Windows 构建说明](https://docs.swmansion.com/react-native-reanimated/docs/guides/building-on-windows/)。本机 SDK 的 CMake 3.22.1 附带 Ninja 1.10.2，实际兼容性以原生构建结果为准。
 
 
-## 仅真实通信（CHG-20261024-002）
+## 仅真实通信
 
 所有构建环境均已删除运行时模拟 HTTP、设备驱动、Shadow 会话、本地云调度、模拟 MCU、演示数据库、产品/帮助、二维码及故障注入。旧 ROWAN_HTTP_MODE/ROWAN_DEVICE_MODE 不再选择传输；若仍设置为 mock，启动配置明确报迁移错误。API 根必须显式配置，可从 `.env.example` 创建本地配置。
 

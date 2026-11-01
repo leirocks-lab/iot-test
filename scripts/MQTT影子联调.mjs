@@ -47,6 +47,6 @@ try{
 }catch(e){report.synchronized=false;record({stage,result:'failed',code:safeCode(e.code),causeCode:safeCode(e.cause?.code)});process.exitCode=1;}
 finally{
  session?.close();if(service?.session){try{await service.logout();record({stage:'logout',result:'passed'});}catch{record({stage:'logout',result:'failed'});process.exitCode=1;}}
- const directory='sdd/迭代变更/变更-20261024-001/联调证据';await mkdir(directory,{recursive:true});
+ const directory='docs/联调证据/MQTT影子联调';await mkdir(directory,{recursive:true});
  const name=report.time.replace(/[:.]/g,'-');await writeFile(`${directory}/App影子实测-${name}.json`,JSON.stringify(report,null,2)+'\n');
 }

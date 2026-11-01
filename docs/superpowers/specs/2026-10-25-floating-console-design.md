@@ -10,4 +10,4 @@
 
 通过 Expo SDK 57 对应文档核对 DevSettings、PanResponder、Modal 和 Clipboard 接口。复制使用 SDK 匹配的 expo-clipboard；需重新构建开发客户端使新增原生模块生效。剪贴板失败显示提示，不能导致 App 崩溃。
 
-验证：日志容量与截断、循环及脱敏、批量通知与坏订阅隔离、过滤与导出、console 原输出、重复安装、防递归、隐藏恢复；运行 lint、typecheck、相关及全量测试、SDD 检查，并按实际环境报告 UI/真机验证范围。
+验证：日志容量与截断、循环及脱敏、批量通知与坏订阅隔离、过滤与导出、console 原输出、重复安装、防递归、隐藏恢复；运行 lint、typecheck、相关及全量测试，并按实际环境报告 UI/真机验证范围。
