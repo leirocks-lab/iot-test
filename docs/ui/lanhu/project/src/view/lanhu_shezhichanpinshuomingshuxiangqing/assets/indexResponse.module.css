@@ -1,0 +1,134 @@
+.page {
+  background-color: rgba(242, 242, 242, 1);
+  position: relative;
+  width: 100vw;
+  height: 216.54vw;
+  overflow: hidden;
+}
+
+.group_1 {
+  width: 100vw;
+  height: 38.14vw;
+}
+
+.box_1 {
+  width: 88vw;
+  height: 4vw;
+  margin: 4vw 0 0 8.26vw;
+}
+
+.text_1 {
+  width: 8.27vw;
+  height: 4vw;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4vw;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 4vw;
+}
+
+.thumbnail_1 {
+  width: 4.8vw;
+  height: 2.94vw;
+  margin: 0.8vw 0 0 61.86vw;
+}
+
+.thumbnail_2 {
+  width: 4vw;
+  height: 2.94vw;
+  margin: 0.8vw 0 0 1.06vw;
+}
+
+.image_1 {
+  width: 6.67vw;
+  height: 3.2vw;
+  margin: 0.53vw 0 0 1.33vw;
+}
+
+.box_2 {
+  width: 81.87vw;
+  height: 7.47vw;
+  margin: 5.86vw 0 16.8vw 3.2vw;
+}
+
+.image-text_1 {
+  width: 81.87vw;
+  height: 7.47vw;
+}
+
+.label_1 {
+  width: 7.47vw;
+  height: 7.47vw;
+}
+
+.text-group_1 {
+  position: relative;
+  width: 70.14vw;
+  height: 5.87vw;
+  margin-top: 0.8vw;
+}
+
+.text_2 {
+  width: 70.14vw;
+  height: 5.87vw;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 5.87vw;
+}
+
+.text_3 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 70.14vw;
+  height: 5.87vw;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 5.87vw;
+}
+
+.image_2 {
+  width: 100vw;
+  height: 141.07vw;
+  margin-top: -0.26vw;
+}
+
+.group_2 {
+  width: 100vw;
+  height: 28.8vw;
+}
+
+.image-wrapper_1 {
+  width: 25.6vw;
+  height: 11.74vw;
+  margin: 12.53vw 0 0 70.13vw;
+}
+
+.label_2 {
+  width: 11.74vw;
+  height: 11.74vw;
+}
+
+.label_3 {
+  width: 11.74vw;
+  height: 11.74vw;
+}
+
+.image_3 {
+  width: 100vw;
+  height: 9.07vw;
+  margin: -0.26vw 0 0 -0.53vw;
+}

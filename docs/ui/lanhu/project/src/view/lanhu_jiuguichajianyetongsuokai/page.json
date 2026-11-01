@@ -1,0 +1,144 @@
+{
+  "archiveId": "export-120-dbcea49d5a0f",
+  "exportIndex": 120,
+  "pageId": null,
+  "name": "酒柜插件页-童锁开",
+  "originalGroup": null,
+  "groupStatus": "not_verified",
+  "sourceUrl": "https://lanhuapp.com/web/#/item/project/stage?tid=fadf0d8e-ba91-4bb8-a05a-e0cad085545e&pid=67947f53-9582-4aad-94c9-9c597e404599",
+  "sourceUrlKind": "project",
+  "coverSourceUrl": "https://alipic.lanhuapp.com/SketchCoverdbcea49d5a0f367e6290fdf555922363cb7f6247fefb606c8c425ac1e62c0865",
+  "coverHash": "dbcea49d5a0f367e6290fdf555922363cb7f6247fefb606c8c425ac1e62c0865",
+  "version": {
+    "policy": "current_displayed",
+    "status": "not_captured",
+    "id": null,
+    "label": null,
+    "dateText": null
+  },
+  "preview": {
+    "status": "captured",
+    "path": "raw/browser-assets/a88e4f616600e8ef",
+    "sourceUrl": "https://assets.lanhuapp.com/SketchCoverdbcea49d5a0f367e6290fdf555922363cb7f6247fefb606c8c425ac1e62c0865?x-oss-process=image/quality,q_lossless/resize,w_282/format,webp",
+    "width": 282,
+    "height": 611,
+    "format": "WEBP",
+    "bytes": 6764,
+    "sha256": "a384ee332e7e2c0040f02cf55648b4d258a8179b0eea9a35e3a80881d97869b1",
+    "note": "浏览器已加载的缩放封面预览，非原始设计图。"
+  },
+  "designImage": {
+    "status": "captured",
+    "sourceKind": "local_export",
+    "path": "project/src/view/lanhu_jiuguichajianyetongsuokai/design.png",
+    "sourcePath": "../酒柜插件页-童锁开.png",
+    "versionVerified": false,
+    "matchBasis": "按原始文件名匹配；本地导出版本未与线上版本核实。",
+    "width": 375,
+    "height": 812,
+    "sha256": "5e0a4c26f49b4bda35b7f8163fbac50fe7cf38236f7f48c9e8a76e036c549a5e"
+  },
+  "annotations": {
+    "status": "not_captured",
+    "path": null,
+    "reason": "尚未完成原始图层标注读取；不从预览或生成 CSS 臆造标注。"
+  },
+  "slices": {
+    "status": "not_captured",
+    "paths": [],
+    "reason": "代码导出包 PNG 见 exportAssets；尚未取得原始切图标注清单。"
+  },
+  "code": {
+    "status": "partial",
+    "files": [
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/index.jsx",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/indexResponse.module.css",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/indexRem.module.css",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/index.module.css"
+    ],
+    "sourceUrl": null,
+    "frameworksCaptured": [
+      "React"
+    ],
+    "missingFiles": [],
+    "reason": "React ZIP 中的页面 JSX、三种 CSS 变体和图片已归档；其他框架未导出，未执行构建；导出包未提供页面 UUID/版本。",
+    "sourceKind": "user_supplied_zip",
+    "formatsPending": [
+      "HTML",
+      "Vue.js",
+      "微信小程序",
+      "uni-app"
+    ],
+    "exportPackage": "raw/LanhuProject.zip",
+    "exportDirectory": "project/src/view/lanhu_jiuguichajianyetongsuokai",
+    "exportIndex": "raw/react-export-index.json",
+    "mappingMethod": "name_and_content_review",
+    "mappingEvidence": "页面原名与蓝湖生成目录拼音匹配；ZIP 中 157 目录与清单一一对应。",
+    "formats": {
+      "React": {
+        "status": "captured",
+        "files": [
+          "project/src/view/lanhu_jiuguichajianyetongsuokai/index.jsx",
+          "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/indexResponse.module.css",
+          "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/indexRem.module.css",
+          "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/index.module.css"
+        ],
+        "sharedStyles": [
+          "project/src/assets/common.css",
+          "project/src/assets/common.less",
+          "project/src/assets/common.scss"
+        ],
+        "generatedPageDimensionsPx": {
+          "width": 375.0,
+          "height": 812.0
+        },
+        "checkedLocalReferences": 46,
+        "remoteReferences": [],
+        "versionVerified": false
+      }
+    }
+  },
+  "localExportComparison": {
+    "status": "associated_local_export",
+    "candidates": [
+      {
+        "path": "../酒柜插件页-童锁开.png",
+        "width": 375,
+        "height": 812,
+        "format": "PNG",
+        "bytes": 78338,
+        "sha256": "5e0a4c26f49b4bda35b7f8163fbac50fe7cf38236f7f48c9e8a76e036c549a5e"
+      }
+    ],
+    "note": "按原始文件名匹配；本地导出版本未与线上版本核实。"
+  },
+  "metadataPath": "project/src/view/lanhu_jiuguichajianyetongsuokai/page.json",
+  "exportAssets": {
+    "status": "captured",
+    "kind": "generated_code_assets",
+    "paths": [
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPnge83bc6f2d9d38a6cfee9f97528a3e46d5006637b6a0dbe55250ad92528499a38.png",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPngc9a260536dbd3080313c16c87528b52417f1c9f065ed809f8b3696a08e798c63.png",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPng459541dfd00d57582df89e5a9479443c03c42e03eaff90f027ddfc3c0be0b9ad.png",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPng02a76c08d66c6c6d9f6cd9c55c89848f984a69984d1fd9aab0a0bb1703200596.png",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPng7bafc64caac31534249c2341d538c56f3a58b83c3088d8488692448d5eb0120b.png",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPnged609f229d14643fd946a0689a5b3006b7aa0e6d02c8d7eb1b91a5d511e8686e.png",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPngf2eef71558638aa18804e297035c38bd53708461b21a8d57b53bc15c097f1794.png",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPng809a0249394ae129d45944b46c36051af6f47683881b9859a48a944a954cafc2.png",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPngbec5cabc5b1a40c4f35789cc6be13af1db70f09bf9359df5a07019989c35eee7.png",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPngb3f2f90ac369a580e677221ed428c4d27c1acf3525e5b76c694ac5a67c49f56c.png",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPng6ebc2e7ec02dcb74e970f5807decf7decc612503a36619059b58534d6135213e.png",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPngb4271c6322c177f2f5600fd4b3294525954ad7db3f6e87ca3466c4987a09dd31.png",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPngd7e1335e1cdbdc1e3e360c2955757ab06b1141266fa5e88323b61ec3919797e6.png",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPng6a27fa4042863b98a5a7a9bfc7c5865f310b56bfc9ccb2987cc8df89dc037218.png",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPngdb52b001b113a4472d2153a7a83c24574aff8e4b4a27f1bbefad18fe2043e1c0.png",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPng664edf4cc1b104e0eff709ffe0cc978c819998b1d1dab151c954019c637de634.png",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPng005dd5aee54f2d58c413d784221579c3e3d6d50ecdbb42a7c33bfa43433815f2.png",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPng70148f92a83b8c7a34f15240572788cd68075997164d262a45e6f3f243cf0153.png",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPng820c1c9c44dc49052383183436a74facb2e6d9c39add32629bf1ab41bda25c46.png",
+      "project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPngbbab2f275822e2f202615c33ad80b1e73adf77ef2eb5ba5124dee98b37d89a4b.png"
+    ],
+    "count": 20,
+    "note": "蓝湖生成代码所用 PNG，可能包含合并图；不等于原始切图标注。"
+  }
+}

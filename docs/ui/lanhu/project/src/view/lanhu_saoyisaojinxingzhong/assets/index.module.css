@@ -1,0 +1,124 @@
+.page {
+  background-color: rgba(242, 242, 242, 1);
+  position: relative;
+  width: 375px;
+  height: 812px;
+  overflow: hidden;
+}
+
+.block_1 {
+  background: url(./img/SketchPng4e3c27ff0331f195cc4432bfcc41d5a8f445471ccd47e2e34cc0671f5a833b03.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+}
+
+.section_1 {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  padding: 52px 49px 176px 12px;
+}
+
+.box_10 {
+  width: 200px;
+  margin-right: 114px;
+}
+
+.label_3 {
+  width: 28px;
+  height: 28px;
+}
+
+.text_1 {
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 16px;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 22px;
+  margin-top: 3px;
+}
+
+.box_11 {
+  margin: 108px 19px 0 55px;
+}
+
+.group_1 {
+  background-image: url(./img/a250b2a53936491a9a4c47338a4d886b_mergeImage.png);
+  width: 240px;
+  height: 240px;
+}
+
+.box_12 {
+  margin: 40px 2px 0 39px;
+}
+
+.text-group_3 {
+}
+
+.text_2 {
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 16px;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 24px;
+  align-self: center;
+}
+
+.text_3 {
+  width: 273px;
+  height: 42px;
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 14px;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: center;
+  line-height: 21px;
+  margin-top: 16px;
+}
+
+.box_13 {
+  margin: 40px 0 0 39px;
+}
+
+.text-wrapper_3 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 8px;
+  padding: 16px 32px 16px 32px;
+}
+
+.text_6 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 16px;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 14px;
+}
+
+.box_5 {
+  height: 244px;
+  background: url(./img/SketchPngc65a133cffd900ce0331e783bad7337132e75b271a7bf7fe98c57d532b6e4bf7.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  width: 244px;
+  position: absolute;
+  left: 65px;
+  top: 186px;
+  padding: 69px 2px 172px 2px;
+}
+
+.group_2 {
+  width: 240px;
+  height: 3px;
+  background: url(./img/SketchPng039f499ad0ea652125cf7bb4e1d43efb743da5984332e5f532c53045f7d94ffc.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+}

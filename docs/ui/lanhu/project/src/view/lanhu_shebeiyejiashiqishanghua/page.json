@@ -1,0 +1,142 @@
+{
+  "archiveId": "export-148-236cd24de7a5",
+  "exportIndex": 148,
+  "pageId": null,
+  "name": "设备页-加湿器-上划",
+  "originalGroup": null,
+  "groupStatus": "not_verified",
+  "sourceUrl": "https://lanhuapp.com/web/#/item/project/stage?tid=fadf0d8e-ba91-4bb8-a05a-e0cad085545e&pid=67947f53-9582-4aad-94c9-9c597e404599",
+  "sourceUrlKind": "project",
+  "coverSourceUrl": "https://alipic.lanhuapp.com/SketchCover236cd24de7a57e845785ae0aa076f08bd4d26bbea1cdff67b7e065805f1200c2",
+  "coverHash": "236cd24de7a57e845785ae0aa076f08bd4d26bbea1cdff67b7e065805f1200c2",
+  "version": {
+    "policy": "current_displayed",
+    "status": "not_captured",
+    "id": null,
+    "label": null,
+    "dateText": null
+  },
+  "preview": {
+    "status": "captured",
+    "path": "raw/browser-assets/98aa8d09aea0b4e4",
+    "sourceUrl": "https://assets.lanhuapp.com/SketchCover236cd24de7a57e845785ae0aa076f08bd4d26bbea1cdff67b7e065805f1200c2?x-oss-process=image/quality,q_lossless/resize,w_282/format,webp",
+    "width": 282,
+    "height": 611,
+    "format": "WEBP",
+    "bytes": 8186,
+    "sha256": "9837451e11c875da4b259d9473beefd99a00a0c6c82345455ccb9a832f547c51",
+    "note": "浏览器已加载的缩放封面预览，非原始设计图。"
+  },
+  "designImage": {
+    "status": "captured",
+    "sourceKind": "local_export",
+    "path": "project/src/view/lanhu_shebeiyejiashiqishanghua/design.png",
+    "sourcePath": "../设备页-加湿器-上划.png",
+    "versionVerified": false,
+    "matchBasis": "按原始文件名匹配；本地导出版本未与线上版本核实。",
+    "width": 375,
+    "height": 812,
+    "sha256": "e6223e27c2fe3ff78213d6de6161ab38e45f55bbcd455a1d02d55fc50e4cd60d"
+  },
+  "annotations": {
+    "status": "not_captured",
+    "path": null,
+    "reason": "尚未完成原始图层标注读取；不从预览或生成 CSS 臆造标注。"
+  },
+  "slices": {
+    "status": "not_captured",
+    "paths": [],
+    "reason": "代码导出包 PNG 见 exportAssets；尚未取得原始切图标注清单。"
+  },
+  "code": {
+    "status": "partial",
+    "files": [
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/index.jsx",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/indexResponse.module.css",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/indexRem.module.css",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/index.module.css"
+    ],
+    "sourceUrl": null,
+    "frameworksCaptured": [
+      "React"
+    ],
+    "missingFiles": [],
+    "reason": "React ZIP 中的页面 JSX、三种 CSS 变体和图片已归档；其他框架未导出，未执行构建；导出包未提供页面 UUID/版本。",
+    "sourceKind": "user_supplied_zip",
+    "formatsPending": [
+      "HTML",
+      "Vue.js",
+      "微信小程序",
+      "uni-app"
+    ],
+    "exportPackage": "raw/LanhuProject.zip",
+    "exportDirectory": "project/src/view/lanhu_shebeiyejiashiqishanghua",
+    "exportIndex": "raw/react-export-index.json",
+    "mappingMethod": "name_and_content_review",
+    "mappingEvidence": "页面原名与蓝湖生成目录拼音匹配；ZIP 中 157 目录与清单一一对应。",
+    "formats": {
+      "React": {
+        "status": "captured",
+        "files": [
+          "project/src/view/lanhu_shebeiyejiashiqishanghua/index.jsx",
+          "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/indexResponse.module.css",
+          "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/indexRem.module.css",
+          "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/index.module.css"
+        ],
+        "sharedStyles": [
+          "project/src/assets/common.css",
+          "project/src/assets/common.less",
+          "project/src/assets/common.scss"
+        ],
+        "generatedPageDimensionsPx": {
+          "width": 375.0,
+          "height": 812.0
+        },
+        "checkedLocalReferences": 27,
+        "remoteReferences": [],
+        "versionVerified": false
+      }
+    }
+  },
+  "localExportComparison": {
+    "status": "associated_local_export",
+    "candidates": [
+      {
+        "path": "../设备页-加湿器-上划.png",
+        "width": 375,
+        "height": 812,
+        "format": "PNG",
+        "bytes": 49801,
+        "sha256": "e6223e27c2fe3ff78213d6de6161ab38e45f55bbcd455a1d02d55fc50e4cd60d"
+      }
+    ],
+    "note": "按原始文件名匹配；本地导出版本未与线上版本核实。"
+  },
+  "metadataPath": "project/src/view/lanhu_shebeiyejiashiqishanghua/page.json",
+  "exportAssets": {
+    "status": "captured",
+    "kind": "generated_code_assets",
+    "paths": [
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/img/SketchPngf76064d3e205f7e8cdf6ae4a5ef4a82e093cf1cdb935cd648262e1fa1c5c33ad.png",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/img/SketchPng5b531527afaa4b3efd7268f71800b747e03493fad5d5d57aaa574df641ad793e.png",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/img/SketchPng02a76c08d66c6c6d9f6cd9c55c89848f984a69984d1fd9aab0a0bb1703200596.png",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/img/SketchPng360cf53083fb4b7bdea1e78734ed0046dca74d03826eaf3e4459ecbbbcbb934b.png",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/img/620a68ec072c46ca8a9fd59b14fd676d_mergeImage.png",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/img/SketchPngbec5cabc5b1a40c4f35789cc6be13af1db70f09bf9359df5a07019989c35eee7.png",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/img/SketchPngaf1e2a0b8f8349e2c9b97b91e404df7ce247c6f590862f18317bfe060626948f.png",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/img/SketchPngf8248615de614e6e2a296b516cfef4b2041fdfaf781ae90a7beb64e4ce57bf26.png",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/img/SketchPng4229b24e5c2afaea178066a3982359a3d5b94fa01e057de8b61da769091f8cf8.png",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/img/SketchPngc223818979f6181347b55858a29b68365d47ebababd8d834021fd26776b8ba64.png",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/img/SketchPngec6e26f0f53aa34871faeae7f46bd9d6190402e583500bec03929122b472ddb9.png",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/img/SketchPngb4c06a58a484033cb7d2ffd64aadaa7cff9bdb3ab9a8536363abd1f8cb72edc8.png",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/img/SketchPngdb52b001b113a4472d2153a7a83c24574aff8e4b4a27f1bbefad18fe2043e1c0.png",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/img/SketchPng664edf4cc1b104e0eff709ffe0cc978c819998b1d1dab151c954019c637de634.png",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/img/SketchPng03552f833b39b6f89e6236690198ec8ddb8377d513acc33d05db9209478c305c.png",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/img/SketchPng235df50f2b085e0bf6a1a7e49c9ea1a58d746459a3f2f1698b7785dd734e9548.png",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/img/SketchPng80caa3040b78375ceb1fdacea76a8e49a6de84e0c23b8fd9f00e39b36b750b2b.png",
+      "project/src/view/lanhu_shebeiyejiashiqishanghua/assets/img/SketchPng1a9ce8d0f73e00890a08f6266bda5ca83249b65335fce3822d855af1acc7c7c7.png"
+    ],
+    "count": 18,
+    "note": "蓝湖生成代码所用 PNG，可能包含合并图；不等于原始切图标注。"
+  }
+}

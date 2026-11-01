@@ -1,0 +1,128 @@
+html {
+  font-size: 37.5px;
+}
+
+.page {
+  position: relative;
+  width: 10rem;
+  height: 21.654rem;
+  overflow: hidden;
+}
+
+.block_1 {
+  background-image: url(./img/aad8a0cd7451450983fa56bdb00db21f_mergeImage.png);
+}
+
+.section_1 {
+  position: relative;
+  margin-bottom: 0.88rem;
+  padding: 0.4rem 0.374rem 11.014rem 0.507rem;
+}
+
+.block_2 {
+  margin-left: 0.32rem;
+}
+
+.text_1 {
+  height: 0.4rem;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.4rem;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 0.4rem;
+}
+
+.thumbnail_1 {
+  width: 0.48rem;
+  height: 0.294rem;
+  margin: 0.08rem 0 0.027rem 6.16rem;
+}
+
+.thumbnail_2 {
+  width: 0.4rem;
+  height: 0.294rem;
+  margin: 0.08rem 0 0.027rem 0.107rem;
+}
+
+.image_1 {
+  width: 0.667rem;
+  height: 0.32rem;
+  margin: 0.054rem 0 0.027rem 0.134rem;
+}
+
+.block_3 {
+  width: 5.787rem;
+  margin: 0.747rem 3.334rem 0 0;
+}
+
+.thumbnail_3 {
+  width: 0.374rem;
+  height: 0.374rem;
+  margin: 0.027rem 0 0.027rem 0;
+}
+
+.text_2 {
+  overflow-wrap: break-word;
+  color: rgba(35, 25, 22, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 0.427rem;
+}
+
+.text-wrapper_1 {
+  margin: 3.6rem 3.867rem 0 3.76rem;
+}
+
+.text_3 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.533rem;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 0.747rem;
+}
+
+.text-wrapper_2 {
+  margin: 2.854rem 3.76rem 0 3.654rem;
+}
+
+.text_4 {
+  overflow-wrap: break-word;
+  color: rgba(102, 102, 102, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 0.587rem;
+}
+
+.image-wrapper_1 {
+  border-radius: 50%;
+  height: 5.227rem;
+  border: 5px solid rgba(24, 109, 175, 1);
+  width: 5.227rem;
+  position: absolute;
+  left: 2.534rem;
+  top: 3.467rem;
+  padding: 0 0 2.48rem 2.48rem;
+}
+
+.image_2 {
+  width: 2.48rem;
+  height: 2.48rem;
+}
+
+.image_3 {
+  width: 10rem;
+  height: 0.907rem;
+  margin: 20.747rem 0 0 -10rem;
+}

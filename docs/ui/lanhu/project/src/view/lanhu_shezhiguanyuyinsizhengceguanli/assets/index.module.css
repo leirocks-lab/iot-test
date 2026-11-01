@@ -1,0 +1,126 @@
+.page {
+  background-color: rgba(242, 242, 242, 1);
+  position: relative;
+  width: 375px;
+  height: 812px;
+  overflow: hidden;
+}
+
+.section_1 {
+  position: relative;
+  padding: 15px 14px 25px 12px;
+}
+
+.group_1 {
+  margin-left: 19px;
+}
+
+.text_1 {
+  height: 15px;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 15px;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 15px;
+}
+
+.thumbnail_1 {
+  width: 18px;
+  height: 11px;
+  margin: 3px 0 1px 232px;
+}
+
+.thumbnail_2 {
+  width: 15px;
+  height: 11px;
+  margin: 3px 0 1px 4px;
+}
+
+.image_1 {
+  width: 25px;
+  height: 12px;
+  margin: 2px 0 1px 5px;
+}
+
+.group_2 {
+  margin: 22px 42px 0 0;
+}
+
+.image-text_1 {
+  width: 307px;
+}
+
+.label_1 {
+  width: 28px;
+  height: 28px;
+}
+
+.text-group_1 {
+  position: relative;
+  margin: 3px 0 3px 0;
+}
+
+.text_2 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 16px;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 22px;
+}
+
+.text_3 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 16px;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 22px;
+}
+
+.group_3 {
+  background-color: rgba(182, 182, 182, 1);
+  border-radius: 3px;
+  position: absolute;
+  left: 365px;
+  top: 120px;
+  width: 4px;
+  height: 142px;
+}
+
+.text-wrapper_1 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  align-self: center;
+  margin-top: -1px;
+  width: 343px;
+  padding: 16px 16px 16px 16px;
+}
+
+.paragraph_1 {
+  width: 311px;
+  height: 626px;
+  overflow-wrap: break-word;
+  color: rgba(102, 102, 102, 1);
+  font-size: 12px;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: justify;
+  line-height: 17px;
+}
+
+.image_2 {
+  width: 375px;
+  height: 34px;
+  margin: 16px 2px 0 -2px;
+}

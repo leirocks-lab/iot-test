@@ -1,0 +1,223 @@
+.page {
+  background-color: rgba(242, 242, 242, 1);
+  position: relative;
+  width: 375px;
+  height: 812px;
+  overflow: hidden;
+}
+
+.block_1 {
+  width: 377px;
+  margin-left: -2px;
+}
+
+.image_1 {
+  width: 375px;
+  height: 34px;
+  margin-top: 778px;
+}
+
+.block_2 {
+  margin: 0 0 33px -373px;
+  padding: 15px 14px 371px 12px;
+}
+
+.group_1 {
+  margin-left: 19px;
+}
+
+.text_1 {
+  height: 15px;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 15px;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 15px;
+}
+
+.thumbnail_1 {
+  width: 18px;
+  height: 11px;
+  margin: 3px 0 1px 232px;
+}
+
+.thumbnail_2 {
+  width: 15px;
+  height: 11px;
+  margin: 3px 0 1px 4px;
+}
+
+.image_2 {
+  width: 25px;
+  height: 12px;
+  margin: 2px 0 1px 5px;
+}
+
+.image-text_1 {
+  width: 307px;
+  margin: 22px 42px 0 0;
+}
+
+.label_1 {
+  width: 28px;
+  height: 28px;
+}
+
+.text-group_1 {
+  position: relative;
+  margin: 3px 0 3px 0;
+}
+
+.text_2 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 16px;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 22px;
+}
+
+.text_3 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 16px;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 22px;
+}
+
+.text_4 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 14px;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 20px;
+  margin: 24px 312px 0 8px;
+}
+
+.text-wrapper_1 {
+  background: url(./img/SketchPng80915eb2bb49c2bd2369e55647ab0e2273269b3b50f1687902ad9402be83fcb3.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  margin: 8px 5px 0 7px;
+  padding: 15px 181px 15px 19px;
+}
+
+.text_5 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 16px;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 16px;
+}
+
+.text-wrapper_2 {
+  background: url(./img/SketchPngb4b6d80ddc9b2352fae498e98b3870a96f44c0a153918d160f83ce0e0ed2658f.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  margin: 0 5px 0 7px;
+  padding: 15px 101px 15px 19px;
+}
+
+.text_6 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 16px;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 16px;
+}
+
+.text-wrapper_3 {
+  background: url(./img/SketchPngb4b6d80ddc9b2352fae498e98b3870a96f44c0a153918d160f83ce0e0ed2658f.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  margin: 0 5px 0 7px;
+  padding: 15px 190px 15px 19px;
+}
+
+.text_7 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 16px;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 16px;
+}
+
+.text-wrapper_4 {
+  background: url(./img/SketchPngb4b6d80ddc9b2352fae498e98b3870a96f44c0a153918d160f83ce0e0ed2658f.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  margin: 0 5px 0 7px;
+  padding: 15px 196px 15px 19px;
+}
+
+.text_8 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 16px;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 16px;
+}
+
+.text-wrapper_5 {
+  background: url(./img/SketchPngb4b6d80ddc9b2352fae498e98b3870a96f44c0a153918d160f83ce0e0ed2658f.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  margin: 0 5px 0 7px;
+  padding: 15px 68px 15px 19px;
+}
+
+.text_9 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 16px;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 16px;
+}
+
+.text-wrapper_6 {
+  background: url(./img/SketchPngaf9997d22119d081b4cc47d49d11570c86fd49200a34b1231346694df7dd5e00.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  margin: 0 5px 0 7px;
+  padding: 15px 142px 15px 19px;
+}
+
+.text_10 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 16px;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 16px;
+}

@@ -1,0 +1,131 @@
+.page {
+  position: relative;
+  width: 100vw;
+  height: 216.54vw;
+  overflow: hidden;
+}
+
+.group_1 {
+  background: url(./img/SketchPng5dd03716c56a3395eaf86f2892c9aba92f1ed8ba499f584611f34fd6dce25293.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+}
+
+.section_1 {
+  padding: 4vw 3.73vw 4vw 8.26vw;
+}
+
+.block_1 {
+}
+
+.text_1 {
+  height: 4vw;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4vw;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 4vw;
+}
+
+.thumbnail_1 {
+  width: 4.8vw;
+  height: 2.94vw;
+  margin: 0.8vw 0 0.26vw 61.6vw;
+}
+
+.thumbnail_2 {
+  width: 4vw;
+  height: 2.94vw;
+  margin: 0.8vw 0 0.26vw 1.06vw;
+}
+
+.image_1 {
+  width: 6.67vw;
+  height: 3.2vw;
+  margin: 0.53vw 0 0.26vw 1.33vw;
+}
+
+.section_2 {
+  position: relative;
+  background: url(./img/SketchPngc21250797e569cae3ad363571d53307a74d76dfd92cf71ea628d29adad5ca14b.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  margin-top: -0.26vw;
+  padding: 56vw 30.13vw 32.53vw 29.86vw;
+}
+
+.image_2 {
+  width: 40vw;
+  height: 22.4vw;
+}
+
+.text-wrapper_1 {
+  background: url(./img/SketchPng6f7c7f2d234241f62545bedeb9ddefa4a0d9bee0a491797ba763e1f7c7b37232.png) -2.14vw -2.14vw
+    no-repeat;
+  background-size: 37.33vw 14.93vw;
+  margin: 12.8vw 3.2vw 0 3.73vw;
+  padding: 3.2vw 9.06vw 3.2vw 9.06vw;
+}
+
+.text_2 {
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 3.73vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 4.27vw;
+}
+
+.text-wrapper_2 {
+  background-color: rgba(0, 0, 0, 1);
+  border-radius: 8px;
+  height: 12.27vw;
+  width: 73.34vw;
+  position: absolute;
+  left: 13.34vw;
+  top: 122.67vw;
+  padding: 4.26vw 32.26vw 4.26vw 32.53vw;
+}
+
+.text_3 {
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 3.74vw;
+}
+
+.section_3 {
+  padding: 4.8vw 13.33vw 44.53vw 13.33vw;
+}
+
+.text-wrapper_3 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 8px;
+  padding: 4.26vw 32.26vw 4.26vw 32.53vw;
+}
+
+.text_4 {
+  overflow-wrap: break-word;
+  color: rgba(51, 44, 43, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 3.74vw;
+}
+
+.image_3 {
+  width: 100vw;
+  height: 9.07vw;
+  margin-top: -0.26vw;
+}

@@ -1,0 +1,134 @@
+{
+  "archiveId": "export-028-7b1c9c951e96",
+  "exportIndex": 28,
+  "pageId": null,
+  "name": "添加设备-蓝牙-初始状态",
+  "originalGroup": null,
+  "groupStatus": "not_verified",
+  "sourceUrl": "https://lanhuapp.com/web/#/item/project/stage?tid=fadf0d8e-ba91-4bb8-a05a-e0cad085545e&pid=67947f53-9582-4aad-94c9-9c597e404599",
+  "sourceUrlKind": "project",
+  "coverSourceUrl": "https://alipic.lanhuapp.com/SketchCover7b1c9c951e965533a3ed7633248fd8acf857d1ae45930f07c7553e3c892bae9d",
+  "coverHash": "7b1c9c951e965533a3ed7633248fd8acf857d1ae45930f07c7553e3c892bae9d",
+  "version": {
+    "policy": "current_displayed",
+    "status": "not_captured",
+    "id": null,
+    "label": null,
+    "dateText": null
+  },
+  "preview": {
+    "status": "captured",
+    "path": "raw/browser-assets/d51ca45d1025ca73",
+    "sourceUrl": "https://assets.lanhuapp.com/SketchCover7b1c9c951e965533a3ed7633248fd8acf857d1ae45930f07c7553e3c892bae9d?x-oss-process=image/quality,q_lossless/resize,w_282/format,webp",
+    "width": 282,
+    "height": 611,
+    "format": "WEBP",
+    "bytes": 4124,
+    "sha256": "b3df56aba182e6507a1d5e62ab586541134d795d119db36fee9dedcef37f8855",
+    "note": "浏览器已加载的缩放封面预览，非原始设计图。"
+  },
+  "designImage": {
+    "status": "captured",
+    "sourceKind": "local_export",
+    "path": "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/design.png",
+    "sourcePath": "../添加设备-蓝牙-初始状态.png",
+    "versionVerified": false,
+    "matchBasis": "按原始文件名匹配；本地导出版本未与线上版本核实。",
+    "width": 375,
+    "height": 812,
+    "sha256": "be108c17a14073942d6773fe8b67ea40fa86e5b25de8766542f89234f10b082c"
+  },
+  "annotations": {
+    "status": "not_captured",
+    "path": null,
+    "reason": "尚未完成原始图层标注读取；不从预览或生成 CSS 臆造标注。"
+  },
+  "slices": {
+    "status": "not_captured",
+    "paths": [],
+    "reason": "代码导出包 PNG 见 exportAssets；尚未取得原始切图标注清单。"
+  },
+  "code": {
+    "status": "partial",
+    "files": [
+      "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/index.jsx",
+      "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/assets/indexResponse.module.css",
+      "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/assets/indexRem.module.css",
+      "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/assets/index.module.css"
+    ],
+    "sourceUrl": null,
+    "frameworksCaptured": [
+      "React"
+    ],
+    "missingFiles": [],
+    "reason": "React ZIP 中的页面 JSX、三种 CSS 变体和图片已归档；其他框架未导出，未执行构建；导出包未提供页面 UUID/版本。",
+    "sourceKind": "user_supplied_zip",
+    "formatsPending": [
+      "HTML",
+      "Vue.js",
+      "微信小程序",
+      "uni-app"
+    ],
+    "exportPackage": "raw/LanhuProject.zip",
+    "exportDirectory": "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai",
+    "exportIndex": "raw/react-export-index.json",
+    "mappingMethod": "name_and_content_review",
+    "mappingEvidence": "页面原名与蓝湖生成目录拼音匹配；ZIP 中 157 目录与清单一一对应。",
+    "formats": {
+      "React": {
+        "status": "captured",
+        "files": [
+          "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/index.jsx",
+          "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/assets/indexResponse.module.css",
+          "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/assets/indexRem.module.css",
+          "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/assets/index.module.css"
+        ],
+        "sharedStyles": [
+          "project/src/assets/common.css",
+          "project/src/assets/common.less",
+          "project/src/assets/common.scss"
+        ],
+        "generatedPageDimensionsPx": {
+          "width": 375.0,
+          "height": 812.0
+        },
+        "checkedLocalReferences": 17,
+        "remoteReferences": [],
+        "versionVerified": false
+      }
+    }
+  },
+  "localExportComparison": {
+    "status": "associated_local_export",
+    "candidates": [
+      {
+        "path": "../添加设备-蓝牙-初始状态.png",
+        "width": 375,
+        "height": 812,
+        "format": "PNG",
+        "bytes": 29185,
+        "sha256": "be108c17a14073942d6773fe8b67ea40fa86e5b25de8766542f89234f10b082c"
+      }
+    ],
+    "note": "按原始文件名匹配；本地导出版本未与线上版本核实。"
+  },
+  "metadataPath": "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/page.json",
+  "exportAssets": {
+    "status": "captured",
+    "kind": "generated_code_assets",
+    "paths": [
+      "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/assets/img/SketchPng360cf53083fb4b7bdea1e78734ed0046dca74d03826eaf3e4459ecbbbcbb934b.png",
+      "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/assets/img/SketchPng1637172f5512a46cd258e24ea60582f4c868a50e55fb13150ca0f9ae380c6988.png",
+      "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/assets/img/56c6f3d1941042d09154d55a0f5bbcca_mergeImage.png",
+      "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/assets/img/SketchPng5536a72d079199bb55727cf8b59310d3e6f027c1a7d03cbf61ae4d9ae1968c51.png",
+      "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/assets/img/SketchPngf8248615de614e6e2a296b516cfef4b2041fdfaf781ae90a7beb64e4ce57bf26.png",
+      "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/assets/img/SketchPng3613bbe3921f220f55f9f51d0ec47e2427bbd8b8a44ce8e6ac9fa58b1aa4ad73.png",
+      "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/assets/img/SketchPng082b42d36bf08f5a6c9bb35a30dd06cb0b5d471974afa516f27ba823116cccaa.png",
+      "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/assets/img/SketchPngece85bc0300f2739a499381327c9bdd803daff9591d859151134b97bd91c1b42.png",
+      "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/assets/img/SketchPng235df50f2b085e0bf6a1a7e49c9ea1a58d746459a3f2f1698b7785dd734e9548.png",
+      "project/src/view/lanhu_tianjiashebeilanyachushizhuangtai/assets/img/SketchPng80caa3040b78375ceb1fdacea76a8e49a6de84e0c23b8fd9f00e39b36b750b2b.png"
+    ],
+    "count": 10,
+    "note": "蓝湖生成代码所用 PNG，可能包含合并图；不等于原始切图标注。"
+  }
+}

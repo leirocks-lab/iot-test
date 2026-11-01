@@ -1,0 +1,30 @@
+html {
+  font-size: 37.5px;
+}
+
+.page {
+  position: relative;
+  width: 11.04rem;
+  height: 2.827rem;
+  overflow: hidden;
+}
+
+.text-wrapper_1 {
+  background-color: rgba(255, 109, 15, 1);
+  height: 2.827rem;
+  width: 11.04rem;
+}
+
+.text_1 {
+  width: 6.667rem;
+  height: 1.867rem;
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 1.333rem;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1.867rem;
+  margin: 0.48rem 0 0 1.92rem;
+}

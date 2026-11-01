@@ -1,0 +1,242 @@
+.page {
+  background-color: rgba(242, 242, 242, 1);
+  position: relative;
+  width: 375px;
+  height: 812px;
+  overflow: hidden;
+}
+
+.group_1 {
+}
+
+.box_1 {
+  position: relative;
+  margin-bottom: 33px;
+  padding: 15px 14px 356px 12px;
+}
+
+.block_1 {
+  margin-left: 19px;
+}
+
+.text_1 {
+  height: 15px;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 15px;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 15px;
+}
+
+.thumbnail_1 {
+  width: 18px;
+  height: 11px;
+  margin: 3px 0 1px 232px;
+}
+
+.thumbnail_2 {
+  width: 15px;
+  height: 11px;
+  margin: 3px 0 1px 4px;
+}
+
+.image_1 {
+  width: 25px;
+  height: 12px;
+  margin: 2px 0 1px 5px;
+}
+
+.block_2 {
+  margin: 22px 42px 0 0;
+}
+
+.image-text_1 {
+  width: 307px;
+}
+
+.label_1 {
+  width: 28px;
+  height: 28px;
+}
+
+.text-group_1 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 16px;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 22px;
+  margin-top: 3px;
+}
+
+.text-wrapper_1 {
+  margin: 74px 150px 0 187px;
+}
+
+.text_2 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 12px;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 12px;
+}
+
+.block_3 {
+  width: 31px;
+  align-self: center;
+  margin-top: 69px;
+}
+
+.section_1 {
+  width: 31px;
+  height: 3px;
+  background: url(./img/SketchPngece85bc0300f2739a499381327c9bdd803daff9591d859151134b97bd91c1b42.png) -16px -16px
+    no-repeat;
+  background-size: 63px 34px;
+}
+
+.text-wrapper_2 {
+  margin: 17px 143px 0 158px;
+}
+
+.text_3 {
+  overflow-wrap: break-word;
+  color: rgba(154, 154, 158, 1);
+  font-size: 12px;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 12px;
+}
+
+.text-wrapper_3 {
+  margin: 40px 159px 0 4px;
+}
+
+.text_4 {
+  overflow-wrap: break-word;
+  color: rgba(154, 154, 158, 1);
+  font-size: 12px;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 12px;
+}
+
+.block_4 {
+  width: 334px;
+  margin: 20px 7px 0 8px;
+}
+
+.text-group_2 {
+}
+
+.text_5 {
+  overflow-wrap: break-word;
+  color: rgba(51, 51, 51, 1);
+  font-size: 14px;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 20px;
+}
+
+.text_6 {
+  overflow-wrap: break-word;
+  color: rgba(51, 51, 51, 1);
+  font-size: 14px;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 20px;
+  margin: 12px 123px 0 0;
+}
+
+.text_7 {
+  overflow-wrap: break-word;
+  color: rgba(51, 51, 51, 1);
+  font-size: 14px;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 20px;
+  margin: 12px 86px 0 0;
+}
+
+.image-wrapper_1 {
+  margin: 8px 0 5px 0;
+}
+
+.thumbnail_3 {
+  width: 13px;
+  height: 9px;
+}
+
+.thumbnail_4 {
+  width: 13px;
+  height: 9px;
+  margin-top: 21px;
+}
+
+.thumbnail_5 {
+  width: 13px;
+  height: 9px;
+  margin-top: 23px;
+}
+
+.block_5 {
+  position: absolute;
+  left: 107px;
+  top: 128px;
+  width: 162px;
+  height: 81px;
+  background: url(./img/SketchPng082b42d36bf08f5a6c9bb35a30dd06cb0b5d471974afa516f27ba823116cccaa.png) -1px -1px
+    no-repeat;
+  background-size: 164px 82px;
+  padding: 3px 74px 0 0;
+}
+
+.image_2 {
+  width: 58px;
+  height: 78px;
+}
+
+.text_8 {
+  height: 24px;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 24px;
+  font-family: DINCondensed-Bold;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 29px;
+  margin-top: 17px;
+}
+
+.image_3 {
+  position: absolute;
+  left: 55px;
+  top: 53px;
+  width: 48px;
+  height: 54px;
+}
+
+.image_4 {
+  width: 375px;
+  height: 34px;
+  margin: 778px 0 0 -375px;
+}

@@ -1,0 +1,12 @@
+{
+  "excludedDownloadedCount": 45,
+  "reason": "蓝湖平台界面图标、样式和其他非项目资源，不作为设计资料。",
+  "failedPlatformResourceCount": 9,
+  "failedProjectCoverCount": 0,
+  "failureCategories": [
+    "平台统计请求",
+    "平台界面 SVG",
+    "平台 favicon"
+  ],
+  "note": "不保留平台遥测查询串、用户标识或机器临时路径。"
+}

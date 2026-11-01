@@ -1,0 +1,123 @@
+{
+  "archiveId": "export-121-06db313e17e6",
+  "exportIndex": 121,
+  "pageId": null,
+  "name": "酒柜设备页",
+  "originalGroup": null,
+  "groupStatus": "not_verified",
+  "sourceUrl": "https://lanhuapp.com/web/#/item/project/stage?tid=fadf0d8e-ba91-4bb8-a05a-e0cad085545e&pid=67947f53-9582-4aad-94c9-9c597e404599",
+  "sourceUrlKind": "project",
+  "coverSourceUrl": "https://alipic.lanhuapp.com/SketchCover06db313e17e64ade976e8cfa343526a3ea3d049af876efac62e80f530fb3f7ae",
+  "coverHash": "06db313e17e64ade976e8cfa343526a3ea3d049af876efac62e80f530fb3f7ae",
+  "version": {
+    "policy": "current_displayed",
+    "status": "not_captured",
+    "id": null,
+    "label": null,
+    "dateText": null
+  },
+  "preview": {
+    "status": "captured",
+    "path": "raw/browser-assets/589b47faf3f2d602",
+    "sourceUrl": "https://assets.lanhuapp.com/SketchCover06db313e17e64ade976e8cfa343526a3ea3d049af876efac62e80f530fb3f7ae?x-oss-process=image/quality,q_lossless/resize,w_311/format,webp",
+    "width": 311,
+    "height": 80,
+    "format": "WEBP",
+    "bytes": 2770,
+    "sha256": "485c480d5450d5a4348f4d59a3437e57086e791559a22d669ed64ebdf60a02b6",
+    "note": "浏览器已加载的缩放封面预览，非原始设计图。"
+  },
+  "designImage": {
+    "status": "captured",
+    "sourceKind": "local_export",
+    "path": "project/src/view/lanhu_jiuguishebeiye/design.png",
+    "sourcePath": "../酒柜设备页.png",
+    "versionVerified": false,
+    "matchBasis": "按原始文件名匹配；本地导出版本未与线上版本核实。",
+    "width": 414,
+    "height": 106,
+    "sha256": "23d3ff00f1a92a1ff30a5c6f61829439af1520d4088afcedf94c790ead6d9881"
+  },
+  "annotations": {
+    "status": "not_captured",
+    "path": null,
+    "reason": "尚未完成原始图层标注读取；不从预览或生成 CSS 臆造标注。"
+  },
+  "slices": {
+    "status": "not_captured",
+    "paths": [],
+    "reason": "代码导出包 PNG 见 exportAssets；尚未取得原始切图标注清单。"
+  },
+  "code": {
+    "status": "partial",
+    "files": [
+      "project/src/view/lanhu_jiuguishebeiye/index.jsx",
+      "project/src/view/lanhu_jiuguishebeiye/assets/indexResponse.module.css",
+      "project/src/view/lanhu_jiuguishebeiye/assets/indexRem.module.css",
+      "project/src/view/lanhu_jiuguishebeiye/assets/index.module.css"
+    ],
+    "sourceUrl": null,
+    "frameworksCaptured": [
+      "React"
+    ],
+    "missingFiles": [],
+    "reason": "React ZIP 中的页面 JSX、三种 CSS 变体和图片已归档；其他框架未导出，未执行构建；导出包未提供页面 UUID/版本。",
+    "sourceKind": "user_supplied_zip",
+    "formatsPending": [
+      "HTML",
+      "Vue.js",
+      "微信小程序",
+      "uni-app"
+    ],
+    "exportPackage": "raw/LanhuProject.zip",
+    "exportDirectory": "project/src/view/lanhu_jiuguishebeiye",
+    "exportIndex": "raw/react-export-index.json",
+    "mappingMethod": "name_and_content_review",
+    "mappingEvidence": "页面原名与蓝湖生成目录拼音匹配；ZIP 中 157 目录与清单一一对应。",
+    "formats": {
+      "React": {
+        "status": "captured",
+        "files": [
+          "project/src/view/lanhu_jiuguishebeiye/index.jsx",
+          "project/src/view/lanhu_jiuguishebeiye/assets/indexResponse.module.css",
+          "project/src/view/lanhu_jiuguishebeiye/assets/indexRem.module.css",
+          "project/src/view/lanhu_jiuguishebeiye/assets/index.module.css"
+        ],
+        "sharedStyles": [
+          "project/src/assets/common.css",
+          "project/src/assets/common.less",
+          "project/src/assets/common.scss"
+        ],
+        "generatedPageDimensionsPx": {
+          "width": 414.0,
+          "height": 106.0
+        },
+        "checkedLocalReferences": 1,
+        "remoteReferences": [],
+        "versionVerified": false
+      }
+    }
+  },
+  "localExportComparison": {
+    "status": "associated_local_export",
+    "candidates": [
+      {
+        "path": "../酒柜设备页.png",
+        "width": 414,
+        "height": 106,
+        "format": "PNG",
+        "bytes": 6657,
+        "sha256": "23d3ff00f1a92a1ff30a5c6f61829439af1520d4088afcedf94c790ead6d9881"
+      }
+    ],
+    "note": "按原始文件名匹配；本地导出版本未与线上版本核实。"
+  },
+  "metadataPath": "project/src/view/lanhu_jiuguishebeiye/page.json",
+  "exportAssets": {
+    "status": "captured",
+    "kind": "generated_code_assets",
+    "paths": [],
+    "count": 0,
+    "note": "蓝湖生成代码所用 PNG，可能包含合并图；不等于原始切图标注。"
+  }
+}

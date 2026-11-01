@@ -1,0 +1,128 @@
+html {
+  font-size: 37.5px;
+}
+
+.page {
+  background-color: rgba(242, 242, 242, 1);
+  position: relative;
+  width: 10rem;
+  height: 21.654rem;
+  overflow: hidden;
+}
+
+.block_1 {
+  background: url(./img/SketchPng4e3c27ff0331f195cc4432bfcc41d5a8f445471ccd47e2e34cc0671f5a833b03.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+}
+
+.section_1 {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  padding: 1.387rem 1.307rem 4.694rem 0.32rem;
+}
+
+.box_10 {
+  width: 5.334rem;
+  margin-right: 3.04rem;
+}
+
+.label_3 {
+  width: 0.747rem;
+  height: 0.747rem;
+}
+
+.text_1 {
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 0.587rem;
+  margin-top: 0.08rem;
+}
+
+.box_11 {
+  margin: 2.88rem 0.507rem 0 1.467rem;
+}
+
+.group_1 {
+  background-image: url(./img/a250b2a53936491a9a4c47338a4d886b_mergeImage.png);
+  width: 6.4rem;
+  height: 6.4rem;
+}
+
+.box_12 {
+  margin: 1.067rem 0.054rem 0 1.04rem;
+}
+
+.text-group_3 {
+}
+
+.text_2 {
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.64rem;
+  align-self: center;
+}
+
+.text_3 {
+  width: 7.28rem;
+  height: 1.12rem;
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 0.373rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: center;
+  line-height: 0.56rem;
+  margin-top: 0.427rem;
+}
+
+.box_13 {
+  margin: 1.067rem 0 0 1.04rem;
+}
+
+.text-wrapper_3 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 8px;
+  padding: 0.427rem 0.854rem 0.427rem 0.854rem;
+}
+
+.text_6 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 0.374rem;
+}
+
+.box_5 {
+  height: 6.507rem;
+  background: url(./img/SketchPngc65a133cffd900ce0331e783bad7337132e75b271a7bf7fe98c57d532b6e4bf7.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  width: 6.507rem;
+  position: absolute;
+  left: 1.734rem;
+  top: 4.96rem;
+  padding: 1.84rem 0.054rem 4.587rem 0.054rem;
+}
+
+.group_2 {
+  width: 6.4rem;
+  height: 0.08rem;
+  background: url(./img/SketchPng039f499ad0ea652125cf7bb4e1d43efb743da5984332e5f532c53045f7d94ffc.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+}

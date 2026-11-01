@@ -1,0 +1,134 @@
+{
+  "archiveId": "export-052-aa5fb2343568",
+  "exportIndex": 52,
+  "pageId": null,
+  "name": "登录-忘记密码-邮箱错误",
+  "originalGroup": "登录",
+  "groupStatus": "verified",
+  "sourceUrl": "https://lanhuapp.com/web/#/item/project/stage?tid=fadf0d8e-ba91-4bb8-a05a-e0cad085545e&pid=67947f53-9582-4aad-94c9-9c597e404599",
+  "sourceUrlKind": "project",
+  "coverSourceUrl": "https://alipic.lanhuapp.com/SketchCoveraa5fb2343568810e1a9e6d699e9b4021bf97d8a678181886c23c9e5feb5e5a1a",
+  "coverHash": "aa5fb2343568810e1a9e6d699e9b4021bf97d8a678181886c23c9e5feb5e5a1a",
+  "version": {
+    "policy": "current_displayed",
+    "status": "not_captured",
+    "id": null,
+    "label": null,
+    "dateText": null
+  },
+  "preview": {
+    "status": "captured",
+    "path": "raw/browser-assets/17db509bf18178d8",
+    "sourceUrl": "https://assets.lanhuapp.com/SketchCoveraa5fb2343568810e1a9e6d699e9b4021bf97d8a678181886c23c9e5feb5e5a1a?x-oss-process=image/quality,q_lossless/resize,w_282/format,webp",
+    "width": 282,
+    "height": 611,
+    "format": "WEBP",
+    "bytes": 4390,
+    "sha256": "9a6574e2720f9e9b228e0cf9220c2e0f28fe2a9d4a852ea85e3fd602834ec8d7",
+    "note": "浏览器已加载的缩放封面预览，非原始设计图。"
+  },
+  "designImage": {
+    "status": "captured",
+    "sourceKind": "local_export",
+    "path": "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/design.png",
+    "sourcePath": "../登录-忘记密码-邮箱错误.png",
+    "versionVerified": false,
+    "matchBasis": "按原始文件名匹配；本地导出版本未与线上版本核实。",
+    "width": 375,
+    "height": 812,
+    "sha256": "4cd54f0cdf008c99c39195374ef972aadb734707b004ae7844bd09d1bd043ad9"
+  },
+  "annotations": {
+    "status": "not_captured",
+    "path": null,
+    "reason": "尚未完成原始图层标注读取；不从预览或生成 CSS 臆造标注。"
+  },
+  "slices": {
+    "status": "not_captured",
+    "paths": [],
+    "reason": "代码导出包 PNG 见 exportAssets；尚未取得原始切图标注清单。"
+  },
+  "code": {
+    "status": "partial",
+    "files": [
+      "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/index.jsx",
+      "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/assets/indexResponse.module.css",
+      "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/assets/indexRem.module.css",
+      "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/assets/index.module.css"
+    ],
+    "sourceUrl": null,
+    "frameworksCaptured": [
+      "React"
+    ],
+    "missingFiles": [],
+    "reason": "React ZIP 中的页面 JSX、三种 CSS 变体和图片已归档；其他框架未导出，未执行构建；导出包未提供页面 UUID/版本。",
+    "sourceKind": "user_supplied_zip",
+    "formatsPending": [
+      "HTML",
+      "Vue.js",
+      "微信小程序",
+      "uni-app"
+    ],
+    "exportPackage": "raw/LanhuProject.zip",
+    "exportDirectory": "project/src/view/lanhu_dengluwangjimimayouxiangcuowu",
+    "exportIndex": "raw/react-export-index.json",
+    "mappingMethod": "name_and_content_review",
+    "mappingEvidence": "页面原名与蓝湖生成目录拼音匹配；ZIP 中 157 目录与清单一一对应。",
+    "formats": {
+      "React": {
+        "status": "captured",
+        "files": [
+          "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/index.jsx",
+          "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/assets/indexResponse.module.css",
+          "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/assets/indexRem.module.css",
+          "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/assets/index.module.css"
+        ],
+        "sharedStyles": [
+          "project/src/assets/common.css",
+          "project/src/assets/common.less",
+          "project/src/assets/common.scss"
+        ],
+        "generatedPageDimensionsPx": {
+          "width": 375.0,
+          "height": 812.0
+        },
+        "checkedLocalReferences": 16,
+        "remoteReferences": [],
+        "versionVerified": false
+      }
+    }
+  },
+  "localExportComparison": {
+    "status": "associated_local_export",
+    "candidates": [
+      {
+        "path": "../登录-忘记密码-邮箱错误.png",
+        "width": 375,
+        "height": 812,
+        "format": "PNG",
+        "bytes": 27951,
+        "sha256": "4cd54f0cdf008c99c39195374ef972aadb734707b004ae7844bd09d1bd043ad9"
+      }
+    ],
+    "note": "按原始文件名匹配；本地导出版本未与线上版本核实。"
+  },
+  "metadataPath": "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/page.json",
+  "exportAssets": {
+    "status": "captured",
+    "kind": "generated_code_assets",
+    "paths": [
+      "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/assets/img/SketchPng1a10c20eafcd764d76fa8f10da58f8799b36f13dd62fbe237a60ae103980858c.png",
+      "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/assets/img/SketchPngc2894dd20e00cb2106425c2d9626ef9ab5bd4cc4b7fa645d2cdf53d0628d7bdb.png",
+      "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/assets/img/SketchPng360cf53083fb4b7bdea1e78734ed0046dca74d03826eaf3e4459ecbbbcbb934b.png",
+      "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/assets/img/SketchPngf8248615de614e6e2a296b516cfef4b2041fdfaf781ae90a7beb64e4ce57bf26.png",
+      "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/assets/img/SketchPng47e4cd1f751e318200768b0459bd36659b1cff7e660f19b8cbfa0f40f3107877.png",
+      "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/assets/img/ca980d0572814afdbbfb8fa2ad65846a_mergeImage.png",
+      "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/assets/img/SketchPngdb52b001b113a4472d2153a7a83c24574aff8e4b4a27f1bbefad18fe2043e1c0.png",
+      "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/assets/img/SketchPng757c641c47da43cad990948c8f352852188f4b43b542cfc5496062fe733483a7.png",
+      "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/assets/img/SketchPng5dd03716c56a3395eaf86f2892c9aba92f1ed8ba499f584611f34fd6dce25293.png",
+      "project/src/view/lanhu_dengluwangjimimayouxiangcuowu/assets/img/SketchPng235df50f2b085e0bf6a1a7e49c9ea1a58d746459a3f2f1698b7785dd734e9548.png"
+    ],
+    "count": 10,
+    "note": "蓝湖生成代码所用 PNG，可能包含合并图；不等于原始切图标注。"
+  }
+}

@@ -1,0 +1,148 @@
+.page {
+  position: relative;
+  width: 100vw;
+  height: 216.54vw;
+  overflow: hidden;
+}
+
+.box_1 {
+  position: relative;
+  background: url(./img/SketchPng5dd03716c56a3395eaf86f2892c9aba92f1ed8ba499f584611f34fd6dce25293.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+}
+
+.group_1 {
+  padding: 4vw 3.73vw 6.66vw 3.2vw;
+}
+
+.section_1 {
+  margin-left: 5.07vw;
+}
+
+.text_1 {
+  height: 4vw;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4vw;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 4vw;
+}
+
+.thumbnail_1 {
+  width: 4.8vw;
+  height: 2.94vw;
+  margin: 0.8vw 0 0.26vw 61.6vw;
+}
+
+.thumbnail_2 {
+  width: 4vw;
+  height: 2.94vw;
+  margin: 0.8vw 0 0.26vw 1.06vw;
+}
+
+.image_1 {
+  width: 6.67vw;
+  height: 3.2vw;
+  margin: 0.53vw 0 0.26vw 1.33vw;
+}
+
+.section_2 {
+  width: 55.47vw;
+  margin: 5.86vw 37.6vw 0 0;
+}
+
+.label_1 {
+  width: 7.47vw;
+  height: 7.47vw;
+}
+
+.text_2 {
+  overflow-wrap: break-word;
+  color: rgba(35, 25, 22, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 5.87vw;
+  margin-top: 0.8vw;
+}
+
+.group_2 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  align-self: center;
+  margin-top: -0.26vw;
+  width: 91.47vw;
+  position: relative;
+  padding: 4.26vw 4.26vw 4.26vw 4.26vw;
+}
+
+.paragraph_1 {
+  width: 82.94vw;
+  height: 150.4vw;
+  overflow-wrap: break-word;
+  color: rgba(102, 102, 102, 1);
+  font-size: 3.2vw;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: justify;
+  line-height: 4.54vw;
+}
+
+.box_2 {
+  background-color: rgba(182, 182, 182, 1);
+  border-radius: 3px;
+  position: absolute;
+  left: 93.07vw;
+  top: 119.47vw;
+  width: 1.07vw;
+  height: 37.87vw;
+}
+
+.image_2 {
+  width: 100vw;
+  height: 9.07vw;
+  margin-top: 20.8vw;
+}
+
+.group_3 {
+  position: absolute;
+  left: 0;
+  top: 186.67vw;
+  width: 100vw;
+  height: 29.87vw;
+  background: url(./img/SketchPng88272c23970a8cdfd04ac73df311c2c403c9a5a3b6d354e60e1845a8f4bb2bc0.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  padding-top: 4.27vw;
+}
+
+.text-wrapper_1 {
+  background-color: rgba(0, 0, 0, 1);
+  border-radius: 8px;
+  align-self: center;
+  width: 91.47vw;
+  padding: 4.26vw 8.53vw 4.26vw 8.53vw;
+}
+
+.text_3 {
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 3.74vw;
+}
+
+.image_3 {
+  width: 100vw;
+  height: 9.07vw;
+  margin-top: 4.27vw;
+}

@@ -1,0 +1,299 @@
+.page {
+  background-color: rgba(242, 242, 242, 1);
+  position: relative;
+  width: 100vw;
+  height: 216.54vw;
+  overflow: hidden;
+}
+
+.box_1 {
+  width: 100.54vw;
+  margin-left: -0.53vw;
+}
+
+.image_1 {
+  width: 100vw;
+  height: 9.07vw;
+  margin-top: 207.47vw;
+}
+
+.block_1 {
+  margin: 0 0 8.8vw -99.46vw;
+  padding: 4vw 3.73vw 66.4vw 3.2vw;
+}
+
+.group_1 {
+  margin-left: 5.07vw;
+}
+
+.text_1 {
+  height: 4vw;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4vw;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 4vw;
+}
+
+.thumbnail_1 {
+  width: 4.8vw;
+  height: 2.94vw;
+  margin: 0.8vw 0 0.26vw 61.86vw;
+}
+
+.thumbnail_2 {
+  width: 4vw;
+  height: 2.94vw;
+  margin: 0.8vw 0 0.26vw 1.06vw;
+}
+
+.image_2 {
+  width: 6.67vw;
+  height: 3.2vw;
+  margin: 0.53vw 0 0.26vw 1.33vw;
+}
+
+.group_2 {
+  width: 92.54vw;
+  margin: 5.86vw 0.53vw 0 0;
+}
+
+.image-text_1 {
+  width: 81.87vw;
+}
+
+.label_1 {
+  width: 7.47vw;
+  height: 7.47vw;
+}
+
+.text-group_1 {
+  position: relative;
+  margin: 0.8vw 0 0.8vw 0;
+}
+
+.text_2 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 5.87vw;
+}
+
+.text_3 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 5.87vw;
+}
+
+.text_4 {
+  overflow-wrap: break-word;
+  color: rgba(24, 109, 175, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 5.87vw;
+  margin-top: 0.8vw;
+}
+
+.text-wrapper_1 {
+  width: 88.27vw;
+  margin: 6.4vw 3.73vw 0 1.06vw;
+}
+
+.text_5 {
+  overflow-wrap: break-word;
+  color: rgba(51, 51, 51, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 4.27vw;
+}
+
+.text_6 {
+  overflow-wrap: break-word;
+  color: rgba(153, 153, 153, 1);
+  font-size: 3.2vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 4.54vw;
+}
+
+.group_3 {
+  width: 91.47vw;
+  background: url(./img/SketchPng6603aa928e5ad2cdd56a02fc017bbbb27ffe85c0596832b18817d9095b6eec4d.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  margin: 4vw 0.53vw 0 1.06vw;
+  padding: 2.93vw 4.26vw 2.93vw 4.26vw;
+}
+
+.text_7 {
+  overflow-wrap: break-word;
+  color: rgba(138, 138, 143, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 4.27vw;
+  margin-top: 1.07vw;
+}
+
+.label_2 {
+  width: 6.4vw;
+  height: 6.4vw;
+}
+
+.text_8 {
+  overflow-wrap: break-word;
+  color: rgba(51, 51, 51, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 4.27vw;
+  margin: 10.66vw 74.93vw 0 1.06vw;
+}
+
+.text-wrapper_2 {
+  background: url(./img/SketchPng5914b419b115b896e2225b21d36e1b2aac09786009a528f3aca90232fd5e3151.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  margin: 4.26vw 2.13vw 0 1.06vw;
+  padding: 4vw 76.26vw 4vw 5.06vw;
+}
+
+.text_9 {
+  overflow-wrap: break-word;
+  color: rgba(24, 109, 175, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 4.27vw;
+}
+
+.text-wrapper_3 {
+  background: url(./img/SketchPng7e0a5ef52c1db6b027ef485cef011717e042597a86c7a647e522b904ec87ed63.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  margin: 0 2.13vw 0 1.06vw;
+  padding: 4vw 72vw 4vw 5.06vw;
+}
+
+.text_10 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 4.27vw;
+}
+
+.group_4 {
+  width: 89.87vw;
+  background: url(./img/SketchPng7e0a5ef52c1db6b027ef485cef011717e042597a86c7a647e522b904ec87ed63.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  margin: 0 2.13vw 0 1.06vw;
+  padding: 2.93vw 4.26vw 2.93vw 5.06vw;
+}
+
+.text_11 {
+  overflow-wrap: break-word;
+  color: rgba(24, 109, 175, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 4.27vw;
+  margin-top: 1.07vw;
+}
+
+.label_3 {
+  width: 6.4vw;
+  height: 6.4vw;
+}
+
+.text-wrapper_4 {
+  background: url(./img/SketchPng7e0a5ef52c1db6b027ef485cef011717e042597a86c7a647e522b904ec87ed63.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  margin: 0 2.13vw 0 1.06vw;
+  padding: 4vw 76.26vw 4vw 5.06vw;
+}
+
+.text_12 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 4.27vw;
+}
+
+.text-wrapper_5 {
+  background: url(./img/SketchPng7e0a5ef52c1db6b027ef485cef011717e042597a86c7a647e522b904ec87ed63.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  margin: 0 2.13vw 0 1.06vw;
+  padding: 4vw 76.26vw 4vw 5.06vw;
+}
+
+.text_13 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 4.27vw;
+}
+
+.text-wrapper_6 {
+  background: url(./img/SketchPng7e0a5ef52c1db6b027ef485cef011717e042597a86c7a647e522b904ec87ed63.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  margin: 0 2.13vw 0 1.06vw;
+  padding: 4vw 72vw 4vw 5.06vw;
+}
+
+.text_14 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 4.27vw;
+}

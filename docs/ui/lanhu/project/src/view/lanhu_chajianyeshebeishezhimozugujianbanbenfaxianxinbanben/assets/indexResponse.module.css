@@ -1,0 +1,133 @@
+.page {
+  position: relative;
+  width: 100vw;
+  height: 216.54vw;
+  overflow: hidden;
+}
+
+.group_1 {
+  background-image: url(./img/a75ba8317a984c7fbb4f9ca6592da562_mergeImage.png);
+}
+
+.box_1 {
+  position: relative;
+  margin-bottom: 8.8vw;
+  padding: 4vw 3.73vw 4.53vw 4.26vw;
+}
+
+.section_1 {
+  margin-left: 4vw;
+}
+
+.text_1 {
+  height: 4vw;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4vw;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 4vw;
+}
+
+.thumbnail_1 {
+  width: 4.8vw;
+  height: 2.94vw;
+  margin: 0.8vw 0 0.26vw 61.6vw;
+}
+
+.thumbnail_2 {
+  width: 4vw;
+  height: 2.94vw;
+  margin: 0.8vw 0 0.26vw 1.06vw;
+}
+
+.image_1 {
+  width: 6.67vw;
+  height: 3.2vw;
+  margin: 0.53vw 0 0.26vw 1.33vw;
+}
+
+.section_2 {
+  width: 57.87vw;
+  margin: 7.46vw 33.33vw 0 0.8vw;
+}
+
+.thumbnail_3 {
+  width: 3.74vw;
+  height: 3.74vw;
+  margin: 0.26vw 0 0.26vw 0;
+}
+
+.text_2 {
+  overflow-wrap: break-word;
+  color: rgba(35, 25, 22, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 4.27vw;
+}
+
+.text_3 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 5.33vw;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 7.47vw;
+  align-self: center;
+  margin-top: 36vw;
+}
+
+.paragraph_1 {
+  width: 37.87vw;
+  height: 11.74vw;
+  overflow-wrap: break-word;
+  color: rgba(102, 102, 102, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: center;
+  line-height: 5.87vw;
+  align-self: center;
+  margin-top: 28.54vw;
+}
+
+.text-wrapper_1 {
+  background-color: rgba(0, 0, 0, 1);
+  border-radius: 8px;
+  margin: 87.46vw 0.53vw 0 0;
+  padding: 4.26vw 8.53vw 4.26vw 8.53vw;
+}
+
+.text_4 {
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 3.74vw;
+}
+
+.section_3 {
+  border-radius: 50%;
+  position: absolute;
+  left: 25.34vw;
+  top: 34.67vw;
+  width: 52.27vw;
+  height: 52.27vw;
+  border: 5px solid rgba(229, 229, 229, 1);
+}
+
+.image_2 {
+  width: 100vw;
+  height: 9.07vw;
+  margin: 207.46vw 0 0 -100vw;
+}

@@ -1,0 +1,140 @@
+{
+  "archiveId": "export-146-c9e0f2345d3e",
+  "exportIndex": 146,
+  "pageId": null,
+  "name": "设备页-除湿机",
+  "originalGroup": null,
+  "groupStatus": "not_verified",
+  "sourceUrl": "https://lanhuapp.com/web/#/item/project/stage?tid=fadf0d8e-ba91-4bb8-a05a-e0cad085545e&pid=67947f53-9582-4aad-94c9-9c597e404599",
+  "sourceUrlKind": "project",
+  "coverSourceUrl": "https://alipic.lanhuapp.com/SketchCoverc9e0f2345d3e6cf3b3cee72e379a72bda00ac47a58c23e23260ea1c0372f2387",
+  "coverHash": "c9e0f2345d3e6cf3b3cee72e379a72bda00ac47a58c23e23260ea1c0372f2387",
+  "version": {
+    "policy": "current_displayed",
+    "status": "not_captured",
+    "id": null,
+    "label": null,
+    "dateText": null
+  },
+  "preview": {
+    "status": "captured",
+    "path": "raw/browser-assets/9423c2a8e0016ea9",
+    "sourceUrl": "https://assets.lanhuapp.com/SketchCoverc9e0f2345d3e6cf3b3cee72e379a72bda00ac47a58c23e23260ea1c0372f2387?x-oss-process=image/quality,q_lossless/resize,w_282/format,webp",
+    "width": 282,
+    "height": 611,
+    "format": "WEBP",
+    "bytes": 6654,
+    "sha256": "15e219f13900ba6fd22aa804ec1016334a65d715682e825a082a16d3517e291f",
+    "note": "浏览器已加载的缩放封面预览，非原始设计图。"
+  },
+  "designImage": {
+    "status": "captured",
+    "sourceKind": "local_export",
+    "path": "project/src/view/lanhu_shebeiyechushiji/design.png",
+    "sourcePath": "../设备页-除湿机.png",
+    "versionVerified": false,
+    "matchBasis": "按原始文件名匹配；本地导出版本未与线上版本核实。",
+    "width": 375,
+    "height": 812,
+    "sha256": "e8d52622a3c957fc9fe986179e512daded6892bf493e1a1a4d4f8a0f5446cc4e"
+  },
+  "annotations": {
+    "status": "not_captured",
+    "path": null,
+    "reason": "尚未完成原始图层标注读取；不从预览或生成 CSS 臆造标注。"
+  },
+  "slices": {
+    "status": "not_captured",
+    "paths": [],
+    "reason": "代码导出包 PNG 见 exportAssets；尚未取得原始切图标注清单。"
+  },
+  "code": {
+    "status": "partial",
+    "files": [
+      "project/src/view/lanhu_shebeiyechushiji/index.jsx",
+      "project/src/view/lanhu_shebeiyechushiji/assets/indexResponse.module.css",
+      "project/src/view/lanhu_shebeiyechushiji/assets/indexRem.module.css",
+      "project/src/view/lanhu_shebeiyechushiji/assets/index.module.css"
+    ],
+    "sourceUrl": null,
+    "frameworksCaptured": [
+      "React"
+    ],
+    "missingFiles": [],
+    "reason": "React ZIP 中的页面 JSX、三种 CSS 变体和图片已归档；其他框架未导出，未执行构建；导出包未提供页面 UUID/版本。",
+    "sourceKind": "user_supplied_zip",
+    "formatsPending": [
+      "HTML",
+      "Vue.js",
+      "微信小程序",
+      "uni-app"
+    ],
+    "exportPackage": "raw/LanhuProject.zip",
+    "exportDirectory": "project/src/view/lanhu_shebeiyechushiji",
+    "exportIndex": "raw/react-export-index.json",
+    "mappingMethod": "name_and_content_review",
+    "mappingEvidence": "页面原名与蓝湖生成目录拼音匹配；ZIP 中 157 目录与清单一一对应。",
+    "formats": {
+      "React": {
+        "status": "captured",
+        "files": [
+          "project/src/view/lanhu_shebeiyechushiji/index.jsx",
+          "project/src/view/lanhu_shebeiyechushiji/assets/indexResponse.module.css",
+          "project/src/view/lanhu_shebeiyechushiji/assets/indexRem.module.css",
+          "project/src/view/lanhu_shebeiyechushiji/assets/index.module.css"
+        ],
+        "sharedStyles": [
+          "project/src/assets/common.css",
+          "project/src/assets/common.less",
+          "project/src/assets/common.scss"
+        ],
+        "generatedPageDimensionsPx": {
+          "width": 375.0,
+          "height": 812.0
+        },
+        "checkedLocalReferences": 19,
+        "remoteReferences": [],
+        "versionVerified": false
+      }
+    }
+  },
+  "localExportComparison": {
+    "status": "associated_local_export",
+    "candidates": [
+      {
+        "path": "../设备页-除湿机.png",
+        "width": 375,
+        "height": 812,
+        "format": "PNG",
+        "bytes": 58399,
+        "sha256": "e8d52622a3c957fc9fe986179e512daded6892bf493e1a1a4d4f8a0f5446cc4e"
+      }
+    ],
+    "note": "按原始文件名匹配；本地导出版本未与线上版本核实。"
+  },
+  "metadataPath": "project/src/view/lanhu_shebeiyechushiji/page.json",
+  "exportAssets": {
+    "status": "captured",
+    "kind": "generated_code_assets",
+    "paths": [
+      "project/src/view/lanhu_shebeiyechushiji/assets/img/SketchPng02a76c08d66c6c6d9f6cd9c55c89848f984a69984d1fd9aab0a0bb1703200596.png",
+      "project/src/view/lanhu_shebeiyechushiji/assets/img/7eb8b76489c7413aa1b9b3365c2ddd49_mergeImage.png",
+      "project/src/view/lanhu_shebeiyechushiji/assets/img/SketchPng360cf53083fb4b7bdea1e78734ed0046dca74d03826eaf3e4459ecbbbcbb934b.png",
+      "project/src/view/lanhu_shebeiyechushiji/assets/img/SketchPngbec5cabc5b1a40c4f35789cc6be13af1db70f09bf9359df5a07019989c35eee7.png",
+      "project/src/view/lanhu_shebeiyechushiji/assets/img/SketchPngf8248615de614e6e2a296b516cfef4b2041fdfaf781ae90a7beb64e4ce57bf26.png",
+      "project/src/view/lanhu_shebeiyechushiji/assets/img/SketchPnga4c263596b1dff65d4a121ebd97fdbf965d5e4acf5b20a9d925750ad5d2c33df.png",
+      "project/src/view/lanhu_shebeiyechushiji/assets/img/SketchPngc223818979f6181347b55858a29b68365d47ebababd8d834021fd26776b8ba64.png",
+      "project/src/view/lanhu_shebeiyechushiji/assets/img/SketchPng5854733b2a46f09c2c979d71bafd4d790e374e26b37ce725200a6a3430497308.png",
+      "project/src/view/lanhu_shebeiyechushiji/assets/img/01aeb23ffe2248eca8f46c3c2721deae_mergeImage.png",
+      "project/src/view/lanhu_shebeiyechushiji/assets/img/SketchPngecba5a57d8b40655d88d77a028bcf16d4fd1ebc42fe99b8ff0606436b39aea59.png",
+      "project/src/view/lanhu_shebeiyechushiji/assets/img/SketchPngdb52b001b113a4472d2153a7a83c24574aff8e4b4a27f1bbefad18fe2043e1c0.png",
+      "project/src/view/lanhu_shebeiyechushiji/assets/img/SketchPng57d91f583d54ccb27f75fa5ee81c139c4eae52403f5ba33e2423a7d66463d7ff.png",
+      "project/src/view/lanhu_shebeiyechushiji/assets/img/SketchPng235df50f2b085e0bf6a1a7e49c9ea1a58d746459a3f2f1698b7785dd734e9548.png",
+      "project/src/view/lanhu_shebeiyechushiji/assets/img/SketchPng80caa3040b78375ceb1fdacea76a8e49a6de84e0c23b8fd9f00e39b36b750b2b.png",
+      "project/src/view/lanhu_shebeiyechushiji/assets/img/SketchPng1a9ce8d0f73e00890a08f6266bda5ca83249b65335fce3822d855af1acc7c7c7.png",
+      "project/src/view/lanhu_shebeiyechushiji/assets/img/SketchPng0b0b11675fbf1b9c65940392756ebcb50631d9cb384cab3a4eb561439e7341e8.png"
+    ],
+    "count": 16,
+    "note": "蓝湖生成代码所用 PNG，可能包含合并图；不等于原始切图标注。"
+  }
+}

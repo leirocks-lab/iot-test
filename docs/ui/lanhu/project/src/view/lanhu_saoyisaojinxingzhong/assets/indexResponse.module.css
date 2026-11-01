@@ -1,0 +1,124 @@
+.page {
+  background-color: rgba(242, 242, 242, 1);
+  position: relative;
+  width: 100vw;
+  height: 216.54vw;
+  overflow: hidden;
+}
+
+.block_1 {
+  background: url(./img/SketchPng4e3c27ff0331f195cc4432bfcc41d5a8f445471ccd47e2e34cc0671f5a833b03.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+}
+
+.section_1 {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  padding: 13.86vw 13.06vw 46.93vw 3.2vw;
+}
+
+.box_10 {
+  width: 53.34vw;
+  margin-right: 30.4vw;
+}
+
+.label_3 {
+  width: 7.47vw;
+  height: 7.47vw;
+}
+
+.text_1 {
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 5.87vw;
+  margin-top: 0.8vw;
+}
+
+.box_11 {
+  margin: 28.8vw 5.06vw 0 14.66vw;
+}
+
+.group_1 {
+  background-image: url(./img/a250b2a53936491a9a4c47338a4d886b_mergeImage.png);
+  width: 64vw;
+  height: 64vw;
+}
+
+.box_12 {
+  margin: 10.66vw 0.53vw 0 10.4vw;
+}
+
+.text-group_3 {
+}
+
+.text_2 {
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 6.4vw;
+  align-self: center;
+}
+
+.text_3 {
+  width: 72.8vw;
+  height: 11.2vw;
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 3.73vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: center;
+  line-height: 5.6vw;
+  margin-top: 4.27vw;
+}
+
+.box_13 {
+  margin: 10.66vw 0 0 10.4vw;
+}
+
+.text-wrapper_3 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 8px;
+  padding: 4.26vw 8.53vw 4.26vw 8.53vw;
+}
+
+.text_6 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 3.74vw;
+}
+
+.box_5 {
+  height: 65.07vw;
+  background: url(./img/SketchPngc65a133cffd900ce0331e783bad7337132e75b271a7bf7fe98c57d532b6e4bf7.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  width: 65.07vw;
+  position: absolute;
+  left: 17.34vw;
+  top: 49.6vw;
+  padding: 18.4vw 0.53vw 45.86vw 0.53vw;
+}
+
+.group_2 {
+  width: 64vw;
+  height: 0.8vw;
+  background: url(./img/SketchPng039f499ad0ea652125cf7bb4e1d43efb743da5984332e5f532c53045f7d94ffc.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+}

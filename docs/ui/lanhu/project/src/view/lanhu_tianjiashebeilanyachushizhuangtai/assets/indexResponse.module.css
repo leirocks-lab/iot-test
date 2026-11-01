@@ -1,0 +1,242 @@
+.page {
+  background-color: rgba(242, 242, 242, 1);
+  position: relative;
+  width: 100vw;
+  height: 216.54vw;
+  overflow: hidden;
+}
+
+.group_1 {
+}
+
+.box_1 {
+  position: relative;
+  margin-bottom: 8.8vw;
+  padding: 4vw 3.73vw 94.93vw 3.2vw;
+}
+
+.block_1 {
+  margin-left: 5.07vw;
+}
+
+.text_1 {
+  height: 4vw;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4vw;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 4vw;
+}
+
+.thumbnail_1 {
+  width: 4.8vw;
+  height: 2.94vw;
+  margin: 0.8vw 0 0.26vw 61.86vw;
+}
+
+.thumbnail_2 {
+  width: 4vw;
+  height: 2.94vw;
+  margin: 0.8vw 0 0.26vw 1.06vw;
+}
+
+.image_1 {
+  width: 6.67vw;
+  height: 3.2vw;
+  margin: 0.53vw 0 0.26vw 1.33vw;
+}
+
+.block_2 {
+  margin: 5.86vw 11.2vw 0 0;
+}
+
+.image-text_1 {
+  width: 81.87vw;
+}
+
+.label_1 {
+  width: 7.47vw;
+  height: 7.47vw;
+}
+
+.text-group_1 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 5.87vw;
+  margin-top: 0.8vw;
+}
+
+.text-wrapper_1 {
+  margin: 19.73vw 40vw 0 49.86vw;
+}
+
+.text_2 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 3.2vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 3.2vw;
+}
+
+.block_3 {
+  width: 8.27vw;
+  align-self: center;
+  margin-top: 18.4vw;
+}
+
+.section_1 {
+  width: 8.27vw;
+  height: 0.8vw;
+  background: url(./img/SketchPngece85bc0300f2739a499381327c9bdd803daff9591d859151134b97bd91c1b42.png) -4.27vw -4.27vw
+    no-repeat;
+  background-size: 16.8vw 9.06vw;
+}
+
+.text-wrapper_2 {
+  margin: 4.53vw 38.13vw 0 42.13vw;
+}
+
+.text_3 {
+  overflow-wrap: break-word;
+  color: rgba(154, 154, 158, 1);
+  font-size: 3.2vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 3.2vw;
+}
+
+.text-wrapper_3 {
+  margin: 10.66vw 42.4vw 0 1.06vw;
+}
+
+.text_4 {
+  overflow-wrap: break-word;
+  color: rgba(154, 154, 158, 1);
+  font-size: 3.2vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 3.2vw;
+}
+
+.block_4 {
+  width: 89.07vw;
+  margin: 5.33vw 1.86vw 0 2.13vw;
+}
+
+.text-group_2 {
+}
+
+.text_5 {
+  overflow-wrap: break-word;
+  color: rgba(51, 51, 51, 1);
+  font-size: 3.73vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 5.34vw;
+}
+
+.text_6 {
+  overflow-wrap: break-word;
+  color: rgba(51, 51, 51, 1);
+  font-size: 3.73vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 5.34vw;
+  margin: 3.2vw 32.8vw 0 0;
+}
+
+.text_7 {
+  overflow-wrap: break-word;
+  color: rgba(51, 51, 51, 1);
+  font-size: 3.73vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 5.34vw;
+  margin: 3.2vw 22.93vw 0 0;
+}
+
+.image-wrapper_1 {
+  margin: 2.13vw 0 1.33vw 0;
+}
+
+.thumbnail_3 {
+  width: 3.47vw;
+  height: 2.4vw;
+}
+
+.thumbnail_4 {
+  width: 3.47vw;
+  height: 2.4vw;
+  margin-top: 5.6vw;
+}
+
+.thumbnail_5 {
+  width: 3.47vw;
+  height: 2.4vw;
+  margin-top: 6.14vw;
+}
+
+.block_5 {
+  position: absolute;
+  left: 28.54vw;
+  top: 34.14vw;
+  width: 43.2vw;
+  height: 21.6vw;
+  background: url(./img/SketchPng082b42d36bf08f5a6c9bb35a30dd06cb0b5d471974afa516f27ba823116cccaa.png) -0.27vw -0.27vw
+    no-repeat;
+  background-size: 43.73vw 21.86vw;
+  padding: 0.8vw 19.73vw 0 0;
+}
+
+.image_2 {
+  width: 15.47vw;
+  height: 20.8vw;
+}
+
+.text_8 {
+  height: 6.4vw;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 6.4vw;
+  font-family: DINCondensed-Bold;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 7.74vw;
+  margin-top: 4.54vw;
+}
+
+.image_3 {
+  position: absolute;
+  left: 14.67vw;
+  top: 14.14vw;
+  width: 12.8vw;
+  height: 14.4vw;
+}
+
+.image_4 {
+  width: 100vw;
+  height: 9.07vw;
+  margin: 207.46vw 0 0 -100vw;
+}

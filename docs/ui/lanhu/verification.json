@@ -1,0 +1,49 @@
+{
+  "checkedAt": "2026-11-01T12:37:50.874752+08:00",
+  "artifactIntegrity": "passed",
+  "acquisitionComplete": false,
+  "pageEntries": 157,
+  "localDesignPages": 149,
+  "localOriginalPngFilesUnchanged": 157,
+  "unmatchedCodePageIndexes": [
+    1,
+    2,
+    3,
+    4,
+    25,
+    35,
+    38,
+    45
+  ],
+  "unassignedLocalDesignFiles": [
+    "添加设备2.png",
+    "设置-设备分享-分享给我.png",
+    "设置-设备分享-删除.png",
+    "设置-设备分享-删除备份.png",
+    "设置-设备分享-我的分享.png",
+    "设置-设备分享-无内容.png",
+    "设置-设备分享-编辑.png",
+    "设置-设备分享.png"
+  ],
+  "reactExportFilesVerifiedAgainstZip": 3497,
+  "reactExportPngFilesDecoded": 2846,
+  "reactExportCssFiles": 472,
+  "checkedLocalCodeReferences": 8457,
+  "missingLocalCodeReferences": [],
+  "jsxSyntax": {
+    "pagesParsed": 157,
+    "failed": 0,
+    "evidence": "raw/react-jsx-validation.json"
+  },
+  "removedArchivalScripts": [
+    "build_archive.py",
+    "import_react_zip.py",
+    "verify_archive.py",
+    "verify_jsx.cjs",
+    "verification-preview.png",
+    "__pycache__/"
+  ],
+  "errors": [],
+  "note": "仅整理资料；本地图版本未核实，未运行导出工程或应用构建。",
+  "maintainedMarkdownFilesChecked": 160
+}

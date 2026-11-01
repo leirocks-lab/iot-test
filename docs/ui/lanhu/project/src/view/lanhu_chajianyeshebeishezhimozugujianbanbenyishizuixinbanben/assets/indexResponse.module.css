@@ -1,0 +1,124 @@
+.page {
+  position: relative;
+  width: 100vw;
+  height: 216.54vw;
+  overflow: hidden;
+}
+
+.box_1 {
+  background-image: url(./img/963c70786b88417daf7965a1901343e2_mergeImage.png);
+}
+
+.group_1 {
+  position: relative;
+  margin-bottom: 8.8vw;
+  padding: 4vw 3.73vw 110.13vw 5.06vw;
+}
+
+.block_1 {
+  margin-left: 3.2vw;
+}
+
+.text_1 {
+  height: 4vw;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4vw;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 4vw;
+}
+
+.thumbnail_1 {
+  width: 4.8vw;
+  height: 2.94vw;
+  margin: 0.8vw 0 0.26vw 61.6vw;
+}
+
+.thumbnail_2 {
+  width: 4vw;
+  height: 2.94vw;
+  margin: 0.8vw 0 0.26vw 1.06vw;
+}
+
+.image_1 {
+  width: 6.67vw;
+  height: 3.2vw;
+  margin: 0.53vw 0 0.26vw 1.33vw;
+}
+
+.block_2 {
+  width: 57.87vw;
+  margin: 7.46vw 33.33vw 0 0;
+}
+
+.thumbnail_3 {
+  width: 3.74vw;
+  height: 3.74vw;
+  margin: 0.26vw 0 0.26vw 0;
+}
+
+.text_2 {
+  overflow-wrap: break-word;
+  color: rgba(35, 25, 22, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 4.27vw;
+}
+
+.text-wrapper_1 {
+  margin: 36vw 38.66vw 0 37.6vw;
+}
+
+.text_3 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 5.33vw;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 7.47vw;
+}
+
+.text-wrapper_2 {
+  margin: 28.53vw 26.93vw 0 25.86vw;
+}
+
+.text_4 {
+  overflow-wrap: break-word;
+  color: rgba(102, 102, 102, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 5.87vw;
+}
+
+.image-wrapper_1 {
+  border-radius: 50%;
+  height: 52.27vw;
+  border: 5px solid rgba(24, 109, 175, 1);
+  width: 52.27vw;
+  position: absolute;
+  left: 25.34vw;
+  top: 34.67vw;
+  padding: 0 0 24.8vw 24.8vw;
+}
+
+.image_2 {
+  width: 24.8vw;
+  height: 24.8vw;
+}
+
+.image_3 {
+  width: 100vw;
+  height: 9.07vw;
+  margin: 207.46vw 0 0 -100vw;
+}

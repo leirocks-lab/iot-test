@@ -1,0 +1,131 @@
+.page {
+  position: relative;
+  width: 375px;
+  height: 812px;
+  overflow: hidden;
+}
+
+.group_1 {
+  background: url(./img/SketchPng5dd03716c56a3395eaf86f2892c9aba92f1ed8ba499f584611f34fd6dce25293.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+}
+
+.section_1 {
+  padding: 15px 14px 15px 31px;
+}
+
+.block_1 {
+}
+
+.text_1 {
+  height: 15px;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 15px;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 15px;
+}
+
+.thumbnail_1 {
+  width: 18px;
+  height: 11px;
+  margin: 3px 0 1px 231px;
+}
+
+.thumbnail_2 {
+  width: 15px;
+  height: 11px;
+  margin: 3px 0 1px 4px;
+}
+
+.image_1 {
+  width: 25px;
+  height: 12px;
+  margin: 2px 0 1px 5px;
+}
+
+.section_2 {
+  position: relative;
+  background: url(./img/SketchPngc21250797e569cae3ad363571d53307a74d76dfd92cf71ea628d29adad5ca14b.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  margin-top: -1px;
+  padding: 210px 113px 122px 112px;
+}
+
+.image_2 {
+  width: 150px;
+  height: 84px;
+}
+
+.text-wrapper_1 {
+  background: url(./img/SketchPng6f7c7f2d234241f62545bedeb9ddefa4a0d9bee0a491797ba763e1f7c7b37232.png) -8px -8px
+    no-repeat;
+  background-size: 140px 56px;
+  margin: 48px 12px 0 14px;
+  padding: 12px 34px 12px 34px;
+}
+
+.text_2 {
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 14px;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 16px;
+}
+
+.text-wrapper_2 {
+  background-color: rgba(0, 0, 0, 1);
+  border-radius: 8px;
+  height: 46px;
+  width: 275px;
+  position: absolute;
+  left: 50px;
+  top: 460px;
+  padding: 16px 121px 16px 122px;
+}
+
+.text_3 {
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 16px;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 14px;
+}
+
+.section_3 {
+  padding: 18px 50px 167px 50px;
+}
+
+.text-wrapper_3 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 8px;
+  padding: 16px 121px 16px 122px;
+}
+
+.text_4 {
+  overflow-wrap: break-word;
+  color: rgba(51, 44, 43, 1);
+  font-size: 16px;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 14px;
+}
+
+.image_3 {
+  width: 375px;
+  height: 34px;
+  margin-top: -1px;
+}

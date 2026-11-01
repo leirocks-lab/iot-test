@@ -1,0 +1,603 @@
+html {
+  font-size: 37.5px;
+}
+
+.page {
+  background-color: rgba(242, 242, 242, 1);
+  position: relative;
+  width: 10rem;
+  height: 21.654rem;
+  overflow: hidden;
+}
+
+.group_2 {
+  width: 10.054rem;
+  margin-left: -0.053rem;
+}
+
+.image_8 {
+  width: 10rem;
+  height: 0.907rem;
+  margin-top: 20.747rem;
+}
+
+.block_4 {
+  position: relative;
+  margin: 0 0 0.88rem -9.947rem;
+  padding: 0.4rem 0.374rem 0.454rem 0.32rem;
+}
+
+.box_16 {
+  margin-left: 0.507rem;
+}
+
+.text_27 {
+  height: 0.4rem;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.4rem;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 0.4rem;
+}
+
+.thumbnail_3 {
+  width: 0.48rem;
+  height: 0.294rem;
+  margin: 0.08rem 0 0.027rem 6.187rem;
+}
+
+.thumbnail_4 {
+  width: 0.4rem;
+  height: 0.294rem;
+  margin: 0.08rem 0 0.027rem 0.107rem;
+}
+
+.image_9 {
+  width: 0.667rem;
+  height: 0.32rem;
+  margin: 0.054rem 0 0.027rem 0.134rem;
+}
+
+.image-text_6 {
+  width: 8.187rem;
+  margin: 0.587rem 1.12rem 0 0;
+}
+
+.label_2 {
+  width: 0.747rem;
+  height: 0.747rem;
+}
+
+.text-group_7 {
+  position: relative;
+  margin: 0.08rem 0 0.08rem 0;
+}
+
+.text_28 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 0.587rem;
+}
+
+.text_29 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 0.587rem;
+}
+
+.text-wrapper_1 {
+  background-color: rgba(102, 102, 102, 0.1);
+  border-radius: 10px;
+  margin: 0.96rem 0.374rem 0 7.547rem;
+  padding: 0.054rem 0.214rem 0.027rem 0.214rem;
+}
+
+.text_4 {
+  overflow-wrap: break-word;
+  color: rgba(102, 102, 102, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.454rem;
+}
+
+.text-wrapper_2 {
+  background-color: rgba(102, 102, 102, 0.1);
+  border-radius: 10px;
+  margin: 2.4rem 0.374rem 0 7.547rem;
+  padding: 0.054rem 0.214rem 0.027rem 0.214rem;
+}
+
+.text_5 {
+  overflow-wrap: break-word;
+  color: rgba(102, 102, 102, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.454rem;
+}
+
+.box_2 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  width: 9.147rem;
+  margin: 2.08rem 0.054rem 0 0.107rem;
+  padding: 0.374rem 0.534rem 0.4rem 0.374rem;
+}
+
+.image-text_7 {
+  width: 5.2rem;
+  margin-top: 0.027rem;
+}
+
+.box_3 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 8px;
+  padding: 0.214rem 0.32rem 0.134rem 0.267rem;
+}
+
+.image_3 {
+  width: 1.28rem;
+  height: 1.44rem;
+}
+
+.box_4 {
+  width: 0.827rem;
+  height: 0.08rem;
+  background: url(./img/SketchPngece85bc0300f2739a499381327c9bdd803daff9591d859151134b97bd91c1b42.png) -0.427rem -0.427rem
+    no-repeat;
+  background-size: 1.68rem 0.907rem;
+  margin: 0 0.214rem 0 0.24rem;
+}
+
+.text-group_8 {
+  margin: 0.134rem 0 0.134rem 0;
+}
+
+.text_6 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.427rem;
+}
+
+.text_7 {
+  overflow-wrap: break-word;
+  color: rgba(51, 51, 51, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.427rem;
+  margin: 0.214rem 1.12rem 0 0;
+}
+
+.text_8 {
+  overflow-wrap: break-word;
+  color: rgba(153, 153, 153, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.427rem;
+  margin: 0.107rem 1.814rem 0 0;
+}
+
+.text_9 {
+  overflow-wrap: break-word;
+  color: rgba(28, 199, 135, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.454rem;
+}
+
+.box_5 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  width: 9.147rem;
+  margin: 0.267rem 0.054rem 0 0.107rem;
+  padding: 0.374rem 0.534rem 0.4rem 0.4rem;
+}
+
+.image-text_8 {
+  width: 5.174rem;
+  margin-top: 0.027rem;
+}
+
+.box_6 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 8px;
+  position: relative;
+  padding: 1.654rem 0.56rem 0.134rem 0.48rem;
+}
+
+.box_7 {
+  width: 0.827rem;
+  height: 0.08rem;
+  background: url(./img/SketchPng07a406abe86ba6db8767304456ff7d0c17fc62a585ca6ef3264c674b3d2ca779.png) -0.4rem -0.427rem
+    no-repeat;
+  background-size: 1.654rem 0.907rem;
+}
+
+.image_4 {
+  position: absolute;
+  left: 0.187rem;
+  top: 0.187rem;
+  width: 1.494rem;
+  height: 1.654rem;
+}
+
+.text-group_9 {
+  margin: 0.134rem 0 0.134rem 0;
+}
+
+.text_10 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.427rem;
+}
+
+.text_11 {
+  overflow-wrap: break-word;
+  color: rgba(51, 51, 51, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.427rem;
+  margin: 0.214rem 1.12rem 0 0;
+}
+
+.text_12 {
+  overflow-wrap: break-word;
+  color: rgba(153, 153, 153, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.427rem;
+  margin: 0.107rem 1.814rem 0 0;
+}
+
+.text_13 {
+  overflow-wrap: break-word;
+  color: rgba(28, 199, 135, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.454rem;
+}
+
+.box_8 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  width: 9.147rem;
+  margin: 0.267rem 0.054rem 0 0.107rem;
+  padding: 0.374rem 0.534rem 0.4rem 0.4rem;
+}
+
+.image-text_9 {
+  width: 5.174rem;
+  margin-top: 0.027rem;
+}
+
+.box_9 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 8px;
+  position: relative;
+  padding: 1.654rem 0.56rem 0.134rem 0.48rem;
+}
+
+.block_2 {
+  width: 0.827rem;
+  height: 0.08rem;
+  background: url(./img/SketchPng07a406abe86ba6db8767304456ff7d0c17fc62a585ca6ef3264c674b3d2ca779.png) -0.4rem -0.427rem
+    no-repeat;
+  background-size: 1.654rem 0.907rem;
+}
+
+.image_5 {
+  position: absolute;
+  left: 0.187rem;
+  top: 0.187rem;
+  width: 1.494rem;
+  height: 1.654rem;
+}
+
+.text-group_10 {
+  margin: 0.134rem 0 0.134rem 0;
+}
+
+.text_14 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.427rem;
+}
+
+.text_15 {
+  overflow-wrap: break-word;
+  color: rgba(51, 51, 51, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.427rem;
+  margin: 0.214rem 1.12rem 0 0;
+}
+
+.text_16 {
+  overflow-wrap: break-word;
+  color: rgba(153, 153, 153, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.427rem;
+  margin: 0.107rem 1.814rem 0 0;
+}
+
+.text_17 {
+  overflow-wrap: break-word;
+  color: rgba(28, 199, 135, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.454rem;
+}
+
+.text-wrapper_4 {
+  background-color: rgba(0, 0, 0, 1);
+  border-radius: 8px;
+  margin: 1.92rem 0.054rem 0 0.107rem;
+  padding: 0.427rem 0.854rem 0.427rem 0.854rem;
+}
+
+.text_30 {
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 0.374rem;
+}
+
+.box_10 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  position: absolute;
+  left: 0.427rem;
+  top: 2.774rem;
+  width: 9.147rem;
+  height: 2.667rem;
+  padding: 0.374rem 0.427rem 0.4rem 0.374rem;
+}
+
+.image-text_10 {
+  width: 5.2rem;
+  margin-top: 0.027rem;
+}
+
+.section_1 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 8px;
+  padding: 0.214rem 0.32rem 0.134rem 0.267rem;
+}
+
+.image_6 {
+  width: 1.28rem;
+  height: 1.44rem;
+}
+
+.box_11 {
+  width: 0.827rem;
+  height: 0.08rem;
+  background: url(./img/SketchPngece85bc0300f2739a499381327c9bdd803daff9591d859151134b97bd91c1b42.png) -0.427rem -0.427rem
+    no-repeat;
+  background-size: 1.68rem 0.907rem;
+  margin: 0 0.214rem 0 0.24rem;
+}
+
+.text-group_11 {
+  margin: 0.134rem 0 0.134rem 0;
+}
+
+.text_19 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.427rem;
+}
+
+.text_20 {
+  overflow-wrap: break-word;
+  color: rgba(51, 51, 51, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.427rem;
+  margin: 0.214rem 1.12rem 0 0;
+}
+
+.text_21 {
+  overflow-wrap: break-word;
+  color: rgba(153, 153, 153, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.427rem;
+  margin: 0.107rem 1.814rem 0 0;
+}
+
+.text_22 {
+  overflow-wrap: break-word;
+  color: rgba(102, 102, 102, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.454rem;
+  margin-left: 2.08rem;
+}
+
+.group_3 {
+  background-color: rgba(240, 83, 74, 1);
+  border-radius: 50%;
+  width: 0.294rem;
+  height: 0.294rem;
+  margin: 0.054rem 0 1.547rem -0.187rem;
+}
+
+.box_13 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  position: absolute;
+  left: 0.427rem;
+  top: 5.707rem;
+  width: 9.147rem;
+  height: 2.667rem;
+  padding: 0.374rem 0.534rem 0.534rem 0.427rem;
+}
+
+.box_14 {
+  background-color: rgba(240, 83, 74, 1);
+  border-radius: 50%;
+  width: 0.294rem;
+  height: 0.294rem;
+  margin: 0.054rem 0 1.414rem 0;
+}
+
+.text-group_12 {
+  margin: 0.16rem 0 0 1.76rem;
+}
+
+.text_23 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.427rem;
+}
+
+.text_24 {
+  overflow-wrap: break-word;
+  color: rgba(51, 51, 51, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.427rem;
+  margin: 0.214rem 1.12rem 0 0;
+}
+
+.text_25 {
+  overflow-wrap: break-word;
+  color: rgba(153, 153, 153, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.427rem;
+  margin: 0.107rem 1.814rem 0 0;
+}
+
+.text_26 {
+  overflow-wrap: break-word;
+  color: rgba(102, 102, 102, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.454rem;
+  margin-left: 2.08rem;
+}
+
+.box_15 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 8px;
+  height: 1.867rem;
+  width: 1.867rem;
+  position: absolute;
+  left: 0.4rem;
+  top: 0.4rem;
+  padding: 1.654rem 0.56rem 0.134rem 0.48rem;
+}
+
+.block_3 {
+  width: 0.827rem;
+  height: 0.08rem;
+  background: url(./img/SketchPng07a406abe86ba6db8767304456ff7d0c17fc62a585ca6ef3264c674b3d2ca779.png) -0.4rem -0.427rem
+    no-repeat;
+  background-size: 1.654rem 0.907rem;
+}
+
+.image_7 {
+  position: absolute;
+  left: 0.187rem;
+  top: 0.187rem;
+  width: 1.494rem;
+  height: 1.654rem;
+}

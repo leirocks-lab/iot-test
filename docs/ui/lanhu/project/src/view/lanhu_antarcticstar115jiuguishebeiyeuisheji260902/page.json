@@ -1,0 +1,150 @@
+{
+  "archiveId": "export-106-caa2a9a0de38",
+  "exportIndex": 106,
+  "pageId": null,
+  "name": "ANTARCTIC STAR115 酒柜 设备页UI设计260902",
+  "originalGroup": null,
+  "groupStatus": "not_verified",
+  "sourceUrl": "https://lanhuapp.com/web/#/item/project/stage?tid=fadf0d8e-ba91-4bb8-a05a-e0cad085545e&pid=67947f53-9582-4aad-94c9-9c597e404599",
+  "sourceUrlKind": "project",
+  "coverSourceUrl": "https://alipic.lanhuapp.com/SketchCovercaa2a9a0de389ffaf30f48ae1e50fd9e35a94e44b7177b3b102926fb5ebe7471",
+  "coverHash": "caa2a9a0de389ffaf30f48ae1e50fd9e35a94e44b7177b3b102926fb5ebe7471",
+  "version": {
+    "policy": "current_displayed",
+    "status": "not_captured",
+    "id": null,
+    "label": null,
+    "dateText": null
+  },
+  "preview": {
+    "status": "captured",
+    "path": "raw/browser-assets/7e62fc45db250c78",
+    "sourceUrl": "https://assets.lanhuapp.com/SketchCovercaa2a9a0de389ffaf30f48ae1e50fd9e35a94e44b7177b3b102926fb5ebe7471?x-oss-process=image/quality,q_lossless/resize,w_375/format,webp",
+    "width": 375,
+    "height": 313,
+    "format": "WEBP",
+    "bytes": 7706,
+    "sha256": "eb3b35e6cdd371d09387f437e662025ec275f9efcff9d15ea1b27769a883212c",
+    "note": "浏览器已加载的缩放封面预览，非原始设计图。"
+  },
+  "designImage": {
+    "status": "captured",
+    "sourceKind": "local_export",
+    "path": "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/design.png",
+    "sourcePath": "../ANTARCTIC STAR115 酒柜 设备页UI设计260902.png",
+    "versionVerified": false,
+    "matchBasis": "按原始文件名匹配；本地导出版本未与线上版本核实。",
+    "width": 2774,
+    "height": 2312,
+    "sha256": "956bfedab21971acf3f40de2e62b969d6f6995c30d3af03077cad2f20fe9a975"
+  },
+  "annotations": {
+    "status": "not_captured",
+    "path": null,
+    "reason": "尚未完成原始图层标注读取；不从预览或生成 CSS 臆造标注。"
+  },
+  "slices": {
+    "status": "not_captured",
+    "paths": [],
+    "reason": "代码导出包 PNG 见 exportAssets；尚未取得原始切图标注清单。"
+  },
+  "code": {
+    "status": "partial",
+    "files": [
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/index.jsx",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/indexResponse.module.css",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/indexRem.module.css",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/index.module.css"
+    ],
+    "sourceUrl": null,
+    "frameworksCaptured": [
+      "React"
+    ],
+    "missingFiles": [],
+    "reason": "React ZIP 中的页面 JSX、三种 CSS 变体和图片已归档；其他框架未导出，未执行构建；导出包未提供页面 UUID/版本。",
+    "sourceKind": "user_supplied_zip",
+    "formatsPending": [
+      "HTML",
+      "Vue.js",
+      "微信小程序",
+      "uni-app"
+    ],
+    "exportPackage": "raw/LanhuProject.zip",
+    "exportDirectory": "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902",
+    "exportIndex": "raw/react-export-index.json",
+    "mappingMethod": "name_and_content_review",
+    "mappingEvidence": "页面原名与蓝湖生成目录拼音匹配；ZIP 中 157 目录与清单一一对应。",
+    "formats": {
+      "React": {
+        "status": "captured",
+        "files": [
+          "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/index.jsx",
+          "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/indexResponse.module.css",
+          "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/indexRem.module.css",
+          "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/index.module.css"
+        ],
+        "sharedStyles": [
+          "project/src/assets/common.css",
+          "project/src/assets/common.less",
+          "project/src/assets/common.scss"
+        ],
+        "generatedPageDimensionsPx": {
+          "width": 2774.0,
+          "height": 2312.0
+        },
+        "checkedLocalReferences": 155,
+        "remoteReferences": [],
+        "versionVerified": false
+      }
+    }
+  },
+  "localExportComparison": {
+    "status": "associated_local_export",
+    "candidates": [
+      {
+        "path": "../ANTARCTIC STAR115 酒柜 设备页UI设计260902.png",
+        "width": 2774,
+        "height": 2312,
+        "format": "PNG",
+        "bytes": 486762,
+        "sha256": "956bfedab21971acf3f40de2e62b969d6f6995c30d3af03077cad2f20fe9a975"
+      }
+    ],
+    "note": "按原始文件名匹配；本地导出版本未与线上版本核实。"
+  },
+  "metadataPath": "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/page.json",
+  "exportAssets": {
+    "status": "captured",
+    "kind": "generated_code_assets",
+    "paths": [
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPngc9a260536dbd3080313c16c87528b52417f1c9f065ed809f8b3696a08e798c63.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPng459541dfd00d57582df89e5a9479443c03c42e03eaff90f027ddfc3c0be0b9ad.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPngb001af9cd49057825386e328c9323b0d6ac0a4deac52b0db61e8e781274e7d09.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPng7bafc64caac31534249c2341d538c56f3a58b83c3088d8488692448d5eb0120b.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPnga649ca43b0583c9df3f08b2f6e911434f4f5e38316bd2aa6ee39f661f400b955.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPngf065390e9d981ae9a59d921e8722da381e0bf98a3e2f1e123ca9833724bca255.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPng8dcd90a5679ca2c41e3f40701d7c0ecc024990ed6040e40ecde04cd44553341d.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPng5e76b828e3a87da8474151757bf93d85f6cc6d9821255e9f4d2da8c489bba5a7.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPng14798d35bdb9f2a7e524f7b02c785d7ad15ff81bc25a556b6c84ace6551d0153.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPngf58837a724aaae3a74e02fb775aef1f8f6b5b822759a1bd67ffa6ca972480de9.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPngb4271c6322c177f2f5600fd4b3294525954ad7db3f6e87ca3466c4987a09dd31.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPng603b8e4f680e75ca5d07934f2051893528284328377ac691e579dda0555fe1ea.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPnga60bf46119ab6ce33b78b516d0c2e861389bb0d91aac22dcedaf26ac2dbd7eec.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPng6ba57cf78431012a03ed6136fc63a6f24659ccc2016ac711640e9b8fd0f33cee.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPngcf3917f6240893dbfc0b50dd53c2ccfd215c578cb1e4ed636fbcac1aaeff90cf.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPng79ee2126a10aeaead95af778086edb482ca9be52bf7e4b53736835cb5d92d6e7.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPng0a9cae403295eb8259bef9615434062b018d5dd55c94540eb9f908b87f34a4ec.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPngd61e2135733a03b7b562b43167d83225a68d1ca6be2ddc00499ab64d5c03dc8a.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPng664edf4cc1b104e0eff709ffe0cc978c819998b1d1dab151c954019c637de634.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPng80c1dc15f157a898c6312cb2e8d95b5678b72b0205e2ab8ad8215715882faf43.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPnge7550b5ff882b3ca52b3af140a73e0df84218fa7f112fec4a703ba9ebdc570e4.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPng0812ab6060a7445e34d3e3339fd46ca5ff061d365a0eccaa9a2078683b8d8b4e.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPng61af0f496f1099183b24386fb52986a3daef2701377c37194644016df91125ad.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPng70148f92a83b8c7a34f15240572788cd68075997164d262a45e6f3f243cf0153.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPngbbab2f275822e2f202615c33ad80b1e73adf77ef2eb5ba5124dee98b37d89a4b.png",
+      "project/src/view/lanhu_antarcticstar115jiuguishebeiyeuisheji260902/assets/img/SketchPng6da0dcb1ecad42ad5fcf9c4f1898acd4bdb8b2f4b027bed542716307741e2433.png"
+    ],
+    "count": 26,
+    "note": "蓝湖生成代码所用 PNG，可能包含合并图；不等于原始切图标注。"
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "archiveId": "export-098-d4a5a1242e53",
+  "exportIndex": 98,
+  "pageId": null,
+  "name": "房间管理-编辑删除成功",
+  "originalGroup": null,
+  "groupStatus": "not_verified",
+  "sourceUrl": "https://lanhuapp.com/web/#/item/project/stage?tid=fadf0d8e-ba91-4bb8-a05a-e0cad085545e&pid=67947f53-9582-4aad-94c9-9c597e404599",
+  "sourceUrlKind": "project",
+  "coverSourceUrl": "https://alipic.lanhuapp.com/SketchCoverd4a5a1242e53d7c841f68bdae18b6a086dca6e3bf9b007e03be579f7ba749a9c",
+  "coverHash": "d4a5a1242e53d7c841f68bdae18b6a086dca6e3bf9b007e03be579f7ba749a9c",
+  "version": {
+    "policy": "current_displayed",
+    "status": "not_captured",
+    "id": null,
+    "label": null,
+    "dateText": null
+  },
+  "preview": {
+    "status": "captured",
+    "path": "raw/browser-assets/20cd94a5a52651af",
+    "sourceUrl": "https://assets.lanhuapp.com/SketchCoverd4a5a1242e53d7c841f68bdae18b6a086dca6e3bf9b007e03be579f7ba749a9c?x-oss-process=image/quality,q_lossless/resize,w_282/format,webp",
+    "width": 282,
+    "height": 611,
+    "format": "WEBP",
+    "bytes": 6486,
+    "sha256": "555acf6c14fbceef967acdff562b1ebc0cb4869de3020ee7f65b180e4939fd03",
+    "note": "浏览器已加载的缩放封面预览，非原始设计图。"
+  },
+  "designImage": {
+    "status": "captured",
+    "sourceKind": "local_export",
+    "path": "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/design.png",
+    "sourcePath": "../房间管理-编辑删除成功.png",
+    "versionVerified": false,
+    "matchBasis": "按原始文件名匹配；本地导出版本未与线上版本核实。",
+    "width": 375,
+    "height": 812,
+    "sha256": "b6ba50b4329d1a3ad1dbbfd478b8215c355270e263fc6e16ae15f672b5954266"
+  },
+  "annotations": {
+    "status": "not_captured",
+    "path": null,
+    "reason": "尚未完成原始图层标注读取；不从预览或生成 CSS 臆造标注。"
+  },
+  "slices": {
+    "status": "not_captured",
+    "paths": [],
+    "reason": "代码导出包 PNG 见 exportAssets；尚未取得原始切图标注清单。"
+  },
+  "code": {
+    "status": "partial",
+    "files": [
+      "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/index.jsx",
+      "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/assets/indexResponse.module.css",
+      "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/assets/indexRem.module.css",
+      "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/assets/index.module.css"
+    ],
+    "sourceUrl": null,
+    "frameworksCaptured": [
+      "React"
+    ],
+    "missingFiles": [],
+    "reason": "React ZIP 中的页面 JSX、三种 CSS 变体和图片已归档；其他框架未导出，未执行构建；导出包未提供页面 UUID/版本。",
+    "sourceKind": "user_supplied_zip",
+    "formatsPending": [
+      "HTML",
+      "Vue.js",
+      "微信小程序",
+      "uni-app"
+    ],
+    "exportPackage": "raw/LanhuProject.zip",
+    "exportDirectory": "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong",
+    "exportIndex": "raw/react-export-index.json",
+    "mappingMethod": "name_and_content_review",
+    "mappingEvidence": "页面原名与蓝湖生成目录拼音匹配；ZIP 中 157 目录与清单一一对应。",
+    "formats": {
+      "React": {
+        "status": "captured",
+        "files": [
+          "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/index.jsx",
+          "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/assets/indexResponse.module.css",
+          "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/assets/indexRem.module.css",
+          "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/assets/index.module.css"
+        ],
+        "sharedStyles": [
+          "project/src/assets/common.css",
+          "project/src/assets/common.less",
+          "project/src/assets/common.scss"
+        ],
+        "generatedPageDimensionsPx": {
+          "width": 375.0,
+          "height": 812.0
+        },
+        "checkedLocalReferences": 31,
+        "remoteReferences": [],
+        "versionVerified": false
+      }
+    }
+  },
+  "localExportComparison": {
+    "status": "associated_local_export",
+    "candidates": [
+      {
+        "path": "../房间管理-编辑删除成功.png",
+        "width": 375,
+        "height": 812,
+        "format": "PNG",
+        "bytes": 35997,
+        "sha256": "b6ba50b4329d1a3ad1dbbfd478b8215c355270e263fc6e16ae15f672b5954266"
+      }
+    ],
+    "note": "按原始文件名匹配；本地导出版本未与线上版本核实。"
+  },
+  "metadataPath": "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/page.json",
+  "exportAssets": {
+    "status": "captured",
+    "kind": "generated_code_assets",
+    "paths": [
+      "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/assets/img/SketchPnge7b5351c1099532936d9e79f72888efc92f48219fc8fb7c6cfc393ba5d5ddb5e.png",
+      "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/assets/img/SketchPng0102535dee335e6b3c4c868fbbed0c54da9394adc938011f60846e4ab9d4fb23.png",
+      "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/assets/img/SketchPng360cf53083fb4b7bdea1e78734ed0046dca74d03826eaf3e4459ecbbbcbb934b.png",
+      "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/assets/img/efede7efbfb54c7cb82c37ebc0d9518c_mergeImage.png",
+      "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/assets/img/SketchPngf8248615de614e6e2a296b516cfef4b2041fdfaf781ae90a7beb64e4ce57bf26.png",
+      "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/assets/img/7897eac013e540cd9e06948e87643a89_mergeImage.png",
+      "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/assets/img/SketchPngc2ec5bcdb82d224a61ec64fcc0bfc2bb0eefa86e096af09c18319a8877314206.png",
+      "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/assets/img/24d7d18ca1f5485ab826cc13732efe45_mergeImage.png",
+      "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/assets/img/SketchPng25937da2040ea3b8ef7d5701456c37548586e368fdd94512910b1d607a719bf2.png",
+      "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/assets/img/SketchPng235df50f2b085e0bf6a1a7e49c9ea1a58d746459a3f2f1698b7785dd734e9548.png",
+      "project/src/view/lanhu_fangjianguanlibianjishanchuchenggong/assets/img/SketchPng80caa3040b78375ceb1fdacea76a8e49a6de84e0c23b8fd9f00e39b36b750b2b.png"
+    ],
+    "count": 11,
+    "note": "蓝湖生成代码所用 PNG，可能包含合并图；不等于原始切图标注。"
+  }
+}

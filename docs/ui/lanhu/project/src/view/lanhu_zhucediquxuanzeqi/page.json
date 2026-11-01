@@ -1,0 +1,138 @@
+{
+  "archiveId": "export-141-3385d0659b04",
+  "exportIndex": 141,
+  "pageId": null,
+  "name": "注册-地区选择器",
+  "originalGroup": null,
+  "groupStatus": "not_verified",
+  "sourceUrl": "https://lanhuapp.com/web/#/item/project/stage?tid=fadf0d8e-ba91-4bb8-a05a-e0cad085545e&pid=67947f53-9582-4aad-94c9-9c597e404599",
+  "sourceUrlKind": "project",
+  "coverSourceUrl": "https://alipic.lanhuapp.com/SketchCover3385d0659b040dadfe1e607caf27398f08babfa4572e8275f3ae2d9a301b4149",
+  "coverHash": "3385d0659b040dadfe1e607caf27398f08babfa4572e8275f3ae2d9a301b4149",
+  "version": {
+    "policy": "current_displayed",
+    "status": "not_captured",
+    "id": null,
+    "label": null,
+    "dateText": null
+  },
+  "preview": {
+    "status": "captured",
+    "path": "raw/browser-assets/86b97031267a5058",
+    "sourceUrl": "https://assets.lanhuapp.com/SketchCover3385d0659b040dadfe1e607caf27398f08babfa4572e8275f3ae2d9a301b4149?x-oss-process=image/quality,q_lossless/resize,w_282/format,webp",
+    "width": 282,
+    "height": 611,
+    "format": "WEBP",
+    "bytes": 8144,
+    "sha256": "35b9ccaa7e371942440ff0fe2192d6eb5c9694e1ba2b2add273f723a77a7b7e3",
+    "note": "浏览器已加载的缩放封面预览，非原始设计图。"
+  },
+  "designImage": {
+    "status": "captured",
+    "sourceKind": "local_export",
+    "path": "project/src/view/lanhu_zhucediquxuanzeqi/design.png",
+    "sourcePath": "../注册-地区选择器.png",
+    "versionVerified": false,
+    "matchBasis": "按原始文件名匹配；本地导出版本未与线上版本核实。",
+    "width": 375,
+    "height": 812,
+    "sha256": "9c0bbfcd3246285df64e2972591291413a2853f6cf92428f7cb7a571647e16a2"
+  },
+  "annotations": {
+    "status": "not_captured",
+    "path": null,
+    "reason": "尚未完成原始图层标注读取；不从预览或生成 CSS 臆造标注。"
+  },
+  "slices": {
+    "status": "not_captured",
+    "paths": [],
+    "reason": "代码导出包 PNG 见 exportAssets；尚未取得原始切图标注清单。"
+  },
+  "code": {
+    "status": "partial",
+    "files": [
+      "project/src/view/lanhu_zhucediquxuanzeqi/index.jsx",
+      "project/src/view/lanhu_zhucediquxuanzeqi/assets/indexResponse.module.css",
+      "project/src/view/lanhu_zhucediquxuanzeqi/assets/indexRem.module.css",
+      "project/src/view/lanhu_zhucediquxuanzeqi/assets/index.module.css"
+    ],
+    "sourceUrl": null,
+    "frameworksCaptured": [
+      "React"
+    ],
+    "missingFiles": [],
+    "reason": "React ZIP 中的页面 JSX、三种 CSS 变体和图片已归档；其他框架未导出，未执行构建；导出包未提供页面 UUID/版本。",
+    "sourceKind": "user_supplied_zip",
+    "formatsPending": [
+      "HTML",
+      "Vue.js",
+      "微信小程序",
+      "uni-app"
+    ],
+    "exportPackage": "raw/LanhuProject.zip",
+    "exportDirectory": "project/src/view/lanhu_zhucediquxuanzeqi",
+    "exportIndex": "raw/react-export-index.json",
+    "mappingMethod": "name_and_content_review",
+    "mappingEvidence": "页面原名与蓝湖生成目录拼音匹配；ZIP 中 157 目录与清单一一对应。",
+    "formats": {
+      "React": {
+        "status": "captured",
+        "files": [
+          "project/src/view/lanhu_zhucediquxuanzeqi/index.jsx",
+          "project/src/view/lanhu_zhucediquxuanzeqi/assets/indexResponse.module.css",
+          "project/src/view/lanhu_zhucediquxuanzeqi/assets/indexRem.module.css",
+          "project/src/view/lanhu_zhucediquxuanzeqi/assets/index.module.css"
+        ],
+        "sharedStyles": [
+          "project/src/assets/common.css",
+          "project/src/assets/common.less",
+          "project/src/assets/common.scss"
+        ],
+        "generatedPageDimensionsPx": {
+          "width": 375.0,
+          "height": 812.0
+        },
+        "checkedLocalReferences": 46,
+        "remoteReferences": [],
+        "versionVerified": false
+      }
+    }
+  },
+  "localExportComparison": {
+    "status": "associated_local_export",
+    "candidates": [
+      {
+        "path": "../注册-地区选择器.png",
+        "width": 375,
+        "height": 812,
+        "format": "PNG",
+        "bytes": 40365,
+        "sha256": "9c0bbfcd3246285df64e2972591291413a2853f6cf92428f7cb7a571647e16a2"
+      }
+    ],
+    "note": "按原始文件名匹配；本地导出版本未与线上版本核实。"
+  },
+  "metadataPath": "project/src/view/lanhu_zhucediquxuanzeqi/page.json",
+  "exportAssets": {
+    "status": "captured",
+    "kind": "generated_code_assets",
+    "paths": [
+      "project/src/view/lanhu_zhucediquxuanzeqi/assets/img/SketchPng92679c79c05f54d1a491e49f59b4fb1a39bcae291c7d2e9a71f6687c3ea13b11.png",
+      "project/src/view/lanhu_zhucediquxuanzeqi/assets/img/SketchPng360cf53083fb4b7bdea1e78734ed0046dca74d03826eaf3e4459ecbbbcbb934b.png",
+      "project/src/view/lanhu_zhucediquxuanzeqi/assets/img/SketchPngf8248615de614e6e2a296b516cfef4b2041fdfaf781ae90a7beb64e4ce57bf26.png",
+      "project/src/view/lanhu_zhucediquxuanzeqi/assets/img/SketchPngefc2700dd31d9ef87fe1b58a5070c885e02a4d592f6aad08c123b01e2c40836f.png",
+      "project/src/view/lanhu_zhucediquxuanzeqi/assets/img/SketchPngae9851b885f030d5a6d73affa75dc72e7bd20a7cd8c9c3853d61196b16a358b9.png",
+      "project/src/view/lanhu_zhucediquxuanzeqi/assets/img/SketchPng5a38973c946cb5c49fabe1d1e9286a0043c9f8c4a19f20d1c90e6a066f2c51ea.png",
+      "project/src/view/lanhu_zhucediquxuanzeqi/assets/img/SketchPng57ddfc3333395ad0184c71321adb31380344f513e0001007cdaab5addc26cd89.png",
+      "project/src/view/lanhu_zhucediquxuanzeqi/assets/img/SketchPng7e410347bcb265a484e609cc73069b53e2341354352893f0b969815e5827f773.png",
+      "project/src/view/lanhu_zhucediquxuanzeqi/assets/img/SketchPnga8ecdc51e660e76d009a68b882b1d41fd48f8fa65eaf3b958c169cb760a88153.png",
+      "project/src/view/lanhu_zhucediquxuanzeqi/assets/img/SketchPngdb52b001b113a4472d2153a7a83c24574aff8e4b4a27f1bbefad18fe2043e1c0.png",
+      "project/src/view/lanhu_zhucediquxuanzeqi/assets/img/SketchPng6ee3edccaf537a954ba0246249cd80fc9f94f1eeb0cb902221d63d9f3fd2faa4.png",
+      "project/src/view/lanhu_zhucediquxuanzeqi/assets/img/086ca09f019c4824bd6f8358ab50b87f_mergeImage.png",
+      "project/src/view/lanhu_zhucediquxuanzeqi/assets/img/SketchPng235df50f2b085e0bf6a1a7e49c9ea1a58d746459a3f2f1698b7785dd734e9548.png",
+      "project/src/view/lanhu_zhucediquxuanzeqi/assets/img/SketchPng7e0a5ef52c1db6b027ef485cef011717e042597a86c7a647e522b904ec87ed63.png"
+    ],
+    "count": 14,
+    "note": "蓝湖生成代码所用 PNG，可能包含合并图；不等于原始切图标注。"
+  }
+}

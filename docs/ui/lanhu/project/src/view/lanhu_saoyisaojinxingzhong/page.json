@@ -1,0 +1,129 @@
+{
+  "archiveId": "export-122-6fd872e07127",
+  "exportIndex": 122,
+  "pageId": null,
+  "name": "扫一扫-进行中",
+  "originalGroup": null,
+  "groupStatus": "not_verified",
+  "sourceUrl": "https://lanhuapp.com/web/#/item/project/stage?tid=fadf0d8e-ba91-4bb8-a05a-e0cad085545e&pid=67947f53-9582-4aad-94c9-9c597e404599",
+  "sourceUrlKind": "project",
+  "coverSourceUrl": "https://alipic.lanhuapp.com/SketchCover6fd872e0712706f508927295fd2bcadb31841bef649af8d9b1f74548d5f43613",
+  "coverHash": "6fd872e0712706f508927295fd2bcadb31841bef649af8d9b1f74548d5f43613",
+  "version": {
+    "policy": "current_displayed",
+    "status": "not_captured",
+    "id": null,
+    "label": null,
+    "dateText": null
+  },
+  "preview": {
+    "status": "captured",
+    "path": "raw/browser-assets/a1d9959d6ebbd668",
+    "sourceUrl": "https://assets.lanhuapp.com/SketchCover6fd872e0712706f508927295fd2bcadb31841bef649af8d9b1f74548d5f43613?x-oss-process=image/quality,q_lossless/resize,w_282/format,webp",
+    "width": 282,
+    "height": 611,
+    "format": "WEBP",
+    "bytes": 9734,
+    "sha256": "e9321b25cc52dd3992bc70278b8bf3a6ca9d847aab558dec7ecb31ef9be24ba8",
+    "note": "浏览器已加载的缩放封面预览，非原始设计图。"
+  },
+  "designImage": {
+    "status": "captured",
+    "sourceKind": "local_export",
+    "path": "project/src/view/lanhu_saoyisaojinxingzhong/design.png",
+    "sourcePath": "../扫一扫-进行中.png",
+    "versionVerified": false,
+    "matchBasis": "按原始文件名匹配；本地导出版本未与线上版本核实。",
+    "width": 375,
+    "height": 812,
+    "sha256": "c87a770ffa8f2629aad521d0cee56ee25fae112a2176471d1fb190c27f1a047e"
+  },
+  "annotations": {
+    "status": "not_captured",
+    "path": null,
+    "reason": "尚未完成原始图层标注读取；不从预览或生成 CSS 臆造标注。"
+  },
+  "slices": {
+    "status": "not_captured",
+    "paths": [],
+    "reason": "代码导出包 PNG 见 exportAssets；尚未取得原始切图标注清单。"
+  },
+  "code": {
+    "status": "partial",
+    "files": [
+      "project/src/view/lanhu_saoyisaojinxingzhong/index.jsx",
+      "project/src/view/lanhu_saoyisaojinxingzhong/assets/indexResponse.module.css",
+      "project/src/view/lanhu_saoyisaojinxingzhong/assets/indexRem.module.css",
+      "project/src/view/lanhu_saoyisaojinxingzhong/assets/index.module.css"
+    ],
+    "sourceUrl": null,
+    "frameworksCaptured": [
+      "React"
+    ],
+    "missingFiles": [],
+    "reason": "React ZIP 中的页面 JSX、三种 CSS 变体和图片已归档；其他框架未导出，未执行构建；导出包未提供页面 UUID/版本。",
+    "sourceKind": "user_supplied_zip",
+    "formatsPending": [
+      "HTML",
+      "Vue.js",
+      "微信小程序",
+      "uni-app"
+    ],
+    "exportPackage": "raw/LanhuProject.zip",
+    "exportDirectory": "project/src/view/lanhu_saoyisaojinxingzhong",
+    "exportIndex": "raw/react-export-index.json",
+    "mappingMethod": "name_and_content_review",
+    "mappingEvidence": "页面原名与蓝湖生成目录拼音匹配；ZIP 中 157 目录与清单一一对应。",
+    "formats": {
+      "React": {
+        "status": "captured",
+        "files": [
+          "project/src/view/lanhu_saoyisaojinxingzhong/index.jsx",
+          "project/src/view/lanhu_saoyisaojinxingzhong/assets/indexResponse.module.css",
+          "project/src/view/lanhu_saoyisaojinxingzhong/assets/indexRem.module.css",
+          "project/src/view/lanhu_saoyisaojinxingzhong/assets/index.module.css"
+        ],
+        "sharedStyles": [
+          "project/src/assets/common.css",
+          "project/src/assets/common.less",
+          "project/src/assets/common.scss"
+        ],
+        "generatedPageDimensionsPx": {
+          "width": 375.0,
+          "height": 812.0
+        },
+        "checkedLocalReferences": 14,
+        "remoteReferences": [],
+        "versionVerified": false
+      }
+    }
+  },
+  "localExportComparison": {
+    "status": "associated_local_export",
+    "candidates": [
+      {
+        "path": "../扫一扫-进行中.png",
+        "width": 375,
+        "height": 812,
+        "format": "PNG",
+        "bytes": 304364,
+        "sha256": "c87a770ffa8f2629aad521d0cee56ee25fae112a2176471d1fb190c27f1a047e"
+      }
+    ],
+    "note": "按原始文件名匹配；本地导出版本未与线上版本核实。"
+  },
+  "metadataPath": "project/src/view/lanhu_saoyisaojinxingzhong/page.json",
+  "exportAssets": {
+    "status": "captured",
+    "kind": "generated_code_assets",
+    "paths": [
+      "project/src/view/lanhu_saoyisaojinxingzhong/assets/img/9f580fb70de44ca8968130325cdf4543_mergeImage.png",
+      "project/src/view/lanhu_saoyisaojinxingzhong/assets/img/a250b2a53936491a9a4c47338a4d886b_mergeImage.png",
+      "project/src/view/lanhu_saoyisaojinxingzhong/assets/img/SketchPng039f499ad0ea652125cf7bb4e1d43efb743da5984332e5f532c53045f7d94ffc.png",
+      "project/src/view/lanhu_saoyisaojinxingzhong/assets/img/SketchPng4e3c27ff0331f195cc4432bfcc41d5a8f445471ccd47e2e34cc0671f5a833b03.png",
+      "project/src/view/lanhu_saoyisaojinxingzhong/assets/img/SketchPngc65a133cffd900ce0331e783bad7337132e75b271a7bf7fe98c57d532b6e4bf7.png"
+    ],
+    "count": 5,
+    "note": "蓝湖生成代码所用 PNG，可能包含合并图；不等于原始切图标注。"
+  }
+}

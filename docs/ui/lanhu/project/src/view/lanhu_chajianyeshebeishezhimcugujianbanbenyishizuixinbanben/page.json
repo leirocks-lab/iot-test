@@ -1,0 +1,131 @@
+{
+  "archiveId": "export-102-856e97ae8182",
+  "exportIndex": 102,
+  "pageId": null,
+  "name": "插件页-设备设置- MCU固件版本-已是最新版本",
+  "originalGroup": null,
+  "groupStatus": "not_verified",
+  "sourceUrl": "https://lanhuapp.com/web/#/item/project/stage?tid=fadf0d8e-ba91-4bb8-a05a-e0cad085545e&pid=67947f53-9582-4aad-94c9-9c597e404599",
+  "sourceUrlKind": "project",
+  "coverSourceUrl": "https://alipic.lanhuapp.com/SketchCover856e97ae81820fda743c5b2118fef33cabde8f4bd7125893aee09a0921f1de97",
+  "coverHash": "856e97ae81820fda743c5b2118fef33cabde8f4bd7125893aee09a0921f1de97",
+  "version": {
+    "policy": "current_displayed",
+    "status": "not_captured",
+    "id": null,
+    "label": null,
+    "dateText": null
+  },
+  "preview": {
+    "status": "captured",
+    "path": "raw/browser-assets/dab522e1116f0f9d",
+    "sourceUrl": "https://assets.lanhuapp.com/SketchCover856e97ae81820fda743c5b2118fef33cabde8f4bd7125893aee09a0921f1de97?x-oss-process=image/quality,q_lossless/resize,w_282/format,webp",
+    "width": 282,
+    "height": 611,
+    "format": "WEBP",
+    "bytes": 4590,
+    "sha256": "565fcd6a33d94cbacc91e89b87f14b977e6413e8eb09f515e6a3fe402b4e06a6",
+    "note": "浏览器已加载的缩放封面预览，非原始设计图。"
+  },
+  "designImage": {
+    "status": "captured",
+    "sourceKind": "local_export",
+    "path": "project/src/view/lanhu_chajianyeshebeishezhimcugujianbanbenyishizuixinbanben/design.png",
+    "sourcePath": "../插件页-设备设置- MCU固件版本-已是最新版本.png",
+    "versionVerified": false,
+    "matchBasis": "按原始文件名匹配；本地导出版本未与线上版本核实。",
+    "width": 375,
+    "height": 812,
+    "sha256": "85c41a9744feb5204e88bfc0bbd9e8f1f4f1c4d04fcd8967c77aa297306b368e"
+  },
+  "annotations": {
+    "status": "not_captured",
+    "path": null,
+    "reason": "尚未完成原始图层标注读取；不从预览或生成 CSS 臆造标注。"
+  },
+  "slices": {
+    "status": "not_captured",
+    "paths": [],
+    "reason": "代码导出包 PNG 见 exportAssets；尚未取得原始切图标注清单。"
+  },
+  "code": {
+    "status": "partial",
+    "files": [
+      "project/src/view/lanhu_chajianyeshebeishezhimcugujianbanbenyishizuixinbanben/index.jsx",
+      "project/src/view/lanhu_chajianyeshebeishezhimcugujianbanbenyishizuixinbanben/assets/indexResponse.module.css",
+      "project/src/view/lanhu_chajianyeshebeishezhimcugujianbanbenyishizuixinbanben/assets/indexRem.module.css",
+      "project/src/view/lanhu_chajianyeshebeishezhimcugujianbanbenyishizuixinbanben/assets/index.module.css"
+    ],
+    "sourceUrl": null,
+    "frameworksCaptured": [
+      "React"
+    ],
+    "missingFiles": [],
+    "reason": "React ZIP 中的页面 JSX、三种 CSS 变体和图片已归档；其他框架未导出，未执行构建；导出包未提供页面 UUID/版本。",
+    "sourceKind": "user_supplied_zip",
+    "formatsPending": [
+      "HTML",
+      "Vue.js",
+      "微信小程序",
+      "uni-app"
+    ],
+    "exportPackage": "raw/LanhuProject.zip",
+    "exportDirectory": "project/src/view/lanhu_chajianyeshebeishezhimcugujianbanbenyishizuixinbanben",
+    "exportIndex": "raw/react-export-index.json",
+    "mappingMethod": "name_and_content_review",
+    "mappingEvidence": "页面原名与蓝湖生成目录拼音匹配；ZIP 中 157 目录与清单一一对应。",
+    "formats": {
+      "React": {
+        "status": "captured",
+        "files": [
+          "project/src/view/lanhu_chajianyeshebeishezhimcugujianbanbenyishizuixinbanben/index.jsx",
+          "project/src/view/lanhu_chajianyeshebeishezhimcugujianbanbenyishizuixinbanben/assets/indexResponse.module.css",
+          "project/src/view/lanhu_chajianyeshebeishezhimcugujianbanbenyishizuixinbanben/assets/indexRem.module.css",
+          "project/src/view/lanhu_chajianyeshebeishezhimcugujianbanbenyishizuixinbanben/assets/index.module.css"
+        ],
+        "sharedStyles": [
+          "project/src/assets/common.css",
+          "project/src/assets/common.less",
+          "project/src/assets/common.scss"
+        ],
+        "generatedPageDimensionsPx": {
+          "width": 375.0,
+          "height": 812.0
+        },
+        "checkedLocalReferences": 10,
+        "remoteReferences": [],
+        "versionVerified": false
+      }
+    }
+  },
+  "localExportComparison": {
+    "status": "associated_local_export",
+    "candidates": [
+      {
+        "path": "../插件页-设备设置- MCU固件版本-已是最新版本.png",
+        "width": 375,
+        "height": 812,
+        "format": "PNG",
+        "bytes": 23012,
+        "sha256": "85c41a9744feb5204e88bfc0bbd9e8f1f4f1c4d04fcd8967c77aa297306b368e"
+      }
+    ],
+    "note": "按原始文件名匹配；本地导出版本未与线上版本核实。"
+  },
+  "metadataPath": "project/src/view/lanhu_chajianyeshebeishezhimcugujianbanbenyishizuixinbanben/page.json",
+  "exportAssets": {
+    "status": "captured",
+    "kind": "generated_code_assets",
+    "paths": [
+      "project/src/view/lanhu_chajianyeshebeishezhimcugujianbanbenyishizuixinbanben/assets/img/44e7873435c34f22a7221b806d1c0167_mergeImage.png",
+      "project/src/view/lanhu_chajianyeshebeishezhimcugujianbanbenyishizuixinbanben/assets/img/SketchPng360cf53083fb4b7bdea1e78734ed0046dca74d03826eaf3e4459ecbbbcbb934b.png",
+      "project/src/view/lanhu_chajianyeshebeishezhimcugujianbanbenyishizuixinbanben/assets/img/SketchPngc8fd641a50d088563b0f84ac603b9d796243ed99057556d3c5f2f54cb8a6ef92.png",
+      "project/src/view/lanhu_chajianyeshebeishezhimcugujianbanbenyishizuixinbanben/assets/img/SketchPngf8248615de614e6e2a296b516cfef4b2041fdfaf781ae90a7beb64e4ce57bf26.png",
+      "project/src/view/lanhu_chajianyeshebeishezhimcugujianbanbenyishizuixinbanben/assets/img/SketchPngdb52b001b113a4472d2153a7a83c24574aff8e4b4a27f1bbefad18fe2043e1c0.png",
+      "project/src/view/lanhu_chajianyeshebeishezhimcugujianbanbenyishizuixinbanben/assets/img/SketchPng3b6adb81697185474e56fe769368a4970aa781210b0efebacd4989f7f583d910.png",
+      "project/src/view/lanhu_chajianyeshebeishezhimcugujianbanbenyishizuixinbanben/assets/img/SketchPng235df50f2b085e0bf6a1a7e49c9ea1a58d746459a3f2f1698b7785dd734e9548.png"
+    ],
+    "count": 7,
+    "note": "蓝湖生成代码所用 PNG，可能包含合并图；不等于原始切图标注。"
+  }
+}

@@ -1,0 +1,577 @@
+.page {
+  position: relative;
+  width: 100vw;
+  height: 216.54vw;
+  overflow: hidden;
+}
+
+.block_1 {
+  background-image: url(./img/a9910277a32d46ab8472c792db1e9dba_mergeImage.png);
+  padding-bottom: 21.87vw;
+  position: relative;
+}
+
+.box_3 {
+  padding: 4.8vw 3.73vw 11.73vw 4.26vw;
+}
+
+.box_4 {
+  margin-left: 4vw;
+}
+
+.text_1 {
+  height: 4vw;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4vw;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 4vw;
+}
+
+.thumbnail_1 {
+  width: 4.8vw;
+  height: 3.47vw;
+  margin: 0.8vw 0 0 61.6vw;
+}
+
+.thumbnail_2 {
+  width: 4vw;
+  height: 2.94vw;
+  margin: 1.33vw 0 0 1.06vw;
+}
+
+.image_1 {
+  width: 6.67vw;
+  height: 3.74vw;
+  margin: 0.53vw 0 0 1.33vw;
+}
+
+.box_5 {
+  width: 85.87vw;
+  margin: 8vw 5.06vw 0 1.06vw;
+}
+
+.image-text_13 {
+  width: 43.74vw;
+}
+
+.image_2 {
+  width: 13.6vw;
+  height: 13.6vw;
+}
+
+.text-group_8 {
+  margin: 0.53vw 0 0.26vw 0;
+}
+
+.text_2 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 5.33vw;
+  text-transform: uppercase;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 7.47vw;
+  margin-right: 11.74vw;
+}
+
+.text_3 {
+  overflow-wrap: break-word;
+  color: rgba(153, 153, 153, 1);
+  font-size: 3.2vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 4.27vw;
+  margin-top: 1.07vw;
+}
+
+.label_1 {
+  width: 6.4vw;
+  height: 6.4vw;
+  margin: 3.73vw 0 3.46vw 0;
+}
+
+.list_3 {
+  height: 114.67vw;
+  margin: 4.26vw 0.53vw 0 0;
+}
+
+.list-items_1-0 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  width: 91.47vw;
+  height: 13.34vw;
+  margin-bottom: 2.67vw;
+  padding: 3.46vw 4.26vw 3.46vw 4.26vw;
+}
+
+.image-text_14-0 {
+  width: 25.6vw;
+}
+
+.label_2-0 {
+  width: 6.4vw;
+  height: 6.4vw;
+}
+
+.text-group_2-0 {
+  width: 21.34vw;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 5.34vw;
+  margin-top: 0.54vw;
+}
+
+.thumbnail_4-0 {
+  width: 5.34vw;
+  height: 5.34vw;
+  margin: 0.53vw 0 0.53vw 52vw;
+}
+
+.list-items_1-1 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  width: 91.47vw;
+  height: 13.34vw;
+  margin-bottom: 2.67vw;
+  padding: 3.46vw 4.26vw 3.46vw 4.26vw;
+}
+
+.image-text_14-1 {
+  width: 25.6vw;
+}
+
+.label_2-1 {
+  width: 6.4vw;
+  height: 6.4vw;
+}
+
+.text-group_2-1 {
+  width: 21.34vw;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 5.34vw;
+  margin-top: 0.54vw;
+}
+
+.image-text_15-1 {
+  width: 22.4vw;
+  margin: 0.53vw 0 0.53vw 34.93vw;
+}
+
+.text-group_3-1 {
+  overflow-wrap: break-word;
+  color: rgba(153, 153, 153, 1);
+  font-size: 3.73vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: right;
+  white-space: nowrap;
+  line-height: 4.27vw;
+  margin-top: 0.54vw;
+}
+
+.thumbnail_3-1 {
+  width: 5.34vw;
+  height: 5.34vw;
+}
+
+.list-items_1-2 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  width: 91.47vw;
+  height: 13.34vw;
+  margin-bottom: 2.67vw;
+  padding: 3.46vw 4.26vw 3.46vw 4.26vw;
+}
+
+.image-text_14-2 {
+  width: 25.6vw;
+}
+
+.label_2-2 {
+  width: 6.4vw;
+  height: 6.4vw;
+}
+
+.text-group_2-2 {
+  width: 21.34vw;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 5.34vw;
+  margin-top: 0.54vw;
+}
+
+.thumbnail_4-2 {
+  width: 5.34vw;
+  height: 5.34vw;
+  margin: 0.53vw 0 0.53vw 52vw;
+}
+
+.list-items_1-3 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  width: 91.47vw;
+  height: 13.34vw;
+  margin-bottom: 2.67vw;
+  padding: 3.46vw 4.26vw 3.46vw 4.26vw;
+}
+
+.image-text_14-3 {
+  width: 25.6vw;
+}
+
+.label_2-3 {
+  width: 6.4vw;
+  height: 6.4vw;
+}
+
+.text-group_2-3 {
+  width: 21.34vw;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 5.34vw;
+  margin-top: 0.54vw;
+}
+
+.thumbnail_4-3 {
+  width: 5.34vw;
+  height: 5.34vw;
+  margin: 0.53vw 0 0.53vw 52vw;
+}
+
+.list-items_1-4 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  width: 91.47vw;
+  height: 13.34vw;
+  margin-bottom: 2.67vw;
+  padding: 3.46vw 4.26vw 3.46vw 4.26vw;
+}
+
+.image-text_14-4 {
+  width: 25.6vw;
+}
+
+.label_2-4 {
+  width: 6.4vw;
+  height: 6.4vw;
+}
+
+.text-group_2-4 {
+  width: 21.34vw;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 5.34vw;
+  margin-top: 0.54vw;
+}
+
+.thumbnail_4-4 {
+  width: 5.34vw;
+  height: 5.34vw;
+  margin: 0.53vw 0 0.53vw 52vw;
+}
+
+.list-items_1-5 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  width: 91.47vw;
+  height: 13.34vw;
+  margin-bottom: 2.67vw;
+  padding: 3.46vw 4.26vw 3.46vw 4.26vw;
+}
+
+.image-text_14-5 {
+  width: 25.6vw;
+}
+
+.label_2-5 {
+  width: 6.4vw;
+  height: 6.4vw;
+}
+
+.text-group_2-5 {
+  width: 21.34vw;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 5.34vw;
+  margin-top: 0.54vw;
+}
+
+.thumbnail_4-5 {
+  width: 5.34vw;
+  height: 5.34vw;
+  margin: 0.53vw 0 0.53vw 52vw;
+}
+
+.list-items_1-6 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  width: 91.47vw;
+  height: 13.34vw;
+  margin-bottom: 2.67vw;
+  padding: 3.46vw 4.26vw 3.46vw 4.26vw;
+}
+
+.image-text_14-6 {
+  width: 25.6vw;
+}
+
+.label_2-6 {
+  width: 6.4vw;
+  height: 6.4vw;
+}
+
+.text-group_2-6 {
+  width: 21.34vw;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 5.34vw;
+  margin-top: 0.54vw;
+}
+
+.thumbnail_4-6 {
+  width: 5.34vw;
+  height: 5.34vw;
+  margin: 0.53vw 0 0.53vw 52vw;
+}
+
+.list-items_1-7 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  width: 91.47vw;
+  height: 13.34vw;
+  margin-bottom: 2.67vw;
+  padding: 3.46vw 4.26vw 3.46vw 4.26vw;
+}
+
+.image-text_14-7 {
+  width: 25.6vw;
+}
+
+.label_2-7 {
+  width: 6.4vw;
+  height: 6.4vw;
+}
+
+.text-group_2-7 {
+  width: 21.34vw;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 5.34vw;
+  margin-top: 0.54vw;
+}
+
+.thumbnail_4-7 {
+  width: 5.34vw;
+  height: 5.34vw;
+  margin: 0.53vw 0 0.53vw 52vw;
+}
+
+.section_3 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  margin: 2.66vw 0.53vw 0 0;
+  padding: 3.46vw 4.53vw 4.26vw 4.26vw;
+}
+
+.group_8 {
+  margin-right: 57.07vw;
+}
+
+.image-text_16 {
+  width: 25.6vw;
+}
+
+.label_3 {
+  width: 6.4vw;
+  height: 6.4vw;
+}
+
+.text-group_4 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 4.26vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 5.34vw;
+  margin-top: 0.54vw;
+}
+
+.group_9 {
+  width: 82.14vw;
+  margin: 3.2vw 0 0 0.53vw;
+}
+
+.box_1 {
+  background-color: rgba(242, 242, 242, 1);
+  border-radius: 8px;
+  padding: 3.73vw 18.13vw 4vw 4.26vw;
+}
+
+.image-text_17 {
+  width: 16.54vw;
+}
+
+.thumbnail_5 {
+  width: 5.34vw;
+  height: 5.34vw;
+  margin-top: 0.27vw;
+}
+
+.text-group_5 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 3.73vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 5.34vw;
+}
+
+.box_2 {
+  background-color: rgba(242, 242, 242, 1);
+  border-radius: 8px;
+  padding: 3.73vw 3.2vw 4vw 4.26vw;
+}
+
+.image-text_18 {
+  width: 31.47vw;
+}
+
+.thumbnail_6 {
+  width: 5.34vw;
+  height: 5.07vw;
+  margin-top: 0.54vw;
+}
+
+.text-group_6 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 3.73vw;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 5.34vw;
+}
+
+.group_2 {
+  position: absolute;
+  left: 0.27vw;
+  top: 194.4vw;
+  width: 99.74vw;
+  height: 22.14vw;
+  background: url(./img/SketchPng8abb8e6d1dddfc227bb456d4c7952f48cfc84cb4381e6b8418b669784ae7a948.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+}
+
+.group_3 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 11.47vw;
+  background: url(./img/SketchPng766933983dac5a9143214a1a80ce9b814fe68d5661a4178ed0ce25835ca752db.png)
+    0vw -0.27vw no-repeat;
+  background-size: 99.73vw 12vw;
+  justify-content: flex-center;
+  padding: 2.13vw 21.33vw 0.26vw 21.06vw;
+}
+
+.label_4 {
+  width: 8.54vw;
+  height: 8.54vw;
+  margin-bottom: 0.54vw;
+}
+
+.group_4 {
+  width: 8.54vw;
+  height: 8.54vw;
+  background: url(./img/SketchPng20731b13ab6cf82bfd18f6ead2daf696af9eac020c7ee9a49addff272110c630.png) -5.6vw -5.6vw
+    no-repeat;
+  background-size: 19.73vw 19.73vw;
+  margin: 0.53vw 0 0 16.53vw;
+}
+
+.label_5 {
+  width: 8.54vw;
+  height: 8.54vw;
+  margin: 0 0 0.53vw 15.46vw;
+}
+
+.image-wrapper_1 {
+  height: 11.2vw;
+  background: url(./img/SketchPng8f4eea73c199b41dde0373b0310de30124297f318a53469ff430522c131e7515.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  width: 11.2vw;
+  position: absolute;
+  left: 44.8vw;
+  top: -1.33vw;
+  padding: 3.73vw 3.73vw 3.73vw 3.73vw;
+}
+
+.thumbnail_9 {
+  width: 3.74vw;
+  height: 3.74vw;
+}
+
+.image_5 {
+  position: absolute;
+  left: -0.26vw;
+  top: 13.07vw;
+  width: 100vw;
+  height: 9.07vw;
+}

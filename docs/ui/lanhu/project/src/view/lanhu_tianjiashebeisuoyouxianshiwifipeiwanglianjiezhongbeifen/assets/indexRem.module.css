@@ -1,0 +1,257 @@
+html {
+  font-size: 37.5px;
+}
+
+.page {
+  background-color: rgba(242, 242, 242, 1);
+  position: relative;
+  width: 10rem;
+  height: 21.654rem;
+  overflow: hidden;
+}
+
+.section_1 {
+}
+
+.box_1 {
+  position: relative;
+  margin-bottom: 0.88rem;
+  padding: 0.4rem 0.374rem 0.454rem 0.32rem;
+}
+
+.group_1 {
+  margin-left: 0.507rem;
+}
+
+.text_1 {
+  height: 0.4rem;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.4rem;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 0.4rem;
+}
+
+.thumbnail_1 {
+  width: 0.48rem;
+  height: 0.294rem;
+  margin: 0.08rem 0 0.027rem 6.187rem;
+}
+
+.thumbnail_2 {
+  width: 0.4rem;
+  height: 0.294rem;
+  margin: 0.08rem 0 0.027rem 0.107rem;
+}
+
+.image_1 {
+  width: 0.667rem;
+  height: 0.32rem;
+  margin: 0.054rem 0 0.027rem 0.134rem;
+}
+
+.image-text_1 {
+  width: 8.187rem;
+  margin: 0.587rem 1.12rem 0 0;
+}
+
+.label_1 {
+  width: 0.747rem;
+  height: 0.747rem;
+}
+
+.text-group_1 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 0.587rem;
+  margin-top: 0.08rem;
+}
+
+.image_2 {
+  width: 1.867rem;
+  height: 1.867rem;
+  align-self: center;
+  margin-top: 2.48rem;
+}
+
+.text_2 {
+  overflow-wrap: break-word;
+  color: rgba(51, 51, 51, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 0.32rem;
+  margin: 0.32rem 3.76rem 0 3.84rem;
+}
+
+.text_3 {
+  overflow-wrap: break-word;
+  color: rgba(154, 154, 158, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.32rem;
+  margin: 1.147rem 4.24rem 0 0.107rem;
+}
+
+.group_2 {
+  width: 8.907rem;
+  margin: 0.534rem 0.187rem 0 0.214rem;
+}
+
+.text_4 {
+  overflow-wrap: break-word;
+  color: rgba(51, 51, 51, 1);
+  font-size: 0.373rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.534rem;
+}
+
+.thumbnail_3 {
+  width: 0.347rem;
+  height: 0.24rem;
+  margin: 0.214rem 0 0.08rem 0;
+}
+
+.group_3 {
+  width: 8.907rem;
+  margin: 0.32rem 0.187rem 0 0.214rem;
+}
+
+.text_5 {
+  overflow-wrap: break-word;
+  color: rgba(51, 51, 51, 1);
+  font-size: 0.373rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.534rem;
+}
+
+.thumbnail_4 {
+  width: 0.347rem;
+  height: 0.24rem;
+  margin: 0.16rem 0 0.134rem 0;
+}
+
+.group_4 {
+  width: 8.934rem;
+  margin: 0.32rem 0.16rem 0 0.214rem;
+}
+
+.text_6 {
+  overflow-wrap: break-word;
+  color: rgba(51, 51, 51, 1);
+  font-size: 0.373rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.534rem;
+}
+
+.thumbnail_5 {
+  width: 0.454rem;
+  height: 0.454rem;
+  margin: 0.027rem 0 0.054rem 0;
+}
+
+.group_5 {
+  width: 8.774rem;
+  margin: 0.32rem 0.32rem 0 0.214rem;
+}
+
+.text_7 {
+  overflow-wrap: break-word;
+  color: rgba(51, 51, 51, 1);
+  font-size: 0.373rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.534rem;
+}
+
+.block_1 {
+  background-color: rgba(204, 204, 204, 1);
+  border-radius: 50%;
+  width: 0.107rem;
+  height: 0.107rem;
+  margin: 0.214rem 0 0.214rem 0;
+}
+
+.text-wrapper_1 {
+  background-color: rgba(0, 0, 0, 1);
+  border-radius: 8px;
+  margin: 6.88rem 0.054rem 0 0.107rem;
+  padding: 0.427rem 0.854rem 0.427rem 0.854rem;
+}
+
+.text_8 {
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 0.374rem;
+}
+
+.text-wrapper_2 {
+  position: absolute;
+  left: 2.854rem;
+  top: 3.414rem;
+  width: 4.32rem;
+  height: 2.16rem;
+  background: url(./img/SketchPng082b42d36bf08f5a6c9bb35a30dd06cb0b5d471974afa516f27ba823116cccaa.png) -0.027rem -0.027rem
+    no-repeat;
+  background-size: 4.374rem 2.187rem;
+  padding: 0.534rem 1.654rem 0.987rem 1.974rem;
+}
+
+.text_9 {
+  height: 0.64rem;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.64rem;
+  font-family: DINCondensed-Bold;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 0.774rem;
+}
+
+.text_10 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.32rem;
+  margin-top: 0.16rem;
+}
+
+.image_3 {
+  width: 10rem;
+  height: 0.907rem;
+  margin: 20.747rem 0 0 -10rem;
+}

@@ -1,0 +1,70 @@
+{
+  "capturedOn": "2026-11-01",
+  "timezone": "Asia/Shanghai",
+  "projectName": "AS智能家居UI设计",
+  "projectId": "67947f53-9582-4aad-94c9-9c597e404599",
+  "teamId": "fadf0d8e-ba91-4bb8-a05a-e0cad085545e",
+  "projectUrl": "https://lanhuapp.com/web/#/item/project/stage?tid=fadf0d8e-ba91-4bb8-a05a-e0cad085545e&pid=67947f53-9582-4aad-94c9-9c597e404599",
+  "reportedCount": 157,
+  "exportListSource": "蓝湖代码下载 > 选择页面；按 DOM 中的 page-box 顺序记录 index、页面原名和 img src。export-pages.tsv 的封面完整地址为 https://alipic.lanhuapp.com/SketchCover 加 cover_hash。",
+  "groups": [
+    {"name":"交互流程图","reportedCount":4},
+    {"name":"切图","reportedCount":1},
+    {"name":"酒柜设备页","reportedCount":24},
+    {"name":"登录","reportedCount":14},
+    {"name":"注册","reportedCount":18},
+    {"name":"我的","reportedCount":46},
+    {"name":"设备页","reportedCount":8},
+    {"name":"添加设备","reportedCount":30},
+    {"name":"扫一扫","reportedCount":5},
+    {"name":"首页","reportedCount":6},
+    {"name":"设计规范","reportedCount":1},
+    {"name":"未分组","reportedCount":0}
+  ],
+  "verifiedGroupAssignments": {
+    "登录": [0,51,52,53,54,55,56,57,125,126,127,128,129,130]
+  },
+  "verifiedPages": {
+    "0": {
+      "name":"登录",
+      "pageId":"1bb5554f-833e-4934-9e63-469c29016a7b",
+      "versionId":"0b41deb8-dc09-4095-9c7c-1f849c92d064",
+      "versionLabel":"版本1",
+      "versionDateText":"8月19日 15:11",
+      "sourceUrl":"https://lanhuapp.com/web/#/item/project/detailDetach?tid=fadf0d8e-ba91-4bb8-a05a-e0cad085545e&pid=67947f53-9582-4aad-94c9-9c597e404599&project_id=67947f53-9582-4aad-94c9-9c597e404599&image_id=1bb5554f-833e-4934-9e63-469c29016a7b&fromEditor=true&type=image&keepPage=true&ddsUrl=https%3A%2F%2Fdds.lanhuapp.com%2F%23%2F%3Ffrom%3Dboard%26version_id%3D0b41deb8-dc09-4095-9c7c-1f849c92d064%26source%3Dcanvas_page%26plugin%3Dimage&paramsDDS=%7B%22name%22%3A%22%E7%99%BB%E5%BD%95%22,%22source%22%3A%22canvas_page%22%7D",
+      "codeSourceUrl":"https://dds.lanhuapp.com/#/?from=board&version_id=0b41deb8-dc09-4095-9c7c-1f849c92d064&source=canvas_page&plugin=image",
+      "codeCaptureMethod":"只读 CodeMirror 编辑区，使用界面全选后读取 DOM textarea 选区值；未访问应用内部状态。",
+      "capturedCodeFiles":["code/react/index.jsx"],
+      "missingCodeFiles":["code/react/index.css","code/react/common.css"]
+    }
+  },
+  "availableFrameworkOptions": ["HTML","Vue.js","React","微信小程序","uni-app"],
+  "availableStyleOptions": ["CSS","Less","Scss"],
+  "attempts": [
+    {"action":"整项目全选导出 Vue.js / CSS / 不选择组件库","result":"已观察到下载包构建中及请勿关闭和离开页面；提示消失后未取得下载文件。用户随后明确确认：没有下载。"},
+    {"action":"登录单页导出及下载事件监听","result":"等待下载事件时工具超时并重置连接，未取得文件；不证明页面无代码。"},
+    {"action":"原详情页重新附加","result":"连续两次 Debugger unattached。"},
+    {"action":"单独打开已观察到的 DDS 子页面并读取 React","result":"成功读取完整 React 编辑区选区并按原文保存。"},
+    {"action":"读取 CSS 编辑区选区","result":"连续两次 CDP operation exceeded its deadline before command dispatch，未保存不完整 CSS。"},
+    {"action":"原始标注及切图","result":"尚未逐页完成读取；状态为未完成，不能认定为蓝湖未提供。"},
+    {"action":"浏览器 pageAssets 资源导出","result":"230 个资源成功、9 个失败；项目相关资源为缩放封面预览图，其余为平台界面资源。"},
+    {"action":"读取 chrome://downloads/","result":"浏览器 URL 安全策略拒绝内部协议；未绕过，未通过其他界面读取下载管理记录。"}
+  ],
+  "followUpImport": {
+    "date": "2026-11-01",
+    "source": "用户随后提供已手动下载的 LanhuProject.zip。本轮归档是用户文件导入，不将此前自动下载失败改写为成功。",
+    "archivePath": "raw/LanhuProject.zip",
+    "framework": "React",
+    "pageCount": 157,
+    "cssCount": 472,
+    "pngCount": 2846,
+    "indexPath": "raw/react-export-index.json",
+    "identityLimitation": "ZIP 不含蓝湖页面 UUID/版本；原名拼音目录与内容关联不能替代身份和版本核实。"
+  },
+  "rulings": [
+    "页面 ID、版本或分组未取得时使用 null；本地 archiveId 仅标识归档条目，不冒充蓝湖 ID。",
+    "未取得页面 ID 的条目放入 pages/待核对/<archiveId>/；仅登录分组的 14 项有明确页面树归属。",
+    "缩放 WebP 仅标记为 preview；既有 PNG 仅记录名称匹配候选，不作为此次原图下载成功。",
+    "资料归档不涉及运行工程；不增加应用测试、不执行旧 RN lint/typecheck、不自动提交当前工作区。"
+  ]
+}

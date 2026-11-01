@@ -1,0 +1,344 @@
+html {
+  font-size: 37.5px;
+}
+
+.page {
+  background-color: rgba(242, 242, 242, 1);
+  position: relative;
+  width: 10rem;
+  height: 21.654rem;
+  overflow: hidden;
+}
+
+.group_4 {
+  padding: 0.4rem 0.374rem 0.294rem 0.32rem;
+}
+
+.section_7 {
+  margin-left: 0.507rem;
+}
+
+.text_1 {
+  height: 0.4rem;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.4rem;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 0.4rem;
+}
+
+.thumbnail_1 {
+  width: 0.48rem;
+  height: 0.294rem;
+  margin: 0.08rem 0 0.027rem 6.16rem;
+}
+
+.thumbnail_2 {
+  width: 0.4rem;
+  height: 0.294rem;
+  margin: 0.08rem 0 0.027rem 0.107rem;
+}
+
+.image_1 {
+  width: 0.667rem;
+  height: 0.32rem;
+  margin: 0.054rem 0 0.027rem 0.134rem;
+}
+
+.image-text_5 {
+  width: 8.187rem;
+  margin: 0.587rem 1.12rem 0 0;
+}
+
+.label_10 {
+  width: 0.747rem;
+  height: 0.747rem;
+}
+
+.text-group_4 {
+  position: relative;
+  margin: 0.08rem 0 0.08rem 0;
+}
+
+.text_12 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 0.587rem;
+}
+
+.text_13 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 0.587rem;
+}
+
+.group_2 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  width: 9.147rem;
+  margin: 0.64rem 0.054rem 0 0.107rem;
+  padding: 0.24rem 0.427rem 0.24rem 0.427rem;
+}
+
+.image-text_6 {
+  width: 4.08rem;
+}
+
+.image-wrapper_1 {
+  background: url(./img/cb4c4567bacb4883909217cc52a4ffab_mergeImage.png)
+    100% no-repeat;
+  background-size: 100% 100%;
+  padding: 0.107rem 0.16rem 0.08rem 0.107rem;
+}
+
+.label_2 {
+  width: 0.587rem;
+  height: 0.667rem;
+}
+
+.text-group_2 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.534rem;
+  margin-top: 0.16rem;
+}
+
+.thumbnail_3 {
+  width: 0.534rem;
+  height: 0.534rem;
+  margin: 0.16rem 0 0.16rem 0;
+}
+
+.section_2 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  width: 9.147rem;
+  align-self: center;
+  margin-top: -0.026rem;
+  padding-bottom: 0.427rem;
+}
+
+.section_3 {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  width: 9.147rem;
+  padding: 0.4rem 0.427rem 0.4rem 0.427rem;
+}
+
+.text_4 {
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.534rem;
+}
+
+.thumbnail_4 {
+  width: 0.534rem;
+  height: 0.534rem;
+}
+
+.text_5 {
+  width: 8.294rem;
+  height: 6.214rem;
+  overflow-wrap: break-word;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.373rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  line-height: 0.64rem;
+  align-self: center;
+  margin-top: 0.454rem;
+}
+
+.block_3 {
+  width: 8.267rem;
+  margin: 0.427rem 0.454rem 0 0.427rem;
+}
+
+.image-wrapper_2 {
+  border-radius: 12px;
+  background-image: url(./img/924ce646280f469aa9084b0afb164619_mergeImage.png);
+  padding: 0 0 1.227rem 1.227rem;
+}
+
+.label_3 {
+  width: 0.64rem;
+  height: 0.64rem;
+}
+
+.image-wrapper_3 {
+  border-radius: 12px;
+  background-image: url(./img/978e6e2ace99474eaafc97f12fb4e2be_mergeImage.png);
+  padding: 0 0 1.227rem 1.227rem;
+}
+
+.label_4 {
+  width: 0.64rem;
+  height: 0.64rem;
+}
+
+.image-wrapper_4 {
+  border-radius: 12px;
+  background-image: url(./img/445d6da3e5544c7aba4afa69c1ac1b43_mergeImage.png);
+  padding: 0 0 1.227rem 1.227rem;
+}
+
+.label_5 {
+  width: 0.64rem;
+  height: 0.64rem;
+}
+
+.image_2 {
+  width: 1.867rem;
+  height: 1.867rem;
+}
+
+.text_6 {
+  overflow-wrap: break-word;
+  color: rgba(153, 153, 153, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.427rem;
+  margin: 0.214rem 5.84rem 0 0.534rem;
+}
+
+.block_4 {
+  width: 4rem;
+  margin: 0.427rem 4.72rem 0 0.427rem;
+}
+
+.image-wrapper_5 {
+  border-radius: 12px;
+  background-image: url(./img/0131244cdf0141c19a43154ac441e03c_mergeImage.png);
+  padding: 0 0 1.227rem 1.227rem;
+}
+
+.label_6 {
+  width: 0.64rem;
+  height: 0.64rem;
+}
+
+.image-wrapper_6 {
+  border-radius: 12px;
+  background-image: url(./img/ea04f2ca6cef4bb6a2eabd81baeb7e23_mergeImage.png);
+  padding: 0 0 1.227rem 1.227rem;
+}
+
+.label_7 {
+  width: 0.64rem;
+  height: 0.64rem;
+}
+
+.text_7 {
+  overflow-wrap: break-word;
+  color: rgba(153, 153, 153, 1);
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.427rem;
+  margin: 0.214rem 5.84rem 0 0.534rem;
+}
+
+.text-wrapper_3 {
+  background-color: rgba(0, 0, 0, 1);
+  border-radius: 8px;
+  align-self: center;
+  margin-top: 0.427rem;
+  width: 9.147rem;
+  padding: 0.427rem 0.854rem 0.427rem 0.854rem;
+}
+
+.text_14 {
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 0.426rem;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 0.374rem;
+}
+
+.image_7 {
+  width: 10rem;
+  height: 0.907rem;
+  margin: 0.427rem 0.054rem 0 -0.054rem;
+}
+
+.section_6 {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 10rem;
+  height: 21.654rem;
+  padding: 0 0.027rem 7.974rem 0;
+}
+
+.box_2 {
+  margin-bottom: 5.68rem;
+  padding: 1.067rem 0.427rem 6.08rem 7.654rem;
+}
+
+.block_5 {
+  width: 1.92rem;
+}
+
+.text-wrapper_4 {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 0.16rem 0.134rem 0.16rem 0.134rem;
+}
+
+.text_15 {
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 0.373rem;
+  font-family: PingFangSC-Regular;
+  font-weight: NaN;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 0.534rem;
+}
+
+.label_8 {
+  width: 0.854rem;
+  height: 0.854rem;
+}
+
+.image_4 {
+  width: 9.947rem;
+  height: 5.707rem;
+  margin: 7.974rem 0 0 -9.974rem;
+}
