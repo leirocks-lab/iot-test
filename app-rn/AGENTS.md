@@ -7,6 +7,13 @@
 
 # app-rn：Expo/RN 开发规则
 
+## 当前阶段实现依据
+
+- HTTP 接口与 App 产品功能、页面及业务流程参考 [V1.4](../docs/prd/ROWAN公共App产品功能及API详细设计说明书_V1.4.docx)。
+- 仅 MQTT 部分参考 [V1.6 Corrected](../docs/prd/ROWAN_AS_App_Spec_V1.6_Corrected.docx)，不得将其非 MQTT 内容用于替代 V1.4；交叉约定有冲突时先记录并确认。
+- 页面视觉样式按 [蓝湖地址](../docs/ui/蓝湖地址.txt) 对应设计稿还原，`../docs/ui/` 导出图辅助核对布局、间距、字体、颜色、图标、图片及状态样式；设计稿不改变已确定的功能和接口依据，不授权新增功能。蓝湖访问受限或与导出图不一致时记录待核对项，不臆造设计参数。
+- 产品文档只补充已授权业务范围内的细节，不授权新增功能。
+
 This directory contains the existing Expo/React Native project during migration to the native + RN architecture. Prioritize mobile-first patterns, performance, and cross-platform compatibility.
 
 所有命令在 `app-rn/` 执行。正式原生宿主位于 `../android-as/` 和 `../ios-as/`；本目录下 `android/`、`ios/` 仅是 Expo 生成内容，不得移作正式宿主。现有全局页面作为迁移基线暂存，通过原生替代验收后再移除。
