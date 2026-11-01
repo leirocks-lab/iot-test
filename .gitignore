@@ -8,6 +8,8 @@ node_modules/
 /ios/
 /app-rn/android/
 /app-rn/ios/
+/app-rn-old/android/
+/app-rn-old/ios/
 web-build/
 
 # Local environment and secrets
@@ -27,6 +29,23 @@ coverage/
 *.tsbuildinfo
 .turbo/
 
+# Native build outputs and machine-specific state
+/android-as/.gradle/
+/android-as/.cxx/
+/android-as/local.properties
+/android-as/build/
+/android-as/app/build/
+/android-as/app/.cxx/
+/ios-as/Pods/
+/ios-as/build/
+/ios-as/DerivedData/
+xcuserdata/
+*.xcuserstate
+*.xcarchive/
+*.ipa
+*.apk
+*.aab
+
 # Local agent execution state
 .superpowers/
 .codex-tmp/
@@ -34,6 +53,7 @@ coverage/
 # Local caches and one-off task files
 /.cache/
 /app-rn/.cache/
+/app-rn-old/.cache/
 /.mock-*
 /.worktrees/
 
@@ -53,6 +73,7 @@ expo-env.d.ts
 *.pem
 # Public certificate only; private keys remain ignored.
 !app-rn/certs/rowan-dev-backend.pem
+!app-rn-old/certs/rowan-dev-backend.pem
 .metro-health-check*
 npm-debug.*
 yarn-debug.*

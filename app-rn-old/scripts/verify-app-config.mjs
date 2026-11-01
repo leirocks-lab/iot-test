@@ -19,18 +19,18 @@ function assert(condition, message) {
 }
 
 function assertCommandWiring() {
-  for (const directory of ['docs', 'android-as', 'ios-as', 'app-rn']) {
+  for (const directory of ['docs', 'android-as', 'ios-as', 'app-rn-old', 'app-rn']) {
     assert(existsSync(join(repositoryRoot, directory)), `Missing refactor directory: ${directory}`);
   }
-  assert(applicationRoot === join(repositoryRoot, 'app-rn'), 'RN application must live in app-rn');
+  assert(applicationRoot === join(repositoryRoot, 'app-rn-old'), 'RN application must live in app-rn-old');
   assert(!existsSync(join(repositoryRoot, 'package.json')), 'Repository root must not be a second Node application');
   const rootPackage = readJson(join(applicationRoot, 'package.json'));
-  assert(rootPackage.main === 'expo-router/entry', 'app-rn package must be the Expo Router migration baseline');
+  assert(rootPackage.main === 'expo-router/entry', 'app-rn-old package must be the Expo Router migration baseline');
   assert(!Object.values(rootPackage.dependencies ?? {}).some((value) => value.startsWith('workspace:')), 'Workspace dependencies must be removed');
   const pnpmSettings = parse(readFileSync(join(applicationRoot, 'pnpm-workspace.yaml'), 'utf8'));
   assert(!pnpmSettings.packages && !pnpmSettings.catalog && !pnpmSettings.catalogs, 'pnpm settings must not define a monorepo');
   const lock = parse(readFileSync(join(applicationRoot, 'pnpm-lock.yaml'), 'utf8'));
-  assert(Object.keys(lock.importers).length === 1 && lock.importers['.'], 'Lockfile must describe only the app-rn application');
+  assert(Object.keys(lock.importers).length === 1 && lock.importers['.'], 'Lockfile must describe only the app-rn-old application');
   assert(!existsSync(join(repositoryRoot, 'apps')) && !existsSync(join(repositoryRoot, 'packages')), 'Old monorepo directories must be removed');
   const requiredRootScripts = [
     'dev',

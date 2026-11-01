@@ -12,26 +12,31 @@
 - 仅 MQTT 部分参考 [ROWAN_AS_App_Spec_V1.6_Corrected](docs/prd/ROWAN_AS_App_Spec_V1.6_Corrected.docx)；不得将 V1.6 的非 MQTT 内容作为当前阶段的实现依据。
 - 页面视觉样式按 [docs/ui/蓝湖地址.txt](docs/ui/蓝湖地址.txt) 指向的蓝湖设计稿还原，包括布局、间距、字体、颜色、图标、图片及各状态样式；`docs/ui/` 中的导出图作为辅助参考。设计稿不改变 HTTP/App、MQTT 的依据分工，也不授权新增业务功能。访问受限或与本地导出图不一致时记录待核对项，不自行认定最新版或臆造设计参数。
 - 上述分工不改变唯一业务范围约束。HTTP/App 与 MQTT 的交叉约定出现冲突时，记录差异并确认，不直接用 V1.6 覆盖 V1.4。
+- 重构以已确认的业务流程、协议语义、视觉要求及最终可观察结果为验收依据；旧代码仅供理解业务和对照，不约束新架构、接口形态、状态机、导航、依赖或代码组织。实现可重新设计或重写，不要求逐文件迁移、保留旧接口或复刻旧缺陷；旧行为与正式依据冲突时记录差异并确认。
 
 ## 架构与目录
 
 - `docs/`：原始资料、需求范围、SDD、计划和验收证据；架构方案见 [SDD](docs/SDD/2026-11-01-原生与RN混合架构重构方案.md)。
 - `android-as/`：Android 原生宿主、页面及平台服务，正式源码纳入 Git。
 - `ios-as/`：iOS 原生宿主、页面及平台服务，正式源码纳入 Git。
-- `app-rn/`：共享 RN 项目；当前保留完整旧工程作迁移基线，最终只承载设备子流程。
+- `app-rn-old/`：重构前完整 Expo/RN 工程及迁移对照基线，保留现有源码、资源和工具。
+- `app-rn/`：重构后的共享 RN 设备模块；当前已建立职责目录、规则和构建命名说明，尚未初始化运行工程。三端结构、环境和产物命名统一见根 README。
 - RN 页面包括从首页设备列表进入后的控制、更多、设备内分享、定时及固件升级。首页、账号、添加设备列表、扫码、配网、我的、房间及全局设置采用原生。
 - 原生统一管理全局导航、账号及安全存储、设备通信、权限、配网、升级任务、RN 容器和资源包。
 - RN 与原生通过版本化契约通信，不各自维护登录态或互相争抢设备会话。
 
 ## 工程与命令
 
-- RN 安装、启动、检查和导出在 `app-rn/` 执行，使用其 package.json 与 pnpm-lock.yaml；例如 `pnpm --dir app-rn lint`。
-- RN 具体规则见 [app-rn/AGENTS.md](app-rn/AGENTS.md)。修改 Expo、EAS 或 RN API 前，读取 app-rn/package.json 并查阅匹配版本的官方文档，不从记忆实现。
+- 原生与 RN 的实现及评审遵循 [代码规范](docs/SDD/原生与RN代码规范.md)；技术要求及评审清单不改变业务范围或表示相关能力已完成。
+- 目标分层、服务所有权、桥接及事件一致性见 [架构及通信设计](docs/SDD/原生与RN架构及通信设计.md)。TurboModule 为待双端技术验证的推荐方案，不能以文档或旧工程结果代替集成验收。
+
+- 旧工程安装、启动、检查和导出在 `app-rn-old/` 执行，例如 `pnpm --dir app-rn-old lint`。新 `app-rn/` 尚无 package.json，不能直接执行这些命令；初始化后使用自己的依赖、锁文件及检查命令。
+- 新 RN 规则见 [app-rn/AGENTS.md](app-rn/AGENTS.md)，旧工程规则见 [app-rn-old/AGENTS.md](app-rn-old/AGENTS.md)。修改 Expo、EAS 或 RN API 前，读取对应工程的 package.json 并查阅匹配版本官方文档，不从记忆实现。
 - 全局导航由原生管理；Expo Router 仅用于 RN 内部导航和迁移期旧工程。
 - `android-as/`、`ios-as/` 不由 Expo prebuild 管理，禁止用 `prebuild --clean` 覆盖。
-- `app-rn/android/`、`app-rn/ios/` 是 Expo 生成内容，原生行为仍通过 app-rn/app.config.ts、Config Plugin 或 Expo Module 配置。
+- `app-rn-old/android/`、`app-rn-old/ios/` 是旧 Expo 生成内容，旧工程原生行为仍通过其 app.config.ts、Config Plugin 或 Expo Module 配置。
 - 原生构建工具链和第三方 SDK 需在技术验证后锁定，未建宿主时不能宣称原生编译通过。
-- 完成 RN 相关变更前运行 `pnpm --dir app-rn lint` 和 `pnpm --dir app-rn typecheck`；按改动执行相关测试和配置检查。
+- 完成旧 RN 相关变更前运行 `pnpm --dir app-rn-old lint` 和 `pnpm --dir app-rn-old typecheck`；新 RN 初始化后运行其 lint 和 typecheck；按改动执行相关测试和配置检查。
 - 测试或 Bundle 导出成功不等于双端签名构建、真机通信或完整业务验收通过。
 
 ## 文档与交付
