@@ -1,0 +1,130 @@
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+Warning: SDK processing. This version only understands SDK XML versions up to 3 but an SDK XML file of version 4 was encountered. This can happen if you use versions of Android Studio and the command-line tools that were released at different times.
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateAutolinkingNewArchitectureFiles
+> Task :app:generateAutolinkingPackageList
+> Task :app:generateCodegenSchemaFromJavaScript
+> Task :app:generateCodegenArtifactsFromSchema
+> Task :app:generateReactNativeEntryPoint
+> Task :app:preBuild
+> Task :app:preDevelopmentDebugBuild
+> Task :app:generateDevelopmentDebugBuildConfig
+> Task :app:checkDevelopmentDebugAarMetadata
+> Task :app:generateDevelopmentDebugResValues
+> Task :app:mapDevelopmentDebugSourceSetPaths
+> Task :app:generateDevelopmentDebugResources
+> Task :app:packageDevelopmentDebugResources
+> Task :app:parseDevelopmentDebugLocalResources
+> Task :app:createDevelopmentDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDevelopmentDebug
+> Task :app:mergeDevelopmentDebugResources
+> Task :app:processDevelopmentDebugMainManifest
+> Task :app:processDevelopmentDebugManifest
+> Task :app:processDevelopmentDebugManifestForPackage
+> Task :app:javaPreCompileDevelopmentDebug
+> Task :app:preDevelopmentDebugAndroidTestBuild SKIPPED
+> Task :app:generateDevelopmentDebugAndroidTestResValues
+> Task :app:extractProguardFiles
+> Task :app:preDevelopmentDebugUnitTestBuild
+> Task :app:processDevelopmentDebugResources
+> Task :app:compileDevelopmentDebugKotlin
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/domain/device/ota/OtaContracts.kt:4:21 Non-public primary constructor is exposed via the generated 'copy()' method of the 'data' class.
+
+The generated 'copy()' will change its visibility in future releases.
+
+To suppress the warning do one of the following:
+- Annotate the data class with the '@ConsistentCopyVisibility' annotation.
+- Use the '-Xconsistent-data-class-copy-visibility' compiler flag.
+- Annotate the data class with the '@ExposedCopyVisibility' annotation 
+  (Discouraged, but can be used to keep binary compatibility).
+
+To learn more, see the documentation of the '@ConsistentCopyVisibility' and '@ExposedCopyVisibility' annotations.
+
+This will become an error in Kotlin 2.2.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/domain/device/ota/OtaContracts.kt:32:27 Non-public primary constructor is exposed via the generated 'copy()' method of the 'data' class.
+
+The generated 'copy()' will change its visibility in future releases.
+
+To suppress the warning do one of the following:
+- Annotate the data class with the '@ConsistentCopyVisibility' annotation.
+- Use the '-Xconsistent-data-class-copy-visibility' compiler flag.
+- Annotate the data class with the '@ExposedCopyVisibility' annotation 
+  (Discouraged, but can be used to keep binary compatibility).
+
+To learn more, see the documentation of the '@ConsistentCopyVisibility' and '@ExposedCopyVisibility' annotations.
+
+This will become an error in Kotlin 2.2.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/domain/device/ota/OtaContracts.kt:37:28 Non-public primary constructor is exposed via the generated 'copy()' method of the 'data' class.
+
+The generated 'copy()' will change its visibility in future releases.
+
+To suppress the warning do one of the following:
+- Annotate the data class with the '@ConsistentCopyVisibility' annotation.
+- Use the '-Xconsistent-data-class-copy-visibility' compiler flag.
+- Annotate the data class with the '@ExposedCopyVisibility' annotation 
+  (Discouraged, but can be used to keep binary compatibility).
+
+To learn more, see the documentation of the '@ConsistentCopyVisibility' and '@ExposedCopyVisibility' annotations.
+
+This will become an error in Kotlin 2.2.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/AccountActivity.kt:43:49 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/AuthFlowLayout.kt:61:69 'static field SOFT_INPUT_ADJUST_RESIZE: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/RegistrationActivity.kt:160:15 'fun onActivityResult(p0: Int, p1: Int, p2: Intent?): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/WelcomeActivity.kt:28:46 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActivity.kt:69:20 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/preferences/PreferencePageViews.kt:41:29 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/products/ProductViews.kt:37:12 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/products/ProductViews.kt:38:12 'var navigationBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/products/ProductViews.kt:43:16 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/RoomsActivity.kt:106:20 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/RoomsActivity.kt:246:57 'static field SOFT_INPUT_ADJUST_RESIZE: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/scan/ScanActivity.kt:144:47 'fun setTargetResolution(p0: @NonNull() Size): @NonNull() ImageAnalysis.Builder' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/rnhost/DeviceActivity.kt:28:24 'var systemUiVisibility: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/rnhost/DeviceActivity.kt:28:60 'var systemUiVisibility: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/rnhost/DeviceActivity.kt:29:29 'static field SYSTEM_UI_FLAG_LIGHT_STATUS_BAR: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/rnhost/DeviceActivity.kt:30:70 'static field SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR: Int' is deprecated. Deprecated in Java.
+
+> Task :app:compileDevelopmentDebugJavaWithJavac
+> Task :app:bundleDevelopmentDebugClassesToCompileJar
+> Task :app:generateDevelopmentDebugLintReportModel
+> Task :app:generateDevelopmentDebugAndroidTestLintModel
+> Task :app:generateDevelopmentDebugUnitTestLintModel
+> Task :app:lintAnalyzeDevelopmentDebug
+> Task :app:lintAnalyzeDevelopmentDebugAndroidTest
+> Task :app:lintAnalyzeDevelopmentDebugUnitTest
+
+> Task :app:lintReportDevelopmentDebug
+Wrote HTML report to file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/build/reports/lint-results-developmentDebug.html
+
+> Task :app:lintDevelopmentDebug
+
+[Incubating] Problems report is available at: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 5m 31s
+43 actionable tasks: 33 executed, 10 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.3.1/userguide/configuration_cache_enabling.html

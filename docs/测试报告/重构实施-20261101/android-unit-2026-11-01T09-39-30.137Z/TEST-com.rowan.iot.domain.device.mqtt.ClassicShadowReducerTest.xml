@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2026-11-01T09:39:22.618Z" hostname="DESKTOP-2AM89R2" time="0.087">
+  <properties/>
+  <testcase name="snapshotOfAlreadyMatchingValueIsNotNewDeviceConfirmation" classname="com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest" time="0.032"/>
+  <testcase name="alternateProductMappingDoesNotReserveExampleNamesOrMisidentifyDeviceIdProperty" classname="com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest" time="0.003"/>
+  <testcase name="controlRequiresExplicitVerifiedMetadataMapping" classname="com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest" time="0.001"/>
+  <testcase name="controlRequiresExplicitProductDictionaryAndValidatedFields" classname="com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest" time="0.001"/>
+  <testcase name="rejectedResponsesHaveExplicitRecoveryAndNeverInventZeroState" classname="com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest" time="0.011"/>
+  <testcase name="olderParentDeletionKeepsNewerNestedField" classname="com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest" time="0.0"/>
+  <testcase name="successiveTargetsCannotBeCompletedByOlderReportOrOldToken" classname="com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest" time="0.009"/>
+  <testcase name="sameTargetNewCommandRequiresANewReportAfterItsOwnAcceptance" classname="com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest" time="0.004"/>
+  <testcase name="cachedOnlineIsUnknownAfterDisconnectCloseOrRecoveryFailure" classname="com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest" time="0.006"/>
+  <testcase name="invalidPayloadAndUnrelatedRejectedCannotChangeStateOrCommands" classname="com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest" time="0.003"/>
+  <testcase name="timeoutDisconnectAndCloseLeavePendingUnknownAndNeverReplay" classname="com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest" time="0.005"/>
+  <testcase name="newerPartialThenOlderSnapshotFillsMissingFieldsWithoutRollback" classname="com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest" time="0.002"/>
+  <testcase name="oldAndForeignContextsCannotReadWriteAcknowledgeOrMutateState" classname="com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest" time="0.001"/>
+  <testcase name="nestedNullDeletionAndRootDeletionDoNotResurrectFromOldSnapshots" classname="com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest" time="0.002"/>
+  <testcase name="unavailableRequiresRequestedFreshGetBeforeAnotherCommand" classname="com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest" time="0.001"/>
+  <testcase name="reportArrivingBeforeDesiredAcceptedIsRetainedForConfirmation" classname="com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest" time="0.001"/>
+  <testcase name="desiredAndPubackDoNotChangeReportedOrProveDeviceExecution" classname="com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest" time="0.002"/>
+  <testcase name="exactTopicsAndZeroByteQuery" classname="com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

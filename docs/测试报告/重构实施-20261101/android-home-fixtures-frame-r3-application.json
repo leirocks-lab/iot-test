@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-01T20:21:36.416750+00:00",
+  "patch": ".cache/refactor/android-home-ui-fixtures-draft/frame-r3/frame.patch",
+  "patchSha256": "2c38ab8e19e827d4158ccf47ce66fc832faaf84e0b4ba22214465021e671b8f0",
+  "stage": "APPLIED_EXACT_REVIEWED_TEXT_NOT_PLATFORM_VERIFIED",
+  "files": [
+    {
+      "path": "android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/HomeFixtureUi.kt",
+      "beforeSha256": "ec0bc7f903386a6948144ea2bf6bd3a6a3bdaf2c337c96cc6385701d657611e1",
+      "afterSha256": "59cfd6dbfcd5095b61bf4cb6ae3fbcffe14c07751b331575c37797054fa03aaa",
+      "reviewedOverlaySha256": "59cfd6dbfcd5095b61bf4cb6ae3fbcffe14c07751b331575c37797054fa03aaa",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/HomeFixtureInstrumentation.kt",
+      "beforeSha256": "365186d3e3449538d86797d185dac9940cced6e4b65c4f7b05e8ed7aa8c24597",
+      "afterSha256": "ab4f86f51553e24be6e15577d9197de7365b66c2974ece66bac6a0ee9f241db6",
+      "reviewedOverlaySha256": "ab4f86f51553e24be6e15577d9197de7365b66c2974ece66bac6a0ee9f241db6",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    }
+  ]
+}

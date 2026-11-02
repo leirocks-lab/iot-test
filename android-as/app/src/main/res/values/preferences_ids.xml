@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="prefs_title" type="id" />
+    <item name="prefs_status" type="id" />
+    <item name="prefs_reload" type="id" />
+    <item name="prefs_language" type="id" />
+    <item name="prefs_language_zh_cn" type="id" />
+    <item name="prefs_language_zh_tw" type="id" />
+    <item name="prefs_language_en" type="id" />
+    <item name="prefs_theme" type="id" />
+    <item name="prefs_temperature_unit" type="id" />
+    <item name="prefs_measurement_system" type="id" />
+    <item name="prefs_notification" type="id" />
+    <item name="prefs_system_notifications" type="id" />
+    <item name="prefs_wallpaper" type="id" />
+    <item name="prefs_home_layout" type="id" />
+    <item name="prefs_back" type="id" />
+    <item name="mine_title" type="id" />
+    <item name="mine_status" type="id" />
+    <item name="mine_preferences" type="id" />
+    <item name="mine_logout" type="id" />
+    <item name="mine_back" type="id" />
+    <item name="home_mine" type="id" />
+</resources>

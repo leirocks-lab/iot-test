@@ -1,0 +1,4 @@
+#include? "../../Pods/Target Support Files/Pods-RowanTests/Pods-RowanTests.developmentdebug.xcconfig"
+#include "../Common.xcconfig"
+#include "../Environments/Development.xcconfig"
+#include "../Modes/Debug.xcconfig"

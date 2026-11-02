@@ -1,0 +1,117 @@
+{
+  "runId": "2026-11-01T17-05-45.839Z",
+  "parentRunId": "2026-11-01T17-04-26.975Z",
+  "parentReportSha256": "56c609427a147779d22973da431349de75dc3b25ec0339a2e334242017484cd9",
+  "scriptSha256": "9e56ee0f3cf75b8b19f0559d138987237b8122dc58269f3a32ada31cdff0111a",
+  "cameraAppOpsSha256": "9b997bc8bc84a4e699ced92aa212620b5382062cb3e94f7a27a5ab179407cb2e",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "serial": "emulator-5554",
+  "installedArtifactSha256": "b8e50abf3df261d6bcfd556a5d9ea30ca8971e6da7f3d910ba22a7a87a94394f",
+  "sourceBefore": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "5d152ab3684c4f17415e9dd9487deb09b81d9fb9061488dd0ac755d28f7672cc",
+    "sourceFiles": 292
+  },
+  "sourceAfter": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "5d152ab3684c4f17415e9dd9487deb09b81d9fb9061488dd0ac755d28f7672cc",
+    "sourceFiles": 292
+  },
+  "sourceUnchanged": true,
+  "permissionOriginal": {
+    "granted": false,
+    "flags": [
+      "USER_SENSITIVE_WHEN_DENIED",
+      "USER_SENSITIVE_WHEN_GRANTED"
+    ],
+    "appOp": "allow",
+    "uidAppOp": "ignore",
+    "packageEntryPresent": true
+  },
+  "permissionRestoration": {
+    "result": "通过",
+    "observed": {
+      "granted": false,
+      "flags": [
+        "USER_SENSITIVE_WHEN_DENIED",
+        "USER_SENSITIVE_WHEN_GRANTED"
+      ],
+      "appOp": "allow",
+      "uidAppOp": "ignore",
+      "packageEntryPresent": true
+    },
+    "packageEntryPresenceRestored": true,
+    "comparison": "Grant and flags exact; effective package CAMERA mode and UID mode match. AppOp entry/history presence is reported separately."
+  },
+  "media": [
+    {
+      "kind": "normal",
+      "sha256": "08af3ffd005d0100f258abf04b96f9bb916b08062910266e104fc3a11738b593",
+      "staged": true,
+      "registered": true,
+      "generatedRelativePath": "Pictures/rowan-scan-6724cef70094-normal/fixture.png"
+    }
+  ],
+  "mediaCleanup": [
+    {
+      "kind": "normal",
+      "result": "通过"
+    }
+  ],
+  "logout": {
+    "result": "阻塞",
+    "actionCount": 0,
+    "errorCode": "NORMAL_LOGOUT_UNCONFIRMED"
+  },
+  "display": {
+    "changed": false,
+    "restoration": "not-required"
+  },
+  "dnsForwarding": {
+    "upstream": "192.168.31.1",
+    "bindAddress": "127.0.0.1",
+    "bindPort": 53,
+    "running": false,
+    "state": "closed",
+    "lastError": null,
+    "pending": 0,
+    "receivedQueries": 0,
+    "forwardedQueries": 0,
+    "forwardedReplies": 0,
+    "expired": 0,
+    "rejectedQueries": 0,
+    "rejectedReplies": 0,
+    "capacityDrops": 0,
+    "sendErrors": 0,
+    "socketErrors": 0,
+    "durationMs": 104985
+  },
+  "results": [
+    {
+      "id": "camera-denied-album-available",
+      "stage": "actual-camera-permission-denial",
+      "result": "通过",
+      "actualSystemDenial": true
+    },
+    {
+      "id": "scan-software",
+      "stage": "photo-picker-normal",
+      "result": "阻塞",
+      "errorCode": "STABLE_TARGET_UNAVAILABLE"
+    }
+  ],
+  "screenshots": [
+    "2026-11-01T17-05-45.839Z-scan-camera-denied.png"
+  ],
+  "scope": "Actual Home/Add/Scan, real camera denial and system PhotoPicker with fixed identity-free public PNGs, native ZXing decisions. No decoder injection.",
+  "limits": [
+    "No production QR interpretation, binding, upload, control, verification codes or other relationship writes.",
+    "No real camera frame delivery/decode, hardware, iOS or full visual acceptance.",
+    "No raw XML/gallery content/URI/QR/error/CLI dump is archived. Optional screenshots require the known native scan page and denied camera; system picker is never captured. No display, OS or network configuration changes.",
+    "Only generated nonce paths and verified MediaStore rows are deleted; unknown picker layout blocks rather than selecting a real photo.",
+    "Only current validation package CAMERA grant/user-set/user-fixed/effective AppOp mode is restored; Android16 absent package default equals allow. UID mode is independently compared and never written. AppOp entry/history presence and timestamps are not rewound.",
+    "SIGINT/SIGTERM restore after bounded current command; force-kill cannot guarantee finally cleanup."
+  ]
+}

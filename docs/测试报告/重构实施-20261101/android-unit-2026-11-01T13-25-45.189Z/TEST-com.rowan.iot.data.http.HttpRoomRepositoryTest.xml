@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.data.http.HttpRoomRepositoryTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-11-01T13:25:37.770Z" hostname="DESKTOP-2AM89R2" time="0.118">
+  <properties/>
+  <testcase name="staleSortDoesNotOverwriteOtherTerminalChanges" classname="com.rowan.iot.data.http.HttpRoomRepositoryTest" time="0.031"/>
+  <testcase name="cancelledUncooperativeTransportCannotReturnRooms" classname="com.rowan.iot.data.http.HttpRoomRepositoryTest" time="0.007"/>
+  <testcase name="nonEmptyDefaultAndUnknownRoomDeletionAreBlockedWithoutPut" classname="com.rowan.iot.data.http.HttpRoomRepositoryTest" time="0.009"/>
+  <testcase name="createPostsOnlyNameThenVerifiesByGet" classname="com.rowan.iot.data.http.HttpRoomRepositoryTest" time="0.007"/>
+  <testcase name="duplicateNameAndMissingRoomKeepTheirBusinessFailures" classname="com.rowan.iot.data.http.HttpRoomRepositoryTest" time="0.008"/>
+  <testcase name="roomSelectionUsesDefinedLocationEndpointsAndOmissionToUnassign" classname="com.rowan.iot.data.http.HttpRoomRepositoryTest" time="0.007"/>
+  <testcase name="oldAccountCannotStartOrAcceptAResponse" classname="com.rowan.iot.data.http.HttpRoomRepositoryTest" time="0.009"/>
+  <testcase name="deleteOnlyAnEmptyNonDefaultRoomAndConfirmRemoval" classname="com.rowan.iot.data.http.HttpRoomRepositoryTest" time="0.006"/>
+  <testcase name="mutationAcceptanceWithoutMatchingReadbackIsNotReportedAsSuccess" classname="com.rowan.iot.data.http.HttpRoomRepositoryTest" time="0.004"/>
+  <testcase name="listRetainsOpaqueIdTypesAndUnknownCounts" classname="com.rowan.iot.data.http.HttpRoomRepositoryTest" time="0.005"/>
+  <testcase name="renameEncodesOpaquePathAndDoesNotRequireMutationData" classname="com.rowan.iot.data.http.HttpRoomRepositoryTest" time="0.005"/>
+  <testcase name="timeoutDoesNotReplayMutationAndReadbackFailureIsUnknown" classname="com.rowan.iot.data.http.HttpRoomRepositoryTest" time="0.005"/>
+  <testcase name="invalidListDoesNotBecomeEmptyOrInventCounts" classname="com.rowan.iot.data.http.HttpRoomRepositoryTest" time="0.009"/>
+  <testcase name="sortingUsesFreshBaselineAndOnlyDefinedRoomsFields" classname="com.rowan.iot.data.http.HttpRoomRepositoryTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

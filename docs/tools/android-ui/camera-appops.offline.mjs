@@ -1,0 +1,11 @@
+import {strict as assert} from 'node:assert';
+import {parseCameraAppOps,cameraAppOpsEquivalent} from './camera-appops.mjs';
+assert.deepEqual(parseCameraAppOps('Uid mode: CAMERA: ignore\r\n'),{appOp:'default',uidAppOp:'ignore',packageEntryPresent:false});
+assert.deepEqual(parseCameraAppOps('No operations.\r\n'),{appOp:'default',uidAppOp:null,packageEntryPresent:false});
+assert.deepEqual(parseCameraAppOps('Uid mode: CAMERA: foreground\nCAMERA: allow; time=+1s'),{appOp:'allow',uidAppOp:'foreground',packageEntryPresent:true});
+assert.deepEqual(parseCameraAppOps('CAMERA: default'),{appOp:'default',uidAppOp:null,packageEntryPresent:true});
+for(const value of ['', 'Uid mode: CAMERA: unknown','CAMERA: ask','Uid mode: CAMERA: ignore\nUid mode: CAMERA: allow','CAMERA: allow\nCAMERA: ignore','No operations.\nCAMERA: allow'])assert.equal(parseCameraAppOps(value),null);
+assert.equal(cameraAppOpsEquivalent(parseCameraAppOps('Uid mode: CAMERA: ignore'),parseCameraAppOps('Uid mode: CAMERA: ignore\nCAMERA: allow')),true);
+assert.equal(cameraAppOpsEquivalent(parseCameraAppOps('Uid mode: CAMERA: ignore'),parseCameraAppOps('Uid mode: CAMERA: allow\nCAMERA: allow')),false);
+assert.equal(cameraAppOpsEquivalent(parseCameraAppOps('CAMERA: default'),parseCameraAppOps('CAMERA: allow')),false);
+console.log('13 CAMERA AppOp format/default-mode fixtures passed; no ADB or permission changes.');

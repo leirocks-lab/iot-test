@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.data.http.HttpDeviceMoreReadRepositoryTest" tests="15" skipped="0" failures="0" errors="0" timestamp="2026-11-01T23:04:21.121Z" hostname="DESKTOP-2AM89R2" time="0.095">
+  <properties/>
+  <testcase name="duplicateMemberIdsAndMissingIdsFailRatherThanChoosingARole" classname="com.rowan.iot.data.http.HttpDeviceMoreReadRepositoryTest" time="0.015"/>
+  <testcase name="accountChangeWhileReadIsSuspendedCannotPublishOldPrivateData" classname="com.rowan.iot.data.http.HttpDeviceMoreReadRepositoryTest" time="0.008"/>
+  <testcase name="localizedObjectsAndOtherWrongTextTypesAreUnknownNotJsonStrings" classname="com.rowan.iot.data.http.HttpDeviceMoreReadRepositoryTest" time="0.006"/>
+  <testcase name="optionalSummaryTextStaysEmptyAndUnknownRoleDoesNotBecomeAdmin" classname="com.rowan.iot.data.http.HttpDeviceMoreReadRepositoryTest" time="0.003"/>
+  <testcase name="cancellationAfterUncooperativeHttpDoesNotReturnAReadResult" classname="com.rowan.iot.data.http.HttpDeviceMoreReadRepositoryTest" time="0.008"/>
+  <testcase name="wrongUserProofNeverDispatchesEvenAtTheSameRevision" classname="com.rowan.iot.data.http.HttpDeviceMoreReadRepositoryTest" time="0.004"/>
+  <testcase name="oldAccountRevisionNeverDispatchesAnyOfTheThreeReads" classname="com.rowan.iot.data.http.HttpDeviceMoreReadRepositoryTest" time="0.006"/>
+  <testcase name="membersAreAnArrayWithLocalKeysWithoutContactsOrUserIds" classname="com.rowan.iot.data.http.HttpDeviceMoreReadRepositoryTest" time="0.01"/>
+  <testcase name="unknownMemberRoleRemainsUnknownAndEmptyArrayIsAnActualEmptyResult" classname="com.rowan.iot.data.http.HttpDeviceMoreReadRepositoryTest" time="0.004"/>
+  <testcase name="duplicateHelpIdsAreNotCollapsedOrExposedAsWriteAuthority" classname="com.rowan.iot.data.http.HttpDeviceMoreReadRepositoryTest" time="0.005"/>
+  <testcase name="helpEmptyArrayIsEmptyButMissingOrMalformedDataIsNot" classname="com.rowan.iot.data.http.HttpDeviceMoreReadRepositoryTest" time="0.006"/>
+  <testcase name="completeDotSegmentsAreRejectedBeforeAnyHttpDispatchButOpaqueIdsRemainEncoded" classname="com.rowan.iot.data.http.HttpDeviceMoreReadRepositoryTest" time="0.004"/>
+  <testcase name="helpAlwaysRequestsTextAndProjectsFourStringsWithoutArticleIdsOrUrls" classname="com.rowan.iot.data.http.HttpDeviceMoreReadRepositoryTest" time="0.005"/>
+  <testcase name="summaryUsesEncodedDeviceGetAndOnlyNineSafeStrings" classname="com.rowan.iot.data.http.HttpDeviceMoreReadRepositoryTest" time="0.003"/>
+  <testcase name="summaryRejectsMismatchedResourceOrProductInsteadOfDisplayingAnotherDevice" classname="com.rowan.iot.data.http.HttpDeviceMoreReadRepositoryTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,1359 @@
+{
+  "date": "2026-11-01T22:45:44.063363+00:00",
+  "sourceSha256": "0b71eb6628a51ddf94758a023d574bd2021604f30b90d31f6f5080c3bcce2151",
+  "sourceFiles": 336,
+  "artifactSha256": "1417a05a0eb2ac3d518736c147c803cc54cfb93829fcdaa0c3764b2008afb38b",
+  "sourceZip": ".cache/refactor/artifacts/1417a05a0eb2ac3d518736c147c803cc54cfb93829fcdaa0c3764b2008afb38b/source.zip",
+  "sourceZipSha256": "ee7cb18429439ce96985b62885d760854cd9ca06d7f5319d8490c57f838dfec1",
+  "apkCopy": ".cache/refactor/artifacts/1417a05a0eb2ac3d518736c147c803cc54cfb93829fcdaa0c3764b2008afb38b/app-development-release.apk",
+  "entries": [
+    {
+      "path": "android-as/README.md",
+      "sha256": "be07e1a867960c555a81c411f4b62a0eed8a386d151c17b91b9c81ad956a685f"
+    },
+    {
+      "path": "android-as/app/build.gradle",
+      "sha256": "7e5be338e47a69f163620ebd44fc645b2f9fa57df0f59e178ed038140413c640"
+    },
+    {
+      "path": "android-as/app/gradle.lockfile",
+      "sha256": "477572df741825fb98917d6343e60788029bec89b5a9d83ca5cf47bb904e2add"
+    },
+    {
+      "path": "android-as/app/proguard-rules.pro",
+      "sha256": "75d4a0dca0e84d4e3302416528a535b4c9dba7be9d8946b4b9e98cd21cb05316"
+    },
+    {
+      "path": "android-as/app/src/androidTest/AndroidManifest.xml",
+      "sha256": "ed4b1dceb556418e385564f600aede71207e00055b3440384b954b72cc0ec2a0"
+    },
+    {
+      "path": "android-as/app/src/androidTest/kotlin/com/rowan/iot/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/FixtureApplication.kt",
+      "sha256": "1772867b4a51b0d08551e716dfd23d2e2bcd32c40966b04205fd9323dd59d152"
+    },
+    {
+      "path": "android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/HomeFixtureInstrumentation.kt",
+      "sha256": "3b148fe0eb12811fee6610b66b660a91648213d699d80f99e05852b382f19bb0"
+    },
+    {
+      "path": "android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/HomeFixtureUi.kt",
+      "sha256": "59cfd6dbfcd5095b61bf4cb6ae3fbcffe14c07751b331575c37797054fa03aaa"
+    },
+    {
+      "path": "android-as/app/src/development/AndroidManifest.xml",
+      "sha256": "0317fbf013164c4faddec762ecd6a9caf42751e89ae970acf89c779a2d618595"
+    },
+    {
+      "path": "android-as/app/src/main/AndroidManifest.xml",
+      "sha256": "4c57069342df34d1758e88b4917a20bfdfcfffc76a8b3c470fec9e6507a783ca"
+    },
+    {
+      "path": "android-as/app/src/main/java/com/rowan/iot/MainApplication.kt",
+      "sha256": "ed69458671e8ee64fe94e891a28800d596fad046317b4c14c63f2e1481d5ed28"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/app/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/app/AppServices.kt",
+      "sha256": "e118922f079b6aad75ceb25ecf019ed4f7de3fd0115dfd4dd32c184a96cf3b6d"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/bridge/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/bridge/BridgeReadTask.kt",
+      "sha256": "16c23f84d082ec39c1d33238daffd1a25be15e3c70734ebfc8054116b47177b5"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/bridge/DeviceBridgeProjection.kt",
+      "sha256": "596b0467c4fc57480f45bb6cf6412307074cecde742236f5bc85e6b24c037bdf"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/bridge/DeviceEventGate.kt",
+      "sha256": "a3f27f9fa67a8a7c148d295e14d101a55b8c7e718acb24972a048b07fb4dc5f2"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/bridge/DeviceFeatureReadPolicy.kt",
+      "sha256": "a46efb3910c08a54fba3eea91e24a486ee8de9a53ce8609a84c4ce1338c312b0"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/bridge/DevicePageClosePolicy.kt",
+      "sha256": "1bcd417cbe11e68c2d14b247cc6c7bf451167c3b59fca704a974306d0317e9d7"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/bridge/DeviceSelfUnbindBridge.kt",
+      "sha256": "097ba85cb39385467097851f914243021c4aad7fcfae0e3a99595455c89a006c"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/bridge/RowanHostModule.kt",
+      "sha256": "a46ca3ced8aa8a307b4a10710d3ae2badf5d1f5c34175a4a98cfc55fba61669f"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/bridge/RowanHostPackage.kt",
+      "sha256": "883ae135fe490da4b0106f9219c10cc7c458d1c598998d264c55eddb5f7b3ffd"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/ble/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/device/DeviceMoreReadFeatures.kt",
+      "sha256": "fcae21d60d1b81b549caf634d75b6133c15e4d4a248b33fca19cf2885601a522"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/device/DeviceReadFeatures.kt",
+      "sha256": "a63982de626a39491839abab6135aa50131946d6f805e16a7fc7454c02fba068"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/device/NativeDeviceServices.kt",
+      "sha256": "bcec8e87031cdb2442118599d5cd6a91ce17729e47cdcf7fa32becf17e8dce85"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/http/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/http/HttpDeviceAccess.kt",
+      "sha256": "5e4ca6f7bb4af015f0c7f25cea9ff2600c867e8e5d182e89d3450534e4ce0057"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/http/HttpDeviceMoreReadRepository.kt",
+      "sha256": "bfb3d05895a8630e1de62b4d652bd97e2d28e986f57787e8ac3a1824cd5ceb7f"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/http/HttpHomeRepository.kt",
+      "sha256": "6f290d01334789ecc11ddfa87ee1a831355c9badd5a8160e6c9291922ae7033f"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/http/HttpNicknameRepository.kt",
+      "sha256": "21d612f731709652347d6e71db8e977cca3fa4698229a8f6f1baec0637421060"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/http/HttpOtaRepository.kt",
+      "sha256": "3ea03563b43e7bf559d410e847d6010d888d2bf7d81f0b8fb7dcf2b43e22f821"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/http/HttpPreferencesRepository.kt",
+      "sha256": "799edeeb3bfe86ff3834386b8507fd9fbf1a63c398bff955926dd56fd07ecfce"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/http/HttpProductCatalog.kt",
+      "sha256": "f6b707efec22ce07f0faeb0fd6209ac5a46886cd7dbb01d13800fa6e90e8a9f5"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/http/HttpRoomRepository.kt",
+      "sha256": "0752ce117f8e4b04e4826bed8b7e50adfeb995de76240aeb97b29afb053331aa"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/http/HttpSchedulesRepository.kt",
+      "sha256": "bf354764c85a8df0c1315b4c7b00345d6cbec0cd7df0b25586900fd26c3b33dc"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/http/HttpSelfUnbindRepository.kt",
+      "sha256": "22f6c75ffdd52ffa6c6eca8247359c22cf4a2694f734362b5cfe85d0a88c439f"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/http/RowanHttpClient.kt",
+      "sha256": "33a5ceb9d3374c2d7a8177e292dba3dde932643397065c91fe38af6f83f23fce"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/mqtt/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/mqtt/auth/AwsIotWebSocketSigner.kt",
+      "sha256": "6de26cb522167a009342b330609f6e51a780d202a6a804f78e9217c996829615"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentials.kt",
+      "sha256": "d8b157f4223d9717758b9b234ecbc93c41501d359ad1c084d2f1fd200ef4ecfb"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/mqtt/auth/README.md",
+      "sha256": "0344990971bb4fd88242c8150413b5feb220626a78e66eca9b99e8e500596c86"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/mqtt/paho/PahoBrokerTransportFactory.kt",
+      "sha256": "3b103443388dbe9e9c30e0f58fe0e448da6124857efd5149f8404bbdb3bae702"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/mqtt/paho/PahoFailureDiagnostic.kt",
+      "sha256": "22944cff516c22bdb3c08bf82c0db027add9623d7e80f5bca1ce81d93f50f4dc"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/mqtt/paho/PahoNoopLogger.kt",
+      "sha256": "ebf8735f82badcaa1c905c69687f91a72eaf82739b69b638dfaeb0f104afe4d6"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/mqtt/paho/README.md",
+      "sha256": "5fa625c8c808111558ad92d41764e767adf9131f77151ec3e2326e7ad5b41475"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/storage/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/storage/EncryptedNicknameJournal.kt",
+      "sha256": "2ebfa8443288062ef820d7a58cf7193c5355c0d58281de4f4424e678e10299d9"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/storage/EncryptedSelfUnbindJournal.kt",
+      "sha256": "08c0c6936f5a044dcb454a244488db81991112e64357df404753cbd9a5f5d30b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/storage/SecureSessionStorage.kt",
+      "sha256": "3fe84c925ab7db78a73273974d9b5917ee4e746671c2424341c0fdee71f64144"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/design/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/AccountService.kt",
+      "sha256": "0b1287df72cc8ee34caf308503eb914b456d8ae850e332ccbace1367b9cde189"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/AgreementService.kt",
+      "sha256": "5bb3b0b7dcdfab55f359f48d0d2482d3e45032d8b1e663e2b146f4ce66acef31"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/EmailLoginService.kt",
+      "sha256": "26930dbe2d45e61052b111f390c4385f80fb43a424512b3f9255788e2a5313c1"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/EmailVerificationService.kt",
+      "sha256": "ce8668707ecc1141df587c08f6f07dc37b66fdfc9e8aa168fa4cb0d57ce62c6c"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/LegalReadGate.kt",
+      "sha256": "f8dcee5da5c6b224b0dd9d7a20a1820a89535bd23255b366c801da4b2d20480b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/RecoveryService.kt",
+      "sha256": "40ad5a0684c68f9d0fe0aeaf4862c31939e86035ffbbafe104647f4368521d87"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/RegistrationService.kt",
+      "sha256": "2c781ec38fa1653b60a3a5725712644184230e764f0aef629e7fee0714ff4187"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/StartupCoordinator.kt",
+      "sha256": "4813053c01cfdb01274fe1a0e5f2a4e74bbc4ae3691de654e7dbd2eeb8b29659"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/DeviceAccess.kt",
+      "sha256": "606868f768e995d1d89b10d8f301db59734e595b0ced3700377924788e331a63"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/HomeRepository.kt",
+      "sha256": "646240f83290b613111d6638c3547128d713479c633991fb944c5a8c726fb2d2"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/capabilities/PublishedThingModel.kt",
+      "sha256": "12a1dcedb61d13815257d249f73c40607f4de7ecd056ad8782e8e93d7a8ba1bd"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/capabilities/PublishedThingModelParser.kt",
+      "sha256": "9e397e8e17be81c315481fb59a5b6a9e13aab87e9ee37da49480c615a66d4cda"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/capabilities/ThingConstraintValidator.kt",
+      "sha256": "17cd27d0af2d6ae783741e6a97ff22cdc5b06e42be84e284819fb704b71fdfb9"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/more/DeviceMoreRead.kt",
+      "sha256": "2ddbc087e43578143429a395e434e9f55f963e82a605541b52bf3723212277e6"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/more/DeviceNickname.kt",
+      "sha256": "a823cbd67dd8d0eafcbb9db945d00853567a0da10fbdd536a1d980c384403de9"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinator.kt",
+      "sha256": "419e9fa8630dd5305f6793f1f47bf2d95eb425ff78735d130ee770bb676d9c59"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/more/DeviceSelfUnbind.kt",
+      "sha256": "e16ab96f05adffed5b68933505ffcdc72cd7148c535a14e4538bac6884797bda"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/more/NativeSelfUnbindAuthority.kt",
+      "sha256": "8c4662a8c1861bea3611708d9980f7bbe526b1889cf9ce3a0047f66f5dba9869"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/more/SelfUnbindApplication.kt",
+      "sha256": "5e39f7ff1b5b059de2d7352c00db726ff558672769c2d42e1da29d59a8f7cbbd"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/mqtt/ClassicShadowReducer.kt",
+      "sha256": "0ba8eb4aa01fa05b735a0556f795b2ea78c764c6769393e244ace16f0bf710d9"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/mqtt/ReportedTree.kt",
+      "sha256": "7bda2520e6da6e9a9062baf9cd0262300b9755184a4c06e5e2466476c92bc19b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/mqtt/ShadowProtocol.kt",
+      "sha256": "1a7e2da9ffcbffc69cf85d9ba4e858bad1afc0a8cf77523598511f733385363f"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/mqtt/transport/BrokerContracts.kt",
+      "sha256": "b7851988cece90c40e476e3ba9f07cf1ace52b2f998056b2722b8f5e88aa2eba"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/mqtt/transport/PoolTiming.kt",
+      "sha256": "b596cd209d08e6709c8c27a129c704f6088814c81bcc1b196aebeefce9daa52a"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/mqtt/transport/ShadowLease.kt",
+      "sha256": "f6e7d700c6d49cee4bebfd0c751d2169964e0e215441c8bfd3662576e8501316"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPool.kt",
+      "sha256": "496f1ed597fc5abdccb6ed2ba1be9721e80b98be121e7085bc985ee2edca2e0d"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/ota/OtaContracts.kt",
+      "sha256": "2a8b4044f9de94c1bb630f089d16564bae1313b403b835ef741a90dcb889820d"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/ota/OtaService.kt",
+      "sha256": "855ec3f78403842459027ce5b7d700df162cbb93620fcf074a66ddba5680c819"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/ota/README.md",
+      "sha256": "f157f7164ef1001a239ed5bb6ffadde5f48f003eebf1e8049193335d58c59821"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/schedules/ScheduleModels.kt",
+      "sha256": "52404090703babc7f9d67474eaa9dd149c18a30bac1e6f74c87ad9c8b7943e92"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/schedules/SchedulesService.kt",
+      "sha256": "e8de96885aeed8ba23984e3d5195de7b5e3f4a7d25b3794460ec012adb37a717"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwner.kt",
+      "sha256": "37ae3025586ecccfafeb947fb20cf7671edf94cc1dd00df9ca460a052e8d72f1"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/state/DeviceReadState.kt",
+      "sha256": "bccc13fc76bd69a72e5981dedf09a16c5f7bb4c67fa04e4f6117ed6bfe53997a"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/firmware/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/home/HomeRoomTabs.kt",
+      "sha256": "5b6a9b37b8fa9958ad9e520dbc9395c82f05d3d3bd2f064d45e7b7dcd9bfdc37"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/home/HomeSelection.kt",
+      "sha256": "d40d19e276eaf613c2dbeaa3300987d81b6ba4cd1314ead9012df1a1de48230e"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/home/SelfUnbindHomeConsumer.kt",
+      "sha256": "9a191c15b968be197c3224849bba51d6accb484ad9d05234dd15acc3129bc556"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/network/HttpGateway.kt",
+      "sha256": "00f6ddd2cf268d1100db0abe7c481734a534dd815462e260fe67925409054344"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/preferences/PreferencesService.kt",
+      "sha256": "86b0a56e4959d21592f4c213871eb3654f16c047be7392a55be1bded5b05af67"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/preferences/UserPreferences.kt",
+      "sha256": "f9686004520476e06601184a9f22c6a037dde476a158582fde486af6b56b5939"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/presentation/PresentationOwner.kt",
+      "sha256": "4d46bf4b15a6389e62fa2d3ee81fa780e517f58fdc703ddeee21dbf7eec345d3"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/presentation/PresentationService.kt",
+      "sha256": "2ede5b92ecd794d5e875b2406b553c051e6313cf28c0321ec03de4c60d0be344"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/products/ProductCatalog.kt",
+      "sha256": "86249cc7356b4f63a7e2d290bf00a80269529e1e1d45db9d4ec9d285e9eab082"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/products/ProductCatalogManager.kt",
+      "sha256": "3390cec099eda1dcf2c6984298446e031e362db2f05692848f9fb84da862025e"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/provisioning/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/rooms/RoomManager.kt",
+      "sha256": "77b315adb5e55f386fbed3ca4916d0d9b9010c84445aa483b660d02cda727673"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/rooms/RoomRepository.kt",
+      "sha256": "1ae4af90315cd252a3ddbd0a3c764e34fe8bba41b5bc54acc83bf16fa9b33e1a"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/scan/ActualPhotoIo.kt",
+      "sha256": "e7bccc42b137b5ccc9fa9abd058b3fcfc1c74ca5eace4ca277cafddd9629f33d"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/scan/ScanBoundary.kt",
+      "sha256": "5a4efb7db2c9521c11a6245acab8145eb6fe1dd292dbd582e85182f9130b24de"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/adddevice/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/auth/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/auth/AccountActivity.kt",
+      "sha256": "6487e7e37e7a6c0ebd19d93d55c94b50bc8b0c042cf4803d770ad90aadee6c5e"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/auth/AgreementActivity.kt",
+      "sha256": "a24f9e4c26632c4ee203e08accf874ae4c4df5d579007b0a911d1e36450870d3"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/auth/AuthFlowLayout.kt",
+      "sha256": "223e78ccefc9fe9a59938209921dcc9d7735c037f82263ecc18bd2899016b573"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/auth/AuthVisuals.kt",
+      "sha256": "8081e12e1f1481bf7eeb3dcd395115e68e89e8831db5ceee02dfcf35df182a26"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/auth/RecoveryActivity.kt",
+      "sha256": "9919eb4102e444d6ed0e5824b0afa7c4b3d7bd517400c6909856ff9f800afb20"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/auth/RegionSelectionActivity.kt",
+      "sha256": "a39f73f3046767cd0b3ab80546bfabb203893175b4126c28863790507ade631d"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/auth/RegistrationActivity.kt",
+      "sha256": "7e9a3470718cfcec217ac450987cbe2aa6a953e8d268d7e8a0429ca8777ea585"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/auth/WelcomeActivity.kt",
+      "sha256": "84221f239e81c9a7a7483d0a61d12635b31f19cddcf693fe6796ac2f4f5d288e"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/home/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActionControls.kt",
+      "sha256": "587c32c4b6fe1e41a5f42f93eeb35c47281573329956255c8ace248d4a184549"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActivity.kt",
+      "sha256": "0bdfba2e5383caf111be2c29751d39b855e000251f9e1c3ef06de90d714cbbc2"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/mine/MineActivity.kt",
+      "sha256": "52a3722ca662840838ddd2f2bb7591d7ce72845b9021bc26da4a3079ee8325ed"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/preferences/PreferencePageViews.kt",
+      "sha256": "b6ebed8dee044a83916111341e7608f24507b935a4bf587bff88cd76a742f891"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/preferences/PreferencesActivity.kt",
+      "sha256": "ed63e33b41451875af01c7712409c6e6820b246b3c783c3af0e1b04a12c4b6ac"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/products/ProductCatalogActivity.kt",
+      "sha256": "9bb7bba42b432250e1796cbb3f632cf621a33a1d5613b7568a78e63e5b8d3bfd"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/products/ProductDetailsActivity.kt",
+      "sha256": "d64292666420b00a137ddbbdd7f147bea93be0c81f7a1698b2cc29ab2de1bb7e"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/products/ProductViews.kt",
+      "sha256": "0ccd5c5852b81edaec94cfd81f83dee9abf13c8ede6189a2b9d6a038d2af21ae"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/products/PublicProductImage.kt",
+      "sha256": "72c53ce0dc6e7029942450d6b05fbcbe6f4edc4ee7e21f57060cfee87f27b7cb"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/products/README.md",
+      "sha256": "0b7f5163b1e510de82ea7a6122f9e2ec7bea4d116c232d8b1860c0c1d51c9429"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/profile/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/RoomsActivity.kt",
+      "sha256": "3a3cd1e2c8f18631c5118fd994cc0a18720d94422d79e7aa48d6cef1cb4f3637"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/scan/AddDeviceSheet.kt",
+      "sha256": "bbb9d8be4c893f1d7623201cc85d27d0ff2d68bec8475829e50ced5f6e4bbdab"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/scan/ScanActivity.kt",
+      "sha256": "68cd74e823844bb9f81ebba0baed572777d9aacf7ada615564688b1c8085d960"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/settings/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/navigation/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/navigation/NativeNavigation.kt",
+      "sha256": "d27841a4c062f05420a9e0b9d4fab61a8be47196b1b84637b2bc215ed07c671b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/platform/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/platform/presentation/AndroidPresentationSystemSource.kt",
+      "sha256": "127fc0ffdece90fe1984506c9cebd46f625dd0c2d2e90bc6b00490b90d353a57"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/platform/scan/NativeQrCameraDriver.kt",
+      "sha256": "fbe6376500512bd2b83ee1d1bb3aa52f01e850167ffed2886d2b96a7b19e33d0"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/platform/scan/NativeQrPhotoReader.kt",
+      "sha256": "2db7c2db861e74717939254633a23cb0857069577891b2a8acc608bd0520f0e6"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/platform/scan/ZxingQrDecoder.kt",
+      "sha256": "993674726f03c6054e27f0738824a68c26d078572f466577ebe5b51043754e1d"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/rnhost/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/rnhost/DeviceActivity.kt",
+      "sha256": "e099f84fc62de5efe6cd69c9a80486861cdf81768b9182f6e28cfc552ce3d23b"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/rnhost/RnStartupTrace.kt",
+      "sha256": "be45b0e43f1215500354fabd722c22a4248c2dfb4e912d1a16559f6c6b618b9d"
+    },
+    {
+      "path": "android-as/app/src/main/res/drawable-nodpi/auth_agreement_checked.png",
+      "sha256": "fc222de65b40bdce58b340f58b78e737651ef211b5fd5eade75c291efd0879bb"
+    },
+    {
+      "path": "android-as/app/src/main/res/drawable-nodpi/auth_agreement_unchecked.png",
+      "sha256": "0fb8ec023090dee30dc46752b87793968447c7e8abc1e4f6d21c785f8b20d045"
+    },
+    {
+      "path": "android-as/app/src/main/res/drawable-nodpi/auth_back.png",
+      "sha256": "dd4c1aeb9bcb9e54c27ee0c0571bb014478c6258fe9d85112e07617422bdbfec"
+    },
+    {
+      "path": "android-as/app/src/main/res/drawable-nodpi/auth_email.png",
+      "sha256": "aa54fea0fe5d4bc820f1bd3b18c7e80361f1a2aaf9b6bc96342059fbf5557d85"
+    },
+    {
+      "path": "android-as/app/src/main/res/drawable-nodpi/auth_flow_chevron.png",
+      "sha256": "11e119491338ecb10fb515ab7b41f077083473bd942cee68f7f8e0cdd17959e5"
+    },
+    {
+      "path": "android-as/app/src/main/res/drawable-nodpi/auth_flow_envelope.png",
+      "sha256": "611df48bd3d4d6b9386ed4eca14ef7d0e9b1a12a703139b47aaea9fa6be52d94"
+    },
+    {
+      "path": "android-as/app/src/main/res/drawable-nodpi/auth_flow_globe.png",
+      "sha256": "3b07d918b41f5eb8afc0a68a4660e2f2419803ff7b0022791b6e3b7a18eb5a99"
+    },
+    {
+      "path": "android-as/app/src/main/res/drawable-nodpi/auth_flow_recovery_lock.png",
+      "sha256": "b099a238fe255fa1c2e4af6c252ced931fa48284902b262db94afa1c1fd8dfe1"
+    },
+    {
+      "path": "android-as/app/src/main/res/drawable-nodpi/auth_flow_search.png",
+      "sha256": "d040948578378784a710d127f549ec9d5577398220e05944de544dac912ab80c"
+    },
+    {
+      "path": "android-as/app/src/main/res/drawable-nodpi/auth_password_hidden.png",
+      "sha256": "3b57bf0e1bf18f47fcf84257d6446101b350a63ffc5362eaf841017532e3be35"
+    },
+    {
+      "path": "android-as/app/src/main/res/drawable-nodpi/auth_password_visible.png",
+      "sha256": "327efcf608f8891c857f750cb9c98b2385a45f00ebd1cb865553329e3073f1f6"
+    },
+    {
+      "path": "android-as/app/src/main/res/drawable-nodpi/startup_logo.png",
+      "sha256": "42a91472f066b100d962f21448082940c49421c93a1216cdee6b8c6d40af8dec"
+    },
+    {
+      "path": "android-as/app/src/main/res/drawable-nodpi/welcome_logo.png",
+      "sha256": "9bfaa1064414e67356e29cc1a50b07cc6141c201b5038d7a235ea2e2764b1bac"
+    },
+    {
+      "path": "android-as/app/src/main/res/drawable/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/res/drawable/rn_edit_text_material.xml",
+      "sha256": "a0ffe99c6c5b933311be2b56a1769600dcdca909289cb4446e58cac2b6c27c7c"
+    },
+    {
+      "path": "android-as/app/src/main/res/font/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/res/mipmap-hdpi/ic_launcher.png",
+      "sha256": "ded7aabf6a56b694e486e096efd89e2f0c9067d292b634663898e352c9491f10"
+    },
+    {
+      "path": "android-as/app/src/main/res/mipmap-hdpi/ic_launcher_round.png",
+      "sha256": "21304a0c9b00da6a72cfa31c7229c9528fc17b6e5eb4e68a969bce08c01a2fee"
+    },
+    {
+      "path": "android-as/app/src/main/res/mipmap-mdpi/ic_launcher.png",
+      "sha256": "eef20f25fb1477d8c9df15757e764811cc503fb0777f18d0f7fb2d19178b5bf6"
+    },
+    {
+      "path": "android-as/app/src/main/res/mipmap-mdpi/ic_launcher_round.png",
+      "sha256": "520d05f978a15ba0ccf23006a1a5691a054a02478c70cafc5ebafae76e600f0d"
+    },
+    {
+      "path": "android-as/app/src/main/res/mipmap-xhdpi/ic_launcher.png",
+      "sha256": "e77c5045bfdb6f4bbe955b3a793bfed3baa369ce4811ae2a9103d5480637cfff"
+    },
+    {
+      "path": "android-as/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png",
+      "sha256": "2846e1a703e519791fe22f41bcb243b82f908d12e5ebcb43f020ddf9982780b0"
+    },
+    {
+      "path": "android-as/app/src/main/res/mipmap-xxhdpi/ic_launcher.png",
+      "sha256": "eb3a34b13632e0cb3b1c0f4273035866cbe81b1b17b7178ce29d19c78d394a5e"
+    },
+    {
+      "path": "android-as/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png",
+      "sha256": "363a569beb72e8b007bf046454612148d4c9f782b9391352059fe83179f18e30"
+    },
+    {
+      "path": "android-as/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+      "sha256": "9ff27328b6916b7f75b99ef36153f154bb4724946e5654635cba2e257352c69f"
+    },
+    {
+      "path": "android-as/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png",
+      "sha256": "5bacd97a1b41e4413c6092cdbd83f65112a9124e823cfaa3a219c65e2761647b"
+    },
+    {
+      "path": "android-as/app/src/main/res/values-v31/styles.xml",
+      "sha256": "d764aab73c4a0c8646cb0020bd798425776919b4b92bd509f263f6b378eb7aa9"
+    },
+    {
+      "path": "android-as/app/src/main/res/values/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/main/res/values/account_login_ids.xml",
+      "sha256": "865c33e377da2a498b8c16bd75a1bf96efbfdf5b54f1978078cb65167d103a16"
+    },
+    {
+      "path": "android-as/app/src/main/res/values/auth_flow_ids.xml",
+      "sha256": "dbb22a80d1633995c4fcd39133da55595595e91177382568202786b77d9c12e3"
+    },
+    {
+      "path": "android-as/app/src/main/res/values/home_room_tabs_ids.xml",
+      "sha256": "bd38f71f46414fb9f891418d6843078e91e57885caad69cccdc51485b61622be"
+    },
+    {
+      "path": "android-as/app/src/main/res/values/home_selection_ids.xml",
+      "sha256": "0bfc610b9cb00ce1cf7ebdad19510d25eef1c1da52d3c55aa613de44c5f24e5c"
+    },
+    {
+      "path": "android-as/app/src/main/res/values/ids.xml",
+      "sha256": "9672fb589d359c7db982e5548d350381ba111f67073e6115022a86e719ab41d1"
+    },
+    {
+      "path": "android-as/app/src/main/res/values/preferences_ids.xml",
+      "sha256": "e079937ca299513deae9965ea78793a977d130f5eb129506236d3790a89a9a2b"
+    },
+    {
+      "path": "android-as/app/src/main/res/values/products_ids.xml",
+      "sha256": "50fc90f3bf9c340a0e839564300dc381784f07ea98e53ce7410d330b75429074"
+    },
+    {
+      "path": "android-as/app/src/main/res/values/rooms_ids.xml",
+      "sha256": "43676daca0e9108113b391a79cb9c5da997d4dc9d99457e74838f0e9fe4ad677"
+    },
+    {
+      "path": "android-as/app/src/main/res/values/scan_ids.xml",
+      "sha256": "0350c537bc757dff53033bc22ab06ab48672868c940a228e89c7e111fbc2c587"
+    },
+    {
+      "path": "android-as/app/src/main/res/values/strings.xml",
+      "sha256": "b4d19dd7e970f8bdc08df63c0c9599ab493e0f64c543b26f5a6e7f1bea9c4f39"
+    },
+    {
+      "path": "android-as/app/src/main/res/values/styles.xml",
+      "sha256": "3f2d5d737f635635b9e4bdd2236630d42f6c43fe3359ae1a38c62992537b5784"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/AccountExpectedRevisionTest.kt",
+      "sha256": "3a5e10865f237caa391b890819509eb8b8ec307cc4a6d0bea7ea0c72e41e0b30"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/AccountServiceTest.kt",
+      "sha256": "a4f8f7ebaa045501d77470396d15bb06fb6b50da34bfff2aa5f5659c79652ba1"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/AccountSettingsCommitTest.kt",
+      "sha256": "b7581871e2d4d8240e4476a1d282a59f6ebc6ce8fd7d2040784fbea9529af82d"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/BackendRoutingTest.kt",
+      "sha256": "923270555e1ae198c45b7c6ae4474597fe30d6a280d79199fc7b8aa960532011"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/DeviceBridgeProjectionTest.kt",
+      "sha256": "c432418cbc2e36ae9806b2dd67e3a139773faacdfd8c62b7f5cccc12e2e1d8f1"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/DeviceEventGateTest.kt",
+      "sha256": "1e1dc19af6b8634233cd10c56212f0438e9f65cc3cd10fc606a4427eda78438e"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt",
+      "sha256": "987c0ef3abc9b6f00467e65e7cc5fd997c7482e0d29314b388b7d9ee68e1112c"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/LegalReadGateTest.kt",
+      "sha256": "a0416ae3df28f0d43a31938baca6f2f20350bd9149853410d56dbef9578931e6"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/RecoveryServiceTest.kt",
+      "sha256": "1c6a9406d7cdee9bf376554b89590ba799793f10cab44d975959396db6c62471"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/RegistrationServiceTest.kt",
+      "sha256": "f2760eecc3448fd7b43fe0abb47ec0b1d82db79ab8b921c094aaaf848d32972b"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/StartupCoordinatorTest.kt",
+      "sha256": "35347ba004f9a22ec4dab8bad64090ece3e98b1903341c2affda4e4ec6d91bcd"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/bridge/BridgeReadLateFailureTest.kt",
+      "sha256": "9e83947914c2e7bdbc00aff80f08391d8166b29ba286b7400c6a8cf121f49dbf"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/bridge/BridgeReadTaskTest.kt",
+      "sha256": "57a226b2c9af0f75b63bccf59a2a3018ba6d5cac5477cbbcc8b6c2abbdf9268a"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/bridge/DeviceFeatureReadPolicyTest.kt",
+      "sha256": "589742c68a4b83bf04a9de35c34230d3d4b7e3ebc37d1eeaf747b01e541c0e18"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/bridge/DevicePageClosePolicyTest.kt",
+      "sha256": "60dba6ba111831f1d7fd7d09dc022c17dbed5a4009cd112f7747dfdff77c3f04"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/bridge/DeviceSelfUnbindBridgeTest.kt",
+      "sha256": "05ae5469461b9ebbb5287372b81c93d6d86592f408a39117ecd21ef253ec9491"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/device/AuthorizedDeviceConnectionsTest.kt",
+      "sha256": "508f01427e890de1312b61a48db9588b3c673e146754e32d3455166377a6e067"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/device/DeviceAuthorizationRevocationTest.kt",
+      "sha256": "336b747601706953296ee7e9e2d43b33fc7f22494fcd19517d9379b2b15bc7d7"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/device/DeviceMoreReadFeaturesTest.kt",
+      "sha256": "87b3d59e80305cc27c00223b717e76642c5548824844df363b98c51f788f5522"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/device/DeviceReadFeaturesTest.kt",
+      "sha256": "32d25719ae3a0904dae158798181bc6008b6b1209d3d3be5789ff7fad0eb5f94"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpDeviceAccessTest.kt",
+      "sha256": "a5c750503ac5b002eef1e13fca5fc08e9cbeb8f0c32d41ebb8c215b9f5426408"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpDeviceMoreReadRepositoryTest.kt",
+      "sha256": "cbc59315599f6ab23dd91872fd82fd524bb66fccfd7296690984220ea206d5a0"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpHomeRepositoryTest.kt",
+      "sha256": "933f29d6378759d0087fbb282caa37cb9b8a0aef8f96aae3d80890020ccb18bb"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpNicknameRepositoryTest.kt",
+      "sha256": "1ba74e4cfee3d31517815c51f56965eddddab0b306c92999295586d545b8f25b"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpOtaRepositoryTest.kt",
+      "sha256": "db5431f6f8740d6e4c902bfcd0c83d38b872935853d0e9356f1a4bafbe340472"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpPreferencesRepositoryTest.kt",
+      "sha256": "43e983480b705bcbaaa0885ec959b1cd7a74e7b7ff1717c1a3417d25e4abc605"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpProductCatalogTest.kt",
+      "sha256": "593d697d90eef410ae0db6f8698027ae92a4b0809df176f3ed86b7d373457b87"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpRoomRepositoryTest.kt",
+      "sha256": "651cf1f03abbd32b72174ef8419b8069a308e9d7ab69ea970ee5fc677388f7e1"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpSchedulesRepositoryTest.kt",
+      "sha256": "457fcfa1012d17c0ef63d2c3ee8db061f3e5a7fce6d4f74b43f475afc509a813"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpSelfUnbindRepositoryTest.kt",
+      "sha256": "98e6c3ad04d6fdc5baa14d3c0757c01f10bc3e09b054ed09bd51a199c70c0f78"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt",
+      "sha256": "7111942641d1f51aa093f4ff0c3f35135d55b8d95a189110ede06217b4e329df"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/paho/PahoBrokerTransportFactoryTest.kt",
+      "sha256": "bc47a3547b45766faa6f1de9c471af3202e01ac0046c7ed1d3bcd46fa201bbbc"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt",
+      "sha256": "de738d8257d073a852057da4b4fb6da9675ce63fd77d317cd307d363cdd1ce8d"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/storage/SelfUnbindJournalDocumentTest.kt",
+      "sha256": "7dd5f2624889811f74f544c63db00ef12d00da51d2028e6170a36da3abc9eef3"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/capabilities/PublishedThingModelTest.kt",
+      "sha256": "7b401bbdd1223be23ffa0b2667a1ec3739652d6722df7c9d02d7691222922f7e"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt",
+      "sha256": "701ede4f3522c4f4fcce29126cc9b2ca09dcd2f3699c2ea1daece5bc0d07b77d"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceSelfUnbindTest.kt",
+      "sha256": "dd53f76bf33c66a753ba42dbfafd4e35a5d2ff54ca0af96616ec950cf3a58f9e"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/NativeSelfUnbindAuthorityTest.kt",
+      "sha256": "1768c28b9bf27390bba794f7508350e36d6f87687af21f87ea8e8f5892e4d052"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt",
+      "sha256": "834e77b56fbb396e16af6973c8229258f2340d1d670c821bb0562eb4595e67c8"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/ClassicShadowReducerTest.kt",
+      "sha256": "243fe7f41acd34e0385e610c546616311eba762f64abbd4048c10abe3e28d08e"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/BrokerContractsTest.kt",
+      "sha256": "e9f95fe8e9407bd0197e69ccaf98a09055e5832d5e66f9c2fba462c077361f2d"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt",
+      "sha256": "e515a9c62e376209349e25688877ed9bdbb62fc32fa909ed3654623d71a6de34"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/ota/OtaServiceTest.kt",
+      "sha256": "ed962e4c1095bd49bf5ffe535dbb719ef6d0eb885867980c7cd89b53dd819f76"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/schedules/ScheduleModelsTest.kt",
+      "sha256": "2b37de0de597ec904f192765e2187314465973a852365ee5aaa31e68b1b7c7d4"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/schedules/SchedulesServiceTest.kt",
+      "sha256": "15381104c22da2255ba6ae5b59037098813d218c5f8172ba12a99e0de882cae1"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt",
+      "sha256": "b89ea71e717be7e30056ae6d44596f54d75e5c510dd022d5c560e371b4a9d042"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/home/HomeRoomTabsTest.kt",
+      "sha256": "5403d478e4979e47fde75c87f74b6bb3d6e48a49289b24679c66e6dffa2cc22c"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/home/HomeSelectionTest.kt",
+      "sha256": "9352ea80694d4ebc1543764b6d0fe7e64d94aa3c378b87fdbb246eaf031ab114"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/preferences/PreferencesServiceTest.kt",
+      "sha256": "c29284c4696e6151697bf1ee0f8dfd1d56456aa67dcfd6299f836eda82f35560"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/preferences/UserPreferencesTest.kt",
+      "sha256": "5c954bbe745aae9bf4705bbd9131b8e1a9f9fcdc0733c3cea90674188c5a101f"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/presentation/PresentationOwnerTest.kt",
+      "sha256": "a00e5ede57bf1c1a3d449f9df28a186b6a75d1fd957f6bdaaa178bea8f6799e3"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/presentation/PresentationServiceTest.kt",
+      "sha256": "41b291c3ae94b1396fe7c6017a9fb06ed67704ba2500ff05cd09cc216c7e6cb5"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/products/ProductCatalogManagerTest.kt",
+      "sha256": "6ab0c87db1f07d2aac1574495dc8036d569547d346b2054a54265776d9d1c7d9"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/rooms/RoomManagerTest.kt",
+      "sha256": "ab6304709e47f1d6e2eea3e1fffc24466ea8ac2b4ef39ef7acd618968eaa6f0f"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt",
+      "sha256": "83d46b02ab413f93550f3107507bdfb2a4d5731b2d0c78646e6780d349fe93a8"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ScanBoundaryTest.kt",
+      "sha256": "5a9241d018f0f0de80e8941fdcfb46b5223a015554f1817aab0c18c188538d57"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/features/home/HomeActionControlsTest.kt",
+      "sha256": "0410512add8c0c1ab1ec2ba359b508bb93df000cdf566bad86e2f9a60d7a79c3"
+    },
+    {
+      "path": "android-as/build.gradle",
+      "sha256": "71ea4541804fa00feaa71a988c879e6ace58a21b5f798f8c2f41a7f02ee589a6"
+    },
+    {
+      "path": "android-as/buildscript-gradle.lockfile",
+      "sha256": "ca44969860f7ce50d5faf452bcbf746bd13e0da252dfbedb00b88d13de0d5a06"
+    },
+    {
+      "path": "android-as/config/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/gradle.properties",
+      "sha256": "2281f56e4eb114f19662b3437f9154da518b85f0656f1acb0e6213d9df5b81f0"
+    },
+    {
+      "path": "android-as/gradle/wrapper/gradle-wrapper.jar",
+      "sha256": "b3a875ddc1f044746e1b1a55f645584505f4a10438c1afea9f15e92a7c42ec13"
+    },
+    {
+      "path": "android-as/gradle/wrapper/gradle-wrapper.properties",
+      "sha256": "5d974da23c1e708448f6abe5ccbb719a2fa8bfd5bd5351eaa41678875df5c0e4"
+    },
+    {
+      "path": "android-as/gradlew",
+      "sha256": "5901fd800994ef6b176e86345b1c980ea8918e1c557e06967fef8fffd555a49d"
+    },
+    {
+      "path": "android-as/gradlew.bat",
+      "sha256": "982f1b2979dd2d13505c11e92192ab43eef338242ca61587f86f8d7fbc86f67b"
+    },
+    {
+      "path": "android-as/scripts/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "android-as/scripts/build.mjs",
+      "sha256": "281be12b3fa69b41045890326218d5536ee57a56fc7df1d3eefe95383323cb26"
+    },
+    {
+      "path": "android-as/scripts/verify-emulator.mjs",
+      "sha256": "ade21ff8e4182edbc87ad55045b07e0034aa614f6585b074137bde3d89fb36fd"
+    },
+    {
+      "path": "android-as/settings-gradle.lockfile",
+      "sha256": "6656e3aed66762d2f39666de089080c66a3224078aabdf27764b041da508df84"
+    },
+    {
+      "path": "android-as/settings.gradle",
+      "sha256": "f9bc4c48eb5182994ea5a8ea8b410ce51f68d6cdca1fc07ab525d370058bb2b7"
+    },
+    {
+      "path": "app-rn/.eslintrc.js",
+      "sha256": "0af3581193f04c59b4479b72aee567e51be08ce2ce1368d1863565c47c5729ac"
+    },
+    {
+      "path": "app-rn/.npmrc",
+      "sha256": "46649e6174842b4e02fee7dad40d66efc6f91541f1902b6eb8af6d453f9f53c7"
+    },
+    {
+      "path": "app-rn/AGENTS.md",
+      "sha256": "d449b400cbc47e0ea1405437e91d6ec5b26d765de2f91f04ea69b0c7e2712870"
+    },
+    {
+      "path": "app-rn/README.md",
+      "sha256": "29c2099cbbae878d54a2f54dac86ff187693dcd216a81d3a31b20843403c5aac"
+    },
+    {
+      "path": "app-rn/assets/fonts/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "app-rn/assets/images/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "app-rn/babel.config.js",
+      "sha256": "d76a3a8625b204efa0f42c4bdd220f484211798f88a56f2e784bc082231cc292"
+    },
+    {
+      "path": "app-rn/config/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "app-rn/index.ts",
+      "sha256": "005dbf0d81426fe64cf5dd74d4c447ec395e0ae9bca6fe62946859401b0305bd"
+    },
+    {
+      "path": "app-rn/metro.config.js",
+      "sha256": "1568e0d2c356e90aa0351a956b6b1a9bdc710d6e8ed34642d5fe5363caa4af31"
+    },
+    {
+      "path": "app-rn/package.json",
+      "sha256": "cf4957e7e8327afc0c20d10be6d77de7ecb7aea7116e03ddea0e38da7eb0972c"
+    },
+    {
+      "path": "app-rn/pnpm-lock.yaml",
+      "sha256": "9a465b92edc5e6f47ad5ee91a0d89940f015b0ce94088196e855d81d90da9539"
+    },
+    {
+      "path": "app-rn/pnpm-workspace.yaml",
+      "sha256": "24e1893e17fe598ebb22daa80d899de6de1143a64e58ae0b0be5b1b3a1a56683"
+    },
+    {
+      "path": "app-rn/react-native.config.js",
+      "sha256": "f85d08f9742aace9f71ef95370a0b5eaf486e1642180b61cbcc970af0c3ef499"
+    },
+    {
+      "path": "app-rn/scripts/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "app-rn/scripts/bundle.mjs",
+      "sha256": "c6b84f896a0cd848dcf5559c8f04c2567b67c228099e1a55d2f64e4ddbbd72d5"
+    },
+    {
+      "path": "app-rn/src/application/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "app-rn/src/components/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "app-rn/src/design/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "app-rn/src/entry/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "app-rn/src/entry/DeviceEntry.tsx",
+      "sha256": "2fd62e009e0f9364e402ccba6a88fdd8393e24186a023b8404dc40ae7f104b27"
+    },
+    {
+      "path": "app-rn/src/entry/deviceStatus.ts",
+      "sha256": "f14fd20f807f16a293a7d0e02b46b64dacebbc89cee0aa51d176c504207b7ecf"
+    },
+    {
+      "path": "app-rn/src/features/control/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "app-rn/src/features/device-control/README.md",
+      "sha256": "24e550b755bbc9782bf57f341e88b8ef1969963747ad39b32cfb46644dfc000a"
+    },
+    {
+      "path": "app-rn/src/features/device-control/WineCabinetScreen.tsx",
+      "sha256": "4ffa72b49e51efd754345b70a53adac51fb10bca86d1503622bbc91b79b8dde8"
+    },
+    {
+      "path": "app-rn/src/features/device-control/assets.ts",
+      "sha256": "7f971dc53f1636ecbac300c0cb5e0c909d743cb49d53714c0d512deb86c36b98"
+    },
+    {
+      "path": "app-rn/src/features/device-control/assets/back.png",
+      "sha256": "61e828a5abb0049c38a5581cb4c353e74e5b6716cae56637e714cad58e804ba3"
+    },
+    {
+      "path": "app-rn/src/features/device-control/assets/cabinet-front.png",
+      "sha256": "f9e485bbbf063e8e58bd0f7014599bf3f4c1c4777933cfa91601c1d32f9e7ad2"
+    },
+    {
+      "path": "app-rn/src/features/device-control/assets/cabinet-glow.png",
+      "sha256": "1fc749a486f121f9e7cf7c566961c54fca7bc0ff2e4cf1fa8a06e9b00cbd30ea"
+    },
+    {
+      "path": "app-rn/src/features/device-control/assets/cabinet-led.png",
+      "sha256": "b6f56fd8f869c10411023374ea93ea5ce0df09a2c1d7e9d4d8dd42d9f75d7a84"
+    },
+    {
+      "path": "app-rn/src/features/device-control/assets/cabinet-shadow.png",
+      "sha256": "9278d26b9010b26cc75d70f04caab38f05dadfdb72a840df47342941aa44b1a4"
+    },
+    {
+      "path": "app-rn/src/features/device-control/assets/cabinet.png",
+      "sha256": "86f370c5ad0135e932255c0f589babb7787b9af7956947d4a088a0e67b6f96a8"
+    },
+    {
+      "path": "app-rn/src/features/device-control/assets/light.png",
+      "sha256": "070cb935682a2bc23e3ac337f0336e1420f17a545dd33877c0bca1c2d4c88cc4"
+    },
+    {
+      "path": "app-rn/src/features/device-control/assets/lock-off.png",
+      "sha256": "86358bb6bc81d48a1c1d067f5972a4695ac09afa4760350b54481a201fc74081"
+    },
+    {
+      "path": "app-rn/src/features/device-control/assets/lock-on.png",
+      "sha256": "699d7d84f71babe184c8fd70ed9080c67ebf2d43baba7195300cbf78e9618a17"
+    },
+    {
+      "path": "app-rn/src/features/device-control/assets/more.png",
+      "sha256": "4e548c9a37798f72701f39eb26be41ef5ab75df0cd61f4a85cb2483883fb4cc8"
+    },
+    {
+      "path": "app-rn/src/features/device-control/assets/power-off.png",
+      "sha256": "5029c52989ff1f8143fb44a36d6ec95df8313ee96803240ce8ac3e26a8bb1df0"
+    },
+    {
+      "path": "app-rn/src/features/device-control/assets/power-on.png",
+      "sha256": "c8b0fb6d8182aca7a820f4d2afa2c342b063895d683de958bde9c591c833904b"
+    },
+    {
+      "path": "app-rn/src/features/device-control/assets/selection-sun.png",
+      "sha256": "beaf498852d24dd555770a89e906b858eaffe9a6aaa47a4c68bcc7bea051368a"
+    },
+    {
+      "path": "app-rn/src/features/device-control/assets/sources.json",
+      "sha256": "3dc666429104d535972b6864f2145644e2fd544f7bd81bb69f50d5e308df176f"
+    },
+    {
+      "path": "app-rn/src/features/device-control/controls.tsx",
+      "sha256": "c325af4a61c022d3244f09a9a4f8f46ca0dca050934dfb5aae2eb798ba806527"
+    },
+    {
+      "path": "app-rn/src/features/device-control/design-sources.json",
+      "sha256": "ae2dee680ce65e45d95e8b4546217fa261bdc7650e4560927feabc4535a15205"
+    },
+    {
+      "path": "app-rn/src/features/device-control/types.ts",
+      "sha256": "f3219205c450df49ddae753e4d3d6ba74d3fc9ab6453accb2bffd56dbd50f4c1"
+    },
+    {
+      "path": "app-rn/src/features/device-control/view-model.ts",
+      "sha256": "ad2980e83f35424aff0ff67046c3237bb7780b1353913b8385942d2be7132787"
+    },
+    {
+      "path": "app-rn/src/features/device-more/DeviceMoreScreen.tsx",
+      "sha256": "4f8cd295b637044cf26da05e29e8df8b9473dad63372e1e5927272b070d04432"
+    },
+    {
+      "path": "app-rn/src/features/device-more/README.md",
+      "sha256": "1746a54141a1a42bf00d7598cbd3ba6d4c116ca5a1cd06176b279ae7f671b6aa"
+    },
+    {
+      "path": "app-rn/src/features/device-more/SelfUnbindPanel.tsx",
+      "sha256": "59091367c837ab6086d4a557f8008607c40f0f22ff28bc5d244dd41cd868e4fb"
+    },
+    {
+      "path": "app-rn/src/features/device-more/navigation.ts",
+      "sha256": "bd4950caa70f71dc147d6e050b4611d4533109eec02ccbcca8ac826352dbe58d"
+    },
+    {
+      "path": "app-rn/src/features/device-more/presentation.ts",
+      "sha256": "550b2d3ef9fe43be1d0bbc88ae52d6d338fd792417fc49ba4d8eff560928bc7e"
+    },
+    {
+      "path": "app-rn/src/features/device-readonly/DeviceReadScreen.tsx",
+      "sha256": "fc6fa2a847318ae93370df8dbd63021e09da5e8e4686ab7e5af58e9a907cbe41"
+    },
+    {
+      "path": "app-rn/src/features/device-readonly/README.md",
+      "sha256": "605645707433a3f76c2ab1f22e1e4737a4bdb13e5d5182434212f385605b9d95"
+    },
+    {
+      "path": "app-rn/src/features/device-readonly/presentation.ts",
+      "sha256": "7ded33308578b3c4ee94c79d218189b8cd43e6b097d3b439bf2642c316c87536"
+    },
+    {
+      "path": "app-rn/src/features/firmware/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "app-rn/src/features/more/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "app-rn/src/features/schedules/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "app-rn/src/features/sharing/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "app-rn/src/host/README.md",
+      "sha256": "56cb6be6f46075c3185605c44c5e8eb0c3599ffdc60d10f41af09c9a805871bc"
+    },
+    {
+      "path": "app-rn/src/host/adapter/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "app-rn/src/host/adapter/DeviceMoreModels.ts",
+      "sha256": "f164eab7b1ba4d3f662d2dd17b828669dee36498084c0209299b4c7c8729578a"
+    },
+    {
+      "path": "app-rn/src/host/adapter/DeviceObservation.ts",
+      "sha256": "432a860519acc2ece4ce2042501b5f834ad2f8f326630288947e212fca6f6a1f"
+    },
+    {
+      "path": "app-rn/src/host/adapter/DeviceReadController.ts",
+      "sha256": "5b7fb015e09fb5a3d16d41ec3e095e5448da5e1d6476a2c45685ef5af2a7dd28"
+    },
+    {
+      "path": "app-rn/src/host/adapter/DeviceReadModels.ts",
+      "sha256": "b8ecc1bfac2f658ac26d5de3b29b484790c6103cba79cce5f17f6a92f1e6c039"
+    },
+    {
+      "path": "app-rn/src/host/adapter/DeviceSelfUnbindController.ts",
+      "sha256": "aa841129b1c94ece63ab1cb19b1d481022ac4d6f14ac4c929cd36228815a9bb3"
+    },
+    {
+      "path": "app-rn/src/host/adapter/DeviceSessionController.ts",
+      "sha256": "d57ff50d40e42715ec5aec3d7967a0c1edb5be498af16b99b3bb651307a7a4e0"
+    },
+    {
+      "path": "app-rn/src/host/adapter/NativePageClose.ts",
+      "sha256": "d5990908e998483f299be1255326bed33e13dce7e5c104c04ad4e55e1ef53c9a"
+    },
+    {
+      "path": "app-rn/src/host/specs/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "app-rn/src/host/specs/NativeRowanHost.ts",
+      "sha256": "9a330128ea2e3fa2932fc0a33b90a0804dc4565a545abf3a5d76da75c704df19"
+    },
+    {
+      "path": "app-rn/src/models/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "app-rn/src/navigation/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "app-rn/src/products/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "app-rn/tests/contract/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "app-rn/tests/contract/device-status.test.ts",
+      "sha256": "b6750dca3b296e3b6e8abe1205f2eb37d791faad8f1d1ecfd97690c38e24c9d7"
+    },
+    {
+      "path": "app-rn/tests/contract/observation-resync.test.ts",
+      "sha256": "6f2842e3dc9d8c5c3caa6b2981de3521b4b9458eb9f61a0979def7cd5addd4b3"
+    },
+    {
+      "path": "app-rn/tests/contract/observation.test.ts",
+      "sha256": "5c5a46fc518219400b1aa04519b15880ce1ef37645cc3feb5f8c670273e2e09e"
+    },
+    {
+      "path": "app-rn/tests/contract/page-close.test.ts",
+      "sha256": "671694e4d2a3f1e0986d874b142593756ab9a76c1e2095ba70ab3470738fba13"
+    },
+    {
+      "path": "app-rn/tests/contract/session-controller.test.ts",
+      "sha256": "0e59bdeac5ca3c8b2da49d0d6b20a912d48f8073ef5492c09dc2dc7d22cb634d"
+    },
+    {
+      "path": "app-rn/tests/device-control/view-model.test.ts",
+      "sha256": "1e9b5ce4da1fcbbd15b06a79bc8daa5a6464fc4173b6c8d47a24fa617ebbb6e1"
+    },
+    {
+      "path": "app-rn/tests/device-more/DeviceSelfUnbindController.test.ts",
+      "sha256": "84333814aabab17c043eef3faf7f9404ed33673a0d2edb420763b8cf94f6fbc5"
+    },
+    {
+      "path": "app-rn/tests/device-more/contracts.test.ts",
+      "sha256": "be5dd8638c5eb4a280c6b85760bdfa8146d0f63b24bc473db1da2b39d9f12141"
+    },
+    {
+      "path": "app-rn/tests/device-more/controller.test.ts",
+      "sha256": "6d06a7377f636d148e601c444713b8b7c10c1137f0eef8f4a5cf8270008bfd6f"
+    },
+    {
+      "path": "app-rn/tests/device-more/presentation.test.ts",
+      "sha256": "bc617adbebac7628601c202cd5a81bdc645f786c504086ee41342207601dbc53"
+    },
+    {
+      "path": "app-rn/tests/device-readonly/controller.test.ts",
+      "sha256": "50f205d6f3ad403e636d201c9ec3a16c041e704f96879d07e3e86a32e25bc488"
+    },
+    {
+      "path": "app-rn/tests/device-readonly/presentation.test.ts",
+      "sha256": "9babab38474ba43da3f4555e1a63abe80bcc3e8f0c3cb2d7f8a0332ed2634bc8"
+    },
+    {
+      "path": "app-rn/tests/fixtures/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "app-rn/tests/unit/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "app-rn/tsconfig.json",
+      "sha256": "48745c88331ae3c3dd14eeb170c1c25ff8e94d5ad246cb0289176c5860821da7"
+    }
+  ],
+  "limits": [
+    "This snapshot preserves the selected source/build, not subsequent worktree changes.",
+    "Private local environment and ignored build/dependency folders are excluded by git source inventory."
+  ]
+}

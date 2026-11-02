@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-01T21:18:32.204007+00:00",
+  "patch": ".cache/refactor/home-visual-r2-draft/implementation.patch",
+  "patchSha256": "fc3e1fa929c181a9018f6d1519d606b3b769b32046b4232977344dca95e0f53d",
+  "stage": "APPLIED_EXACT_REVIEWED_TEXT_NOT_PLATFORM_VERIFIED",
+  "files": [
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActivity.kt",
+      "beforeSha256": "66e2e6bd4597d58ea378da186d3a79f7afd9532ed649e2747cdc0dfd8c5452a8",
+      "afterSha256": "0f0367f855175c9e5497ce8db0934c8f48000730f46dc083b96bfbda8307482e",
+      "reviewedOverlaySha256": "0f0367f855175c9e5497ce8db0934c8f48000730f46dc083b96bfbda8307482e",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Rowan/Features/Home/HomeViewController.swift",
+      "beforeSha256": "82c66f67c21b260303531d129822d2eac6b902f4224a7b5944bcd044baa9e4a5",
+      "afterSha256": "c38bc4f40506bea07f291559734d02568a0eaa45cdf6178e4f51184d06644192",
+      "reviewedOverlaySha256": "c38bc4f40506bea07f291559734d02568a0eaa45cdf6178e4f51184d06644192",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    }
+  ]
+}

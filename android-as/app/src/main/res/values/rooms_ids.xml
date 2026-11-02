@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="rooms_title" type="id" />
+    <item name="rooms_back" type="id" />
+    <item name="rooms_edit" type="id" />
+    <item name="rooms_cancel_edit" type="id" />
+    <item name="rooms_save" type="id" />
+    <item name="rooms_status" type="id" />
+    <item name="rooms_list" type="id" />
+    <item name="rooms_row" type="id" />
+    <item name="rooms_rename" type="id" />
+    <item name="rooms_remove" type="id" />
+    <item name="rooms_move_up" type="id" />
+    <item name="rooms_move_down" type="id" />
+    <item name="rooms_add" type="id" />
+    <item name="rooms_refresh" type="id" />
+    <item name="rooms_name_input" type="id" />
+    <item name="rooms_name_error" type="id" />
+    <item name="rooms_name_confirm" type="id" />
+    <item name="rooms_name_cancel" type="id" />
+</resources>

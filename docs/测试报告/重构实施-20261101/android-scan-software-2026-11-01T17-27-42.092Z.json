@@ -1,0 +1,204 @@
+{
+  "runId": "2026-11-01T17-27-42.092Z",
+  "parentRunId": "2026-11-01T17-26-22.001Z",
+  "parentReportSha256": "8e59f1d08a03f71414de7c4a5da2f9e079a769022b4c80612db03e38fe3b1e86",
+  "scriptSha256": "155782b71658c9213870d86b1ed041c10c587d43a8fe6d41470a855ed2c9bda9",
+  "cameraAppOpsSha256": "9b997bc8bc84a4e699ced92aa212620b5382062cb3e94f7a27a5ab179407cb2e",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "serial": "emulator-5554",
+  "installedArtifactSha256": "b8e50abf3df261d6bcfd556a5d9ea30ca8971e6da7f3d910ba22a7a87a94394f",
+  "sourceBefore": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "5d152ab3684c4f17415e9dd9487deb09b81d9fb9061488dd0ac755d28f7672cc",
+    "sourceFiles": 292
+  },
+  "sourceAfter": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "5d152ab3684c4f17415e9dd9487deb09b81d9fb9061488dd0ac755d28f7672cc",
+    "sourceFiles": 292
+  },
+  "sourceUnchanged": true,
+  "permissionOriginal": {
+    "granted": false,
+    "flags": [
+      "USER_SENSITIVE_WHEN_DENIED",
+      "USER_SENSITIVE_WHEN_GRANTED"
+    ],
+    "appOp": "allow",
+    "uidAppOp": "ignore",
+    "packageEntryPresent": true
+  },
+  "permissionRestoration": {
+    "result": "通过",
+    "observed": {
+      "granted": false,
+      "flags": [
+        "USER_SENSITIVE_WHEN_DENIED",
+        "USER_SENSITIVE_WHEN_GRANTED"
+      ],
+      "appOp": "allow",
+      "uidAppOp": "ignore",
+      "packageEntryPresent": true
+    },
+    "packageEntryPresenceRestored": true,
+    "comparison": "Grant and flags exact; effective package CAMERA mode and UID mode match. AppOp entry/history presence is reported separately."
+  },
+  "pickerRestoration": {
+    "result": "不适用",
+    "reason": "picker-already-closed"
+  },
+  "pickerDiagnostics": {
+    "stage": "photo-picker-multiple-unique-thumbnail",
+    "knownTabs": [
+      {
+        "label": "Camera",
+        "selected": "false",
+        "clickable": "false"
+      }
+    ],
+    "localCameraCategoryVisible": true,
+    "resourceIds": [
+      "com.google.android.providers.media.module:id/action_bar_root",
+      "android:id/content",
+      "com.google.android.providers.media.module:id/photo_picker_base",
+      "com.google.android.providers.media.module:id/bottom_sheet",
+      "com.google.android.providers.media.module:id/drag_bar",
+      "com.google.android.providers.media.module:id/fragment_container",
+      "com.google.android.providers.media.module:id/picker_tab_recyclerview",
+      "com.google.android.providers.media.module:id/date_header_title",
+      "com.google.android.providers.media.module:id/icon_thumbnail",
+      "com.google.android.providers.media.module:id/toolbar"
+    ]
+  },
+  "media": [
+    {
+      "kind": "normal",
+      "sha256": "08af3ffd005d0100f258abf04b96f9bb916b08062910266e104fc3a11738b593",
+      "staged": true,
+      "registered": true,
+      "indexed": true,
+      "generatedRelativePath": "DCIM/Camera/rowan-scan-d3295eb13d2e-normal/fixture.png"
+    },
+    {
+      "kind": "blank",
+      "sha256": "6477f9b774db808235b98b5558211a8606f6bbc844e3afc2017f37ad3424cb9a",
+      "staged": true,
+      "registered": true,
+      "indexed": true,
+      "generatedRelativePath": "DCIM/Camera/rowan-scan-d3295eb13d2e-blank/fixture.png"
+    },
+    {
+      "kind": "multiple",
+      "sha256": "1da2c2b463e633cc9fb54a80411d172056b6474414de7f440b95dd69981660b5",
+      "staged": true,
+      "registered": true,
+      "indexed": true,
+      "generatedRelativePath": "DCIM/Camera/rowan-scan-d3295eb13d2e-multiple/fixture.png"
+    }
+  ],
+  "mediaCleanup": [
+    {
+      "kind": "multiple",
+      "result": "通过",
+      "alreadyCleaned": true
+    },
+    {
+      "kind": "blank",
+      "result": "通过",
+      "alreadyCleaned": true
+    },
+    {
+      "kind": "normal",
+      "result": "通过",
+      "alreadyCleaned": true
+    }
+  ],
+  "logout": {
+    "result": "通过",
+    "actionCount": 1,
+    "state": "normal-logout-confirmed"
+  },
+  "display": {
+    "changed": false,
+    "restoration": "not-required"
+  },
+  "dnsForwarding": {
+    "upstream": "192.168.31.1",
+    "bindAddress": "127.0.0.1",
+    "bindPort": 53,
+    "running": false,
+    "state": "closed",
+    "lastError": null,
+    "pending": 0,
+    "receivedQueries": 16,
+    "forwardedQueries": 16,
+    "forwardedReplies": 14,
+    "expired": 2,
+    "rejectedQueries": 0,
+    "rejectedReplies": 2,
+    "capacityDrops": 0,
+    "sendErrors": 0,
+    "socketErrors": 0,
+    "durationMs": 182469
+  },
+  "results": [
+    {
+      "id": "camera-denied-album-available",
+      "stage": "actual-camera-permission-denial",
+      "result": "通过",
+      "actualSystemDenial": true
+    },
+    {
+      "id": "photo-picker-normal",
+      "stage": "photo-picker-normal-unique-thumbnail",
+      "result": "通过",
+      "fixtureSha256": "08af3ffd005d0100f258abf04b96f9bb916b08062910266e104fc3a11738b593",
+      "route": "system-picker-to-native-decoder",
+      "fixedDecision": "unsupported"
+    },
+    {
+      "id": "photo-picker-blank",
+      "stage": "photo-picker-blank-unique-thumbnail",
+      "result": "通过",
+      "fixtureSha256": "6477f9b774db808235b98b5558211a8606f6bbc844e3afc2017f37ad3424cb9a",
+      "route": "system-picker-to-native-decoder",
+      "fixedDecision": "no-code"
+    },
+    {
+      "id": "photo-picker-multiple",
+      "stage": "photo-picker-multiple-unique-thumbnail",
+      "result": "通过",
+      "fixtureSha256": "1da2c2b463e633cc9fb54a80411d172056b6474414de7f440b95dd69981660b5",
+      "route": "system-picker-to-native-decoder",
+      "fixedDecision": "multiple-codes"
+    },
+    {
+      "id": "scan-return-home",
+      "stage": "scan-return-home",
+      "result": "通过"
+    },
+    {
+      "id": "live-camera-frame-decode",
+      "stage": "scan-return-home",
+      "result": "未验收",
+      "reason": "No controlled virtual camera input was supplied; preview presence is not frame/decode evidence."
+    }
+  ],
+  "screenshots": [
+    "2026-11-01T17-27-42.092Z-scan-camera-denied.png",
+    "2026-11-01T17-27-42.092Z-scan-normal.png",
+    "2026-11-01T17-27-42.092Z-scan-blank.png",
+    "2026-11-01T17-27-42.092Z-scan-multiple.png"
+  ],
+  "scope": "Actual Home/Add/Scan, real camera denial and system PhotoPicker with fixed identity-free public PNGs, native ZXing decisions. No decoder injection.",
+  "limits": [
+    "No production QR interpretation, binding, upload, control, verification codes or other relationship writes.",
+    "No real camera frame delivery/decode, hardware, iOS or full visual acceptance.",
+    "No raw XML/gallery content/URI/QR/error/CLI dump is archived. Optional screenshots require the known native scan page and denied camera; system picker is never captured. No display, OS or network configuration changes.",
+    "Only generated nonce paths and verified MediaStore rows are deleted; unknown picker layout blocks rather than selecting a real photo.",
+    "Only current validation package CAMERA grant/user-set/user-fixed/effective AppOp mode is restored; Android16 absent package default equals allow. UID mode is independently compared and never written. AppOp entry/history presence and timestamps are not rewound.",
+    "SIGINT/SIGTERM restore after bounded current command; force-kill cannot guarantee finally cleanup."
+  ]
+}

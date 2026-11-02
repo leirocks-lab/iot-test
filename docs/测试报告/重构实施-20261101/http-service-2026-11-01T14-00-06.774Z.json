@@ -1,0 +1,196 @@
+{
+  "date": "2026-11-01T14:00:07.613Z",
+  "runId": "2026-11-01T14-00-06.774Z",
+  "scriptSha256": "a11a370f904f53c451e4760254b21c2cdc5808d026ff10b17840fdfd6a87f3f9",
+  "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+  "contentQuery": {
+    "type": "text"
+  },
+  "execution": "Node real HTTP; does not prove native implementation or emulator acceptance",
+  "results": [
+    {
+      "id": "CONTENT-01",
+      "method": "GET",
+      "path": "/app-api/privacy",
+      "authenticated": false,
+      "httpStatus": 200,
+      "businessCode": 1002030000,
+      "result": "失败",
+      "expectation": "业务成功",
+      "dataType": "undefined",
+      "durationMs": 209
+    },
+    {
+      "id": "CONTENT-02",
+      "method": "GET",
+      "path": "/app-api/serviceTerms",
+      "authenticated": false,
+      "httpStatus": 200,
+      "businessCode": 1002030001,
+      "result": "失败",
+      "expectation": "业务成功",
+      "dataType": "undefined",
+      "durationMs": 48
+    },
+    {
+      "id": "HOME-01-denial",
+      "method": "GET",
+      "path": "/app-api/devices",
+      "authenticated": false,
+      "httpStatus": 200,
+      "businessCode": 401,
+      "result": "通过",
+      "expectation": "拒绝未认证访问",
+      "dataType": "null",
+      "durationMs": 19
+    },
+    {
+      "id": "AUTH-04",
+      "method": "POST",
+      "path": "/app-api/session",
+      "authenticated": false,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "object",
+      "durationMs": 70
+    },
+    {
+      "id": "HOME-01",
+      "method": "GET",
+      "path": "/app-api/devices",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "array",
+      "durationMs": 66
+    },
+    {
+      "id": "TIMER-01",
+      "method": "GET",
+      "path": "/app-api/devices/{deviceID}/schedules",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "array",
+      "durationMs": 73
+    },
+    {
+      "id": "TIMER-01-defined-shape",
+      "result": "通过",
+      "isArray": true,
+      "count": 0,
+      "allIdsValid": true,
+      "note": "不记录日程名称、标识、动作或设备值；空列表不证明编辑/下发通过"
+    },
+    {
+      "id": "OTA-mcu-candidate",
+      "method": "GET",
+      "path": "/app-api/devices/{deviceID}/ota/mcu",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "object",
+      "durationMs": 69
+    },
+    {
+      "id": "OTA-mcu-defined-shape",
+      "result": "失败",
+      "firmwareFieldPresent": true,
+      "firmwareType": "null",
+      "deviceIdMatches": true,
+      "firmwareIdType": "undefined",
+      "versionType": "undefined",
+      "deviceIdType": "string",
+      "deviceNameType": "string",
+      "macType": "string",
+      "note": "只记录类型/布尔，无原始值；不推导hasUpdate、不创建或查询升级任务"
+    },
+    {
+      "id": "OTA-wifi-candidate",
+      "method": "GET",
+      "path": "/app-api/devices/{deviceID}/ota/wifi",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "object",
+      "durationMs": 65
+    },
+    {
+      "id": "OTA-wifi-defined-shape",
+      "result": "失败",
+      "firmwareFieldPresent": true,
+      "firmwareType": "null",
+      "deviceIdMatches": true,
+      "firmwareIdType": "undefined",
+      "versionType": "undefined",
+      "deviceIdType": "string",
+      "deviceNameType": "string",
+      "macType": "string",
+      "note": "只记录类型/布尔，无原始值；不推导hasUpdate、不创建或查询升级任务"
+    },
+    {
+      "id": "USER-01",
+      "method": "GET",
+      "path": "/app-api/user/setting",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "object",
+      "durationMs": 35
+    },
+    {
+      "id": "ROOM-03",
+      "method": "GET",
+      "path": "/app-api/user/locations",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "array",
+      "durationMs": 71
+    },
+    {
+      "id": "AUTH-05",
+      "method": "PATCH",
+      "path": "/app-api/session",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "object",
+      "durationMs": 58
+    },
+    {
+      "id": "AUTH-06",
+      "method": "DELETE",
+      "path": "/app-api/session",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "undefined",
+      "durationMs": 51
+    }
+  ],
+  "exclusions": [
+    "MQTT",
+    "native HTTP implementation",
+    "UI",
+    "hardware"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-01T19:54:56.156549+00:00",
+  "patch": ".cache/refactor/email-login-disabled-style/implementation.patch",
+  "patchSha256": "48de8feacc54c3feb0b4be5c228d695efea963bd6a47abe698be7c2538cdf04d",
+  "stage": "APPLIED_EXACT_REVIEWED_TEXT_NOT_PLATFORM_VERIFIED",
+  "files": [
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/auth/AccountActivity.kt",
+      "beforeSha256": "479a0323d0d9aab6e7b63dbc575b78806f1704e90df3a06783abcc8d3b5a0809",
+      "afterSha256": "6487e7e37e7a6c0ebd19d93d55c94b50bc8b0c042cf4803d770ad90aadee6c5e",
+      "reviewedOverlaySha256": "6487e7e37e7a6c0ebd19d93d55c94b50bc8b0c042cf4803d770ad90aadee6c5e",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    }
+  ]
+}

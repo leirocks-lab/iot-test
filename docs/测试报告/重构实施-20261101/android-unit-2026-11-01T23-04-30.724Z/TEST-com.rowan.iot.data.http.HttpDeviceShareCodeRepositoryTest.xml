@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-01T23:04:19.167Z" hostname="DESKTOP-2AM89R2" time="0.395">
+  <properties/>
+  <testcase name="generation401DoesNotRefreshOrReplay" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.313"/>
+  <testcase name="lateResponseAfterAccountChangeIsDiscarded" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.006"/>
+  <testcase name="timeoutDoesNotAutomaticallyGenerateAgain" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.004"/>
+  <testcase name="invalidScopeNeverSends" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.009"/>
+  <testcase name="nativeCredentialDescriptionIsRedacted" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.003"/>
+  <testcase name="malformedMissingOrNonStringCodeNeverBecomesSuccess" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.015"/>
+  <testcase name="explicitGenerationUsesExactEncodedGetWithoutBody" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.004"/>
+  <testcase name="staleAccountCannotGenerateWithANewToken" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.004"/>
+  <testcase name="mismatchedDeviceDoesNotExposeItsCode" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.005"/>
+  <testcase name="ordinaryReadStillRefreshesOnce" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.008"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

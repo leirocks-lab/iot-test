@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-01T19:19:01.334610+00:00",
+  "patch": ".cache/refactor/home-selection-draft/tests.patch",
+  "patchSha256": "4744b1fad87eecb58485a665dc278e6e184b08bb3ab3de059236ffdf3e38320a",
+  "stage": "APPLIED_EXACT_REVIEWED_TEXT_NOT_PLATFORM_VERIFIED",
+  "files": [
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/home/HomeSelectionTest.kt",
+      "beforeSha256": null,
+      "afterSha256": "9352ea80694d4ebc1543764b6d0fe7e64d94aa3c378b87fdbb246eaf031ab114",
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/features/home/HomeActionControlsTest.kt",
+      "beforeSha256": null,
+      "afterSha256": "0410512add8c0c1ab1ec2ba359b508bb93df000cdf566bad86e2f9a60d7a79c3",
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Tests/Unit/HomeAndAccountTests.swift",
+      "beforeSha256": "4c07d9ada5cf4ade901190bc8cfdd8d09c6b42d6e47db1da8cb6a400fad5c843",
+      "afterSha256": "d96ee803b99e4162fc5ac87826158ccc6f0db5eace5a8f88065bccc39138a24e",
+      "lineEnding": "UTF-8 LF"
+    }
+  ]
+}

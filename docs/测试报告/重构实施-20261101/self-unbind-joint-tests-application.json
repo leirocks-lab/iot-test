@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-01T22:32:54.030242+00:00",
+  "patch": ".cache/refactor/self-unbind-joint-reviewed/tests.patch",
+  "patchSha256": "42e745aacbf546ebd8b8b2015b177b1f1eaa9e4849e7d8b6698ad9cb7bed7e87",
+  "stage": "APPLIED_EXACT_REVIEWED_TEXT_NOT_PLATFORM_VERIFIED",
+  "files": [
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/bridge/DeviceSelfUnbindBridgeTest.kt",
+      "beforeSha256": null,
+      "afterSha256": "05ae5469461b9ebbb5287372b81c93d6d86592f408a39117ecd21ef253ec9491",
+      "reviewedOverlaySha256": "05ae5469461b9ebbb5287372b81c93d6d86592f408a39117ecd21ef253ec9491",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/NativeSelfUnbindAuthorityTest.kt",
+      "beforeSha256": null,
+      "afterSha256": "1768c28b9bf27390bba794f7508350e36d6f87687af21f87ea8e8f5892e4d052",
+      "reviewedOverlaySha256": "1768c28b9bf27390bba794f7508350e36d6f87687af21f87ea8e8f5892e4d052",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt",
+      "beforeSha256": "53fa833cb28574350b27ed859de7871cc232ea3a336ff53c056c4c5416d7f2f2",
+      "afterSha256": "834e77b56fbb396e16af6973c8229258f2340d1d670c821bb0562eb4595e67c8",
+      "reviewedOverlaySha256": "834e77b56fbb396e16af6973c8229258f2340d1d670c821bb0562eb4595e67c8",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt",
+      "beforeSha256": "b01d47c1008c185ebb81fed89a6bd83b9da82c926f0689d4c9315ccbd6f0fe02",
+      "afterSha256": "b89ea71e717be7e30056ae6d44596f54d75e5c510dd022d5c560e371b4a9d042",
+      "reviewedOverlaySha256": "b89ea71e717be7e30056ae6d44596f54d75e5c510dd022d5c560e371b4a9d042",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "app-rn/tests/device-more/DeviceSelfUnbindController.test.ts",
+      "beforeSha256": null,
+      "afterSha256": "84333814aabab17c043eef3faf7f9404ed33673a0d2edb420763b8cf94f6fbc5",
+      "reviewedOverlaySha256": "84333814aabab17c043eef3faf7f9404ed33673a0d2edb420763b8cf94f6fbc5",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Rowan.xcodeproj/project.pbxproj",
+      "beforeSha256": "2b36652b9779fe015a1084b4a2c3e54dcc83292ba60218f9815550e3a1589e6f",
+      "afterSha256": "1528b3f61208eb56d64b223ab655dd2719f837b9adc3e8727f20812239734b18",
+      "reviewedOverlaySha256": "1528b3f61208eb56d64b223ab655dd2719f837b9adc3e8727f20812239734b18",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Tests/Unit/DeviceReadOwnerTests.swift",
+      "beforeSha256": "09360b9fc8e8da8d4d7cd21e5823b37ef3b77025d2af56f5fedce79086c3d6eb",
+      "afterSha256": "81fb9e4173ac3bb26a63b004898b995ef482e1e2631daa31e6e3e7a1fa91ae34",
+      "reviewedOverlaySha256": "81fb9e4173ac3bb26a63b004898b995ef482e1e2631daa31e6e3e7a1fa91ae34",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Tests/Unit/DeviceSelfUnbindBridgeTests.swift",
+      "beforeSha256": null,
+      "afterSha256": "d0d0783a020a333bb28d9be20ae8a24f97552b91f114b04e23ef92f2d27e4da8",
+      "reviewedOverlaySha256": "d0d0783a020a333bb28d9be20ae8a24f97552b91f114b04e23ef92f2d27e4da8",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Tests/Unit/NativeSelfUnbindAuthorityTests.swift",
+      "beforeSha256": null,
+      "afterSha256": "aa46de8b3ba1e9cd2dd6ab4fb1c645dbaddcc41aa9dcefd726c975fb255859a7",
+      "reviewedOverlaySha256": "aa46de8b3ba1e9cd2dd6ab4fb1c645dbaddcc41aa9dcefd726c975fb255859a7",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Tests/Unit/SelfUnbindIntegrationTests.swift",
+      "beforeSha256": "4e80d604f5aae43991a0e3ec0d6628fb0c3ee246c8334e3cfac6d3c986a88087",
+      "afterSha256": "cc6f0fc0183cf3c0164f0cfd458183b9623009ec5da24a9924e156951118023e",
+      "reviewedOverlaySha256": "cc6f0fc0183cf3c0164f0cfd458183b9623009ec5da24a9924e156951118023e",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    }
+  ]
+}

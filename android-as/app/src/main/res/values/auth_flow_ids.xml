@@ -1,0 +1,14 @@
+<resources>
+    <item name="auth_flow_back" type="id" />
+    <item name="auth_flow_title" type="id" />
+    <item name="registration_continue" type="id" />
+    <item name="registration_privacy" type="id" />
+    <item name="registration_terms" type="id" />
+    <item name="registration_return_login" type="id" />
+    <item name="recovery_return_login" type="id" />
+    <item name="recovery_reverify" type="id" />
+    <item name="auth_region_search" type="id" />
+    <item name="auth_region_cancel" type="id" />
+    <item name="auth_region_list" type="id" />
+    <item name="auth_region_empty" type="id" />
+</resources>

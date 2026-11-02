@@ -1,0 +1,21 @@
+$ vitest run tests "--maxWorkers=1"
+
+ RUN  v4.0.0 D:/workspace/rowaniot/rowan-iot-app/app-rn
+
+ ✓ tests/contract/page-close.test.ts (6 tests) 20ms
+ ✓ tests/contract/session-controller.test.ts (23 tests) 47ms
+ ✓ tests/device-readonly/controller.test.ts (16 tests) 40ms
+ ✓ tests/device-control/view-model.test.ts (21 tests) 35ms
+ ✓ tests/device-more/controller.test.ts (6 tests) 23ms
+ ✓ tests/contract/observation-resync.test.ts (5 tests) 11ms
+ ✓ tests/device-more/contracts.test.ts (7 tests) 13ms
+ ✓ tests/device-more/presentation.test.ts (3 tests) 9ms
+ ✓ tests/device-readonly/presentation.test.ts (4 tests) 11ms
+ ✓ tests/contract/observation.test.ts (5 tests) 7ms
+ ✓ tests/contract/device-status.test.ts (4 tests) 8ms
+
+ Test Files  11 passed (11)
+      Tests  100 passed (100)
+   Start at  23:45:30
+   Duration  12.75s (transform 1.09s, setup 0ms, collect 1.83s, tests 225ms, environment 5ms, prepare 367ms)
+

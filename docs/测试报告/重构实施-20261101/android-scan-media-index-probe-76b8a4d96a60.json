@@ -1,0 +1,15 @@
+{
+  "nonce": "76b8a4d96a60",
+  "fixtureSha256": "08af3ffd005d0100f258abf04b96f9bb916b08062910266e104fc3a11738b593",
+  "before": {
+    "rows": 0,
+    "metadata": [],
+    "expectedBucket": false
+  },
+  "after": {
+    "rows": 0,
+    "metadata": [],
+    "expectedBucket": false
+  },
+  "cleanup": "通过"
+}

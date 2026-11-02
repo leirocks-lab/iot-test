@@ -1,0 +1,120 @@
+{
+  "runId": "2026-11-01T12-35-32.932Z",
+  "parentRunId": "2026-11-01T12-33-06.557Z",
+  "execution": "Actual Android preferences UI and native HTTP; not complete scope acceptance",
+  "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+  "worktreeDirty": true,
+  "sourceSha256": "6f435e7c94db9650ecf516c8a6bf4ffadfedf1c45d085ecb357d13c7a55fa6c4",
+  "sourceFiles": 235,
+  "scriptSha256": "258c5b11fecbb7ba5fc051142e36a2d183313adcf93d6f91509da11b0063f3e8",
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "installedArtifactSha256": "39a5d15b9927bd05e9a67804a11a463414747503ef8cb65993df6171b53609bc",
+  "buildProvenance": {
+    "date": "2026-11-01T12:31:15.548Z",
+    "task": ":app:assembleDevelopmentRelease",
+    "artifactSha256": "39a5d15b9927bd05e9a67804a11a463414747503ef8cb65993df6171b53609bc",
+    "sourceBefore": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "6f435e7c94db9650ecf516c8a6bf4ffadfedf1c45d085ecb357d13c7a55fa6c4",
+      "sourceFiles": 235
+    },
+    "sourceAfter": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "6f435e7c94db9650ecf516c8a6bf4ffadfedf1c45d085ecb357d13c7a55fa6c4",
+      "sourceFiles": 235
+    },
+    "sourceUnchangedDuringBuild": true,
+    "architecture": "x86_64",
+    "signing": "development debug key",
+    "isolatedValidation": true
+  },
+  "dnsForwarding": {
+    "upstream": "192.168.31.1",
+    "bindAddress": "127.0.0.1",
+    "bindPort": 53,
+    "running": false,
+    "state": "closed",
+    "lastError": null,
+    "pending": 0,
+    "receivedQueries": 16,
+    "forwardedQueries": 16,
+    "forwardedReplies": 16,
+    "expired": 0,
+    "rejectedQueries": 0,
+    "rejectedReplies": 0,
+    "capacityDrops": 0,
+    "sendErrors": 0,
+    "socketErrors": 0,
+    "durationMs": 77414
+  },
+  "originalTheme": "system",
+  "themeRestorationPending": false,
+  "themeMutationRequested": true,
+  "screenshots": [
+    "2026-11-01T12-35-32.932Z-preferences-loaded.png",
+    "2026-11-01T12-35-32.932Z-preferences-language-options.png",
+    "2026-11-01T12-35-32.932Z-preferences-theme-changed.png",
+    "2026-11-01T12-35-32.932Z-preferences-appearance-limits.png"
+  ],
+  "results": [
+    {
+      "id": "S035-native-mine-defined-entries",
+      "result": "通过",
+      "note": "仅设置/退出入口，不代表未冻结Mine全部视觉或额外功能"
+    },
+    {
+      "id": "USER01-native-preferences-read",
+      "result": "通过",
+      "note": "实际原生GET及账号缓存提交完成；不是所有异常状态验收"
+    },
+    {
+      "id": "S105-native-three-language-options",
+      "result": "通过",
+      "note": "只读核对三选项，未切换语言，不证明全应用资源刷新"
+    },
+    {
+      "id": "S110-native-temperature-options",
+      "result": "通过",
+      "note": "只读选项，不修改偏好或设备目标"
+    },
+    {
+      "id": "S111-native-measurement-options",
+      "result": "通过",
+      "note": "只读公制/英制选项，不修改偏好或推断组合矩阵"
+    },
+    {
+      "id": "USER02-native-theme-write-readback",
+      "result": "通过",
+      "note": "单字段真实PATCH→GET→持久化/发布；不证明全App主题已应用"
+    },
+    {
+      "id": "USER02-native-theme-restored",
+      "result": "通过",
+      "note": "已将本次唯一修改恢复到实际已读取的原始枚举"
+    },
+    {
+      "id": "S106-native-cloud-system-notification-separation",
+      "result": "通过",
+      "note": "仅分开展示和入口存在；未请求/改变系统权限或云偏好"
+    },
+    {
+      "id": "S108-S109-no-invented-selector",
+      "result": "通过",
+      "note": "完整选择器仍阻塞：缺壁纸目录和布局选项；本项仅检查未构造假选项"
+    },
+    {
+      "id": "AUTH06-native-preferences-session-logout",
+      "result": "通过",
+      "note": "正常退出本轮显式保留的验证会话"
+    }
+  ],
+  "limits": [
+    "全App/RN语言与主题尚未完成",
+    "壁纸/布局选择器缺权威目录",
+    "iOS运行/视觉未验收",
+    "没有设备控制、通知授权或其他偏好写入"
+  ]
+}

@@ -1,0 +1,325 @@
+{
+  "execution": "JVM public fixtures; not real HTTP/MQTT, UI, registration or hardware acceptance",
+  "provenance": {
+    "date": "2026-11-01T14:35:45.809Z",
+    "task": ":app:testDevelopmentDebugUnitTest",
+    "exitCode": 0,
+    "sourceBefore": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "cf5517add4cb483008df5d9d73bf85544df796b80ebfa0981478327509e28a60",
+      "sourceFiles": 273
+    },
+    "sourceAfter": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "cf5517add4cb483008df5d9d73bf85544df796b80ebfa0981478327509e28a60",
+      "sourceFiles": 273
+    },
+    "sourceUnchangedDuringCheck": true
+  },
+  "totals": {
+    "tests": 398,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": [
+    {
+      "name": "com.rowan.iot.AccountExpectedRevisionTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:36.229Z"
+    },
+    {
+      "name": "com.rowan.iot.AccountServiceTest",
+      "tests": 22,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:36.277Z"
+    },
+    {
+      "name": "com.rowan.iot.AccountSettingsCommitTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:36.470Z"
+    },
+    {
+      "name": "com.rowan.iot.BackendRoutingTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:36.532Z"
+    },
+    {
+      "name": "com.rowan.iot.DeviceBridgeProjectionTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:36.538Z"
+    },
+    {
+      "name": "com.rowan.iot.DeviceEventGateTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:36.578Z"
+    },
+    {
+      "name": "com.rowan.iot.LegalReadGateTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:36.589Z"
+    },
+    {
+      "name": "com.rowan.iot.RecoveryServiceTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:36.598Z"
+    },
+    {
+      "name": "com.rowan.iot.RegistrationServiceTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:36.627Z"
+    },
+    {
+      "name": "com.rowan.iot.StartupCoordinatorTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:36.643Z"
+    },
+    {
+      "name": "com.rowan.iot.bridge.BridgeReadLateFailureTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:36.656Z"
+    },
+    {
+      "name": "com.rowan.iot.bridge.BridgeReadTaskTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:36.673Z"
+    },
+    {
+      "name": "com.rowan.iot.data.device.AuthorizedDeviceConnectionsTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:36.730Z"
+    },
+    {
+      "name": "com.rowan.iot.data.device.DeviceAuthorizationRevocationTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:35.164Z"
+    },
+    {
+      "name": "com.rowan.iot.data.device.DeviceMoreReadFeaturesTest",
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:36.766Z"
+    },
+    {
+      "name": "com.rowan.iot.data.device.DeviceReadFeaturesTest",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:36.881Z"
+    },
+    {
+      "name": "com.rowan.iot.data.http.HttpDeviceAccessTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:35.857Z"
+    },
+    {
+      "name": "com.rowan.iot.data.http.HttpDeviceMoreReadRepositoryTest",
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:36.987Z"
+    },
+    {
+      "name": "com.rowan.iot.data.http.HttpOtaRepositoryTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:37.075Z"
+    },
+    {
+      "name": "com.rowan.iot.data.http.HttpPreferencesRepositoryTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:37.132Z"
+    },
+    {
+      "name": "com.rowan.iot.data.http.HttpProductCatalogTest",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:37.181Z"
+    },
+    {
+      "name": "com.rowan.iot.data.http.HttpRoomRepositoryTest",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:35.975Z"
+    },
+    {
+      "name": "com.rowan.iot.data.http.HttpSchedulesRepositoryTest",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:37.213Z"
+    },
+    {
+      "name": "com.rowan.iot.data.mqtt.auth.MqttCredentialsTest",
+      "tests": 23,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:37.328Z"
+    },
+    {
+      "name": "com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest",
+      "tests": 25,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:37.573Z"
+    },
+    {
+      "name": "com.rowan.iot.domain.device.capabilities.PublishedThingModelTest",
+      "tests": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:37.799Z"
+    },
+    {
+      "name": "com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest",
+      "tests": 21,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:37.841Z"
+    },
+    {
+      "name": "com.rowan.iot.domain.device.mqtt.transport.BrokerContractsTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:37.910Z"
+    },
+    {
+      "name": "com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest",
+      "tests": 25,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:37.918Z"
+    },
+    {
+      "name": "com.rowan.iot.domain.device.ota.OtaServiceTest",
+      "tests": 21,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:38.226Z"
+    },
+    {
+      "name": "com.rowan.iot.domain.device.schedules.ScheduleModelsTest",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:38.350Z"
+    },
+    {
+      "name": "com.rowan.iot.domain.device.schedules.SchedulesServiceTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:38.370Z"
+    },
+    {
+      "name": "com.rowan.iot.domain.device.state.DeviceReadOwnerTest",
+      "tests": 27,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:38.459Z"
+    },
+    {
+      "name": "com.rowan.iot.domain.preferences.PreferencesServiceTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:38.799Z"
+    },
+    {
+      "name": "com.rowan.iot.domain.preferences.UserPreferencesTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:38.866Z"
+    },
+    {
+      "name": "com.rowan.iot.domain.products.ProductCatalogManagerTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:38.875Z"
+    },
+    {
+      "name": "com.rowan.iot.domain.rooms.RoomManagerTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-01T14:35:38.903Z"
+    }
+  ]
+}

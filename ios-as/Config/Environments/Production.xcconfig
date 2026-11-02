@@ -1,0 +1,3 @@
+ROWAN_ENVIRONMENT = production
+ROWAN_BUNDLE_IDENTIFIER = com.rowan.iot
+#include? "../Local/Production.xcconfig"

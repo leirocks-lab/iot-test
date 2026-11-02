@@ -1,0 +1,70 @@
+{
+  "runId": "2026-11-01T14-07-41.228Z",
+  "parentRunId": "2026-11-01T14-02-53.569Z",
+  "parentReportSha256": "0d837ad32c0da146456b70902e77167dfc5ef37396a36e7797d47a170b8371e4",
+  "scriptSha256": "923951009fee8624afd2b760bcd91ca266b1a36f6fc6d169c0d48a1563ea6286",
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "avdName": "ROWAN_API_36\r",
+  "installedArtifactSha256": "dc6c4c2e8fc5c318d81254a6a0a8d2917a69f661d4896a70e1264150b94490d3",
+  "parentInstalledArtifactSha256": "dc6c4c2e8fc5c318d81254a6a0a8d2917a69f661d4896a70e1264150b94490d3",
+  "buildProvenance": {
+    "date": "2026-11-01T13:52:44.789Z",
+    "task": ":app:assembleDevelopmentRelease",
+    "artifactSha256": "dc6c4c2e8fc5c318d81254a6a0a8d2917a69f661d4896a70e1264150b94490d3",
+    "sourceBefore": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "9296de48b202867ad5e9bd78fdbd2cd896d30019bf339aa9b9f1b16783d85961",
+      "sourceFiles": 258
+    },
+    "sourceAfter": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "9296de48b202867ad5e9bd78fdbd2cd896d30019bf339aa9b9f1b16783d85961",
+      "sourceFiles": 258
+    },
+    "sourceUnchangedDuringBuild": true,
+    "architecture": "x86_64",
+    "signing": "development debug key",
+    "isolatedValidation": true
+  },
+  "sourceBefore": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "4f990f40fe9ecfb83b528a3b0c53ea253452dd746100c09e7a9239ff1708cdb8",
+    "sourceFiles": 258
+  },
+  "sourceAfter": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "4f990f40fe9ecfb83b528a3b0c53ea253452dd746100c09e7a9239ff1708cdb8",
+    "sourceFiles": 258
+  },
+  "sourceUnchanged": true,
+  "originalEnvironment": null,
+  "restoration": {
+    "result": "不适用",
+    "note": "No display/font overrides were changed."
+  },
+  "logout": {
+    "result": "不适用",
+    "note": "Parent/artifact/environment preconditions were not established; no logout action."
+  },
+  "dnsForwarding": null,
+  "screenshots": [],
+  "results": [
+    {
+      "id": "device-read-layout-flow",
+      "geometryResult": "阻塞",
+      "stage": "precondition",
+      "reason": "DEDICATED_AVD_REQUIRED"
+    }
+  ],
+  "scope": "Real native GET + RN geometry matrix; no timer/OTA writes, sharing, unbinding, preferences mutation or data clearing.",
+  "limits": [
+    "Firmware error geometry is independent of blocked firmware-candidate business acceptance.",
+    "Only empty schedules and MCU error pages may be captured; populated lists have geometry metadata only.",
+    "Rectangles/reachability do not prove glyph wrapping, touch accuracy, reference fidelity, all UI states, iOS or hardware."
+  ]
+}

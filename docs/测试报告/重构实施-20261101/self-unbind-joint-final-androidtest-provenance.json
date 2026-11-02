@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-01T22:43:49.334Z",
+  "task": ":app:assembleDevelopmentReleaseAndroidTest",
+  "artifactSha256": "0661016c6a2b483975e65bf5b6ec6c3bb5f7993c6f4142052b08d75af5e3bbe2",
+  "artifactRole": "sdk-instrumentation-test-only",
+  "targetArtifactSha256": "1417a05a0eb2ac3d518736c147c803cc54cfb93829fcdaa0c3764b2008afb38b",
+  "sourceBefore": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "0b71eb6628a51ddf94758a023d574bd2021604f30b90d31f6f5080c3bcce2151",
+    "sourceFiles": 336
+  },
+  "sourceAfter": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "0b71eb6628a51ddf94758a023d574bd2021604f30b90d31f6f5080c3bcce2151",
+    "sourceFiles": 336
+  },
+  "sourceUnchangedDuringBuild": true,
+  "architecture": "x86_64",
+  "signing": "development debug key",
+  "isolatedValidation": true
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.home.HomeRoomTabsTest" tests="17" skipped="0" failures="0" errors="0" timestamp="2026-11-01T23:04:24.257Z" hostname="DESKTOP-2AM89R2" time="0.071">
+  <properties/>
+  <testcase name="accountChangeAfterDispatchDropsLateResponse" classname="com.rowan.iot.domain.home.HomeRoomTabsTest" time="0.006"/>
+  <testcase name="unknownRoomIdentityNeverBecomesUnassignedOrSelectable" classname="com.rowan.iot.domain.home.HomeRoomTabsTest" time="0.002"/>
+  <testcase name="accountChangeBeforeLoadHasZeroDispatchAndClearsSelection" classname="com.rowan.iot.domain.home.HomeRoomTabsTest" time="0.003"/>
+  <testcase name="selectedTabChangedDuringReadIsNotOverwrittenByCapturedSelection" classname="com.rowan.iot.domain.home.HomeRoomTabsTest" time="0.004"/>
+  <testcase name="allAndRoomSelectionOnlyProjectLoadedGroups" classname="com.rowan.iot.domain.home.HomeRoomTabsTest" time="0.002"/>
+  <testcase name="initialFailureIsNotAConfirmedEmptyHome" classname="com.rowan.iot.domain.home.HomeRoomTabsTest" time="0.002"/>
+  <testcase name="preCancelledCallerCannotRetireAnotherPendingRead" classname="com.rowan.iot.domain.home.HomeRoomTabsTest" time="0.004"/>
+  <testcase name="offlineFailureKeepsConfirmedDataAndAllowsLocalSwitch" classname="com.rowan.iot.domain.home.HomeRoomTabsTest" time="0.004"/>
+  <testcase name="refreshPreservesSelectionByOpaqueIdAndUsesNewRoomName" classname="com.rowan.iot.domain.home.HomeRoomTabsTest" time="0.003"/>
+  <testcase name="nativeDeviceEntryRequiresCurrentlyVisibleMetadataAndCurrentAccount" classname="com.rowan.iot.domain.home.HomeRoomTabsTest" time="0.005"/>
+  <testcase name="sameNameRoomsRemainDistinctAndNumericIdDoesNotEqualText" classname="com.rowan.iot.domain.home.HomeRoomTabsTest" time="0.002"/>
+  <testcase name="closingOwnerRejectsLateSuccessAndFutureReads" classname="com.rowan.iot.domain.home.HomeRoomTabsTest" time="0.007"/>
+  <testcase name="oldFailureCannotClearNewDataOrBusyState" classname="com.rowan.iot.domain.home.HomeRoomTabsTest" time="0.011"/>
+  <testcase name="deletedSelectedRoomFallsBackToAllOnlyAfterSuccessfulRefresh" classname="com.rowan.iot.domain.home.HomeRoomTabsTest" time="0.003"/>
+  <testcase name="oldUncooperativeSuccessCannotOverwriteNewRefresh" classname="com.rowan.iot.domain.home.HomeRoomTabsTest" time="0.005"/>
+  <testcase name="emptyRoomHasTabAndRoomSpecificEmptyState" classname="com.rowan.iot.domain.home.HomeRoomTabsTest" time="0.002"/>
+  <testcase name="pageCancellationRetiresReadWithoutDeletingConfirmedOfflineList" classname="com.rowan.iot.domain.home.HomeRoomTabsTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

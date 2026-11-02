@@ -1,0 +1,24 @@
+{
+  "status": "CACHE_ONLY_NOT_SWIFT_EXECUTED",
+  "baseline": {
+    "ios-as/Tests/Unit/PresentationServiceTests.swift": "ee0d1634794d629dd07364614edb7f05630a501f8b779697e050b4e80a4f4aff",
+    "ios-as/Rowan/Domain/Presentation/PresentationService.swift": "b00114e7aebedac97af83c272765be4b72674e98a4a5b2e971068b401d7eab71"
+  },
+  "testStage": {
+    "ios-as/Tests/Unit/PresentationServiceTests.swift": "dfa200f67936e12cc18bf22d117e552ccd83b30f94256c12966b8ffaeb9a0188",
+    "ios-as/Rowan/Domain/Presentation/PresentationService.swift": "b00114e7aebedac97af83c272765be4b72674e98a4a5b2e971068b401d7eab71"
+  },
+  "final": {
+    "ios-as/Tests/Unit/PresentationServiceTests.swift": "dfa200f67936e12cc18bf22d117e552ccd83b30f94256c12966b8ffaeb9a0188",
+    "ios-as/Rowan/Domain/Presentation/PresentationService.swift": "3786b708f314032c98a0c3453bafb363f44589e7606a2cd5588f8b581ef54dec"
+  },
+  "patches": {
+    "tests.patch": "85cbaac42a90bb6c326875d0607d668d50fcb1a9bd53fbb487a142a18a4c6c6a",
+    "implementation.patch": "c84ebc8e73b73b8b475984238ead8a6f2a11ac7d54442b9857e1c059b2925175"
+  },
+  "newXCTestDefinitions": 3,
+  "existingFileDefinitionCount": 19,
+  "pbxChanges": false,
+  "productionDiff": "one line queue:.main -> queue:nil",
+  "verification": "exact in-memory two-stage reconstruction and current formal raw SHA match; no RED/compiler/SDK execution"
+}

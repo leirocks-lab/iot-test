@@ -1,0 +1,74 @@
+{
+  "runId": "2026-11-01T16-54-21.370Z",
+  "parentRunId": "2026-11-01T16-50-54.643Z",
+  "parentReportSha256": "726daacb25337895d4d0ba564169e062e2d20119dadb34539f111cc96841541a",
+  "scriptSha256": "de6c4ded08c842887584d7fc27a8830a46c2f9a971720e553e490e6d4c10e0c9",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "serial": "emulator-5554",
+  "installedArtifactSha256": "b8e50abf3df261d6bcfd556a5d9ea30ca8971e6da7f3d910ba22a7a87a94394f",
+  "sourceBefore": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "5d152ab3684c4f17415e9dd9487deb09b81d9fb9061488dd0ac755d28f7672cc",
+    "sourceFiles": 292
+  },
+  "sourceAfter": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "5d152ab3684c4f17415e9dd9487deb09b81d9fb9061488dd0ac755d28f7672cc",
+    "sourceFiles": 292
+  },
+  "sourceUnchanged": true,
+  "permissionOriginal": null,
+  "permissionRestoration": {
+    "result": "不适用"
+  },
+  "media": [],
+  "mediaCleanup": [],
+  "logout": {
+    "result": "通过",
+    "actionCount": 1,
+    "state": "normal-logout-confirmed"
+  },
+  "display": {
+    "changed": false,
+    "restoration": "not-required"
+  },
+  "dnsForwarding": {
+    "upstream": "192.168.31.1",
+    "bindAddress": "127.0.0.1",
+    "bindPort": 53,
+    "running": false,
+    "state": "closed",
+    "lastError": null,
+    "pending": 0,
+    "receivedQueries": 0,
+    "forwardedQueries": 0,
+    "forwardedReplies": 0,
+    "expired": 0,
+    "rejectedQueries": 0,
+    "rejectedReplies": 0,
+    "capacityDrops": 0,
+    "sendErrors": 0,
+    "socketErrors": 0,
+    "durationMs": 14218
+  },
+  "results": [
+    {
+      "id": "scan-software",
+      "stage": "permission-prestate",
+      "result": "阻塞",
+      "errorCode": "CAMERA_APPOP_PRESTATE_UNCONFIRMED"
+    }
+  ],
+  "screenshots": [],
+  "scope": "Actual Home/Add/Scan, real camera denial and system PhotoPicker with fixed identity-free public PNGs, native ZXing decisions. No decoder injection.",
+  "limits": [
+    "No production QR interpretation, binding, upload, control, verification codes or other relationship writes.",
+    "No real camera frame delivery/decode, hardware, iOS or full visual acceptance.",
+    "No raw XML/gallery content/URI/QR/error/CLI dump is archived. Optional screenshots require the known native scan page and denied camera; system picker is never captured. No display, OS or network configuration changes.",
+    "Only generated nonce paths and verified MediaStore rows are deleted; unknown picker layout blocks rather than selecting a real photo.",
+    "Only current validation package CAMERA grant/user-set/user-fixed/AppOp mode is restored; permission history timestamps are not rewound.",
+    "SIGINT/SIGTERM restore after bounded current command; force-kill cannot guarantee finally cleanup."
+  ]
+}

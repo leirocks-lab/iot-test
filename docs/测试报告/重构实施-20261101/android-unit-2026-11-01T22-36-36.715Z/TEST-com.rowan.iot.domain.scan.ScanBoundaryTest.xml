@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.scan.ScanBoundaryTest" tests="22" skipped="0" failures="0" errors="0" timestamp="2026-11-01T22:36:28.947Z" hostname="DESKTOP-2AM89R2" time="0.038">
+  <properties/>
+  <testcase name="pickerRoundSurvivesExpectedStopButCannotPublishInBackground" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.001"/>
+  <testcase name="pickerCallbackFromOldAccountOrClosedPageIsDiscarded" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.0"/>
+  <testcase name="textBudgetCountsUtf8BytesNotUtf16Characters" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.001"/>
+  <testcase name="lastRowNeedNotContainUnusedStridePadding" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.002"/>
+  <testcase name="frameFromPausedOrPreviousGenerationCannotPublish" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.0"/>
+  <testcase name="tooManyCandidatesAreBounded" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.001"/>
+  <testcase name="noDetectedQrIsDifferentFromUnsupported" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.0"/>
+  <testcase name="dimensionsAndOverflowingStrideCannotAllocateAnUnboundedPlane" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.0"/>
+  <testcase name="duplicateOrOldPickerCallbacksCannotConsumeNewRound" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.0"/>
+  <testcase name="packedPlaneStringNeverPrintsPixels" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.003"/>
+  <testcase name="severalCodesAreNotSilentlySelected" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.0"/>
+  <testcase name="albumAfterTerminalEstablishesANewRoundWithoutAcceptingOldFrameError" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.004"/>
+  <testcase name="parallelWorkersHaveExactlyOneAtomicTerminalWinner" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.021"/>
+  <testcase name="retryRetiresQueuedTerminalAndOldExceptionCannotClaimTheNewRound" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.0"/>
+  <testcase name="accountRevisionChangeClosesTheGate" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.0"/>
+  <testcase name="rotationsHaveCorrectDimensionsAndPixels" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.001"/>
+  <testcase name="arbitraryUrlsAndOldDevelopmentJsonNeverGrantAProductionIdentity" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.0"/>
+  <testcase name="pausedOrClosedPageCannotDisplayAnAlreadyClaimedQueuedTerminal" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.0"/>
+  <testcase name="rejectedFramesCannotReleaseAnotherFramesBusyLease" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.001"/>
+  <testcase name="truncatedPlanesInvalidStridesAndCropAreRejectedBeforeIndexing" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.003"/>
+  <testcase name="blockedMainQueueDisplaysOnlyTheFirstTerminalNotLaterFrameOrException" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.0"/>
+  <testcase name="lumaHonorsCropRowAndPixelStride" classname="com.rowan.iot.domain.scan.ScanBoundaryTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

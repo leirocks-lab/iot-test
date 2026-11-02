@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.data.http.HttpOtaRepositoryTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-01T16:15:36.943Z" hostname="DESKTOP-2AM89R2" time="0.077">
+  <properties/>
+  <testcase name="uncertainCreateAndCancelRequestsAreNeverRetriedByTheHttpAdapter" classname="com.rowan.iot.data.http.HttpOtaRepositoryTest" time="0.015"/>
+  <testcase name="aLateOldScopeReadCannotEscapeAndOldScopeCannotDispatchMutationsForTheNewAccount" classname="com.rowan.iot.data.http.HttpOtaRepositoryTest" time="0.012"/>
+  <testcase name="cancelUsesDeleteTaskBodyAndAcceptsTheCommonEnvelopeWithoutData" classname="com.rowan.iot.data.http.HttpOtaRepositoryTest" time="0.006"/>
+  <testcase name="malformedCandidateOrDifferentDeviceCannotBecomeAnUpToDateOrStartableOffer" classname="com.rowan.iot.data.http.HttpOtaRepositoryTest" time="0.01"/>
+  <testcase name="undeclaredTaskResultsOrMissingTaskIdsNeverBecomeConfirmedStatus" classname="com.rowan.iot.data.http.HttpOtaRepositoryTest" time="0.012"/>
+  <testcase name="startUsesTypeQueryAndOnlyFirmwareIdThenRequiresTheReturnedTaskId" classname="com.rowan.iot.data.http.HttpOtaRepositoryTest" time="0.005"/>
+  <testcase name="opaqueResourceAndTaskIdsAreSegmentsAndOnlyTheFourDeclaredResultsDecode" classname="com.rowan.iot.data.http.HttpOtaRepositoryTest" time="0.004"/>
+  <testcase name="bothFirmwareChecksUseExactAuthenticatedRoutesWithoutInventingARequiredHasUpdateFlag" classname="com.rowan.iot.data.http.HttpOtaRepositoryTest" time="0.005"/>
+  <testcase name="unsafeSegmentsOrEmptyOperationIdentifiersNeverReachHttp" classname="com.rowan.iot.data.http.HttpOtaRepositoryTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

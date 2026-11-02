@@ -1,0 +1,52 @@
+{
+  "status": "CACHE_ONLY_NOT_APPLIED_NOT_COMPILED",
+  "virtualPrerequisite": "OS Presentation R2 implementation must first be applied exactly; no bypass of its test/RED process",
+  "files": {
+    "android-as/app/build.gradle": {
+      "baselineSha256": "07cde16d679f5418641e16235644df91062dc4996ce162929f383cae29a1280a",
+      "baselineSource": "android-as\\app\\build.gradle",
+      "virtualBaseline": false,
+      "finalSha256": "7e5be338e47a69f163620ebd44fc645b2f9fa57df0f59e178ed038140413c640"
+    },
+    "android-as/scripts/build.mjs": {
+      "baselineSha256": "88a4ad999fc1607814bcdeb56a54a2a271e48f7dfdbd091babdc7bf1ea188ff7",
+      "baselineSource": "android-as\\scripts\\build.mjs",
+      "virtualBaseline": false,
+      "finalSha256": "281be12b3fa69b41045890326218d5536ee57a56fc7df1d3eefe95383323cb26"
+    },
+    "android-as/app/src/main/kotlin/com/rowan/iot/app/AppServices.kt": {
+      "baselineSha256": "6b8cbb507323e024eb8afedede9524191c287d7253bd9bcac88ef1bb66e7d469",
+      "baselineSource": ".cache\\refactor\\presentation-system-r2-draft\\code\\android-as\\app\\src\\main\\kotlin\\com\\rowan\\iot\\app\\AppServices.kt",
+      "virtualBaseline": true,
+      "finalSha256": "e118922f079b6aad75ceb25ecf019ed4f7de3fd0115dfd4dd32c184a96cf3b6d"
+    },
+    "docs/tools/http_acceptance.mjs": {
+      "baselineSha256": "7cfd89c445c93208aaf018972f977ae770af5aba3865244edc2af4daa0f12007",
+      "baselineSource": "docs\\tools\\http_acceptance.mjs",
+      "virtualBaseline": false,
+      "finalSha256": "23c0b5b6dbcdb256e35e10c9dba1618c9c86a3d6148ffb940f6fe6bec6883bc9"
+    },
+    "docs/tools/content-brand-config.mjs": {
+      "baselineSha256": null,
+      "baselineSource": null,
+      "virtualBaseline": false,
+      "finalSha256": "daee603373b686b9d8bb12b0ff59d2153f7d5f0b30daebc5cdbd5018935dddab"
+    }
+  },
+  "readEvidence": {
+    "ios-as/Config/Common.xcconfig": "c391da307d46a44996a3a0d14e87b788a621b7e139e170ffb7be782f3278d250",
+    "ios-as/Rowan/Info.plist": "0a142fd69804d12aab82c76d638ba49407cd04acfec932d900926c1961cfdc96",
+    "ios-as/Rowan/AppDelegate.swift": "ad2fbc7759fdcf4c9f6cd3bafb672b66af1701047af2db874cce0dae4055d497",
+    "ios-as/Rowan/Domain/Account/AgreementContent.swift": "9e36e1ab7723bcd46c67423e8fa2ee5b9c4af9172ef00f1f64a274813fb877c2",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/AgreementService.kt": "5bb3b0b7dcdfab55f359f48d0d2482d3e45032d8b1e663e2b146f4ce66acef31",
+    "docs/prd/ROWAN\u516c\u5171App\u4ea7\u54c1\u529f\u80fd\u53caAPI\u8be6\u7ec6\u8bbe\u8ba1\u8bf4\u660e\u4e66_V1.4.docx": "6cdc859af888f3dd03c21d64cd1ac4d7b5afdf1fd85864db2766cd2975d74d1e"
+  },
+  "patchSha256": "15f1d58872f107acca3131c5dfb2aae8de3b2c86aa7a3cf864657298f437bd57",
+  "offlineCasesPassed": 10,
+  "toolsSha256": {
+    "verify.py": "f23a089dd54b14f73a4f3199bfa5f6b3330e2cdd56f1f3fb1bc0127cf4a683d9",
+    "apply.py": "6fa8bff46bcbdc7998dbcd655a9ecbc6e299a5d7770f5e94cae973866bc54536",
+    "offline.mjs": "d4a89d18018dd441d6f2d39990b80dbe346fa7898b93ef193541be569723f437",
+    "README.md": "3d707062005ad890bca387cceb28426ae91e569ef1c26b785f9dc990b3389a01"
+  }
+}

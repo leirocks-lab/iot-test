@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.bridge.BridgeReadLateFailureTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-11-01T14:35:36.656Z" hostname="DESKTOP-2AM89R2" time="0.012">
+  <properties/>
+  <testcase name="aLateErrorCannotExecuteTheClassifierAfterItsBindingIsNoLongerCurrent" classname="com.rowan.iot.bridge.BridgeReadLateFailureTest" time="0.012"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

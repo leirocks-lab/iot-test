@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "scope": "S026",
+  "formalApplied": false,
+  "execution": "NOT_EXECUTED: no Gradle/ADB/macOS",
+  "files": [
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/http/HttpHomeRepository.kt",
+      "baselineSha256": "e70a23aeed0c6db2044e281005362b4d44f8fc4545f5db40a05462d78e7cff81",
+      "afterTestsSha256": "e70a23aeed0c6db2044e281005362b4d44f8fc4545f5db40a05462d78e7cff81",
+      "finalSha256": "6f290d01334789ecc11ddfa87ee1a831355c9badd5a8160e6c9291922ae7033f",
+      "stage": "implementation"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/HomeRepository.kt",
+      "baselineSha256": "098b0a1ca4d71a1ea3ad3a2214ad2520f350d7c03c7aa9f9f7a05a4849702037",
+      "afterTestsSha256": "098b0a1ca4d71a1ea3ad3a2214ad2520f350d7c03c7aa9f9f7a05a4849702037",
+      "finalSha256": "646240f83290b613111d6638c3547128d713479c633991fb944c5a8c726fb2d2",
+      "stage": "implementation"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/home/HomeRoomTabs.kt",
+      "baselineSha256": null,
+      "afterTestsSha256": null,
+      "finalSha256": "e5b6051510fb5c3eee96599834eb216506d3983a11ee035e2a6646d73aae5c63",
+      "stage": "implementation"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActivity.kt",
+      "baselineSha256": "1b7082089f55c4225e9f15cc440ff75faf0a63917cca143cfa0350d0a4d0962f",
+      "afterTestsSha256": "1b7082089f55c4225e9f15cc440ff75faf0a63917cca143cfa0350d0a4d0962f",
+      "finalSha256": "68d8530462e3c7061c41f7d15da9d75c859868503de07ff316887b8dc42ec672",
+      "stage": "implementation"
+    },
+    {
+      "path": "android-as/app/src/main/res/values/home_room_tabs_ids.xml",
+      "baselineSha256": null,
+      "afterTestsSha256": null,
+      "finalSha256": "bd38f71f46414fb9f891418d6843078e91e57885caad69cccdc51485b61622be",
+      "stage": "implementation"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpHomeRepositoryTest.kt",
+      "baselineSha256": null,
+      "afterTestsSha256": "933f29d6378759d0087fbb282caa37cb9b8a0aef8f96aae3d80890020ccb18bb",
+      "finalSha256": "933f29d6378759d0087fbb282caa37cb9b8a0aef8f96aae3d80890020ccb18bb",
+      "stage": "tests"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/home/HomeRoomTabsTest.kt",
+      "baselineSha256": null,
+      "afterTestsSha256": "ea5bb36ecd3637d5c926a5efde45e6e0ec234917f79ffbad2f8c8cbb0c06ea78",
+      "finalSha256": "ea5bb36ecd3637d5c926a5efde45e6e0ec234917f79ffbad2f8c8cbb0c06ea78",
+      "stage": "tests"
+    },
+    {
+      "path": "ios-as/Rowan/Data/HTTP/HTTPHomeRepository.swift",
+      "baselineSha256": "d11f864d8b83e685e12a0275eb88f4ee8286a1f13f9eb9cdc589417c9585692f",
+      "afterTestsSha256": "d11f864d8b83e685e12a0275eb88f4ee8286a1f13f9eb9cdc589417c9585692f",
+      "finalSha256": "8c5fbe0846e082c2720b9c17f1d2f7730858497884aaca85d7de583e1e914985",
+      "stage": "implementation"
+    },
+    {
+      "path": "ios-as/Rowan/Domain/Device/HomeRepository.swift",
+      "baselineSha256": "f19bfc74ec304e0c317c2a827eb932be6f124bf67f1efd4f9388e90312f36540",
+      "afterTestsSha256": "f19bfc74ec304e0c317c2a827eb932be6f124bf67f1efd4f9388e90312f36540",
+      "finalSha256": "bb1798ffd94222c69af219086aced0ed3e0ff07261f2660fca11c6dc68d3bab4",
+      "stage": "implementation"
+    },
+    {
+      "path": "ios-as/Rowan/Features/Home/HomeViewController.swift",
+      "baselineSha256": "22bfe2721126b36ef3218669dec51c067e285a73c5a4f525e19cf97cae7c7bbd",
+      "afterTestsSha256": "22bfe2721126b36ef3218669dec51c067e285a73c5a4f525e19cf97cae7c7bbd",
+      "finalSha256": "45ce69130d4635c0e8fb53a691c87b1aa8464453d021ec2520df6ddccaecfd49",
+      "stage": "implementation"
+    },
+    {
+      "path": "ios-as/Tests/Unit/HomeAndAccountTests.swift",
+      "baselineSha256": "6f9492677bfeb5357f4edadd2a1863e5c53a90ff326b889eb54a942ad81557b9",
+      "afterTestsSha256": "4c07d9ada5cf4ade901190bc8cfdd8d09c6b42d6e47db1da8cb6a400fad5c843",
+      "finalSha256": "4c07d9ada5cf4ade901190bc8cfdd8d09c6b42d6e47db1da8cb6a400fad5c843",
+      "stage": "tests"
+    }
+  ],
+  "patches": {
+    "tests.patch": "03559a9e6c604ae92ba819e087e3dbf6d1dd20f54858321ae0b7464cb04e8090",
+    "implementation.patch": "181142979cb162f98c8aaf1eb98e879e190370619a239bc86e390b849a9e9312"
+  }
+}

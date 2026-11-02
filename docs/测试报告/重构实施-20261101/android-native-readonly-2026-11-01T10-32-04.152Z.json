@@ -1,0 +1,66 @@
+{
+  "runId": "2026-11-01T10-32-04.152Z",
+  "parentRunId": "2026-11-01T09-49-57.441Z",
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "scriptSha256": "687ae92f2d7c5257e5d83be37cc2f9eb0377a25aab0de09b71a105095d122bec",
+  "installedArtifactSha256": "1654a469b6ece181ead0d8c999e222d0a0ab9ceec02adeb29889ba59e40f315a",
+  "buildProvenance": {
+    "date": "2026-11-01T09:47:37.703Z",
+    "task": ":app:assembleDevelopmentRelease",
+    "artifactSha256": "1654a469b6ece181ead0d8c999e222d0a0ab9ceec02adeb29889ba59e40f315a",
+    "sourceBefore": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "72103f7641aa3becde58a12f3c5db772bc09334ddebd7b7fda4f6dc0ddf6bbc0",
+      "sourceFiles": 200
+    },
+    "sourceAfter": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "72103f7641aa3becde58a12f3c5db772bc09334ddebd7b7fda4f6dc0ddf6bbc0",
+      "sourceFiles": 200
+    },
+    "sourceUnchangedDuringBuild": true,
+    "architecture": "x86_64",
+    "signing": "development debug key",
+    "isolatedValidation": true
+  },
+  "results": [
+    {
+      "id": "ROOM-03-native-read",
+      "result": "通过",
+      "stage": "rooms-read-only",
+      "note": "只读加载，不证明编辑、默认标记或删除通过"
+    },
+    {
+      "id": "PAIR-01-03-native-catalog",
+      "result": "通过",
+      "stage": "catalog-read-only",
+      "note": "真实目录加载，不包含配网/绑定"
+    },
+    {
+      "id": "PAIR-02-native-detail",
+      "result": "通过",
+      "stage": "product-details-read-only",
+      "note": "真实目录 ID 的文本详情；没有打开图片/Shop"
+    },
+    {
+      "id": "catalog-rooms-return-stack",
+      "result": "通过",
+      "stage": "product-details-read-only"
+    },
+    {
+      "id": "AUTH-06-native-logout-continuation",
+      "result": "通过",
+      "stage": "logout"
+    }
+  ],
+  "screenshots": [
+    "2026-11-01T10-32-04.152Z-rooms-read-only.png",
+    "2026-11-01T10-32-04.152Z-catalog-read-only.png",
+    "2026-11-01T10-32-04.152Z-product-detail-read-only.png"
+  ],
+  "limits": "继续已记录的本轮测试会话；不登录、不改房间、不绑定、不发送 MQTT 控制；完整UI/iOS/硬件未验收",
+  "rnExcludedForIsolation": true
+}

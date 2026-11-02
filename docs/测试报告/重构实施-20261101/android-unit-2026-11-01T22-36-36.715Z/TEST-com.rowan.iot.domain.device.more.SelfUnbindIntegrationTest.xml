@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" tests="26" skipped="0" failures="0" errors="0" timestamp="2026-11-01T22:36:26.800Z" hostname="DESKTOP-2AM89R2" time="0.681">
+  <properties/>
+  <testcase name="queuedCollectorCannotDropCoreFinalViewWhenWorkerCompletesFirst" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.045"/>
+  <testcase name="unknownRecoveryUsesHomeAbsenceNotDeleteOrBorrowedHandle" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.024"/>
+  <testcase name="concurrentDuplicateReturnsSameWrapperAndBothReceiveDurableCleanup" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.023"/>
+  <testcase name="dirtyDuringActualReadRetiresOldResultAndCoalescesMultipleTickets" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.011"/>
+  <testcase name="newAccountGetsIndependentReadGateWhileOldIoCannotAckItsTicket" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.012"/>
+  <testcase name="installedReadReceiptBecomesInvalidOnCancelOrNewRead" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.006"/>
+  <testcase name="oldAccountJournalSuccessAndErrorDoNotQueueNewAccountTickets" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.006"/>
+  <testcase name="recreatedSameAccountPageWaitsForOriginalActualIo" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.008"/>
+  <testcase name="activeDeleteIsNotReconciledAsUnknownUntilActualWorkerSettles" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.014"/>
+  <testcase name="confirmedPairOnNewPageRetiresWholeOldRelationshipAndOldAckDoesNotTouchReplacement" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.017"/>
+  <testcase name="sameUserNewRevisionCannotBorrowPreviousAccountWrapper" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.024"/>
+  <testcase name="homePresenceKeepsUnknownAndDoesNotPollAutomatically" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.004"/>
+  <testcase name="nativeRelationshipReplacementClosesOnlyOriginalIncarnation" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.008"/>
+  <testcase name="sharedReadScopeRejectsOldFactoryAndSameRevisionDifferentIdentity" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.001"/>
+  <testcase name="closingPageNeverAcknowledgesItsLateRead" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.006"/>
+  <testcase name="lateAckInvalidatesOrdinaryRecreatedPageAndRepeatedRecoveryDoesNotRestartProof" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.031"/>
+  <testcase name="registrationRequiresActualExistingOwnerAndNeverStartsOne" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.005"/>
+  <testcase name="recoveryRequestsShareOneActualJournalDrainAndOnePendingBit" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.005"/>
+  <testcase name="discoveredHistoricalJournalNeverReturnsOldBindingWrapper" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.019"/>
+  <testcase name="capacityRejectsBeforeCoreDispatchAndDuplicateUsesExistingSlot" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.383"/>
+  <testcase name="failedHomeReadCannotAcknowledgeOrSpin" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.004"/>
+  <testcase name="registrationReleaseRejectsNewIntentButDoesNotRetireOtherObservers" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.003"/>
+  <testcase name="pauseAndEarlyReturnRetainActualIoSlotUntilOldReadReturns" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.005"/>
+  <testcase name="fullHomeSnapshotNotSelectedRoomDeterminesAbsence" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.004"/>
+  <testcase name="acknowledgementAfterAccountChangeDoesNotInvalidateNewAccountResource" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.007"/>
+  <testcase name="ackRecoveryCompletesOnlyAfterActualHomeCacheInstall" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

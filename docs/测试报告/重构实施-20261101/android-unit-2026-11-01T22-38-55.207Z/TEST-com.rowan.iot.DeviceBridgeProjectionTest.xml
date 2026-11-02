@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.DeviceBridgeProjectionTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-01T22:38:42.708Z" hostname="DESKTOP-2AM89R2" time="0.051">
+  <properties/>
+  <testcase name="projectsSafeMetadataWithIndependentDeliverySequence" classname="com.rowan.iot.DeviceBridgeProjectionTest" time="0.05"/>
+  <testcase name="duplicateSnapshotDoesNotCreateAnArtificialDeliveryGap" classname="com.rowan.iot.DeviceBridgeProjectionTest" time="0.0"/>
+  <testcase name="recoveryRetainsEpochButNeverClaimsCurrentOnline" classname="com.rowan.iot.DeviceBridgeProjectionTest" time="0.0"/>
+  <testcase name="regressingOwnerVersionOrEpochTerminatesAndClearsOldData" classname="com.rowan.iot.DeviceBridgeProjectionTest" time="0.001"/>
+  <testcase name="forbiddenSnapshotDoesNotClaimOnline" classname="com.rowan.iot.DeviceBridgeProjectionTest" time="0.0"/>
+  <testcase name="closedClearsMetadataWithoutRegressingEpochOrAuthority" classname="com.rowan.iot.DeviceBridgeProjectionTest" time="0.0"/>
+  <testcase name="wrongResourceAndAccountCannotPopulateObserver" classname="com.rowan.iot.DeviceBridgeProjectionTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

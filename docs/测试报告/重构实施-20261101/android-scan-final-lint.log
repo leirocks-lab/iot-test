@@ -1,0 +1,73 @@
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateAutolinkingNewArchitectureFiles UP-TO-DATE
+> Task :app:generateAutolinkingPackageList UP-TO-DATE
+> Task :app:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :app:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :app:generateReactNativeEntryPoint UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDevelopmentDebugBuild UP-TO-DATE
+> Task :app:generateDevelopmentDebugBuildConfig UP-TO-DATE
+> Task :app:checkDevelopmentDebugAarMetadata UP-TO-DATE
+> Task :app:generateDevelopmentDebugResValues UP-TO-DATE
+> Task :app:mapDevelopmentDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDevelopmentDebugResources UP-TO-DATE
+> Task :app:mergeDevelopmentDebugResources UP-TO-DATE
+> Task :app:packageDevelopmentDebugResources UP-TO-DATE
+> Task :app:parseDevelopmentDebugLocalResources UP-TO-DATE
+> Task :app:createDevelopmentDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDevelopmentDebug UP-TO-DATE
+> Task :app:processDevelopmentDebugMainManifest UP-TO-DATE
+> Task :app:processDevelopmentDebugManifest UP-TO-DATE
+> Task :app:processDevelopmentDebugManifestForPackage UP-TO-DATE
+> Task :app:processDevelopmentDebugResources UP-TO-DATE
+> Task :app:compileDevelopmentDebugKotlin UP-TO-DATE
+> Task :app:javaPreCompileDevelopmentDebug UP-TO-DATE
+> Task :app:compileDevelopmentDebugJavaWithJavac UP-TO-DATE
+> Task :app:bundleDevelopmentDebugClassesToCompileJar UP-TO-DATE
+> Task :app:preDevelopmentDebugAndroidTestBuild SKIPPED
+> Task :app:generateDevelopmentDebugAndroidTestResValues UP-TO-DATE
+> Task :app:generateDevelopmentDebugAndroidTestLintModel
+> Task :app:extractProguardFiles UP-TO-DATE
+> Task :app:generateDevelopmentDebugLintReportModel
+> Task :app:preDevelopmentDebugUnitTestBuild UP-TO-DATE
+> Task :app:generateDevelopmentDebugUnitTestLintModel
+> Task :app:lintAnalyzeDevelopmentDebugAndroidTest
+> Task :app:lintAnalyzeDevelopmentDebug
+> Task :app:lintAnalyzeDevelopmentDebugUnitTest
+
+> Task :app:lintReportDevelopmentDebug
+Wrote HTML report to file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/build/reports/lint-results-developmentDebug.html
+
+> Task :app:lintDevelopmentDebug
+
+[Incubating] Problems report is available at: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1m 6s
+43 actionable tasks: 8 executed, 35 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.3.1/userguide/configuration_cache_enabling.html

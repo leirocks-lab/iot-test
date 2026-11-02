@@ -1,0 +1,134 @@
+{
+  "stage": "isolated-cache-only; no Gradle/Swift/ADB/network execution",
+  "baselineSHA256": {
+    "android-as/app/src/main/kotlin/com/rowan/iot/app/AppServices.kt": "10795f0533dca1c207ebb9bd84a377f9030e57c89d03299ef38aa8303f2d1cab",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/home/HomeRoomTabs.kt": "e5b6051510fb5c3eee96599834eb216506d3983a11ee035e2a6646d73aae5c63",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/more/DeviceSelfUnbind.kt": "11f4a716de6bb8d8d3d99475c3ae2cfb74e063d74718287ab9211785d94f1e5b",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwner.kt": "59e285ea3f03e387aa36740f02f2f621b8197a6ab868d6d7c85a54833d349fea",
+    "android-as/app/src/main/kotlin/com/rowan/iot/data/storage/EncryptedSelfUnbindJournal.kt": "18519b1565b077ca2614562ef970b78582d149f76600c142da226c323bcacbad",
+    "android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActivity.kt": "60d29388eea427966c57d230309b247e9705d14fe2f7d33e9077d563255dfa14",
+    "ios-as/Rowan/App/RowanAppServices.swift": "0ea3839f60b7450fa4c5ad12e3b865fda7b07f1dbd2e4130af204b6ddf58bf6a",
+    "ios-as/Rowan/Domain/Device/HomeRepository.swift": "035c605a7b1af925f13f5b45e37a3d6212cac521d049e07ca1c5a3ea2cfe560d",
+    "ios-as/Rowan/Domain/Device/More/DeviceSelfUnbind.swift": "54846b76545c4dcd3608475cff0679e90d4819944f67d1260cd2689f28b73284",
+    "ios-as/Rowan/Domain/Device/State/DeviceReadOwner.swift": "e4e970f923e8d95c8c5c44b3657c2d13a38beb1b20a0731483a64d5693813622",
+    "ios-as/Rowan/Data/Storage/KeychainSelfUnbindJournal.swift": "b04c7d89ee2acd3336e3c1c9960deccc82a348bce6aafb1b63a910d2da470999",
+    "ios-as/Rowan/Features/Home/HomeViewController.swift": "3a3cb614e76fc02601830a4acfd0dd93a3d6a6be19cb75e26184b95a93f557ac",
+    "ios-as/Rowan/AppDelegate.swift": "88f0ab7910f635e2f683f78d3cfda50660ce6072570f1d53e166ad0a40672fa1",
+    "ios-as/Rowan.xcodeproj/project.pbxproj": "f49d656db4025661f2bf520308156d49ba9522253127ead70bdaab4cd5e107b4",
+    "android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/FixtureApplication.kt": "dcb104f87259e4f23c89b2ec1313298edb1e9f2b26d4dada3f93b7df5ea93e81",
+    "android-as/app/src/test/kotlin/com/rowan/iot/domain/home/HomeRoomTabsTest.kt": "ea5bb36ecd3637d5c926a5efde45e6e0ec234917f79ffbad2f8c8cbb0c06ea78",
+    "ios-as/Tests/Unit/HomeAndAccountTests.swift": "d96ee803b99e4162fc5ac87826158ccc6f0db5eace5a8f88065bccc39138a24e",
+    "android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/HomeFixtureInstrumentation.kt": "ab4f86f51553e24be6e15577d9197de7365b66c2974ece66bac6a0ee9f241db6"
+  },
+  "explicitRebases": [
+    {
+      "path": "android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/HomeFixtureInstrumentation.kt",
+      "from": "85d57ab1349d605c5272e499a09b91f77057ecc744a580a2c6ee4a4f08a5dc60",
+      "to": "365186d3e3449538d86797d185dac9940cced6e4b65c4f7b05e8ed7aa8c24597",
+      "reason": "Root formal diagnostics-r2; preserve all safe diagnostics, only adjust same-R actual-read ordering."
+    },
+    {
+      "path": "android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/HomeFixtureInstrumentation.kt",
+      "from": "365186d3e3449538d86797d185dac9940cced6e4b65c4f7b05e8ed7aa8c24597",
+      "to": "ab4f86f51553e24be6e15577d9197de7365b66c2974ece66bac6a0ee9f241db6",
+      "reason": "Root frame-r3 new frameNumbers diagnostics retained; read-order-only integration delta."
+    }
+  ],
+  "virtualBaselines": {
+    "android-as/app/src/main/kotlin/com/rowan/iot/app/AppServices.kt": {
+      "source": ".cache\\refactor\\android-home-ui-fixtures-draft\\code\\android-as\\app\\src\\main\\kotlin\\com\\rowan\\iot\\app\\AppServices.kt",
+      "sha256": "10795f0533dca1c207ebb9bd84a377f9030e57c89d03299ef38aa8303f2d1cab",
+      "reason": "Root-mandated future merged fixture DI baseline; NOT current formal file"
+    },
+    "android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/FixtureApplication.kt": {
+      "source": ".cache\\refactor\\android-home-ui-fixtures-draft\\code\\android-as\\app\\src\\androidTest\\kotlin\\com\\rowan\\iot\\fixtures\\FixtureApplication.kt",
+      "sha256": "dcb104f87259e4f23c89b2ec1313298edb1e9f2b26d4dada3f93b7df5ea93e81",
+      "reason": "Root-mandated future fixture merge; memory journal injection is added ONLY in integration implementation"
+    }
+  },
+  "tests": [
+    "android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/HomeFixtureInstrumentation.kt",
+    "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt",
+    "android-as/app/src/test/kotlin/com/rowan/iot/domain/home/HomeRoomTabsTest.kt",
+    "ios-as/Tests/Unit/HomeAndAccountTests.swift",
+    "ios-as/Tests/Unit/SelfUnbindIntegrationTests.swift"
+  ],
+  "production": [
+    "android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/FixtureApplication.kt",
+    "android-as/app/src/main/kotlin/com/rowan/iot/app/AppServices.kt",
+    "android-as/app/src/main/kotlin/com/rowan/iot/data/storage/EncryptedSelfUnbindJournal.kt",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/more/DeviceSelfUnbind.kt",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/more/SelfUnbindApplication.kt",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwner.kt",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/home/HomeRoomTabs.kt",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/home/SelfUnbindHomeConsumer.kt",
+    "android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActivity.kt",
+    "ios-as/Rowan/App/RowanAppServices.swift",
+    "ios-as/Rowan/AppDelegate.swift",
+    "ios-as/Rowan/Data/Storage/KeychainSelfUnbindJournal.swift",
+    "ios-as/Rowan/Domain/Device/HomeRepository.swift",
+    "ios-as/Rowan/Domain/Device/More/DeviceSelfUnbind.swift",
+    "ios-as/Rowan/Domain/Device/More/SelfUnbindApplication.swift",
+    "ios-as/Rowan/Domain/Device/More/SelfUnbindHomeConsumer.swift",
+    "ios-as/Rowan/Domain/Device/State/DeviceReadOwner.swift",
+    "ios-as/Rowan/Features/Home/HomeViewController.swift"
+  ],
+  "newFiles": [
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/more/SelfUnbindApplication.kt",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/home/SelfUnbindHomeConsumer.kt",
+    "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt",
+    "ios-as/Rowan/Domain/Device/More/SelfUnbindApplication.swift",
+    "ios-as/Rowan/Domain/Device/More/SelfUnbindHomeConsumer.swift",
+    "ios-as/Tests/Unit/SelfUnbindIntegrationTests.swift"
+  ],
+  "patchSHA256": {
+    "tests-first.patch": "9a018f790bbd47e4c47a9ab062136516f57420321c59aff207f84de77490bea7",
+    "implementation.patch": "fc6d58a17927c5a3c46c4437e1781b1ad61a40b5e73979a6fb3fe75cdd119386"
+  },
+  "overlaySHA256": {
+    "android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/FixtureApplication.kt": "123e0286fd9b66b583a37c3937c1fa6bc5055fd28d2b75e3f279efe717150d93",
+    "android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/HomeFixtureInstrumentation.kt": "7ebde641a594a18208d241d965199486c2b7f3f2397a865e2afc668cb78cd723",
+    "android-as/app/src/main/kotlin/com/rowan/iot/app/AppServices.kt": "df6ca8de0e21dc779b3ae2db1c4237df70b7c295eab830fcf0eeabed32d49d5c",
+    "android-as/app/src/main/kotlin/com/rowan/iot/data/storage/EncryptedSelfUnbindJournal.kt": "c6fbe77b2d7cd7ee8d48234ca41d1eb8310431f498852887d98bbc17319779d5",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/more/DeviceSelfUnbind.kt": "c833a2609f2d083ebd6421f69eddf04ae4a4e6d2a3d6eed510f202ef631f40e2",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/more/SelfUnbindApplication.kt": "38825ca00a5c92c7312a2d14d75d7e4591ac10358c0dcb8368f2ee8768ac5703",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwner.kt": "4985b10c02b01f8c6583cd28276a4b56393cae9716f86834c51328235a524452",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/home/HomeRoomTabs.kt": "74c7063b6953e6ebfbc2923d1de2c1367ba54a0bd828638b51fe597ec159228b",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/home/SelfUnbindHomeConsumer.kt": "843dbbc94b884bfff4e73ec67b9feb2aab07d78ae8d582a90a576f79c6cde6f5",
+    "android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActivity.kt": "3fa58956703af33ab7364a37819c80f5ff00fe190b8a808c273f37d79a04922d",
+    "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt": "034079aaec08d17b0e2c3d537db8205001ba53718b3c7982a2a6815ba754aebd",
+    "android-as/app/src/test/kotlin/com/rowan/iot/domain/home/HomeRoomTabsTest.kt": "aa30e49de447454c6d23095fe1495e490ffb3370788e818a7bba189c373b175f",
+    "ios-as/Rowan.xcodeproj/project.pbxproj": "3e57e656ed313494c95ece10814cbc35ded0e16992854f3c335ce21564c8bb21",
+    "ios-as/Rowan/App/RowanAppServices.swift": "7c68ef4aa094b427fea94ca2ced0367d29924e169c47184fba8a3c199687c2a2",
+    "ios-as/Rowan/AppDelegate.swift": "bd92986ecf62c2bba919c640d0c4e221c4e10f7d9486891776eee73d7a12e3a6",
+    "ios-as/Rowan/Data/Storage/KeychainSelfUnbindJournal.swift": "90b7213a111d4d98e60a30d3888e536c94d7fbe52d9f71b3fc98ec63178ea13a",
+    "ios-as/Rowan/Domain/Device/HomeRepository.swift": "e3cb761cab997fc09af7df3cc4f3f07d7dca8afbb3a0a85cad744567c52fe022",
+    "ios-as/Rowan/Domain/Device/More/DeviceSelfUnbind.swift": "0e272936e4c67f55d01671fd2f24139175a5d48089ec81ef3b9969eed7d40746",
+    "ios-as/Rowan/Domain/Device/More/SelfUnbindApplication.swift": "48e3c4620170289aaf721781f9390c3e06f241a2dfe16797627e13baba2cbbc2",
+    "ios-as/Rowan/Domain/Device/More/SelfUnbindHomeConsumer.swift": "c92f5b89b049355a16293f94ade3a880ef7f573bc501ec5e4f700e9089b129b7",
+    "ios-as/Rowan/Domain/Device/State/DeviceReadOwner.swift": "ac9a3a5d4681d359265c68659d2176c4cc7c9efa076d1bbd994fc7fd4940b3fa",
+    "ios-as/Rowan/Features/Home/HomeViewController.swift": "68fb21ee43aa6d4068a09184a8f400387bbdc171878062a22684acf7bc955d17",
+    "ios-as/Tests/Unit/HomeAndAccountTests.swift": "a268cef63c46bae8a6eedbcc3f019d00516cdf78465f32c5221786b5b845331c",
+    "ios-as/Tests/Unit/SelfUnbindIntegrationTests.swift": "427a586c43937765c23f0eca43620273369d856f6d6e920ed4af197dfcbf805f"
+  },
+  "iosBaseline": {
+    "objects": 347,
+    "appSources": 90,
+    "testSources": 46,
+    "testDefinitions": 677
+  },
+  "iosTestsStage": {
+    "objects": 349,
+    "appSources": 90,
+    "testSources": 47,
+    "testDefinitions": 699
+  },
+  "iosImplementation": {
+    "objects": 353,
+    "appSources": 92,
+    "testSources": 47,
+    "testDefinitions": 699
+  },
+  "androidNewDefinitions": 23,
+  "iosNewDefinitions": 22
+}

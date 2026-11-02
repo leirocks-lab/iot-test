@@ -1,0 +1,109 @@
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+Warning: SDK processing. This version only understands SDK XML versions up to 3 but an SDK XML file of version 4 was encountered. This can happen if you use versions of Android Studio and the command-line tools that were released at different times.
+> Task :app:buildKotlinToolingMetadata UP-TO-DATE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateAutolinkingNewArchitectureFiles UP-TO-DATE
+> Task :app:generateAutolinkingPackageList UP-TO-DATE
+> Task :app:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :app:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :app:generateReactNativeEntryPoint UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDevelopmentReleaseBuild UP-TO-DATE
+> Task :app:generateDevelopmentReleaseBuildConfig UP-TO-DATE
+> Task :app:checkDevelopmentReleaseAarMetadata UP-TO-DATE
+> Task :app:createBundleDevelopmentReleaseJsAndAssets UP-TO-DATE
+> Task :app:generateDevelopmentReleaseResValues UP-TO-DATE
+> Task :app:mapDevelopmentReleaseSourceSetPaths UP-TO-DATE
+> Task :app:generateDevelopmentReleaseResources UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseResources UP-TO-DATE
+> Task :app:packageDevelopmentReleaseResources UP-TO-DATE
+> Task :app:parseDevelopmentReleaseLocalResources UP-TO-DATE
+> Task :app:createDevelopmentReleaseCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDevelopmentRelease UP-TO-DATE
+> Task :app:processDevelopmentReleaseMainManifest UP-TO-DATE
+> Task :app:processDevelopmentReleaseManifest UP-TO-DATE
+> Task :app:processDevelopmentReleaseManifestForPackage UP-TO-DATE
+> Task :app:processDevelopmentReleaseResources UP-TO-DATE
+> Task :app:compileDevelopmentReleaseKotlin UP-TO-DATE
+> Task :app:javaPreCompileDevelopmentRelease UP-TO-DATE
+> Task :app:compileDevelopmentReleaseJavaWithJavac UP-TO-DATE
+> Task :app:preDevelopmentReleaseAndroidTestBuild SKIPPED
+> Task :app:processDevelopmentReleaseAndroidTestManifest
+> Task :app:generateDevelopmentReleaseAndroidTestBuildConfig
+> Task :app:checkDevelopmentReleaseAndroidTestAarMetadata
+> Task :app:generateDevelopmentReleaseAndroidTestResValues
+> Task :app:mapDevelopmentReleaseAndroidTestSourceSetPaths
+> Task :app:generateDevelopmentReleaseAndroidTestResources
+> Task :app:bundleDevelopmentReleaseClassesToCompileJar
+> Task :app:javaPreCompileDevelopmentReleaseAndroidTest
+> Task :app:mergeDevelopmentReleaseAndroidTestShaders
+> Task :app:compileDevelopmentReleaseAndroidTestShaders NO-SOURCE
+> Task :app:generateDevelopmentReleaseAndroidTestAssets UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseAndroidTestResources
+> Task :app:mergeDevelopmentReleaseAndroidTestAssets
+> Task :app:compressDevelopmentReleaseAndroidTestAssets
+> Task :app:desugarDevelopmentReleaseAndroidTestFileDependencies
+> Task :app:checkDevelopmentReleaseAndroidTestDuplicateClasses
+> Task :app:processDevelopmentReleaseAndroidTestResources
+> Task :app:mergeExtDexDevelopmentReleaseAndroidTest
+> Task :app:mergeDevelopmentReleaseAndroidTestJniLibFolders
+> Task :app:preProductionReleaseBuild UP-TO-DATE
+> Task :app:configureCMakeRelWithDebInfo[x86_64]
+> Task :app:buildCMakeRelWithDebInfo[x86_64]
+> Task :app:mergeDevelopmentReleaseJniLibFolders UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseNativeLibs UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseAndroidTestNativeLibs NO-SOURCE
+> Task :app:stripDevelopmentReleaseAndroidTestDebugSymbols NO-SOURCE
+> Task :app:validateSigningDevelopmentReleaseAndroidTest
+> Task :app:writeDevelopmentReleaseAndroidTestSigningConfigVersions
+
+> Task :app:compileDevelopmentReleaseAndroidTestKotlin FAILED
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/FixtureApplication.kt:19:26 This type is final, so it cannot be extended.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/FixtureApplication.kt:29:5 'createServices' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/FixtureApplication.kt:29:52 No parameter with name 'http' found.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/FixtureApplication.kt:29:65 No parameter with name 'account' found.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/FixtureApplication.kt:29:88 No parameter with name 'home' found.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/HomeFixtureInstrumentation.kt:56:62 Operator '===' cannot be applied to 'RowanHttpClient' and 'NoBusinessNetworkGateway'.
+
+[Incubating] Problems report is available at: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileDevelopmentReleaseAndroidTestKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 51s
+58 actionable tasks: 22 executed, 36 up-to-date

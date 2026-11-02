@@ -1,0 +1,178 @@
+{
+  "runId": "2026-11-01T15-40-27.047Z",
+  "parentRunId": "2026-11-01T15-39-00.997Z",
+  "parentReportSha256": "a6d690f176300fe529241557d0e27d52ac3923971cbbbb33a4055f7e56e3bf91",
+  "scriptSha256": "4a4caa9886afa2a02c08093029b8699a10b9781f32114a08c1220eaf2009baa1",
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "avdName": "ROWAN_API_36",
+  "installedArtifactSha256": "9aa0de57269fb514b309ce4807a97e2e9b814569c8dcdc5cedfa2691e5b00729",
+  "parentInstalledArtifactSha256": "9aa0de57269fb514b309ce4807a97e2e9b814569c8dcdc5cedfa2691e5b00729",
+  "buildProvenance": {
+    "date": "2026-11-01T15:11:09.741Z",
+    "task": ":app:assembleDevelopmentRelease",
+    "artifactSha256": "9aa0de57269fb514b309ce4807a97e2e9b814569c8dcdc5cedfa2691e5b00729",
+    "sourceBefore": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "ccf06ba08519ac3134b5fd122178514cb213a302e40d2203b7e0551a718dcb2b",
+      "sourceFiles": 279
+    },
+    "sourceAfter": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "ccf06ba08519ac3134b5fd122178514cb213a302e40d2203b7e0551a718dcb2b",
+      "sourceFiles": 279
+    },
+    "sourceUnchangedDuringBuild": true,
+    "architecture": "x86_64",
+    "signing": "development debug key",
+    "isolatedValidation": true
+  },
+  "sourceBefore": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "ccf06ba08519ac3134b5fd122178514cb213a302e40d2203b7e0551a718dcb2b",
+    "sourceFiles": 279
+  },
+  "sourceAfter": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "ccf06ba08519ac3134b5fd122178514cb213a302e40d2203b7e0551a718dcb2b",
+    "sourceFiles": 279
+  },
+  "sourceUnchanged": true,
+  "capabilities": {
+    "resumeMethod": "verified-task-focus",
+    "taskFocus": true,
+    "airplane": true,
+    "wifi": true,
+    "data": true,
+    "helpExitCodes": {
+      "focusProbe": 255,
+      "connectivity": 255,
+      "wifi": 1,
+      "data": 1
+    }
+  },
+  "activity": {
+    "record": "87235430",
+    "task": 76
+  },
+  "originalNetwork": {
+    "airplane": "disabled",
+    "airplaneSetting": "0",
+    "wifiSetting": "1",
+    "wifiEnabled": true,
+    "mobileData": "1",
+    "defaultNetworkPresent": true
+  },
+  "restoration": {
+    "result": "通过",
+    "attempts": [
+      {
+        "kind": "airplane",
+        "completed": true
+      },
+      {
+        "kind": "mobileData",
+        "completed": true
+      },
+      {
+        "kind": "wifi",
+        "completed": true
+      }
+    ],
+    "observed": {
+      "airplane": "disabled",
+      "airplaneSetting": "0",
+      "wifiSetting": "1",
+      "wifiEnabled": true,
+      "mobileData": "1",
+      "defaultNetworkPresent": true
+    },
+    "policy": "Restore only the captured AVD airplane/mobile-data/Wi-Fi values; compare physical Wi-Fi and default-network presence. No host/network/proxy/DNS-setting changes."
+  },
+  "logout": {
+    "result": "通过",
+    "state": "normal-logout-confirmed",
+    "actionCount": 1
+  },
+  "dnsForwarding": {
+    "upstream": "192.168.31.1",
+    "bindAddress": "127.0.0.1",
+    "bindPort": 53,
+    "running": false,
+    "state": "closed",
+    "lastError": null,
+    "pending": 0,
+    "receivedQueries": 8,
+    "forwardedQueries": 8,
+    "forwardedReplies": 8,
+    "expired": 0,
+    "rejectedQueries": 0,
+    "rejectedReplies": 0,
+    "capacityDrops": 0,
+    "sendErrors": 0,
+    "socketErrors": 0,
+    "durationMs": 74827
+  },
+  "results": [
+    {
+      "id": "more-baseline-real-read",
+      "result": "通过",
+      "stage": "baseline-more",
+      "state": "loaded"
+    },
+    {
+      "id": "more-background-resume",
+      "result": "通过",
+      "stage": "same-activity-background-resume",
+      "sameActivityRecord": true,
+      "sameTask": true,
+      "state": "loaded"
+    },
+    {
+      "id": "avd-network-isolation",
+      "result": "通过",
+      "stage": "network-isolation",
+      "offline": {
+        "airplane": "enabled",
+        "airplaneSetting": "1",
+        "wifiSetting": "0",
+        "wifiEnabled": false,
+        "mobileData": "0",
+        "defaultNetworkPresent": false
+      },
+      "evidence": "Recognized CLI state plus no active default network; no host/ADB/proxy/TLS modification."
+    },
+    {
+      "id": "more-offline-read-error",
+      "result": "通过",
+      "stage": "offline-resume-read",
+      "sameActivityRecord": true,
+      "state": "error",
+      "causalLimit": "Generic error is not a backend diagnosis; transport isolation was independently checked."
+    },
+    {
+      "id": "more-network-read-recovery",
+      "result": "通过",
+      "stage": "read-recovery",
+      "sameActivityRecord": true,
+      "explicitGetRetryActions": 1,
+      "state": "loaded"
+    }
+  ],
+  "screenshots": [
+    "2026-11-01T15-40-27.047Z-device-read-lifecycle-offline-error.png"
+  ],
+  "scope": "One retained test session; real metadata GETs, same native Activity background/resume, explicitly verified AVD network isolation/recovery, one normal logout.",
+  "limits": [
+    "No desired/control/relationship/OTA/schedule writes, sharing codes, verification codes, new login or account A/B switch.",
+    "No raw hierarchy/text/CLI dumps/errors archived. Optional PNG only on fixed More error state, never populated metadata.",
+    "ActivityRecord/task identity proves reuse; loaded alone does not prove exact HTTP request counts or physical IO cancellation.",
+    "Noncooperative HTTP may outlive cancellation; bounded polling records blocking rather than declaring a hard deadline.",
+    "CLI/state formats not recognized are a precondition block, never a simulated offline success. Force-kill cannot guarantee JS finally restoration.",
+    "No iOS/hardware/full visual acceptance."
+  ]
+}

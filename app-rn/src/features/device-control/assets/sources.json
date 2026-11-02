@@ -1,0 +1,70 @@
+{
+  "note": "Unmodified copied Lanhu export assets. No generated illustration. Page versions and design differences recorded in ../README.md.",
+  "assets": [
+    {
+      "asset": "cabinet.png",
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzheng/assets/img/SketchPngc9a260536dbd3080313c16c87528b52417f1c9f065ed809f8b3696a08e798c63.png",
+      "sha256": "86f370c5ad0135e932255c0f589babb7787b9af7956947d4a088a0e67b6f96a8"
+    },
+    {
+      "asset": "cabinet-front.png",
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzheng/assets/img/SketchPngb4271c6322c177f2f5600fd4b3294525954ad7db3f6e87ca3466c4987a09dd31.png",
+      "sha256": "f9e485bbbf063e8e58bd0f7014599bf3f4c1c4777933cfa91601c1d32f9e7ad2"
+    },
+    {
+      "asset": "cabinet-shadow.png",
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzheng/assets/img/SketchPng7bafc64caac31534249c2341d538c56f3a58b83c3088d8488692448d5eb0120b.png",
+      "sha256": "9278d26b9010b26cc75d70f04caab38f05dadfdb72a840df47342941aa44b1a4"
+    },
+    {
+      "asset": "cabinet-glow.png",
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzheng/assets/img/SketchPng459541dfd00d57582df89e5a9479443c03c42e03eaff90f027ddfc3c0be0b9ad.png",
+      "sha256": "1fc749a486f121f9e7cf7c566961c54fca7bc0ff2e4cf1fa8a06e9b00cbd30ea"
+    },
+    {
+      "asset": "cabinet-led.png",
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzheng/assets/img/SketchPng70148f92a83b8c7a34f15240572788cd68075997164d262a45e6f3f243cf0153.png",
+      "sha256": "b6f56fd8f869c10411023374ea93ea5ce0df09a2c1d7e9d4d8dd42d9f75d7a84"
+    },
+    {
+      "asset": "back.png",
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzheng/assets/img/SketchPng6ebc2e7ec02dcb74e970f5807decf7decc612503a36619059b58534d6135213e.png",
+      "sha256": "61e828a5abb0049c38a5581cb4c353e74e5b6716cae56637e714cad58e804ba3"
+    },
+    {
+      "asset": "more.png",
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzheng/assets/img/SketchPnged609f229d14643fd946a0689a5b3006b7aa0e6d02c8d7eb1b91a5d511e8686e.png",
+      "sha256": "4e548c9a37798f72701f39eb26be41ef5ab75df0cd61f4a85cb2483883fb4cc8"
+    },
+    {
+      "asset": "light.png",
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzheng/assets/img/SketchPngbbab2f275822e2f202615c33ad80b1e73adf77ef2eb5ba5124dee98b37d89a4b.png",
+      "sha256": "070cb935682a2bc23e3ac337f0336e1420f17a545dd33877c0bca1c2d4c88cc4"
+    },
+    {
+      "asset": "selection-sun.png",
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzheng/assets/img/SketchPng0a9cae403295eb8259bef9615434062b018d5dd55c94540eb9f908b87f34a4ec.png",
+      "sha256": "beaf498852d24dd555770a89e906b858eaffe9a6aaa47a4c68bcc7bea051368a"
+    },
+    {
+      "asset": "power-on.png",
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzheng/assets/img/SketchPng02a76c08d66c6c6d9f6cd9c55c89848f984a69984d1fd9aab0a0bb1703200596.png",
+      "sha256": "c8b0fb6d8182aca7a820f4d2afa2c342b063895d683de958bde9c591c833904b"
+    },
+    {
+      "asset": "power-off.png",
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzhengguanji/assets/img/SketchPngddc79b030011a67fd6970429e680885c19bed65764f0218e6c8d64601f24e229.png",
+      "sha256": "5029c52989ff1f8143fb44a36d6ec95df8313ee96803240ce8ac3e26a8bb1df0"
+    },
+    {
+      "asset": "lock-on.png",
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianyetongsuokai/assets/img/SketchPngf2eef71558638aa18804e297035c38bd53708461b21a8d57b53bc15c097f1794.png",
+      "sha256": "699d7d84f71babe184c8fd70ed9080c67ebf2d43baba7195300cbf78e9618a17"
+    },
+    {
+      "asset": "lock-off.png",
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzheng/assets/img/SketchPng98805cdbda15cd0eea64450e27d96d64da10a58e253c85096afb53bd62c4ce88.png",
+      "sha256": "86358bb6bc81d48a1c1d067f5972a4695ac09afa4760350b54481a201fc74081"
+    }
+  ]
+}

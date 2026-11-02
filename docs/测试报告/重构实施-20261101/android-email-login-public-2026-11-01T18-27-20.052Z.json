@@ -1,0 +1,43 @@
+{
+  "runId": "2026-11-01T18-27-20.052Z",
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "scriptSha256": "c7e8b5e37cc5eab51d62bc1b34b27d833f4fd0ffd643aa5c268e9d297ec0700e",
+  "installedArtifactSha256": "c08d29c5907eb29a0c9226f822dbcdc22dcdd58ee2ce3b0c7c8c26b53851b2d6",
+  "sidecarSha256": "09a95489319b45502b9200fd35aaca424de4fc29247cae75863334e69813ad4d",
+  "sourceBefore": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "0e254d1a1928f49e46298d32388318d9f7ac8dca8cdd829396a99b225697a9fb",
+    "sourceFiles": 306
+  },
+  "sourceAfter": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "0e254d1a1928f49e46298d32388318d9f7ac8dca8cdd829396a99b225697a9fb",
+    "sourceFiles": 306
+  },
+  "sourceUnchanged": true,
+  "results": [
+    {
+      "id": "public-flow",
+      "stage": "default-password",
+      "result": "阻塞",
+      "errorCode": "EXPECTED_PUBLIC_STATE_MISSING"
+    }
+  ],
+  "screenshots": [
+    "2026-11-01T18-27-20.052Z-email-login-initial-welcome.png"
+  ],
+  "cleanup": "blocked-native-return-unconfirmed",
+  "sendActions": 0,
+  "submitActions": 0,
+  "scope": "Public dummy-only S016 UI gates; not real captcha/email/login/backend validation.",
+  "limits": [
+    "Input text is redacted by the existing snapshot exporter; clearing is inferred through disabled submit after a previously enabled gate.",
+    "Alphabetic attempt passes through numeric EditText filtering; this is not a direct validator proof or Unicode IME coverage.",
+    "No actual send/cooldown/SMTP, AUTH04, AUTH02, login, account switch, persistence, hardware, iOS or pixel/online-Lanhu acceptance.",
+    "Only Welcome screenshots, guarded before/after. Raw XML/dumpsys/CLI/error payloads and input values are not archived.",
+    "SIGINT/SIGTERM use bounded finally; force-kill cannot guarantee return. Existing authenticated/unknown pages are never logged out or cleared."
+  ]
+}

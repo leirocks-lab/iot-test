@@ -1,0 +1,141 @@
+{
+  "runId": "2026-11-01T18-50-48.743Z",
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "scriptSha256": "d88629e144376dafed4a832d089795b0ce7e573440fc82766182eafd124bf5e0",
+  "taskResumeSha256": "a3ad9d4a3062cb7bc7fb2f4930e21f46484cfe35909a9565ee29227fe4fcfd63",
+  "installedArtifactSha256": "c08d29c5907eb29a0c9226f822dbcdc22dcdd58ee2ce3b0c7c8c26b53851b2d6",
+  "sidecarSha256": "09a95489319b45502b9200fd35aaca424de4fc29247cae75863334e69813ad4d",
+  "sourceBefore": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "0e254d1a1928f49e46298d32388318d9f7ac8dca8cdd829396a99b225697a9fb",
+    "sourceFiles": 306
+  },
+  "sourceAfter": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "0e254d1a1928f49e46298d32388318d9f7ac8dca8cdd829396a99b225697a9fb",
+    "sourceFiles": 306
+  },
+  "sourceUnchanged": true,
+  "results": [
+    {
+      "id": "default-password-disabled",
+      "result": "通过"
+    },
+    {
+      "id": "password-consent-required",
+      "result": "通过"
+    },
+    {
+      "id": "password-public-gate-enabled-no-submit",
+      "result": "通过"
+    },
+    {
+      "id": "email-change-cleared-password",
+      "result": "通过"
+    },
+    {
+      "id": "password-restored-no-submit",
+      "result": "通过"
+    },
+    {
+      "id": "captcha-initial-empty",
+      "result": "通过"
+    },
+    {
+      "id": "invalid-email-send-and-submit-disabled",
+      "result": "通过"
+    },
+    {
+      "id": "valid-email-no-code",
+      "result": "通过"
+    },
+    {
+      "id": "mode-cleared-password",
+      "result": "通过"
+    },
+    {
+      "id": "five-digits",
+      "result": "通过"
+    },
+    {
+      "id": "seven-digits",
+      "result": "通过"
+    },
+    {
+      "id": "alphabetic-input-attempt",
+      "result": "通过"
+    },
+    {
+      "id": "six-ascii-digits",
+      "result": "通过"
+    },
+    {
+      "id": "captcha-consent-required",
+      "result": "通过"
+    },
+    {
+      "id": "captcha-consent-restored",
+      "result": "通过"
+    },
+    {
+      "id": "email-change-cleared-code",
+      "result": "通过"
+    },
+    {
+      "id": "code-ready-before-switch",
+      "result": "通过"
+    },
+    {
+      "id": "code-not-password",
+      "result": "通过"
+    },
+    {
+      "id": "mode-cleared-code",
+      "result": "通过"
+    },
+    {
+      "id": "code-ready-before-background",
+      "result": "通过"
+    },
+    {
+      "id": "background-cleared-code",
+      "result": "通过"
+    },
+    {
+      "id": "password-ready-before-background",
+      "result": "通过"
+    },
+    {
+      "id": "background-cleared-password",
+      "result": "通过"
+    },
+    {
+      "id": "return-default-password-disabled",
+      "result": "通过"
+    },
+    {
+      "id": "return-captcha-disabled",
+      "result": "通过"
+    }
+  ],
+  "screenshots": [
+    "2026-11-01T18-50-48.743Z-email-login-initial-welcome.png",
+    "2026-11-01T18-50-48.743Z-email-login-password-public.png",
+    "2026-11-01T18-50-48.743Z-email-login-captcha-public.png",
+    "2026-11-01T18-50-48.743Z-email-login-final-welcome.png"
+  ],
+  "cleanup": "welcome-confirmed",
+  "sendActions": 0,
+  "submitActions": 0,
+  "scope": "Public dummy-only S016 UI gates; not real captcha/email/login/backend validation.",
+  "limits": [
+    "Input text is redacted by the existing snapshot exporter; clearing is inferred through disabled submit after a previously enabled gate.",
+    "Alphabetic attempt passes through numeric EditText filtering; this is not a direct validator proof or Unicode IME coverage.",
+    "No actual send/cooldown/SMTP, AUTH04, AUTH02, login, account switch, persistence, hardware, iOS or pixel/online-Lanhu acceptance.",
+    "Welcome and tool-owned fixed-public-input form screenshots, guarded before/after. Raw XML/dumpsys/CLI/error payloads and input values are not archived.",
+    "SIGINT/SIGTERM use bounded finally; force-kill cannot guarantee return. Existing authenticated/unknown pages are never logged out or cleared."
+  ]
+}

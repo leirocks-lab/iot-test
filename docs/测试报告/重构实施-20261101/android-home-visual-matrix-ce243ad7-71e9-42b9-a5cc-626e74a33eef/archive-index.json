@@ -1,0 +1,134 @@
+{
+  "status": "通过",
+  "fixtureOnly": true,
+  "realHttpAcceptance": false,
+  "pixelAcceptance": false,
+  "runId": "ce243ad7-71e9-42b9-a5cc-626e74a33eef",
+  "sourceSha256": "f583769e080b515ae1a4b35ff122d06be510aaac50c910bbb458b1bc5e77f2c5",
+  "hostSha256": "f631abf1b7ae6551f014380e9d27130868cb7ed1b76b383ae36dae68074a41a2",
+  "testSha256": "0661016c6a2b483975e65bf5b6ec6c3bb5f7993c6f4142052b08d75af5e3bbe2",
+  "rawMatrix": "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/matrix.json",
+  "rawMatrixSha256": "81cc88420ed5848f0d8371a6ab281bb0ec63279ea710a2ff7d58b6ac5e0a983c",
+  "restoration": {
+    "result": "passed",
+    "attempts": [
+      {
+        "kind": "size",
+        "result": "passed"
+      },
+      {
+        "kind": "density",
+        "result": "passed"
+      },
+      {
+        "kind": "font",
+        "result": "passed"
+      }
+    ],
+    "after": {
+      "size": {
+        "physical": "1080x2400",
+        "override": null
+      },
+      "density": {
+        "physical": "420",
+        "override": null
+      },
+      "fontScale": "1.0"
+    }
+  },
+  "configurations": [
+    {
+      "configuration": {
+        "id": "base",
+        "size": "1080x2400",
+        "density": "420",
+        "fontScale": "1"
+      },
+      "status": "通过",
+      "passed": 9,
+      "report": "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/base/report.json",
+      "screenshots": [
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/base/00-empty-home.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/base/01-same-name-room.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/base/02-empty-room.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/base/03-long-room-name.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/base/04-loading-cache.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/base/05-error-cache.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/base/06-return-old-read-rejected.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/base/07-real-device-return.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/base/08-account-revision-fence.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/base/09-local-selection.png"
+      ]
+    },
+    {
+      "configuration": {
+        "id": "small",
+        "size": "640x1280",
+        "density": "320",
+        "fontScale": "1"
+      },
+      "status": "通过",
+      "passed": 9,
+      "report": "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/small/report.json",
+      "screenshots": [
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/small/00-empty-home.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/small/01-same-name-room.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/small/02-empty-room.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/small/03-long-room-name.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/small/04-loading-cache.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/small/05-error-cache.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/small/06-return-old-read-rejected.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/small/07-real-device-return.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/small/08-account-revision-fence.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/small/09-local-selection.png"
+      ]
+    },
+    {
+      "configuration": {
+        "id": "large",
+        "size": "1440x2560",
+        "density": "420",
+        "fontScale": "1"
+      },
+      "status": "通过",
+      "passed": 9,
+      "report": "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/large/report.json",
+      "screenshots": [
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/large/00-empty-home.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/large/01-same-name-room.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/large/02-empty-room.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/large/03-long-room-name.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/large/04-loading-cache.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/large/05-error-cache.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/large/06-return-old-read-rejected.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/large/07-real-device-return.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/large/08-account-revision-fence.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/large/09-local-selection.png"
+      ]
+    },
+    {
+      "configuration": {
+        "id": "font150",
+        "size": "1080x2400",
+        "density": "420",
+        "fontScale": "1.5"
+      },
+      "status": "通过",
+      "passed": 9,
+      "report": "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/font150/report.json",
+      "screenshots": [
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/font150/00-empty-home.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/font150/01-same-name-room.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/font150/02-empty-room.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/font150/03-long-room-name.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/font150/04-loading-cache.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/font150/05-error-cache.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/font150/06-return-old-read-rejected.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/font150/07-real-device-return.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/font150/08-account-revision-fence.png",
+        "android-home-visual-matrix-ce243ad7-71e9-42b9-a5cc-626e74a33eef/font150/09-local-selection.png"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-01T12:31:15.548Z",
+  "task": ":app:assembleDevelopmentRelease",
+  "artifactSha256": "39a5d15b9927bd05e9a67804a11a463414747503ef8cb65993df6171b53609bc",
+  "sourceBefore": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "6f435e7c94db9650ecf516c8a6bf4ffadfedf1c45d085ecb357d13c7a55fa6c4",
+    "sourceFiles": 235
+  },
+  "sourceAfter": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "6f435e7c94db9650ecf516c8a6bf4ffadfedf1c45d085ecb357d13c7a55fa6c4",
+    "sourceFiles": 235
+  },
+  "sourceUnchangedDuringBuild": true,
+  "architecture": "x86_64",
+  "signing": "development debug key",
+  "isolatedValidation": true
+}

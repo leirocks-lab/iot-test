@@ -1,0 +1,57 @@
+{
+  "archivedAt": "2026-11-01T14:19:27.117Z",
+  "scope": "RN more read-only source; bridge major 2 integration",
+  "checks": {
+    "lint": {
+      "exitCode": 0
+    },
+    "typecheck": {
+      "exitCode": 0
+    },
+    "vitest": {
+      "exitCode": 0,
+      "workers": 1,
+      "files": 10,
+      "tests": 93,
+      "addedTests": 16
+    },
+    "codegen": {
+      "exitCode": 0,
+      "reactNative": "0.86.3",
+      "methods": 13,
+      "events": 1
+    }
+  },
+  "red": "3 test files failed: missing new projection/presentation modules and four controller dispatch/result failures; old 7 files/77 tests remained green",
+  "sourceHashes": {
+    "src/host/specs/NativeRowanHost.ts": "1db391eab4ed962bfa2906e71e4e7a28c0c55c8f3be063463e8f9f821cc432b0",
+    "src/host/adapter/DeviceReadController.ts": "5b7fb015e09fb5a3d16d41ec3e095e5448da5e1d6476a2c45685ef5af2a7dd28",
+    "src/host/adapter/DeviceMoreModels.ts": "f164eab7b1ba4d3f662d2dd17b828669dee36498084c0209299b4c7c8729578a",
+    "src/entry/DeviceEntry.tsx": "7ff89da41c45f0f3b272a0801d3902632571ec91848586730dc2020b76849dbe",
+    "src/features/device-more/DeviceMoreScreen.tsx": "7eb8341ab4b0b49154f93a9102f4d75f847ddfa9d78f7ed6714c24bda5fe704f",
+    "src/features/device-more/navigation.ts": "bd4950caa70f71dc147d6e050b4611d4533109eec02ccbcca8ac826352dbe58d",
+    "src/features/device-more/presentation.ts": "550b2d3ef9fe43be1d0bbc88ae52d6d338fd792417fc49ba4d8eff560928bc7e",
+    "src/features/device-more/README.md": "7216c24be2c538bb5540c0cc6516f0bda1733ee4299a05b248390ee53fcabf4d",
+    "README.md": "8dfe94e84b02b4ac28c668507e4b5d449bb42f8a0dc7e975e775af741826f241",
+    "tests/device-more/contracts.test.ts": "be5dd8638c5eb4a280c6b85760bdfa8146d0f63b24bc473db1da2b39d9f12141",
+    "tests/device-more/controller.test.ts": "6d06a7377f636d148e601c444713b8b7c10c1137f0eef8f4a5cf8270008bfd6f",
+    "tests/device-more/presentation.test.ts": "bc617adbebac7628601c202cd5a81bdc645f786c504086ee41342207601dbc53",
+    "tests/device-readonly/controller.test.ts": "50f205d6f3ad403e636d201c9ec3a16c041e704f96879d07e3e86a32e25bc488"
+  },
+  "evidenceHashes": {
+    "red.log": "6ae2c4f248d8303875854067ace5e156eb362122985b458af31a2b33f7c9c180",
+    "lint.log": "7960138dbf9924e05133d4f570f78221cb940ba5690fe0e4b18ee9cefee519f4",
+    "typecheck.log": "5a3973f79ed9becd5f23c4feff467513814de7ea381d75a4d2e339aa8b8edca9",
+    "vitest.log": "6b025b8f19e578ca439ce10353e8f796f83c6fdf77788144294102f069c7590a",
+    "codegen.log": "0c1dd901763aad6f569f3e116f599f9924db03dfade7e3d0b7d2e4c2d2c38ea7",
+    "schema.json": "5bb72c526dfaa9b4f741ff7b6ae34809b877be06152dc9d273c3e20980480cb2",
+    "verify-codegen.cjs": "c0d5a2b5a52960beb03cd49ca5a70853fc9670efda6062762ad1eb77870930b0"
+  },
+  "limitations": [
+    "No native build/ADB/Metro/network executed",
+    "No actual more API/UI acceptance",
+    "No iOS Swift compilation/runtime",
+    "No writable/QR/share/OTA/schedule mutation methods",
+    "Exact blue-lake visual parity and current native release integration remain to verify"
+  ]
+}

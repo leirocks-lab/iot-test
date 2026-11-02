@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" tests="25" skipped="0" failures="0" errors="0" timestamp="2026-11-01T11:36:28.587Z" hostname="DESKTOP-2AM89R2" time="0.355">
+  <properties/>
+  <testcase name="cancellingTheApplicationScopeClosesPortsWithoutWaitingForObservers" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.066"/>
+  <testcase name="twoObserversOfOneResourceShareCredentialsConnectionAndSubscriptions" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.005"/>
+  <testcase name="subackTimeoutRemovesItsUncommittedTopicsWithoutClosingOtherResources" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.042"/>
+  <testcase name="publishingIsRestrictedToTheLeaseTopicsEpochAndFixedDeliveryFlags" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.008"/>
+  <testcase name="overflowInvalidatesOnlyTheSlowLeaseAndRequiresANewEpochSnapshot" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.021"/>
+  <testcase name="sameKeyRenewalCreatesANewEpochAndDoesNotReplayCommands" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.011"/>
+  <testcase name="expirationIsAlreadyDecodedEpochMillisAndNeverGuessedFromMagnitude" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.004"/>
+  <testcase name="oldPortCallbacksCannotAffectAReplacementConnection" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.006"/>
+  <testcase name="aLatePubackFromAnOldEpochCannotReportSuccessOrReplay" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.008"/>
+  <testcase name="renewalMovesAChangedClientIdIntoAnExistingEntryWithoutKickingIt" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.006"/>
+  <testcase name="releaseDuringUncooperativeCredentialLoadCannotCreateABrokerConnection" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.004"/>
+  <testcase name="releasingASubackWaiterRemovesOnlyItsUncommittedTopicsOnASharedConnection" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.005"/>
+  <testcase name="duplicateObserverIdentityFailsInsteadOfInflatingReferenceCounts" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.004"/>
+  <testcase name="routingCopiesInboundPayloadAndNeverRoutesAnotherDevicesTopic" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.006"/>
+  <testcase name="sdkIngressRemainsBoundedWhileTheApplicationDispatcherIsBlocked" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.012"/>
+  <testcase name="accountInvalidationClosesOldLeasesAndRejectsTheirCallbacksAndNewOperations" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.005"/>
+  <testcase name="aDeniedNewResourceDoesNotKickAnExistingAuthorizedConnection" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.006"/>
+  <testcase name="disconnectRefetchesCredentialsAndSubscriptionsWithoutReplayingTheLastUpdate" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.005"/>
+  <testcase name="aCallersShorterPublishTimeoutDoesNotCloseOtherLeasesOrReplayTheCommand" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.043"/>
+  <testcase name="readyRequiresEveryExactResponseSubscriptionAcknowledgement" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.004"/>
+  <testcase name="resourcesWithTheSameServerClientShareOnePortAndReleaseOnlyTheirOwnTopics" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.005"/>
+  <testcase name="recoveryReadyDoesNotDiscardAnImmediateResponseToTheOwnersFreshGet" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.008"/>
+  <testcase name="credentialAndConnackTimeoutsAreBoundedAndCloseAttemptedPorts" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.058"/>
+  <testcase name="authorizationFailureNeedsExplicitRetryAndNeverLoopsAutomatically" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.005"/>
+  <testcase name="cancellingAWaitDoesNotCancelAnotherObserversSharedConnection" classname="com.rowan.iot.domain.device.mqtt.transport.SharedBrokerPoolTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

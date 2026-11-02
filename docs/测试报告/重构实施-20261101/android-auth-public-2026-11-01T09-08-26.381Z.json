@@ -1,0 +1,40 @@
+{
+  "runId": "2026-11-01T09-08-26.381Z",
+  "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+  "worktreeDirty": true,
+  "sourceSha256": "15b5dd430199730f2d650319b846cd4455bbfa683ff82d94d0a4d7a7886dd88d",
+  "sourceFiles": 177,
+  "stage": "registration-initial",
+  "errorCode": "PUBLIC_GATE_NOT_VISIBLE",
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "buildProvenance": {
+    "artifactSha256": "83ab910e3d013d8414742eeeba16f2188b6db221b0f2ae8a8c8c1191ece56fba",
+    "sourceBeforeSha256": "41c9503b2c1c20ee4401efc1c61fded32e308003b34c7928be03795b0f872f94",
+    "sourceAfterSha256": "41c9503b2c1c20ee4401efc1c61fded32e308003b34c7928be03795b0f872f94",
+    "sourceUnchangedDuringBuild": true,
+    "architecture": "x86_64"
+  },
+  "viewport": "Physical size: 1080x2400; Override size: 750x1624",
+  "fontScale": 1,
+  "metadataErrors": [],
+  "results": [
+    {
+      "id": "registration-explicit-region-empty",
+      "stage": "registration-initial",
+      "result": "通过",
+      "errorCode": null
+    },
+    {
+      "id": "public-flow-prerequisite",
+      "stage": "registration-initial",
+      "result": "阻塞",
+      "errorCode": "PUBLIC_GATE_NOT_VISIBLE",
+      "reason": "页面或运行条件未满足"
+    }
+  ],
+  "screenshots": [
+    "2026-11-01T09-08-26.381Z-welcome-entry.png"
+  ],
+  "limits": "仅两步界面空态/非法输入/地区选择/协议真实加载及未读门禁；未点击验证码发送、验证码校验、注册或重置；无测试替身"
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.bridge.BridgeReadTaskTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-01T18:07:24.228Z" hostname="DESKTOP-2AM89R2" time="0.696">
+  <properties/>
+  <testcase name="arbitraryClassifierOutputCannotBecomeAPublicError" classname="com.rowan.iot.bridge.BridgeReadTaskTest" time="0.076"/>
+  <testcase name="changedPageAfterAwaitDiscardsResult" classname="com.rowan.iot.bridge.BridgeReadTaskTest" time="0.091"/>
+  <testcase name="cancelledOwnerBeforeStartStillCompletesPromiseOnce" classname="com.rowan.iot.bridge.BridgeReadTaskTest" time="0.073"/>
+  <testcase name="permissionFailureUsesOnlyTheFixedPublicCode" classname="com.rowan.iot.bridge.BridgeReadTaskTest" time="0.074"/>
+  <testcase name="cancellationDuringReadSettlesOnlyOnce" classname="com.rowan.iot.bridge.BridgeReadTaskTest" time="0.08"/>
+  <testcase name="releasedQueuedTaskCannotHangOrDispatch" classname="com.rowan.iot.bridge.BridgeReadTaskTest" time="0.071"/>
+  <testcase name="timeoutAndBackendErrorsNeverExposeOriginalException" classname="com.rowan.iot.bridge.BridgeReadTaskTest" time="0.149"/>
+  <testcase name="successfulReadHasOneTerminalDelivery" classname="com.rowan.iot.bridge.BridgeReadTaskTest" time="0.08"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

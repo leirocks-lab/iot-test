@@ -1,0 +1,20 @@
+{
+  "status": "IMPLEMENTATION_APPLIED_AFTER_ACTUAL_ANDROID_RED",
+  "patches": {
+    "tests-first.patch": "2a4f5bc8f184bc600228db80ac8bbdd7f2974b66d57d409832a791abff3c05be",
+    "implementation.patch": "2b824773f662fa06ab8a061741dee1f17c3e3d6cdfea29925ca2fa95c6814d5b"
+  },
+  "files": {
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/AccountService.kt": "0b1287df72cc8ee34caf308503eb914b456d8ae850e332ccbace1367b9cde189",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/preferences/PreferencesService.kt": "86b0a56e4959d21592f4c213871eb3654f16c047be7392a55be1bded5b05af67",
+    "android-as/app/src/main/kotlin/com/rowan/iot/app/AppServices.kt": "ef24ffa5455d3b12e4ea0a417f966cb7609186d9a3ad6151be55f14063264aad",
+    "android-as/app/src/test/kotlin/com/rowan/iot/domain/preferences/PreferencesServiceTest.kt": "c29284c4696e6151697bf1ee0f8dfd1d56456aa67dcfd6299f836eda82f35560",
+    "android-as/app/src/test/kotlin/com/rowan/iot/AccountSettingsCommitTest.kt": "b7581871e2d4d8240e4476a1d282a59f6ebc6ce8fd7d2040784fbea9529af82d",
+    "ios-as/Rowan/Domain/Account/AccountService.swift": "03951b345697b8bc8aac19bf20dc54d4f8463e8eebc98c691cae474939a303a7",
+    "ios-as/Rowan/Domain/Preferences/PreferencesService.swift": "3df4ff8c330ce3e110e87f62f5f0f42027bb10ee69e5ccfcf3858b73a1522fd4",
+    "ios-as/Rowan/App/RowanAppServices.swift": "0ea3839f60b7450fa4c5ad12e3b865fda7b07f1dbd2e4130af204b6ddf58bf6a",
+    "ios-as/Tests/Unit/PreferencesServiceTests.swift": "726a3b2ea74ce6303f06da1bb0c245edf208ec778f2495b92f54111f027cb611",
+    "ios-as/Tests/Unit/AccountSettingsCommitTests.swift": "f8fd2a7bbb9b3144afd43c8d60f42a45484cfdf6cb9a302d45093feee4796a55"
+  },
+  "iosExecution": "NOT_EXECUTED_NO_MACOS"
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.rooms.RoomManagerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-01T22:36:28.832Z" hostname="DESKTOP-2AM89R2" time="0.048">
+  <properties/>
+  <testcase name="unknownMutationRequiresReadBeforeNewUserActionAndIsNotReplayed" classname="com.rowan.iot.domain.rooms.RoomManagerTest" time="0.011"/>
+  <testcase name="duplicateSubmissionIsRejectedRatherThanQueued" classname="com.rowan.iot.domain.rooms.RoomManagerTest" time="0.01"/>
+  <testcase name="cancellingMutationKeepsResultUnknownAndCannotReplayOnReturn" classname="com.rowan.iot.domain.rooms.RoomManagerTest" time="0.009"/>
+  <testcase name="staleAccountNeverPublishesRoomData" classname="com.rowan.iot.domain.rooms.RoomManagerTest" time="0.007"/>
+  <testcase name="baselineConflictRefreshesListAndDiscardsStaleDraft" classname="com.rowan.iot.domain.rooms.RoomManagerTest" time="0.006"/>
+  <testcase name="editingIsOnlyOrderOrSafeRemovalAndCancellationRestoresBaseline" classname="com.rowan.iot.domain.rooms.RoomManagerTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

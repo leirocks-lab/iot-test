@@ -1,0 +1,59 @@
+buildscript {
+    configurations.classpath { resolutionStrategy.activateDependencyLocking() }
+    ext {
+        buildToolsVersion = "36.0.0"
+        minSdkVersion = 24
+        compileSdkVersion = 36
+        targetSdkVersion = 36
+        ndkVersion = "27.1.12297006"
+        kotlinVersion = "2.1.20"
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle")
+        classpath("com.facebook.react:react-native-gradle-plugin")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+    }
+}
+
+apply plugin: "com.facebook.react.rootproject"
+
+// Lock every native variant graph; the RN workspace has its own pnpm lockfile.
+allprojects {
+    dependencyLocking {
+        lockAllConfigurations()
+        lockMode = LockMode.STRICT
+    }
+}
+
+tasks.register("resolveAndLockAll") {
+    notCompatibleWithConfigurationCache("Resolves native configuration graphs at execution time")
+    doFirst {
+        if (!gradle.startParameter.writeDependencyLocks) {
+            throw new GradleException("resolveAndLockAll requires --write-locks")
+        }
+    }
+    doLast {
+        buildscript.configurations.classpath.resolve()
+        allprojects.each { target ->
+            // Kotlin also registers common/metadata-only configurations on this
+            // Android-only project. They lack Android build-type attributes and
+            // are not the variant graphs consumed by compile/test/package tasks.
+            target.configurations.findAll {
+                it.canBeResolved && !it.name.endsWith("DependenciesMetadata")
+            }.each { configuration ->
+                logger.lifecycle("Locking " + target.path + ":" + configuration.name)
+                // Lock the dependency graph, rather than requesting every Android
+                // artifact type from the tested app's many secondary variants.
+                configuration.incoming.resolutionResult.allDependencies.each { dependency ->
+                    if (dependency instanceof org.gradle.api.artifacts.result.UnresolvedDependencyResult) {
+                        throw new GradleException("Cannot lock " + configuration.name, dependency.failure)
+                    }
+                }
+            }
+        }
+    }
+}

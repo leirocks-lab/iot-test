@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.AccountServiceTest" tests="22" skipped="0" failures="0" errors="0" timestamp="2026-11-01T13:43:29.673Z" hostname="DESKTOP-2AM89R2" time="0.224">
+  <properties/>
+  <testcase name="forbiddenOrUnknownLogoutDoesNotClaimRemoteSuccessOrEraseTheSession" classname="com.rowan.iot.AccountServiceTest" time="0.008"/>
+  <testcase name="sessionRoundTripAndRefreshKeepFullSettingsAndExpiry" classname="com.rowan.iot.AccountServiceTest" time="0.004"/>
+  <testcase name="unauthorizedReadAfterRenewalInvalidatesOnlyTheSameSession" classname="com.rowan.iot.AccountServiceTest" time="0.004"/>
+  <testcase name="failedLogoutCleanupCanRetryLocallyWithoutSendingDeleteAgain" classname="com.rowan.iot.AccountServiceTest" time="0.056"/>
+  <testcase name="restoreRefreshFailureClearsStoredSession" classname="com.rowan.iot.AccountServiceTest" time="0.006"/>
+  <testcase name="cancelledBlockingPersistenceRemovesCiphertextBeforeAnotherLogin" classname="com.rowan.iot.AccountServiceTest" time="0.014"/>
+  <testcase name="failedRollbackAfterCancelledPersistenceKeepsARecoverableCleanupPhase" classname="com.rowan.iot.AccountServiceTest" time="0.01"/>
+  <testcase name="queuedOldPageLogoutDoesNotSendDeleteForANewAccount" classname="com.rowan.iot.AccountServiceTest" time="0.006"/>
+  <testcase name="unusableSessionMetadataIsRejectedInsteadOfInventingDefaults" classname="com.rowan.iot.AccountServiceTest" time="0.0"/>
+  <testcase name="storageNeverRunsOnTheCallingUiThread" classname="com.rowan.iot.AccountServiceTest" time="0.005"/>
+  <testcase name="overlappingRefreshesShareOneRequestEvenIfAccessTokenDoesNotChange" classname="com.rowan.iot.AccountServiceTest" time="0.013"/>
+  <testcase name="cleanupPhaseIsVisibleBeforeTheBlockingDeleteCompletes" classname="com.rowan.iot.AccountServiceTest" time="0.006"/>
+  <testcase name="logoutDuringLoginRejectsLateCredentials" classname="com.rowan.iot.AccountServiceTest" time="0.007"/>
+  <testcase name="queuedRefreshCannotRefreshANewAccount" classname="com.rowan.iot.AccountServiceTest" time="0.012"/>
+  <testcase name="expiredLogoutClearsOnlyTheCurrentSessionWithoutRefreshOrReplay" classname="com.rowan.iot.AccountServiceTest" time="0.004"/>
+  <testcase name="cancelledLogoutCannotAcceptALateUncooperativeResponse" classname="com.rowan.iot.AccountServiceTest" time="0.01"/>
+  <testcase name="restorationDuringCleanupCannotReadOldCiphertextOrAdvanceItsRevision" classname="com.rowan.iot.AccountServiceTest" time="0.022"/>
+  <testcase name="invalidEmailDoesNotReachTransport" classname="com.rowan.iot.AccountServiceTest" time="0.003"/>
+  <testcase name="lateExpiredLogoutCannotClearANewAccount" classname="com.rowan.iot.AccountServiceTest" time="0.007"/>
+  <testcase name="cancelledLoginDoesNotCommitAResponseFromUncooperativeTransport" classname="com.rowan.iot.AccountServiceTest" time="0.009"/>
+  <testcase name="failedCleanupCanRetryWithoutInvalidatingANewLogin" classname="com.rowan.iot.AccountServiceTest" time="0.007"/>
+  <testcase name="lateLogoutCannotClearNewAccount" classname="com.rowan.iot.AccountServiceTest" time="0.007"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

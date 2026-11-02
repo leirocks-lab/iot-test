@@ -1,0 +1,10 @@
+{
+  "status": "CACHE_ONLY_R2_PREPARED_NOT_ANDROID_EXECUTED",
+  "offlineCasesPassed": 40,
+  "files": {
+    "run.mjs": "2490caf82e81045848d62a94f49041dbe28dba463bdc332194a9c34702ccca73",
+    "state.mjs": "348e9bc2ad19d60f3b9038d3527358331b5b90edd862e7f77bc6147eac4dac44",
+    "offline.mjs": "df62a0dd7c48571fe1c192fb3107c771b273d3b6160f700f2c1eb5884fb56738",
+    "README.md": "adc74f683d873fa0e6c77cf9b2282ac6d93202d29d062f1256bc968531e0c01c"
+  }
+}

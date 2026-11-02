@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-01T07:19:33.617Z",
+  "runId": "2026-11-01T07-18-22.556Z",
+  "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+  "worktreeDirty": true,
+  "sourceSha256": "5c17c662ab59accc3a2a644d936fbb1a3912becc9efb60288eea0ee6f98c95c7",
+  "sourceFiles": 120,
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "viewport": "Physical size: 1080x2400\r\nOverride size: 750x1624",
+  "density": "Physical density: 420\r\nOverride density: 320",
+  "fontScale": "1.0",
+  "screenshots": [
+    "2026-11-01T07-18-22.556Z-android-login-initial.png",
+    "2026-11-01T07-18-22.556Z-android-home-after-login.png",
+    "2026-11-01T07-18-22.556Z-android-rn-bootstrap.png"
+  ],
+  "scope": "Android native login only; not complete UI/HTTP/MQTT acceptance",
+  "results": [
+    {
+      "id": "AUTH-UI-empty",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-UI-consent-gate",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-04-native-emulator",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-03-05-cold-restore-native",
+      "result": "通过"
+    },
+    {
+      "id": "RN-release-bundle-host-context",
+      "result": "通过",
+      "note": "仅验证包内资源与 getContext；不代表设备控制或事件验收"
+    },
+    {
+      "id": "RN-host-close-navigation",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-06-native-emulator",
+      "result": "通过"
+    }
+  ],
+  "hardware": "未验收"
+}

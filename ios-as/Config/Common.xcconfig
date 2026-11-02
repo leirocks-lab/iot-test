@@ -1,0 +1,5 @@
+// Non-secret defaults. No backend, tenant, brand or signing identity is guessed.
+ROWAN_PLATFORM_URL =
+ROWAN_IOT_URL =
+ROWAN_TENANT_ID =
+ROWAN_BRAND_ID =

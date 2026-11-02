@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-01T21:02:23.394547+00:00",
+  "patch": ".cache/refactor/presentation-nc-ingress-draft/implementation.patch",
+  "patchSha256": "c84ebc8e73b73b8b475984238ead8a6f2a11ac7d54442b9857e1c059b2925175",
+  "stage": "APPLIED_EXACT_REVIEWED_TEXT_NOT_PLATFORM_VERIFIED",
+  "files": [
+    {
+      "path": "ios-as/Rowan/Domain/Presentation/PresentationService.swift",
+      "beforeSha256": "b00114e7aebedac97af83c272765be4b72674e98a4a5b2e971068b401d7eab71",
+      "afterSha256": "3786b708f314032c98a0c3453bafb363f44589e7606a2cd5588f8b581ef54dec",
+      "reviewedOverlaySha256": "3786b708f314032c98a0c3453bafb363f44589e7606a2cd5588f8b581ef54dec",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    }
+  ]
+}

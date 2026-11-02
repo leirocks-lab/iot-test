@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-01T19:54:54.322707+00:00",
+  "patch": ".cache/refactor/android-home-ui-fixtures-draft/implementation.patch",
+  "patchSha256": "d04ccf78855771590e8e2515d50c294aa16c6e11b4d60c93e27506fe9b2ff48e",
+  "stage": "APPLIED_EXACT_REVIEWED_TEXT_NOT_PLATFORM_VERIFIED",
+  "files": [
+    {
+      "path": "android-as/app/src/main/java/com/rowan/iot/MainApplication.kt",
+      "beforeSha256": "0423c907212a96c82b891e4b62ce0ad8e63451f542b8ed6d73cb0ce561c04b19",
+      "afterSha256": "18d0de1b268fcf114dd9038773f867b4635b3001228b1c3d155f92f99358a8b8",
+      "reviewedOverlaySha256": "18d0de1b268fcf114dd9038773f867b4635b3001228b1c3d155f92f99358a8b8",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/app/AppServices.kt",
+      "beforeSha256": "ef24ffa5455d3b12e4ea0a417f966cb7609186d9a3ad6151be55f14063264aad",
+      "afterSha256": "10795f0533dca1c207ebb9bd84a377f9030e57c89d03299ef38aa8303f2d1cab",
+      "reviewedOverlaySha256": "10795f0533dca1c207ebb9bd84a377f9030e57c89d03299ef38aa8303f2d1cab",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "date": "2026-11-01T19:22:40.614630+00:00",
+  "patch": ".cache/refactor/home-selection-draft/implementation.patch",
+  "patchSha256": "773b127fffb006855cb23d849db28d0a6d388ccab1670c71b9a1caa972c66571",
+  "stage": "APPLIED_EXACT_REVIEWED_TEXT_NOT_PLATFORM_VERIFIED",
+  "files": [
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/home/HomeSelection.kt",
+      "beforeSha256": null,
+      "afterSha256": "d40d19e276eaf613c2dbeaa3300987d81b6ba4cd1314ead9012df1a1de48230e",
+      "reviewedOverlaySha256": "d40d19e276eaf613c2dbeaa3300987d81b6ba4cd1314ead9012df1a1de48230e",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActionControls.kt",
+      "beforeSha256": null,
+      "afterSha256": "587c32c4b6fe1e41a5f42f93eeb35c47281573329956255c8ace248d4a184549",
+      "reviewedOverlaySha256": "587c32c4b6fe1e41a5f42f93eeb35c47281573329956255c8ace248d4a184549",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActivity.kt",
+      "beforeSha256": "68d8530462e3c7061c41f7d15da9d75c859868503de07ff316887b8dc42ec672",
+      "afterSha256": "60d29388eea427966c57d230309b247e9705d14fe2f7d33e9077d563255dfa14",
+      "reviewedOverlaySha256": "60d29388eea427966c57d230309b247e9705d14fe2f7d33e9077d563255dfa14",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/main/res/values/home_selection_ids.xml",
+      "beforeSha256": null,
+      "afterSha256": "0bfc610b9cb00ce1cf7ebdad19510d25eef1c1da52d3c55aa613de44c5f24e5c",
+      "reviewedOverlaySha256": "0bfc610b9cb00ce1cf7ebdad19510d25eef1c1da52d3c55aa613de44c5f24e5c",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Rowan/Domain/Device/HomeRepository.swift",
+      "beforeSha256": "bb1798ffd94222c69af219086aced0ed3e0ff07261f2660fca11c6dc68d3bab4",
+      "afterSha256": "035c605a7b1af925f13f5b45e37a3d6212cac521d049e07ca1c5a3ea2cfe560d",
+      "reviewedOverlaySha256": "035c605a7b1af925f13f5b45e37a3d6212cac521d049e07ca1c5a3ea2cfe560d",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Rowan/Features/Home/HomeViewController.swift",
+      "beforeSha256": "45ce69130d4635c0e8fb53a691c87b1aa8464453d021ec2520df6ddccaecfd49",
+      "afterSha256": "3a3cb614e76fc02601830a4acfd0dd93a3d6a6be19cb75e26184b95a93f557ac",
+      "reviewedOverlaySha256": "3a3cb614e76fc02601830a4acfd0dd93a3d6a6be19cb75e26184b95a93f557ac",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    }
+  ]
+}

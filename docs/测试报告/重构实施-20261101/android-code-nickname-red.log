@@ -1,0 +1,266 @@
+Starting a Gradle Daemon (subsequent builds will be faster)
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+Warning: SDK processing. This version only understands SDK XML versions up to 3 but an SDK XML file of version 4 was encountered. This can happen if you use versions of Android Studio and the command-line tools that were released at different times.
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateAutolinkingNewArchitectureFiles UP-TO-DATE
+> Task :app:generateAutolinkingPackageList UP-TO-DATE
+> Task :app:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :app:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :app:generateReactNativeEntryPoint UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDevelopmentDebugBuild UP-TO-DATE
+> Task :app:generateDevelopmentDebugBuildConfig UP-TO-DATE
+> Task :app:checkDevelopmentDebugAarMetadata UP-TO-DATE
+> Task :app:generateDevelopmentDebugResValues UP-TO-DATE
+> Task :app:mapDevelopmentDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDevelopmentDebugResources UP-TO-DATE
+> Task :app:mergeDevelopmentDebugResources UP-TO-DATE
+> Task :app:packageDevelopmentDebugResources UP-TO-DATE
+> Task :app:parseDevelopmentDebugLocalResources UP-TO-DATE
+> Task :app:createDevelopmentDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDevelopmentDebug UP-TO-DATE
+> Task :app:processDevelopmentDebugMainManifest UP-TO-DATE
+> Task :app:processDevelopmentDebugManifest UP-TO-DATE
+> Task :app:processDevelopmentDebugManifestForPackage UP-TO-DATE
+> Task :app:processDevelopmentDebugResources UP-TO-DATE
+> Task :app:compileDevelopmentDebugKotlin UP-TO-DATE
+> Task :app:javaPreCompileDevelopmentDebug UP-TO-DATE
+> Task :app:compileDevelopmentDebugJavaWithJavac UP-TO-DATE
+> Task :app:bundleDevelopmentDebugClassesToRuntimeJar UP-TO-DATE
+> Task :app:bundleDevelopmentDebugClassesToCompileJar UP-TO-DATE
+> Task :app:preDevelopmentDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileDevelopmentDebugUnitTest UP-TO-DATE
+> Task :app:processDevelopmentDebugJavaRes UP-TO-DATE
+
+> Task :app:compileDevelopmentDebugUnitTestKotlin
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:42:21 Unresolved reference 'EmailLoginService'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:43:25 Unresolved reference 'EmailLoginService'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:43:56 Unresolved reference 'LoginMode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:43:66 Unresolved reference 'LoginMode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:44:19 Unresolved reference 'setEmail'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:44:57 Unresolved reference 'setMode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:44:77 Unresolved reference 'setConsent'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:45:22 Unresolved reference 'LoginMode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:45:46 Unresolved reference 'setCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:45:74 Unresolved reference 'setPassword'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:57:38 Unresolved reference 'LoginMode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:61:38 Unresolved reference 'LoginMode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:61:104 Unresolved reference 'LoginMode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:62:87 Unresolved reference 'LoginMode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:66:86 Unresolved reference 'LoginMode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:80:61 Unresolved reference 'EmailLoginService'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:81:24 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:88:97 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:94:19 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:95:18 Unresolved reference 'EmailLoginService'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:96:20 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:97:32 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:102:18 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:102:132 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:107:70 Unresolved reference 'LoginCredential'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:107:104 Argument type mismatch: actual type is 'Int', but 'String' was expected.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:114:89 Unresolved reference 'LoginCredential'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:114:123 Argument type mismatch: actual type is 'Int', but 'String' was expected.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:120:55 Unresolved reference 'LoginCredential'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:120:89 Argument type mismatch: actual type is 'Int', but 'String' was expected.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:127:18 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:127:122 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:131:38 Unresolved reference 'LoginMode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:133:18 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:133:78 Unresolved reference 'LoginMode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:133:131 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:137:93 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:143:20 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:149:19 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:149:110 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:156:19 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:156:89 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:157:32 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:162:21 Unresolved reference 'EmailLoginService'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:162:88 Unresolved reference 'it'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:164:19 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:165:17 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:165:68 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:174:122 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:175:53 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:179:73 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:183:132 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:187:21 Unresolved reference 'LoginCredential'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:187:133 Unresolved reference 'AccountLoginReceipt'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:192:22 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:195:45 Unresolved reference 'LoginMode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt:196:46 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpNicknameRepositoryTest.kt:13:88 Unresolved reference 'HttpNicknameRepository'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpNicknameRepositoryTest.kt:19:24 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpNicknameRepositoryTest.kt:19:27 Unresolved reference 'HttpNicknameRepository'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpNicknameRepositoryTest.kt:23:14 Unresolved reference 'patch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpNicknameRepositoryTest.kt:29:20 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpNicknameRepositoryTest.kt:29:38 Unresolved reference 'patch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpNicknameRepositoryTest.kt:34:20 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpNicknameRepositoryTest.kt:34:38 Unresolved reference 'patch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpNicknameRepositoryTest.kt:40:29 Unresolved reference 'readNickname'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpNicknameRepositoryTest.kt:43:20 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpNicknameRepositoryTest.kt:43:39 Unresolved reference 'readNickname'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:11:9 Unresolved reference 'NicknameRecord'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:11:24 Unresolved reference 'nicknameKey'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:13:41 Unresolved reference 'NicknameJournalDocument'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:13:72 Unresolved reference 'NicknameJournalDocument'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:13:103 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:13:109 Argument type mismatch: actual type is 'Pair<A (of fun <A, B> A.to), B (of fun <A, B> A.to)>', but 'Pair<K (of fun <K, V> mapOf), V (of fun <K, V> mapOf)>' was expected.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:13:119 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:14:44 Unresolved reference 'userId'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:14:91 Unresolved reference 'resourceId'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:14:138 Unresolved reference 'target'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:15:22 Unresolved reference 'NicknamePhase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:15:53 Unresolved reference 'phase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:18:37 Unresolved reference 'NicknamePhase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:19:22 Unresolved reference 'NicknameJournalDocument'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:19:53 Unresolved reference 'NicknameJournalDocument'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:19:84 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:19:90 Argument type mismatch: actual type is 'Pair<A (of fun <A, B> A.to), B (of fun <A, B> A.to)>', but 'Pair<K (of fun <K, V> mapOf), V (of fun <K, V> mapOf)>' was expected.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:19:100 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:20:22 Unresolved reference 'NicknamePhase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:20:54 Unresolved reference 'phase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:20:95 Unresolved reference 'errorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:23:47 Unresolved reference 'NicknameJournalDocument'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:23:78 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:23:84 Argument type mismatch: actual type is 'Pair<A (of fun <A, B> A.to), B (of fun <A, B> A.to)>', but 'Pair<K (of fun <K, V> mapOf), V (of fun <K, V> mapOf)>' was expected.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:23:94 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:24:13 Unresolved reference 'getJSONArray'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:25:20 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:25:33 Unresolved reference 'NicknameJournalDocument'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:26:19 Unresolved reference 'NicknameRecord'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:27:20 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:27:33 Unresolved reference 'NicknameJournalDocument'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:27:64 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:27:70 Argument type mismatch: actual type is 'Pair<A (of fun <A, B> A.to), B (of fun <A, B> A.to)>', but 'Pair<K (of fun <K, V> mapOf), V (of fun <K, V> mapOf)>' was expected.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:27:80 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:30:20 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:30:33 Unresolved reference 'NicknameJournalDocument'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:31:20 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:31:33 Unresolved reference 'NicknameJournalDocument'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:34:47 Unresolved reference 'NicknameJournalDocument'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:34:78 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:34:84 Argument type mismatch: actual type is 'Pair<A (of fun <A, B> A.to), B (of fun <A, B> A.to)>', but 'Pair<K (of fun <K, V> mapOf), V (of fun <K, V> mapOf)>' was expected.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:34:94 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:35:23 Unresolved reference 'getJSONArray'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:36:20 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:36:33 Unresolved reference 'NicknameJournalDocument'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:39:48 Unresolved reference 'NicknameJournalDocument'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:40:20 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:40:33 Unresolved reference 'NicknameJournalDocument'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:40:64 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:40:70 Argument type mismatch: actual type is 'Pair<A (of fun <A, B> A.to), B (of fun <A, B> A.to)>', but 'Pair<K (of fun <K, V> mapOf), V (of fun <K, V> mapOf)>' was expected.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:40:84 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:41:29 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:41:65 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:41:65 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:41:65 Not enough information to infer type argument for 'K'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:41:77 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:41:81 Unresolved reference 'key'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:42:20 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt:42:33 Unresolved reference 'NicknameJournalDocument'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:15:33 Unresolved reference 'NicknameJournal'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:16:41 Unresolved reference 'NicknameRecord'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:19:9 'load' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:20:9 'reserve' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:20:48 Unresolved reference 'NicknameRecord'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:20:64 Unresolved reference 'NicknameRecord'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:22:44 Unresolved reference 'key'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:23:33 Unresolved reference 'phase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:23:40 Unresolved reference 'NicknamePhase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:23:76 Argument type mismatch: actual type is 'T (of fun <T> T.also)', but 'K (of fun <K> WHEN_CALL)' was expected.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:23:86 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:23:86 Unresolved reference. None of the following candidates is applicable because of a receiver type mismatch:
+fun <T> T.also(block: (T) -> Unit): T
+    [R|Contract description]
+     <
+        CallsInPlace(block, EXACTLY_ONCE)
+    >
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:23:91 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:23:92 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:23:103 Unresolved reference 'key'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:25:9 'complete' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:25:46 Unresolved reference 'NicknameRecord'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:27:31 Unresolved reference 'key'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:27:37 Unresolved reference 'operationId'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:27:57 Unresolved reference 'operationId'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:28:13 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:28:28 Unresolved reference 'key'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:50:20 Unresolved reference 'NicknamePolicy'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:50:36 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:50:38 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:51:27 Unresolved reference 'NicknameBinding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:59:31 Unresolved reference 'NicknameRepository'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:60:13 'scope' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:61:13 'patch' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:62:13 'readNickname' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:64:32 Unresolved reference 'NicknamePolicy'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:64:61 Unresolved reference 'DeviceNicknameCoordinator'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:65:26 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:65:28 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:90:150 Unresolved reference 'NicknamePhase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:90:197 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:90:197 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:90:206 Unresolved reference 'phase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:117:81 Unresolved reference 'NicknamePhase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:117:128 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:117:128 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:117:137 Unresolved reference 'phase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:149:25 Unresolved reference 'nicknameKey'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:149:58 Unresolved reference 'nicknameKey'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:150:25 Unresolved reference 'nicknameKey'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:150:47 Unresolved reference 'nicknameKey'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:151:21 Unresolved reference 'nicknameKey'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:173:35 Unresolved reference 'NicknameRepository'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:174:17 'scope' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:175:17 'patch' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:176:17 'readNickname' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:178:23 Unresolved reference 'DeviceNicknameCoordinator'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:179:25 Unresolved reference 'NicknameBinding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt:188:66 Unresolved reference 'NicknameBinding'.
+
+> Task :app:compileDevelopmentDebugUnitTestKotlin FAILED
+
+[Incubating] Problems report is available at: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileDevelopmentDebugUnitTestKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 1m 24s
+37 actionable tasks: 1 executed, 36 up-to-date

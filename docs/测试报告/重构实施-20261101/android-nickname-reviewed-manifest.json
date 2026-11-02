@@ -1,0 +1,62 @@
+{
+  "stage": "ISOLATED DRAFT - NOT APPLIED / NOT COMPILED / NO RED OR GREEN EXECUTED",
+  "testDefinitions": 30,
+  "targets": [
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/http/HttpNicknameRepository.kt",
+      "stage": "implementation.patch",
+      "new": true,
+      "draftSha256": "940bdb6f2abdbaf9a122ab1b09e83baaa83471f06e3ff80608af8d3d7ca4c3f8"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/data/storage/EncryptedNicknameJournal.kt",
+      "stage": "implementation.patch",
+      "new": true,
+      "draftSha256": "98e17975d9bb5e2036e940e66f0b94b85a6eface134dd8f73f9e955a725cfc53"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/more/DeviceNickname.kt",
+      "stage": "implementation.patch",
+      "new": true,
+      "draftSha256": "e73967093cb69ffeefaafd6135c92b2c57bec16dc9d42dfaca97824b54052482"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinator.kt",
+      "stage": "implementation.patch",
+      "new": true,
+      "draftSha256": "ed5f7f14023ae5f7509fc7b84a95d34dd7bbff2e210523c470f32245014d120c"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/http/HttpNicknameRepositoryTest.kt",
+      "stage": "tests-first.patch",
+      "new": true,
+      "draftSha256": "c61810a3e1e5095f3a4456f63617f3e9b6fc0fe616d7942a18121fe7a4065fe3"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/data/storage/NicknameJournalDocumentTest.kt",
+      "stage": "tests-first.patch",
+      "new": true,
+      "draftSha256": "27b15df1a482b4d1f41cd4467efb2d1f75cfdf88a19949be3690a956c13f741a"
+    },
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/DeviceNicknameCoordinatorTest.kt",
+      "stage": "tests-first.patch",
+      "new": true,
+      "draftSha256": "ec0cd67acd707231e3be290357f3efbc554eae7df3f35dafdd8f06d8641001e5"
+    }
+  ],
+  "baselines": {
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/AccountService.kt": "f0560630420537a6afd7b9417bda0ad9522048b26a662316c4e46712a0423d75",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwner.kt": "c22459198956543f67f712c01dbb087aa0e2affe58b7ae9a2110615e3685ce09",
+    "android-as/app/src/main/kotlin/com/rowan/iot/data/http/HttpDeviceAccess.kt": "5e4ca6f7bb4af015f0c7f25cea9ff2600c867e8e5d182e89d3450534e4ce0057",
+    "android-as/app/src/main/kotlin/com/rowan/iot/bridge/RowanHostModule.kt": "bec98cd786ce5ad53445888f635fcdca2461290f4dead1c7a7487d7e0f9a3362"
+  },
+  "patchHashes": {
+    "tests-first.patch": "c22abf11aa426c0eae6eb1943d6b51d6dc7a33cab9e80b578ac70ed140693708",
+    "implementation.patch": "f9d2ffed31a55a6bd08f2f721c1f811eebdb15b64fab20469bc414e3296136f5"
+  },
+  "limitations": [
+    "No production policy/permit issuer, DI, bridge, metadata-owner mutation, RN or iOS source changes.",
+    "Real AndroidKeyStore/disk/process-death/HTTP mutation acceptance not run."
+  ]
+}

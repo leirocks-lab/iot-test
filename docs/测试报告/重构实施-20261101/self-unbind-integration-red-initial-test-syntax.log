@@ -1,0 +1,218 @@
+Starting a Gradle Daemon, 3 stopped Daemons could not be reused, use --status for details
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+Warning: SDK processing. This version only understands SDK XML versions up to 3 but an SDK XML file of version 4 was encountered. This can happen if you use versions of Android Studio and the command-line tools that were released at different times.
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateAutolinkingNewArchitectureFiles UP-TO-DATE
+> Task :app:generateAutolinkingPackageList UP-TO-DATE
+> Task :app:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :app:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :app:generateReactNativeEntryPoint UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDevelopmentDebugBuild UP-TO-DATE
+> Task :app:generateDevelopmentDebugBuildConfig UP-TO-DATE
+> Task :app:checkDevelopmentDebugAarMetadata UP-TO-DATE
+> Task :app:generateDevelopmentDebugResValues UP-TO-DATE
+> Task :app:mapDevelopmentDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDevelopmentDebugResources UP-TO-DATE
+> Task :app:mergeDevelopmentDebugResources UP-TO-DATE
+> Task :app:packageDevelopmentDebugResources UP-TO-DATE
+> Task :app:parseDevelopmentDebugLocalResources UP-TO-DATE
+> Task :app:createDevelopmentDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDevelopmentDebug UP-TO-DATE
+> Task :app:processDevelopmentDebugMainManifest UP-TO-DATE
+> Task :app:processDevelopmentDebugManifest UP-TO-DATE
+> Task :app:processDevelopmentDebugManifestForPackage UP-TO-DATE
+> Task :app:processDevelopmentDebugResources UP-TO-DATE
+> Task :app:compileDevelopmentDebugKotlin UP-TO-DATE
+> Task :app:javaPreCompileDevelopmentDebug UP-TO-DATE
+> Task :app:compileDevelopmentDebugJavaWithJavac UP-TO-DATE
+> Task :app:bundleDevelopmentDebugClassesToRuntimeJar UP-TO-DATE
+> Task :app:bundleDevelopmentDebugClassesToCompileJar UP-TO-DATE
+> Task :app:preDevelopmentDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileDevelopmentDebugUnitTest UP-TO-DATE
+> Task :app:processDevelopmentDebugJavaRes UP-TO-DATE
+
+> Task :app:compileDevelopmentDebugUnitTestKotlin
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:23:27 Unresolved reference 'SelfUnbindRecoveryJournal'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:27:9 'unresolved' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:32:9 'load' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:33:9 'reserve' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:37:9 'complete' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:44:9 Property must be initialized or be abstract.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:44:43 Syntax error: Expecting a '>'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:44:43 Syntax error: Property getter or setter expected.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:44:45 Syntax error: Expecting member declaration.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:44:45 Function declaration must have a name.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:44:46 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:44:46 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:59:30 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:59:36 Unresolved reference 'SelfUnbindApplication'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:59:89 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:65:24 Unresolved reference 'HomeReadScopes'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:67:50 Too many arguments for 'constructor(repository: HomeRepository, revision: Long, current: () -> Boolean): HomeRoomTabs'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:68:22 Property delegate must have a 'getValue(SelfUnbindIntegrationTest.Fixture, KProperty1<SelfUnbindIntegrationTest.Fixture, ERROR CLASS: Cannot infer argument for type parameter T>)' method. None of the following functions is applicable:
+fun <T> Lazy<T>.getValue(thisRef: Any?, property: KProperty<*>): T
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:68:25 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:68:25 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:68:25 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:68:25 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:68:31 Unresolved reference 'SelfUnbindHomeConsumer'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:77:78 Unresolved reference 'close'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:82:24 Unresolved reference 'appear'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:87:80 Unresolved reference 'appear'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:90:113 Unresolved reference 'appear'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:90:263 Unresolved reference 'ledger'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:93:91 Unresolved reference 'appear'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:93:117 Unresolved reference 'requestRecovery'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:93:309 Unresolved reference 'refresh'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:98:24 Unresolved reference 'appear'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:100:33 Unresolved reference 'requestRecovery'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:100:82 Unresolved reference 'requestRecovery'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:110:24 Unresolved reference 'appear'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:110:44 Unresolved reference 'leave'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:110:63 Unresolved reference 'appear'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:117:92 Unresolved reference 'appear'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:117:112 Unresolved reference 'close'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:118:110 Unresolved reference 'ledger'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:124:19 Unresolved reference 'requestRecovery'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:125:58 Unresolved reference 'ledger'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:125:104 Unresolved reference 'ledger'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:132:19 Unresolved reference 'requestRecovery'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:132:54 Unresolved reference 'requestRecovery'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:138:73 Unresolved reference 'register'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:139:61 Unresolved reference 'begin'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:140:19 Unresolved reference 'requestRecovery'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:140:54 Unresolved reference 'ledger'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:141:26 Unresolved reference 'close'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:143:24 Unresolved reference 'appear'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:149:30 Unresolved reference 'register'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:153:90 Unresolved reference 'register'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:153:125 Unresolved reference 'close'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:154:50 Unresolved reference 'begin'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:159:70 Unresolved reference 'register'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:159:109 Unresolved reference 'relationshipReplaced'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:160:59 Unresolved reference 'register'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:160:101 Unresolved reference 'relationshipReplaced'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:167:24 Unresolved reference 'appear'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:167:67 Unresolved reference 'refresh'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:172:45 Unresolved reference 'reloadTracked'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:172:121 Unresolved reference 'whileInstalled'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:173:30 Unresolved reference 'reloadTracked'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:173:67 Unresolved reference 'whileInstalled'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:173:115 Unresolved reference 'whileInstalled'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:179:24 Unresolved reference 'appear'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:179:44 Unresolved reference 'close'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:180:58 Too many arguments for 'constructor(repository: HomeRepository, revision: Long, current: () -> Boolean): HomeRoomTabs'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:181:22 Unresolved reference 'SelfUnbindHomeConsumer'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:187:111 Unresolved reference 'appear'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:187:131 Unresolved reference 'leave'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:189:62 Unresolved reference 'requestRecovery'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:190:59 Too many arguments for 'constructor(repository: HomeRepository, revision: Long, current: () -> Boolean): HomeRoomTabs'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:190:99 Unresolved reference 'SelfUnbindHomeConsumer'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:196:91 Unresolved reference 'HomeReadScopes'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:203:22 Unresolved reference 'NativeSelfUnbindOperation'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:204:30 Unresolved reference 'NativeSelfUnbindRegistration'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:207:32 Unresolved reference 'register'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:208:37 Unresolved reference 'begin'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:210:36 Unresolved reference 'close'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:212:35 Unresolved reference 'begin'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:214:39 Unresolved reference 'begin'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:222:36 Unresolved reference 'register'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:223:25 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:223:25 Not enough information to infer type argument for 'R'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:223:41 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:223:41 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:223:48 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:223:49 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:223:49 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:223:98 Unresolved reference 'begin'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:223:131 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:223:131 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:225:35 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:225:35 Not enough information to infer type argument for 'V'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:225:46 Unresolved reference 'await'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:225:65 Unresolved reference 'appear'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:226:13 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:226:13 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:226:31 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:226:31 Not enough information to infer type argument for 'V'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:226:42 Unresolved reference 'state'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:226:48 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:226:48 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:226:54 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:226:58 Unresolved reference 'state'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:227:38 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:227:38 Not enough information to infer type argument for 'V'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:227:49 Unresolved reference 'state'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:233:46 Unresolved reference 'register'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:233:82 Unresolved reference 'begin'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:233:119 Unresolved reference 'close'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:234:52 Unresolved reference 'register'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:234:90 Unresolved reference 'begin'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:235:63 Unresolved reference 'appear'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:236:13 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:236:13 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:236:43 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:236:43 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:236:49 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:236:53 Unresolved reference 'state'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:242:83 Unresolved reference 'register'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:243:27 Unresolved reference 'begin'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:243:68 Unresolved reference 'close'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:245:61 Unresolved reference 'register'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:245:99 Unresolved reference 'begin'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:247:59 Too many arguments for 'constructor(repository: HomeRepository, revision: Long, current: () -> Boolean): HomeRoomTabs'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:248:26 Unresolved reference 'SelfUnbindHomeConsumer'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:249:13 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:249:13 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:249:43 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:249:43 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:249:49 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:249:53 Unresolved reference 'state'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:261:43 Unresolved reference 'SelfUnbindApplication'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt:261:102 Cannot infer type for this parameter. Specify it explicitly.
+
+> Task :app:compileDevelopmentDebugUnitTestKotlin FAILED
+
+[Incubating] Problems report is available at: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+
+Execution failed for task ':app:compileDevelopmentDebugUnitTestKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 1m 15s
+37 actionable tasks: 1 executed, 36 up-to-date

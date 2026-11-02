@@ -1,0 +1,21 @@
+
+ RUN  v4.0.0 D:/workspace/rowaniot/rowan-iot-app/app-rn
+
+ ✓ tests/contract/session-controller.test.ts (23 tests) 44ms
+ ✓ tests/device-readonly/controller.test.ts (16 tests) 35ms
+ ✓ tests/device-more/DeviceSelfUnbindController.test.ts (16 tests) 27ms
+ ✓ tests/device-control/view-model.test.ts (21 tests) 30ms
+ ✓ tests/device-more/contracts.test.ts (7 tests) 18ms
+ ✓ tests/device-more/controller.test.ts (6 tests) 25ms
+ ✓ tests/contract/page-close.test.ts (6 tests) 20ms
+ ✓ tests/contract/observation-resync.test.ts (5 tests) 11ms
+ ✓ tests/device-readonly/presentation.test.ts (4 tests) 11ms
+ ✓ tests/device-more/presentation.test.ts (3 tests) 10ms
+ ✓ tests/contract/device-status.test.ts (4 tests) 9ms
+ ✓ tests/contract/observation.test.ts (5 tests) 9ms
+
+ Test Files  12 passed (12)
+      Tests  116 passed (116)
+   Start at  06:38:53
+   Duration  13.65s (transform 1.03s, setup 0ms, collect 1.81s, tests 250ms, environment 5ms, prepare 383ms)
+

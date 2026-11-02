@@ -1,0 +1,94 @@
+{
+  "runId": "2026-11-01T15-37-10.313Z",
+  "parentRunId": "2026-11-01T15-33-15.024Z",
+  "parentReportSha256": "5361d6550411cf34c8b26ab3207b6d176a71ac8f05d3d9e087c81f1fd41b060f",
+  "scriptSha256": "50e0eb1af3399816ce6ba7cf4da88ff1bd41cc86bab4a6ac7289be588572356d",
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "avdName": "ROWAN_API_36",
+  "installedArtifactSha256": "9aa0de57269fb514b309ce4807a97e2e9b814569c8dcdc5cedfa2691e5b00729",
+  "parentInstalledArtifactSha256": "9aa0de57269fb514b309ce4807a97e2e9b814569c8dcdc5cedfa2691e5b00729",
+  "buildProvenance": {
+    "date": "2026-11-01T15:11:09.741Z",
+    "task": ":app:assembleDevelopmentRelease",
+    "artifactSha256": "9aa0de57269fb514b309ce4807a97e2e9b814569c8dcdc5cedfa2691e5b00729",
+    "sourceBefore": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "ccf06ba08519ac3134b5fd122178514cb213a302e40d2203b7e0551a718dcb2b",
+      "sourceFiles": 279
+    },
+    "sourceAfter": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "ccf06ba08519ac3134b5fd122178514cb213a302e40d2203b7e0551a718dcb2b",
+      "sourceFiles": 279
+    },
+    "sourceUnchangedDuringBuild": true,
+    "architecture": "x86_64",
+    "signing": "development debug key",
+    "isolatedValidation": true
+  },
+  "sourceBefore": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "ccf06ba08519ac3134b5fd122178514cb213a302e40d2203b7e0551a718dcb2b",
+    "sourceFiles": 279
+  },
+  "sourceAfter": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "ccf06ba08519ac3134b5fd122178514cb213a302e40d2203b7e0551a718dcb2b",
+    "sourceFiles": 279
+  },
+  "sourceUnchanged": true,
+  "capabilities": null,
+  "activity": null,
+  "originalNetwork": null,
+  "restoration": {
+    "result": "不适用",
+    "note": "No AVD radio state changed."
+  },
+  "logout": {
+    "result": "通过",
+    "state": "normal-logout-confirmed",
+    "actionCount": 1
+  },
+  "dnsForwarding": {
+    "upstream": "192.168.31.1",
+    "bindAddress": "127.0.0.1",
+    "bindPort": 53,
+    "running": false,
+    "state": "closed",
+    "lastError": null,
+    "pending": 0,
+    "receivedQueries": 0,
+    "forwardedQueries": 0,
+    "forwardedReplies": 0,
+    "expired": 0,
+    "rejectedQueries": 0,
+    "rejectedReplies": 0,
+    "capacityDrops": 0,
+    "sendErrors": 0,
+    "socketErrors": 0,
+    "durationMs": 16330
+  },
+  "results": [
+    {
+      "id": "device-read-lifecycle",
+      "result": "阻塞",
+      "stage": "readonly-cli-preflight",
+      "errorCode": "TASK_FOCUS_PROBE_UNAVAILABLE"
+    }
+  ],
+  "screenshots": [],
+  "scope": "One retained test session; real metadata GETs, same native Activity background/resume, explicitly verified AVD network isolation/recovery, one normal logout.",
+  "limits": [
+    "No desired/control/relationship/OTA/schedule writes, sharing codes, verification codes, new login or account A/B switch.",
+    "No raw hierarchy/text/CLI dumps/errors archived. Optional PNG only on fixed More error state, never populated metadata.",
+    "ActivityRecord/task identity proves reuse; loaded alone does not prove exact HTTP request counts or physical IO cancellation.",
+    "Noncooperative HTTP may outlive cancellation; bounded polling records blocking rather than declaring a hard deadline.",
+    "CLI/state formats not recognized are a precondition block, never a simulated offline success. Force-kill cannot guarantee JS finally restoration.",
+    "No iOS/hardware/full visual acceptance."
+  ]
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.data.device.DeviceReadFeaturesTest" tests="17" skipped="0" failures="0" errors="0" timestamp="2026-11-01T18:07:26.636Z" hostname="DESKTOP-2AM89R2" time="1.201">
+  <properties/>
+  <testcase name="missingOldOrPendingAccountContextNeverStartsAuthorization" classname="com.rowan.iot.data.device.DeviceReadFeaturesTest" time="0.154"/>
+  <testcase name="invalidKindNeverCallsOwnershipOrAnArbitraryHttpRoute" classname="com.rowan.iot.data.device.DeviceReadFeaturesTest" time="0.025"/>
+  <testcase name="lateFirmwareUnboundAfterAccountSwitchIsSessionChangedWithoutRevocationMarker" classname="com.rowan.iot.data.device.DeviceReadFeaturesTest" time="0.158"/>
+  <testcase name="scheduleProjectionHasOnlyTheSafeFieldsAndUsesALocalDisplayKey" classname="com.rowan.iot.data.device.DeviceReadFeaturesTest" time="0.095"/>
+  <testcase name="accountChangeDuringAuthorizationCannotOpenAFeatureRepository" classname="com.rowan.iot.data.device.DeviceReadFeaturesTest" time="0.1"/>
+  <testcase name="everyMethodFreshlyAuthorizesTheNativeDeviceAndUsesOnlyUnknownModelReadScope" classname="com.rowan.iot.data.device.DeviceReadFeaturesTest" time="0.055"/>
+  <testcase name="freshOwnershipRejectionCarriesRevocationForBothReadKinds" classname="com.rowan.iot.data.device.DeviceReadFeaturesTest" time="0.044"/>
+  <testcase name="firmwareProjectionDoesNotExposeCandidateIdMacOrInventAnUpdateDecision" classname="com.rowan.iot.data.device.DeviceReadFeaturesTest" time="0.032"/>
+  <testcase name="lateFeatureReadAfterAccountChangeDoesNotReturnAnOldSummary" classname="com.rowan.iot.data.device.DeviceReadFeaturesTest" time="0.101"/>
+  <testcase name="unknownReadFieldsRemainUnknownWithoutInventingAScheduleOrNextExecution" classname="com.rowan.iot.data.device.DeviceReadFeaturesTest" time="0.023"/>
+  <testcase name="deniedOwnershipCannotFetchSchedulesFirmwareOrCredentialsAndErrorsAreFixed" classname="com.rowan.iot.data.device.DeviceReadFeaturesTest" time="0.061"/>
+  <testcase name="firmwareNotFoundGenericRbacAndUnknownSuffixCodesDoNotRevokeOwnership" classname="com.rowan.iot.data.device.DeviceReadFeaturesTest" time="0.068"/>
+  <testcase name="backendReadFailureDoesNotExposeItsRawMessageOrCause" classname="com.rowan.iot.data.device.DeviceReadFeaturesTest" time="0.051"/>
+  <testcase name="aFeatureRepositoryPermissionFailureDoesNotRevokeDeviceOwnership" classname="com.rowan.iot.data.device.DeviceReadFeaturesTest" time="0.055"/>
+  <testcase name="cancellingAnUncooperativeFirmwareReadRemainsCancellationAndReturnsNoOffer" classname="com.rowan.iot.data.device.DeviceReadFeaturesTest" time="0.096"/>
+  <testcase name="documentedFirmwareUnboundAfterFreshProofStillRevokesOwnership" classname="com.rowan.iot.data.device.DeviceReadFeaturesTest" time="0.051"/>
+  <testcase name="mismatchedNativeProofIsRejectedBeforeAnyFeatureRepositoryIsConstructed" classname="com.rowan.iot.data.device.DeviceReadFeaturesTest" time="0.03"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

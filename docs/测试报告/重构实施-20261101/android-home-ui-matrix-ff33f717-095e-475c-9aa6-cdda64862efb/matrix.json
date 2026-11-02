@@ -1,0 +1,177 @@
+{
+  "fixtureOnly": true,
+  "realHttpAcceptance": false,
+  "pixelAcceptance": false,
+  "configurations": [
+    {
+      "configuration": {
+        "id": "base",
+        "size": "1080x2400",
+        "density": "420",
+        "fontScale": "1"
+      },
+      "environment": {
+        "size": {
+          "physical": "1080x2400",
+          "override": null
+        },
+        "density": {
+          "physical": "420",
+          "override": null
+        },
+        "fontScale": "1"
+      },
+      "status": "passed",
+      "collectorExitCode": 0,
+      "log": ".cache\\refactor\\android-home-fixture-matrix-runs\\ff33f717-095e-475c-9aa6-cdda64862efb\\base.instrument.log",
+      "logBytes": 1041621,
+      "report": ".cache\\refactor\\android-home-ui-fixtures-runs\\b993bced-9b25-4bdb-8ff3-7e7959373c46\\report.json",
+      "passed": 9,
+      "blocked": 0
+    },
+    {
+      "configuration": {
+        "id": "small",
+        "size": "640x1280",
+        "density": "320",
+        "fontScale": "1"
+      },
+      "environment": {
+        "size": {
+          "physical": "1080x2400",
+          "override": "640x1280"
+        },
+        "density": {
+          "physical": "420",
+          "override": "320"
+        },
+        "fontScale": "1"
+      },
+      "status": "passed",
+      "collectorExitCode": 0,
+      "log": ".cache\\refactor\\android-home-fixture-matrix-runs\\ff33f717-095e-475c-9aa6-cdda64862efb\\small.instrument.log",
+      "logBytes": 693341,
+      "report": ".cache\\refactor\\android-home-ui-fixtures-runs\\48340a2b-9cc9-4f6d-b0b9-97c058f569cf\\report.json",
+      "passed": 9,
+      "blocked": 0
+    },
+    {
+      "configuration": {
+        "id": "large",
+        "size": "1440x2560",
+        "density": "420",
+        "fontScale": "1"
+      },
+      "environment": {
+        "size": {
+          "physical": "1080x2400",
+          "override": "1440x2560"
+        },
+        "density": {
+          "physical": "420",
+          "override": null
+        },
+        "fontScale": "1"
+      },
+      "status": "passed",
+      "collectorExitCode": 0,
+      "log": ".cache\\refactor\\android-home-fixture-matrix-runs\\ff33f717-095e-475c-9aa6-cdda64862efb\\large.instrument.log",
+      "logBytes": 1122553,
+      "report": ".cache\\refactor\\android-home-ui-fixtures-runs\\f9499b67-3a96-4d40-8806-c064f43a1293\\report.json",
+      "passed": 9,
+      "blocked": 0
+    },
+    {
+      "configuration": {
+        "id": "font150",
+        "size": "1080x2400",
+        "density": "420",
+        "fontScale": "1.5"
+      },
+      "environment": {
+        "size": {
+          "physical": "1080x2400",
+          "override": null
+        },
+        "density": {
+          "physical": "420",
+          "override": null
+        },
+        "fontScale": "1.5"
+      },
+      "status": "passed",
+      "collectorExitCode": 0,
+      "log": ".cache\\refactor\\android-home-fixture-matrix-runs\\ff33f717-095e-475c-9aa6-cdda64862efb\\font150.instrument.log",
+      "logBytes": 1315829,
+      "report": ".cache\\refactor\\android-home-ui-fixtures-runs\\919b3134-04fd-4009-9070-11faf39ffffe\\report.json",
+      "passed": 9,
+      "blocked": 0
+    }
+  ],
+  "restoration": {
+    "result": "passed",
+    "attempts": [
+      {
+        "kind": "size",
+        "result": "passed"
+      },
+      {
+        "kind": "density",
+        "result": "passed"
+      },
+      {
+        "kind": "font",
+        "result": "passed"
+      }
+    ],
+    "after": {
+      "size": {
+        "physical": "1080x2400",
+        "override": null
+      },
+      "density": {
+        "physical": "420",
+        "override": null
+      },
+      "fontScale": "1.0"
+    }
+  },
+  "original": {
+    "size": {
+      "physical": "1080x2400",
+      "override": null
+    },
+    "density": {
+      "physical": "420",
+      "override": null
+    },
+    "fontScale": "1.0"
+  },
+  "status": "passed",
+  "runId": "ff33f717-095e-475c-9aa6-cdda64862efb",
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "sourceSha256": "725e3f9a235c21f5cc5c40239fc34be683c1e9a46a1a900280e23da6ae0d6251",
+  "sourceProjects": [
+    "android-as",
+    "app-rn"
+  ],
+  "collectorPath": "docs/tools/android-home-fixtures/collect_results.mjs",
+  "hostSha256": "3fc9e74af7eb253cc7d150701cfe3aa6d82ae93615855fd308ee311c8b3f1197",
+  "testSha256": "0d39c88a6156492fd7a5ace794b64f473aae37549b5a077dd564b766bdbc0648",
+  "collectorSha256": "cae07d6f3b495cda59435efed1a9907a787b70db393445a22507c2879b056b29",
+  "scriptSha256": "2490caf82e81045848d62a94f49041dbe28dba463bdc332194a9c34702ccca73",
+  "stateMachineSha256": "348e9bc2ad19d60f3b9038d3527358331b5b90edd862e7f77bc6147eac4dac44",
+  "snapshotHelperSha256": "b9c21b371744d233234dee2270024c1d7989d795970ef07bc193e91b8423e194",
+  "formalProvenance": [
+    {
+      "path": "docs\\测试报告\\重构实施-20261101\\self-unbind-integration-release-provenance.json",
+      "sha256": "8c2cd3767f2bd4ff47bea6e86a911cd803ecf549a6fe075084a869444b33a458"
+    },
+    {
+      "path": "docs\\测试报告\\重构实施-20261101\\self-unbind-integration-androidtest-provenance.json",
+      "sha256": "630936f0939cc86f9b280a3d4cf14a24f57c809afc36278230329ec9370c9a72"
+    }
+  ],
+  "finalSourceMatches": true
+}

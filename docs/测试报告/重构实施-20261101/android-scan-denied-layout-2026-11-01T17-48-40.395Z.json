@@ -1,0 +1,1125 @@
+{
+  "runId": "2026-11-01T17-48-40.395Z",
+  "parentRunId": "2026-11-01T17-47-17.595Z",
+  "parentReportSha256": "d9d12f0951f2ec8bfd350f468051256aa877fca540c377b43ba7577f3940d1f3",
+  "scriptSha256": "abb02bd5304afb5d937b726c4b34facef95c6dcb4a293a021a175d6ef70a6347",
+  "cameraAppOpsSha256": "9b997bc8bc84a4e699ced92aa212620b5382062cb3e94f7a27a5ab179407cb2e",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "serial": "emulator-5554",
+  "installedArtifactSha256": "b8e50abf3df261d6bcfd556a5d9ea30ca8971e6da7f3d910ba22a7a87a94394f",
+  "sourceBefore": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "5d152ab3684c4f17415e9dd9487deb09b81d9fb9061488dd0ac755d28f7672cc",
+    "sourceFiles": 292
+  },
+  "sourceAfter": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "5d152ab3684c4f17415e9dd9487deb09b81d9fb9061488dd0ac755d28f7672cc",
+    "sourceFiles": 292
+  },
+  "sourceUnchanged": true,
+  "originalEnvironment": {
+    "size": {
+      "physical": "1080x2400",
+      "override": null
+    },
+    "density": {
+      "physical": "420",
+      "override": null
+    },
+    "fontScale": "1.0"
+  },
+  "originalPermission": {
+    "granted": false,
+    "flags": [
+      "USER_SENSITIVE_WHEN_DENIED",
+      "USER_SENSITIVE_WHEN_GRANTED"
+    ],
+    "appOp": "allow",
+    "uidAppOp": "ignore",
+    "packageEntryPresent": true
+  },
+  "environmentRestoration": {
+    "result": "通过",
+    "attempts": [
+      {
+        "kind": "size",
+        "completed": true
+      },
+      {
+        "kind": "density",
+        "completed": true
+      },
+      {
+        "kind": "font",
+        "completed": true
+      }
+    ],
+    "observed": {
+      "size": {
+        "physical": "1080x2400",
+        "override": null
+      },
+      "density": {
+        "physical": "420",
+        "override": null
+      },
+      "fontScale": "1.0"
+    }
+  },
+  "permissionRestoration": {
+    "result": "通过",
+    "attempts": [
+      {
+        "kind": "grant",
+        "completed": true
+      },
+      {
+        "kind": "flags",
+        "completed": true
+      },
+      {
+        "kind": "appOp",
+        "completed": true
+      }
+    ],
+    "observed": {
+      "granted": false,
+      "flags": [
+        "USER_SENSITIVE_WHEN_DENIED",
+        "USER_SENSITIVE_WHEN_GRANTED"
+      ],
+      "appOp": "allow",
+      "uidAppOp": "ignore",
+      "packageEntryPresent": true
+    },
+    "packageEntryPresenceMatches": true,
+    "historyRestored": false,
+    "comparison": "Strict grant/flags/UID mode; Android16 CAMERA effective package mode. Package entry/history is not restored."
+  },
+  "permissionDialogRestoration": {
+    "result": "不适用"
+  },
+  "logout": {
+    "result": "通过",
+    "actionCount": 1,
+    "state": "normal-logout-confirmed"
+  },
+  "dnsForwarding": {
+    "upstream": "192.168.31.1",
+    "bindAddress": "127.0.0.1",
+    "bindPort": 53,
+    "running": false,
+    "state": "closed",
+    "lastError": null,
+    "pending": 0,
+    "receivedQueries": 24,
+    "forwardedQueries": 24,
+    "forwardedReplies": 24,
+    "expired": 0,
+    "rejectedQueries": 0,
+    "rejectedReplies": 0,
+    "capacityDrops": 0,
+    "sendErrors": 0,
+    "socketErrors": 0,
+    "durationMs": 168703
+  },
+  "results": [
+    {
+      "id": "small-denied-scan-geometry",
+      "configuration": {
+        "name": "small",
+        "size": "640x1280",
+        "density": "320",
+        "densityDpi": 320,
+        "font": "1.0",
+        "width": 640,
+        "height": 1280,
+        "observedEnvironment": {
+          "size": {
+            "physical": "1080x2400",
+            "override": "640x1280"
+          },
+          "density": {
+            "physical": "420",
+            "override": "320"
+          },
+          "fontScale": "1.0"
+        }
+      },
+      "geometryResult": "通过",
+      "frames": [
+        {
+          "viewport": {
+            "width": 640,
+            "height": 1280
+          },
+          "observed": [
+            {
+              "id": "scan_back",
+              "bounds": [
+                48,
+                86,
+                144,
+                182
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 95,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_title",
+              "bounds": [
+                144,
+                110,
+                496,
+                158
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_status",
+              "bounds": [
+                48,
+                1122,
+                592,
+                1164
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_album",
+              "bounds": [
+                96,
+                1236,
+                544,
+                1280
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 95,
+              "withinViewport": false
+            },
+            {
+              "id": "scan_permission",
+              "bounds": null,
+              "enabled": false,
+              "clickable": false,
+              "minimumActionSizePx": 95,
+              "withinViewport": false
+            }
+          ],
+          "overlaps": [],
+          "settingsObserved": false
+        },
+        {
+          "viewport": {
+            "width": 640,
+            "height": 1280
+          },
+          "observed": [
+            {
+              "id": "scan_back",
+              "bounds": [
+                48,
+                86,
+                144,
+                182
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 95,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_title",
+              "bounds": [
+                144,
+                110,
+                496,
+                158
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_status",
+              "bounds": [
+                48,
+                1122,
+                592,
+                1164
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_album",
+              "bounds": [
+                96,
+                1236,
+                544,
+                1280
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 95,
+              "withinViewport": false
+            },
+            {
+              "id": "scan_permission",
+              "bounds": null,
+              "enabled": false,
+              "clickable": false,
+              "minimumActionSizePx": 95,
+              "withinViewport": false
+            }
+          ],
+          "overlaps": [],
+          "settingsObserved": false
+        },
+        {
+          "viewport": {
+            "width": 640,
+            "height": 1280
+          },
+          "observed": [
+            {
+              "id": "scan_back",
+              "bounds": [
+                48,
+                86,
+                144,
+                182
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 95,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_title",
+              "bounds": [
+                144,
+                110,
+                496,
+                158
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_status",
+              "bounds": [
+                48,
+                1122,
+                592,
+                1164
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_album",
+              "bounds": [
+                96,
+                1236,
+                544,
+                1280
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 95,
+              "withinViewport": false
+            },
+            {
+              "id": "scan_permission",
+              "bounds": null,
+              "enabled": false,
+              "clickable": false,
+              "minimumActionSizePx": 95,
+              "withinViewport": false
+            }
+          ],
+          "overlaps": [],
+          "settingsObserved": false
+        },
+        {
+          "viewport": {
+            "width": 640,
+            "height": 1280
+          },
+          "observed": [
+            {
+              "id": "scan_back",
+              "bounds": [
+                48,
+                86,
+                144,
+                182
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 95,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_title",
+              "bounds": [
+                144,
+                110,
+                496,
+                158
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_status",
+              "bounds": [
+                48,
+                1122,
+                592,
+                1164
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_album",
+              "bounds": [
+                96,
+                1236,
+                544,
+                1280
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 95,
+              "withinViewport": false
+            },
+            {
+              "id": "scan_permission",
+              "bounds": null,
+              "enabled": false,
+              "clickable": false,
+              "minimumActionSizePx": 95,
+              "withinViewport": false
+            }
+          ],
+          "overlaps": [],
+          "settingsObserved": false
+        },
+        {
+          "viewport": {
+            "width": 640,
+            "height": 1280
+          },
+          "observed": [
+            {
+              "id": "scan_back",
+              "bounds": null,
+              "enabled": false,
+              "clickable": false,
+              "minimumActionSizePx": 95,
+              "withinViewport": false
+            },
+            {
+              "id": "scan_title",
+              "bounds": null,
+              "enabled": false,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": false
+            },
+            {
+              "id": "scan_status",
+              "bounds": [
+                48,
+                854,
+                592,
+                896
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_album",
+              "bounds": [
+                96,
+                968,
+                544,
+                1064
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 95,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_permission",
+              "bounds": [
+                96,
+                1088,
+                544,
+                1184
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 95,
+              "withinViewport": true
+            }
+          ],
+          "overlaps": [],
+          "settingsObserved": false
+        },
+        {
+          "viewport": {
+            "width": 640,
+            "height": 1280
+          },
+          "observed": [
+            {
+              "id": "scan_back",
+              "bounds": null,
+              "enabled": false,
+              "clickable": false,
+              "minimumActionSizePx": 95,
+              "withinViewport": false
+            },
+            {
+              "id": "scan_title",
+              "bounds": null,
+              "enabled": false,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": false
+            },
+            {
+              "id": "scan_status",
+              "bounds": [
+                48,
+                854,
+                592,
+                896
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_album",
+              "bounds": [
+                96,
+                968,
+                544,
+                1064
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 95,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_permission",
+              "bounds": [
+                96,
+                1088,
+                544,
+                1184
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 95,
+              "withinViewport": true
+            }
+          ],
+          "overlaps": [],
+          "settingsObserved": false
+        }
+      ],
+      "reached": [
+        {
+          "id": "scan_back",
+          "reached": true,
+          "scrollAttempts": 0,
+          "reachableViaScroll": false
+        },
+        {
+          "id": "scan_title",
+          "reached": true,
+          "scrollAttempts": 0,
+          "reachableViaScroll": false
+        },
+        {
+          "id": "scan_status",
+          "reached": true,
+          "scrollAttempts": 0,
+          "reachableViaScroll": false
+        },
+        {
+          "id": "scan_album",
+          "reached": true,
+          "scrollAttempts": 1,
+          "reachableViaScroll": true
+        },
+        {
+          "id": "scan_permission",
+          "reached": true,
+          "scrollAttempts": 0,
+          "reachableViaScroll": false
+        }
+      ],
+      "screenshot": "2026-11-01T17-48-40.395Z-scan-denied-layout-small.png",
+      "visualResult": "未验收：几何/滚动可达不证明字形、换行、触摸、遮罩及蓝湖视觉一致",
+      "settingsPolicy": "条件显示；仅记录观察，不点击设置或授予相机"
+    },
+    {
+      "id": "font150-denied-scan-geometry",
+      "configuration": {
+        "name": "font150",
+        "size": "reset",
+        "density": "reset",
+        "densityDpi": 420,
+        "font": "1.5",
+        "width": 1080,
+        "height": 2400,
+        "observedEnvironment": {
+          "size": {
+            "physical": "1080x2400",
+            "override": null
+          },
+          "density": {
+            "physical": "420",
+            "override": null
+          },
+          "fontScale": "1.5"
+        }
+      },
+      "geometryResult": "通过",
+      "frames": [
+        {
+          "viewport": {
+            "width": 1080,
+            "height": 2400
+          },
+          "observed": [
+            {
+              "id": "scan_back",
+              "bounds": [
+                63,
+                153,
+                189,
+                279
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 125,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_title",
+              "bounds": [
+                189,
+                172,
+                891,
+                260
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_status",
+              "bounds": [
+                63,
+                1678,
+                1017,
+                1762
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_album",
+              "bounds": [
+                126,
+                1856,
+                954,
+                2006
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 125,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_permission",
+              "bounds": [
+                126,
+                2037,
+                954,
+                2187
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 125,
+              "withinViewport": true
+            }
+          ],
+          "overlaps": [],
+          "settingsObserved": false
+        },
+        {
+          "viewport": {
+            "width": 1080,
+            "height": 2400
+          },
+          "observed": [
+            {
+              "id": "scan_back",
+              "bounds": [
+                63,
+                153,
+                189,
+                279
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 125,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_title",
+              "bounds": [
+                189,
+                172,
+                891,
+                260
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_status",
+              "bounds": [
+                63,
+                1678,
+                1017,
+                1762
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_album",
+              "bounds": [
+                126,
+                1856,
+                954,
+                2006
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 125,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_permission",
+              "bounds": [
+                126,
+                2037,
+                954,
+                2187
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 125,
+              "withinViewport": true
+            }
+          ],
+          "overlaps": [],
+          "settingsObserved": false
+        },
+        {
+          "viewport": {
+            "width": 1080,
+            "height": 2400
+          },
+          "observed": [
+            {
+              "id": "scan_back",
+              "bounds": [
+                63,
+                153,
+                189,
+                279
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 125,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_title",
+              "bounds": [
+                189,
+                172,
+                891,
+                260
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_status",
+              "bounds": [
+                63,
+                1678,
+                1017,
+                1762
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_album",
+              "bounds": [
+                126,
+                1856,
+                954,
+                2006
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 125,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_permission",
+              "bounds": [
+                126,
+                2037,
+                954,
+                2187
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 125,
+              "withinViewport": true
+            }
+          ],
+          "overlaps": [],
+          "settingsObserved": false
+        },
+        {
+          "viewport": {
+            "width": 1080,
+            "height": 2400
+          },
+          "observed": [
+            {
+              "id": "scan_back",
+              "bounds": [
+                63,
+                153,
+                189,
+                279
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 125,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_title",
+              "bounds": [
+                189,
+                172,
+                891,
+                260
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_status",
+              "bounds": [
+                63,
+                1678,
+                1017,
+                1762
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_album",
+              "bounds": [
+                126,
+                1856,
+                954,
+                2006
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 125,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_permission",
+              "bounds": [
+                126,
+                2037,
+                954,
+                2187
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 125,
+              "withinViewport": true
+            }
+          ],
+          "overlaps": [],
+          "settingsObserved": false
+        },
+        {
+          "viewport": {
+            "width": 1080,
+            "height": 2400
+          },
+          "observed": [
+            {
+              "id": "scan_back",
+              "bounds": [
+                63,
+                153,
+                189,
+                279
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 125,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_title",
+              "bounds": [
+                189,
+                172,
+                891,
+                260
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_status",
+              "bounds": [
+                63,
+                1678,
+                1017,
+                1762
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_album",
+              "bounds": [
+                126,
+                1856,
+                954,
+                2006
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 125,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_permission",
+              "bounds": [
+                126,
+                2037,
+                954,
+                2187
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 125,
+              "withinViewport": true
+            }
+          ],
+          "overlaps": [],
+          "settingsObserved": false
+        },
+        {
+          "viewport": {
+            "width": 1080,
+            "height": 2400
+          },
+          "observed": [
+            {
+              "id": "scan_back",
+              "bounds": [
+                63,
+                153,
+                189,
+                279
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 125,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_title",
+              "bounds": [
+                189,
+                172,
+                891,
+                260
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_status",
+              "bounds": [
+                63,
+                1678,
+                1017,
+                1762
+              ],
+              "enabled": true,
+              "clickable": false,
+              "minimumActionSizePx": 0,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_album",
+              "bounds": [
+                126,
+                1856,
+                954,
+                2006
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 125,
+              "withinViewport": true
+            },
+            {
+              "id": "scan_permission",
+              "bounds": [
+                126,
+                2037,
+                954,
+                2187
+              ],
+              "enabled": true,
+              "clickable": true,
+              "minimumActionSizePx": 125,
+              "withinViewport": true
+            }
+          ],
+          "overlaps": [],
+          "settingsObserved": false
+        }
+      ],
+      "reached": [
+        {
+          "id": "scan_back",
+          "reached": true,
+          "scrollAttempts": 0,
+          "reachableViaScroll": false
+        },
+        {
+          "id": "scan_title",
+          "reached": true,
+          "scrollAttempts": 0,
+          "reachableViaScroll": false
+        },
+        {
+          "id": "scan_status",
+          "reached": true,
+          "scrollAttempts": 0,
+          "reachableViaScroll": false
+        },
+        {
+          "id": "scan_album",
+          "reached": true,
+          "scrollAttempts": 0,
+          "reachableViaScroll": false
+        },
+        {
+          "id": "scan_permission",
+          "reached": true,
+          "scrollAttempts": 0,
+          "reachableViaScroll": false
+        }
+      ],
+      "screenshot": "2026-11-01T17-48-40.395Z-scan-denied-layout-font150.png",
+      "visualResult": "未验收：几何/滚动可达不证明字形、换行、触摸、遮罩及蓝湖视觉一致",
+      "settingsPolicy": "条件显示；仅记录观察，不点击设置或授予相机"
+    }
+  ],
+  "screenshots": [
+    "2026-11-01T17-48-40.395Z-scan-denied-layout-small.png",
+    "2026-11-01T17-48-40.395Z-scan-denied-layout-font150.png"
+  ],
+  "scope": "Two native denied-camera Scan layouts only; no gallery selection or real camera frame capture.",
+  "limits": [
+    "Not pixel/visual/touch acceptance; online Lanhu version remains unverified.",
+    "No camera frame decoding, production QR parser, binding, hardware, iOS or whole scope acceptance.",
+    "No raw XML/dumpsys/CLI/account/gallery data is retained. Captures require native Scan identity, denied CAMERA and exact visible error before AND after screencap.",
+    "Restore display/font and compare strict CAMERA grant/flags/UID plus Android16 effective package mode; absent package default is allow. Package entry/history is not restored and UID AppOps are never explicitly written.",
+    "SIGINT/SIGTERM enter finally after bounded commands; force-kill cannot guarantee restoration."
+  ]
+}

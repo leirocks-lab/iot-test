@@ -1,0 +1,350 @@
+Starting a Gradle Daemon, 1 stopped Daemon could not be reused, use --status for details
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+Warning: SDK processing. This version only understands SDK XML versions up to 3 but an SDK XML file of version 4 was encountered. This can happen if you use versions of Android Studio and the command-line tools that were released at different times.
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateAutolinkingNewArchitectureFiles UP-TO-DATE
+> Task :app:generateAutolinkingPackageList UP-TO-DATE
+> Task :app:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :app:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :app:generateReactNativeEntryPoint UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDevelopmentDebugBuild UP-TO-DATE
+> Task :app:generateDevelopmentDebugBuildConfig
+> Task :app:checkDevelopmentDebugAarMetadata UP-TO-DATE
+> Task :app:generateDevelopmentDebugResValues
+> Task :app:mapDevelopmentDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDevelopmentDebugResources UP-TO-DATE
+> Task :app:packageDevelopmentDebugResources
+> Task :app:parseDevelopmentDebugLocalResources
+> Task :app:createDevelopmentDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDevelopmentDebug
+> Task :app:processDevelopmentDebugMainManifest
+> Task :app:processDevelopmentDebugManifest
+> Task :app:mergeDevelopmentDebugResources
+> Task :app:javaPreCompileDevelopmentDebug UP-TO-DATE
+> Task :app:preDevelopmentDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileDevelopmentDebugUnitTest UP-TO-DATE
+> Task :app:processDevelopmentDebugManifestForPackage
+> Task :app:processDevelopmentDebugResources
+> Task :app:compileDevelopmentDebugKotlin
+> Task :app:compileDevelopmentDebugJavaWithJavac
+> Task :app:bundleDevelopmentDebugClassesToCompileJar
+> Task :app:bundleDevelopmentDebugClassesToRuntimeJar
+> Task :app:processDevelopmentDebugJavaRes UP-TO-DATE
+
+> Task :app:compileDevelopmentDebugUnitTestKotlin
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/AccountServiceTest.kt:98:60 Unresolved reference 'AccountLogoutCleanupFailure'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/AccountServiceTest.kt:99:63 Unresolved reference 'AccountLogoutCleanupFailure'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/AccountServiceTest.kt:99:92 Unresolved reference 'expectedRevision'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/AccountServiceTest.kt:103:28 Unresolved reference 'retryLogoutCleanup'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:22:63 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:22:80 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:23:9 Unresolved reference 'MqttCredentials'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:27:15 Unresolved reference 'MqttCanonicalHost'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:27:35 Unresolved reference 'MqttCanonicalHost'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:28:19 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:28:36 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:29:9 Unresolved reference 'AwsIotWebSocketSigner'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:30:18 Unresolved reference 'MqttEndpointPolicy'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:32:35 Unresolved reference 'MqttConnectionParameters'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:32:95 Unresolved reference 'withUri'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:32:105 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:33:13 Unresolved reference 'rawQuery'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:39:31 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:39:83 Unresolved reference 'MqttCredentialFailure'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:41:79 Unresolved reference 'MqttCredentialFailure'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:42:26 Unresolved reference 'MqttCredentialFailure'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:42:49 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:42:49 Unresolved reference. None of the following candidates is applicable because of a receiver type mismatch:
+fun <T> T.also(block: (T) -> Unit): T
+    [R|Contract description]
+     <
+        CallsInPlace(block, EXACTLY_ONCE)
+    >
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:42:54 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:51:22 Unresolved reference 'MqttCredentialExpiry'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:59:67 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:60:38 Unresolved reference 'MqttCredentialExpiry'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:61:40 Unresolved reference 'deadlineEpochSeconds'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:62:22 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:62:59 Unresolved reference 'encoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:63:81 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:64:64 Unresolved reference 'MqttCredentialExpiry'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:64:92 Unresolved reference 'deadlineEpochSeconds'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:68:77 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:69:38 Unresolved reference 'MqttCredentialExpiry'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:70:46 Unresolved reference 'deadlineEpochSeconds'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:71:22 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:71:58 Unresolved reference 'encoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:77:26 Unresolved reference 'MqttCredentialExpiry'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:81:22 Unresolved reference 'MqttCredentialExpiry'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:85:78 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:85:112 Unresolved reference 'MqttCredentialExpiry'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:86:86 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:86:120 Unresolved reference 'MqttCredentialExpiry'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:87:89 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:87:123 Unresolved reference 'MqttCredentialExpiry'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:88:31 Unresolved reference 'deadlineEpochSeconds'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:89:26 Unresolved reference 'deadlineEpochSeconds'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:89:55 Unresolved reference 'deadlineEpochSeconds'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:90:46 Unresolved reference 'deadlineEpochSeconds'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:92:21 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:92:103 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:98:21 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:98:103 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:101:21 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:101:103 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:105:21 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:105:63 Unresolved reference 'MqttCredentialExpiry'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:105:124 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:106:21 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:106:63 Unresolved reference 'MqttCredentialExpiry'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:106:124 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:112:52 Unresolved reference 'MqttAuthentication'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:113:47 Unresolved reference 'MqttAuthentication'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:115:21 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:127:23 Unresolved reference 'MqttCredentials'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:127:97 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:136:21 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:136:65 Unresolved reference 'MqttCredentials'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:136:128 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:142:21 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:161:17 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:165:17 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:166:13 Unresolved reference 'AwsIotWebSocketSigner'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:166:53 Unresolved reference 'MqttEndpointPolicy'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:166:75 Unresolved reference 'MqttCanonicalHost'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:169:17 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:170:17 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:170:59 Unresolved reference 'MqttEndpointPolicy'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:175:17 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:176:13 Unresolved reference 'AwsIotWebSocketSigner'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:177:17 Unresolved reference 'MqttEndpointPolicy'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:177:75 Unresolved reference 'MqttCanonicalHost'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:179:17 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:186:22 Unresolved reference 'MqttEndpointPolicy'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:189:17 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:190:13 Unresolved reference 'AwsIotWebSocketSigner'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:190:130 Unresolved reference 'MqttCanonicalHost'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:197:22 Unresolved reference 'MqttEndpointPolicy'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:197:63 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:198:22 Unresolved reference 'AwsIotWebSocketSigner'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:198:73 Unresolved reference 'MqttCanonicalHost'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:199:45 Unresolved reference 'MqttConnectAuthentication'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:200:44 Unresolved reference 'username'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:200:65 Unresolved reference 'it'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:201:41 Unresolved reference 'password'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:201:62 Unresolved reference 'it'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:203:37 Unresolved reference 'it'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:205:62 Unresolved reference 'it'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:206:17 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:207:13 Unresolved reference 'AwsIotWebSocketSigner'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:207:56 Unresolved reference 'MqttEndpointPolicy'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:207:78 Unresolved reference 'MqttCanonicalHost'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:210:17 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:211:13 Unresolved reference 'AwsIotWebSocketSigner'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:211:58 Unresolved reference 'MqttCanonicalHost'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:223:62 Unresolved reference 'it'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:224:43 Unresolved reference 'it'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:225:22 Unresolved reference 'MqttConnectAuthentication'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:229:40 Unresolved reference 'MqttCanonicalHost'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:232:62 Unresolved reference 'it'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:233:44 Unresolved reference 'it'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:241:35 Unresolved reference 'it'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:245:22 Unresolved reference 'MqttConnectAuthentication'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:248:39 Unresolved reference 'it'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:248:70 Unresolved reference 'it'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:259:83 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:263:21 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:263:116 Unresolved reference 'ExpiryEncoding'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:269:21 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:272:21 Unresolved reference 'MqttCredentialErrorCode'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:273:17 Unresolved reference 'AwsIotWebSocketSigner'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:273:57 Unresolved reference 'MqttEndpointPolicy'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:273:116 Unresolved reference 'MqttCanonicalHost'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/data/mqtt/auth/MqttCredentialsTest.kt:280:114 Unresolved reference 'MqttSecret'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/BrokerContractsTest.kt:8:17 Unresolved reference 'BrokerKey'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/BrokerContractsTest.kt:9:17 Unresolved reference 'BrokerKey'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/BrokerContractsTest.kt:11:28 Unresolved reference 'BrokerKey'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/BrokerContractsTest.kt:12:28 Unresolved reference 'BrokerKey'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/BrokerContractsTest.kt:14:23 Unresolved reference 'BrokerOptions'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/BrokerContractsTest.kt:23:19 Unresolved reference 'BrokerKey'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/BrokerContractsTest.kt:25:24 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/BrokerContractsTest.kt:25:38 Unresolved reference 'BrokerOptions'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/BrokerContractsTest.kt:27:20 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/BrokerContractsTest.kt:27:34 Unresolved reference 'BrokerKey'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/BrokerContractsTest.kt:28:20 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/BrokerContractsTest.kt:28:34 Unresolved reference 'LeaseResource'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:11:21 Unresolved reference 'LeaseResource'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:12:21 Unresolved reference 'LeaseResource'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:16:27 Unresolved reference 'PoolTiming'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:19:9 'nowEpochMillis' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:20:9 'pause' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:31:29 Unresolved reference 'BrokerTransportFactory'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:36:9 'create' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:36:38 Unresolved reference 'BrokerOptions'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:36:63 Unresolved reference 'BrokerListener'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:36:80 Unresolved reference 'BrokerPort'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:38:37 Unresolved reference 'BrokerOptions'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:38:66 Unresolved reference 'BrokerListener'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:38:114 Unresolved reference 'BrokerPort'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:45:9 'connect' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:46:9 'subscribe' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:50:23 Unresolved reference 'BrokerFailure'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:50:23 Type mismatch: inferred type is 'ERROR CLASS: Unresolved name: BrokerFailure', but 'Throwable' was expected.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:50:37 Unresolved reference 'BrokerFailureKind'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:52:9 'unsubscribe' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:53:9 'publish' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:57:9 'close' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:65:32 Unresolved reference 'LeaseResource'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:65:50 Unresolved reference 'BrokerOptions'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:65:66 Unresolved reference 'BrokerOptions'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:66:79 Unresolved reference 'BrokerOptions'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:67:13 Unresolved reference 'BrokerKey'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:69:20 Unresolved reference 'SharedBrokerPool'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:69:55 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:69:76 Suspend function 'suspend fun invoke(p1: <ERROR TYPE REF: Symbol not found for LeaseResource>): <ERROR TYPE REF: Symbol not found for BrokerOptions>' can only be called from a coroutine or another suspend function.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:70:13 Unresolved reference 'PoolPolicy'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:74:38 Unresolved reference 'ShadowLease'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:74:53 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:74:80 Unresolved reference 'state'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:74:86 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:74:92 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:74:100 Unresolved reference 'LeaseState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:74:122 Unresolved reference 'LeaseState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:75:39 Unresolved reference 'ShadowLease'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:75:54 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:75:81 Unresolved reference 'state'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:75:87 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:75:93 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:75:101 Unresolved reference 'LeaseState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:75:124 Unresolved reference 'LeaseState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:96:73 Unresolved reference 'LeaseState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:102:26 Unresolved reference 'BrokerFailureKind'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:102:98 Unresolved reference 'kind'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:106:78 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:106:78 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:107:19 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:107:19 Not enough information to infer type argument for 'R'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:110:55 Unresolved reference 'LeaseState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:120:26 Unresolved reference 'BrokerFailureKind'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:120:80 Unresolved reference 'kind'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:122:50 Unresolved reference 'LeaseState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:127:77 Unresolved reference 'epoch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:133:24 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:150:26 Unresolved reference 'BrokerOptions'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:152:84 Unresolved reference 'LeaseState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:157:73 Unresolved reference 'epoch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:159:43 Unresolved reference 'LeaseState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:161:26 Unresolved reference 'BrokerFailureKind'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:161:101 Unresolved reference 'kind'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:162:27 Unresolved reference 'disconnected'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:162:40 Unresolved reference 'BrokerFailure'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:162:54 Unresolved reference 'BrokerFailureKind'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:168:75 Unresolved reference 'epoch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:170:46 Unresolved reference 'disconnected'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:170:59 Unresolved reference 'BrokerFailure'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:170:73 Unresolved reference 'BrokerFailureKind'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:173:44 Unresolved reference 'epoch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:184:30 Unresolved reference 'disconnected'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:184:43 Unresolved reference 'BrokerFailure'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:184:57 Unresolved reference 'BrokerFailureKind'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:185:30 Unresolved reference 'message'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:192:26 Unresolved reference 'BrokerOptions'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:193:26 Unresolved reference 'BrokerFailureKind'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:193:99 Unresolved reference 'kind'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:200:26 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:200:28 Unresolved reference 'LeaseResource'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:208:33 Unresolved reference 'epoch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:208:46 Unresolved reference 'epoch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:218:26 Unresolved reference 'BrokerOptions'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:219:75 Unresolved reference 'epoch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:221:47 Unresolved reference 'epoch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:228:79 Unresolved reference 'epoch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:230:42 Unresolved reference 'BrokerMessage'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:231:87 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:231:95 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:231:95 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:233:27 Unresolved reference 'message'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:234:27 Unresolved reference 'message'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:235:52 Unresolved reference 'epoch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:236:26 Unresolved reference 'ReadyReason'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:236:76 Unresolved reference 'LeaseState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:236:94 Unresolved reference 'reason'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:239:24 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:244:77 Unresolved reference 'epoch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:246:27 Unresolved reference 'message'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:247:27 Unresolved reference 'message'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:248:28 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:248:28 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:248:64 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:248:64 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:249:42 Unresolved reference 'epoch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:249:93 Unresolved reference 'payload'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:254:75 Unresolved reference 'epoch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:256:27 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:256:27 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:256:33 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:256:35 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:256:35 Not enough information to infer type argument for 'R'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:257:27 Unresolved reference 'disconnected'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:257:40 Unresolved reference 'BrokerFailure'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:257:54 Unresolved reference 'BrokerFailureKind'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:259:40 Unresolved reference 'isFailure'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:268:45 Unresolved reference 'LeaseState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:273:75 Unresolved reference 'epoch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:274:47 Unresolved reference 'disconnected'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:274:60 Unresolved reference 'BrokerFailure'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:274:74 Unresolved reference 'BrokerFailureKind'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:275:26 Unresolved reference 'BrokerFailureKind'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:275:73 Unresolved reference 'kind'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:277:62 Unresolved reference 'epoch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:284:26 Unresolved reference 'BrokerFailureKind'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:284:87 Unresolved reference 'kind'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:289:26 Unresolved reference 'BrokerFailureKind'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/transport/SharedBrokerPoolTest.kt:289:87 Unresolved reference 'kind'.
+
+> Task :app:compileDevelopmentDebugUnitTestKotlin FAILED
+
+[Incubating] Problems report is available at: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileDevelopmentDebugUnitTestKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 2m 3s
+37 actionable tasks: 16 executed, 21 up-to-date

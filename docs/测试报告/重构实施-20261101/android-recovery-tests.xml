@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.RecoveryServiceTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-01T07:15:02.181Z" hostname="DESKTOP-2AM89R2" time="0.685">
+  <properties/>
+  <testcase name="unknownSendOrResetOutcomesAreNotReplayed" classname="com.rowan.iot.RecoveryServiceTest" time="0.54"/>
+  <testcase name="lateVerificationCannotAuthorizeChangedInputs" classname="com.rowan.iot.RecoveryServiceTest" time="0.051"/>
+  <testcase name="changedInputRejectsOldVerificationAndInvalidPasswordsNeverReset" classname="com.rowan.iot.RecoveryServiceTest" time="0.084"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

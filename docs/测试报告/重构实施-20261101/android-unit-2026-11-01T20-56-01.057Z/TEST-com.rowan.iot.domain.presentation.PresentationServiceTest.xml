@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.presentation.PresentationServiceTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-01T20:55:52.091Z" hostname="DESKTOP-2AM89R2" time="0.053">
+  <properties/>
+  <testcase name="startAndCloseAreIdempotentAndNeverRetainCallbacks" classname="com.rowan.iot.domain.presentation.PresentationServiceTest" time="0.012"/>
+  <testcase name="savedValuesWinAndUnknownUnitsRemainUnknown" classname="com.rowan.iot.domain.presentation.PresentationServiceTest" time="0.003"/>
+  <testcase name="directCaptureIsFreshEvenBeforeQueuedAccountSignal" classname="com.rowan.iot.domain.presentation.PresentationServiceTest" time="0.003"/>
+  <testcase name="queuedOldNotificationAlwaysCapturesCurrentAuthority" classname="com.rowan.iot.domain.presentation.PresentationServiceTest" time="0.002"/>
+  <testcase name="cleanupAndNextAccountCannotInheritPreviousChoices" classname="com.rowan.iot.domain.presentation.PresentationServiceTest" time="0.003"/>
+  <testcase name="unavailableSystemInputNeverReturnsLastAccountSnapshot" classname="com.rowan.iot.domain.presentation.PresentationServiceTest" time="0.003"/>
+  <testcase name="lateSourceCallbackAfterCloseReadsNoAccountAndEmitsNothing" classname="com.rowan.iot.domain.presentation.PresentationServiceTest" time="0.002"/>
+  <testcase name="backgroundKeepsOnlyDirtyThenForegroundEmitsLatestOnce" classname="com.rowan.iot.domain.presentation.PresentationServiceTest" time="0.015"/>
+  <testcase name="fixedThemeIgnoresSystemAppearanceAndSystemThemeFollowsIt" classname="com.rowan.iot.domain.presentation.PresentationServiceTest" time="0.003"/>
+  <testcase name="tokenAndOpaqueRawChangesDoNotInvalidate" classname="com.rowan.iot.domain.presentation.PresentationServiceTest" time="0.002"/>
+  <testcase name="parentCancellationReleasesSystemSubscription" classname="com.rowan.iot.domain.presentation.PresentationServiceTest" time="0.002"/>
+  <testcase name="failedRegistrationDoesNotInstallAccountObserverOrFakeReady" classname="com.rowan.iot.domain.presentation.PresentationServiceTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,5 @@
+nodeLinker: hoisted
+overrides:
+  vite: 7.1.9
+allowBuilds:
+  esbuild: true

@@ -1,0 +1,3070 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+		0AA2F66995A501E7B3D5A333 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/HTTPDeviceShareCodeRepositoryTests.swift;
+			sourceTree = <group>;
+		};
+		705FDE15CA014EDCCD8124D9 = {
+			isa = PBXBuildFile;
+			fileRef = 0AA2F66995A501E7B3D5A333;
+		};
+		C745616B75FF4E20944EE9FA = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/HTTP/HTTPDeviceShareCodeRepository.swift;
+			sourceTree = <group>;
+		};
+		B0822C9AE2C6498126DC1FBC = {
+			isa = PBXBuildFile;
+			fileRef = C745616B75FF4E20944EE9FA;
+		};
+		EAB987669EAB4F2A08FC9F75 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/More/DeviceShareCode.swift;
+			sourceTree = <group>;
+		};
+		F8621071E22239172141744B = {
+			isa = PBXBuildFile;
+			fileRef = EAB987669EAB4F2A08FC9F75;
+		};
+		3964945E28DA0EA9E63F2378 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Platform/Presentation/UIKitPresentationSystemSource.swift;
+			sourceTree = <group>;
+		};
+		ABECC6200DD1FDC110BF1937 = {
+			isa = PBXBuildFile;
+			fileRef = 3964945E28DA0EA9E63F2378;
+		};
+		16BA34838D5E591862B9EB98 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Presentation/PresentationService.swift;
+			sourceTree = <group>;
+		};
+		8AE0D73063C9C11BF83C9E27 = {
+			isa = PBXBuildFile;
+			fileRef = 16BA34838D5E591862B9EB98;
+		};
+		71EA00FBDE9654E3A55C6AF0 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/PresentationServiceTests.swift;
+			sourceTree = <group>;
+		};
+		CE65F1E38A0D5249DD8BBF5B = {
+			isa = PBXBuildFile;
+			fileRef = 71EA00FBDE9654E3A55C6AF0;
+		};
+		62DBDBE637EEC318EE3AD1B3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Presentation/PresentationOwner.swift;
+			sourceTree = <group>;
+		};
+		FD9E73A3F2A0015AD2059C48 = {
+			isa = PBXBuildFile;
+			fileRef = 62DBDBE637EEC318EE3AD1B3;
+		};
+		29A85375351AFF3C1C52E894 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/PresentationOwnerTests.swift;
+			sourceTree = <group>;
+		};
+		1D03E8022778D58AF782ACCB = {
+			isa = PBXBuildFile;
+			fileRef = 29A85375351AFF3C1C52E894;
+		};
+		0C80B921A6F3F58F76C31292 = {
+			isa = PBXBuildFile;
+			fileRef = 5DCACB8F33CDC322A6C60F78;
+		};
+		13B07FBF1A68108700A75B9A = {
+			isa = PBXBuildFile;
+			fileRef = 13B07FB51A68108700A75B9A;
+		};
+		761780ED2CA45674006654EE = {
+			isa = PBXBuildFile;
+			fileRef = 761780EC2CA45674006654EE;
+		};
+		81AB9BB82411601600AC10FF = {
+			isa = PBXBuildFile;
+			fileRef = 81AB9BB72411601600AC10FF;
+		};
+		ED90E23D4E48AB6923272B6F = {
+			isa = PBXBuildFile;
+			fileRef = 270D2016211704FA66D2C80F;
+		};
+		E6B007FB20E4B1AC9ECC97D6 = {
+			isa = PBXBuildFile;
+			fileRef = E569C4D576E240C06096D467;
+		};
+		C818B645F9EC400004C99BC7 = {
+			isa = PBXBuildFile;
+			fileRef = 559C11F460F33A0CE05D7878;
+		};
+		AD2945B4941180303AC3D4EB = {
+			isa = PBXBuildFile;
+			fileRef = FACC9AC316D84845624BB6CB;
+		};
+		0489D0B50196B92C8022039E = {
+			isa = PBXBuildFile;
+			fileRef = BF5E0A76B6D3FB6F2F78ABAE;
+		};
+		5E47176CA5869A8A638AE115 = {
+			isa = PBXBuildFile;
+			fileRef = AF15ED15D436C496C1A9D239;
+		};
+		BCE8C3097C45A28F961F1D3C = {
+			isa = PBXBuildFile;
+			fileRef = 5E7E9D8E41E3F0C9A6149F98;
+		};
+		0DDB227CE53CE52DBAB9AD13 = {
+			isa = PBXBuildFile;
+			fileRef = 8B65DF653B997CE5463355C8;
+		};
+		9ED9DD2C0F9F65A7149E6E8C = {
+			isa = PBXBuildFile;
+			fileRef = 81AB7FEE5452CF38569B57AF;
+		};
+		86EEB2A03FAD0B95B60752AB = {
+			isa = PBXBuildFile;
+			fileRef = BDBF08B442F7FEA93B3D7136;
+		};
+		3C2B5B832AD01E05723BDEA7 = {
+			isa = PBXBuildFile;
+			fileRef = 16175B00385248264BB151DB;
+		};
+		E157FDBBF6ADC93F1C231AA2 = {
+			isa = PBXBuildFile;
+			fileRef = 55E33238B834EC45BE234A18;
+		};
+		2303C169CB1C1F581A9CA425 = {
+			isa = PBXBuildFile;
+			fileRef = AB62697AC63248CEC1A0320A;
+		};
+		FA27E62F7994E0338B215123 = {
+			isa = PBXBuildFile;
+			fileRef = 09233DDBF580D637122FFF85;
+		};
+		CDC5DC30F8C9FCC40C667A3D = {
+			isa = PBXBuildFile;
+			fileRef = 78EE44F295917619FB1F0901;
+		};
+		278228DC6F5FE7C72FAC32C5 = {
+			isa = PBXBuildFile;
+			fileRef = 27A8C70D0BB732A1EB5332B0;
+		};
+		1D506408B6C9EC42FB958046 = {
+			isa = PBXBuildFile;
+			fileRef = 84CF483DF16BD62EBE4BD7D2;
+		};
+		D41DFA49CA4FFB9BD8612D30 = {
+			isa = PBXBuildFile;
+			fileRef = 274C6B84874ACBC5990F207B;
+		};
+		531674DECFD80F1550F6F5DE = {
+			isa = PBXBuildFile;
+			fileRef = 4B7A0428333414E51ADAFA39;
+		};
+		E085699E31CD84205B6F3EDD = {
+			isa = PBXBuildFile;
+			fileRef = 7F6A41C24B0A9166F148A385;
+		};
+		0AEBBC9E90EAA8C456CB08C8 = {
+			isa = PBXBuildFile;
+			fileRef = CD0B186273ACB8CABF95FE3A;
+		};
+		DA8B48833AA3636922FFD6A8 = {
+			isa = PBXBuildFile;
+			fileRef = F56150E4CCD9F21FB7FC6E13;
+		};
+		42C021BCCC4BAB42B98CE063 = {
+			isa = PBXBuildFile;
+			fileRef = D24C681C754F03FEF44E5E58;
+		};
+		13B07F961A680F5B00A75B9A = {
+			isa = PBXFileReference;
+			explicitFileType = wrapper.application;
+			includeInIndex = 0;
+			path = Rowan.app;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		13B07FB51A68108700A75B9A = {
+			isa = PBXFileReference;
+			lastKnownFileType = folder.assetcatalog;
+			name = Images.xcassets;
+			path = Rowan/Images.xcassets;
+			sourceTree = <group>;
+		};
+		13B07FB61A68108700A75B9A = {
+			isa = PBXFileReference;
+			fileEncoding = 4;
+			lastKnownFileType = text.plist.xml;
+			name = Info.plist;
+			path = Rowan/Info.plist;
+			sourceTree = <group>;
+		};
+		13B07FB81A68108700A75B9A = {
+			isa = PBXFileReference;
+			fileEncoding = 4;
+			lastKnownFileType = text.plist.xml;
+			name = PrivacyInfo.xcprivacy;
+			path = Rowan/PrivacyInfo.xcprivacy;
+			sourceTree = <group>;
+		};
+		5DCACB8F33CDC322A6C60F78 = {
+			isa = PBXFileReference;
+			explicitFileType = archive.ar;
+			includeInIndex = 0;
+			path = libPods-Rowan.a;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		761780EC2CA45674006654EE = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			name = AppDelegate.swift;
+			path = Rowan/AppDelegate.swift;
+			sourceTree = <group>;
+		};
+		81AB9BB72411601600AC10FF = {
+			isa = PBXFileReference;
+			fileEncoding = 4;
+			lastKnownFileType = file.storyboard;
+			name = LaunchScreen.storyboard;
+			path = Rowan/LaunchScreen.storyboard;
+			sourceTree = <group>;
+		};
+		ED297162215061F000B7C4FE = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = JavaScriptCore.framework;
+			path = System/Library/Frameworks/JavaScriptCore.framework;
+			sourceTree = SDKROOT;
+		};
+		59D006E8C75335EE1E5518DF = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = Rowan/Bridge/RowanHost.h;
+			sourceTree = <group>;
+		};
+		270D2016211704FA66D2C80F = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = Rowan/Bridge/RowanHost.mm;
+			sourceTree = <group>;
+		};
+		E569C4D576E240C06096D467 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Bridge/RowanHostServices.swift;
+			sourceTree = <group>;
+		};
+		559C11F460F33A0CE05D7878 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/HTTP/RowanHTTPClient.swift;
+			sourceTree = <group>;
+		};
+		FACC9AC316D84845624BB6CB = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/Storage/KeychainSessionStorage.swift;
+			sourceTree = <group>;
+		};
+		BF5E0A76B6D3FB6F2F78ABAE = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Account/AccountService.swift;
+			sourceTree = <group>;
+		};
+		AF15ED15D436C496C1A9D239 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Features/Auth/AccountViewController.swift;
+			sourceTree = <group>;
+		};
+		5E7E9D8E41E3F0C9A6149F98 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/App/RowanAppServices.swift;
+			sourceTree = <group>;
+		};
+		8B65DF653B997CE5463355C8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Account/AccountGateway.swift;
+			sourceTree = <group>;
+		};
+		81AB7FEE5452CF38569B57AF = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/HomeRepository.swift;
+			sourceTree = <group>;
+		};
+		BDBF08B442F7FEA93B3D7136 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/HTTP/HTTPHomeRepository.swift;
+			sourceTree = <group>;
+		};
+		16175B00385248264BB151DB = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Features/Home/HomeViewController.swift;
+			sourceTree = <group>;
+		};
+		55E33238B834EC45BE234A18 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/RNHost/DeviceViewController.swift;
+			sourceTree = <group>;
+		};
+		4D9EFB8C0994A1CA5EB51BD3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/HomeAndAccountTests.swift;
+			sourceTree = <group>;
+		};
+		AB62697AC63248CEC1A0320A = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Account/AccountSession.swift;
+			sourceTree = <group>;
+		};
+		09233DDBF580D637122FFF85 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Account/AgreementContent.swift;
+			sourceTree = <group>;
+		};
+		78EE44F295917619FB1F0901 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/HTTP/HTTPAgreementContentService.swift;
+			sourceTree = <group>;
+		};
+		27A8C70D0BB732A1EB5332B0 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Features/Auth/AgreementViewController.swift;
+			sourceTree = <group>;
+		};
+		84CF483DF16BD62EBE4BD7D2 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Features/Auth/RegionSelectionViewController.swift;
+			sourceTree = <group>;
+		};
+		38CB63D5E91D1A27A97F2AC1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/AgreementAndSessionTests.swift;
+			sourceTree = <group>;
+		};
+		274C6B84874ACBC5990F207B = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Account/PasswordRecovery.swift;
+			sourceTree = <group>;
+		};
+		4B7A0428333414E51ADAFA39 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/HTTP/HTTPPasswordRecoveryService.swift;
+			sourceTree = <group>;
+		};
+		7F6A41C24B0A9166F148A385 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Features/Auth/PasswordRecoveryViewController.swift;
+			sourceTree = <group>;
+		};
+		F1493AD871795B3411573774 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/PasswordRecoveryTests.swift;
+			sourceTree = <group>;
+		};
+		CD0B186273ACB8CABF95FE3A = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Account/EmailRegistration.swift;
+			sourceTree = <group>;
+		};
+		F56150E4CCD9F21FB7FC6E13 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/HTTP/HTTPRegistrationCaptchaService.swift;
+			sourceTree = <group>;
+		};
+		D24C681C754F03FEF44E5E58 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Features/Auth/EmailRegistrationViewController.swift;
+			sourceTree = <group>;
+		};
+		179752B3B4717FE99DEF9C70 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/EmailRegistrationTests.swift;
+			sourceTree = <group>;
+		};
+		13B07F8C1A680F5B00A75B9A = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C80B921A6F3F58F76C31292,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13B07FAE1A68108700A75B9A = {
+			isa = PBXGroup;
+			children = (
+				3964945E28DA0EA9E63F2378,
+				16BA34838D5E591862B9EB98,
+				62DBDBE637EEC318EE3AD1B3,
+				13B07FB51A68108700A75B9A,
+				5E7E9D8E41E3F0C9A6149F98,
+				8B65DF653B997CE5463355C8,
+				761780EC2CA45674006654EE,
+				D24C681C754F03FEF44E5E58,
+				F56150E4CCD9F21FB7FC6E13,
+				CD0B186273ACB8CABF95FE3A,
+				7F6A41C24B0A9166F148A385,
+				4B7A0428333414E51ADAFA39,
+				274C6B84874ACBC5990F207B,
+				84CF483DF16BD62EBE4BD7D2,
+				27A8C70D0BB732A1EB5332B0,
+				78EE44F295917619FB1F0901,
+				09233DDBF580D637122FFF85,
+				AB62697AC63248CEC1A0320A,
+				55E33238B834EC45BE234A18,
+				16175B00385248264BB151DB,
+				BDBF08B442F7FEA93B3D7136,
+				81AB7FEE5452CF38569B57AF,
+				59D006E8C75335EE1E5518DF,
+				270D2016211704FA66D2C80F,
+				E569C4D576E240C06096D467,
+				559C11F460F33A0CE05D7878,
+				FACC9AC316D84845624BB6CB,
+				BF5E0A76B6D3FB6F2F78ABAE,
+				AF15ED15D436C496C1A9D239,
+				13B07FB61A68108700A75B9A,
+				81AB9BB72411601600AC10FF,
+				13B07FB81A68108700A75B9A,
+				F5DF1C071123ABFE8C1EB714,
+				F4E984A1E6BFD3BDB583C417,
+				433B4A125AD3B090C57F679A,
+				D89604276AEBDEB89FE5AEA8,
+				20EA37124CF7A73C0C3D6103,
+				F876F08862DD25426E3BC616,
+				39EF3630A11D8A450F2196C3,
+				196869A20ACF35E0E0973C2F,
+				25861AB752C494A96932C37D,
+				1D988568ADF9D7DE4FA9EF32,
+				A372C22B7E5249C3339C1304,
+				4EE3CBAC00DED5A8E6E1D1E3,
+				2E4AC8B7EBC2A494E44F67A5,
+				EC090F8FE1AF72B4711C7D7B,
+				F1F194A78FC3AF5C3C8C99A2,
+				7554BDD1F2958A867457EB01,
+				3B9271D768533AD038139C6F,
+				F51A6FA9D91B4238E8F4F6A8,
+				3D1EFD8F8C19C14DB2DA0C01,
+				90AF9893A9774ACAE64EE22D,
+				425FEAA1BFA4A5F74F8F0FAA,
+				B94B82DEA2A62F8814C6B295,
+				120431C8DB53AB6CA4F85D8F,
+				4DD84DB3DD3FA3986C59A17E,
+				F54C7AE65238CD369F180012,
+				A6BFBA0F1DFEA371CE4987A5,
+				89CD8F27FA052CE11E071582,
+				797A5E955AD5AD352EB433A4,
+				DD782A51906F2046FDB0835A,
+				2CA63CF19E6CABDF03E7B97B,
+				0AB6A6493F0A163C914B66AA,
+				0A330D3919ED6139BDF82EC0,
+				76419ABA71B2CF9703D58069,
+				4AD8B6DE28FF740BEE980B87,
+				AE729043650144CEA80AF883,
+				6731271F5D98830AC2B8DEC3,
+				20265D58F3F3C3212DE5657E,
+				B2504B7D618D9B00A376D5D1,
+				840EF4D0FACE7597417159B8,
+				2D4D3F81428934BFAB7E9260,
+				D79803051D92601F49D4C2DC,
+				23D20D60810CC2A8CE44B491,
+				AD7948C66C4A84CCA3E37F51,
+				3107E58ABC87B926DB1F244B,
+				794203285D018C59AA76F263,
+				D58F60446BEAB2AD2CF5DE04,
+				71A0F692BE1032A151DF5D31,
+				E92FC41A9C0C517FD1BBA21D,
+				C745616B75FF4E20944EE9FA,
+				EAB987669EAB4F2A08FC9F75,
+				8A8CBF95352BC09DB5E11011,
+				2E0576AAB9926A95D5A74675,
+				33ACBD260F9D5B1A6E5A890A,
+				1E1704AAEA45E8EA842EC69A,
+				69B7581E4CECDCE0747E7B7C,
+				01A4DF483626DE7FB3788A6D,
+				7EE3418CB6A72AE596914B2D,
+				821BFA70D846F7B7C2505F8C,
+				0ECFD6E48BEBCB3E003F6C6B,
+				8DDD5687B4B4DA7EA580AA44,
+				5D1F0E1E993909B0CCD2F451,
+				AFEB1C1F883A31D1ADF76F90,
+				5B18FD83247BDDAE37957BBE,
+				234F3CB25BA8E2B8EC6DAE62,
+				67D234E9C931472D44BEC4BB,
+				CB1D7C17E40760B5EC620595,
+				D8E1E9FD9B93D654899EFFEF,
+				2918BC57F7ED44313EB0C69B,
+				78CDA68CE199B5875195AFCB,
+				5498B553E882310AFB3E4DD8,
+				1F94FE1A5DD4DDA560992FA0,
+			);
+			name = Rowan;
+			sourceTree = <group>;
+		};
+		2D16E6871FA4F8E400B85C8A = {
+			isa = PBXGroup;
+			children = (
+				ED297162215061F000B7C4FE,
+				5DCACB8F33CDC322A6C60F78,
+			);
+			name = Frameworks;
+			sourceTree = <group>;
+		};
+		832341AE1AAA6A7D00B99B32 = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Libraries;
+			sourceTree = <group>;
+		};
+		83CBB9F61A601CBA00E9B192 = {
+			isa = PBXGroup;
+			children = (
+				13B07FAE1A68108700A75B9A,
+				832341AE1AAA6A7D00B99B32,
+				83CBBA001A601CBA00E9B192,
+				2D16E6871FA4F8E400B85C8A,
+				BBD78D7AC51CEA395F1C20DB,
+				EEFE21A1443933CA4DE017DA,
+				D35BDCF6803CCB1A9C4483A8,
+			);
+			indentWidth = 2;
+			sourceTree = <group>;
+			tabWidth = 2;
+			usesTabs = 0;
+		};
+		83CBBA001A601CBA00E9B192 = {
+			isa = PBXGroup;
+			children = (
+				13B07F961A680F5B00A75B9A,
+				D1383FD9C4727C48FCF77C63,
+			);
+			name = Products;
+			sourceTree = <group>;
+		};
+		BBD78D7AC51CEA395F1C20DB = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pods;
+			sourceTree = <group>;
+		};
+		13B07F861A680F5B00A75B9A = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A;
+			buildPhases = (
+				C38B50BA6285516D6DCD4F65,
+				13B07F871A680F5B00A75B9A,
+				13B07F8C1A680F5B00A75B9A,
+				13B07F8E1A680F5B00A75B9A,
+				00DD1BFF1BD5951E006B06BC,
+				00EEFC60759A1932668264C0,
+				E235C05ADACE081382539298,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Rowan;
+			productName = Rowan;
+			productReference = 13B07F961A680F5B00A75B9A;
+			productType = com.apple.product-type.application;
+		};
+		83CBB9F71A601CBA00E9B192 = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1210;
+				TargetAttributes = {
+					13B07F861A680F5B00A75B9A = {
+						LastSwiftMigration = 1120;
+					};
+					E4EF143BB0E338EDF4346ABA = {
+						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+				};
+			};
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192;
+			compatibilityVersion = "Xcode 12.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 83CBB9F61A601CBA00E9B192;
+			productRefGroup = 83CBBA001A601CBA00E9B192;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				13B07F861A680F5B00A75B9A,
+				E4EF143BB0E338EDF4346ABA,
+			);
+		};
+		13B07F8E1A680F5B00A75B9A = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81AB9BB82411601600AC10FF,
+				13B07FBF1A68108700A75B9A,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		00DD1BFF1BD5951E006B06BC = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/.xcode.env.local",
+				"$(SRCROOT)/.xcode.env",
+			);
+			name = "Bundle React Native code and images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nexport PROJECT_ROOT=\"$PROJECT_DIR/../app-rn\"\nexport ENTRY_FILE=index.ts\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"\\\"$WITH_ENVIRONMENT\\\" \\\"$REACT_NATIVE_XCODE\\\"\"\n";
+		};
+		00EEFC60759A1932668264C0 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rowan/Pods-Rowan-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rowan/Pods-Rowan-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Rowan/Pods-Rowan-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C38B50BA6285516D6DCD4F65 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Rowan-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E235C05ADACE081382539298 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rowan/Pods-Rowan-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rowan/Pods-Rowan-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Rowan/Pods-Rowan-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		13B07F871A680F5B00A75B9A = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABECC6200DD1FDC110BF1937,
+				8AE0D73063C9C11BF83C9E27,
+				FD9E73A3F2A0015AD2059C48,
+				BCE8C3097C45A28F961F1D3C,
+				0DDB227CE53CE52DBAB9AD13,
+				761780ED2CA45674006654EE,
+				42C021BCCC4BAB42B98CE063,
+				DA8B48833AA3636922FFD6A8,
+				0AEBBC9E90EAA8C456CB08C8,
+				E085699E31CD84205B6F3EDD,
+				531674DECFD80F1550F6F5DE,
+				D41DFA49CA4FFB9BD8612D30,
+				1D506408B6C9EC42FB958046,
+				278228DC6F5FE7C72FAC32C5,
+				CDC5DC30F8C9FCC40C667A3D,
+				FA27E62F7994E0338B215123,
+				2303C169CB1C1F581A9CA425,
+				E157FDBBF6ADC93F1C231AA2,
+				3C2B5B832AD01E05723BDEA7,
+				86EEB2A03FAD0B95B60752AB,
+				9ED9DD2C0F9F65A7149E6E8C,
+				ED90E23D4E48AB6923272B6F,
+				E6B007FB20E4B1AC9ECC97D6,
+				C818B645F9EC400004C99BC7,
+				AD2945B4941180303AC3D4EB,
+				0489D0B50196B92C8022039E,
+				5E47176CA5869A8A638AE115,
+				8AF9680D52C8E89A43A7FC0D,
+				5492298F171F4F431AF4BDD0,
+				DDBBC575A9FF4100C05863C0,
+				03CEE8A19B2B9FBED440DD5D,
+				18E6F82A855AE5E8DFF2F6F7,
+				3114854FFF9C9CE1784C18E5,
+				64B85BCA618B11B9EF9607FD,
+				E00B53BC2DF99191D0A9D1B8,
+				87F2939DFAE1206CB336BCCA,
+				341B020A58065D116A3EA11A,
+				B0963B2BDEC94E682AA1C532,
+				9C78939BA453427FC8A82089,
+				72A0DF6EBF17CC00E11E28F1,
+				3EFD09A3636A62ABC01EA382,
+				809277E61379FD436C645814,
+				BCA178766D2A704F1E2DDA4B,
+				C2C5989532B137BC2566BCA1,
+				B8F61F7D831C37F629A2E386,
+				D09D5BB285237E09C35DC08E,
+				5B2A39B325DD7D535011022B,
+				47056BF71B2A9B06B72E9846,
+				F2B785DA7BF9D3584BE8AEB2,
+				7E3BA5D362328A1877CA1D10,
+				0854C6248C55E0936B465823,
+				9D219EC9D89C77ACE13E5A00,
+				3884AA17C47D10E81AF1EFC9,
+				E531B3E11472B2BE75268036,
+				6AC2C9463A249944CF2B6D84,
+				B547351B54132B733F3A8B81,
+				CCE1D3FABE4690FB4D9E6C2C,
+				FF25A3BBB885CA932004CF30,
+				72BBA5E15EC2EEB615AE3413,
+				D48DD2A134E25D7293E1CF26,
+				8F6C1B7CDA29C84FC184AF41,
+				4A9BC5CB86D18E33C363B79D,
+				34AD1A9E94964EB88C902399,
+				3D92B2CE0087B972F6D7A6B9,
+				B9DE85143BC962F447146D2F,
+				0C26303AB6A93C8897ACD40F,
+				8D0446B8F0BD9CA52382BF12,
+				0B3A5A30E8D11B6C9DE2770D,
+				2544C4318B1DA2222DC0E246,
+				1782AC1885455CAC4BF2C844,
+				BCA4BE8FAB343F1E8BBC8965,
+				6E7D3E5BF5C805A64128D8AB,
+				C9C7F3D64FC2D6B490661993,
+				C2D686F10444D658F05B741C,
+				AAD497E4F091D11A03A2488D,
+				B0822C9AE2C6498126DC1FBC,
+				F8621071E22239172141744B,
+				500D6DC412596867006A460D,
+				664A9FD9DA683481EB2037DC,
+				6459917E3C5580B6B6B360ED,
+				ECA60E24C475E56C6F97C882,
+				FAF429FC310F5AB6902F6832,
+				29ED0A489910D55F6DD20DD3,
+				274B262754AC664C7D53A74B,
+				FD01C8ACA14368E709DD9EEB,
+				39E499E36D58EC54D84D3267,
+				7B2BCFBD7A5FD737E4B8576A,
+				DB4009771EA2860526061CB8,
+				7B7C42F997150ED79E3A5D4E,
+				9EB31EB19691E5B201451AAA,
+				9672C1B576452AA37378372C,
+				108AD2F41E5BEC9CDA36A04D,
+				DA5CBBC4EBF0D1C14BA1DF6B,
+				6A80E628A17579BC5B1B79DE,
+				9CEA8563BB7BE091FA8F69D4,
+				3FDCD6D131F7E9FA215ADE7E,
+				2F0F34A3800838F1C8B7D5C9,
+				AE50B969012B9B46141099F4,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13B07F931A680F5B00A75B9A = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D1F8462C463586FEA9AD3B5,
+				833D61EE88411D0A82BCDD5C,
+				DBF87A5C8DD7F430F43A7E57,
+				7E1FACD92658C24E84B36053,
+				00B2A1DD0E5A494B1F78A9B6,
+				3DCEF444F8255CEBD7D77DFA,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = ProductionRelease;
+		};
+		83CBB9FA1A601CBA00E9B192 = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				313BC18E2BDE965281A76DA3,
+				ACB142FF334FECB3A5EFCE49,
+				D938DAE19FBACE02BEB274BE,
+				E0950E30E99B238A7437A85E,
+				DF46CE4E9E420963EA2D151E,
+				BAECDEB1CF0EFAA08874AC69,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = ProductionRelease;
+		};
+		7A333F5F793F04FDF1CFED2A = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xcconfig;
+			path = Config/Common.xcconfig;
+			sourceTree = <group>;
+		};
+		72B938B67CD5BD2D099E4817 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xcconfig;
+			path = Config/Environments/Development.xcconfig;
+			sourceTree = <group>;
+		};
+		1C91F4FC259DB96CDBE664CD = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xcconfig;
+			path = Config/Environments/Preview.xcconfig;
+			sourceTree = <group>;
+		};
+		6B9098C5D3D4CA27931894F4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xcconfig;
+			path = Config/Environments/Production.xcconfig;
+			sourceTree = <group>;
+		};
+		5EC23E112B8EB15C601F5718 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xcconfig;
+			path = Config/Modes/Debug.xcconfig;
+			sourceTree = <group>;
+		};
+		BF390FEC8EEF84FEF111CC62 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xcconfig;
+			path = Config/Modes/Release.xcconfig;
+			sourceTree = <group>;
+		};
+		94FC699E379572F7489750F7 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xcconfig;
+			path = Config/DevelopmentDebug.xcconfig;
+			sourceTree = <group>;
+		};
+		A23564DD1CDD877908ACC326 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xcconfig;
+			path = Config/Tests/DevelopmentDebug.xcconfig;
+			sourceTree = <group>;
+		};
+		4D1F8462C463586FEA9AD3B5 = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 94FC699E379572F7489750F7;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Rowan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					-ObjC,
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ROWAN_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = Rowan;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = apple-generic;
+				PRODUCT_MODULE_NAME = Rowan;
+			};
+			name = DevelopmentDebug;
+		};
+		313BC18E2BDE965281A76DA3 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SDKROOT)/usr/lib/swift\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					-DFOLLY_NO_CONFIG,
+					"-DFOLLY_MOBILE=1",
+					"-DFOLLY_USE_LIBCPP=1",
+					"-DFOLLY_CFG_NO_COROUTINES=1",
+					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
+				);
+				SDKROOT = iphoneos;
+			};
+			name = DevelopmentDebug;
+		};
+		3D71FBBE524F32AD69F0470C = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A23564DD1CDD877908ACC326;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ROWAN_BUNDLE_IDENTIFIER).tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rowan.app/Rowan";
+				TEST_TARGET_NAME = Rowan;
+			};
+			name = DevelopmentDebug;
+		};
+		AED609A1BEF4BFE4FDA52B93 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xcconfig;
+			path = Config/DevelopmentRelease.xcconfig;
+			sourceTree = <group>;
+		};
+		E117C199C5E5E3E76069113E = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xcconfig;
+			path = Config/Tests/DevelopmentRelease.xcconfig;
+			sourceTree = <group>;
+		};
+		833D61EE88411D0A82BCDD5C = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AED609A1BEF4BFE4FDA52B93;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = Rowan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					-ObjC,
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ROWAN_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = Rowan;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = apple-generic;
+				PRODUCT_MODULE_NAME = Rowan;
+			};
+			name = DevelopmentRelease;
+		};
+		ACB142FF334FECB3A5EFCE49 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SDKROOT)/usr/lib/swift\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					-DFOLLY_NO_CONFIG,
+					"-DFOLLY_MOBILE=1",
+					"-DFOLLY_USE_LIBCPP=1",
+					"-DFOLLY_CFG_NO_COROUTINES=1",
+					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
+				);
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = DevelopmentRelease;
+		};
+		9F38C92AE213DACC7EA4E044 = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E117C199C5E5E3E76069113E;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ROWAN_BUNDLE_IDENTIFIER).tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rowan.app/Rowan";
+				TEST_TARGET_NAME = Rowan;
+			};
+			name = DevelopmentRelease;
+		};
+		C10596F80A048BB378FB75E6 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xcconfig;
+			path = Config/PreviewDebug.xcconfig;
+			sourceTree = <group>;
+		};
+		B2D2576632CC8CDB691F6755 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xcconfig;
+			path = Config/Tests/PreviewDebug.xcconfig;
+			sourceTree = <group>;
+		};
+		DBF87A5C8DD7F430F43A7E57 = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C10596F80A048BB378FB75E6;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Rowan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					-ObjC,
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ROWAN_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = Rowan;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = apple-generic;
+				PRODUCT_MODULE_NAME = Rowan;
+			};
+			name = PreviewDebug;
+		};
+		D938DAE19FBACE02BEB274BE = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SDKROOT)/usr/lib/swift\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					-DFOLLY_NO_CONFIG,
+					"-DFOLLY_MOBILE=1",
+					"-DFOLLY_USE_LIBCPP=1",
+					"-DFOLLY_CFG_NO_COROUTINES=1",
+					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
+				);
+				SDKROOT = iphoneos;
+			};
+			name = PreviewDebug;
+		};
+		B33DF846A2C120E776BE2AFA = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2D2576632CC8CDB691F6755;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ROWAN_BUNDLE_IDENTIFIER).tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rowan.app/Rowan";
+				TEST_TARGET_NAME = Rowan;
+			};
+			name = PreviewDebug;
+		};
+		3EA583CCE38958B692F28BAA = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xcconfig;
+			path = Config/PreviewRelease.xcconfig;
+			sourceTree = <group>;
+		};
+		FD24450635A5215DA772693D = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xcconfig;
+			path = Config/Tests/PreviewRelease.xcconfig;
+			sourceTree = <group>;
+		};
+		7E1FACD92658C24E84B36053 = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EA583CCE38958B692F28BAA;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = Rowan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					-ObjC,
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ROWAN_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = Rowan;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = apple-generic;
+				PRODUCT_MODULE_NAME = Rowan;
+			};
+			name = PreviewRelease;
+		};
+		E0950E30E99B238A7437A85E = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SDKROOT)/usr/lib/swift\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					-DFOLLY_NO_CONFIG,
+					"-DFOLLY_MOBILE=1",
+					"-DFOLLY_USE_LIBCPP=1",
+					"-DFOLLY_CFG_NO_COROUTINES=1",
+					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
+				);
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = PreviewRelease;
+		};
+		6290AFB02731D7DE5F4B39D8 = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD24450635A5215DA772693D;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ROWAN_BUNDLE_IDENTIFIER).tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rowan.app/Rowan";
+				TEST_TARGET_NAME = Rowan;
+			};
+			name = PreviewRelease;
+		};
+		1360612C39011A11DCA82EA1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xcconfig;
+			path = Config/ProductionDebug.xcconfig;
+			sourceTree = <group>;
+		};
+		887C79C0A913817F6951E8C6 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xcconfig;
+			path = Config/Tests/ProductionDebug.xcconfig;
+			sourceTree = <group>;
+		};
+		00B2A1DD0E5A494B1F78A9B6 = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1360612C39011A11DCA82EA1;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Rowan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					-ObjC,
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ROWAN_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = Rowan;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = apple-generic;
+				PRODUCT_MODULE_NAME = Rowan;
+			};
+			name = ProductionDebug;
+		};
+		DF46CE4E9E420963EA2D151E = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SDKROOT)/usr/lib/swift\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					-DFOLLY_NO_CONFIG,
+					"-DFOLLY_MOBILE=1",
+					"-DFOLLY_USE_LIBCPP=1",
+					"-DFOLLY_CFG_NO_COROUTINES=1",
+					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
+				);
+				SDKROOT = iphoneos;
+			};
+			name = ProductionDebug;
+		};
+		6D412A31C4383D990128B7DA = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 887C79C0A913817F6951E8C6;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ROWAN_BUNDLE_IDENTIFIER).tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rowan.app/Rowan";
+				TEST_TARGET_NAME = Rowan;
+			};
+			name = ProductionDebug;
+		};
+		B2057BDD1E7E0DC1CE596F60 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xcconfig;
+			path = Config/ProductionRelease.xcconfig;
+			sourceTree = <group>;
+		};
+		15805649B676556DFA2A1E1E = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xcconfig;
+			path = Config/Tests/ProductionRelease.xcconfig;
+			sourceTree = <group>;
+		};
+		3DCEF444F8255CEBD7D77DFA = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2057BDD1E7E0DC1CE596F60;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = Rowan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					-ObjC,
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ROWAN_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = Rowan;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = apple-generic;
+				PRODUCT_MODULE_NAME = Rowan;
+			};
+			name = ProductionRelease;
+		};
+		BAECDEB1CF0EFAA08874AC69 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SDKROOT)/usr/lib/swift\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					-DFOLLY_NO_CONFIG,
+					"-DFOLLY_MOBILE=1",
+					"-DFOLLY_USE_LIBCPP=1",
+					"-DFOLLY_CFG_NO_COROUTINES=1",
+					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
+				);
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = ProductionRelease;
+		};
+		8A10268506B03A6DCDD4F3A9 = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15805649B676556DFA2A1E1E;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ROWAN_BUNDLE_IDENTIFIER).tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rowan.app/Rowan";
+				TEST_TARGET_NAME = Rowan;
+			};
+			name = ProductionRelease;
+		};
+		BB2EC4DCC2987EB7C28FA995 = {
+			isa = PBXBuildFile;
+			fileRef = 4D9EFB8C0994A1CA5EB51BD3;
+		};
+		38CAACFF7B581EC1C8C8AC94 = {
+			isa = PBXBuildFile;
+			fileRef = 38CB63D5E91D1A27A97F2AC1;
+		};
+		8095DEBFC9D672E882253967 = {
+			isa = PBXBuildFile;
+			fileRef = F1493AD871795B3411573774;
+		};
+		D4C3063945A15EFE28534F8F = {
+			isa = PBXBuildFile;
+			fileRef = 179752B3B4717FE99DEF9C70;
+		};
+		EEFE21A1443933CA4DE017DA = {
+			isa = PBXGroup;
+			children = (
+				71EA00FBDE9654E3A55C6AF0,
+				29A85375351AFF3C1C52E894,
+				4D9EFB8C0994A1CA5EB51BD3,
+				38CB63D5E91D1A27A97F2AC1,
+				F1493AD871795B3411573774,
+				179752B3B4717FE99DEF9C70,
+				5028E86CF4B573C4B9AA12AB,
+				E0874E955B58284D2C072031,
+				4EC4EFF1B83E895502C189D1,
+				036EFB7CF85C84794DB157E9,
+				D349D0A6D70CF6524A71A4A1,
+				E6288F7AC1CA857756D68590,
+				8B6A1FCFAF1AA8EF7F6716FB,
+				7352BCA87534329E72501C07,
+				854E8D59D5D69F419BA1C7D6,
+				78FD4F4564021BCAAF3736D3,
+				99D84EB8676B09979C56AEA7,
+				114501CA1FF278F85C2AF44C,
+				AF28CFE86069F6E5C95475DF,
+				6D5DB1E1C2723E822F7402D8,
+				D4C6AD6889F54317706E51EB,
+				BF7221563AE4079A9AD7EACD,
+				C246616AB3EDB504BD0B93C6,
+				79B4145C55DCAD795F95DAA4,
+				2D326FC9A05D056335641319,
+				787F1703DE395A042ACA0098,
+				59C8FC124313725F81229F75,
+				C6EBD5E1F88ECABC14DFD2FD,
+				57A4C81DF90934B3EED0E9D0,
+				15ACF1006571C0321188A4A2,
+				16C648CCBF0788D9B96B3E41,
+				58A60E29EFCE262785F66533,
+				97137D7970652FAB25C7E2CF,
+				AD9A44D58EDC6F5E3FDB47C5,
+				46E53CB2DDEE822856ABA087,
+				FB3D0320BF6D6CEEC035EF97,
+				0AA2F66995A501E7B3D5A333,
+				B7C921C2A49F0F409BE6BC35,
+				41BAF74EA663DDB658765702,
+				6DA86B1E2C5638F73544FAAF,
+				7433EEF46E468B6D63229DDA,
+				7723B4D8721024AF0B9BB6FF,
+				3FD384F13B0042FDE2E7693B,
+				4B049AE82E026E5EC7924B83,
+				5AA3839F967BBFDEEF310AC0,
+				DD13A9334CD10E8505123DB7,
+				225CD5BC1F56F4F040455B3A,
+				C7B91205A8E4177943A13B04,
+				E29D0B1580FDE553DD1D4678,
+				2CB2CB06471A5A6773DBB957,
+				F79D93E15F54D3082905DFB5,
+			);
+			name = Tests;
+			sourceTree = <group>;
+		};
+		D35BDCF6803CCB1A9C4483A8 = {
+			isa = PBXGroup;
+			children = (
+				7A333F5F793F04FDF1CFED2A,
+				72B938B67CD5BD2D099E4817,
+				1C91F4FC259DB96CDBE664CD,
+				6B9098C5D3D4CA27931894F4,
+				5EC23E112B8EB15C601F5718,
+				BF390FEC8EEF84FEF111CC62,
+				94FC699E379572F7489750F7,
+				A23564DD1CDD877908ACC326,
+				AED609A1BEF4BFE4FDA52B93,
+				E117C199C5E5E3E76069113E,
+				C10596F80A048BB378FB75E6,
+				B2D2576632CC8CDB691F6755,
+				3EA583CCE38958B692F28BAA,
+				FD24450635A5215DA772693D,
+				1360612C39011A11DCA82EA1,
+				887C79C0A913817F6951E8C6,
+				B2057BDD1E7E0DC1CE596F60,
+				15805649B676556DFA2A1E1E,
+				15DFFC924F29F651FF361F07,
+			);
+			name = Config;
+			sourceTree = <group>;
+		};
+		D1383FD9C4727C48FCF77C63 = {
+			isa = PBXFileReference;
+			explicitFileType = wrapper.cfbundle;
+			includeInIndex = 0;
+			path = RowanTests.xctest;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B6F43314D0693B2B792DAE17 = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE65F1E38A0D5249DD8BBF5B,
+				1D03E8022778D58AF782ACCB,
+				BB2EC4DCC2987EB7C28FA995,
+				38CAACFF7B581EC1C8C8AC94,
+				8095DEBFC9D672E882253967,
+				D4C3063945A15EFE28534F8F,
+				626C601DF679EE590ADBA32E,
+				2598EF57F8F79833138C3D98,
+				16B3633915B134329366393F,
+				C17E6A0BD0E6777EABC05A0E,
+				CCFCC7C46519AF995EDAB802,
+				750A0B338739F871ED047F44,
+				5F3C412E39389ACB7855922A,
+				22C101E5A8B585F87BC6DB6B,
+				79D0C627E74F97366F4A96FF,
+				D3F24A241B622FBACBD6AED3,
+				6DA36BEA22F79D14F895438D,
+				C1DF62405B0909253F4622B6,
+				7E12FA592C16918CCC4B0A27,
+				E70BF76D946B1ACD3C45B531,
+				6F4C5EB5C8091D1A31BDE42A,
+				C41B7FED11CEC133091C8687,
+				B6013EC40448E82D1015E08F,
+				25E2FE6568F4B8DDFBB85E0A,
+				DD0A44A1F62CBB00ECFC7403,
+				0E1E53B2A191D197562D87C9,
+				50C97797E676BA2203ADC545,
+				CF3E0C8A498FE5AA6DABC7C0,
+				7D75C9C7589DF524CCDA5868,
+				92F29D7F8A177C8B4AAA00AD,
+				466D64CD5510AB86587591EB,
+				C5FA667723A77A0F37365870,
+				E3BC8CF0E70862E0AB7A0247,
+				859808658CAA3B14684F6EB8,
+				61A506DC8EBC7598148A5010,
+				14235DC57A07AE4FB5ED2B4A,
+				705FDE15CA014EDCCD8124D9,
+				596BF793060AA5CBDA0076A2,
+				062CBF6C3D02084234C5AEF8,
+				72D6BF2F8461E0ABA7F0724E,
+				6C1CF63E234493E4489DC3F0,
+				9C6516E40292A4DCC7D68005,
+				6A9EC080BE0187B6383AF986,
+				524385AFBA8C6B5E435122D8,
+				D1520DF5DB53E2792038395F,
+				397CB0B83E0BE8C4CD0B6EA9,
+				F36A0291D3B1C5038520129D,
+				3449141AA69D1D338913D4B7,
+				4627A9AB667353746B89CF2E,
+				A64F13A1640791C89BBA6BA5,
+				98B193DDB3D87DB038F9646D,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F115AF690239BFBFCB7B4DE6 = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BD6B9B82414E6AB1198F133 = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E300E7E233F962FCEFF3E45 = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192;
+			proxyType = 1;
+			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
+			remoteInfo = Rowan;
+		};
+		ED8C81C9A3956C10005E7109 = {
+			isa = PBXTargetDependency;
+			target = 13B07F861A680F5B00A75B9A;
+			targetProxy = 1E300E7E233F962FCEFF3E45;
+		};
+		896302F3B0CBBDA7B3457F1A = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D71FBBE524F32AD69F0470C,
+				9F38C92AE213DACC7EA4E044,
+				B33DF846A2C120E776BE2AFA,
+				6290AFB02731D7DE5F4B39D8,
+				6D412A31C4383D990128B7DA,
+				8A10268506B03A6DCDD4F3A9,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = ProductionRelease;
+		};
+		E4EF143BB0E338EDF4346ABA = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 896302F3B0CBBDA7B3457F1A;
+			buildPhases = (
+				B6F43314D0693B2B792DAE17,
+				F115AF690239BFBFCB7B4DE6,
+				2BD6B9B82414E6AB1198F133,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ED8C81C9A3956C10005E7109,
+			);
+			name = RowanTests;
+			productName = RowanTests;
+			productReference = D1383FD9C4727C48FCF77C63;
+			productType = com.apple.product-type.bundle.unit-test;
+		};
+		F5DF1C071123ABFE8C1EB714 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Account/WelcomeModel.swift;
+			sourceTree = <group>;
+		};
+		8AF9680D52C8E89A43A7FC0D = {
+			isa = PBXBuildFile;
+			fileRef = F5DF1C071123ABFE8C1EB714;
+		};
+		F4E984A1E6BFD3BDB583C417 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Features/Auth/WelcomeViewController.swift;
+			sourceTree = <group>;
+		};
+		5492298F171F4F431AF4BDD0 = {
+			isa = PBXBuildFile;
+			fileRef = F4E984A1E6BFD3BDB583C417;
+		};
+		5028E86CF4B573C4B9AA12AB = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/WelcomeTests.swift;
+			sourceTree = <group>;
+		};
+		626C601DF679EE590ADBA32E = {
+			isa = PBXBuildFile;
+			fileRef = 5028E86CF4B573C4B9AA12AB;
+		};
+		433B4A125AD3B090C57F679A = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/MQTT/ShadowProtocol.swift;
+			sourceTree = <group>;
+		};
+		DDBBC575A9FF4100C05863C0 = {
+			isa = PBXBuildFile;
+			fileRef = 433B4A125AD3B090C57F679A;
+		};
+		D89604276AEBDEB89FE5AEA8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/MQTT/ReportedTree.swift;
+			sourceTree = <group>;
+		};
+		03CEE8A19B2B9FBED440DD5D = {
+			isa = PBXBuildFile;
+			fileRef = D89604276AEBDEB89FE5AEA8;
+		};
+		20EA37124CF7A73C0C3D6103 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/MQTT/ClassicShadowReducer.swift;
+			sourceTree = <group>;
+		};
+		18E6F82A855AE5E8DFF2F6F7 = {
+			isa = PBXBuildFile;
+			fileRef = 20EA37124CF7A73C0C3D6103;
+		};
+		E0874E955B58284D2C072031 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/ClassicShadowReducerTests.swift;
+			sourceTree = <group>;
+		};
+		2598EF57F8F79833138C3D98 = {
+			isa = PBXBuildFile;
+			fileRef = E0874E955B58284D2C072031;
+		};
+		F876F08862DD25426E3BC616 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Design/AccountDesign.swift;
+			sourceTree = <group>;
+		};
+		3114854FFF9C9CE1784C18E5 = {
+			isa = PBXBuildFile;
+			fileRef = F876F08862DD25426E3BC616;
+		};
+		15DFFC924F29F651FF361F07 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.json;
+			path = Config/AccountAssetSources.json;
+			sourceTree = <group>;
+		};
+		39EF3630A11D8A450F2196C3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Rooms/RoomRepository.swift;
+			sourceTree = <group>;
+		};
+		64B85BCA618B11B9EF9607FD = {
+			isa = PBXBuildFile;
+			fileRef = 39EF3630A11D8A450F2196C3;
+		};
+		196869A20ACF35E0E0973C2F = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Rooms/RoomManager.swift;
+			sourceTree = <group>;
+		};
+		E00B53BC2DF99191D0A9D1B8 = {
+			isa = PBXBuildFile;
+			fileRef = 196869A20ACF35E0E0973C2F;
+		};
+		25861AB752C494A96932C37D = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/HTTP/HTTPRoomRepository.swift;
+			sourceTree = <group>;
+		};
+		87F2939DFAE1206CB336BCCA = {
+			isa = PBXBuildFile;
+			fileRef = 25861AB752C494A96932C37D;
+		};
+		1D988568ADF9D7DE4FA9EF32 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Features/Rooms/RoomsViewController.swift;
+			sourceTree = <group>;
+		};
+		341B020A58065D116A3EA11A = {
+			isa = PBXBuildFile;
+			fileRef = 1D988568ADF9D7DE4FA9EF32;
+		};
+		4EC4EFF1B83E895502C189D1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/HTTPRoomRepositoryTests.swift;
+			sourceTree = <group>;
+		};
+		16B3633915B134329366393F = {
+			isa = PBXBuildFile;
+			fileRef = 4EC4EFF1B83E895502C189D1;
+		};
+		036EFB7CF85C84794DB157E9 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/RoomManagerTests.swift;
+			sourceTree = <group>;
+		};
+		C17E6A0BD0E6777EABC05A0E = {
+			isa = PBXBuildFile;
+			fileRef = 036EFB7CF85C84794DB157E9;
+		};
+		A372C22B7E5249C3339C1304 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/MQTT/MQTTCredentials.swift;
+			sourceTree = <group>;
+		};
+		B0963B2BDEC94E682AA1C532 = {
+			isa = PBXBuildFile;
+			fileRef = A372C22B7E5249C3339C1304;
+		};
+		4EE3CBAC00DED5A8E6E1D1E3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/MQTT/AWSIoTWebSocketSigner.swift;
+			sourceTree = <group>;
+		};
+		9C78939BA453427FC8A82089 = {
+			isa = PBXBuildFile;
+			fileRef = 4EE3CBAC00DED5A8E6E1D1E3;
+		};
+		D349D0A6D70CF6524A71A4A1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/MQTTCredentialsTests.swift;
+			sourceTree = <group>;
+		};
+		CCFCC7C46519AF995EDAB802 = {
+			isa = PBXBuildFile;
+			fileRef = D349D0A6D70CF6524A71A4A1;
+		};
+		E6288F7AC1CA857756D68590 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/AccountLogoutTests.swift;
+			sourceTree = <group>;
+		};
+		750A0B338739F871ED047F44 = {
+			isa = PBXBuildFile;
+			fileRef = E6288F7AC1CA857756D68590;
+		};
+		2E4AC8B7EBC2A494E44F67A5 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Products/ProductCatalog.swift;
+			sourceTree = <group>;
+		};
+		72A0DF6EBF17CC00E11E28F1 = {
+			isa = PBXBuildFile;
+			fileRef = 2E4AC8B7EBC2A494E44F67A5;
+		};
+		EC090F8FE1AF72B4711C7D7B = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Products/ProductCatalogModel.swift;
+			sourceTree = <group>;
+		};
+		3EFD09A3636A62ABC01EA382 = {
+			isa = PBXBuildFile;
+			fileRef = EC090F8FE1AF72B4711C7D7B;
+		};
+		F1F194A78FC3AF5C3C8C99A2 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/HTTP/HTTPProductCatalog.swift;
+			sourceTree = <group>;
+		};
+		809277E61379FD436C645814 = {
+			isa = PBXBuildFile;
+			fileRef = F1F194A78FC3AF5C3C8C99A2;
+		};
+		7554BDD1F2958A867457EB01 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Features/Products/ProductCatalogViewController.swift;
+			sourceTree = <group>;
+		};
+		BCA178766D2A704F1E2DDA4B = {
+			isa = PBXBuildFile;
+			fileRef = 7554BDD1F2958A867457EB01;
+		};
+		8B6A1FCFAF1AA8EF7F6716FB = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/ProductCatalogTests.swift;
+			sourceTree = <group>;
+		};
+		5F3C412E39389ACB7855922A = {
+			isa = PBXBuildFile;
+			fileRef = 8B6A1FCFAF1AA8EF7F6716FB;
+		};
+		3B9271D768533AD038139C6F = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/HTTP/HTTPDeviceAccess.swift;
+			sourceTree = <group>;
+		};
+		C2C5989532B137BC2566BCA1 = {
+			isa = PBXBuildFile;
+			fileRef = 3B9271D768533AD038139C6F;
+		};
+		7352BCA87534329E72501C07 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/HTTPDeviceAccessTests.swift;
+			sourceTree = <group>;
+		};
+		22C101E5A8B585F87BC6DB6B = {
+			isa = PBXBuildFile;
+			fileRef = 7352BCA87534329E72501C07;
+		};
+		F51A6FA9D91B4238E8F4F6A8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Platform/Images/PublicProductImage.swift;
+			sourceTree = <group>;
+		};
+		B8F61F7D831C37F629A2E386 = {
+			isa = PBXBuildFile;
+			fileRef = F51A6FA9D91B4238E8F4F6A8;
+		};
+		3D1EFD8F8C19C14DB2DA0C01 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Bridge/UnavailableDeviceObservations.swift;
+			sourceTree = <group>;
+		};
+		D09D5BB285237E09C35DC08E = {
+			isa = PBXBuildFile;
+			fileRef = 3D1EFD8F8C19C14DB2DA0C01;
+		};
+		854E8D59D5D69F419BA1C7D6 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/BridgeObservationTests.swift;
+			sourceTree = <group>;
+		};
+		79D0C627E74F97366F4A96FF = {
+			isa = PBXBuildFile;
+			fileRef = 854E8D59D5D69F419BA1C7D6;
+		};
+		90AF9893A9774ACAE64EE22D = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Account/AccountTransactionGate.swift;
+			sourceTree = <group>;
+		};
+		5B2A39B325DD7D535011022B = {
+			isa = PBXBuildFile;
+			fileRef = 90AF9893A9774ACAE64EE22D;
+		};
+		78FD4F4564021BCAAF3736D3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/AccountPersistenceTests.swift;
+			sourceTree = <group>;
+		};
+		D3F24A241B622FBACBD6AED3 = {
+			isa = PBXBuildFile;
+			fileRef = 78FD4F4564021BCAAF3736D3;
+		};
+		425FEAA1BFA4A5F74F8F0FAA = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/Capabilities/PublishedThingModel.swift;
+			sourceTree = <group>;
+		};
+		47056BF71B2A9B06B72E9846 = {
+			isa = PBXBuildFile;
+			fileRef = 425FEAA1BFA4A5F74F8F0FAA;
+		};
+		B94B82DEA2A62F8814C6B295 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/Capabilities/PublishedThingModelParser.swift;
+			sourceTree = <group>;
+		};
+		F2B785DA7BF9D3584BE8AEB2 = {
+			isa = PBXBuildFile;
+			fileRef = B94B82DEA2A62F8814C6B295;
+		};
+		120431C8DB53AB6CA4F85D8F = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/Capabilities/ThingConstraintValidator.swift;
+			sourceTree = <group>;
+		};
+		7E3BA5D362328A1877CA1D10 = {
+			isa = PBXBuildFile;
+			fileRef = 120431C8DB53AB6CA4F85D8F;
+		};
+		99D84EB8676B09979C56AEA7 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/PublishedThingModelTests.swift;
+			sourceTree = <group>;
+		};
+		6DA36BEA22F79D14F895438D = {
+			isa = PBXBuildFile;
+			fileRef = 99D84EB8676B09979C56AEA7;
+		};
+		4DD84DB3DD3FA3986C59A17E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Preferences/UserPreferences.swift;
+			sourceTree = <group>;
+		};
+		0854C6248C55E0936B465823 = {
+			isa = PBXBuildFile;
+			fileRef = 4DD84DB3DD3FA3986C59A17E;
+		};
+		F54C7AE65238CD369F180012 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Preferences/PreferencesService.swift;
+			sourceTree = <group>;
+		};
+		9D219EC9D89C77ACE13E5A00 = {
+			isa = PBXBuildFile;
+			fileRef = F54C7AE65238CD369F180012;
+		};
+		A6BFBA0F1DFEA371CE4987A5 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/HTTP/HTTPPreferencesRepository.swift;
+			sourceTree = <group>;
+		};
+		3884AA17C47D10E81AF1EFC9 = {
+			isa = PBXBuildFile;
+			fileRef = A6BFBA0F1DFEA371CE4987A5;
+		};
+		114501CA1FF278F85C2AF44C = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/UserPreferencesTests.swift;
+			sourceTree = <group>;
+		};
+		C1DF62405B0909253F4622B6 = {
+			isa = PBXBuildFile;
+			fileRef = 114501CA1FF278F85C2AF44C;
+		};
+		AF28CFE86069F6E5C95475DF = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/PreferencesServiceTests.swift;
+			sourceTree = <group>;
+		};
+		7E12FA592C16918CCC4B0A27 = {
+			isa = PBXBuildFile;
+			fileRef = AF28CFE86069F6E5C95475DF;
+		};
+		6D5DB1E1C2723E822F7402D8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/HTTPPreferencesRepositoryTests.swift;
+			sourceTree = <group>;
+		};
+		E70BF76D946B1ACD3C45B531 = {
+			isa = PBXBuildFile;
+			fileRef = 6D5DB1E1C2723E822F7402D8;
+		};
+		D4C6AD6889F54317706E51EB = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/AccountSettingsCommitTests.swift;
+			sourceTree = <group>;
+		};
+		6F4C5EB5C8091D1A31BDE42A = {
+			isa = PBXBuildFile;
+			fileRef = D4C6AD6889F54317706E51EB;
+		};
+		89CD8F27FA052CE11E071582 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Features/Preferences/MineViewController.swift;
+			sourceTree = <group>;
+		};
+		E531B3E11472B2BE75268036 = {
+			isa = PBXBuildFile;
+			fileRef = 89CD8F27FA052CE11E071582;
+		};
+		797A5E955AD5AD352EB433A4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Features/Preferences/PreferencesViewController.swift;
+			sourceTree = <group>;
+		};
+		6AC2C9463A249944CF2B6D84 = {
+			isa = PBXBuildFile;
+			fileRef = 797A5E955AD5AD352EB433A4;
+		};
+		DD782A51906F2046FDB0835A = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/Schedules/ScheduleModels.swift;
+			sourceTree = <group>;
+		};
+		B547351B54132B733F3A8B81 = {
+			isa = PBXBuildFile;
+			fileRef = DD782A51906F2046FDB0835A;
+		};
+		2CA63CF19E6CABDF03E7B97B = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/Schedules/SchedulesService.swift;
+			sourceTree = <group>;
+		};
+		CCE1D3FABE4690FB4D9E6C2C = {
+			isa = PBXBuildFile;
+			fileRef = 2CA63CF19E6CABDF03E7B97B;
+		};
+		0AB6A6493F0A163C914B66AA = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/HTTP/HTTPSchedulesRepository.swift;
+			sourceTree = <group>;
+		};
+		FF25A3BBB885CA932004CF30 = {
+			isa = PBXBuildFile;
+			fileRef = 0AB6A6493F0A163C914B66AA;
+		};
+		BF7221563AE4079A9AD7EACD = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/ScheduleModelsTests.swift;
+			sourceTree = <group>;
+		};
+		C41B7FED11CEC133091C8687 = {
+			isa = PBXBuildFile;
+			fileRef = BF7221563AE4079A9AD7EACD;
+		};
+		C246616AB3EDB504BD0B93C6 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/SchedulesServiceTests.swift;
+			sourceTree = <group>;
+		};
+		B6013EC40448E82D1015E08F = {
+			isa = PBXBuildFile;
+			fileRef = C246616AB3EDB504BD0B93C6;
+		};
+		79B4145C55DCAD795F95DAA4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/HTTPSchedulesRepositoryTests.swift;
+			sourceTree = <group>;
+		};
+		25E2FE6568F4B8DDFBB85E0A = {
+			isa = PBXBuildFile;
+			fileRef = 79B4145C55DCAD795F95DAA4;
+		};
+		0A330D3919ED6139BDF82EC0 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/MQTT/MQTTBrokerPort.swift;
+			sourceTree = <group>;
+		};
+		72BBA5E15EC2EEB615AE3413 = {
+			isa = PBXBuildFile;
+			fileRef = 0A330D3919ED6139BDF82EC0;
+		};
+		76419ABA71B2CF9703D58069 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/MQTT/ControlledMQTTWebSocketFactory.swift;
+			sourceTree = <group>;
+		};
+		D48DD2A134E25D7293E1CF26 = {
+			isa = PBXBuildFile;
+			fileRef = 76419ABA71B2CF9703D58069;
+		};
+		4AD8B6DE28FF740BEE980B87 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/MQTT/CocoaMQTTSDKDriver.swift;
+			sourceTree = <group>;
+		};
+		8F6C1B7CDA29C84FC184AF41 = {
+			isa = PBXBuildFile;
+			fileRef = 4AD8B6DE28FF740BEE980B87;
+		};
+		2D326FC9A05D056335641319 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/MQTTBrokerAdapterTests.swift;
+			sourceTree = <group>;
+		};
+		DD0A44A1F62CBB00ECFC7403 = {
+			isa = PBXBuildFile;
+			fileRef = 2D326FC9A05D056335641319;
+		};
+		AE729043650144CEA80AF883 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/OTA/OtaContracts.swift;
+			sourceTree = <group>;
+		};
+		4A9BC5CB86D18E33C363B79D = {
+			isa = PBXBuildFile;
+			fileRef = AE729043650144CEA80AF883;
+		};
+		6731271F5D98830AC2B8DEC3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/OTA/OtaService.swift;
+			sourceTree = <group>;
+		};
+		34AD1A9E94964EB88C902399 = {
+			isa = PBXBuildFile;
+			fileRef = 6731271F5D98830AC2B8DEC3;
+		};
+		20265D58F3F3C3212DE5657E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/HTTP/HTTPOtaRepository.swift;
+			sourceTree = <group>;
+		};
+		3D92B2CE0087B972F6D7A6B9 = {
+			isa = PBXBuildFile;
+			fileRef = 20265D58F3F3C3212DE5657E;
+		};
+		B2504B7D618D9B00A376D5D1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Bridge/DeviceReadOnlyDTO.swift;
+			sourceTree = <group>;
+		};
+		B9DE85143BC962F447146D2F = {
+			isa = PBXBuildFile;
+			fileRef = B2504B7D618D9B00A376D5D1;
+		};
+		787F1703DE395A042ACA0098 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/OtaServiceTests.swift;
+			sourceTree = <group>;
+		};
+		0E1E53B2A191D197562D87C9 = {
+			isa = PBXBuildFile;
+			fileRef = 787F1703DE395A042ACA0098;
+		};
+		59C8FC124313725F81229F75 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/HTTPOtaRepositoryTests.swift;
+			sourceTree = <group>;
+		};
+		50C97797E676BA2203ADC545 = {
+			isa = PBXBuildFile;
+			fileRef = 59C8FC124313725F81229F75;
+		};
+		C6EBD5E1F88ECABC14DFD2FD = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/DeviceReadOnlyBridgeTests.swift;
+			sourceTree = <group>;
+		};
+		CF3E0C8A498FE5AA6DABC7C0 = {
+			isa = PBXBuildFile;
+			fileRef = C6EBD5E1F88ECABC14DFD2FD;
+		};
+		840EF4D0FACE7597417159B8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/MQTT/CocoaMQTTWebSocketBridge.swift;
+			sourceTree = <group>;
+		};
+		0C26303AB6A93C8897ACD40F = {
+			isa = PBXBuildFile;
+			fileRef = 840EF4D0FACE7597417159B8;
+		};
+		57A4C81DF90934B3EED0E9D0 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/CocoaMQTTWebSocketBridgeTests.swift;
+			sourceTree = <group>;
+		};
+		7D75C9C7589DF524CCDA5868 = {
+			isa = PBXBuildFile;
+			fileRef = 57A4C81DF90934B3EED0E9D0;
+		};
+		2D4D3F81428934BFAB7E9260 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/MQTT/SharedMQTTBrokerPort.swift;
+			sourceTree = <group>;
+		};
+		8D0446B8F0BD9CA52382BF12 = {
+			isa = PBXBuildFile;
+			fileRef = 2D4D3F81428934BFAB7E9260;
+		};
+		D79803051D92601F49D4C2DC = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/MQTT/MQTTLeaseContracts.swift;
+			sourceTree = <group>;
+		};
+		0B3A5A30E8D11B6C9DE2770D = {
+			isa = PBXBuildFile;
+			fileRef = D79803051D92601F49D4C2DC;
+		};
+		23D20D60810CC2A8CE44B491 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/MQTT/NativeSharedBrokerPool.swift;
+			sourceTree = <group>;
+		};
+		2544C4318B1DA2222DC0E246 = {
+			isa = PBXBuildFile;
+			fileRef = 23D20D60810CC2A8CE44B491;
+		};
+		15ACF1006571C0321188A4A2 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/SharedMQTTBrokerPortTests.swift;
+			sourceTree = <group>;
+		};
+		92F29D7F8A177C8B4AAA00AD = {
+			isa = PBXBuildFile;
+			fileRef = 15ACF1006571C0321188A4A2;
+		};
+		16C648CCBF0788D9B96B3E41 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/NativeSharedBrokerPoolTests.swift;
+			sourceTree = <group>;
+		};
+		466D64CD5510AB86587591EB = {
+			isa = PBXBuildFile;
+			fileRef = 16C648CCBF0788D9B96B3E41;
+		};
+		AD7948C66C4A84CCA3E37F51 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/State/DeviceReadState.swift;
+			sourceTree = <group>;
+		};
+		1782AC1885455CAC4BF2C844 = {
+			isa = PBXBuildFile;
+			fileRef = AD7948C66C4A84CCA3E37F51;
+		};
+		3107E58ABC87B926DB1F244B = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/State/DeviceReadOwner.swift;
+			sourceTree = <group>;
+		};
+		BCA4BE8FAB343F1E8BBC8965 = {
+			isa = PBXBuildFile;
+			fileRef = 3107E58ABC87B926DB1F244B;
+		};
+		794203285D018C59AA76F263 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/Device/AuthorizedDeviceConnections.swift;
+			sourceTree = <group>;
+		};
+		6E7D3E5BF5C805A64128D8AB = {
+			isa = PBXBuildFile;
+			fileRef = 794203285D018C59AA76F263;
+		};
+		D58F60446BEAB2AD2CF5DE04 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/Device/NativeDeviceServices.swift;
+			sourceTree = <group>;
+		};
+		C9C7F3D64FC2D6B490661993 = {
+			isa = PBXBuildFile;
+			fileRef = D58F60446BEAB2AD2CF5DE04;
+		};
+		58A60E29EFCE262785F66533 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/DeviceReadFixtures.swift;
+			sourceTree = <group>;
+		};
+		C5FA667723A77A0F37365870 = {
+			isa = PBXBuildFile;
+			fileRef = 58A60E29EFCE262785F66533;
+		};
+		97137D7970652FAB25C7E2CF = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/DeviceReadOwnerTests.swift;
+			sourceTree = <group>;
+		};
+		E3BC8CF0E70862E0AB7A0247 = {
+			isa = PBXBuildFile;
+			fileRef = 97137D7970652FAB25C7E2CF;
+		};
+		AD9A44D58EDC6F5E3FDB47C5 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/AuthorizedDeviceConnectionsTests.swift;
+			sourceTree = <group>;
+		};
+		859808658CAA3B14684F6EB8 = {
+			isa = PBXBuildFile;
+			fileRef = AD9A44D58EDC6F5E3FDB47C5;
+		};
+		46E53CB2DDEE822856ABA087 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/DeviceReadCompositionTests.swift;
+			sourceTree = <group>;
+		};
+		61A506DC8EBC7598148A5010 = {
+			isa = PBXBuildFile;
+			fileRef = 46E53CB2DDEE822856ABA087;
+		};
+		71A0F692BE1032A151DF5D31 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/More/DeviceMoreRead.swift;
+			sourceTree = <group>;
+		};
+		C2D686F10444D658F05B741C = {
+			isa = PBXBuildFile;
+			fileRef = 71A0F692BE1032A151DF5D31;
+		};
+		E92FC41A9C0C517FD1BBA21D = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/HTTP/HTTPDeviceMoreReadRepository.swift;
+			sourceTree = <group>;
+		};
+		AAD497E4F091D11A03A2488D = {
+			isa = PBXBuildFile;
+			fileRef = E92FC41A9C0C517FD1BBA21D;
+		};
+		8A8CBF95352BC09DB5E11011 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Bridge/DeviceMoreDTO.swift;
+			sourceTree = <group>;
+		};
+		500D6DC412596867006A460D = {
+			isa = PBXBuildFile;
+			fileRef = 8A8CBF95352BC09DB5E11011;
+		};
+		FB3D0320BF6D6CEEC035EF97 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/HTTPDeviceMoreReadRepositoryTests.swift;
+			sourceTree = <group>;
+		};
+		14235DC57A07AE4FB5ED2B4A = {
+			isa = PBXBuildFile;
+			fileRef = FB3D0320BF6D6CEEC035EF97;
+		};
+		B7C921C2A49F0F409BE6BC35 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/DeviceMoreReadFeaturesTests.swift;
+			sourceTree = <group>;
+		};
+		596BF793060AA5CBDA0076A2 = {
+			isa = PBXBuildFile;
+			fileRef = B7C921C2A49F0F409BE6BC35;
+		};
+		2E0576AAB9926A95D5A74675 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/Device/NativeDeviceMoreReadFactory.swift;
+			sourceTree = <group>;
+		};
+		664A9FD9DA683481EB2037DC = {
+			isa = PBXBuildFile;
+			fileRef = 2E0576AAB9926A95D5A74675;
+		};
+		33ACBD260F9D5B1A6E5A890A = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Bridge/NativeDeviceObservations.swift;
+			sourceTree = <group>;
+		};
+		6459917E3C5580B6B6B360ED = {
+			isa = PBXBuildFile;
+			fileRef = 33ACBD260F9D5B1A6E5A890A;
+		};
+		1E1704AAEA45E8EA842EC69A = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Bridge/NativeDeviceBridgeReads.swift;
+			sourceTree = <group>;
+		};
+		ECA60E24C475E56C6F97C882 = {
+			isa = PBXBuildFile;
+			fileRef = 1E1704AAEA45E8EA842EC69A;
+		};
+		41BAF74EA663DDB658765702 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/NativeDeviceBridgeTests.swift;
+			sourceTree = <group>;
+		};
+		062CBF6C3D02084234C5AEF8 = {
+			isa = PBXBuildFile;
+			fileRef = 41BAF74EA663DDB658765702;
+		};
+		69B7581E4CECDCE0747E7B7C = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Bridge/DevicePageCloseService.swift;
+			sourceTree = <group>;
+		};
+		FAF429FC310F5AB6902F6832 = {
+			isa = PBXBuildFile;
+			fileRef = 69B7581E4CECDCE0747E7B7C;
+		};
+		6DA86B1E2C5638F73544FAAF = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/DevicePageCloseTests.swift;
+			sourceTree = <group>;
+		};
+		72D6BF2F8461E0ABA7F0724E = {
+			isa = PBXBuildFile;
+			fileRef = 6DA86B1E2C5638F73544FAAF;
+		};
+		7433EEF46E468B6D63229DDA = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/QRScanTests.swift;
+			sourceTree = <group>;
+		};
+		6C1CF63E234493E4489DC3F0 = {
+			isa = PBXBuildFile;
+			fileRef = 7433EEF46E468B6D63229DDA;
+		};
+		01A4DF483626DE7FB3788A6D = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Scanning/QRScanSession.swift;
+			sourceTree = <group>;
+		};
+		29ED0A489910D55F6DD20DD3 = {
+			isa = PBXBuildFile;
+			fileRef = 01A4DF483626DE7FB3788A6D;
+		};
+		7EE3418CB6A72AE596914B2D = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Features/Scanning/QRScanViewController.swift;
+			sourceTree = <group>;
+		};
+		274B262754AC664C7D53A74B = {
+			isa = PBXBuildFile;
+			fileRef = 7EE3418CB6A72AE596914B2D;
+		};
+		821BFA70D846F7B7C2505F8C = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Platform/Scanning/QRPhotoReader.swift;
+			sourceTree = <group>;
+		};
+		FD01C8ACA14368E709DD9EEB = {
+			isa = PBXBuildFile;
+			fileRef = 821BFA70D846F7B7C2505F8C;
+		};
+		0ECFD6E48BEBCB3E003F6C6B = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Platform/Scanning/QRScanCamera.swift;
+			sourceTree = <group>;
+		};
+		39E499E36D58EC54D84D3267 = {
+			isa = PBXBuildFile;
+			fileRef = 0ECFD6E48BEBCB3E003F6C6B;
+		};
+		7723B4D8721024AF0B9BB6FF = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/EmailLoginTests.swift;
+			sourceTree = <group>;
+		};
+		9C6516E40292A4DCC7D68005 = {
+			isa = PBXBuildFile;
+			fileRef = 7723B4D8721024AF0B9BB6FF;
+		};
+		8DDD5687B4B4DA7EA580AA44 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Account/EmailLogin.swift;
+			sourceTree = <group>;
+		};
+		7B2BCFBD7A5FD737E4B8576A = {
+			isa = PBXBuildFile;
+			fileRef = 8DDD5687B4B4DA7EA580AA44;
+		};
+		5D1F0E1E993909B0CCD2F451 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/HTTP/HTTPEmailLoginCodeService.swift;
+			sourceTree = <group>;
+		};
+		DB4009771EA2860526061CB8 = {
+			isa = PBXBuildFile;
+			fileRef = 5D1F0E1E993909B0CCD2F451;
+		};
+		3FD384F13B0042FDE2E7693B = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/DeviceNicknameTests.swift;
+			sourceTree = <group>;
+		};
+		6A9EC080BE0187B6383AF986 = {
+			isa = PBXBuildFile;
+			fileRef = 3FD384F13B0042FDE2E7693B;
+		};
+		4B049AE82E026E5EC7924B83 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/HTTPNicknameTests.swift;
+			sourceTree = <group>;
+		};
+		524385AFBA8C6B5E435122D8 = {
+			isa = PBXBuildFile;
+			fileRef = 4B049AE82E026E5EC7924B83;
+		};
+		5AA3839F967BBFDEEF310AC0 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/NicknameJournalTests.swift;
+			sourceTree = <group>;
+		};
+		D1520DF5DB53E2792038395F = {
+			isa = PBXBuildFile;
+			fileRef = 5AA3839F967BBFDEEF310AC0;
+		};
+		AFEB1C1F883A31D1ADF76F90 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/HTTP/HTTPNicknameRepository.swift;
+			sourceTree = <group>;
+		};
+		7B7C42F997150ED79E3A5D4E = {
+			isa = PBXBuildFile;
+			fileRef = AFEB1C1F883A31D1ADF76F90;
+		};
+		5B18FD83247BDDAE37957BBE = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/Storage/KeychainNicknameJournal.swift;
+			sourceTree = <group>;
+		};
+		9EB31EB19691E5B201451AAA = {
+			isa = PBXBuildFile;
+			fileRef = 5B18FD83247BDDAE37957BBE;
+		};
+		234F3CB25BA8E2B8EC6DAE62 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/More/DeviceNickname.swift;
+			sourceTree = <group>;
+		};
+		9672C1B576452AA37378372C = {
+			isa = PBXBuildFile;
+			fileRef = 234F3CB25BA8E2B8EC6DAE62;
+		};
+		DD13A9334CD10E8505123DB7 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/DeviceSelfUnbindTests.swift;
+			sourceTree = <group>;
+		};
+		397CB0B83E0BE8C4CD0B6EA9 = {
+			isa = PBXBuildFile;
+			fileRef = DD13A9334CD10E8505123DB7;
+		};
+		225CD5BC1F56F4F040455B3A = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/HTTPSelfUnbindTests.swift;
+			sourceTree = <group>;
+		};
+		F36A0291D3B1C5038520129D = {
+			isa = PBXBuildFile;
+			fileRef = 225CD5BC1F56F4F040455B3A;
+		};
+		C7B91205A8E4177943A13B04 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/SelfUnbindJournalTests.swift;
+			sourceTree = <group>;
+		};
+		3449141AA69D1D338913D4B7 = {
+			isa = PBXBuildFile;
+			fileRef = C7B91205A8E4177943A13B04;
+		};
+		67D234E9C931472D44BEC4BB = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/HTTP/HTTPSelfUnbindRepository.swift;
+			sourceTree = <group>;
+		};
+		108AD2F41E5BEC9CDA36A04D = {
+			isa = PBXBuildFile;
+			fileRef = 67D234E9C931472D44BEC4BB;
+		};
+		CB1D7C17E40760B5EC620595 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Data/Storage/KeychainSelfUnbindJournal.swift;
+			sourceTree = <group>;
+		};
+		DA5CBBC4EBF0D1C14BA1DF6B = {
+			isa = PBXBuildFile;
+			fileRef = CB1D7C17E40760B5EC620595;
+		};
+		D8E1E9FD9B93D654899EFFEF = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/More/DeviceSelfUnbind.swift;
+			sourceTree = <group>;
+		};
+		6A80E628A17579BC5B1B79DE = {
+			isa = PBXBuildFile;
+			fileRef = D8E1E9FD9B93D654899EFFEF;
+		};
+		E29D0B1580FDE553DD1D4678 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/SelfUnbindIntegrationTests.swift;
+			sourceTree = <group>;
+		};
+		4627A9AB667353746B89CF2E = {
+			isa = PBXBuildFile;
+			fileRef = E29D0B1580FDE553DD1D4678;
+		};
+		2918BC57F7ED44313EB0C69B = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/More/SelfUnbindApplication.swift;
+			sourceTree = <group>;
+		};
+		9CEA8563BB7BE091FA8F69D4 = {
+			isa = PBXBuildFile;
+			fileRef = 2918BC57F7ED44313EB0C69B;
+		};
+		78CDA68CE199B5875195AFCB = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/More/SelfUnbindHomeConsumer.swift;
+			sourceTree = <group>;
+		};
+		3FDCD6D131F7E9FA215ADE7E = {
+			isa = PBXBuildFile;
+			fileRef = 78CDA68CE199B5875195AFCB;
+		};
+		2CB2CB06471A5A6773DBB957 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/DeviceSelfUnbindBridgeTests.swift;
+			sourceTree = <group>;
+		};
+		A64F13A1640791C89BBA6BA5 = {
+			isa = PBXBuildFile;
+			fileRef = 2CB2CB06471A5A6773DBB957;
+		};
+		F79D93E15F54D3082905DFB5 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Tests/Unit/NativeSelfUnbindAuthorityTests.swift;
+			sourceTree = <group>;
+		};
+		98B193DDB3D87DB038F9646D = {
+			isa = PBXBuildFile;
+			fileRef = F79D93E15F54D3082905DFB5;
+		};
+		5498B553E882310AFB3E4DD8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Bridge/DeviceSelfUnbindBridge.swift;
+			sourceTree = <group>;
+		};
+		2F0F34A3800838F1C8B7D5C9 = {
+			isa = PBXBuildFile;
+			fileRef = 5498B553E882310AFB3E4DD8;
+		};
+		1F94FE1A5DD4DDA560992FA0 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Rowan/Domain/Device/More/NativeSelfUnbindAuthority.swift;
+			sourceTree = <group>;
+		};
+		AE50B969012B9B46141099F4 = {
+			isa = PBXBuildFile;
+			fileRef = 1F94FE1A5DD4DDA560992FA0;
+		};
+	};
+	rootObject = 83CBB9F71A601CBA00E9B192;
+}

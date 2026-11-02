@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-01T19:14:58.822Z",
+  "source": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "0e254d1a1928f49e46298d32388318d9f7ac8dca8cdd829396a99b225697a9fb",
+    "sourceFiles": 306
+  },
+  "artifactSha256": "c08d29c5907eb29a0c9226f822dbcdc22dcdd58ee2ce3b0c7c8c26b53851b2d6",
+  "serial": "emulator-5554",
+  "avd": "ROWAN_API_36\r",
+  "api": "36",
+  "locale": "",
+  "timezone": "GMT",
+  "guestUnix": "1793560498",
+  "hostUnix": 1793560499,
+  "fontScale": "1.0",
+  "size": "Physical size: 1080x2400",
+  "density": "Physical density: 420",
+  "airplaneMode": "0",
+  "limits": [
+    "Final base environment metadata only; all UI/HTTP/MQTT/hardware results remain in their separate run reports."
+  ]
+}

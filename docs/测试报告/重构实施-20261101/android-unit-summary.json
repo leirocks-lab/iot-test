@@ -1,0 +1,67 @@
+{
+  "execution": "JVM fixtures; not real HTTP/MQTT/registration or hardware",
+  "suites": [
+    {
+      "name": "com.rowan.iot.AccountServiceTest",
+      "tests": "10",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "timestamp": "2026-11-01T07:48:42.854Z"
+    },
+    {
+      "name": "com.rowan.iot.BackendRoutingTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "timestamp": "2026-11-01T07:48:43.371Z"
+    },
+    {
+      "name": "com.rowan.iot.domain.device.mqtt.ClassicShadowReducerTest",
+      "tests": "18",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "timestamp": "2026-11-01T07:48:43.524Z"
+    },
+    {
+      "name": "com.rowan.iot.LegalReadGateTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "timestamp": "2026-11-01T07:48:43.380Z"
+    },
+    {
+      "name": "com.rowan.iot.RecoveryServiceTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "timestamp": "2026-11-01T07:48:43.392Z"
+    },
+    {
+      "name": "com.rowan.iot.RegistrationServiceTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "timestamp": "2026-11-01T07:48:43.452Z"
+    },
+    {
+      "name": "com.rowan.iot.StartupCoordinatorTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "timestamp": "2026-11-01T07:48:43.481Z"
+    }
+  ],
+  "source": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "50cac77f65f90c168339f20d74699ec383d87d14297a72da1f082c5b90531384",
+    "sourceFiles": 137
+  }
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.EmailLoginServiceTest" tests="27" skipped="0" failures="0" errors="0" timestamp="2026-11-01T23:04:20.047Z" hostname="DESKTOP-2AM89R2" time="0.203">
+  <properties/>
+  <testcase name="forgetRegisterCooldownDoesNotBlockLogin" classname="com.rowan.iot.EmailLoginServiceTest" time="0.028"/>
+  <testcase name="inactiveCompensationReceiptIsRecordedBeforeBusyReturn" classname="com.rowan.iot.EmailLoginServiceTest" time="0.023"/>
+  <testcase name="captchaAcceptsOnlySixAsciiDigits" classname="com.rowan.iot.EmailLoginServiceTest" time="0.001"/>
+  <testcase name="captchaHasExactAuth04FieldsAndNoAuth02" classname="com.rowan.iot.EmailLoginServiceTest" time="0.018"/>
+  <testcase name="staleAlreadyDispatchedLoginCannotPersistOverB" classname="com.rowan.iot.EmailLoginServiceTest" time="0.006"/>
+  <testcase name="typedCredentialDescriptionAndReceiptContainNoPinOrTokens" classname="com.rowan.iot.EmailLoginServiceTest" time="0.003"/>
+  <testcase name="physicalWriteCancellationCompensatesAndAcceptsNewCredentialRetry" classname="com.rowan.iot.EmailLoginServiceTest" time="0.011"/>
+  <testcase name="auth01IsEmailLoginAndEscapesPlus" classname="com.rowan.iot.EmailLoginServiceTest" time="0.008"/>
+  <testcase name="staleRegistrationStillPreservesExistingExpectedRevisionGuard" classname="com.rowan.iot.EmailLoginServiceTest" time="0.004"/>
+  <testcase name="returnBeforeCancelledActualHttpEndsDoesNotStrandPage" classname="com.rowan.iot.EmailLoginServiceTest" time="0.009"/>
+  <testcase name="BSessionPreventsOldPageResumeFromAdoptingItsAuthority" classname="com.rowan.iot.EmailLoginServiceTest" time="0.004"/>
+  <testcase name="inputChangeAfterSendChildCompletesRejectsQueuedParentSuccess" classname="com.rowan.iot.EmailLoginServiceTest" time="0.007"/>
+  <testcase name="modeSwitchDiscardsBothInputs" classname="com.rowan.iot.EmailLoginServiceTest" time="0.002"/>
+  <testcase name="changedEmailDoesNotAcceptLateSendResultOrPublishToNewInput" classname="com.rowan.iot.EmailLoginServiceTest" time="0.008"/>
+  <testcase name="globalCooldownSurvivesFlowReopenAndCaseChange" classname="com.rowan.iot.EmailLoginServiceTest" time="0.004"/>
+  <testcase name="inputChangeCancelsPendingLoginBeforePersistence" classname="com.rowan.iot.EmailLoginServiceTest" time="0.008"/>
+  <testcase name="failedSendKeepsCooldownWithoutReplay" classname="com.rowan.iot.EmailLoginServiceTest" time="0.006"/>
+  <testcase name="passwordKeepsExistingBodyWithoutCaptchaAlias" classname="com.rowan.iot.EmailLoginServiceTest" time="0.003"/>
+  <testcase name="queuedOldAAfterBStorageCommitDoesZeroClearAndZeroHttp" classname="com.rowan.iot.EmailLoginServiceTest" time="0.005"/>
+  <testcase name="staleExpectedAfterBDoesZeroHttpAndZeroClear" classname="com.rowan.iot.EmailLoginServiceTest" time="0.004"/>
+  <testcase name="commonConsentGatesSendAndBothLoginModes" classname="com.rowan.iot.EmailLoginServiceTest" time="0.001"/>
+  <testcase name="switchingModeCancelsOldPasswordWithoutSubmittingCaptcha" classname="com.rowan.iot.EmailLoginServiceTest" time="0.007"/>
+  <testcase name="fixedErrorsNeverEnumerateAccountsOrExposeBackendMessages" classname="com.rowan.iot.EmailLoginServiceTest" time="0.007"/>
+  <testcase name="explicitRetryAfterAuthRejectionUsesOwnReservation" classname="com.rowan.iot.EmailLoginServiceTest" time="0.005"/>
+  <testcase name="cancelledUncooperativeSendHoldsGlobalLeasePastSixtySeconds" classname="com.rowan.iot.EmailLoginServiceTest" time="0.006"/>
+  <testcase name="pendingCleanupBlocksLoginAndSend" classname="com.rowan.iot.EmailLoginServiceTest" time="0.003"/>
+  <testcase name="compensatedStorageFailureAllowsSameModelNewInputRetry" classname="com.rowan.iot.EmailLoginServiceTest" time="0.008"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

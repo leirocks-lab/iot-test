@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.data.http.HttpNicknameRepositoryTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-01T22:36:24.663Z" hostname="DESKTOP-2AM89R2" time="0.033">
+  <properties/>
+  <testcase name="patchUsesEncodedOpaqueSegmentAndNicknameOnlyWithNoResponseDataRequirement" classname="com.rowan.iot.data.http.HttpNicknameRepositoryTest" time="0.011"/>
+  <testcase name="readBackRequiresExplicitNicknameAndMatchingIdentity" classname="com.rowan.iot.data.http.HttpNicknameRepositoryTest" time="0.008"/>
+  <testcase name="staleRevisionCannotSendWithNewAccountCredentials" classname="com.rowan.iot.data.http.HttpNicknameRepositoryTest" time="0.006"/>
+  <testcase name="patch401IsNeverAutomaticallyRefreshedOrReplayed" classname="com.rowan.iot.data.http.HttpNicknameRepositoryTest" time="0.007"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

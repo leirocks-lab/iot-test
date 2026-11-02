@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-11-01T13:12:45.287Z" hostname="DESKTOP-2AM89R2" time="0.174">
+  <properties/>
+  <testcase name="timeRequiresExactTwentyFourHourHHmmAndAllowsCrossMidnightWithoutComputingDates" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.109"/>
+  <testcase name="editCarriesRequiredFieldsAndPreservesAnExistingDisabledFlagExplicitly" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.019"/>
+  <testcase name="createUsesOnlyParameterTableFieldsAndNeverCopiesServerIdOrNextExecution" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.009"/>
+  <testcase name="permitMustMatchEveryNativeScopeComponentAndDoesNotComeFromAReadAction" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.004"/>
+  <testcase name="customWeekdaysUseIsoRangeAndDeduplicateWithoutChangingTheRepeatType" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.004"/>
+  <testcase name="javaLegacyShortIdsAreRejectedWithoutRejectingRealIanaAliasesOrUtc" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.004"/>
+  <testcase name="serverOwnedFieldsAndUnknownBooleanTypesDoNotBecomeClientDefaults" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.001"/>
+  <testcase name="unknownEnabledNeedsAnExplicitEditChoiceRatherThanAssumingTrue" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.005"/>
+  <testcase name="timezoneMustBeAnAvailableExactIdAndNeverSilentlyFallsBackToGmt" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.002"/>
+  <testcase name="permitPayloadIsDetachedAndCannotBeChangedThroughAJsonReturnedToACaller" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.001"/>
+  <testcase name="recordsRetainUnknownFieldsAndServerNextExecutionWithoutCalculatingDstLocally" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.001"/>
+  <testcase name="optionalFieldsStayOmittedAndDoNotBecomeNullOrSyntheticModes" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.001"/>
+  <testcase name="requiredRequestFieldsAreValidatedWithoutInventingATypeRepeatCompatibilityMatrix" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

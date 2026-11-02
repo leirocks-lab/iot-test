@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-01T17:03:51.837Z",
+  "parentReport": "docs/测试报告/重构实施-20261101/android-scan-software-2026-11-01T16-59-11.255Z.json",
+  "parentReportSha256": "3da47dd5ba738b2fb708cf508328d62dcd1a9a4aaa8cf38a2f55f582a38a789a",
+  "mediaCleanup": {
+    "result": "通过",
+    "rowAlreadyAbsent": true,
+    "fileExisted": false,
+    "fileNowAbsent": true,
+    "generatedDirectoryNowAbsent": true
+  },
+  "camera": {
+    "result": "通过",
+    "original": {
+      "granted": false,
+      "flags": [
+        "USER_SENSITIVE_WHEN_DENIED",
+        "USER_SENSITIVE_WHEN_GRANTED"
+      ],
+      "appOp": "default",
+      "uidAppOp": "ignore",
+      "packageEntryPresent": false
+    },
+    "current": {
+      "granted": false,
+      "flags": [
+        "USER_SENSITIVE_WHEN_DENIED",
+        "USER_SENSITIVE_WHEN_GRANTED"
+      ],
+      "appOp": "allow",
+      "uidAppOp": "ignore",
+      "packageEntryPresent": true
+    },
+    "comparison": "Same grant, user flags and effective package CAMERA default/allow, identical UID restriction. Raw history/entry presence is not rewound.",
+    "reference": "https://android.googlesource.com/platform/frameworks/base/+/refs/heads/android16-release/core/java/android/app/AppOpsManager.java"
+  },
+  "limits": [
+    "Only this recorded nonce path was inspected or removed; no recursive deletion or gallery enumeration.",
+    "No CAMERA/UID/AppOp writes were made during remediation; original failed report is retained."
+  ]
+}

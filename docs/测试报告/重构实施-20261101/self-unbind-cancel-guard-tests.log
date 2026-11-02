@@ -1,0 +1,18 @@
+✔ only the known negative action is returned (67.2925ms)
+✔ unknown package (1.0413ms)
+✔ wrong dialog (0.5439ms)
+✔ missing positive (0.4599ms)
+✔ duplicate negative (0.5035ms)
+✔ ANR (0.4267ms)
+✔ wrong message (0.5576ms)
+✔ disabled negative (0.4358ms)
+✔ invalid bounds (0.6677ms)
+✔ positive is refused independently (0.7377ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 731.3925

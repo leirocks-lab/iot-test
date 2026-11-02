@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-01T09:55:07.366Z",
+  "runId": "2026-11-01T09-49-57.441Z",
+  "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+  "worktreeDirty": true,
+  "sourceSha256": "837fa9bb905ef51acad0c8741d7501cb0a4d93f3b2a6ee6da2353fbe851bee58",
+  "sourceFiles": 201,
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "installedArtifactSha256": "1654a469b6ece181ead0d8c999e222d0a0ab9ceec02adeb29889ba59e40f315a",
+  "buildProvenance": {
+    "date": "2026-11-01T09:47:37.703Z",
+    "task": ":app:assembleDevelopmentRelease",
+    "artifactSha256": "1654a469b6ece181ead0d8c999e222d0a0ab9ceec02adeb29889ba59e40f315a",
+    "sourceBefore": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "72103f7641aa3becde58a12f3c5db772bc09334ddebd7b7fda4f6dc0ddf6bbc0",
+      "sourceFiles": 200
+    },
+    "sourceAfter": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "72103f7641aa3becde58a12f3c5db772bc09334ddebd7b7fda4f6dc0ddf6bbc0",
+      "sourceFiles": 200
+    },
+    "sourceUnchangedDuringBuild": true,
+    "architecture": "x86_64",
+    "signing": "development debug key",
+    "isolatedValidation": true
+  },
+  "installedArtifactMatchesBuild": true,
+  "viewport": "Physical size: 1080x2400\r\nOverride size: 750x1624",
+  "density": "Physical density: 420\r\nOverride density: 320",
+  "fontScale": "1.0",
+  "screenshots": [
+    "2026-11-01T09-49-57.441Z-android-login-initial.png",
+    "2026-11-01T09-49-57.441Z-android-home-after-login.png"
+  ],
+  "scope": "Android native startup/login/cold restore/logout and packaged RN navigation; not complete UI/HTTP/MQTT acceptance",
+  "results": [
+    {
+      "id": "STARTUP-no-session-native-entry",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-UI-empty",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-UI-consent-gate",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-04-native-emulator",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-03-05-cold-restore-native",
+      "result": "通过"
+    },
+    {
+      "id": "RN-release-bundle-host-context",
+      "result": "失败",
+      "note": "仅验证包内资源与 getContext；不代表设备控制或事件验收"
+    },
+    {
+      "id": "emulator-prerequisite-or-flow",
+      "result": "阻塞",
+      "stage": "rn-bootstrap",
+      "reason": "启动、安装、页面状态或测试配置未满足；未记录凭据或层级正文"
+    }
+  ],
+  "hardware": "未验收"
+}

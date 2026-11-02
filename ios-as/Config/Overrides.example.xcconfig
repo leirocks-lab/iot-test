@@ -1,0 +1,8 @@
+// Copy to Local/Development.xcconfig, Local/Preview.xcconfig or Local/Production.xcconfig.
+// Non-secret values only. Keep tokens, account passwords, certificates and private keys out.
+// Write an HTTPS URL in xcconfig as https:/$()/host/path to avoid // starting a comment.
+// No endpoint, tenant or brand is inferred when these values are empty.
+ROWAN_PLATFORM_URL =
+ROWAN_IOT_URL =
+ROWAN_TENANT_ID =
+ROWAN_BRAND_ID =

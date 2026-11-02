@@ -1,0 +1,43 @@
+{
+  "runId": "2026-11-01T19-47-05.178Z",
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "scriptSha256": "cf30d51d826c209fae41433ff6bb6ef0ca111657c9418d3c991e4578eca911cf",
+  "taskResumeSha256": "a3ad9d4a3062cb7bc7fb2f4930e21f46484cfe35909a9565ee29227fe4fcfd63",
+  "installedArtifactSha256": "47d2d2014df0db4db88c47ceebc03e8a60c9635e5d1f1b1d5f44b30fe2843f88",
+  "sidecarSha256": "a6fbf72e4060936e0154d3f0c7aa01d83056cef054954a350adad5aca6ee26c6",
+  "sourceBefore": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "8461b4cad4038a170c9057dcab738f0e2e7f73ea777cdeedb1f17e7df2477e17",
+    "sourceFiles": 319
+  },
+  "sourceAfter": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "8461b4cad4038a170c9057dcab738f0e2e7f73ea777cdeedb1f17e7df2477e17",
+    "sourceFiles": 319
+  },
+  "sourceUnchanged": true,
+  "results": [
+    {
+      "id": "public-flow",
+      "stage": "welcome-precondition",
+      "result": "阻塞",
+      "errorCode": "SYSTEM_ANR_DIALOG"
+    }
+  ],
+  "screenshots": [],
+  "cleanup": "not-needed",
+  "visualOnly": true,
+  "sendActions": 0,
+  "submitActions": 0,
+  "scope": "Public dummy-only S016 UI gates; not real captcha/email/login/backend validation.",
+  "limits": [
+    "Input text is redacted by the existing snapshot exporter; clearing is inferred through disabled submit after a previously enabled gate.",
+    "Alphabetic attempt passes through numeric EditText filtering; this is not a direct validator proof or Unicode IME coverage.",
+    "No actual send/cooldown/SMTP, AUTH04, AUTH02, login, account switch, persistence, hardware, iOS or pixel/online-Lanhu acceptance.",
+    "Welcome and tool-owned fixed-public-input form screenshots, guarded before/after. Raw XML/dumpsys/CLI/error payloads and input values are not archived.",
+    "SIGINT/SIGTERM use bounded finally; force-kill cannot guarantee return. Existing authenticated/unknown pages are never logged out or cleared."
+  ]
+}

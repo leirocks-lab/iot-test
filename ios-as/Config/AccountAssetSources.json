@@ -1,0 +1,72 @@
+[
+  {
+    "asset": "AuthBack",
+    "source": "docs/ui/lanhu/project/src/view/lanhu_denglu/assets/img/e9038ce8197e479b9142c977c7de51ce_mergeImage.png",
+    "sha256": "dd4c1aeb9bcb9e54c27ee0c0571bb014478c6258fe9d85112e07617422bdbfec"
+  },
+  {
+    "asset": "AuthEmail",
+    "source": "docs/ui/lanhu/project/src/view/lanhu_zhuce/assets/img/SketchPng1a10c20eafcd764d76fa8f10da58f8799b36f13dd62fbe237a60ae103980858c.png",
+    "sha256": "aa54fea0fe5d4bc820f1bd3b18c7e80361f1a2aaf9b6bc96342059fbf5557d85"
+  },
+  {
+    "asset": "AuthLock",
+    "source": "docs/ui/lanhu/project/src/view/lanhu_zhuce/assets/img/SketchPng4d13fd308481531fc141fb4256149d3acfc774600734363b59db40979e36151f.png",
+    "sha256": "fce009ec678df1f0647008d7f83eb74fb9db72a46a5f96e19b7dda618f139034"
+  },
+  {
+    "asset": "AuthGlobe",
+    "source": "docs/ui/lanhu/project/src/view/lanhu_zhuce/assets/img/SketchPng0890dfe1b7a80b4d9381a791f5eaa912b5bc39094c9519af2605ddb9666874e1.png",
+    "sha256": "3b07d918b41f5eb8afc0a68a4660e2f2419803ff7b0022791b6e3b7a18eb5a99"
+  },
+  {
+    "asset": "AuthChevron",
+    "source": "docs/ui/lanhu/project/src/view/lanhu_zhuce/assets/img/SketchPng075a5ffce4eb663176ce20f8ba03cb91b8f2b1d0ef9943badecc405925a76a53.png",
+    "sha256": "11e119491338ecb10fb515ab7b41f077083473bd942cee68f7f8e0cdd17959e5"
+  },
+  {
+    "asset": "AuthUnchecked",
+    "source": "docs/ui/lanhu/project/src/view/lanhu_zhuce/assets/img/SketchPng7234a80a4137d6added447cef31bfda1f3f9a9c4e65f07b60b2c75b78669aeac.png",
+    "sha256": "0654bf5e789f251cc5323add51790008f849f7e6eed978adcd524053be39ae9b"
+  },
+  {
+    "asset": "AuthPasswordBackground",
+    "source": "docs/ui/lanhu/project/src/view/lanhu_zhuce/assets/img/SketchPngba059489a3f2b1cfe8cce71cf00587dd5eb9329de427f0f9de9bd625b1ddb8a0.png",
+    "sha256": "d8b90457fc7b88c71681e4a2810be75061f0c118dc0d329c9a362ac8c126f769"
+  },
+  {
+    "asset": "AuthRecoveryLock",
+    "source": "docs/ui/lanhu/project/src/view/lanhu_dengluwangjimima/assets/img/SketchPng47e4cd1f751e318200768b0459bd36659b1cff7e660f19b8cbfa0f40f3107877.png",
+    "sha256": "b099a238fe255fa1c2e4af6c252ced931fa48284902b262db94afa1c1fd8dfe1"
+  },
+  {
+    "asset": "AuthEnvelope",
+    "source": "docs/ui/lanhu/project/src/view/lanhu_zhuceshuruwanchengyanzhengmafasongchenggong/assets/img/SketchPnga7a867d35cb3993c2f89a8549fbce76df10c3ac647bc391c3697f064b1a5d893.png",
+    "sha256": "611df48bd3d4d6b9386ed4eca14ef7d0e9b1a12a703139b47aaea9fa6be52d94"
+  },
+  {
+    "asset": "AuthSearch",
+    "source": "docs/ui/lanhu/project/src/view/lanhu_zhucediquxuanzeqi/assets/img/SketchPng7e410347bcb265a484e609cc73069b53e2341354352893f0b969815e5827f773.png",
+    "sha256": "d040948578378784a710d127f549ec9d5577398220e05944de544dac912ab80c"
+  },
+  {
+    "asset": "AuthSelected",
+    "source": "docs/ui/lanhu/project/src/view/lanhu_zhucediquxuanzeqi/assets/img/SketchPng5a38973c946cb5c49fabe1d1e9286a0043c9f8c4a19f20d1c90e6a066f2c51ea.png",
+    "sha256": "cb427ee6dc24c3726262601f035963c503280f123b5bb8da0c176fb89403158b"
+  },
+  {
+    "asset": "AuthRegionNotice",
+    "source": "docs/ui/lanhu/project/src/view/lanhu_zhucediquxuanzeqi/assets/img/SketchPngefc2700dd31d9ef87fe1b58a5070c885e02a4d592f6aad08c123b01e2c40836f.png",
+    "sha256": "9faba51dd7d34ef270403e9c974a75d02af90adcdbc453ed59531fa33ac268e3"
+  },
+  {
+    "asset": "AuthNoticeClose",
+    "source": "docs/ui/lanhu/project/src/view/lanhu_zhucediquxuanzeqi/assets/img/SketchPng57ddfc3333395ad0184c71321adb31380344f513e0001007cdaab5addc26cd89.png",
+    "sha256": "92bbdec294ceb986392f9d81645db239a53aea0aba79dd80c3fdad0dd0ca4b15"
+  },
+  {
+    "asset": "AuthChecked",
+    "source": "docs/ui/lanhu/project/src/view/lanhu_zhuceshuruwancheng/assets/img/SketchPng6d43d85721a5daca7f12ee7060243d062e9219ecf7c1bc9fcf9491760cd14193.png",
+    "sha256": "fc222de65b40bdce58b340f58b78e737651ef211b5fd5eade75c291efd0879bb"
+  }
+]

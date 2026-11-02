@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.features.home.HomeActionControlsTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-01T22:36:28.987Z" hostname="DESKTOP-2AM89R2" time="0.04">
+  <properties/>
+  <testcase name="duplicateLogoutWhileSuspendedNeverStartsAsecondOperation" classname="com.rowan.iot.features.home.HomeActionControlsTest" time="0.01"/>
+  <testcase name="unexpectedOperationFailureStillClearsBusyAndRendersRetry" classname="com.rowan.iot.features.home.HomeActionControlsTest" time="0.004"/>
+  <testcase name="preCancelledCallerDoesNotChangeAnotherPendingOperationOrButton" classname="com.rowan.iot.features.home.HomeActionControlsTest" time="0.009"/>
+  <testcase name="cancellationFinallyReenablesAfterALaterSelectionRender" classname="com.rowan.iot.features.home.HomeActionControlsTest" time="0.005"/>
+  <testcase name="editingBlocksDispatchAndExitRestoresAvailability" classname="com.rowan.iot.features.home.HomeActionControlsTest" time="0.005"/>
+  <testcase name="pendingCleanupRenderThenLocalFailureStillEnablesTheSameRetryButton" classname="com.rowan.iot.features.home.HomeActionControlsTest" time="0.007"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

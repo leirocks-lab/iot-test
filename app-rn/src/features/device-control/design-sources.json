@@ -1,0 +1,69 @@
+{
+  "note": "Local reference hashes only; export pageId/group and latest version remain unverified. No screenshot or runtime acceptance implied.",
+  "references": [
+    {
+      "source": "docs/ui/酒柜插件首页-完整.png",
+      "sha256": "ac8defbce15c7e0f924b12fdbde0204e7f4c63a9a86b06d71f7476c7cf5d9fd8"
+    },
+    {
+      "source": "docs/ui/酒柜插件首页-完整离线.png",
+      "sha256": "2d9add14ffcb8285688a16ca11bba44876d2428902e488f970b21b4a8ddc5191"
+    },
+    {
+      "source": "docs/ui/酒柜插件首页-完整关机.png",
+      "sha256": "c383f6f86467542a7a928fa76e94591f053a4215a6d9d2057091657dc0b8e293"
+    },
+    {
+      "source": "docs/ui/酒柜插件页-童锁开.png",
+      "sha256": "5e0a4c26f49b4bda35b7f8163fbac50fe7cf38236f7f48c9e8a76e036c549a5e"
+    },
+    {
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzheng/page.json",
+      "sha256": "a56e4b548e515bf0848de601e2d8bc9d3e395238e3d58adac6afccb61614de58"
+    },
+    {
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzheng/index.jsx",
+      "sha256": "6d58261ed246c534a2fb8af894d12565e02770f69e92816db3339fc793d1b7b0"
+    },
+    {
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzheng/assets/index.module.css",
+      "sha256": "f23e559708301ba9a78e66f9a70a07afc3cf5ea602d7c7d292a6301f01183ac1"
+    },
+    {
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzhengguanji/page.json",
+      "sha256": "dd7d850b3ca75c0931b468854af7ef53b0fd1e6cff4e50a7057022f4243a8b1d"
+    },
+    {
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzhengguanji/index.jsx",
+      "sha256": "9a1de1d9c9e1b1d5c4f6376077522b358fb40924e02b0989ae62c04caaa920b0"
+    },
+    {
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzhengguanji/assets/index.module.css",
+      "sha256": "6bd18e6b389e0b9412739adfa6a29aa173fb05b6c65c441915370a6dd58f767d"
+    },
+    {
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzhenglixian/page.json",
+      "sha256": "5feecd5a89ff80de7d349421e72673ee645cd85eb7ba6acd4a4f75ac52536cb8"
+    },
+    {
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzhenglixian/index.jsx",
+      "sha256": "851e139cb2642a48af9e2f8905ece928703e8fa9cdd040350873e1d982df4f2c"
+    },
+    {
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianshouyewanzhenglixian/assets/index.module.css",
+      "sha256": "aa75b78d67a0cce373428fe2706e70668409ecc98d0937ee7ad240fb67a58879"
+    },
+    {
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianyetongsuokai/page.json",
+      "sha256": "837bd804d4b9803be1892be8575d0df010c9875ba52a45e1930e8937d93b3c46"
+    },
+    {
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianyetongsuokai/index.jsx",
+      "sha256": "4008334b1576becf9cddc454e9f7d3a91bfe2c1b3d00f77d5c09746620ac1b91"
+    },
+    {
+      "source": "docs/ui/lanhu/project/src/view/lanhu_jiuguichajianyetongsuokai/assets/index.module.css",
+      "sha256": "4dc03b11061035cd8b43e8d897d29ab70be4baed16373cffb6ef51c76fcec94a"
+    }
+  ]
+}

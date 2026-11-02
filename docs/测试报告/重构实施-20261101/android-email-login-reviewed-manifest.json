@@ -1,0 +1,31 @@
+{
+  "status": "ISOLATED_ANDROID_DRAFT_NOT_APPLIED_NOT_COMPILED_NOT_EXECUTED",
+  "baseSHA256": {
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/AccountService.kt": "f0560630420537a6afd7b9417bda0ad9522048b26a662316c4e46712a0423d75",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/EmailVerificationService.kt": "b12f0140e256508f342cfa6f8c3e4a5eb6cda2df0cbde66a219000bbda0ab357",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/RegistrationService.kt": "d3d86a02071b162f1cd10030c52a67af36b445f4ff59b8bbe09039b8fbc91f6f",
+    "android-as/app/src/main/kotlin/com/rowan/iot/features/auth/AccountActivity.kt": "49cb8d78c59358f1b665b037684af23853c8f97d56c5f3e15b3fc17508f3d3c2",
+    "android-as/app/src/main/kotlin/com/rowan/iot/app/AppServices.kt": "5e155af63debea1796e01baca40201424e5bc318f87a42eec6b654c60a21c1c4"
+  },
+  "newFiles": [
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/EmailLoginService.kt",
+    "android-as/app/src/test/kotlin/com/rowan/iot/EmailLoginServiceTest.kt",
+    "android-as/app/src/main/res/values/account_login_ids.xml"
+  ],
+  "modifiedFiles": [
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/AccountService.kt",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/EmailVerificationService.kt",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/RegistrationService.kt",
+    "android-as/app/src/main/kotlin/com/rowan/iot/features/auth/AccountActivity.kt",
+    "android-as/app/src/main/kotlin/com/rowan/iot/app/AppServices.kt"
+  ],
+  "newTestDefinitions": 27,
+  "patchOrder": [
+    "tests.patch",
+    "implementation.patch"
+  ],
+  "patchSHA256": {
+    "tests.patch": "5fd9189941f9c03838d641baa0f18a84fd0c99a10b069cd3935c5f869559d0b5",
+    "implementation.patch": "d6e09a451d1664043ad37c2fe41831d48623e64a155da620661b976162a90365"
+  }
+}

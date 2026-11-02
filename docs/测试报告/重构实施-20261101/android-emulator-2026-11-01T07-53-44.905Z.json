@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-01T07:55:24.087Z",
+  "runId": "2026-11-01T07-53-44.905Z",
+  "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+  "worktreeDirty": true,
+  "sourceSha256": "50cac77f65f90c168339f20d74699ec383d87d14297a72da1f082c5b90531384",
+  "sourceFiles": 137,
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "installedArtifactSha256": "9bc1cce88744ec3c62555ebd0051b5f167275e41eb2dd97ef2352f4fb807e3a5",
+  "buildProvenance": {
+    "date": "2026-11-01T07:52:31.863Z",
+    "task": ":app:assembleDevelopmentRelease",
+    "artifactSha256": "9bc1cce88744ec3c62555ebd0051b5f167275e41eb2dd97ef2352f4fb807e3a5",
+    "sourceBefore": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "50cac77f65f90c168339f20d74699ec383d87d14297a72da1f082c5b90531384",
+      "sourceFiles": 137
+    },
+    "sourceAfter": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "50cac77f65f90c168339f20d74699ec383d87d14297a72da1f082c5b90531384",
+      "sourceFiles": 137
+    },
+    "sourceUnchangedDuringBuild": true,
+    "architecture": "x86_64",
+    "signing": "development debug key",
+    "isolatedValidation": true
+  },
+  "installedArtifactMatchesBuild": true,
+  "viewport": "Physical size: 1080x2400\r\nOverride size: 750x1624",
+  "density": "Physical density: 420\r\nOverride density: 320",
+  "fontScale": "1.0",
+  "screenshots": [
+    "2026-11-01T07-53-44.905Z-android-login-initial.png"
+  ],
+  "scope": "Android native login only; not complete UI/HTTP/MQTT acceptance",
+  "results": [
+    {
+      "id": "STARTUP-no-session-native-entry",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-UI-empty",
+      "result": "通过"
+    },
+    {
+      "id": "emulator-prerequisite-or-flow",
+      "result": "阻塞",
+      "stage": "input",
+      "reason": "系统无响应弹窗遮挡"
+    }
+  ],
+  "hardware": "未验收"
+}

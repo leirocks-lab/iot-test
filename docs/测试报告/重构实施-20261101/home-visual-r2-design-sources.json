@@ -1,0 +1,12 @@
+{
+  "sourceStatus": "LOCAL_EXPORT_ONLY_ONLINE_VERSION_UNKNOWN",
+  "sources": {
+    "docs/ui/首页(1).png": "2f90f0aa7bd02ca70b560af9e0d9f78ceabff05b124151eabb5276c9bbbc5d01",
+    "docs/ui/首页.png": "3134b0f34d097ce4b0fc4fe31b0918656c0dce33452f2ed71fc149d80ead3f3a",
+    "docs/ui/首页备份-长按编辑.png": "61c272f78fdcd0443bda5ef470dac5f122cbdca33fa644be9fe6af5f629955a4",
+    "docs/ui/lanhu/project/src/view/lanhu_shouye/page.json": "9aced4162b6086d8c526a6f0d90d66333858f486db4a4ec2a1e0d73c22a924af",
+    "docs/ui/lanhu/project/src/view/lanhu_shouye/assets/index.module.css": "9eb85f08b4189b917ea5c24d31a506e05e02ce31a59aa96e00ca6ec151cb3d96",
+    "docs/ui/lanhu/project/src/view/lanhu_shouyebeifenzhanganbianji/assets/index.module.css": "32b523a9928741e6f015c3c7ade41507ba07d9f23af42b726884950e536d59d3"
+  },
+  "businessBoundary": "Only existing Home metadata/tabs/selection/native navigation; no product image/status/power/brand inference"
+}

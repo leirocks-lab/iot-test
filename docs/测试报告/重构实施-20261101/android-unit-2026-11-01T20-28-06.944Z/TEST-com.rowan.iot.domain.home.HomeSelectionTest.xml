@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.home.HomeSelectionTest" tests="21" skipped="0" failures="0" errors="0" timestamp="2026-11-01T20:27:57.816Z" hostname="DESKTOP-2AM89R2" time="0.011">
+  <properties/>
+  <testcase name="unknownOrOldVisibleDeviceCannotStartEditing" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.003"/>
+  <testcase name="longPressStartsEditingAndSelectsOnlyCurrentDevice" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.0"/>
+  <testcase name="staleRefreshOrButtonAfterPageLeaveCannotRestoreEditing" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.001"/>
+  <testcase name="confirmedOfflineCacheAllowsLocalSelectionWithoutInventingDeletePermission" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.001"/>
+  <testcase name="leavingPageClearsReviewAndRejectsLateInputsUntilAnewAppearance" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.0"/>
+  <testcase name="explicitExitClearsSelectionAndReview" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.0"/>
+  <testcase name="aSecondLongPressDoesNotDiscardPreviousSelection" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.0"/>
+  <testcase name="lateCancelOfOldReviewDoesNotDismissNewReview" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.0"/>
+  <testcase name="closeIsPermanentEvenIfAviewTriesToReappear" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.0"/>
+  <testcase name="loadingRetainsSelectionButBlocksNewInputAndConfirmation" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.001"/>
+  <testcase name="accountChangeBeforeConfirmHasNoSuccessfulOutcomeEvenWithoutNotification" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.0"/>
+  <testcase name="canonicallyEquivalentUnicodeDeviceIdsRemainDistinct" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.001"/>
+  <testcase name="defaultDenyNeverReportsRemovalOrDropsMetadata" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.0"/>
+  <testcase name="successfulRefreshPrunesRemovedIdsAndUsesLatestNickname" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.0"/>
+  <testcase name="aRenameRefreshInvalidatesOldReviewWithoutDeletingSelection" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.0"/>
+  <testcase name="tappingWithoutEditingDoesNotImplicitlySelect" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.001"/>
+  <testcase name="accountChangeClearsSelectionAndOldReviewCannotAffectNewContext" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.001"/>
+  <testcase name="toggleCanDeselectLastItemWithoutExitingEditing" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.001"/>
+  <testcase name="selectionCannotRetainDevicesHiddenByAProgrammaticRoomChange" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.0"/>
+  <testcase name="reviewIsAnExactSelectionSnapshotAndInputChangesInvalidateIt" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.0"/>
+  <testcase name="initialReadFailureCannotSelectOrConfirmAnEmptyUnloadedList" classname="com.rowan.iot.domain.home.HomeSelectionTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

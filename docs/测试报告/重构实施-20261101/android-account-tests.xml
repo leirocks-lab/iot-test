@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.AccountServiceTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-01T07:15:02.890Z" hostname="DESKTOP-2AM89R2" time="0.221">
+  <properties/>
+  <testcase name="sessionRoundTripAndRefreshKeepFullSettingsAndExpiry" classname="com.rowan.iot.AccountServiceTest" time="0.117"/>
+  <testcase name="restoreRefreshFailureClearsStoredSession" classname="com.rowan.iot.AccountServiceTest" time="0.006"/>
+  <testcase name="overlappingRefreshesShareOneRequestEvenIfAccessTokenDoesNotChange" classname="com.rowan.iot.AccountServiceTest" time="0.042"/>
+  <testcase name="logoutDuringLoginRejectsLateCredentials" classname="com.rowan.iot.AccountServiceTest" time="0.008"/>
+  <testcase name="queuedRefreshCannotRefreshANewAccount" classname="com.rowan.iot.AccountServiceTest" time="0.032"/>
+  <testcase name="invalidEmailDoesNotReachTransport" classname="com.rowan.iot.AccountServiceTest" time="0.003"/>
+  <testcase name="lateLogoutCannotClearNewAccount" classname="com.rowan.iot.AccountServiceTest" time="0.01"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

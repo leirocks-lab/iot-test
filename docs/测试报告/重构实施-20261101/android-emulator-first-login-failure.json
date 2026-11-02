@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-01T06:20:31.033Z",
+  "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+  "worktreeDirty": true,
+  "sourceSha256": "32d22f980aceff60f318ffa3bcb00bde7b5e688bb1e4ced8f099d132dd81684e",
+  "sourceFiles": 152,
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "scope": "Android native login only; not complete UI/HTTP/MQTT acceptance",
+  "results": [
+    {
+      "id": "AUTH-UI-empty",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-UI-consent-gate",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-04-native-emulator",
+      "result": "失败"
+    }
+  ],
+  "hardware": "未验收"
+}

@@ -1,0 +1,76 @@
+{
+  "status": "CACHE_DRAFT_ONLY_NOT_APPLIED_NOT_PLATFORM_EXECUTED",
+  "baseline": {
+    "android-as/app/src/main/java/com/rowan/iot/MainApplication.kt": "18d0de1b268fcf114dd9038773f867b4635b3001228b1c3d155f92f99358a8b8",
+    "android-as/app/src/main/kotlin/com/rowan/iot/app/AppServices.kt": "25ed75e45ab57f1fc6363f7e68c7a4b8d15db18960990955177253a03033990d",
+    "ios-as/Rowan/App/RowanAppServices.swift": "f92b5cc72f4507aebd314c92f47efb007a34c4237d98007a2e05cdef649cf208",
+    "ios-as/Rowan/AppDelegate.swift": "0c1c8fc04904ae98d3cd2a89f83219b194a791d5899e6cc43c03630ea62bd800",
+    "ios-as/Rowan.xcodeproj/project.pbxproj": "3e57e656ed313494c95ece10814cbc35ded0e16992854f3c335ce21564c8bb21"
+  },
+  "newPaths": [
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/presentation/PresentationService.kt",
+    "android-as/app/src/main/kotlin/com/rowan/iot/platform/presentation/AndroidPresentationSystemSource.kt",
+    "ios-as/Rowan/Domain/Presentation/PresentationService.swift",
+    "ios-as/Rowan/Platform/Presentation/UIKitPresentationSystemSource.swift",
+    "android-as/app/src/test/kotlin/com/rowan/iot/domain/presentation/PresentationServiceTest.kt",
+    "ios-as/Tests/Unit/PresentationServiceTests.swift"
+  ],
+  "readDependencies": {
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/presentation/PresentationOwner.kt": "4d46bf4b15a6389e62fa2d3ee81fa780e517f58fdc703ddeee21dbf7eec345d3",
+    "ios-as/Rowan/Domain/Presentation/PresentationOwner.swift": "cbe94d4129923362d3cb7a2d484b98611af3a73c81305632533756a6f2a4efa5",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/account/AccountService.kt": "0b1287df72cc8ee34caf308503eb914b456d8ae850e332ccbace1367b9cde189",
+    "ios-as/Rowan/Domain/Account/AccountService.swift": "03951b345697b8bc8aac19bf20dc54d4f8463e8eebc98c691cae474939a303a7",
+    "ios-as/Rowan/Info.plist": "0a142fd69804d12aab82c76d638ba49407cd04acfec932d900926c1961cfdc96"
+  },
+  "testStage": {
+    "android-as/app/src/main/java/com/rowan/iot/MainApplication.kt": "18d0de1b268fcf114dd9038773f867b4635b3001228b1c3d155f92f99358a8b8",
+    "android-as/app/src/main/kotlin/com/rowan/iot/app/AppServices.kt": "25ed75e45ab57f1fc6363f7e68c7a4b8d15db18960990955177253a03033990d",
+    "ios-as/Rowan/App/RowanAppServices.swift": "f92b5cc72f4507aebd314c92f47efb007a34c4237d98007a2e05cdef649cf208",
+    "ios-as/Rowan/AppDelegate.swift": "0c1c8fc04904ae98d3cd2a89f83219b194a791d5899e6cc43c03630ea62bd800",
+    "ios-as/Rowan.xcodeproj/project.pbxproj": "f5668d6d5407622b64a57c42dfc4ea46d6562db2094454af8de3aaf5c78b84e9",
+    "android-as/app/src/test/kotlin/com/rowan/iot/domain/presentation/PresentationServiceTest.kt": "41b291c3ae94b1396fe7c6017a9fb06ed67704ba2500ff05cd09cc216c7e6cb5",
+    "ios-as/Tests/Unit/PresentationServiceTests.swift": "ee0d1634794d629dd07364614edb7f05630a501f8b779697e050b4e80a4f4aff"
+  },
+  "finalStage": {
+    "android-as/app/src/main/java/com/rowan/iot/MainApplication.kt": "ed69458671e8ee64fe94e891a28800d596fad046317b4c14c63f2e1481d5ed28",
+    "android-as/app/src/main/kotlin/com/rowan/iot/app/AppServices.kt": "6b8cbb507323e024eb8afedede9524191c287d7253bd9bcac88ef1bb66e7d469",
+    "ios-as/Rowan/App/RowanAppServices.swift": "c8f98d289b09edd5af1f6e27420edf03f2c0d055ade96748da4d42fe141596e7",
+    "ios-as/Rowan/AppDelegate.swift": "ad2fbc7759fdcf4c9f6cd3bafb672b66af1701047af2db874cce0dae4055d497",
+    "ios-as/Rowan.xcodeproj/project.pbxproj": "2b36652b9779fe015a1084b4a2c3e54dcc83292ba60218f9815550e3a1589e6f",
+    "android-as/app/src/test/kotlin/com/rowan/iot/domain/presentation/PresentationServiceTest.kt": "41b291c3ae94b1396fe7c6017a9fb06ed67704ba2500ff05cd09cc216c7e6cb5",
+    "ios-as/Tests/Unit/PresentationServiceTests.swift": "ee0d1634794d629dd07364614edb7f05630a501f8b779697e050b4e80a4f4aff",
+    "android-as/app/src/main/kotlin/com/rowan/iot/domain/presentation/PresentationService.kt": "2ede5b92ecd794d5e875b2406b553c051e6313cf28c0321ec03de4c60d0be344",
+    "android-as/app/src/main/kotlin/com/rowan/iot/platform/presentation/AndroidPresentationSystemSource.kt": "127fc0ffdece90fe1984506c9cebd46f625dd0c2d2e90bc6b00490b90d353a57",
+    "ios-as/Rowan/Domain/Presentation/PresentationService.swift": "b00114e7aebedac97af83c272765be4b72674e98a4a5b2e971068b401d7eab71",
+    "ios-as/Rowan/Platform/Presentation/UIKitPresentationSystemSource.swift": "ebba8361c5987535ac4caf7270ee5423a294315b96c3761c92603bed5fcc88ad"
+  },
+  "patches": {
+    "tests.patch": "884b62896a93c9e2d0a04e470b2884366b491068d1d269e6e1f92d4907806321",
+    "implementation.patch": "8b079372496f12da288c9b466b6c2f64366989a45d318319ba4ddee646e42134"
+  },
+  "pbxRegistration": {
+    "ios-as/Tests/Unit/PresentationServiceTests.swift": {
+      "fileReference": "71EA00FBDE9654E3A55C6AF0",
+      "buildFile": "CE65F1E38A0D5249DD8BBF5B",
+      "group": "EEFE21A1443933CA4DE017DA",
+      "phase": "B6F43314D0693B2B792DAE17"
+    },
+    "ios-as/Rowan/Domain/Presentation/PresentationService.swift": {
+      "fileReference": "16BA34838D5E591862B9EB98",
+      "buildFile": "8AE0D73063C9C11BF83C9E27",
+      "group": "13B07FAE1A68108700A75B9A",
+      "phase": "13B07F871A680F5B00A75B9A"
+    },
+    "ios-as/Rowan/Platform/Presentation/UIKitPresentationSystemSource.swift": {
+      "fileReference": "3964945E28DA0EA9E63F2378",
+      "buildFile": "ABECC6200DD1FDC110BF1937",
+      "group": "13B07FAE1A68108700A75B9A",
+      "phase": "13B07F871A680F5B00A75B9A"
+    }
+  },
+  "definitions": {
+    "android": 12,
+    "ios": 16
+  },
+  "execution": "Tests authored before service/adapter implementation; no RED/GREEN, platform/SDK, Swift or network backend execution"
+}

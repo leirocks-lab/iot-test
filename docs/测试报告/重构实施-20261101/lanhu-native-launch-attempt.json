@@ -1,0 +1,16 @@
+{
+  "timeRecordedUtc": "2026-11-01T19:36:31.289886+00:00",
+  "status": "LAUNCH_OUTCOME_UNKNOWN_USER_INTERRUPTED",
+  "browser": "Edge",
+  "api": "sky.launch_app",
+  "executable": "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
+  "installedVersion": "156.0.4314.58",
+  "singleCallElapsedSecondsApprox": 1218,
+  "toolResult": "aborted by user",
+  "windowHandleReturned": false,
+  "projectOrLoginObserved": false,
+  "navigationAttempted": false,
+  "followupBrowserCalls": 0,
+  "createdWindowCleanup": "UNKNOWN_NO_BOUND_WINDOW",
+  "investigationEndedByRoot": true
+}

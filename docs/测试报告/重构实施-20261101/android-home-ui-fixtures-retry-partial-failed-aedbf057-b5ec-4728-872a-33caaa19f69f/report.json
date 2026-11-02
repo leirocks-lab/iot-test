@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "runId": "aedbf057-b5ec-4728-872a-33caaa19f69f",
+  "fixtureOnly": true,
+  "businessHttpDelegate": "none",
+  "realHttpAcceptance": false,
+  "realCameraOrHardwareAcceptance": false,
+  "iosRuntimeAcceptance": false,
+  "pixelAcceptance": false,
+  "targetPackage": "com.rowan.iot.dev.refactor",
+  "sdk": 36,
+  "targetApkSha256": "ef3043ea0ccac32a6dea78e6b308cbcc28c047bb6c97b606444294663b52f549",
+  "testApkSha256": "0cf2f2f91c6b93cbdb8fad30c2212457ba26c692a28db7ab6c947c77bb8478f1",
+  "gatewayDeniedRequests": 0,
+  "results": [
+    {
+      "id": "empty-home",
+      "result": "passed",
+      "geometryResult": "passed",
+      "artifactNames": [
+        "00-empty-home.png"
+      ]
+    },
+    {
+      "id": "multiple-rooms-same-name-and-opaque-id",
+      "result": "failed",
+      "code": "fixture_assertion_failed"
+    },
+    {
+      "id": "runner",
+      "result": "failed",
+      "code": "fixture_runner_failure"
+    }
+  ],
+  "artifacts": [
+    {
+      "caseId": "empty-home",
+      "name": "00-empty-home.png",
+      "sha256": "7aef46b6736702e236701d78e5df3af53d4c1a40fb333b8ceb29ddc9240420b6",
+      "bytes": 53902,
+      "realWindowFrame": true,
+      "semanticGuardBeforeAfter": true,
+      "geometry": {
+        "windowWidth": 1080,
+        "windowHeight": 2400,
+        "density": 2.625,
+        "fontScale": 1,
+        "nodes": [
+          {
+            "id": "home_title",
+            "text": "首页",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              42,
+              163,
+              1038,
+              277
+            ],
+            "visibleBounds": [
+              42,
+              163,
+              1038,
+              277
+            ]
+          },
+          {
+            "id": "home_room_tabs",
+            "text": "",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              42,
+              277,
+              1038,
+              408
+            ],
+            "visibleBounds": [
+              42,
+              277,
+              1038,
+              408
+            ]
+          },
+          {
+            "id": "home_room_all",
+            "text": "全屋",
+            "selected": true,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              42,
+              277,
+              273,
+              403
+            ],
+            "visibleBounds": [
+              42,
+              277,
+              273,
+              403
+            ]
+          },
+          {
+            "id": "home_room_status",
+            "text": "还没有设备",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              42,
+              408,
+              1038,
+              461
+            ],
+            "visibleBounds": [
+              42,
+              408,
+              1038,
+              461
+            ]
+          },
+          {
+            "id": "home_selection_count",
+            "text": "已选中 0 个设备",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              0,
+              132,
+              0,
+              132
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_cancel",
+            "text": "取消",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              132,
+              0,
+              132
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_done",
+            "text": "完成",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              132,
+              0,
+              132
+            ],
+            "visibleBounds": null
+          }
+        ]
+      },
+      "frameFence": {
+        "requestedNanos": 288406369763,
+        "completedVsyncNanos": 288411169752
+      },
+      "geometryResult": "passed",
+      "visualResult": "not_reviewed"
+    }
+  ],
+  "nativeNavigation": [],
+  "limits": [
+    "Real HomeActivity/HomeRoomTabs with test repository, not real HTTP/MQTT proof.",
+    "No DELETE/PATCH/binding/SMTP/camera/gallery/permissions; original secure account storage never read or cleared.",
+    "Geometry and native navigation are separate from pixel/design approval. S031 is optional when its reviewed source is present.",
+    "Window screenshots contain public fixtures only; no system picker or other app surface is captured."
+  ]
+}

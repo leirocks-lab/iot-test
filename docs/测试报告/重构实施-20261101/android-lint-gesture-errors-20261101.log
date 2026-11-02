@@ -1,0 +1,134 @@
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+> Task :app:buildKotlinToolingMetadata UP-TO-DATE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateAutolinkingNewArchitectureFiles UP-TO-DATE
+> Task :app:generateAutolinkingPackageList UP-TO-DATE
+> Task :app:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :app:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :app:generateReactNativeEntryPoint UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDevelopmentReleaseBuild UP-TO-DATE
+> Task :app:generateDevelopmentReleaseBuildConfig
+> Task :app:checkDevelopmentReleaseAarMetadata UP-TO-DATE
+> Task :app:createBundleDevelopmentReleaseJsAndAssets UP-TO-DATE
+> Task :app:generateDevelopmentReleaseResValues
+> Task :app:mapDevelopmentReleaseSourceSetPaths
+> Task :app:generateDevelopmentReleaseResources
+> Task :app:packageDevelopmentReleaseResources
+> Task :app:parseDevelopmentReleaseLocalResources
+> Task :app:createDevelopmentReleaseCompatibleScreenManifests
+> Task :app:extractDeepLinksDevelopmentRelease
+> Task :app:processDevelopmentReleaseMainManifest
+> Task :app:processDevelopmentReleaseManifest
+> Task :app:processDevelopmentReleaseManifestForPackage
+> Task :app:javaPreCompileDevelopmentRelease UP-TO-DATE
+> Task :app:extractProguardFiles UP-TO-DATE
+> Task :app:preDevelopmentReleaseUnitTestBuild UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseResources
+> Task :app:processDevelopmentReleaseResources
+> Task :app:compileDevelopmentReleaseKotlin
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/AccountActivity.kt:43:49 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/AuthFlowLayout.kt:61:69 'static field SOFT_INPUT_ADJUST_RESIZE: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/WelcomeActivity.kt:28:46 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActivity.kt:59:20 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/products/ProductViews.kt:38:16 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/RoomsActivity.kt:70:105 'fun onBackPressed(): Unit' is deprecated. Platform callback retained for host minSdk compatibility.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/RoomsActivity.kt:102:20 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/RoomsActivity.kt:242:57 'static field SOFT_INPUT_ADJUST_RESIZE: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/RoomsActivity.kt:267:22 'fun onBackPressed(): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/AccountActivity.kt:43:49 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/AuthFlowLayout.kt:61:69 'static field SOFT_INPUT_ADJUST_RESIZE: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/WelcomeActivity.kt:28:46 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActivity.kt:59:20 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/products/ProductViews.kt:38:16 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/RoomsActivity.kt:70:105 'fun onBackPressed(): Unit' is deprecated. Platform callback retained for host minSdk compatibility.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/RoomsActivity.kt:102:20 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/RoomsActivity.kt:242:57 'static field SOFT_INPUT_ADJUST_RESIZE: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/RoomsActivity.kt:267:22 'fun onBackPressed(): Unit' is deprecated. Deprecated in Java.
+
+> Task :app:compileDevelopmentReleaseJavaWithJavac
+> Task :app:generateDevelopmentReleaseLintReportModel
+> Task :app:bundleDevelopmentReleaseClassesToCompileJar
+> Task :app:generateDevelopmentReleaseUnitTestLintModel
+> Task :app:lintAnalyzeDevelopmentRelease
+> Task :app:lintAnalyzeDevelopmentReleaseUnitTest
+
+> Task :app:lintReportDevelopmentRelease
+Wrote HTML report to file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/build/reports/lint-results-developmentRelease.html
+Lint found 3 errors and 19 warnings. First failure:
+D:\workspace\rowaniot\rowan-iot-app\android-as\app\src\main\kotlin\com\rowan\iot\features\auth\RecoveryActivity.kt:141: Error: onBackPressed is no longer called for back gestures; migrate to AndroidX's backward compatible OnBackPressedDispatcher [GestureBackNavigation]
+    @Deprecated("Retained native back handling") override fun onBackPressed() = back()
+                                                              ~~~~~~~~~~~~~
+
+
+> Task :app:lintDevelopmentRelease FAILED
+Lint found 3 errors, 19 warnings. First failure:
+
+D:\workspace\rowaniot\rowan-iot-app\android-as\app\src\main\kotlin\com\rowan\iot\features\auth\RecoveryActivity.kt:141: Error: onBackPressed is no longer called for back gestures; migrate to AndroidX's backward compatible OnBackPressedDispatcher [GestureBackNavigation]
+    @Deprecated("Retained native back handling") override fun onBackPressed() = back()
+                                                              ~~~~~~~~~~~~~
+
+The full lint text report is located at:
+  D:\workspace\rowaniot\rowan-iot-app\android-as\app\build\intermediates\lint_intermediate_text_report\developmentRelease\lintReportDevelopmentRelease\lint-results-developmentRelease.txt
+
+[Incubating] Problems report is available at: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:lintDevelopmentRelease'.
+> Lint found errors in the project; aborting build.
+  
+  Fix the issues identified by lint, or create a baseline to see only new errors.
+  To create a baseline, run `gradlew updateLintBaseline` after adding the following to the module's build.gradle file:
+  ```
+  android {
+      lint {
+          baseline = file("lint-baseline.xml")
+      }
+  }
+  ```
+  For more details, see https://developer.android.com/studio/write/lint#snapshot
+  
+  Lint found 3 errors, 19 warnings. First failure:
+  
+  D:\workspace\rowaniot\rowan-iot-app\android-as\app\src\main\kotlin\com\rowan\iot\features\auth\RecoveryActivity.kt:141: Error: onBackPressed is no longer called for back gestures; migrate to AndroidX's backward compatible OnBackPressedDispatcher [GestureBackNavigation]
+      @Deprecated("Retained native back handling") override fun onBackPressed() = back()
+                                                                ~~~~~~~~~~~~~
+  
+  The full lint text report is located at:
+    D:\workspace\rowaniot\rowan-iot-app\android-as\app\build\intermediates\lint_intermediate_text_report\developmentRelease\lintReportDevelopmentRelease\lint-results-developmentRelease.txt
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 2m 43s
+42 actionable tasks: 22 executed, 20 up-to-date

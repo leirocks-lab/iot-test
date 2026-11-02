@@ -183,14 +183,22 @@ Metro 负责开发与构建期 RN 打包，非生产手机常驻服务。Expo �
 4. 扩展范围内定时、分享、解绑与升级任务；验证退出再进入、切账号、前后台及重连。
 5. 完成视觉、性能和业务回归；有动态发布授权时再按代码规范验证坏包、不兼容、断网及回滚。
 
-以上是技术验证及后续实施建议，不表示全部业务重写或发布平台建设已获授权。当前唯一业务范围表仍需恢复或确认正式位置后用于逐项范围核对。
+本轮用户已明确授权同步实现范围表内全部 Android、iOS 及 RN 功能。远程发布平台不因该授权自动纳入；仍按范围表判定。当前唯一业务范围表采用用户确认的 docs/prd/智能家居物联网项目计划&需求范围.xlsx，逐项追踪见重构实施总计划。
 
 ## 12. 官方技术依据
 
-本次评估以旧工程 RN 0.86.3 为候选，不代表新工程版本已冻结。实施前按最终版本再次查阅文档。
+初始评估以旧工程 RN 0.86.3 为候选；当前新 RN 独立工程已采用该版本并保存自己的依赖锁文件。后续变更 API 继续核对匹配版本官方文档，不能用 Android 结果替代 iOS 集成结果。
 
 - [RN 0.86 Turbo Native Modules](https://reactnative.dev/docs/0.86/turbo-native-modules-introduction)
 - [RN 0.86 原生事件](https://reactnative.dev/docs/0.86/the-new-architecture/native-modules-custom-events)
 - [RN 0.86 Codegen](https://reactnative.dev/docs/0.86/the-new-architecture/using-codegen)
 - [RN 0.86 Swift 接入](https://reactnative.dev/docs/0.86/the-new-architecture/turbo-modules-with-swift)
 - [RN 0.86 Codegen 类型](https://reactnative.dev/docs/0.86/appendix)
+
+## 13. 当前只读桥接实现边界
+
+major2 处于本轮集成阶段，尚未作为外部兼容版本发布。原生授权上下文绑定页面 Intent/容器及账号修订，RN 不能仅凭传入设备 ID 取得访问权限。桥接快照仅白名单传递标题、品类、阶段、在线三态、陈旧标志、快照可用性、固定错误码以及序号；不传 reported 原文、用户身份、thing reference 或认证参数。
+
+每个观察句柄区分桥接投递序号、原生权威版本及连接 epoch。closed 摘要清空元数据并保留最后 epoch/权威版本，旧会话不能通过快照查询复活。订阅先于 observe，初始交错及事件缺口使用同一句柄 getDeviceSnapshot 重同步，不新开第二套设备连接。
+
+原生→JS 每句柄至多一个事件在途及一个最新待发 DTO；JS 收件后 acknowledgeDeviceEvent 只确认投递，绝不表示状态合法、云端接受或设备执行成功。未确认期间后续变化覆盖待发 DTO；产生的序号缺口由读取最新快照恢复。页面不可见时停止投递，释放、账号变化及容器销毁分别隔离和清理。对应 Android JVM/RN 测试、实际原生 MQTT 及 iOS 源码/运行结果须分别记录；当前代码不意味着设备控制、完整 UI 或双端运行已通过。

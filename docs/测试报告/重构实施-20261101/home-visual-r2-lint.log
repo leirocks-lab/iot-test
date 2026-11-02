@@ -1,0 +1,79 @@
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+> Task :app:buildKotlinToolingMetadata UP-TO-DATE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateAutolinkingNewArchitectureFiles UP-TO-DATE
+> Task :app:generateAutolinkingPackageList UP-TO-DATE
+> Task :app:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :app:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :app:generateReactNativeEntryPoint UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDevelopmentReleaseBuild UP-TO-DATE
+> Task :app:generateDevelopmentReleaseBuildConfig
+> Task :app:checkDevelopmentReleaseAarMetadata UP-TO-DATE
+> Task :app:createBundleDevelopmentReleaseJsAndAssets UP-TO-DATE
+> Task :app:generateDevelopmentReleaseResValues UP-TO-DATE
+> Task :app:mapDevelopmentReleaseSourceSetPaths UP-TO-DATE
+> Task :app:generateDevelopmentReleaseResources UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseResources UP-TO-DATE
+> Task :app:packageDevelopmentReleaseResources UP-TO-DATE
+> Task :app:parseDevelopmentReleaseLocalResources UP-TO-DATE
+> Task :app:createDevelopmentReleaseCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDevelopmentRelease UP-TO-DATE
+> Task :app:processDevelopmentReleaseMainManifest UP-TO-DATE
+> Task :app:processDevelopmentReleaseManifest UP-TO-DATE
+> Task :app:processDevelopmentReleaseManifestForPackage UP-TO-DATE
+> Task :app:processDevelopmentReleaseResources UP-TO-DATE
+> Task :app:javaPreCompileDevelopmentRelease UP-TO-DATE
+> Task :app:preDevelopmentReleaseAndroidTestBuild SKIPPED
+> Task :app:generateDevelopmentReleaseAndroidTestResValues UP-TO-DATE
+> Task :app:extractProguardFiles UP-TO-DATE
+> Task :app:preDevelopmentReleaseUnitTestBuild UP-TO-DATE
+
+> Task :app:compileDevelopmentReleaseKotlin
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActivity.kt:136:20 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActivity.kt:346:46 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+
+> Task :app:compileDevelopmentReleaseJavaWithJavac
+> Task :app:bundleDevelopmentReleaseClassesToCompileJar
+> Task :app:generateDevelopmentReleaseLintReportModel
+> Task :app:generateDevelopmentReleaseAndroidTestLintModel
+> Task :app:generateDevelopmentReleaseUnitTestLintModel
+> Task :app:lintAnalyzeDevelopmentRelease
+> Task :app:lintAnalyzeDevelopmentReleaseAndroidTest
+> Task :app:lintAnalyzeDevelopmentReleaseUnitTest
+
+> Task :app:lintReportDevelopmentRelease
+Wrote HTML report to file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/build/reports/lint-results-developmentRelease.html
+
+> Task :app:lintDevelopmentRelease
+
+[Incubating] Problems report is available at: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 2m 30s
+45 actionable tasks: 12 executed, 33 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.3.1/userguide/configuration_cache_enabling.html

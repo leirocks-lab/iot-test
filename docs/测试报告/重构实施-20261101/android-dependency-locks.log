@@ -1,0 +1,169 @@
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+
+> Task :resolveAndLockAll
+Locking :app:_internal-unified-test-platform-android-device-provider-ddmlib
+Locking :app:_internal-unified-test-platform-android-device-provider-gradle
+Locking :app:_internal-unified-test-platform-android-driver-instrumentation
+Locking :app:_internal-unified-test-platform-android-test-plugin
+Locking :app:_internal-unified-test-platform-android-test-plugin-host-additional-test-output
+Locking :app:_internal-unified-test-platform-android-test-plugin-host-apk-installer
+Locking :app:_internal-unified-test-platform-android-test-plugin-host-coverage
+Locking :app:_internal-unified-test-platform-android-test-plugin-host-device-info
+Locking :app:_internal-unified-test-platform-android-test-plugin-host-emulator-control
+Locking :app:_internal-unified-test-platform-android-test-plugin-host-logcat
+Locking :app:_internal-unified-test-platform-android-test-plugin-result-listener-gradle
+Locking :app:_internal-unified-test-platform-core
+Locking :app:_internal-unified-test-platform-launcher
+Locking :app:_internal_prefab_binary
+Locking :app:androidApis
+Locking :app:androidJdkImage
+Locking :app:androidTestUtil
+Locking :app:coreLibraryDesugaring
+Locking :app:developmentDebugAndroidTestAnnotationProcessorClasspath
+Locking :app:developmentDebugAndroidTestCompileClasspath
+Locking :app:developmentDebugAndroidTestRuntimeClasspath
+Locking :app:developmentDebugAnnotationProcessorClasspath
+Locking :app:developmentDebugCompileClasspath
+Locking :app:developmentDebugOptimizedAnnotationProcessorClasspath
+Locking :app:developmentDebugOptimizedCompileClasspath
+Locking :app:developmentDebugOptimizedReverseMetadataValues
+Locking :app:developmentDebugOptimizedRuntimeClasspath
+Locking :app:developmentDebugOptimizedUnitTestAnnotationProcessorClasspath
+Locking :app:developmentDebugOptimizedUnitTestCompileClasspath
+Locking :app:developmentDebugOptimizedUnitTestRuntimeClasspath
+Locking :app:developmentDebugOptimizedWearBundling
+Locking :app:developmentDebugReverseMetadataValues
+Locking :app:developmentDebugRuntimeClasspath
+Locking :app:developmentDebugUnitTestAnnotationProcessorClasspath
+Locking :app:developmentDebugUnitTestCompileClasspath
+Locking :app:developmentDebugUnitTestRuntimeClasspath
+Locking :app:developmentDebugWearBundling
+Locking :app:developmentReleaseAnnotationProcessorClasspath
+Locking :app:developmentReleaseCompileClasspath
+Locking :app:developmentReleaseReverseMetadataValues
+Locking :app:developmentReleaseRuntimeClasspath
+Locking :app:developmentReleaseUnitTestAnnotationProcessorClasspath
+Locking :app:developmentReleaseUnitTestCompileClasspath
+Locking :app:developmentReleaseUnitTestRuntimeClasspath
+Locking :app:developmentReleaseWearBundling
+Locking :app:kotlinBuildToolsApiClasspath
+Locking :app:kotlinCompilerClasspath
+Locking :app:kotlinCompilerPluginClasspath
+Locking :app:kotlinCompilerPluginClasspathDevelopmentDebug
+Locking :app:kotlinCompilerPluginClasspathDevelopmentDebugAndroidTest
+Locking :app:kotlinCompilerPluginClasspathDevelopmentDebugOptimized
+Locking :app:kotlinCompilerPluginClasspathDevelopmentDebugOptimizedUnitTest
+Locking :app:kotlinCompilerPluginClasspathDevelopmentDebugUnitTest
+Locking :app:kotlinCompilerPluginClasspathDevelopmentRelease
+Locking :app:kotlinCompilerPluginClasspathDevelopmentReleaseUnitTest
+Locking :app:kotlinCompilerPluginClasspathPreviewDebug
+Locking :app:kotlinCompilerPluginClasspathPreviewDebugAndroidTest
+Locking :app:kotlinCompilerPluginClasspathPreviewDebugOptimized
+Locking :app:kotlinCompilerPluginClasspathPreviewDebugOptimizedUnitTest
+Locking :app:kotlinCompilerPluginClasspathPreviewDebugUnitTest
+Locking :app:kotlinCompilerPluginClasspathPreviewRelease
+Locking :app:kotlinCompilerPluginClasspathPreviewReleaseUnitTest
+Locking :app:kotlinCompilerPluginClasspathProductionDebug
+Locking :app:kotlinCompilerPluginClasspathProductionDebugAndroidTest
+Locking :app:kotlinCompilerPluginClasspathProductionDebugOptimized
+Locking :app:kotlinCompilerPluginClasspathProductionDebugOptimizedUnitTest
+Locking :app:kotlinCompilerPluginClasspathProductionDebugUnitTest
+Locking :app:kotlinCompilerPluginClasspathProductionRelease
+Locking :app:kotlinCompilerPluginClasspathProductionReleaseUnitTest
+Locking :app:kotlinKlibCommonizerClasspath
+Locking :app:kotlinNativeCompilerPluginClasspath
+Locking :app:lintChecks
+Locking :app:lintPublish
+Locking :app:previewDebugAndroidTestAnnotationProcessorClasspath
+Locking :app:previewDebugAndroidTestCompileClasspath
+Locking :app:previewDebugAndroidTestRuntimeClasspath
+Locking :app:previewDebugAnnotationProcessorClasspath
+Locking :app:previewDebugCompileClasspath
+Locking :app:previewDebugOptimizedAnnotationProcessorClasspath
+Locking :app:previewDebugOptimizedCompileClasspath
+Locking :app:previewDebugOptimizedReverseMetadataValues
+Locking :app:previewDebugOptimizedRuntimeClasspath
+Locking :app:previewDebugOptimizedUnitTestAnnotationProcessorClasspath
+Locking :app:previewDebugOptimizedUnitTestCompileClasspath
+Locking :app:previewDebugOptimizedUnitTestRuntimeClasspath
+Locking :app:previewDebugOptimizedWearBundling
+Locking :app:previewDebugReverseMetadataValues
+Locking :app:previewDebugRuntimeClasspath
+Locking :app:previewDebugUnitTestAnnotationProcessorClasspath
+Locking :app:previewDebugUnitTestCompileClasspath
+Locking :app:previewDebugUnitTestRuntimeClasspath
+Locking :app:previewDebugWearBundling
+Locking :app:previewReleaseAnnotationProcessorClasspath
+Locking :app:previewReleaseCompileClasspath
+Locking :app:previewReleaseReverseMetadataValues
+Locking :app:previewReleaseRuntimeClasspath
+Locking :app:previewReleaseUnitTestAnnotationProcessorClasspath
+Locking :app:previewReleaseUnitTestCompileClasspath
+Locking :app:previewReleaseUnitTestRuntimeClasspath
+Locking :app:previewReleaseWearBundling
+Locking :app:productionDebugAndroidTestAnnotationProcessorClasspath
+Locking :app:productionDebugAndroidTestCompileClasspath
+Locking :app:productionDebugAndroidTestRuntimeClasspath
+Locking :app:productionDebugAnnotationProcessorClasspath
+Locking :app:productionDebugCompileClasspath
+Locking :app:productionDebugOptimizedAnnotationProcessorClasspath
+Locking :app:productionDebugOptimizedCompileClasspath
+Locking :app:productionDebugOptimizedReverseMetadataValues
+Locking :app:productionDebugOptimizedRuntimeClasspath
+Locking :app:productionDebugOptimizedUnitTestAnnotationProcessorClasspath
+Locking :app:productionDebugOptimizedUnitTestCompileClasspath
+Locking :app:productionDebugOptimizedUnitTestRuntimeClasspath
+Locking :app:productionDebugOptimizedWearBundling
+Locking :app:productionDebugReverseMetadataValues
+Locking :app:productionDebugRuntimeClasspath
+Locking :app:productionDebugUnitTestAnnotationProcessorClasspath
+Locking :app:productionDebugUnitTestCompileClasspath
+Locking :app:productionDebugUnitTestRuntimeClasspath
+Locking :app:productionDebugWearBundling
+Locking :app:productionReleaseAnnotationProcessorClasspath
+Locking :app:productionReleaseCompileClasspath
+Locking :app:productionReleaseReverseMetadataValues
+Locking :app:productionReleaseRuntimeClasspath
+Locking :app:productionReleaseUnitTestAnnotationProcessorClasspath
+Locking :app:productionReleaseUnitTestCompileClasspath
+Locking :app:productionReleaseUnitTestRuntimeClasspath
+Locking :app:productionReleaseWearBundling
+Persisted dependency lock state for settings file 'settings.gradle'
+Persisted dependency lock state for buildscript of root project 'RowanAndroid'
+Persisted dependency lock state for project ':app'
+Persisted dependency lock state for settings file '..\app-rn\node_modules\@react-native\gradle-plugin\settings.gradle.kts'
+Persisted dependency lock state for unknown
+Persisted dependency lock state for buildscript of project ':gradle-plugin'
+Persisted dependency lock state for project ':gradle-plugin:react-native-gradle-plugin'
+Persisted dependency lock state for project ':gradle-plugin:settings-plugin'
+Persisted dependency lock state for project ':gradle-plugin:shared'
+
+[Incubating] Problems report is available at: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 15s
+11 actionable tasks: 1 executed, 10 up-to-date

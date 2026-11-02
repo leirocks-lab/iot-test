@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" tests="25" skipped="0" failures="0" errors="0" timestamp="2026-11-01T23:04:21.957Z" hostname="DESKTOP-2AM89R2" time="0.239">
+  <properties/>
+  <testcase name="throwingDiagnosticObserverCannotReplaceSdkOperationResult" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.065"/>
+  <testcase name="genericReasonTypedFallbackIsBoundedAndNeverFormatsTheSdkThrowable" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.004"/>
+  <testcase name="connectWaitsForConnackAndConfiguresCleanMqtt311TlsAndNoReplay" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.003"/>
+  <testcase name="diagnosticsNeverReadMessagesToStringOrRawStackAndBoundCauseWalk" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.002"/>
+  <testcase name="closeMarksClosedAndFailsWaitersBeforeAnyPotentiallyBlockingSdkTeardown" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.011"/>
+  <testcase name="plainConnectCredentialsAreOnlyPassedForTheUnsignedBranch" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.005"/>
+  <testcase name="paho443HandshakeRejectsAuthorityWithoutExplicitPortInsteadOfRewritingItsSignature" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.0"/>
+  <testcase name="inboundPayloadIsDetachedAndCallbacksAfterCloseAreSuppressed" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.002"/>
+  <testcase name="invalidDeliveryFlagsOrWildcardTopicsNeverReachSdk" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.006"/>
+  <testcase name="sdkSetupFailureAlsoNotifiesDiagnosticsAndSchedulesTeardown" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.002"/>
+  <testcase name="disconnectIsSanitizedAndDoesNotInitiateAutomaticReconnectOrReplay" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.003"/>
+  <testcase name="callbackAndSynchronousSdkFailuresMapToFiniteFailuresWithoutRawCauses" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.008"/>
+  <testcase name="pureCreationUsesExactUriServerClientIdAndMemoryPersistenceWithoutConnecting" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.042"/>
+  <testcase name="publishCompletionIsPubackOnlyAndPayloadIsDetachedBeforeSdkOwnership" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.006"/>
+  <testcase name="unsubscribeWaitsForItsOwnActionCallback" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.008"/>
+  <testcase name="cancellingOneSubscribeDoesNotCloseTheSharedClientOrCompleteAnotherWaiter" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.007"/>
+  <testcase name="diagnosticsCoverCallbackSynchronousAndConnectionLossSdkFailures" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.009"/>
+  <testcase name="stsSignedUriDoesNotEnterMqttConnectUsernameOrPassword" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.002"/>
+  <testcase name="inlineAndDuplicateSdkCallbacksCompleteOnlyTheOriginalOperationOnce" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.002"/>
+  <testcase name="cancellingPublishDoesNotReplayOrDisconnectAndLatePubackIsIgnored" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.005"/>
+  <testcase name="diagnosticUsesFiniteCauseCategoriesWithoutRawSdkDetails" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.005"/>
+  <testcase name="explicitAuthenticationReasonHasPriorityOverNestedTransientCause" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.007"/>
+  <testcase name="genericMqttReasonUsesTypedTransientCauseConsistentlyForCallbackAndSyncFailures" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.014"/>
+  <testcase name="noopLoggerHasPublicNoargConstructionAndNeverFormatsSensitiveArguments" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.005"/>
+  <testcase name="subscribeRequiresAnAckForEveryTopicAndEveryGrantMustBeExactlyOne" classname="com.rowan.iot.data.mqtt.paho.PahoBrokerTransportFactoryTest" time="0.011"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

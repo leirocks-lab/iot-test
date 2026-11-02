@@ -1,0 +1,88 @@
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateAutolinkingNewArchitectureFiles UP-TO-DATE
+> Task :app:generateAutolinkingPackageList UP-TO-DATE
+> Task :app:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :app:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :app:generateReactNativeEntryPoint UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDevelopmentDebugBuild UP-TO-DATE
+> Task :app:generateDevelopmentDebugBuildConfig UP-TO-DATE
+> Task :app:checkDevelopmentDebugAarMetadata UP-TO-DATE
+> Task :app:generateDevelopmentDebugResValues UP-TO-DATE
+> Task :app:mapDevelopmentDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDevelopmentDebugResources UP-TO-DATE
+> Task :app:mergeDevelopmentDebugResources UP-TO-DATE
+> Task :app:packageDevelopmentDebugResources UP-TO-DATE
+> Task :app:parseDevelopmentDebugLocalResources UP-TO-DATE
+> Task :app:createDevelopmentDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDevelopmentDebug UP-TO-DATE
+> Task :app:processDevelopmentDebugMainManifest UP-TO-DATE
+> Task :app:processDevelopmentDebugManifest UP-TO-DATE
+> Task :app:processDevelopmentDebugManifestForPackage UP-TO-DATE
+> Task :app:processDevelopmentDebugResources UP-TO-DATE
+> Task :app:javaPreCompileDevelopmentDebug UP-TO-DATE
+> Task :app:preDevelopmentDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileDevelopmentDebugUnitTest UP-TO-DATE
+> Task :app:compileDevelopmentDebugKotlin
+> Task :app:compileDevelopmentDebugJavaWithJavac UP-TO-DATE
+> Task :app:bundleDevelopmentDebugClassesToCompileJar
+> Task :app:bundleDevelopmentDebugClassesToRuntimeJar
+> Task :app:processDevelopmentDebugJavaRes UP-TO-DATE
+
+> Task :app:compileDevelopmentDebugUnitTestKotlin
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/AccountServiceTest.kt:188:43 'val id: Long' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/AccountServiceTest.kt:192:74 'val id: Long' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/AccountServiceTest.kt:193:80 'val id: Long' is deprecated. Deprecated in Java.
+
+> Task :app:compileDevelopmentDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processDevelopmentDebugUnitTestJavaRes UP-TO-DATE
+
+> Task :app:testDevelopmentDebugUnitTest
+
+HttpDeviceShareCodeRepositoryTest > ordinaryReadStillRefreshesOnce FAILED
+    org.json.JSONException at JSONObject.java:596
+        Caused by: org.json.JSONException at JSONObject.java:596
+
+701 tests completed, 1 failed
+
+> Task :app:testDevelopmentDebugUnitTest FAILED
+
+[Incubating] Problems report is available at: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:testDevelopmentDebugUnitTest'.
+> There were failing tests. See the report at: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/build/reports/tests/testDevelopmentDebugUnitTest/index.html
+
+* Try:
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 1m 30s
+39 actionable tasks: 5 executed, 34 up-to-date

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.scan.ActualPhotoIoTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-11-01T18:07:37.689Z" hostname="DESKTOP-2AM89R2" time="0.049">
+  <properties/>
+  <testcase name="onlyOneConcurrentPageCanReserveTheSharedAdmission" classname="com.rowan.iot.domain.scan.ActualPhotoIoTest" time="0.012"/>
+  <testcase name="successCompletesOnceClosesTimerAndReleasesActualSlot" classname="com.rowan.iot.domain.scan.ActualPhotoIoTest" time="0.003"/>
+  <testcase name="pageBecomingStaleDuringBlockingReadCannotPublishPrivateDecodedResult" classname="com.rowan.iot.domain.scan.ActualPhotoIoTest" time="0.007"/>
+  <testcase name="executorRejectionBeforeDispatchReleasesAndSettlesOnce" classname="com.rowan.iot.domain.scan.ActualPhotoIoTest" time="0.002"/>
+  <testcase name="streamFailureIsFixedAndDoesNotLeakTheOriginalExceptionOrCause" classname="com.rowan.iot.domain.scan.ActualPhotoIoTest" time="0.001"/>
+  <testcase name="eightSecondTimeoutKeepsUncooperativeWorkerSlotAndDropsLateDecode" classname="com.rowan.iot.domain.scan.ActualPhotoIoTest" time="0.004"/>
+  <testcase name="oldCancelAndOldTimeoutCannotClearOrCancelTheNewOwner" classname="com.rowan.iot.domain.scan.ActualPhotoIoTest" time="0.002"/>
+  <testcase name="cancellingBlockingStreamSettlesUiButCannotReleaseActualIoAcrossPages" classname="com.rowan.iot.domain.scan.ActualPhotoIoTest" time="0.004"/>
+  <testcase name="timeoutWinningInsideWorkCannotBeOverwrittenByItsReturnedSuccess" classname="com.rowan.iot.domain.scan.ActualPhotoIoTest" time="0.001"/>
+  <testcase name="cancelledBeforeWorkerEntryRetainsAdmissionUntilEntryDrainsAndSkipsIo" classname="com.rowan.iot.domain.scan.ActualPhotoIoTest" time="0.002"/>
+  <testcase name="staleBeforeAdmissionDoesNotScheduleDispatchOrOpenAnything" classname="com.rowan.iot.domain.scan.ActualPhotoIoTest" time="0.001"/>
+  <testcase name="repeatedNewPagesDoNotCreateMoreActualWorkersOrQueuedReads" classname="com.rowan.iot.domain.scan.ActualPhotoIoTest" time="0.006"/>
+  <testcase name="deadlineSchedulerFailureDoesNotDispatchOrLeakAdmission" classname="com.rowan.iot.domain.scan.ActualPhotoIoTest" time="0.002"/>
+  <testcase name="repeatedCancelSettlesOnlyOnceAndNeverEarlyReleasesItsOwner" classname="com.rowan.iot.domain.scan.ActualPhotoIoTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

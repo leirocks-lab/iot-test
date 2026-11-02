@@ -1,0 +1,143 @@
+{
+  "runId": "2026-11-01T17-38-46.660Z",
+  "parentRunId": "2026-11-01T17-37-25.705Z",
+  "parentReportSha256": "ff9bfe78590a04b278b7a4aced3a37a7df0ada007ab17fe74fef9032d7d22685",
+  "scriptSha256": "b2182db9e10e9d868bb61c9c25fa96a643d2635d72e44e2188fcd1756f630119",
+  "cameraAppOpsSha256": "9b997bc8bc84a4e699ced92aa212620b5382062cb3e94f7a27a5ab179407cb2e",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "serial": "emulator-5554",
+  "installedArtifactSha256": "b8e50abf3df261d6bcfd556a5d9ea30ca8971e6da7f3d910ba22a7a87a94394f",
+  "sourceBefore": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "5d152ab3684c4f17415e9dd9487deb09b81d9fb9061488dd0ac755d28f7672cc",
+    "sourceFiles": 292
+  },
+  "sourceAfter": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "5d152ab3684c4f17415e9dd9487deb09b81d9fb9061488dd0ac755d28f7672cc",
+    "sourceFiles": 292
+  },
+  "sourceUnchanged": true,
+  "originalEnvironment": {
+    "size": {
+      "physical": "1080x2400",
+      "override": null
+    },
+    "density": {
+      "physical": "420",
+      "override": null
+    },
+    "fontScale": "1.0"
+  },
+  "originalPermission": {
+    "granted": false,
+    "flags": [
+      "USER_SENSITIVE_WHEN_DENIED",
+      "USER_SENSITIVE_WHEN_GRANTED"
+    ],
+    "appOp": "allow",
+    "uidAppOp": "ignore",
+    "packageEntryPresent": true
+  },
+  "environmentRestoration": {
+    "result": "通过",
+    "attempts": [
+      {
+        "kind": "size",
+        "completed": true
+      },
+      {
+        "kind": "density",
+        "completed": true
+      },
+      {
+        "kind": "font",
+        "completed": true
+      }
+    ],
+    "observed": {
+      "size": {
+        "physical": "1080x2400",
+        "override": null
+      },
+      "density": {
+        "physical": "420",
+        "override": null
+      },
+      "fontScale": "1.0"
+    }
+  },
+  "permissionRestoration": {
+    "result": "通过",
+    "attempts": [
+      {
+        "kind": "grant",
+        "completed": true
+      },
+      {
+        "kind": "flags",
+        "completed": true
+      },
+      {
+        "kind": "appOp",
+        "completed": true
+      }
+    ],
+    "observed": {
+      "granted": false,
+      "flags": [
+        "USER_SENSITIVE_WHEN_DENIED",
+        "USER_SENSITIVE_WHEN_GRANTED"
+      ],
+      "appOp": "allow",
+      "uidAppOp": "ignore",
+      "packageEntryPresent": true
+    },
+    "packageEntryPresenceMatches": true,
+    "historyRestored": false,
+    "comparison": "Strict grant/flags/UID mode; Android16 CAMERA effective package mode. Package entry/history is not restored."
+  },
+  "logout": {
+    "result": "阻塞",
+    "actionCount": 0,
+    "errorCode": "NORMAL_LOGOUT_UNCONFIRMED"
+  },
+  "dnsForwarding": {
+    "upstream": "192.168.31.1",
+    "bindAddress": "127.0.0.1",
+    "bindPort": 53,
+    "running": false,
+    "state": "closed",
+    "lastError": null,
+    "pending": 0,
+    "receivedQueries": 0,
+    "forwardedQueries": 0,
+    "forwardedReplies": 0,
+    "expired": 0,
+    "rejectedQueries": 0,
+    "rejectedReplies": 0,
+    "capacityDrops": 0,
+    "sendErrors": 0,
+    "socketErrors": 0,
+    "durationMs": 62440
+  },
+  "results": [
+    {
+      "id": "scan-denied-layout-flow",
+      "stage": "small-native-scan",
+      "geometryResult": "阻塞",
+      "errorCode": "VIEWPORT_UNCONFIRMED"
+    }
+  ],
+  "screenshots": [],
+  "scope": "Two native denied-camera Scan layouts only; no gallery selection or real camera frame capture.",
+  "limits": [
+    "Not pixel/visual/touch acceptance; online Lanhu version remains unverified.",
+    "No camera frame decoding, production QR parser, binding, hardware, iOS or whole scope acceptance.",
+    "No raw XML/dumpsys/CLI/account/gallery data is retained. Captures require native Scan identity, denied CAMERA and exact visible error before AND after screencap.",
+    "Restore display/font and compare strict CAMERA grant/flags/UID plus Android16 effective package mode; absent package default is allow. Package entry/history is not restored and UID AppOps are never explicitly written.",
+    "SIGINT/SIGTERM enter finally after bounded commands; force-kill cannot guarantee restoration."
+  ]
+}

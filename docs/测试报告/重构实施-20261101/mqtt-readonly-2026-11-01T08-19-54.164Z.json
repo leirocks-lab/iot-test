@@ -1,0 +1,63 @@
+{
+  "runId": "2026-11-01T08-19-54.164Z",
+  "execution": "Actual Node/MQTT.js service harness; NOT native/emulator MQTT acceptance",
+  "libraryVersion": "5.16.0",
+  "scriptSha256": "6529751fabff40ff0d67014d882f1f1f46c9dfd688fc8779a1429e1f55445f5f",
+  "hostIncludesDefaultPort": true,
+  "results": [
+    {
+      "id": "sigv4-public-fixture",
+      "result": "通过"
+    },
+    {
+      "id": "mqtt-connect",
+      "result": "通过",
+      "durationMs": 2191,
+      "authentication": "STS SigV4",
+      "hostIncludesDefaultPort": true
+    },
+    {
+      "id": "mqtt-four-explicit-subscriptions",
+      "result": "通过",
+      "grantedQoS": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "mqtt-empty-get-puback",
+      "result": "通过"
+    },
+    {
+      "id": "mqtt-get-reported",
+      "result": "通过",
+      "version": 9,
+      "reportedFields": [
+        "ConnectType",
+        "DeviceVersion",
+        "ProductId",
+        "WifiManufacturer",
+        "WifiVersion"
+      ],
+      "identityMatchesCredential": null,
+      "note": "只记录字段名与版本；未记录状态值、设备标识、地址或凭据；不证明设备在线或控制执行"
+    },
+    {
+      "id": "mqtt-readonly-chain",
+      "result": "通过"
+    },
+    {
+      "id": "probe-session-logout",
+      "result": "通过"
+    }
+  ],
+  "exclusions": [
+    "desired/control publishes",
+    "real hardware execution",
+    "native transport",
+    "RN device integration",
+    "reconnect and expiry refresh"
+  ]
+}

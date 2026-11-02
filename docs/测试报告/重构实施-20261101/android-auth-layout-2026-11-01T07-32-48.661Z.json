@@ -1,0 +1,237 @@
+{
+  "runId": "2026-11-01T07-32-48.661Z",
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "buildProvenance": {
+    "date": "2026-11-01T07:31:23.823Z",
+    "task": ":app:assembleDevelopmentRelease",
+    "artifactSha256": "cb847cea7968485cc0f0975f9de1fa364ba0edd5a079ef100038fc96d2366ab5",
+    "sourceBefore": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "ffc859268a7e378e8c9151392439e35f6d070b0d99d8370fc035deabe8844521",
+      "sourceFiles": 125
+    },
+    "sourceAfter": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "ffc859268a7e378e8c9151392439e35f6d070b0d99d8370fc035deabe8844521",
+      "sourceFiles": 125
+    },
+    "sourceUnchangedDuringBuild": true,
+    "architecture": "x86_64",
+    "signing": "development debug key",
+    "isolatedValidation": true
+  },
+  "limits": "仅登录空态几何与截图；未证明键盘、所有触摸、所有页面或iOS视觉通过",
+  "results": [
+    {
+      "name": "baseline",
+      "size": "750x1624",
+      "density": 320,
+      "fontScale": "1.0",
+      "observed": [
+        {
+          "id": "account_email",
+          "withinViewport": true,
+          "bounds": [
+            94,
+            421,
+            654,
+            513
+          ]
+        },
+        {
+          "id": "account_password",
+          "withinViewport": true,
+          "bounds": [
+            94,
+            545,
+            654,
+            637
+          ]
+        },
+        {
+          "id": "account_consent",
+          "withinViewport": true,
+          "bounds": [
+            142,
+            741,
+            606,
+            789
+          ]
+        },
+        {
+          "id": "account_submit",
+          "withinViewport": true,
+          "bounds": [
+            94,
+            809,
+            654,
+            901
+          ],
+          "disabled": true
+        }
+      ],
+      "screenshot": "2026-11-01T07-32-48.661Z-login-layout-baseline.png",
+      "geometryResult": "通过",
+      "visualResult": "未验收：需要人工对照参考及检查字形/换行/触摸"
+    },
+    {
+      "name": "small",
+      "size": "640x1280",
+      "density": 320,
+      "fontScale": "1.0",
+      "observed": [
+        {
+          "id": "account_email",
+          "withinViewport": false,
+          "bounds": [
+            94,
+            421,
+            654,
+            513
+          ]
+        },
+        {
+          "id": "account_password",
+          "withinViewport": false,
+          "bounds": [
+            94,
+            545,
+            654,
+            637
+          ]
+        },
+        {
+          "id": "account_consent",
+          "withinViewport": true,
+          "bounds": [
+            142,
+            741,
+            606,
+            789
+          ]
+        },
+        {
+          "id": "account_submit",
+          "withinViewport": false,
+          "bounds": [
+            94,
+            809,
+            654,
+            901
+          ],
+          "disabled": true
+        }
+      ],
+      "screenshot": "2026-11-01T07-32-48.661Z-login-layout-small.png",
+      "geometryResult": "失败",
+      "visualResult": "未验收：需要人工对照参考及检查字形/换行/触摸"
+    },
+    {
+      "name": "large",
+      "size": "860x1864",
+      "density": 320,
+      "fontScale": "1.0",
+      "observed": [
+        {
+          "id": "account_email",
+          "withinViewport": true,
+          "bounds": [
+            94,
+            421,
+            654,
+            513
+          ]
+        },
+        {
+          "id": "account_password",
+          "withinViewport": true,
+          "bounds": [
+            94,
+            545,
+            654,
+            637
+          ]
+        },
+        {
+          "id": "account_consent",
+          "withinViewport": true,
+          "bounds": [
+            142,
+            741,
+            606,
+            789
+          ]
+        },
+        {
+          "id": "account_submit",
+          "withinViewport": true,
+          "bounds": [
+            94,
+            809,
+            654,
+            901
+          ],
+          "disabled": true
+        }
+      ],
+      "screenshot": "2026-11-01T07-32-48.661Z-login-layout-large.png",
+      "geometryResult": "通过",
+      "visualResult": "未验收：需要人工对照参考及检查字形/换行/触摸"
+    },
+    {
+      "name": "font150",
+      "size": "750x1624",
+      "density": 320,
+      "fontScale": "1.5",
+      "observed": [
+        {
+          "id": "account_email",
+          "withinViewport": true,
+          "bounds": [
+            94,
+            421,
+            654,
+            513
+          ]
+        },
+        {
+          "id": "account_password",
+          "withinViewport": true,
+          "bounds": [
+            94,
+            545,
+            654,
+            637
+          ]
+        },
+        {
+          "id": "account_consent",
+          "withinViewport": true,
+          "bounds": [
+            142,
+            741,
+            606,
+            869
+          ]
+        },
+        {
+          "id": "account_submit",
+          "withinViewport": true,
+          "bounds": [
+            94,
+            889,
+            654,
+            981
+          ],
+          "disabled": true
+        }
+      ],
+      "screenshot": "2026-11-01T07-32-48.661Z-login-layout-font150.png",
+      "geometryResult": "通过",
+      "visualResult": "未验收：需要人工对照参考及检查字形/换行/触摸"
+    }
+  ]
+}

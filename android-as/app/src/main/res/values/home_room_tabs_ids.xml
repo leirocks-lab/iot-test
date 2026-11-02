@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="home_room_tabs" type="id"/>
+    <item name="home_room_all" type="id"/>
+    <item name="home_room_tab" type="id"/>
+    <item name="home_room_status" type="id"/>
+</resources>

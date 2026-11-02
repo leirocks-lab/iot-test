@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.data.http.HttpProductCatalogTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-11-01T11:25:09.629Z" hostname="DESKTOP-2AM89R2" time="0.071">
+  <properties/>
+  <testcase name="invalidTypesAreNotCoercedIntoCapabilities" classname="com.rowan.iot.data.http.HttpProductCatalogTest" time="0.028"/>
+  <testcase name="externalLinksRequireHttpsWithoutEmbeddedCredentials" classname="com.rowan.iot.data.http.HttpProductCatalogTest" time="0.001"/>
+  <testcase name="equalAndMissingSortRemainStableAndMissingRecommendationIsUnknown" classname="com.rowan.iot.data.http.HttpProductCatalogTest" time="0.005"/>
+  <testcase name="oldCatalogCannotReadWithNewAccount" classname="com.rowan.iot.data.http.HttpProductCatalogTest" time="0.01"/>
+  <testcase name="detailAcceptsActualArraysAndRetainsBluetoothFalse" classname="com.rowan.iot.data.http.HttpProductCatalogTest" time="0.006"/>
+  <testcase name="wrongDetailIdentityAndDuplicateProductsAreRejected" classname="com.rowan.iot.data.http.HttpProductCatalogTest" time="0.001"/>
+  <testcase name="detailAcceptsDeclaredStringsAndParameterObjectWithoutExecutingIntroduction" classname="com.rowan.iot.data.http.HttpProductCatalogTest" time="0.005"/>
+  <testcase name="pathsUseOnlyExplicitBrandAndTextDetailWithEscapedOpaqueId" classname="com.rowan.iot.data.http.HttpProductCatalogTest" time="0.002"/>
+  <testcase name="categoriesKeepStableCodesAndRejectDuplicateValues" classname="com.rowan.iot.data.http.HttpProductCatalogTest" time="0.001"/>
+  <testcase name="cloudCategoryRecommendationAndSortArePreserved" classname="com.rowan.iot.data.http.HttpProductCatalogTest" time="0.0"/>
+  <testcase name="authenticatedServiceNeverAddsUndefinedCategoryQuery" classname="com.rowan.iot.data.http.HttpProductCatalogTest" time="0.009"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

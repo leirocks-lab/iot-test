@@ -1,0 +1,200 @@
+{
+  "date": "2026-11-01T14:13:21.317Z",
+  "runId": "2026-11-01T14-13-20.485Z",
+  "scriptSha256": "7cfd89c445c93208aaf018972f977ae770af5aba3865244edc2af4daa0f12007",
+  "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+  "contentQuery": {
+    "type": "text"
+  },
+  "execution": "Node real HTTP; does not prove native implementation or emulator acceptance",
+  "results": [
+    {
+      "id": "CONTENT-01",
+      "method": "GET",
+      "path": "/app-api/privacy",
+      "authenticated": false,
+      "httpStatus": 200,
+      "businessCode": 1002030000,
+      "result": "失败",
+      "expectation": "业务成功",
+      "dataType": "undefined",
+      "durationMs": 103
+    },
+    {
+      "id": "CONTENT-02",
+      "method": "GET",
+      "path": "/app-api/serviceTerms",
+      "authenticated": false,
+      "httpStatus": 200,
+      "businessCode": 1002030001,
+      "result": "失败",
+      "expectation": "业务成功",
+      "dataType": "undefined",
+      "durationMs": 45
+    },
+    {
+      "id": "HOME-01-denial",
+      "method": "GET",
+      "path": "/app-api/devices",
+      "authenticated": false,
+      "httpStatus": 200,
+      "businessCode": 401,
+      "result": "通过",
+      "expectation": "拒绝未认证访问",
+      "dataType": "null",
+      "durationMs": 21
+    },
+    {
+      "id": "AUTH-04",
+      "method": "POST",
+      "path": "/app-api/session",
+      "authenticated": false,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "object",
+      "durationMs": 65
+    },
+    {
+      "id": "HOME-01",
+      "method": "GET",
+      "path": "/app-api/devices",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "array",
+      "durationMs": 68
+    },
+    {
+      "id": "MORE-summary-DEVICE02",
+      "method": "GET",
+      "path": "/app-api/devices/{deviceID}",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "object",
+      "durationMs": 63
+    },
+    {
+      "id": "MORE-summary-shape",
+      "result": "通过",
+      "deviceIdMatches": true,
+      "nicknameType": "string",
+      "bindingRoleRecognized": true,
+      "productPresent": true,
+      "note": "只记录结构，不记录昵称、设备名、MAC、账号或标识"
+    },
+    {
+      "id": "MORE-01-members",
+      "method": "GET",
+      "path": "/app-api/devices/{deviceID}/users",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "array",
+      "durationMs": 103
+    },
+    {
+      "id": "MORE-01-members-shape",
+      "result": "通过",
+      "isArray": true,
+      "count": 1,
+      "allUserIdStrings": true,
+      "allRolesRecognized": true,
+      "note": "不记录成员ID、昵称、邮箱、手机或原始正文"
+    },
+    {
+      "id": "ROOM-02-device-location",
+      "method": "GET",
+      "path": "/app-api/devices/{deviceID}/location",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "undefined",
+      "durationMs": 54
+    },
+    {
+      "id": "MORE-05-text-help",
+      "method": "GET",
+      "path": "/app-api/devices/{deviceID}/helping",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "array",
+      "durationMs": 71
+    },
+    {
+      "id": "MORE-05-help-shape",
+      "result": "通过",
+      "isArray": true,
+      "count": 0,
+      "allTextFields": true,
+      "note": "不记录文章正文、URL、标识或标题；不请求type=url，不打开外部链接"
+    },
+    {
+      "id": "USER-01",
+      "method": "GET",
+      "path": "/app-api/user/setting",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "object",
+      "durationMs": 30
+    },
+    {
+      "id": "ROOM-03",
+      "method": "GET",
+      "path": "/app-api/user/locations",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "array",
+      "durationMs": 56
+    },
+    {
+      "id": "AUTH-05",
+      "method": "PATCH",
+      "path": "/app-api/session",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "object",
+      "durationMs": 51
+    },
+    {
+      "id": "AUTH-06",
+      "method": "DELETE",
+      "path": "/app-api/session",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "undefined",
+      "durationMs": 99
+    }
+  ],
+  "exclusions": [
+    "MQTT",
+    "native HTTP implementation",
+    "UI",
+    "hardware"
+  ]
+}

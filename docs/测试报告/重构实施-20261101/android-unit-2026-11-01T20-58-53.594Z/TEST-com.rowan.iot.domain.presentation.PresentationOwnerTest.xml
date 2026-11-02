@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.presentation.PresentationOwnerTest" tests="24" skipped="0" failures="0" errors="0" timestamp="2026-11-01T20:58:47.293Z" hostname="DESKTOP-2AM89R2" time="0.013">
+  <properties/>
+  <testcase name="unsafeIdentityEncodingFailsClosedWithoutLoggingIt" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.004"/>
+  <testcase name="unknownThemeStaysUnknownWhileColorFollowsSystem" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.002"/>
+  <testcase name="revisionAtSafeMaximumCanDeduplicateButNeverWrapOrRecoverOldSnapshot" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.002"/>
+  <testcase name="pendingCleanupNeverUsesEvenARetainedSession" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.0"/>
+  <testcase name="confirmedSettingsChangeAdvancesOnlyPresentation" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.0"/>
+  <testcase name="systemThemeChangesOnlyOnEffectiveColorChange" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.001"/>
+  <testcase name="unsafeAccountRevisionFailsClosed" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.0"/>
+  <testcase name="savedLanguageWhitelistIsExactNoAliases" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.0"/>
+  <testcase name="wrongKnownTypesRemainUnknown" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.001"/>
+  <testcase name="savedSupportedLanguageWinsOverSystem" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.0"/>
+  <testcase name="captureReadsTheAccountGetterExactlyOnce" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.0"/>
+  <testcase name="missingLanguageUsesFirstSupportedSystemTag" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.0"/>
+  <testcase name="unitsAreIndependentWithoutInventedCombinationMatrix" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.0"/>
+  <testcase name="lateOldNotificationMustReadCurrentAuthority" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.001"/>
+  <testcase name="tokenRenewalDoesNotAdvancePresentationOrAccountRevision" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.0"/>
+  <testcase name="unsupportedAndMalformedLanguageTagsRenderEnglish" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.0"/>
+  <testcase name="opaqueRawOnlyChangeDoesNotAdvancePresentation" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.001"/>
+  <testcase name="canonicallyEquivalentIdentitiesAreByteDistinct" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.0"/>
+  <testcase name="nextAccountCannotInheritPreviousSettings" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.0"/>
+  <testcase name="logoutDropsPreviousChoicesImmediately" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.001"/>
+  <testcase name="explicitScriptTakesPrecedenceOverRegion" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.0"/>
+  <testcase name="unknownUnitsNeverAcquireDefaults" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.0"/>
+  <testcase name="sameRevisionDifferentPrivateIdentityChangesPublication" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.0"/>
+  <testcase name="fixedThemeIgnoresUnrelatedSystemAppearanceChanges" classname="com.rowan.iot.domain.presentation.PresentationOwnerTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

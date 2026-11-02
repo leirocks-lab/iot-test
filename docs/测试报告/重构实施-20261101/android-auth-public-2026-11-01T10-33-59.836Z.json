@@ -1,0 +1,144 @@
+{
+  "runId": "2026-11-01T10-33-59.836Z",
+  "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+  "worktreeDirty": true,
+  "sourceSha256": "f05221ea4ff3a1d028765a568a3972a849e3f431313b72536da87b1792cba12a",
+  "sourceFiles": 203,
+  "stage": "recovery-invalid-email",
+  "errorCode": null,
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "buildProvenance": {
+    "artifactSha256": "1654a469b6ece181ead0d8c999e222d0a0ab9ceec02adeb29889ba59e40f315a",
+    "sourceBeforeSha256": "72103f7641aa3becde58a12f3c5db772bc09334ddebd7b7fda4f6dc0ddf6bbc0",
+    "sourceAfterSha256": "72103f7641aa3becde58a12f3c5db772bc09334ddebd7b7fda4f6dc0ddf6bbc0",
+    "sourceUnchangedDuringBuild": true,
+    "architecture": "x86_64"
+  },
+  "viewport": "Physical size: 1080x2400; Override size: 750x1624",
+  "fontScale": 1,
+  "metadataErrors": [],
+  "results": [
+    {
+      "id": "registration-explicit-region-empty",
+      "stage": "registration-initial",
+      "result": "通过",
+      "errorCode": null
+    },
+    {
+      "id": "registration-empty-continue-blocked",
+      "stage": "registration-initial",
+      "result": "通过",
+      "errorCode": null
+    },
+    {
+      "id": "registration-unread-consent-blocked",
+      "stage": "registration-initial",
+      "result": "通过",
+      "errorCode": null
+    },
+    {
+      "id": "registration-send-only-on-code-step",
+      "stage": "registration-initial",
+      "result": "通过",
+      "errorCode": null
+    },
+    {
+      "id": "registration-local-region-search-selection",
+      "stage": "region-search",
+      "result": "通过",
+      "errorCode": null
+    },
+    {
+      "id": "registration-unread-consent-submit-blocked",
+      "stage": "region-search",
+      "result": "通过",
+      "errorCode": null
+    },
+    {
+      "id": "privacy-navigation",
+      "stage": "registration-privacy-actual-content",
+      "result": "通过",
+      "errorCode": null
+    },
+    {
+      "id": "privacy-real-content",
+      "stage": "registration-privacy-actual-content",
+      "result": "阻塞",
+      "errorCode": "1002030000",
+      "code": "1002030000",
+      "note": "真实正文未取得，阅读闭环未通过"
+    },
+    {
+      "id": "privacy-unread-cannot-confirm",
+      "stage": "registration-privacy-actual-content",
+      "result": "通过",
+      "errorCode": null
+    },
+    {
+      "id": "privacy-failure-cannot-confirm",
+      "stage": "registration-privacy-actual-content",
+      "result": "通过",
+      "errorCode": null
+    },
+    {
+      "id": "terms-navigation",
+      "stage": "registration-terms-actual-content",
+      "result": "通过",
+      "errorCode": null
+    },
+    {
+      "id": "terms-real-content",
+      "stage": "registration-terms-actual-content",
+      "result": "阻塞",
+      "errorCode": "1002030001",
+      "code": "1002030001",
+      "note": "真实正文未取得，阅读闭环未通过"
+    },
+    {
+      "id": "terms-unread-cannot-confirm",
+      "stage": "registration-terms-actual-content",
+      "result": "通过",
+      "errorCode": null
+    },
+    {
+      "id": "terms-failure-cannot-confirm",
+      "stage": "registration-terms-actual-content",
+      "result": "通过",
+      "errorCode": null
+    },
+    {
+      "id": "registration-no-fake-reading-completion",
+      "stage": "registration-after-agreement-errors",
+      "result": "通过",
+      "errorCode": null
+    },
+    {
+      "id": "recovery-empty-gates",
+      "stage": "recovery-initial",
+      "result": "通过",
+      "errorCode": null
+    },
+    {
+      "id": "recovery-email-step-only",
+      "stage": "recovery-initial",
+      "result": "通过",
+      "errorCode": null
+    },
+    {
+      "id": "recovery-invalid-email-no-send",
+      "stage": "recovery-invalid-email",
+      "result": "通过",
+      "errorCode": null
+    }
+  ],
+  "screenshots": [
+    "2026-11-01T10-33-59.836Z-welcome-entry.png",
+    "2026-11-01T10-33-59.836Z-registration-unread-state.png",
+    "2026-11-01T10-33-59.836Z-privacy-actual-service-state.png",
+    "2026-11-01T10-33-59.836Z-terms-actual-service-state.png",
+    "2026-11-01T10-33-59.836Z-recovery-initial.png",
+    "2026-11-01T10-33-59.836Z-recovery-invalid-email.png"
+  ],
+  "limits": "仅两步界面空态/非法输入/地区选择/协议真实加载及未读门禁；未点击验证码发送、验证码校验、注册或重置；无测试替身"
+}

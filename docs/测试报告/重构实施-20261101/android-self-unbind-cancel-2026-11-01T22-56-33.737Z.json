@@ -1,0 +1,49 @@
+{
+  "runId": "2026-11-01T22-56-33.737Z",
+  "parentRunId": "2026-11-01T22-53-37.136Z",
+  "scriptSha256": "527f7e1c9c86afccb2db90abd0ac0531846f6e272bfcbc524989e384abf781bf",
+  "guardSha256": "ce54c401fbbfa3d71e48772dc137d95a120356852b457720bdb57bba7a47e0a0",
+  "installedArtifactSha256": "1417a05a0eb2ac3d518736c147c803cc54cfb93829fcdaa0c3764b2008afb38b",
+  "source": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "0b71eb6628a51ddf94758a023d574bd2021604f30b90d31f6f5080c3bcce2151",
+    "sourceFiles": 336
+  },
+  "sourceUnchanged": true,
+  "results": [
+    {
+      "id": "S096-native-confirmation",
+      "result": "通过"
+    },
+    {
+      "id": "S096-cancel-visible-result",
+      "result": "通过"
+    },
+    {
+      "id": "S096-cancel-return-home",
+      "result": "通过"
+    }
+  ],
+  "positiveActions": 0,
+  "dnsForwarding": {
+    "upstream": "192.168.31.1",
+    "bindAddress": "127.0.0.1",
+    "bindPort": 53,
+    "running": false,
+    "state": "closed",
+    "lastError": null,
+    "pending": 0,
+    "receivedQueries": 2,
+    "forwardedQueries": 2,
+    "forwardedReplies": 2,
+    "expired": 0,
+    "rejectedQueries": 0,
+    "rejectedReplies": 0,
+    "capacityDrops": 0,
+    "sendErrors": 0,
+    "socketErrors": 0,
+    "durationMs": 34156
+  },
+  "limits": "仅验证确认和取消，未执行真实解绑；未抓包，不据此声称网络层零请求。真实关系写联调仍阻塞；未截图或保存设备昵称。会话须由后续正常退出流程关闭。"
+}

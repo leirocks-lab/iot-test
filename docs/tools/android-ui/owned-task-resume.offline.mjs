@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {recentsState} from './owned-task-resume.mjs';
+const p='com.google.android.apps.nexuslauncher';
+const card=(label='ROWAN 验证',width=700)=>`<node resource-id="${p}:id/task_view_single" clickable="true" bounds="[100,100][900,2200]"><node resource-id="${p}:id/snapshot" content-desc="${label}" bounds="[100,300][${100+width},2100]"/></node>`;
+const page=(body,overview=true)=>`<node package="${p}" bounds="[0,0][1080,2400]">${overview?`<node resource-id="${p}:id/overview_panel"/>`:''}${body}</node>`;
+assert.deepEqual(recentsState(page(card())).target,[100,300,800,2100]);
+assert.equal(recentsState(page(card('ROWAN'))).target,null);
+assert.equal(recentsState(page(card()+card())).target,null);
+assert.equal(recentsState(page(card('ROWAN 验证',100))).target,null);
+assert.equal(recentsState(page(card(),false)).target,null);
+assert.equal(recentsState(page(card()).replace(`package="${p}"`,'package="other.app"')).target,null);
+assert.equal(recentsState(page(card().replace('clickable="true"','clickable="false"'))).target,null);
+assert.equal(recentsState(page(card().replace('[100,300]','[0,300]'))).target,null);
+console.log('Owned Recents card: 8 offline safety fixtures passed; no ADB.');

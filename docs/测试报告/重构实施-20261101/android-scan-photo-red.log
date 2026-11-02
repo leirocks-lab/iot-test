@@ -1,0 +1,185 @@
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateAutolinkingNewArchitectureFiles UP-TO-DATE
+> Task :app:generateAutolinkingPackageList UP-TO-DATE
+> Task :app:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :app:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :app:generateReactNativeEntryPoint UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDevelopmentDebugBuild UP-TO-DATE
+> Task :app:generateDevelopmentDebugBuildConfig UP-TO-DATE
+> Task :app:checkDevelopmentDebugAarMetadata UP-TO-DATE
+> Task :app:generateDevelopmentDebugResValues UP-TO-DATE
+> Task :app:mapDevelopmentDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDevelopmentDebugResources UP-TO-DATE
+> Task :app:mergeDevelopmentDebugResources UP-TO-DATE
+> Task :app:packageDevelopmentDebugResources UP-TO-DATE
+> Task :app:parseDevelopmentDebugLocalResources UP-TO-DATE
+> Task :app:createDevelopmentDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDevelopmentDebug UP-TO-DATE
+> Task :app:processDevelopmentDebugMainManifest UP-TO-DATE
+> Task :app:processDevelopmentDebugManifest UP-TO-DATE
+> Task :app:processDevelopmentDebugManifestForPackage UP-TO-DATE
+> Task :app:processDevelopmentDebugResources UP-TO-DATE
+> Task :app:compileDevelopmentDebugKotlin UP-TO-DATE
+> Task :app:javaPreCompileDevelopmentDebug UP-TO-DATE
+> Task :app:compileDevelopmentDebugJavaWithJavac UP-TO-DATE
+> Task :app:bundleDevelopmentDebugClassesToRuntimeJar UP-TO-DATE
+> Task :app:bundleDevelopmentDebugClassesToCompileJar UP-TO-DATE
+> Task :app:preDevelopmentDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileDevelopmentDebugUnitTest UP-TO-DATE
+> Task :app:processDevelopmentDebugJavaRes UP-TO-DATE
+
+> Task :app:compileDevelopmentDebugUnitTestKotlin FAILED
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:11:38 Unresolved reference 'PhotoIoTicket'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:12:25 Unresolved reference 'PhotoDeadlineScheduler'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:15:9 'after' overrides nothing.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:38:56 Unresolved reference 'ActualPhotoIo'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:38:105 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:39:22 Unresolved reference 'PhotoAdmission'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:39:102 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:39:104 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:41:22 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:41:22 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:41:29 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:45:66 Unresolved reference 'ActualPhotoIo'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:45:168 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:46:81 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:46:83 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:49:26 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:49:26 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:49:33 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:50:26 Unresolved reference 'PhotoAdmission'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:50:114 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:50:116 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:56:66 Unresolved reference 'ActualPhotoIo'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:56:153 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:57:88 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:57:90 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:60:26 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:60:26 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:60:33 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:61:26 Unresolved reference 'PhotoAdmission'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:61:94 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:61:96 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:66:66 Unresolved reference 'ActualPhotoIo'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:67:79 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:67:81 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:70:38 Unresolved reference 'PhotoAdmission'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:70:132 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:70:134 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:75:56 Unresolved reference 'ActualPhotoIo'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:75:135 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:76:54 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:76:56 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:77:31 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:77:51 Unresolved reference 'allowed'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:77:89 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:77:91 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:80:22 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:80:22 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:80:29 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:83:48 Unresolved reference 'ActualPhotoIo'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:83:169 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:84:94 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:84:96 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:86:22 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:86:22 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:86:29 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:89:56 Unresolved reference 'ActualPhotoIo'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:90:22 Unresolved reference 'PhotoAdmission'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:90:95 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:90:97 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:94:56 Unresolved reference 'ActualPhotoIo'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:94:122 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:95:66 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:95:68 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:96:46 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:96:46 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:96:53 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:100:38 Unresolved reference 'ActualPhotoIo'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:101:125 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:101:127 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:101:133 Unresolved reference 'PhotoAdmission'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:107:38 Unresolved reference 'ActualPhotoIo'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:107:89 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:108:93 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:108:95 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:109:22 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:109:22 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:109:29 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:112:38 Unresolved reference 'ActualPhotoIo'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:112:136 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:113:22 Unresolved reference 'PhotoAdmission'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:113:102 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:113:104 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:114:47 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:114:47 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:114:54 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:117:38 Unresolved reference 'ActualPhotoIo'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:117:58 Unresolved reference 'PhotoDeadlineScheduler'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:117:82 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:117:84 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:117:150 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:118:61 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:118:63 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:119:86 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:119:86 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:119:93 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:122:56 Unresolved reference 'ActualPhotoIo'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:122:105 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:123:78 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:123:80 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:124:22 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:124:22 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:124:29 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:127:38 Unresolved reference 'ActualPhotoIo'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:127:106 Unresolved reference 'PhotoIoOutcome'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:128:59 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:128:61 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:129:22 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:129:22 Not enough information to infer type argument for 'T'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/scan/ActualPhotoIoTest.kt:129:29 Unresolved reference 'PhotoIoOutcome'.
+
+[Incubating] Problems report is available at: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileDevelopmentDebugUnitTestKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 11s
+37 actionable tasks: 1 executed, 36 up-to-date

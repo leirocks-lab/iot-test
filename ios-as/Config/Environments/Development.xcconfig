@@ -1,0 +1,3 @@
+ROWAN_ENVIRONMENT = development
+ROWAN_BUNDLE_IDENTIFIER = com.rowan.iot.dev
+#include? "../Local/Development.xcconfig"

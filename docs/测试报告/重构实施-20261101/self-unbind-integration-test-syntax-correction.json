@@ -1,0 +1,8 @@
+{
+  "date": "2026-11-01T20:25:54.736891+00:00",
+  "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/device/more/SelfUnbindIntegrationTest.kt",
+  "beforeSha256": "4345b71353ec5b543968dc6874a6755bd3ed696030f9b8b12a17c546f6981ed5",
+  "afterSha256": "53fa833cb28574350b27ed859de7871cc232ea3a336ff53c056c4c5416d7f2f2",
+  "reason": "Kotlin generic close immediately followed by equals tokenized as >=; added assignment whitespace only. Original failing compiler log retained; corrected RED rerun required.",
+  "platformPassed": false
+}

@@ -1,0 +1,228 @@
+{
+  "date": "2026-11-01T09:19:09.458Z",
+  "runId": "2026-11-01T09-19-08.469Z",
+  "scriptSha256": "dbd06268a2dfed451177bbbe69e111747903c2e45f8fd8a9b4b3e53aa9e06748",
+  "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+  "contentQuery": {
+    "type": "text"
+  },
+  "execution": "Node real HTTP; does not prove native implementation or emulator acceptance",
+  "results": [
+    {
+      "id": "CONTENT-01",
+      "method": "GET",
+      "path": "/app-api/privacy",
+      "authenticated": false,
+      "httpStatus": 200,
+      "businessCode": 1002030000,
+      "result": "失败",
+      "expectation": "业务成功",
+      "dataType": "undefined",
+      "durationMs": 148
+    },
+    {
+      "id": "CONTENT-02",
+      "method": "GET",
+      "path": "/app-api/serviceTerms",
+      "authenticated": false,
+      "httpStatus": 200,
+      "businessCode": 1002030001,
+      "result": "失败",
+      "expectation": "业务成功",
+      "dataType": "undefined",
+      "durationMs": 56
+    },
+    {
+      "id": "HOME-01-denial",
+      "method": "GET",
+      "path": "/app-api/devices",
+      "authenticated": false,
+      "httpStatus": 200,
+      "businessCode": 401,
+      "result": "通过",
+      "expectation": "拒绝未认证访问",
+      "dataType": "null",
+      "durationMs": 22
+    },
+    {
+      "id": "AUTH-04",
+      "method": "POST",
+      "path": "/app-api/session",
+      "authenticated": false,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "object",
+      "durationMs": 82
+    },
+    {
+      "id": "HOME-01",
+      "method": "GET",
+      "path": "/app-api/devices",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "array",
+      "durationMs": 134
+    },
+    {
+      "id": "PAIR-03",
+      "method": "GET",
+      "path": "/app-api/products/category",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "array",
+      "durationMs": 134
+    },
+    {
+      "id": "PAIR-03-field-shape",
+      "result": "通过",
+      "fields": [
+        "name",
+        "value"
+      ],
+      "namesAreLocalizedObjects": false,
+      "stableValuesPresent": true,
+      "note": "只记录结构；未记录名称或品类值，原生筛选与语言显示未验收"
+    },
+    {
+      "id": "PAIR-01",
+      "method": "GET",
+      "path": "/app-api/products",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "array",
+      "durationMs": 107
+    },
+    {
+      "id": "PAIR-01-field-shape",
+      "result": "通过",
+      "groupFields": [
+        "category",
+        "categoryName",
+        "products"
+      ],
+      "productFields": [
+        "buyLink",
+        "cloudPlatform",
+        "configType",
+        "connectType",
+        "id",
+        "image",
+        "modelName",
+        "name",
+        "productid",
+        "recommended",
+        "seriesName",
+        "sort"
+      ],
+      "configTypeShapes": [
+        "array"
+      ],
+      "recommendedAlwaysPresent": true,
+      "sortAlwaysPresent": true,
+      "note": "只读目录结构；不从型号猜推荐、顺序、连接或配网方式"
+    },
+    {
+      "id": "PAIR-02",
+      "method": "GET",
+      "path": "/app-api/products/{productID}",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "object",
+      "durationMs": 79
+    },
+    {
+      "id": "PAIR-02-field-shape",
+      "result": "通过",
+      "fields": [
+        "bluetooth",
+        "buyLink",
+        "category",
+        "cloudPlatform",
+        "configType",
+        "connectType",
+        "craetedAt",
+        "id",
+        "image",
+        "introduction",
+        "modelName",
+        "name",
+        "parameters",
+        "productid",
+        "seriesName"
+      ],
+      "requestedIDMatches": true,
+      "configTypeShape": "array",
+      "imageShape": "array",
+      "parametersShape": "array",
+      "note": "产品标识只取本次真实目录，不猜ID；配网与设备绑定均未执行"
+    },
+    {
+      "id": "USER-01",
+      "method": "GET",
+      "path": "/app-api/user/setting",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "object",
+      "durationMs": 39
+    },
+    {
+      "id": "ROOM-03",
+      "method": "GET",
+      "path": "/app-api/user/locations",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "array",
+      "durationMs": 68
+    },
+    {
+      "id": "AUTH-05",
+      "method": "PATCH",
+      "path": "/app-api/session",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "object",
+      "durationMs": 63
+    },
+    {
+      "id": "AUTH-06",
+      "method": "DELETE",
+      "path": "/app-api/session",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "undefined",
+      "durationMs": 53
+    }
+  ],
+  "exclusions": [
+    "MQTT",
+    "native HTTP implementation",
+    "UI",
+    "hardware"
+  ]
+}

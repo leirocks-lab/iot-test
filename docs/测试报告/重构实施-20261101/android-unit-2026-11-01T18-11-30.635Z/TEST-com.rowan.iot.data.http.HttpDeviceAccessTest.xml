@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.data.http.HttpDeviceAccessTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-01T18:11:19.685Z" hostname="DESKTOP-2AM89R2" time="0.114">
+  <properties/>
+  <testcase name="aLateDetailResponseCannotCrossAnAccountRevision" classname="com.rowan.iot.data.http.HttpDeviceAccessTest" time="0.009"/>
+  <testcase name="oldAuthorizationCannotConnectOrIssueRequestsForANewAccount" classname="com.rowan.iot.data.http.HttpDeviceAccessTest" time="0.004"/>
+  <testcase name="authorizationMustComeFromTheAuthenticatedHomeAndMatchingDeviceDetail" classname="com.rowan.iot.data.http.HttpDeviceAccessTest" time="0.005"/>
+  <testcase name="opaqueResourceAndThingIdentifiersRemainDistinctAndStsNeverEntersConnect" classname="com.rowan.iot.data.http.HttpDeviceAccessTest" time="0.078"/>
+  <testcase name="mismatchedDetailNeverCreatesAnAuthorizedDevice" classname="com.rowan.iot.data.http.HttpDeviceAccessTest" time="0.005"/>
+  <testcase name="unknownResourceCannotFetchDetailOrCredentials" classname="com.rowan.iot.data.http.HttpDeviceAccessTest" time="0.005"/>
+  <testcase name="device01UnboundBusinessCodeIsAuthorizationAfterRealGatewayAuthorization" classname="com.rowan.iot.data.http.HttpDeviceAccessTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

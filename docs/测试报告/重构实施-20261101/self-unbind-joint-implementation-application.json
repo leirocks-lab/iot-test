@@ -1,0 +1,176 @@
+{
+  "date": "2026-11-01T22:34:58.816128+00:00",
+  "patch": ".cache/refactor/self-unbind-joint-reviewed/implementation.patch",
+  "patchSha256": "7f2edd706aef3455472acd87747ba5d44a9e52a395f69d71858db64617554476",
+  "stage": "APPLIED_EXACT_REVIEWED_TEXT_NOT_PLATFORM_VERIFIED",
+  "files": [
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/bridge/DeviceSelfUnbindBridge.kt",
+      "beforeSha256": null,
+      "afterSha256": "097ba85cb39385467097851f914243021c4aad7fcfae0e3a99595455c89a006c",
+      "reviewedOverlaySha256": "097ba85cb39385467097851f914243021c4aad7fcfae0e3a99595455c89a006c",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/bridge/RowanHostModule.kt",
+      "beforeSha256": "bec98cd786ce5ad53445888f635fcdca2461290f4dead1c7a7487d7e0f9a3362",
+      "afterSha256": "a46ca3ced8aa8a307b4a10710d3ae2badf5d1f5c34175a4a98cfc55fba61669f",
+      "reviewedOverlaySha256": "a46ca3ced8aa8a307b4a10710d3ae2badf5d1f5c34175a4a98cfc55fba61669f",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/more/NativeSelfUnbindAuthority.kt",
+      "beforeSha256": null,
+      "afterSha256": "8c4662a8c1861bea3611708d9980f7bbe526b1889cf9ce3a0047f66f5dba9869",
+      "reviewedOverlaySha256": "8c4662a8c1861bea3611708d9980f7bbe526b1889cf9ce3a0047f66f5dba9869",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/more/SelfUnbindApplication.kt",
+      "beforeSha256": "9fdb32249e40fa1d02fa28ae855f101f504fc00a0510296e5760a3d7654472ec",
+      "afterSha256": "5e39f7ff1b5b059de2d7352c00db726ff558672769c2d42e1da29d59a8f7cbbd",
+      "reviewedOverlaySha256": "5e39f7ff1b5b059de2d7352c00db726ff558672769c2d42e1da29d59a8f7cbbd",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwner.kt",
+      "beforeSha256": "f97d046ee9fec912294b0434e542116b69b69bc24a721e0533597d0a86eb265b",
+      "afterSha256": "37ae3025586ecccfafeb947fb20cf7671edf94cc1dd00df9ca460a052e8d72f1",
+      "reviewedOverlaySha256": "37ae3025586ecccfafeb947fb20cf7671edf94cc1dd00df9ca460a052e8d72f1",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/rnhost/DeviceActivity.kt",
+      "beforeSha256": "502ecd38c496febea1b81b3ff1a904d562f2429c4633c266e132ad671abc0783",
+      "afterSha256": "e099f84fc62de5efe6cd69c9a80486861cdf81768b9182f6e28cfc552ce3d23b",
+      "reviewedOverlaySha256": "e099f84fc62de5efe6cd69c9a80486861cdf81768b9182f6e28cfc552ce3d23b",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "app-rn/src/entry/DeviceEntry.tsx",
+      "beforeSha256": "e1d892c97ad645fab25652d3e1c88d408224abd54b70ccbb5d29e3854eec8028",
+      "afterSha256": "2fd62e009e0f9364e402ccba6a88fdd8393e24186a023b8404dc40ae7f104b27",
+      "reviewedOverlaySha256": "2fd62e009e0f9364e402ccba6a88fdd8393e24186a023b8404dc40ae7f104b27",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "app-rn/src/features/device-more/DeviceMoreScreen.tsx",
+      "beforeSha256": "7eb8341ab4b0b49154f93a9102f4d75f847ddfa9d78f7ed6714c24bda5fe704f",
+      "afterSha256": "4f8cd295b637044cf26da05e29e8df8b9473dad63372e1e5927272b070d04432",
+      "reviewedOverlaySha256": "4f8cd295b637044cf26da05e29e8df8b9473dad63372e1e5927272b070d04432",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "app-rn/src/features/device-more/SelfUnbindPanel.tsx",
+      "beforeSha256": null,
+      "afterSha256": "4eaf980585bf7e769b3df17531bed0a2f1acbd8c8f8eaa16a3429ec948a8796d",
+      "reviewedOverlaySha256": "4eaf980585bf7e769b3df17531bed0a2f1acbd8c8f8eaa16a3429ec948a8796d",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "app-rn/src/host/README.md",
+      "beforeSha256": "eb7567c4bf0818300d37764a03f11a019ae238bb93cdc2c60ddd1d98f3749eb7",
+      "afterSha256": "56cb6be6f46075c3185605c44c5e8eb0c3599ffdc60d10f41af09c9a805871bc",
+      "reviewedOverlaySha256": "56cb6be6f46075c3185605c44c5e8eb0c3599ffdc60d10f41af09c9a805871bc",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "app-rn/src/host/adapter/DeviceSelfUnbindController.ts",
+      "beforeSha256": null,
+      "afterSha256": "b8fb49cc5f57d009fe2c6887e77f2f2b9c70cea032e64eb3e669f4d03861e297",
+      "reviewedOverlaySha256": "b8fb49cc5f57d009fe2c6887e77f2f2b9c70cea032e64eb3e669f4d03861e297",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "app-rn/src/host/adapter/DeviceSessionController.ts",
+      "beforeSha256": "053699a441878cfe699828050b3a21809fc73233cad09c4ede9e3cb4bfc7ba0e",
+      "afterSha256": "d57ff50d40e42715ec5aec3d7967a0c1edb5be498af16b99b3bb651307a7a4e0",
+      "reviewedOverlaySha256": "d57ff50d40e42715ec5aec3d7967a0c1edb5be498af16b99b3bb651307a7a4e0",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "app-rn/src/host/specs/NativeRowanHost.ts",
+      "beforeSha256": "75fc3d4766aecb296a477bef0f42d28df4d49002b741463e6c95ee97b8730255",
+      "afterSha256": "9a330128ea2e3fa2932fc0a33b90a0804dc4565a545abf3a5d76da75c704df19",
+      "reviewedOverlaySha256": "9a330128ea2e3fa2932fc0a33b90a0804dc4565a545abf3a5d76da75c704df19",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Rowan.xcodeproj/project.pbxproj",
+      "beforeSha256": "1528b3f61208eb56d64b223ab655dd2719f837b9adc3e8727f20812239734b18",
+      "afterSha256": "ebb6f06ad57ce221eb69222527453e6143b40e63a95a6e4170f87c76cd2e04b4",
+      "reviewedOverlaySha256": "ebb6f06ad57ce221eb69222527453e6143b40e63a95a6e4170f87c76cd2e04b4",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Rowan/Bridge/DeviceSelfUnbindBridge.swift",
+      "beforeSha256": null,
+      "afterSha256": "9ebbcc331a569dd8e3a2991133a1796664eb4562d4068656a089a39383ca1e80",
+      "reviewedOverlaySha256": "9ebbcc331a569dd8e3a2991133a1796664eb4562d4068656a089a39383ca1e80",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Rowan/Bridge/NativeDeviceObservations.swift",
+      "beforeSha256": "672ec41296b2318798c8abcba254761b10596633789f8c507e34872fcda60400",
+      "afterSha256": "9bbdac69e18dae267216a81a450d96c3521c35ef45a4bc79406fe70bcee15d3b",
+      "reviewedOverlaySha256": "9bbdac69e18dae267216a81a450d96c3521c35ef45a4bc79406fe70bcee15d3b",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Rowan/Bridge/RowanHost.mm",
+      "beforeSha256": "bd9ee8ddc689a521b0cd0121cb5ba74ddbe94a005d52ecd45e9f91f1df65e59a",
+      "afterSha256": "3ea746d07a5848c6e9764c16367c93ef0297a463262924c5818dd00c4fb3e244",
+      "reviewedOverlaySha256": "3ea746d07a5848c6e9764c16367c93ef0297a463262924c5818dd00c4fb3e244",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Rowan/Bridge/RowanHostServices.swift",
+      "beforeSha256": "e0e3e26e735e36544e3c0e2f6d408873289a95ced1837bf2cb106552a86c8969",
+      "afterSha256": "f1c7c7dabc4942583980baec66b7c51f81c90a03eb83c0e21ef6994adc034e4b",
+      "reviewedOverlaySha256": "f1c7c7dabc4942583980baec66b7c51f81c90a03eb83c0e21ef6994adc034e4b",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Rowan/Domain/Device/More/NativeSelfUnbindAuthority.swift",
+      "beforeSha256": null,
+      "afterSha256": "8f5e9a3118925db91a6ef3c1d28a25d0ec5d9710b7b9e4eecd6738f44f490b8b",
+      "reviewedOverlaySha256": "8f5e9a3118925db91a6ef3c1d28a25d0ec5d9710b7b9e4eecd6738f44f490b8b",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Rowan/Domain/Device/More/SelfUnbindApplication.swift",
+      "beforeSha256": "93d2551c242916880bc1b4345f7b9392df7365688f817c6f392d3aaf7b880bf4",
+      "afterSha256": "5bc119a588a65821474315035a6e867a58faf0ab2d4520ef7650c6205e64fde5",
+      "reviewedOverlaySha256": "5bc119a588a65821474315035a6e867a58faf0ab2d4520ef7650c6205e64fde5",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Rowan/Domain/Device/State/DeviceReadOwner.swift",
+      "beforeSha256": "a5c22cb0741e8f1ff9a00c754a36b8cb5ccd14cdf21b02d2e027175ae412e5fc",
+      "afterSha256": "32f231b813bf0e42deb6e6e08f84d2dee257ca7c0dd880823fff55fe54ddcc85",
+      "reviewedOverlaySha256": "32f231b813bf0e42deb6e6e08f84d2dee257ca7c0dd880823fff55fe54ddcc85",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    }
+  ]
+}

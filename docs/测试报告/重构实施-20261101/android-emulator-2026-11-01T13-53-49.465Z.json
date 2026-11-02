@@ -1,0 +1,99 @@
+{
+  "date": "2026-11-01T13:54:18.941Z",
+  "runId": "2026-11-01T13-53-49.465Z",
+  "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+  "worktreeDirty": true,
+  "sourceSha256": "9296de48b202867ad5e9bd78fdbd2cd896d30019bf339aa9b9f1b16783d85961",
+  "sourceFiles": 258,
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "nativeDiagnostics": [
+    "application_react_load begin t=7282222 main=true",
+    "application_react_load end t=7282332 durationMs=110",
+    "home_focus_gain begin t=7299687 main=true",
+    "home_focus_gain end t=7299688 durationMs=1",
+    "application_react_load begin t=7303415 main=true",
+    "application_react_load end t=7303490 durationMs=75",
+    "home_focus_gain begin t=7307179 main=true",
+    "home_focus_gain end t=7307180 durationMs=1"
+  ],
+  "dnsForwarding": {
+    "upstream": "192.168.31.1",
+    "bindAddress": "127.0.0.1",
+    "bindPort": 53,
+    "running": false,
+    "state": "closed",
+    "lastError": null,
+    "pending": 0,
+    "receivedQueries": 0,
+    "forwardedQueries": 0,
+    "forwardedReplies": 0,
+    "expired": 0,
+    "rejectedQueries": 0,
+    "rejectedReplies": 0,
+    "capacityDrops": 0,
+    "sendErrors": 0,
+    "socketErrors": 0,
+    "durationMs": 27507,
+    "mode": "Real upstream DNS packet forwarding; no business mock or TLS bypass",
+    "moduleSha256": "d70c74f46e8ccfc63a5c6e0d74311b7a2e7fbd7f673ad6c71a5248e40d7171fc"
+  },
+  "sessionKept": false,
+  "deferredCases": [],
+  "installedArtifactSha256": "dc6c4c2e8fc5c318d81254a6a0a8d2917a69f661d4896a70e1264150b94490d3",
+  "buildProvenance": {
+    "date": "2026-11-01T13:52:44.789Z",
+    "task": ":app:assembleDevelopmentRelease",
+    "artifactSha256": "dc6c4c2e8fc5c318d81254a6a0a8d2917a69f661d4896a70e1264150b94490d3",
+    "sourceBefore": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "9296de48b202867ad5e9bd78fdbd2cd896d30019bf339aa9b9f1b16783d85961",
+      "sourceFiles": 258
+    },
+    "sourceAfter": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "9296de48b202867ad5e9bd78fdbd2cd896d30019bf339aa9b9f1b16783d85961",
+      "sourceFiles": 258
+    },
+    "sourceUnchangedDuringBuild": true,
+    "architecture": "x86_64",
+    "signing": "development debug key",
+    "isolatedValidation": true
+  },
+  "installedArtifactMatchesBuild": true,
+  "viewport": "Physical size: 1080x2400",
+  "density": "Physical density: 420",
+  "fontScale": "1.0",
+  "screenshots": [
+    "2026-11-01T13-53-49.465Z-android-login-initial.png",
+    "2026-11-01T13-53-49.465Z-android-home-after-login.png"
+  ],
+  "scope": "Android native startup/login/cold restore/logout and packaged RN navigation; not complete UI/HTTP/MQTT acceptance",
+  "results": [
+    {
+      "id": "STARTUP-no-session-native-entry",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-UI-empty",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-UI-consent-gate",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-04-native-emulator",
+      "result": "通过"
+    },
+    {
+      "id": "emulator-prerequisite-or-flow",
+      "result": "阻塞",
+      "stage": "cold-session-restore",
+      "reason": "启动、安装、页面状态或测试配置未满足；未记录凭据或层级正文"
+    }
+  ],
+  "hardware": "未验收"
+}

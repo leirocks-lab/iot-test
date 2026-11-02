@@ -1,0 +1,135 @@
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+> Task :app:generateAutolinkingNewArchitectureFiles UP-TO-DATE
+> Task :app:generateAutolinkingPackageList UP-TO-DATE
+> Task :app:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :app:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :app:generateReactNativeEntryPoint UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preProductionReleaseBuild UP-TO-DATE
+> Task :app:configureCMakeRelWithDebInfo[x86_64]
+> Task :app:buildCMakeRelWithDebInfo[x86_64]
+> Task :app:preDevelopmentReleaseBuild UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseJniLibFolders UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseNativeLibs UP-TO-DATE
+> Task :app:stripDevelopmentReleaseDebugSymbols UP-TO-DATE
+> Task :app:extractDevelopmentReleaseNativeSymbolTables UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseNativeDebugMetadata UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseArtProfile UP-TO-DATE
+> Task :app:desugarDevelopmentReleaseFileDependencies UP-TO-DATE
+> Task :app:buildKotlinToolingMetadata UP-TO-DATE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateDevelopmentReleaseBuildConfig UP-TO-DATE
+> Task :app:checkDevelopmentReleaseAarMetadata UP-TO-DATE
+> Task :app:createBundleDevelopmentReleaseJsAndAssets UP-TO-DATE
+> Task :app:generateDevelopmentReleaseResValues UP-TO-DATE
+> Task :app:mapDevelopmentReleaseSourceSetPaths
+> Task :app:generateDevelopmentReleaseResources
+> Task :app:packageDevelopmentReleaseResources
+> Task :app:parseDevelopmentReleaseLocalResources
+> Task :app:createDevelopmentReleaseCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDevelopmentRelease UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseResources
+> Task :app:processDevelopmentReleaseMainManifest UP-TO-DATE
+> Task :app:processDevelopmentReleaseManifest UP-TO-DATE
+> Task :app:processDevelopmentReleaseManifestForPackage UP-TO-DATE
+> Task :app:javaPreCompileDevelopmentRelease UP-TO-DATE
+> Task :app:checkDevelopmentReleaseDuplicateClasses UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseStartupProfile UP-TO-DATE
+> Task :app:mergeExtDexDevelopmentRelease UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseShaders UP-TO-DATE
+> Task :app:compileDevelopmentReleaseShaders NO-SOURCE
+> Task :app:generateDevelopmentReleaseAssets UP-TO-DATE
+> Task :app:processDevelopmentReleaseResources
+> Task :app:mergeDevelopmentReleaseAssets UP-TO-DATE
+> Task :app:compressDevelopmentReleaseAssets UP-TO-DATE
+> Task :app:extractDevelopmentReleaseVersionControlInfo UP-TO-DATE
+> Task :app:extractProguardFiles UP-TO-DATE
+> Task :app:optimizeDevelopmentReleaseResources
+> Task :app:collectDevelopmentReleaseDependencies UP-TO-DATE
+> Task :app:sdkDevelopmentReleaseDependencyData UP-TO-DATE
+> Task :app:validateSigningDevelopmentRelease UP-TO-DATE
+> Task :app:writeDevelopmentReleaseAppMetadata UP-TO-DATE
+> Task :app:writeDevelopmentReleaseSigningConfigVersions UP-TO-DATE
+> Task :app:compileDevelopmentReleaseKotlin
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/AccountActivity.kt:49:49 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/AuthFlowLayout.kt:61:69 'static field SOFT_INPUT_ADJUST_RESIZE: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/RegistrationActivity.kt:160:15 'fun onActivityResult(p0: Int, p1: Int, p2: Intent?): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/WelcomeActivity.kt:28:46 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActivity.kt:79:20 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/products/ProductViews.kt:37:12 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/products/ProductViews.kt:38:12 'var navigationBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/products/ProductViews.kt:43:16 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/RoomsActivity.kt:106:20 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/RoomsActivity.kt:246:57 'static field SOFT_INPUT_ADJUST_RESIZE: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/scan/ScanActivity.kt:257:44 'val systemWindowInsetLeft: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/scan/ScanActivity.kt:257:73 'val systemWindowInsetTop: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/scan/ScanActivity.kt:257:101 'val systemWindowInsetRight: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/scan/ScanActivity.kt:257:131 'val systemWindowInsetBottom: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/scan/ScanActivity.kt:262:20 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/scan/ScanActivity.kt:276:77 'fun clipRect(p0: RectF, p1: Region.Op): Boolean' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/AccountActivity.kt:49:49 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/AuthFlowLayout.kt:61:69 'static field SOFT_INPUT_ADJUST_RESIZE: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/RegistrationActivity.kt:160:15 'fun onActivityResult(p0: Int, p1: Int, p2: Intent?): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/WelcomeActivity.kt:28:46 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActivity.kt:79:20 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/products/ProductViews.kt:37:12 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/products/ProductViews.kt:38:12 'var navigationBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/products/ProductViews.kt:43:16 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/RoomsActivity.kt:106:20 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/RoomsActivity.kt:246:57 'static field SOFT_INPUT_ADJUST_RESIZE: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/scan/ScanActivity.kt:257:44 'val systemWindowInsetLeft: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/scan/ScanActivity.kt:257:73 'val systemWindowInsetTop: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/scan/ScanActivity.kt:257:101 'val systemWindowInsetRight: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/scan/ScanActivity.kt:257:131 'val systemWindowInsetBottom: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/scan/ScanActivity.kt:262:20 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/scan/ScanActivity.kt:276:77 'fun clipRect(p0: RectF, p1: Region.Op): Boolean' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/rnhost/DeviceActivity.kt:28:24 'var systemUiVisibility: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/rnhost/DeviceActivity.kt:28:60 'var systemUiVisibility: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/rnhost/DeviceActivity.kt:29:29 'static field SYSTEM_UI_FLAG_LIGHT_STATUS_BAR: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/rnhost/DeviceActivity.kt:30:70 'static field SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR: Int' is deprecated. Deprecated in Java.
+
+> Task :app:compileDevelopmentReleaseJavaWithJavac UP-TO-DATE
+> Task :app:dexBuilderDevelopmentRelease
+> Task :app:mergeDevelopmentReleaseGlobalSynthetics UP-TO-DATE
+> Task :app:generateDevelopmentReleaseLintVitalReportModel
+> Task :app:mergeDexDevelopmentRelease
+> Task :app:compileDevelopmentReleaseArtProfile
+> Task :app:processDevelopmentReleaseJavaRes
+> Task :app:mergeDevelopmentReleaseJavaResource
+> Task :app:lintVitalAnalyzeDevelopmentRelease
+> Task :app:lintVitalReportDevelopmentRelease
+> Task :app:lintVitalDevelopmentRelease
+> Task :app:packageDevelopmentRelease
+> Task :app:createDevelopmentReleaseApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleDevelopmentRelease
+
+[Incubating] Problems report is available at: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1m 56s
+69 actionable tasks: 20 executed, 49 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.3.1/userguide/configuration_cache_enabling.html

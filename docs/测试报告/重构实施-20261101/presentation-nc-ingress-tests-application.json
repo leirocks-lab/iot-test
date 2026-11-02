@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-01T21:02:21.581355+00:00",
+  "patch": ".cache/refactor/presentation-nc-ingress-draft/tests.patch",
+  "patchSha256": "85cbaac42a90bb6c326875d0607d668d50fcb1a9bd53fbb487a142a18a4c6c6a",
+  "stage": "APPLIED_EXACT_REVIEWED_TEXT_NOT_PLATFORM_VERIFIED",
+  "files": [
+    {
+      "path": "ios-as/Tests/Unit/PresentationServiceTests.swift",
+      "beforeSha256": "ee0d1634794d629dd07364614edb7f05630a501f8b779697e050b4e80a4f4aff",
+      "afterSha256": "dfa200f67936e12cc18bf22d117e552ccd83b30f94256c12966b8ffaeb9a0188",
+      "reviewedOverlaySha256": "dfa200f67936e12cc18bf22d117e552ccd83b30f94256c12966b8ffaeb9a0188",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    }
+  ]
+}

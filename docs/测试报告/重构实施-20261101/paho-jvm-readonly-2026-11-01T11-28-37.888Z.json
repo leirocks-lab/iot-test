@@ -1,0 +1,33 @@
+{
+  "runId": "2026-11-01T11-28-37.888Z",
+  "execution": "Actual isolated JVM/Paho 1.2.5 read-only service harness; NOT native/Android/RN acceptance",
+  "sdkVersion": "1.2.5",
+  "javaRuntime": "JDK17",
+  "scriptSha256": "9b7a3d1eb9ad72bc891936b600c9ba4e1c9f89c6992bb9dbb1442afc82f74d36",
+  "javaSourceSha256": "6780fb2c07639180e14c823838c1ea1b498cc4d72675deb8930a4700d94d4130",
+  "sdkJarSha256": "59914287adac506a28d5e8172eed262a22605f3df4d426b9d92f41dae2448185",
+  "hostIncludesDefaultPort": true,
+  "results": [
+    {
+      "stage": "JAVAC_AND_LOGGER_PREFLIGHT",
+      "result": "PASS"
+    },
+    {
+      "stage": "SIGV4_HOST443_VECTOR",
+      "result": "PASS"
+    },
+    {
+      "stage": "LOGIN",
+      "result": "FAILURE",
+      "code": "SANITIZED_PROBE_FAILURE"
+    }
+  ],
+  "exclusions": [
+    "desired/control",
+    "reported JSON parsing or device state values",
+    "physical device online/execution",
+    "native/emulator/RN acceptance",
+    "reconnect/credential renewal",
+    "Android TLS provider equivalence"
+  ]
+}

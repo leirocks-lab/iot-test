@@ -1,0 +1,973 @@
+{
+  "runId": "2026-11-01T14-08-12.596Z",
+  "parentRunId": "2026-11-01T14-02-53.569Z",
+  "parentReportSha256": "0d837ad32c0da146456b70902e77167dfc5ef37396a36e7797d47a170b8371e4",
+  "scriptSha256": "a738e7207c88d4a5918bbe0ceba713796e6665d336b880ce53bb4e4baf677e67",
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "avdName": "ROWAN_API_36",
+  "installedArtifactSha256": "dc6c4c2e8fc5c318d81254a6a0a8d2917a69f661d4896a70e1264150b94490d3",
+  "parentInstalledArtifactSha256": "dc6c4c2e8fc5c318d81254a6a0a8d2917a69f661d4896a70e1264150b94490d3",
+  "buildProvenance": {
+    "date": "2026-11-01T13:52:44.789Z",
+    "task": ":app:assembleDevelopmentRelease",
+    "artifactSha256": "dc6c4c2e8fc5c318d81254a6a0a8d2917a69f661d4896a70e1264150b94490d3",
+    "sourceBefore": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "9296de48b202867ad5e9bd78fdbd2cd896d30019bf339aa9b9f1b16783d85961",
+      "sourceFiles": 258
+    },
+    "sourceAfter": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "9296de48b202867ad5e9bd78fdbd2cd896d30019bf339aa9b9f1b16783d85961",
+      "sourceFiles": 258
+    },
+    "sourceUnchangedDuringBuild": true,
+    "architecture": "x86_64",
+    "signing": "development debug key",
+    "isolatedValidation": true
+  },
+  "sourceBefore": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "4f990f40fe9ecfb83b528a3b0c53ea253452dd746100c09e7a9239ff1708cdb8",
+    "sourceFiles": 258
+  },
+  "sourceAfter": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "4f990f40fe9ecfb83b528a3b0c53ea253452dd746100c09e7a9239ff1708cdb8",
+    "sourceFiles": 258
+  },
+  "sourceUnchanged": true,
+  "originalEnvironment": {
+    "size": {
+      "physical": "1080x2400",
+      "override": null
+    },
+    "density": {
+      "physical": "420",
+      "override": null
+    },
+    "fontScale": "1.0",
+    "fontWasAbsent": false
+  },
+  "restoration": {
+    "result": "通过",
+    "attempts": [
+      {
+        "kind": "size",
+        "completed": true
+      },
+      {
+        "kind": "density",
+        "completed": true
+      },
+      {
+        "kind": "font",
+        "completed": true
+      }
+    ],
+    "observed": {
+      "size": {
+        "physical": "1080x2400",
+        "override": null
+      },
+      "density": {
+        "physical": "420",
+        "override": null
+      },
+      "fontScale": "1.0",
+      "fontWasAbsent": false
+    },
+    "policy": "Restore original overrides verbatim; reset only when the original override was absent. Restore/delete the original font setting."
+  },
+  "logout": {
+    "result": "通过",
+    "state": "normal-logout-confirmed",
+    "note": "Single normal Home logout, Welcome confirmed."
+  },
+  "dnsForwarding": {
+    "upstream": "192.168.31.1",
+    "bindAddress": "127.0.0.1",
+    "bindPort": 53,
+    "running": false,
+    "state": "closed",
+    "lastError": null,
+    "pending": 0,
+    "receivedQueries": 6,
+    "forwardedQueries": 6,
+    "forwardedReplies": 6,
+    "expired": 0,
+    "rejectedQueries": 0,
+    "rejectedReplies": 0,
+    "capacityDrops": 0,
+    "sendErrors": 0,
+    "socketErrors": 0,
+    "durationMs": 220824
+  },
+  "screenshots": [
+    "2026-11-01T14-08-12.596Z-device-read-layout-baseline-schedules-empty.png",
+    "2026-11-01T14-08-12.596Z-device-read-layout-baseline-firmware-error.png",
+    "2026-11-01T14-08-12.596Z-device-read-layout-small-schedules-empty.png",
+    "2026-11-01T14-08-12.596Z-device-read-layout-small-firmware-error.png",
+    "2026-11-01T14-08-12.596Z-device-read-layout-large-schedules-empty.png",
+    "2026-11-01T14-08-12.596Z-device-read-layout-large-firmware-error.png",
+    "2026-11-01T14-08-12.596Z-device-read-layout-font150-schedules-empty.png",
+    "2026-11-01T14-08-12.596Z-device-read-layout-font150-firmware-error.png"
+  ],
+  "results": [
+    {
+      "id": "baseline-schedules-geometry",
+      "configuration": "baseline",
+      "feature": "schedules",
+      "kind": null,
+      "state": "empty",
+      "geometryResult": "通过",
+      "geometry": {
+        "result": "通过",
+        "allWithinInitialViewport": true,
+        "reachable": [
+          {
+            "id": "rn-feature-back",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-schedules-empty",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-schedules-retry",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-device-close",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          }
+        ],
+        "frames": [
+          {
+            "index": 0,
+            "viewport": {
+              "width": 1080,
+              "height": 2400
+            },
+            "observed": [
+              {
+                "id": "rn-feature-back",
+                "bounds": [
+                  21,
+                  121,
+                  147,
+                  247
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-schedules-empty",
+                "bounds": [
+                  42,
+                  1089,
+                  1038,
+                  1155
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-schedules-retry",
+                "bounds": [
+                  42,
+                  2025,
+                  1038,
+                  2150
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-device-close",
+                "bounds": [
+                  42,
+                  2212,
+                  1038,
+                  2337
+                ],
+                "withinViewport": true,
+                "enabled": true
+              }
+            ],
+            "overlaps": []
+          }
+        ],
+        "limits": "Only accessible node rectangles and reachability; glyph clipping, padding, safe-area appearance and touch quality require manual visual review."
+      },
+      "screenshot": "2026-11-01T14-08-12.596Z-device-read-layout-baseline-schedules-empty.png",
+      "businessResult": "通过：仅真实只读列表/空态呈现",
+      "visualResult": "未验收：需人工对照参考，检查字形、换行、间距、状态与触摸",
+      "note": "Empty list screenshot only; no schedule creation/edit/enable/delete."
+    },
+    {
+      "id": "baseline-firmware-geometry",
+      "configuration": "baseline",
+      "feature": "firmware",
+      "kind": "mcu",
+      "state": "error",
+      "geometryResult": "通过",
+      "geometry": {
+        "result": "通过",
+        "allWithinInitialViewport": true,
+        "reachable": [
+          {
+            "id": "rn-feature-back",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-firmware-error-mcu",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-firmware-retry",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-device-close",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          }
+        ],
+        "frames": [
+          {
+            "index": 0,
+            "viewport": {
+              "width": 1080,
+              "height": 2400
+            },
+            "observed": [
+              {
+                "id": "rn-feature-back",
+                "bounds": [
+                  21,
+                  121,
+                  147,
+                  247
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-firmware-error-mcu",
+                "bounds": [
+                  63,
+                  1184,
+                  1017,
+                  1250
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-firmware-retry",
+                "bounds": [
+                  63,
+                  1314,
+                  1017,
+                  1439
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-device-close",
+                "bounds": [
+                  42,
+                  2212,
+                  1038,
+                  2337
+                ],
+                "withinViewport": true,
+                "enabled": true
+              }
+            ],
+            "overlaps": []
+          }
+        ],
+        "limits": "Only accessible node rectangles and reachability; glyph clipping, padding, safe-area appearance and touch quality require manual visual review."
+      },
+      "screenshot": "2026-11-01T14-08-12.596Z-device-read-layout-baseline-firmware-error.png",
+      "businessResult": "阻塞：本矩阵不证明可用固件候选或升级业务通过",
+      "visualResult": "未验收：需人工对照参考，检查字形、换行、间距、状态与触摸",
+      "note": "Real read error may validate error layout; it does not establish the backend cause or firmware availability."
+    },
+    {
+      "id": "baseline-return-home",
+      "geometryResult": "通过",
+      "note": "Normal RN back/close navigation; no device or relationship mutation."
+    },
+    {
+      "id": "small-schedules-geometry",
+      "configuration": "small",
+      "feature": "schedules",
+      "kind": null,
+      "state": "empty",
+      "geometryResult": "通过",
+      "geometry": {
+        "result": "通过",
+        "allWithinInitialViewport": true,
+        "reachable": [
+          {
+            "id": "rn-feature-back",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-schedules-empty",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-schedules-retry",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-device-close",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          }
+        ],
+        "frames": [
+          {
+            "index": 0,
+            "viewport": {
+              "width": 640,
+              "height": 1280
+            },
+            "observed": [
+              {
+                "id": "rn-feature-back",
+                "bounds": [
+                  16,
+                  92,
+                  112,
+                  188
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-schedules-empty",
+                "bounds": [
+                  32,
+                  555,
+                  608,
+                  605
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-schedules-retry",
+                "bounds": [
+                  32,
+                  992,
+                  608,
+                  1088
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-device-close",
+                "bounds": [
+                  32,
+                  1136,
+                  608,
+                  1232
+                ],
+                "withinViewport": true,
+                "enabled": true
+              }
+            ],
+            "overlaps": []
+          }
+        ],
+        "limits": "Only accessible node rectangles and reachability; glyph clipping, padding, safe-area appearance and touch quality require manual visual review."
+      },
+      "screenshot": "2026-11-01T14-08-12.596Z-device-read-layout-small-schedules-empty.png",
+      "businessResult": "通过：仅真实只读列表/空态呈现",
+      "visualResult": "未验收：需人工对照参考，检查字形、换行、间距、状态与触摸",
+      "note": "Empty list screenshot only; no schedule creation/edit/enable/delete."
+    },
+    {
+      "id": "small-firmware-geometry",
+      "configuration": "small",
+      "feature": "firmware",
+      "kind": "mcu",
+      "state": "error",
+      "geometryResult": "通过",
+      "geometry": {
+        "result": "通过",
+        "allWithinInitialViewport": true,
+        "reachable": [
+          {
+            "id": "rn-feature-back",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-firmware-error-mcu",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-firmware-retry",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-device-close",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          }
+        ],
+        "frames": [
+          {
+            "index": 0,
+            "viewport": {
+              "width": 640,
+              "height": 1280
+            },
+            "observed": [
+              {
+                "id": "rn-feature-back",
+                "bounds": [
+                  16,
+                  92,
+                  112,
+                  188
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-firmware-error-mcu",
+                "bounds": [
+                  48,
+                  627,
+                  592,
+                  677
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-firmware-retry",
+                "bounds": [
+                  48,
+                  725,
+                  592,
+                  821
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-device-close",
+                "bounds": [
+                  32,
+                  1136,
+                  608,
+                  1232
+                ],
+                "withinViewport": true,
+                "enabled": true
+              }
+            ],
+            "overlaps": []
+          }
+        ],
+        "limits": "Only accessible node rectangles and reachability; glyph clipping, padding, safe-area appearance and touch quality require manual visual review."
+      },
+      "screenshot": "2026-11-01T14-08-12.596Z-device-read-layout-small-firmware-error.png",
+      "businessResult": "阻塞：本矩阵不证明可用固件候选或升级业务通过",
+      "visualResult": "未验收：需人工对照参考，检查字形、换行、间距、状态与触摸",
+      "note": "Real read error may validate error layout; it does not establish the backend cause or firmware availability."
+    },
+    {
+      "id": "small-return-home",
+      "geometryResult": "通过",
+      "note": "Normal RN back/close navigation; no device or relationship mutation."
+    },
+    {
+      "id": "large-schedules-geometry",
+      "configuration": "large",
+      "feature": "schedules",
+      "kind": null,
+      "state": "empty",
+      "geometryResult": "通过",
+      "geometry": {
+        "result": "通过",
+        "allWithinInitialViewport": true,
+        "reachable": [
+          {
+            "id": "rn-feature-back",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-schedules-empty",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-schedules-retry",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-device-close",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          }
+        ],
+        "frames": [
+          {
+            "index": 0,
+            "viewport": {
+              "width": 860,
+              "height": 1864
+            },
+            "observed": [
+              {
+                "id": "rn-feature-back",
+                "bounds": [
+                  16,
+                  92,
+                  112,
+                  188
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-schedules-empty",
+                "bounds": [
+                  32,
+                  847,
+                  828,
+                  897
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-schedules-retry",
+                "bounds": [
+                  32,
+                  1576,
+                  828,
+                  1672
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-device-close",
+                "bounds": [
+                  32,
+                  1720,
+                  828,
+                  1816
+                ],
+                "withinViewport": true,
+                "enabled": true
+              }
+            ],
+            "overlaps": []
+          }
+        ],
+        "limits": "Only accessible node rectangles and reachability; glyph clipping, padding, safe-area appearance and touch quality require manual visual review."
+      },
+      "screenshot": "2026-11-01T14-08-12.596Z-device-read-layout-large-schedules-empty.png",
+      "businessResult": "通过：仅真实只读列表/空态呈现",
+      "visualResult": "未验收：需人工对照参考，检查字形、换行、间距、状态与触摸",
+      "note": "Empty list screenshot only; no schedule creation/edit/enable/delete."
+    },
+    {
+      "id": "large-firmware-geometry",
+      "configuration": "large",
+      "feature": "firmware",
+      "kind": "mcu",
+      "state": "error",
+      "geometryResult": "通过",
+      "geometry": {
+        "result": "通过",
+        "allWithinInitialViewport": true,
+        "reachable": [
+          {
+            "id": "rn-feature-back",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-firmware-error-mcu",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-firmware-retry",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-device-close",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          }
+        ],
+        "frames": [
+          {
+            "index": 0,
+            "viewport": {
+              "width": 860,
+              "height": 1864
+            },
+            "observed": [
+              {
+                "id": "rn-feature-back",
+                "bounds": [
+                  16,
+                  92,
+                  112,
+                  188
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-firmware-error-mcu",
+                "bounds": [
+                  48,
+                  919,
+                  812,
+                  969
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-firmware-retry",
+                "bounds": [
+                  48,
+                  1017,
+                  812,
+                  1113
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-device-close",
+                "bounds": [
+                  32,
+                  1720,
+                  828,
+                  1816
+                ],
+                "withinViewport": true,
+                "enabled": true
+              }
+            ],
+            "overlaps": []
+          }
+        ],
+        "limits": "Only accessible node rectangles and reachability; glyph clipping, padding, safe-area appearance and touch quality require manual visual review."
+      },
+      "screenshot": "2026-11-01T14-08-12.596Z-device-read-layout-large-firmware-error.png",
+      "businessResult": "阻塞：本矩阵不证明可用固件候选或升级业务通过",
+      "visualResult": "未验收：需人工对照参考，检查字形、换行、间距、状态与触摸",
+      "note": "Real read error may validate error layout; it does not establish the backend cause or firmware availability."
+    },
+    {
+      "id": "large-return-home",
+      "geometryResult": "通过",
+      "note": "Normal RN back/close navigation; no device or relationship mutation."
+    },
+    {
+      "id": "font150-schedules-geometry",
+      "configuration": "font150",
+      "feature": "schedules",
+      "kind": null,
+      "state": "empty",
+      "geometryResult": "通过",
+      "geometry": {
+        "result": "通过",
+        "allWithinInitialViewport": true,
+        "reachable": [
+          {
+            "id": "rn-feature-back",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-schedules-empty",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-schedules-retry",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-device-close",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          }
+        ],
+        "frames": [
+          {
+            "index": 0,
+            "viewport": {
+              "width": 1080,
+              "height": 2400
+            },
+            "observed": [
+              {
+                "id": "rn-feature-back",
+                "bounds": [
+                  21,
+                  121,
+                  147,
+                  247
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-schedules-empty",
+                "bounds": [
+                  42,
+                  1057,
+                  1038,
+                  1132
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-schedules-retry",
+                "bounds": [
+                  42,
+                  1971,
+                  1038,
+                  2123
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-device-close",
+                "bounds": [
+                  42,
+                  2185,
+                  1038,
+                  2337
+                ],
+                "withinViewport": true,
+                "enabled": true
+              }
+            ],
+            "overlaps": []
+          }
+        ],
+        "limits": "Only accessible node rectangles and reachability; glyph clipping, padding, safe-area appearance and touch quality require manual visual review."
+      },
+      "screenshot": "2026-11-01T14-08-12.596Z-device-read-layout-font150-schedules-empty.png",
+      "businessResult": "通过：仅真实只读列表/空态呈现",
+      "visualResult": "未验收：需人工对照参考，检查字形、换行、间距、状态与触摸",
+      "note": "Empty list screenshot only; no schedule creation/edit/enable/delete."
+    },
+    {
+      "id": "font150-firmware-geometry",
+      "configuration": "font150",
+      "feature": "firmware",
+      "kind": "mcu",
+      "state": "error",
+      "geometryResult": "通过",
+      "geometry": {
+        "result": "通过",
+        "allWithinInitialViewport": true,
+        "reachable": [
+          {
+            "id": "rn-feature-back",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-firmware-error-mcu",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-firmware-retry",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          },
+          {
+            "id": "rn-device-close",
+            "withinInitialViewport": true,
+            "reached": true,
+            "scrollAttempts": 0,
+            "reachableViaScroll": false
+          }
+        ],
+        "frames": [
+          {
+            "index": 0,
+            "viewport": {
+              "width": 1080,
+              "height": 2400
+            },
+            "observed": [
+              {
+                "id": "rn-feature-back",
+                "bounds": [
+                  21,
+                  121,
+                  147,
+                  247
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-firmware-error-mcu",
+                "bounds": [
+                  63,
+                  1167,
+                  1017,
+                  1242
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-firmware-retry",
+                "bounds": [
+                  63,
+                  1306,
+                  1017,
+                  1458
+                ],
+                "withinViewport": true,
+                "enabled": true
+              },
+              {
+                "id": "rn-device-close",
+                "bounds": [
+                  42,
+                  2185,
+                  1038,
+                  2337
+                ],
+                "withinViewport": true,
+                "enabled": true
+              }
+            ],
+            "overlaps": []
+          }
+        ],
+        "limits": "Only accessible node rectangles and reachability; glyph clipping, padding, safe-area appearance and touch quality require manual visual review."
+      },
+      "screenshot": "2026-11-01T14-08-12.596Z-device-read-layout-font150-firmware-error.png",
+      "businessResult": "阻塞：本矩阵不证明可用固件候选或升级业务通过",
+      "visualResult": "未验收：需人工对照参考，检查字形、换行、间距、状态与触摸",
+      "note": "Real read error may validate error layout; it does not establish the backend cause or firmware availability."
+    },
+    {
+      "id": "font150-return-home",
+      "geometryResult": "通过",
+      "note": "Normal RN back/close navigation; no device or relationship mutation."
+    }
+  ],
+  "scope": "Real native GET + RN geometry matrix; no timer/OTA writes, sharing, unbinding, preferences mutation or data clearing.",
+  "limits": [
+    "Firmware error geometry is independent of blocked firmware-candidate business acceptance.",
+    "Only empty schedules and MCU error pages may be captured; populated lists have geometry metadata only.",
+    "Rectangles/reachability do not prove glyph wrapping, touch accuracy, reference fidelity, all UI states, iOS or hardware."
+  ]
+}

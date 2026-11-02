@@ -1,0 +1,58 @@
+{
+  "runId": "2026-11-01T20-09-55.932Z",
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "scriptSha256": "cf30d51d826c209fae41433ff6bb6ef0ca111657c9418d3c991e4578eca911cf",
+  "taskResumeSha256": "a3ad9d4a3062cb7bc7fb2f4930e21f46484cfe35909a9565ee29227fe4fcfd63",
+  "installedArtifactSha256": "ef3043ea0ccac32a6dea78e6b308cbcc28c047bb6c97b606444294663b52f549",
+  "sidecarSha256": "676138adf2ee468b6d2b132e7e147a04e6c3865e19028516110427f0fda0e91b",
+  "sourceBefore": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "f24946de1730d0cda3731df136f56c9b1b3fc5816df4661e16a8a2e784821312",
+    "sourceFiles": 323
+  },
+  "sourceAfter": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "f24946de1730d0cda3731df136f56c9b1b3fc5816df4661e16a8a2e784821312",
+    "sourceFiles": 323
+  },
+  "sourceUnchanged": true,
+  "results": [
+    {
+      "id": "default-password-disabled",
+      "result": "通过"
+    },
+    {
+      "id": "password-public-form-capture",
+      "result": "通过"
+    },
+    {
+      "id": "empty-captcha-disabled",
+      "result": "通过"
+    },
+    {
+      "id": "captcha-public-form-capture",
+      "result": "通过"
+    }
+  ],
+  "screenshots": [
+    "2026-11-01T20-09-55.932Z-email-login-initial-welcome.png",
+    "2026-11-01T20-09-55.932Z-email-login-password-visual.png",
+    "2026-11-01T20-09-55.932Z-email-login-captcha-visual.png",
+    "2026-11-01T20-09-55.932Z-email-login-final-welcome.png"
+  ],
+  "cleanup": "welcome-confirmed",
+  "visualOnly": true,
+  "sendActions": 0,
+  "submitActions": 0,
+  "scope": "Public dummy-only S016 UI gates; not real captcha/email/login/backend validation.",
+  "limits": [
+    "Input text is redacted by the existing snapshot exporter; clearing is inferred through disabled submit after a previously enabled gate.",
+    "Alphabetic attempt passes through numeric EditText filtering; this is not a direct validator proof or Unicode IME coverage.",
+    "No actual send/cooldown/SMTP, AUTH04, AUTH02, login, account switch, persistence, hardware, iOS or pixel/online-Lanhu acceptance.",
+    "Welcome and tool-owned fixed-public-input form screenshots, guarded before/after. Raw XML/dumpsys/CLI/error payloads and input values are not archived.",
+    "SIGINT/SIGTERM use bounded finally; force-kill cannot guarantee return. Existing authenticated/unknown pages are never logged out or cleared."
+  ]
+}

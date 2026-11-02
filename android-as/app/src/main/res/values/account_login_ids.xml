@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="account_mode" type="id" />
+    <item name="account_code" type="id" />
+    <item name="account_send_code" type="id" />
+</resources>

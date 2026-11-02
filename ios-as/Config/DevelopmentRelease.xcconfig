@@ -1,0 +1,4 @@
+#include? "../Pods/Target Support Files/Pods-Rowan/Pods-Rowan.developmentrelease.xcconfig"
+#include "Common.xcconfig"
+#include "Environments/Development.xcconfig"
+#include "Modes/Release.xcconfig"

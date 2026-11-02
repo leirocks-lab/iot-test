@@ -1,6 +1,8 @@
 # Android 原生宿主
 
-工程名约定：`RowanAndroid`；应用模块：`app`；Kotlin namespace：`com.rowan.iot`。当前仅建立目录骨架和 `.gitkeep`，尚无 Gradle Wrapper、构建配置、Manifest、应用入口或可安装产物。
+> 当前实施状态（2026-11-02）：独立宿主、原生服务及 major3 只读桥接已构建并在 API36 运行；测试、静态检查、Release、真实接口与局部受控 UI 分版本记录。首页多房间受控 UI 尚在诊断与复测，局部检查不关闭范围条目。完整业务、蓝湖视觉、硬件及生产签名仍未验收；具体计数、源码与 APK 对应关系以[批次证据](../docs/测试报告/重构实施-20261101/README.md)为准。
+
+工程名：`RowanAndroid`；应用模块：`app`；Kotlin namespace：`com.rowan.iot`。实际完成状态见上方说明与实施报告。
 
 ## 目录职责
 
@@ -12,7 +14,7 @@ android-as/
 │  ├─ features/            原生页面及页面状态
 │  │  ├─ auth/             账号流程
 │  │  ├─ home/             首页、设备列表、快捷控制
-│  │  ├─ adddevice/        发现、扫码、配网页面
+│  │  ├─ scan/             添加菜单、扫码及单图选择
 │  │  ├─ profile/          我的
 │  │  ├─ rooms/            房间管理
 │  │  └─ settings/         全局设置
@@ -37,11 +39,11 @@ android-as/
 
 ## 初始化与编译
 
-后续需补齐 settings.gradle.kts、根与 app 的 build.gradle.kts、Wrapper、工具链版本配置、Manifest、Application/Activity、资源和 RN/Codegen 集成；由经过验证的模板生成，不复制旧 Expo 生成工程。
+已建立settings.gradle、根与app的build.gradle、Wrapper、Manifest、Application/Activity、资源和RN/Codegen集成；基于独立官方模板，没有复制旧Expo生成工程。
 
 宿主显式定位 `../app-rn/node_modules` 和 `../app-rn/src/host/specs`。Codegen 输出由构建管理，不手改。RN/JDK/Gradle/AGP/SDK/NDK 版本经集成验证后锁定。
 
-以下为初始化后应提供的目标任务，当前不可执行：
+已配置下列目标任务；目前已执行development Debug测试/lint及development Release构建，preview/production签名交付未验收：
 
 | 用途 | 目标 Gradle 任务 | 输出 |
 | --- | --- | --- |
@@ -49,11 +51,13 @@ android-as/
 | 预览验收 | `:app:assemblePreviewRelease` | 签名 APK |
 | 正式分发 | `:app:bundleProductionRelease` | 签名 AAB |
 
-这些任务依赖后续配置 development/preview/production flavors 及 debug/release build types。Windows 从本目录调用 `./gradlew.bat`，例如 `./gradlew.bat :app:assembleDevelopmentDebug`；其他构建环境使用对应 Wrapper。
+工程已有development/preview/production flavors及debug/release build types。Windows从本目录调用`./gradlew.bat`；可用`node scripts/build.mjs :app:assembleDevelopmentRelease`记录来源指纹并剔除测试凭据，仅将公开环境配置传入构建。
 
 namespace 保持 com.rowan.iot；环境 applicationId 按根 README 约定。原始产物位于 app/build/outputs，归档副本放 dist；versionName 对应宿主版本，versionCode 对应递增构建号。签名文件及密码不提交。Release 必须内置匹配的 RN 资源，不依赖 Metro。
 
-当前未执行原生编译。建立工程后配置静态检查、单元测试及真机测试，记录实际命令和结果。
+构建脚本、settings和应用依赖图已有真实Gradle锁文件，正常构建使用STRICT模式。更新依赖后显式执行`node scripts/build.mjs :resolveAndLockAll --write-locks`并审阅锁差异；生成任务覆盖三环境的原生编译/运行/测试图，排除没有Android构建类型的Kotlin common metadata图。锁状态记录见[依赖锁证据](../docs/测试报告/重构实施-20261101/android-dependency-locks.json)，锁图不代表全部变体都已构建。
+
+当前已执行原生编译、静态检查、单元测试及部分模拟器验证。真机硬件未验收，development debug key不代表production签名完成；生产构建交付仍需单独核验。
 
 ## 关联项目
 

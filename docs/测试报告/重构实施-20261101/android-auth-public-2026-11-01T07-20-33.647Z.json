@@ -1,0 +1,76 @@
+{
+  "runId": "2026-11-01T07-20-33.647Z",
+  "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+  "worktreeDirty": true,
+  "sourceSha256": "114924f561dfdb39f54566ec3272ffb3a86d494f0141364f2743c6be22a45ac7",
+  "sourceFiles": 120,
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "buildProvenance": {
+    "date": "2026-11-01T07:16:21.216Z",
+    "task": ":app:assembleDevelopmentRelease",
+    "artifactSha256": "2ec5baf4832e0f1675208c54bf3e4922a334cb64a316ba0f8f454ec6d69e5dd5",
+    "sourceBefore": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "304814fd584e80f4f4359023cf93431fd921d5ec8d8d80adcbf9210c0f4fbebf",
+      "sourceFiles": 120
+    },
+    "sourceAfter": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "304814fd584e80f4f4359023cf93431fd921d5ec8d8d80adcbf9210c0f4fbebf",
+      "sourceFiles": 120
+    },
+    "sourceUnchangedDuringBuild": true,
+    "architecture": "x86_64",
+    "signing": "development debug key",
+    "isolatedValidation": true
+  },
+  "viewport": "Physical size: 1080x2400\r\nOverride size: 750x1624",
+  "fontScale": "1.0",
+  "results": [
+    {
+      "id": "recovery-empty-gates",
+      "result": "通过"
+    },
+    {
+      "id": "recovery-invalid-email-no-send",
+      "result": "通过"
+    },
+    {
+      "id": "privacy-navigation",
+      "result": "通过"
+    },
+    {
+      "id": "privacy-real-content",
+      "result": "阻塞",
+      "code": "1002030000",
+      "note": "真实正文未取得，阅读闭环未通过"
+    },
+    {
+      "id": "privacy-failure-cannot-confirm",
+      "result": "通过"
+    },
+    {
+      "id": "terms-navigation",
+      "result": "通过"
+    },
+    {
+      "id": "terms-real-content",
+      "result": "阻塞",
+      "code": "1002030001",
+      "note": "真实正文未取得，阅读闭环未通过"
+    },
+    {
+      "id": "terms-failure-cannot-confirm",
+      "result": "通过"
+    }
+  ],
+  "screenshots": [
+    "2026-11-01T07-20-33.647Z-recovery-initial.png",
+    "2026-11-01T07-20-33.647Z-privacy-actual-service-state.png",
+    "2026-11-01T07-20-33.647Z-terms-actual-service-state.png"
+  ],
+  "limits": "仅空态/非法输入/导航和真实协议失败态；未发送验证码、未重置、未注册；无测试替身"
+}

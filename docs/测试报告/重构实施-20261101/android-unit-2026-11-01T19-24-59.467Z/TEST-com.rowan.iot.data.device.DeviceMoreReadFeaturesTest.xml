@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.data.device.DeviceMoreReadFeaturesTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-01T19:24:47.428Z" hostname="DESKTOP-2AM89R2" time="0.132">
+  <properties/>
+  <testcase name="callerCancellationCannotPublishEvenIfDependencyIgnoresIt" classname="com.rowan.iot.data.device.DeviceMoreReadFeaturesTest" time="0.036"/>
+  <testcase name="roomMissingIsUnknownAndNeverInventsUnassigned" classname="com.rowan.iot.data.device.DeviceMoreReadFeaturesTest" time="0.006"/>
+  <testcase name="malformedOrDotDeviceIdsNeverAuthorizeOrDispatch" classname="com.rowan.iot.data.device.DeviceMoreReadFeaturesTest" time="0.004"/>
+  <testcase name="oldAccountResultsAndLateErrorsAreFencedForAllFourReads" classname="com.rowan.iot.data.device.DeviceMoreReadFeaturesTest" time="0.007"/>
+  <testcase name="featureNotFoundGenericRbacAndUnknownSuffixCodesDoNotInventOwnershipRevocation" classname="com.rowan.iot.data.device.DeviceMoreReadFeaturesTest" time="0.004"/>
+  <testcase name="ioAndMalformedResponsesUseClosedVocabularyWithoutLeakingMessages" classname="com.rowan.iot.data.device.DeviceMoreReadFeaturesTest" time="0.005"/>
+  <testcase name="freshOwnershipRejectionMarksAllFourReadsWithoutOpeningRepositories" classname="com.rowan.iot.data.device.DeviceMoreReadFeaturesTest" time="0.004"/>
+  <testcase name="documentedFeatureUnboundAfterFreshProofStillCarriesOwnershipRevocation" classname="com.rowan.iot.data.device.DeviceMoreReadFeaturesTest" time="0.019"/>
+  <testcase name="preCancelledCallerDoesNotStartAuthorization" classname="com.rowan.iot.data.device.DeviceMoreReadFeaturesTest" time="0.003"/>
+  <testcase name="lateKnownUnboundCannotRevokeTheAccountThatReplacedItsReadIntent" classname="com.rowan.iot.data.device.DeviceMoreReadFeaturesTest" time="0.006"/>
+  <testcase name="accountChangeDuringAuthorizationPreventsAnyRead" classname="com.rowan.iot.data.device.DeviceMoreReadFeaturesTest" time="0.008"/>
+  <testcase name="repositoryScopeMismatchIsRejectedBeforeReading" classname="com.rowan.iot.data.device.DeviceMoreReadFeaturesTest" time="0.004"/>
+  <testcase name="knownUnboundAndForbiddenCodesHaveFixedPermissionErrorWithoutBackendCause" classname="com.rowan.iot.data.device.DeviceMoreReadFeaturesTest" time="0.009"/>
+  <testcase name="mismatchedAuthorizationCannotConstructAnyFeatureRepository" classname="com.rowan.iot.data.device.DeviceMoreReadFeaturesTest" time="0.004"/>
+  <testcase name="allFourReadsFreshlyAuthorizeAndCarryCompleteNativeScopeWithoutConnecting" classname="com.rowan.iot.data.device.DeviceMoreReadFeaturesTest" time="0.006"/>
+  <testcase name="oldMissingOrPendingContextsBlockAllMethodsBeforeAuthorization" classname="com.rowan.iot.data.device.DeviceMoreReadFeaturesTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-01T06:30:06.578Z",
+  "runId": "2026-11-01T06-29-32.397Z",
+  "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+  "worktreeDirty": true,
+  "sourceSha256": "c01472bc9629b1a6ab2481cf62f06b37a8acd5a9fe4c8af249f50f7a0840b34f",
+  "sourceFiles": 153,
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "viewport": "Physical size: 1080x2400\r\nOverride size: 750x1624",
+  "density": "Physical density: 420\r\nOverride density: 320",
+  "fontScale": "1.0",
+  "screenshots": [
+    "2026-11-01T06-29-32.397Z-android-login-initial.png",
+    "2026-11-01T06-29-32.397Z-android-home-after-login.png"
+  ],
+  "scope": "Android native login only; not complete UI/HTTP/MQTT acceptance",
+  "results": [
+    {
+      "id": "AUTH-UI-empty",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-UI-consent-gate",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-04-native-emulator",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-06-native-emulator",
+      "result": "通过"
+    }
+  ],
+  "hardware": "未验收"
+}

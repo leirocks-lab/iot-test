@@ -1,0 +1,40 @@
+{
+  "runId": "2026-11-01T13-56-32.878Z",
+  "parentRunId": "2026-11-01T13-53-49.465Z",
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "scriptSha256": "2f8697ca7e5a3eaa9d1c31a382e3b861e83038eba5c28c4753c78a2baf8e00b5",
+  "installedArtifactSha256": "dc6c4c2e8fc5c318d81254a6a0a8d2917a69f661d4896a70e1264150b94490d3",
+  "buildProvenance": {
+    "date": "2026-11-01T13:52:44.789Z",
+    "task": ":app:assembleDevelopmentRelease",
+    "artifactSha256": "dc6c4c2e8fc5c318d81254a6a0a8d2917a69f661d4896a70e1264150b94490d3",
+    "sourceBefore": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "9296de48b202867ad5e9bd78fdbd2cd896d30019bf339aa9b9f1b16783d85961",
+      "sourceFiles": 258
+    },
+    "sourceAfter": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "9296de48b202867ad5e9bd78fdbd2cd896d30019bf339aa9b9f1b16783d85961",
+      "sourceFiles": 258
+    },
+    "sourceUnchangedDuringBuild": true,
+    "architecture": "x86_64",
+    "signing": "development debug key",
+    "isolatedValidation": true
+  },
+  "results": [
+    {
+      "id": "AUTH-06-native-logout-continuation",
+      "result": "通过",
+      "stage": "logout"
+    }
+  ],
+  "screenshots": [],
+  "limits": "继续已记录的本轮测试会话；不登录、不改房间、不绑定、不发送 MQTT 控制；完整UI/iOS/硬件未验收",
+  "rnExcludedForIsolation": true,
+  "logoutOnly": true
+}

@@ -1,0 +1,64 @@
+{
+  "status": "R2_STATIC_REVIEW_NO_REMAINING_LOCATED_P1_P2",
+  "initialDraft": ".cache\\refactor\\presentation-system-draft",
+  "patches": {
+    "tests.patch": "a71dab865585c514d72e831017baa228718c98de15a9f7d27b8777d3e243cc70",
+    "implementation.patch": "ec0584839ce497e7607b9e3ae223d37f61cb1f5ebd2e34f5408c79db51a9ab5d"
+  },
+  "definitions": {
+    "android": 12,
+    "ios": 12
+  },
+  "pbxMembershipReadOnlyChecked": [
+    "ios-as/Tests/Unit/PresentationServiceTests.swift",
+    "ios-as/Rowan/Domain/Presentation/PresentationService.swift",
+    "ios-as/Rowan/Platform/Presentation/UIKitPresentationSystemSource.swift"
+  ],
+  "finding": {
+    "priority": "P2",
+    "id": "NC-UNBOUNDED-DELIVERY",
+    "locations": [
+      "code/ios-as/Rowan/Domain/Presentation/PresentationService.swift:89-90",
+      "code/ios-as/Rowan/Platform/Presentation/UIKitPresentationSystemSource.swift:53-54"
+    ],
+    "reproduction": "Within one synchronous MainActor turn post N valid notifications. Each observer callback creates an unstructured Task. Active gate cannot coalesce queued work; service dirty is applied only after each task executes. Close blocks stale delivery but leaves N pending tasks.",
+    "minimumFix": "Payload-free per-registration bounded mailbox/scheduler ticket; synchronous coalescing before queue admission; close retires/cancels old ticket; delivery freshly captures current authority.",
+    "regressionRequirement": "Real NotificationCenter adapter entry plus controllable scheduler, burst before drain and close-before-drain; synchronous FakeSignals 100-loop is insufficient."
+  },
+  "otherReview": "No additional concrete P1/P2 found in fresh authority ownership, saved/system separation, service close/child Job, weak 64-entry listeners, PBX registration or stated SDK limitations.",
+  "limits": [
+    "Read-only cache source/manifest/PBX parsing only",
+    "No Gradle/ADB/Swift/Xcode/SDK execution",
+    "No formal Android/RN/iOS modified"
+  ],
+  "revision2": {
+    "draft": ".cache\\refactor\\presentation-system-r2-draft",
+    "patches": {
+      "tests.patch": "884b62896a93c9e2d0a04e470b2884366b491068d1d269e6e1f92d4907806321",
+      "implementation.patch": "8b079372496f12da288c9b466b6c2f64366989a45d318319ba4ddee646e42134"
+    },
+    "definitions": {
+      "android": 12,
+      "ios": 16
+    },
+    "pbxMembershipReadOnlyChecked": [
+      "ios-as/Tests/Unit/PresentationServiceTests.swift",
+      "ios-as/Rowan/Domain/Presentation/PresentationService.swift",
+      "ios-as/Rowan/Platform/Presentation/UIKitPresentationSystemSource.swift"
+    ],
+    "findingResolution": "R1 NC-UNBOUNDED-DELIVERY source-level reproduction closed: NSLock admission sets one UUID pending before scheduling; notifications merge before Task creation; close retires token and cancellation before observers removal; queued old cancellation must fail exact UUID; default delivery reads fresh authority through caller.",
+    "newTestsRead": [
+      "actual NotificationCenter account10000 burst -> one queued delivery and latest closure state",
+      "close and force-run cancelled ticket -> no delivery",
+      "UIKit active/locale20000 mixed notifications -> one pending then new resign notification",
+      "close old/register new -> forced late old ticket does not invoke old or replace new callback"
+    ],
+    "notSubstituted": "Existing synchronous FakeSignals100 background test retained as service-only coverage; four actual-NC adapter entry definitions reviewed independently.",
+    "remainingLimitations": [
+      "No Swift/XCTest/UIKit/platform execution or compiler checks",
+      "NSLock mailbox @unchecked Sendable correctness assessed from source; actual scheduler/NC threading requires platform verification",
+      "OS global resource/screen trait propagation and page override isolation remain unverified runtime contracts",
+      "Global UI and RN presentation still not wired"
+    ]
+  }
+}

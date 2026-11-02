@@ -1,0 +1,41 @@
+{
+  "source": "user supplied Lanhu export; online version not fully verified",
+  "assets": [
+    {
+      "source": "docs/ui/lanhu/project/src/view/lanhu_denglu/assets/img/e9038ce8197e479b9142c977c7de51ce_mergeImage.png",
+      "destination": "android-as/app/src/main/res/drawable-nodpi/auth_back.png",
+      "sha256": "dd4c1aeb9bcb9e54c27ee0c0571bb014478c6258fe9d85112e07617422bdbfec",
+      "transformation": "none; original bytes"
+    },
+    {
+      "source": "docs/ui/lanhu/project/src/view/lanhu_denglu/assets/img/SketchPng1a10c20eafcd764d76fa8f10da58f8799b36f13dd62fbe237a60ae103980858c.png",
+      "destination": "android-as/app/src/main/res/drawable-nodpi/auth_email.png",
+      "sha256": "aa54fea0fe5d4bc820f1bd3b18c7e80361f1a2aaf9b6bc96342059fbf5557d85",
+      "transformation": "none; original bytes"
+    },
+    {
+      "source": "docs/ui/lanhu/project/src/view/lanhu_denglu/assets/img/SketchPng4f07f3628d3f112c01b7ed3ca9202d790d2616d76922c71e697609278c3891b7.png",
+      "destination": "android-as/app/src/main/res/drawable-nodpi/auth_password_hidden.png",
+      "sha256": "3b57bf0e1bf18f47fcf84257d6446101b350a63ffc5362eaf841017532e3be35",
+      "transformation": "none; original bytes"
+    },
+    {
+      "source": "docs/ui/lanhu/project/src/view/lanhu_denglushuruwancheng/assets/img/SketchPnge00774c1b49cea8a3ebb1df620647cb7370ee8a3a06d3bd6529981829823c5f3.png",
+      "destination": "android-as/app/src/main/res/drawable-nodpi/auth_password_visible.png",
+      "sha256": "327efcf608f8891c857f750cb9c98b2385a45f00ebd1cb865553329e3073f1f6",
+      "transformation": "none; original bytes"
+    },
+    {
+      "source": "docs/ui/lanhu/project/src/view/lanhu_denglu/assets/img/SketchPng4b19373a8d47de67eaa30abef7bbb27500ebd3b466311cd0967743023982080b.png",
+      "destination": "android-as/app/src/main/res/drawable-nodpi/auth_agreement_unchecked.png",
+      "sha256": "0fb8ec023090dee30dc46752b87793968447c7e8abc1e4f6d21c785f8b20d045",
+      "transformation": "none; original bytes"
+    },
+    {
+      "source": "docs/ui/lanhu/project/src/view/lanhu_denglushuruwancheng/assets/img/SketchPng6d43d85721a5daca7f12ee7060243d062e9219ecf7c1bc9fcf9491760cd14193.png",
+      "destination": "android-as/app/src/main/res/drawable-nodpi/auth_agreement_checked.png",
+      "sha256": "fc222de65b40bdce58b340f58b78e737651ef211b5fd5eade75c291efd0879bb",
+      "transformation": "none; original bytes"
+    }
+  ]
+}

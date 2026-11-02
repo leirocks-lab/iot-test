@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="products_back" type="id" />
+    <item name="products_title" type="id" />
+    <item name="products_status" type="id" />
+    <item name="products_filter" type="id" />
+    <item name="products_refresh" type="id" />
+    <item name="products_list" type="id" />
+    <item name="products_section" type="id" />
+    <item name="products_card" type="id" />
+    <item name="products_name" type="id" />
+    <item name="products_open_details" type="id" />
+    <item name="products_image_retry" type="id" />
+    <item name="products_image" type="id" />
+    <item name="products_shop" type="id" />
+    <item name="product_details_status" type="id" />
+    <item name="product_details_content" type="id" />
+</resources>

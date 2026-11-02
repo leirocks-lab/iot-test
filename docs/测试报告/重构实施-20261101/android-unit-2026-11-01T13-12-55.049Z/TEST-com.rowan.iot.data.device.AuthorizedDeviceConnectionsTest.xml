@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.data.device.AuthorizedDeviceConnectionsTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-01T13:12:46.063Z" hostname="DESKTOP-2AM89R2" time="0.046">
+  <properties/>
+  <testcase name="refreshedThingReferenceMismatchIsRejectedWithoutFabricatingAnIdentity" classname="com.rowan.iot.data.device.AuthorizedDeviceConnectionsTest" time="0.029"/>
+  <testcase name="cancelledPrefetchDoesNotRegisterOrOpenThePool" classname="com.rowan.iot.data.device.AuthorizedDeviceConnectionsTest" time="0.006"/>
+  <testcase name="accountChangeDuringCredentialFetchCannotReturnOldAccountOptions" classname="com.rowan.iot.data.device.AuthorizedDeviceConnectionsTest" time="0.003"/>
+  <testcase name="prefetchIsNeverReusedAsAReconnectCredential" classname="com.rowan.iot.data.device.AuthorizedDeviceConnectionsTest" time="0.002"/>
+  <testcase name="oldLeaseCloseCannotRemoveReplacementProofForSameResource" classname="com.rowan.iot.data.device.AuthorizedDeviceConnectionsTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

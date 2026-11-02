@@ -1,0 +1,80 @@
+apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "com.facebook.react"
+
+react {
+    root = rootProject.file("../app-rn")
+    reactNativeDir = rootProject.file("../app-rn/node_modules/react-native")
+    codegenDir = rootProject.file("../app-rn/node_modules/@react-native/codegen")
+    cliFile = rootProject.file("../app-rn/node_modules/react-native/cli.js")
+    entryFile = rootProject.file("../app-rn/index.ts")
+    debuggableVariants = ["developmentDebug", "previewDebug", "productionDebug"]
+    autolinkLibrariesWithApp()
+}
+
+def configString = { key, fallback ->
+    def value = providers.gradleProperty(key).getOrElse(fallback)
+    if (value.contains('"') || value.contains('\\') || value.contains('\n')) {
+        throw new GradleException("Invalid non-secret build configuration: " + key)
+    }
+    return '"' + value + '"'
+}
+def isolatedValidation = providers.gradleProperty("rowanIsolatedValidation").getOrElse("false") == "true"
+android {
+    ndkVersion rootProject.ext.ndkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdk rootProject.ext.compileSdkVersion
+    namespace "com.rowan.iot"
+    defaultConfig {
+        applicationId "com.rowan.iot"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0.0"
+        testInstrumentationRunner "com.rowan.iot.fixtures.HomeFixtureInstrumentation"
+        buildConfigField "String", "TENANT_ID", configString("rowanTenantId", "")
+        buildConfigField "String", "PLATFORM_URL", configString("rowanPlatformUrl", "")
+        buildConfigField "String", "IOT_URL", configString("rowanIotUrl", "")
+        buildConfigField "String", "BRAND_ID", configString("rowanBrandId", "")
+        buildConfigField "String", "PRODUCT_BRAND_ID", configString("rowanProductBrandId", "")
+        manifestPlaceholders = [usesCleartextTraffic: "false", applicationLabel: "ROWAN"]
+    }
+    testBuildType "release"
+    flavorDimensions "environment"
+    productFlavors {
+        development {
+            dimension "environment"
+            applicationIdSuffix isolatedValidation ? ".dev.refactor" : ".dev"
+            manifestPlaceholders = [usesCleartextTraffic: "true", applicationLabel: isolatedValidation ? "ROWAN 验证" : "ROWAN"]
+            signingConfig signingConfigs.debug
+        }
+        preview {
+            dimension "environment"
+            applicationIdSuffix ".preview"
+        }
+        production { dimension "environment" }
+    }
+    buildTypes {
+        debug { signingConfig signingConfigs.debug }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+    }
+    buildFeatures { buildConfig true }
+    testOptions { unitTests.returnDefaultValues = true }
+}
+dependencies {
+    implementation("com.facebook.react:react-android")
+    implementation("com.facebook.react:hermes-android")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
+    implementation("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5")
+    implementation("androidx.activity:activity:1.7.0")
+    implementation("androidx.camera:camera-core:1.6.2")
+    implementation("androidx.camera:camera-camera2:1.6.2")
+    implementation("androidx.camera:camera-lifecycle:1.6.2")
+    implementation("androidx.camera:camera-view:1.6.2")
+    implementation("com.google.zxing:core:3.5.4")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.json:json:20240303")
+}

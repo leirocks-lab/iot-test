@@ -4,15 +4,15 @@
 
 ## 当前工程状态
 
-本次已生成三端职责目录、`.gitkeep` 和项目说明。新工程尚未初始化 Gradle/Xcode/Node 构建配置、应用入口、依赖锁文件及桥接实现，不能编译或运行。本 README 中新工程的任务、Scheme、包名、脚本和产物结构均为后续初始化需要落实的约定，不是已有可执行能力或构建成功记录。
+已根据 RN 0.86.3 官方模板建立独立 Android、iOS 与 RN 工程。Android 原生账号、房间、目录、设置及只读设备观察已完成部分真实接口与模拟器验证，RN 六类只读查询及原生自解绑确认入口已接线；全范围继续实施。最近正式源码 Android 58 套 701 项 JVM 检查通过，新增分享码协议适配尚未接入页面；RN 116 项及 lint/typecheck 通过，Release 与配对测试 APK 构建通过。首页受控 UI 历史四配置已通过，当前新包回归分别记录，不沿用旧包结论。iOS 只有源码与静态结构检查，无 macOS/Xcode 编译运行。全部 111 项尚未完成验收；缺失产品字段、第二账号与隔离设备、真实硬件等阻塞独立列出。各批对应源码、APK 与实际结果见[实施证据](docs/测试报告/重构实施-20261101/README.md)。
 
-| 项目 | 用途 | 当前状态 |
-| --- | --- | --- |
-| [android-as](android-as/README.md) | Kotlin 原生 Android 宿主 | 单 app 模块的源码目录骨架，Gradle 工程待初始化 |
-| [ios-as](ios-as/README.md) | Swift 原生 iOS 宿主 | 原生源码目录骨架，Xcode 工程待初始化 |
-| [app-rn](app-rn/README.md) | 共享 RN 设备子流程 | TS 逻辑目录骨架，Node/RN 工程待初始化 |
-| [app-rn-old](app-rn-old/README.md) | 重构前完整 Expo/RN 应用 | 独立保留，只作业务和结果对照 |
-| [docs](docs/README.md) | PRD、UI、SDD、业务范围及验收记录 | 统一资料入口 |
+| 项目 | 当前状态 |
+| --- | --- |
+| [android-as](android-as/README.md) | 独立宿主及原生服务、major3只读桥接已构建运行；全范围继续实施验收 |
+| [ios-as](ios-as/README.md) | Xcode 工程、原生账号及最小桥接源码已建立；macOS 构建未验证 |
+| [app-rn](app-rn/README.md) | 独立 package.json、锁文件、Codegen 规格和检查脚本已建立；完整设备子流程未完成 |
+| [app-rn-old](app-rn-old/README.md) | 旧工程独立保留，未作为新工程依赖 |
+| [实施证据](docs/测试报告/重构实施-20261101/README.md) | 实际检查、接口结果、差异及未验收项 |
 
 ## 项目间的关系
 
@@ -71,7 +71,7 @@ rowan-iot-app/
 | Android 工程 / module | RowanAndroid / app |
 | Kotlin namespace | com.rowan.iot；不随环境变化 |
 | iOS 工程 / Target | Rowan / Rowan |
-| RN package.name | @rowan/device-module，尚未创建 package.json |
+| RN package.name | @rowan/device-module，已创建独立 package.json |
 | RN 注册组件 | RowanDeviceModule；注册入口及双端容器保持一致 |
 | TurboModule 类型文件 | Native 前缀，放 src/host/specs；模块名与原生实现一致 |
 | 类型 / 组件 | PascalCase；函数与属性 camelCase；Hooks 以 use 开头 |
@@ -97,7 +97,7 @@ rowan-iot-app/
 
 ## 新工程构建顺序
 
-以下为待初始化后实现的构建契约，当前不存在相应 Wrapper、Scheme、scripts 或可执行入口。
+以下为待初始化后实现的构建契约，已建立 Wrapper、Rowan Scheme 及部分 RN scripts；下表保留完整目标，未落实项不可执行。
 
 1. 在 app-rn 按独立锁文件安装依赖，运行 lint、typecheck 和相关测试。
 2. 两端从同一 specs 运行 Codegen，并分别接入原生业务适配；规格变更需双方构建验证。
@@ -143,17 +143,19 @@ RN ZIP 内部规划 manifest.json、bundle/、assets/ 和 checksums.json。Manif
 
 ## 检查、签名与交付
 
-当前新工程没有可运行 lint/typecheck/原生编译，不能以旧工程检查结果冒充新工程通过。初始化后要求 RN 静态检查和测试、Android/iOS 各自构建和测试、双端真机业务与视觉验收。
+新 RN 已有独立检查命令；原生按平台分别构建和记录，不以旧工程或 Android 结果代替 iOS。当前本轮运行验收到 Android 模拟器；真实硬件项目单列未验收。
 
 Token、Wi-Fi 密码、设备密钥、keystore、证书私钥、描述文件和签名密码不提交。配置模板可提交，秘密通过受控渠道注入。验收记录关联宿主构建号、资源版本/Hash、完整 Commit、桥接版本、测试设备及结果。
 
-唯一业务范围表由 AGENTS.md 指定；该文件目前在工作区缺失，业务逐项实施前需恢复或确认正式位置，不能用另一份表默认替代。
+唯一业务范围表已由用户确认为 docs/prd/智能家居物联网项目计划&需求范围.xlsx；逐项追踪及验证状态见重构实施总计划。
 
 ## 旧工程使用
 
 旧工程保留在 app-rn-old，可从根目录执行 `pnpm --dir app-rn-old lint`、`pnpm --dir app-rn-old typecheck`，其安装、启动、配置验证及原生缓存限制见 [旧工程说明](app-rn-old/README.md)。编辑器暂使用旧工程工具配置，待新工程初始化后分别接入；新旧依赖和配置不混用。
 
 ## 设计与官方参考
+
+- [重构实施总计划](docs/SDD/2026-11-01-重构实施总计划.md)：当前阶段安排、依赖、交付物与验收门槛。
 
 - [原生与 RN 完整架构及接入文档](docs/architecture/原生与RN完整架构及接入文档.md)：原生/RN 专题集中入口。
 

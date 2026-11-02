@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" tests="10" skipped="0" failures="1" errors="0" timestamp="2026-11-01T23:03:26.787Z" hostname="DESKTOP-2AM89R2" time="0.059">
+  <properties/>
+  <testcase name="generation401DoesNotRefreshOrReplay" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.012"/>
+  <testcase name="lateResponseAfterAccountChangeIsDiscarded" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.005"/>
+  <testcase name="timeoutDoesNotAutomaticallyGenerateAgain" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.003"/>
+  <testcase name="invalidScopeNeverSends" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.004"/>
+  <testcase name="nativeCredentialDescriptionIsRedacted" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.006"/>
+  <testcase name="malformedMissingOrNonStringCodeNeverBecomesSuccess" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.008"/>
+  <testcase name="explicitGenerationUsesExactEncodedGetWithoutBody" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.003"/>
+  <testcase name="staleAccountCannotGenerateWithANewToken" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.003"/>
+  <testcase name="mismatchedDeviceDoesNotExposeItsCode" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.003"/>
+  <testcase name="ordinaryReadStillRefreshesOnce" classname="com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest" time="0.012">
+    <failure message="org.json.JSONException: JSONObject[&quot;data&quot;] not found." type="org.json.JSONException">org.json.JSONException: JSONObject[&quot;data&quot;] not found.
+	at org.json.JSONObject.get(JSONObject.java:596)
+	at org.json.JSONObject.getJSONObject(JSONObject.java:806)
+	at com.rowan.iot.domain.account.AccountService$refreshContext$2.invokeSuspend(AccountService.kt:227)
+	at _COROUTINE._BOUNDARY._(CoroutineDebugging.kt:42)
+	at com.rowan.iot.domain.account.AccountService.request(AccountService.kt:317)
+	at com.rowan.iot.data.http.HttpDeviceShareCodeRepositoryTest$ordinaryReadStillRefreshesOnce$1.invokeSuspend(HttpDeviceShareCodeRepositoryTest.kt:40)
+Caused by: org.json.JSONException: JSONObject[&quot;data&quot;] not found.
+	at org.json.JSONObject.get(JSONObject.java:596)
+	at org.json.JSONObject.getJSONObject(JSONObject.java:806)
+	at com.rowan.iot.domain.account.AccountService$refreshContext$2.invokeSuspend(AccountService.kt:227)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:820)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+</failure>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

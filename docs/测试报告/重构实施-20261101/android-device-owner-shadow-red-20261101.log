@@ -1,0 +1,239 @@
+Starting a Gradle Daemon, 1 stopped Daemon could not be reused, use --status for details
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+Warning: SDK processing. This version only understands SDK XML versions up to 3 but an SDK XML file of version 4 was encountered. This can happen if you use versions of Android Studio and the command-line tools that were released at different times.
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateAutolinkingNewArchitectureFiles UP-TO-DATE
+> Task :app:generateAutolinkingPackageList UP-TO-DATE
+> Task :app:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :app:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :app:generateReactNativeEntryPoint UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDevelopmentDebugBuild UP-TO-DATE
+> Task :app:generateDevelopmentDebugBuildConfig UP-TO-DATE
+> Task :app:checkDevelopmentDebugAarMetadata UP-TO-DATE
+> Task :app:generateDevelopmentDebugResValues UP-TO-DATE
+> Task :app:mapDevelopmentDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDevelopmentDebugResources UP-TO-DATE
+> Task :app:mergeDevelopmentDebugResources UP-TO-DATE
+> Task :app:packageDevelopmentDebugResources UP-TO-DATE
+> Task :app:parseDevelopmentDebugLocalResources UP-TO-DATE
+> Task :app:createDevelopmentDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDevelopmentDebug UP-TO-DATE
+> Task :app:processDevelopmentDebugMainManifest UP-TO-DATE
+> Task :app:processDevelopmentDebugManifest UP-TO-DATE
+> Task :app:processDevelopmentDebugManifestForPackage UP-TO-DATE
+> Task :app:processDevelopmentDebugResources UP-TO-DATE
+> Task :app:javaPreCompileDevelopmentDebug UP-TO-DATE
+> Task :app:preDevelopmentDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileDevelopmentDebugUnitTest UP-TO-DATE
+> Task :app:compileDevelopmentDebugKotlin
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/RegistrationActivity.kt:156:15 'fun onActivityResult(p0: Int, p1: Int, p2: Intent?): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActivity.kt:64:20 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/RoomsActivity.kt:106:20 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/RoomsActivity.kt:246:57 'static field SOFT_INPUT_ADJUST_RESIZE: Int' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/AccountActivity.kt:43:49 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/RegistrationActivity.kt:156:15 'fun onActivityResult(p0: Int, p1: Int, p2: Intent?): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/auth/WelcomeActivity.kt:28:46 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActivity.kt:64:20 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/RoomsActivity.kt:106:20 'fun setDecorFitsSystemWindows(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/main/kotlin/com/rowan/iot/features/rooms/RoomsActivity.kt:246:57 'static field SOFT_INPUT_ADJUST_RESIZE: Int' is deprecated. Deprecated in Java.
+
+> Task :app:compileDevelopmentDebugJavaWithJavac UP-TO-DATE
+> Task :app:bundleDevelopmentDebugClassesToRuntimeJar
+> Task :app:bundleDevelopmentDebugClassesToCompileJar
+> Task :app:processDevelopmentDebugJavaRes UP-TO-DATE
+
+> Task :app:compileDevelopmentDebugUnitTestKotlin
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/ClassicShadowReducerTest.kt:10:23 Unresolved reference 'hasRequestedSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/ClassicShadowReducerTest.kt:13:22 Unresolved reference 'hasRequestedSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/ClassicShadowReducerTest.kt:15:40 Unresolved reference 'hasRequestedSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/ClassicShadowReducerTest.kt:17:22 Unresolved reference 'hasRequestedSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/ClassicShadowReducerTest.kt:23:23 Unresolved reference 'hasRequestedSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/ClassicShadowReducerTest.kt:26:23 Unresolved reference 'hasRequestedSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/ClassicShadowReducerTest.kt:28:22 Unresolved reference 'hasRequestedSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/ClassicShadowReducerTest.kt:33:23 Unresolved reference 'hasRequestedSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/ClassicShadowReducerTest.kt:35:22 Unresolved reference 'hasRequestedSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/ClassicShadowReducerTest.kt:37:23 Unresolved reference 'hasRequestedSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/ClassicShadowReducerTest.kt:39:22 Unresolved reference 'hasRequestedSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/mqtt/ClassicShadowReducerTest.kt:40:45 Unresolved reference 'hasRequestedSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:94:21 Unresolved reference 'DeviceReadOwner'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:94:65 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:94:73 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:96:36 Suspend function 'suspend fun connection(device: AuthorizedDevice): PreparedDeviceConnection' can only be called from a coroutine or another suspend function.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:97:40 Unresolved reference 'accountRevision'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:97:64 Unresolved reference 'resourceId'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:105:14 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:105:55 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:105:65 Suspend function 'suspend fun invoke(p1: AuthorizedDevice): ShadowProfile?' can only be called from a coroutine or another suspend function.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:106:13 Unresolved reference 'DeviceReadPolicy'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:111:33 Unresolved reference 'DeviceReadHandle'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:111:61 Unresolved reference 'state'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:111:76 Unresolved reference 'DeviceObservationState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:111:108 Unresolved reference 'snapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:112:42 Unresolved reference 'DeviceReadHandle'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:112:72 Unresolved reference 'DeviceReadSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:112:105 Unresolved reference 'DeviceReadSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:112:126 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:113:17 Unresolved reference 'state'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:113:23 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:113:29 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:113:37 Unresolved reference 'DeviceObservationState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:113:84 Unresolved reference 'snapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:113:99 Unresolved reference 'DeviceObservationState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:113:131 Unresolved reference 'snapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:115:38 Unresolved reference 'DeviceReadHandle'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:115:75 Unresolved reference 'DeviceReadSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:115:80 Unresolved reference 'phase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:115:89 Unresolved reference 'DeviceReadPhase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:115:116 Unresolved reference 'snapshotAvailable'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:124:42 Unresolved reference 'metadata'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:124:53 Unresolved reference 'title'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:125:38 Unresolved reference 'online'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:126:47 Unresolved reference 'reportedJson'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:126:61 Unresolved reference 'getInt'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:136:42 Unresolved reference 'DeviceReadSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:136:47 Unresolved reference 'phase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:136:56 Unresolved reference 'DeviceReadPhase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:138:62 Unresolved reference 'metadata'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:138:90 Unresolved reference 'online'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:139:31 Unresolved reference 'snapshotAvailable'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:139:84 Unresolved reference 'reportedJson'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:139:98 Unresolved reference 'length'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:147:50 Unresolved reference 'DeviceObservationState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:149:28 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:159:26 Unresolved reference 'DeviceReadPhase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:173:43 Unresolved reference 'DeviceObservationState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:175:24 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:177:91 Unresolved reference 'accountRevision'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:187:33 Unresolved reference 'connectionEpoch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:198:50 Unresolved reference 'reportedJson'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:198:64 Unresolved reference 'getInt'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:200:33 Unresolved reference 'snapshotAvailable'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:209:44 Unresolved reference 'DeviceReadSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:209:49 Unresolved reference 'phase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:209:58 Unresolved reference 'DeviceReadPhase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:210:32 Unresolved reference 'online'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:210:61 Unresolved reference 'snapshotAvailable'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:211:48 Unresolved reference 'reportedJson'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:211:62 Unresolved reference 'length'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:220:30 Unresolved reference 'DeviceReadSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:220:35 Unresolved reference 'phase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:220:44 Unresolved reference 'DeviceReadPhase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:223:33 Unresolved reference 'online'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:223:78 Unresolved reference 'reportedJson'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:223:92 Unresolved reference 'length'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:224:33 Unresolved reference 'snapshotAvailable'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:232:33 Unresolved reference 'snapshotAvailable'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:232:73 Unresolved reference 'online'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:233:56 Unresolved reference 'reportedJson'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:233:70 Unresolved reference 'getString'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:244:30 Unresolved reference 'DeviceReadSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:244:35 Unresolved reference 'phase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:244:44 Unresolved reference 'DeviceReadPhase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:249:45 Unresolved reference 'DeviceReadSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:249:50 Unresolved reference 'connectionEpoch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:249:80 Unresolved reference 'snapshotAvailable'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:250:50 Unresolved reference 'reportedJson'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:250:64 Unresolved reference 'getInt'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:252:37 Unresolved reference 'authorityRevision'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:254:76 Unresolved reference 'getInt'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:263:30 Unresolved reference 'DeviceReadSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:263:35 Unresolved reference 'phase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:263:44 Unresolved reference 'DeviceReadPhase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:267:44 Unresolved reference 'DeviceReadSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:267:49 Unresolved reference 'connectionEpoch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:268:33 Unresolved reference 'snapshotAvailable'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:269:32 Unresolved reference 'online'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:273:50 Unresolved reference 'reportedJson'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:273:64 Unresolved reference 'getInt'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:281:42 Unresolved reference 'DeviceReadSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:281:47 Unresolved reference 'stale'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:281:59 Unresolved reference 'phase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:281:68 Unresolved reference 'DeviceReadPhase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:282:30 Unresolved reference 'online'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:283:47 Unresolved reference 'reportedJson'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:283:61 Unresolved reference 'getInt'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:292:44 Unresolved reference 'DeviceObservationState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:294:26 Unresolved reference 'DeviceReadSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:294:42 Unresolved reference 'reportedJson'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:294:56 Unresolved reference 'optInt'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:295:44 Unresolved reference 'DeviceObservationState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:296:24 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:306:30 Unresolved reference 'DeviceReadSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:306:35 Unresolved reference 'phase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:306:44 Unresolved reference 'DeviceReadPhase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:320:39 Unresolved reference 'DeviceReadSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:320:55 Unresolved reference 'reportedJson'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:320:69 Unresolved reference 'optInt'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:321:28 Unresolved reference 'authorityRevision'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:321:52 Unresolved reference 'authorityRevision'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:324:30 Unresolved reference 'authorityRevision'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:324:54 Unresolved reference 'authorityRevision'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:326:38 Unresolved reference 'connectionEpoch'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:327:45 Unresolved reference 'DeviceObservationState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:339:37 Unresolved reference 'snapshotAvailable'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:347:48 Unresolved reference 'DeviceReadSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:347:53 Unresolved reference 'phase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:347:62 Unresolved reference 'DeviceReadPhase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:348:26 Unresolved reference 'DeviceReadFailure'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:348:74 Unresolved reference 'failure'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:349:36 Unresolved reference 'online'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:349:69 Unresolved reference 'snapshotAvailable'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:358:46 Unresolved reference 'DeviceObservationState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:369:46 Unresolved reference 'DeviceObservationState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:370:75 Unresolved reference 'DeviceObservationState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:378:49 Unresolved reference 'DeviceObservationState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:382:48 Unresolved reference 'DeviceObservationState'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:392:46 Unresolved reference 'DeviceReadSnapshot'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:392:51 Unresolved reference 'phase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:392:60 Unresolved reference 'DeviceReadPhase'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:393:34 Unresolved reference 'metadata'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:393:66 Unresolved reference 'online'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:394:35 Unresolved reference 'snapshotAvailable'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:394:92 Unresolved reference 'reportedJson'.
+e: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/src/test/kotlin/com/rowan/iot/domain/device/state/DeviceReadOwnerTest.kt:394:106 Unresolved reference 'length'.
+
+> Task :app:compileDevelopmentDebugUnitTestKotlin FAILED
+
+[Incubating] Problems report is available at: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileDevelopmentDebugUnitTestKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 2m 6s
+37 actionable tasks: 4 executed, 33 up-to-date

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-01T16:30:04.703Z" hostname="DESKTOP-2AM89R2" time="0.017">
+  <properties/>
+  <testcase name="timeRequiresExactTwentyFourHourHHmmAndAllowsCrossMidnightWithoutComputingDates" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.001"/>
+  <testcase name="editCarriesRequiredFieldsAndPreservesAnExistingDisabledFlagExplicitly" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.001"/>
+  <testcase name="createUsesOnlyParameterTableFieldsAndNeverCopiesServerIdOrNextExecution" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.001"/>
+  <testcase name="unknownModelVersionIsExplicitlyNullWhileExistingScheduleDataRemainsReadable" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.0"/>
+  <testcase name="permitMustMatchEveryNativeScopeComponentAndDoesNotComeFromAReadAction" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.002"/>
+  <testcase name="unknownModelCannotIssueAnActionPermitOrSerializeAKnownModelsPermit" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.0"/>
+  <testcase name="customWeekdaysUseIsoRangeAndDeduplicateWithoutChangingTheRepeatType" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.001"/>
+  <testcase name="javaLegacyShortIdsAreRejectedWithoutRejectingRealIanaAliasesOrUtc" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.002"/>
+  <testcase name="serverOwnedFieldsAndUnknownBooleanTypesDoNotBecomeClientDefaults" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.0"/>
+  <testcase name="unknownEnabledNeedsAnExplicitEditChoiceRatherThanAssumingTrue" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.003"/>
+  <testcase name="timezoneMustBeAnAvailableExactIdAndNeverSilentlyFallsBackToGmt" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.001"/>
+  <testcase name="permitPayloadIsDetachedAndCannotBeChangedThroughAJsonReturnedToACaller" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.001"/>
+  <testcase name="recordsRetainUnknownFieldsAndServerNextExecutionWithoutCalculatingDstLocally" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.001"/>
+  <testcase name="completeDotSegmentIdsAreNotAcceptedFromAReadListButDotsInsideIdsRemainOpaque" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.0"/>
+  <testcase name="optionalFieldsStayOmittedAndDoNotBecomeNullOrSyntheticModes" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.0"/>
+  <testcase name="requiredRequestFieldsAreValidatedWithoutInventingATypeRepeatCompatibilityMatrix" classname="com.rowan.iot.domain.device.schedules.ScheduleModelsTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,85 @@
+{
+  "recordedAt": "2026-11-01T13:41:28.497Z",
+  "scope": "RN read-only schedules and firmware source checks; NOT native runtime or visual acceptance",
+  "rnVersion": "0.86.3",
+  "lint": "PASS (0 errors, 0 warnings)",
+  "typecheck": "PASS",
+  "vitest": {
+    "files": 7,
+    "tests": 77,
+    "workers": 1,
+    "result": "PASS",
+    "newTests": 20
+  },
+  "codegenParser": "PASS (9 methods + onDeviceChanged)",
+  "sources": [
+    {
+      "path": "app-rn/src/host/specs/NativeRowanHost.ts",
+      "sha256": "c2aba79fd528f491d354dbb9d16e678d6c85f1bb7e0489c63f2dbbc09249f1c3"
+    },
+    {
+      "path": "app-rn/src/host/adapter/DeviceReadController.ts",
+      "sha256": "a4949bcf47ded1bcec75f57ea090ebcacdded3ce3fda194763616d23884f1b7e"
+    },
+    {
+      "path": "app-rn/src/host/adapter/DeviceReadModels.ts",
+      "sha256": "b8ecc1bfac2f658ac26d5de3b29b484790c6103cba79cce5f17f6a92f1e6c039"
+    },
+    {
+      "path": "app-rn/src/features/device-readonly/presentation.ts",
+      "sha256": "7ded33308578b3c4ee94c79d218189b8cd43e6b097d3b439bf2642c316c87536"
+    },
+    {
+      "path": "app-rn/src/features/device-readonly/DeviceReadScreen.tsx",
+      "sha256": "fc6fa2a847318ae93370df8dbd63021e09da5e8e4686ab7e5af58e9a907cbe41"
+    },
+    {
+      "path": "app-rn/src/features/device-readonly/README.md",
+      "sha256": "6217d59f62894c0276236c4a197474e8468665c33dd4f6b5a6189eaec8fbd995"
+    },
+    {
+      "path": "app-rn/src/entry/DeviceEntry.tsx",
+      "sha256": "94f072134be9663ac9dde360bffba4899b57e042432c5191f47c3d132dd90451"
+    },
+    {
+      "path": "app-rn/tests/device-readonly/controller.test.ts",
+      "sha256": "baf89079370b68f744c75e5e37026103ee0ea1caa5a4adaf33947ab8ff0006fb"
+    },
+    {
+      "path": "app-rn/tests/device-readonly/presentation.test.ts",
+      "sha256": "9babab38474ba43da3f4555e1a63abe80bcc3e8f0c3cb2d7f8a0332ed2634bc8"
+    },
+    {
+      "path": "app-rn/README.md",
+      "sha256": "05ebe48c417d96cea7bc87be74be5967b82936edd346fa7855fc487fdd3b8c73"
+    }
+  ],
+  "checks": [
+    {
+      "path": "app-rn/.cache/verification/device-readonly/lint.log",
+      "sha256": "7960138dbf9924e05133d4f570f78221cb940ba5690fe0e4b18ee9cefee519f4"
+    },
+    {
+      "path": "app-rn/.cache/verification/device-readonly/typecheck.log",
+      "sha256": "5a3973f79ed9becd5f23c4feff467513814de7ea381d75a4d2e339aa8b8edca9"
+    },
+    {
+      "path": "app-rn/.cache/verification/device-readonly/vitest.log",
+      "sha256": "f06db9d9bc4e6ccf0298e1a1614ac1ca9faae80b6f70fe20a21d748dd0182867"
+    },
+    {
+      "path": "app-rn/.cache/verification/device-readonly/codegen.log",
+      "sha256": "45312bf165ad1e3b10c9300a844de1d0d8b43735bc9ec332998890b20355b9fb"
+    },
+    {
+      "path": "app-rn/.cache/verification/device-readonly/schema.json",
+      "sha256": "33d7b22a1d0c18abaac91be6dbf6328f60841573f8f1ddf2e733198359a87ff9"
+    }
+  ],
+  "limits": [
+    "Android344 covers earlier frozen native/Spec state, not subsequent RN page runtime",
+    "iOS alignment/build/runtime pending",
+    "No schedule/OTA mutation contract or controls",
+    "Actual API/visual checks remain Root harness work"
+  ]
+}

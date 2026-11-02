@@ -1,0 +1,61 @@
+{
+  "runId": "2026-11-01T22-57-24.160Z",
+  "parentRunId": "2026-11-01T22-53-37.136Z",
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "scriptSha256": "9de0b3b82d62c7886faec85d2c8c559ffae867b8921fcec61f6d9f6caffb3334",
+  "installedArtifactSha256": "1417a05a0eb2ac3d518736c147c803cc54cfb93829fcdaa0c3764b2008afb38b",
+  "buildProvenance": {
+    "date": "2026-11-01T22:43:33.628Z",
+    "task": ":app:assembleDevelopmentRelease",
+    "artifactSha256": "1417a05a0eb2ac3d518736c147c803cc54cfb93829fcdaa0c3764b2008afb38b",
+    "artifactRole": "native-application",
+    "targetArtifactSha256": null,
+    "sourceBefore": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "0b71eb6628a51ddf94758a023d574bd2021604f30b90d31f6f5080c3bcce2151",
+      "sourceFiles": 336
+    },
+    "sourceAfter": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "0b71eb6628a51ddf94758a023d574bd2021604f30b90d31f6f5080c3bcce2151",
+      "sourceFiles": 336
+    },
+    "sourceUnchangedDuringBuild": true,
+    "architecture": "x86_64",
+    "signing": "development debug key",
+    "isolatedValidation": true
+  },
+  "dnsForwarding": {
+    "upstream": "192.168.31.1",
+    "bindAddress": "127.0.0.1",
+    "bindPort": 53,
+    "running": false,
+    "state": "closed",
+    "lastError": null,
+    "pending": 0,
+    "receivedQueries": 0,
+    "forwardedQueries": 0,
+    "forwardedReplies": 0,
+    "expired": 0,
+    "rejectedQueries": 0,
+    "rejectedReplies": 0,
+    "capacityDrops": 0,
+    "sendErrors": 0,
+    "socketErrors": 0,
+    "durationMs": 9177
+  },
+  "results": [
+    {
+      "id": "AUTH-06-native-logout-continuation",
+      "result": "通过",
+      "stage": "logout"
+    }
+  ],
+  "screenshots": [],
+  "limits": "继续已记录的本轮测试会话；不登录、不改房间、不绑定、不发送 MQTT 控制；完整UI/iOS/硬件未验收",
+  "rnExcludedForIsolation": true,
+  "logoutOnly": true
+}

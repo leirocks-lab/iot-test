@@ -1,0 +1,21 @@
+{
+  "reference": "docs/ui/登录注册页.png; docs/ui/启动页.png",
+  "assets": [
+    {
+      "source": "app-rn-old/assets/images/logo-white.png",
+      "destination": "android-as/app/src/main/res/drawable-nodpi/startup_logo.png",
+      "width": 302,
+      "height": 170,
+      "sha256": "42a91472f066b100d962f21448082940c49421c93a1216cdee6b8c6d40af8dec",
+      "transformation": "none; original bytes"
+    },
+    {
+      "source": "app-rn-old/assets/images/login-logo.png",
+      "destination": "android-as/app/src/main/res/drawable-nodpi/welcome_logo.png",
+      "width": 300,
+      "height": 170,
+      "sha256": "9bfaa1064414e67356e29cc1a50b07cc6141c201b5038d7a235ea2e2764b1bac",
+      "transformation": "none; original bytes"
+    }
+  ]
+}

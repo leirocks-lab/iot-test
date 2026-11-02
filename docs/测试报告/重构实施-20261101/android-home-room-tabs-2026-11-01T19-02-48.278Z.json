@@ -1,0 +1,81 @@
+{
+  "runId": "2026-11-01T19-02-48.278Z",
+  "parentRunId": "2026-11-01T18-58-13.658Z",
+  "parentReportSha256": "eed6d26f6293e35a7f67675eb745d2e1380f56f309906d37e521276f8777da02",
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "installedArtifactSha256": "c08d29c5907eb29a0c9226f822dbcdc22dcdd58ee2ce3b0c7c8c26b53851b2d6",
+  "sidecarSha256": "09a95489319b45502b9200fd35aaca424de4fc29247cae75863334e69813ad4d",
+  "scriptSha256": "d872fe78ab375b987ef10bdf742c22bbbcd85372170bcedd38f332cefd3d7b1c",
+  "taskResumeSha256": "a3ad9d4a3062cb7bc7fb2f4930e21f46484cfe35909a9565ee29227fe4fcfd63",
+  "sourceBefore": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "0e254d1a1928f49e46298d32388318d9f7ac8dca8cdd829396a99b225697a9fb",
+    "sourceFiles": 306
+  },
+  "sourceAfter": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "0e254d1a1928f49e46298d32388318d9f7ac8dca8cdd829396a99b225697a9fb",
+    "sourceFiles": 306
+  },
+  "sourceUnchanged": true,
+  "roomCount": 0,
+  "results": [
+    {
+      "id": "all-selected",
+      "result": "通过"
+    },
+    {
+      "id": "all-retained-after-refresh",
+      "result": "未验收",
+      "reason": "REFRESH_LOADING_WINDOW_NOT_OBSERVED"
+    },
+    {
+      "id": "real-room-selection",
+      "result": "未验收",
+      "reason": "NO_SERVER_ROOM_TABS"
+    },
+    {
+      "id": "same-home-activity-after-background",
+      "result": "通过"
+    },
+    {
+      "id": "all-retained-after-background",
+      "result": "通过"
+    }
+  ],
+  "cleanup": "all-confirmed-session-retained",
+  "dnsForwarding": {
+    "upstream": "192.168.31.1",
+    "bindAddress": "127.0.0.1",
+    "bindPort": 53,
+    "running": false,
+    "state": "closed",
+    "lastError": null,
+    "pending": 0,
+    "receivedQueries": 0,
+    "forwardedQueries": 0,
+    "forwardedReplies": 0,
+    "expired": 0,
+    "rejectedQueries": 0,
+    "rejectedReplies": 0,
+    "capacityDrops": 0,
+    "sendErrors": 0,
+    "socketErrors": 0,
+    "durationMs": 69385
+  },
+  "sessionKept": true,
+  "screenshots": [],
+  "loginActions": 0,
+  "logoutActions": 0,
+  "roomWriteActions": 0,
+  "limits": [
+    "HOME UI selected-state/refresh/lifecycle only; no raw names, device/room IDs, XML, dumpsys or error payloads are stored.",
+    "No room creation/change/removal, DELETE, device/RN navigation, account switch, login, logout, force-stop or clear-data. UI refresh/resume may invoke native HOME-01 GET.",
+    "Room identity uses a unique UI label only in memory; this does not prove opaque typed ID/membership or protocol correctness. No tabs means fixture coverage missing.",
+    "No screenshots or visual acceptance, real hardware/iOS/whole scope acceptance. Existing domain fixtures remain separate.",
+    "SIGINT/SIGTERM attempt only safe All return; force-kill/device loss cannot guarantee restoration."
+  ]
+}

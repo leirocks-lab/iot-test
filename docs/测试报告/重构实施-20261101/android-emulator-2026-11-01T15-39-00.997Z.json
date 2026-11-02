@@ -1,0 +1,127 @@
+{
+  "date": "2026-11-01T15:39:42.243Z",
+  "runId": "2026-11-01T15-39-00.997Z",
+  "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+  "worktreeDirty": true,
+  "sourceSha256": "ccf06ba08519ac3134b5fd122178514cb213a302e40d2203b7e0551a718dcb2b",
+  "sourceFiles": 279,
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "nativeDiagnostics": [
+    "application_react_load begin t=13593905 main=true",
+    "application_react_load end t=13594046 durationMs=141",
+    "home_focus_gain begin t=13610954 main=true",
+    "home_focus_gain end t=13610954 durationMs=0",
+    "application_react_load begin t=13613832 main=true",
+    "application_react_load end t=13613894 durationMs=62",
+    "home_focus_gain begin t=13616915 main=true",
+    "home_focus_gain end t=13616915 durationMs=0",
+    "device_create begin t=13621716 main=true",
+    "host_factory begin t=13621755 main=true",
+    "host_factory end t=13621818 durationMs=63",
+    "device_create end t=13621856 durationMs=140",
+    "device_resume begin t=13621865 main=true",
+    "device_resume end t=13621868 durationMs=3",
+    "home_focus_loss begin t=13622048 main=true",
+    "home_focus_loss end t=13622049 durationMs=1",
+    "device_focus_gain begin t=13622805 main=true",
+    "device_focus_gain end t=13622829 durationMs=24",
+    "phase=connecting snapshot=false epoch=0 delivery=1",
+    "device_focus_loss begin t=13627514 main=true",
+    "device_focus_loss end t=13627515 durationMs=1",
+    "home_focus_gain begin t=13627822 main=true",
+    "home_focus_gain end t=13627822 durationMs=0",
+    "phase=closed snapshot=false epoch=0 delivery=2"
+  ],
+  "dnsForwarding": {
+    "upstream": "192.168.31.1",
+    "bindAddress": "127.0.0.1",
+    "bindPort": 53,
+    "running": false,
+    "state": "closed",
+    "lastError": null,
+    "pending": 0,
+    "receivedQueries": 0,
+    "forwardedQueries": 0,
+    "forwardedReplies": 0,
+    "expired": 0,
+    "rejectedQueries": 0,
+    "rejectedReplies": 0,
+    "capacityDrops": 0,
+    "sendErrors": 0,
+    "socketErrors": 0,
+    "durationMs": 39297,
+    "mode": "Real upstream DNS packet forwarding; no business mock or TLS bypass",
+    "moduleSha256": "d70c74f46e8ccfc63a5c6e0d74311b7a2e7fbd7f673ad6c71a5248e40d7171fc"
+  },
+  "sessionKept": true,
+  "uiCaptureRetries": [],
+  "verificationScriptSha256": "f8092bd15e159334465936adb77beb649f0a66652ae04ae0bb42258c058a985e",
+  "deferredCases": [
+    "AUTH-06-native-emulator; continued acceptance must explicitly log out"
+  ],
+  "installedArtifactSha256": "9aa0de57269fb514b309ce4807a97e2e9b814569c8dcdc5cedfa2691e5b00729",
+  "buildProvenance": {
+    "date": "2026-11-01T15:11:09.741Z",
+    "task": ":app:assembleDevelopmentRelease",
+    "artifactSha256": "9aa0de57269fb514b309ce4807a97e2e9b814569c8dcdc5cedfa2691e5b00729",
+    "sourceBefore": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "ccf06ba08519ac3134b5fd122178514cb213a302e40d2203b7e0551a718dcb2b",
+      "sourceFiles": 279
+    },
+    "sourceAfter": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "ccf06ba08519ac3134b5fd122178514cb213a302e40d2203b7e0551a718dcb2b",
+      "sourceFiles": 279
+    },
+    "sourceUnchangedDuringBuild": true,
+    "architecture": "x86_64",
+    "signing": "development debug key",
+    "isolatedValidation": true
+  },
+  "installedArtifactMatchesBuild": true,
+  "viewport": "Physical size: 1080x2400",
+  "density": "Physical density: 420",
+  "fontScale": "1.0",
+  "screenshots": [
+    "2026-11-01T15-39-00.997Z-android-login-initial.png",
+    "2026-11-01T15-39-00.997Z-android-home-after-login.png",
+    "2026-11-01T15-39-00.997Z-android-rn-bootstrap.png"
+  ],
+  "scope": "Android native startup/login/cold restore/logout and packaged RN navigation; not complete UI/HTTP/MQTT acceptance",
+  "results": [
+    {
+      "id": "STARTUP-no-session-native-entry",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-UI-empty",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-UI-consent-gate",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-04-native-emulator",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-03-05-cold-restore-native",
+      "result": "通过"
+    },
+    {
+      "id": "RN-release-bundle-host-context",
+      "result": "通过",
+      "note": "验证内置包及只读状态页面渲染；真实 MQTT 快照及设备控制须另有证据"
+    },
+    {
+      "id": "RN-host-close-navigation",
+      "result": "通过"
+    }
+  ],
+  "hardware": "未验收"
+}

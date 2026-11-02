@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-01T19:52:10.330162+00:00",
+  "patch": ".cache/refactor/android-home-ui-fixtures-draft/tests-first.patch",
+  "patchSha256": "1e2ca437ffd874028e74d9206a881851f86766683a96f358f4bd4fa5b4e2a423",
+  "stage": "APPLIED_EXACT_REVIEWED_TEXT_NOT_PLATFORM_VERIFIED",
+  "files": [
+    {
+      "path": "android-as/app/build.gradle",
+      "beforeSha256": "60441911f00c933e77b892d33a44644fb97d611428f4301cc2c5c8d0c376b06c",
+      "afterSha256": "07cde16d679f5418641e16235644df91062dc4996ce162929f383cae29a1280a",
+      "reviewedOverlaySha256": "07cde16d679f5418641e16235644df91062dc4996ce162929f383cae29a1280a",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/androidTest/AndroidManifest.xml",
+      "beforeSha256": null,
+      "afterSha256": "ed4b1dceb556418e385564f600aede71207e00055b3440384b954b72cc0ec2a0",
+      "reviewedOverlaySha256": "ed4b1dceb556418e385564f600aede71207e00055b3440384b954b72cc0ec2a0",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/FixtureApplication.kt",
+      "beforeSha256": null,
+      "afterSha256": "dcb104f87259e4f23c89b2ec1313298edb1e9f2b26d4dada3f93b7df5ea93e81",
+      "reviewedOverlaySha256": "dcb104f87259e4f23c89b2ec1313298edb1e9f2b26d4dada3f93b7df5ea93e81",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/HomeFixtureInstrumentation.kt",
+      "beforeSha256": null,
+      "afterSha256": "85d57ab1349d605c5272e499a09b91f77057ecc744a580a2c6ee4a4f08a5dc60",
+      "reviewedOverlaySha256": "85d57ab1349d605c5272e499a09b91f77057ecc744a580a2c6ee4a4f08a5dc60",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/androidTest/kotlin/com/rowan/iot/fixtures/HomeFixtureUi.kt",
+      "beforeSha256": null,
+      "afterSha256": "bb9908d69b8e7d6bef29de2ce4d5fffa0074ebca4a2db5764de580cc96d95e98",
+      "reviewedOverlaySha256": "bb9908d69b8e7d6bef29de2ce4d5fffa0074ebca4a2db5764de580cc96d95e98",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "runId": "baa9df10-2708-4c2c-9d95-01f06fc359f0",
+  "fixtureOnly": true,
+  "businessHttpDelegate": "none",
+  "realHttpAcceptance": false,
+  "realCameraOrHardwareAcceptance": false,
+  "iosRuntimeAcceptance": false,
+  "pixelAcceptance": false,
+  "targetPackage": "com.rowan.iot.dev.refactor",
+  "sdk": 36,
+  "targetApkSha256": "ef3043ea0ccac32a6dea78e6b308cbcc28c047bb6c97b606444294663b52f549",
+  "testApkSha256": "0cf2f2f91c6b93cbdb8fad30c2212457ba26c692a28db7ab6c947c77bb8478f1",
+  "gatewayDeniedRequests": 0,
+  "results": [
+    {
+      "id": "empty-home",
+      "result": "failed",
+      "code": "fixture_assertion_failed"
+    },
+    {
+      "id": "runner",
+      "result": "failed",
+      "code": "fixture_runner_failure"
+    }
+  ],
+  "artifacts": [],
+  "nativeNavigation": [],
+  "limits": [
+    "Real HomeActivity/HomeRoomTabs with test repository, not real HTTP/MQTT proof.",
+    "No DELETE/PATCH/binding/SMTP/camera/gallery/permissions; original secure account storage never read or cleared.",
+    "Geometry and native navigation are separate from pixel/design approval. S031 is optional when its reviewed source is present.",
+    "Window screenshots contain public fixtures only; no system picker or other app surface is captured."
+  ]
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" tests="23" skipped="0" failures="0" errors="0" timestamp="2026-11-01T20:58:46.044Z" hostname="DESKTOP-2AM89R2" time="0.513">
+  <properties/>
+  <testcase name="queuedCollectorCannotDropCoreFinalViewWhenWorkerCompletesFirst" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.06"/>
+  <testcase name="unknownRecoveryUsesHomeAbsenceNotDeleteOrBorrowedHandle" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.009"/>
+  <testcase name="concurrentDuplicateReturnsSameWrapperAndBothReceiveDurableCleanup" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.013"/>
+  <testcase name="dirtyDuringActualReadRetiresOldResultAndCoalescesMultipleTickets" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.006"/>
+  <testcase name="newAccountGetsIndependentReadGateWhileOldIoCannotAckItsTicket" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.007"/>
+  <testcase name="installedReadReceiptBecomesInvalidOnCancelOrNewRead" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.003"/>
+  <testcase name="oldAccountJournalSuccessAndErrorDoNotQueueNewAccountTickets" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.006"/>
+  <testcase name="recreatedSameAccountPageWaitsForOriginalActualIo" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.013"/>
+  <testcase name="activeDeleteIsNotReconciledAsUnknownUntilActualWorkerSettles" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.008"/>
+  <testcase name="sameUserNewRevisionCannotBorrowPreviousAccountWrapper" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.013"/>
+  <testcase name="homePresenceKeepsUnknownAndDoesNotPollAutomatically" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.003"/>
+  <testcase name="nativeRelationshipReplacementClosesOnlyOriginalIncarnation" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.008"/>
+  <testcase name="sharedReadScopeRejectsOldFactoryAndSameRevisionDifferentIdentity" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.0"/>
+  <testcase name="closingPageNeverAcknowledgesItsLateRead" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.004"/>
+  <testcase name="registrationRequiresActualExistingOwnerAndNeverStartsOne" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.003"/>
+  <testcase name="recoveryRequestsShareOneActualJournalDrainAndOnePendingBit" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.003"/>
+  <testcase name="discoveredHistoricalJournalNeverReturnsOldBindingWrapper" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.01"/>
+  <testcase name="capacityRejectsBeforeCoreDispatchAndDuplicateUsesExistingSlot" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.325"/>
+  <testcase name="failedHomeReadCannotAcknowledgeOrSpin" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.004"/>
+  <testcase name="registrationReleaseRejectsNewIntentButDoesNotRetireOtherObservers" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.003"/>
+  <testcase name="pauseAndEarlyReturnRetainActualIoSlotUntilOldReadReturns" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.004"/>
+  <testcase name="fullHomeSnapshotNotSelectedRoomDeterminesAbsence" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.003"/>
+  <testcase name="ackRecoveryCompletesOnlyAfterActualHomeCacheInstall" classname="com.rowan.iot.domain.device.more.SelfUnbindIntegrationTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

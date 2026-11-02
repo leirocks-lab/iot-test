@@ -1,0 +1,2399 @@
+{
+  "schemaVersion": 1,
+  "runId": "48340a2b-9cc9-4f6d-b0b9-97c058f569cf",
+  "fixtureOnly": true,
+  "businessHttpDelegate": "none",
+  "realHttpAcceptance": false,
+  "realCameraOrHardwareAcceptance": false,
+  "iosRuntimeAcceptance": false,
+  "pixelAcceptance": false,
+  "targetPackage": "com.rowan.iot.dev.refactor",
+  "sdk": 36,
+  "targetApkSha256": "3fc9e74af7eb253cc7d150701cfe3aa6d82ae93615855fd308ee311c8b3f1197",
+  "testApkSha256": "0d39c88a6156492fd7a5ace794b64f473aae37549b5a077dd564b766bdbc0648",
+  "gatewayDeniedRequests": 1,
+  "results": [
+    {
+      "id": "empty-home",
+      "result": "passed",
+      "geometryResult": "passed",
+      "artifactNames": [
+        "00-empty-home.png"
+      ]
+    },
+    {
+      "id": "multiple-rooms-same-name-and-opaque-id",
+      "result": "passed",
+      "geometryResult": "passed",
+      "artifactNames": [
+        "01-same-name-room.png"
+      ]
+    },
+    {
+      "id": "known-empty-room",
+      "result": "passed",
+      "geometryResult": "passed",
+      "artifactNames": [
+        "02-empty-room.png"
+      ]
+    },
+    {
+      "id": "long-room-label-reachable",
+      "result": "passed",
+      "geometryResult": "passed",
+      "artifactNames": [
+        "03-long-room-name.png"
+      ]
+    },
+    {
+      "id": "loading-and-offline-retain-confirmed-selection",
+      "result": "passed",
+      "geometryResult": "passed",
+      "artifactNames": [
+        "04-loading-cache.png",
+        "05-error-cache.png"
+      ]
+    },
+    {
+      "id": "native-return-rejects-old-uncooperative-read",
+      "result": "passed",
+      "geometryResult": "passed",
+      "artifactNames": [
+        "06-return-old-read-rejected.png"
+      ]
+    },
+    {
+      "id": "real-device-container-navigation-and-back",
+      "result": "passed",
+      "geometryResult": "passed",
+      "artifactNames": [
+        "07-real-device-return.png"
+      ]
+    },
+    {
+      "id": "old-account-read-cannot-populate-new-home",
+      "result": "passed",
+      "geometryResult": "passed",
+      "artifactNames": [
+        "08-account-revision-fence.png"
+      ]
+    },
+    {
+      "id": "s031-reviewed-draft-compatibility",
+      "result": "passed",
+      "geometryResult": "passed",
+      "artifactNames": [
+        "09-local-selection.png"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "caseId": "empty-home",
+      "name": "00-empty-home.png",
+      "sha256": "b8c7734f31398e36059098a4a28a2b2eb1fd29e679dbf0a859809f0316b482ac",
+      "bytes": 35015,
+      "realWindowFrame": true,
+      "semanticGuardBeforeAfter": true,
+      "geometry": {
+        "windowWidth": 640,
+        "windowHeight": 1280,
+        "density": 2,
+        "fontScale": 1,
+        "nodes": [
+          {
+            "id": "home_title",
+            "text": "首页",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              94,
+              608,
+              182
+            ],
+            "visibleBounds": [
+              32,
+              94,
+              608,
+              182
+            ]
+          },
+          {
+            "id": "home_room_tabs",
+            "text": "",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              182,
+              608,
+              282
+            ],
+            "visibleBounds": [
+              32,
+              182,
+              608,
+              282
+            ]
+          },
+          {
+            "id": "home_room_all",
+            "text": "全屋",
+            "selected": true,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              182,
+              208,
+              278
+            ],
+            "visibleBounds": [
+              32,
+              182,
+              208,
+              278
+            ]
+          },
+          {
+            "id": "home_room_status",
+            "text": "还没有设备",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              282,
+              608,
+              324
+            ],
+            "visibleBounds": [
+              32,
+              282,
+              608,
+              324
+            ]
+          },
+          {
+            "id": "home_selection_count",
+            "text": "已选中 0 个设备",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_cancel",
+            "text": "取消",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_done",
+            "text": "完成",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          }
+        ]
+      },
+      "frameFence": {
+        "requestedNanos": 406705954100,
+        "completedVsyncNanos": 406714649462
+      },
+      "geometryResult": "passed",
+      "visualResult": "not_reviewed"
+    },
+    {
+      "caseId": "multiple-rooms-same-name-and-opaque-id",
+      "name": "01-same-name-room.png",
+      "sha256": "4189d2c7999ce2713d083800358c0e24f1a9cb4abf6e1714c3a65ea5a2672680",
+      "bytes": 42278,
+      "realWindowFrame": true,
+      "semanticGuardBeforeAfter": true,
+      "geometry": {
+        "windowWidth": 640,
+        "windowHeight": 1280,
+        "density": 2,
+        "fontScale": 1,
+        "nodes": [
+          {
+            "id": "home_title",
+            "text": "首页",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              94,
+              608,
+              182
+            ],
+            "visibleBounds": [
+              32,
+              94,
+              608,
+              182
+            ]
+          },
+          {
+            "id": "home_room_tabs",
+            "text": "",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              182,
+              608,
+              282
+            ],
+            "visibleBounds": [
+              32,
+              182,
+              608,
+              282
+            ]
+          },
+          {
+            "id": "home_room_all",
+            "text": "全屋",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              -389,
+              182,
+              -213,
+              278
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Public Kitchen",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              -213,
+              182,
+              -2,
+              278
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Shared Public Room",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              -2,
+              182,
+              283,
+              278
+            ],
+            "visibleBounds": [
+              32,
+              182,
+              283,
+              278
+            ]
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Shared Public Room",
+            "selected": true,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              283,
+              182,
+              608,
+              278
+            ],
+            "visibleBounds": [
+              283,
+              182,
+              608,
+              278
+            ]
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Public Empty",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              608,
+              182,
+              804,
+              278
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_room_status",
+            "text": "",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              282,
+              608,
+              320
+            ],
+            "visibleBounds": [
+              32,
+              282,
+              608,
+              320
+            ]
+          },
+          {
+            "id": "home_device_open",
+            "text": "Public Device C",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              320,
+              608,
+              416
+            ],
+            "visibleBounds": [
+              32,
+              320,
+              608,
+              416
+            ]
+          },
+          {
+            "id": "home_selection_count",
+            "text": "已选中 0 个设备",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_cancel",
+            "text": "取消",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_done",
+            "text": "完成",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          }
+        ]
+      },
+      "frameFence": {
+        "requestedNanos": 410121027900,
+        "completedVsyncNanos": 410131315992
+      },
+      "geometryResult": "passed",
+      "visualResult": "not_reviewed"
+    },
+    {
+      "caseId": "known-empty-room",
+      "name": "02-empty-room.png",
+      "sha256": "8c71b69512c2f78a93afd956edded394f8ee3a1b9f79ba5a6a66e5ef3c8d6a1b",
+      "bytes": 41762,
+      "realWindowFrame": true,
+      "semanticGuardBeforeAfter": true,
+      "geometry": {
+        "windowWidth": 640,
+        "windowHeight": 1280,
+        "density": 2,
+        "fontScale": 1,
+        "nodes": [
+          {
+            "id": "home_title",
+            "text": "首页",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              94,
+              608,
+              182
+            ],
+            "visibleBounds": [
+              32,
+              94,
+              608,
+              182
+            ]
+          },
+          {
+            "id": "home_room_tabs",
+            "text": "",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              182,
+              608,
+              282
+            ],
+            "visibleBounds": [
+              32,
+              182,
+              608,
+              282
+            ]
+          },
+          {
+            "id": "home_room_all",
+            "text": "全屋",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              -545,
+              182,
+              -369,
+              278
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Public Kitchen",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              -369,
+              182,
+              -158,
+              278
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Shared Public Room",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              -158,
+              182,
+              127,
+              278
+            ],
+            "visibleBounds": [
+              32,
+              182,
+              127,
+              278
+            ]
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Shared Public Room",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              127,
+              182,
+              412,
+              278
+            ],
+            "visibleBounds": [
+              127,
+              182,
+              412,
+              278
+            ]
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Public Empty",
+            "selected": true,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              412,
+              182,
+              634,
+              278
+            ],
+            "visibleBounds": [
+              412,
+              182,
+              608,
+              278
+            ]
+          },
+          {
+            "id": "home_room_status",
+            "text": "此房间暂无设备",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              282,
+              608,
+              324
+            ],
+            "visibleBounds": [
+              32,
+              282,
+              608,
+              324
+            ]
+          },
+          {
+            "id": "home_selection_count",
+            "text": "已选中 0 个设备",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_cancel",
+            "text": "取消",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_done",
+            "text": "完成",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          }
+        ]
+      },
+      "frameFence": {
+        "requestedNanos": 411214888000,
+        "completedVsyncNanos": 411231315948
+      },
+      "geometryResult": "passed",
+      "visualResult": "not_reviewed"
+    },
+    {
+      "caseId": "long-room-label-reachable",
+      "name": "03-long-room-name.png",
+      "sha256": "e7471ddd4d91dee1e796652a75be9785dc63bb0f96800f00133bf549b4e8c247",
+      "bytes": 39159,
+      "realWindowFrame": true,
+      "semanticGuardBeforeAfter": true,
+      "geometry": {
+        "windowWidth": 640,
+        "windowHeight": 1280,
+        "density": 2,
+        "fontScale": 1,
+        "nodes": [
+          {
+            "id": "home_title",
+            "text": "首页",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              94,
+              608,
+              182
+            ],
+            "visibleBounds": [
+              32,
+              94,
+              608,
+              182
+            ]
+          },
+          {
+            "id": "home_room_tabs",
+            "text": "",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              182,
+              608,
+              282
+            ],
+            "visibleBounds": [
+              32,
+              182,
+              608,
+              282
+            ]
+          },
+          {
+            "id": "home_room_all",
+            "text": "全屋",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              -144,
+              182,
+              32,
+              278
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Public long room name — Long Public Label Long Public Label Long Public Label Long Public Label Long Public Label Long Public Label Long Public Label Long Public Label Long Public Label Long Public Label Long Public Label Long Public Label ",
+            "selected": true,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              182,
+              3580,
+              278
+            ],
+            "visibleBounds": [
+              32,
+              182,
+              608,
+              278
+            ]
+          },
+          {
+            "id": "home_room_status",
+            "text": "",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              282,
+              608,
+              320
+            ],
+            "visibleBounds": [
+              32,
+              282,
+              608,
+              320
+            ]
+          },
+          {
+            "id": "home_device_open",
+            "text": "Public Long-name Device",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              320,
+              608,
+              416
+            ],
+            "visibleBounds": [
+              32,
+              320,
+              608,
+              416
+            ]
+          },
+          {
+            "id": "home_selection_count",
+            "text": "已选中 0 个设备",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_cancel",
+            "text": "取消",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_done",
+            "text": "完成",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          }
+        ]
+      },
+      "frameFence": {
+        "requestedNanos": 414202343500,
+        "completedVsyncNanos": 414214649162
+      },
+      "geometryResult": "passed",
+      "visualResult": "not_reviewed"
+    },
+    {
+      "caseId": "loading-and-offline-retain-confirmed-selection",
+      "name": "04-loading-cache.png",
+      "sha256": "8b3918a5b820d0ebc69e2d8b2814d8ef3fc89de3d5f9abb0f126380cc5e99ef7",
+      "bytes": 45673,
+      "realWindowFrame": true,
+      "semanticGuardBeforeAfter": true,
+      "geometry": {
+        "windowWidth": 640,
+        "windowHeight": 1280,
+        "density": 2,
+        "fontScale": 1,
+        "nodes": [
+          {
+            "id": "home_title",
+            "text": "首页",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              94,
+              608,
+              182
+            ],
+            "visibleBounds": [
+              32,
+              94,
+              608,
+              182
+            ]
+          },
+          {
+            "id": "home_room_tabs",
+            "text": "",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              182,
+              608,
+              282
+            ],
+            "visibleBounds": [
+              32,
+              182,
+              608,
+              282
+            ]
+          },
+          {
+            "id": "home_room_all",
+            "text": "全屋",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              182,
+              208,
+              278
+            ],
+            "visibleBounds": [
+              32,
+              182,
+              208,
+              278
+            ]
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Public Kitchen",
+            "selected": true,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              208,
+              182,
+              447,
+              278
+            ],
+            "visibleBounds": [
+              208,
+              182,
+              447,
+              278
+            ]
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Shared Public Room",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              447,
+              182,
+              732,
+              278
+            ],
+            "visibleBounds": [
+              447,
+              182,
+              608,
+              278
+            ]
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Shared Public Room",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              732,
+              182,
+              1017,
+              278
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Public Empty",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              1017,
+              182,
+              1213,
+              278
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_room_status",
+            "text": "正在刷新设备…",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              282,
+              608,
+              324
+            ],
+            "visibleBounds": [
+              32,
+              282,
+              608,
+              324
+            ]
+          },
+          {
+            "id": "home_device_open",
+            "text": "Public Device A",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              324,
+              608,
+              420
+            ],
+            "visibleBounds": [
+              32,
+              324,
+              608,
+              420
+            ]
+          },
+          {
+            "id": "home_selection_count",
+            "text": "已选中 0 个设备",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_cancel",
+            "text": "取消",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_done",
+            "text": "完成",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          }
+        ]
+      },
+      "frameFence": {
+        "requestedNanos": 417121353500,
+        "completedVsyncNanos": 417131315712
+      },
+      "geometryResult": "passed",
+      "visualResult": "not_reviewed"
+    },
+    {
+      "caseId": "loading-and-offline-retain-confirmed-selection",
+      "name": "05-error-cache.png",
+      "sha256": "f4572d219061f7a4967c658b2b35ecf9fcfcd9401e5b8c6b2fc2f9eca4c80f4c",
+      "bytes": 55358,
+      "realWindowFrame": true,
+      "semanticGuardBeforeAfter": true,
+      "geometry": {
+        "windowWidth": 640,
+        "windowHeight": 1280,
+        "density": 2,
+        "fontScale": 1,
+        "nodes": [
+          {
+            "id": "home_title",
+            "text": "首页",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              94,
+              608,
+              182
+            ],
+            "visibleBounds": [
+              32,
+              94,
+              608,
+              182
+            ]
+          },
+          {
+            "id": "home_room_tabs",
+            "text": "",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              182,
+              608,
+              282
+            ],
+            "visibleBounds": [
+              32,
+              182,
+              608,
+              282
+            ]
+          },
+          {
+            "id": "home_room_all",
+            "text": "全屋",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              182,
+              208,
+              278
+            ],
+            "visibleBounds": [
+              32,
+              182,
+              208,
+              278
+            ]
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Public Kitchen",
+            "selected": true,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              208,
+              182,
+              447,
+              278
+            ],
+            "visibleBounds": [
+              208,
+              182,
+              447,
+              278
+            ]
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Shared Public Room",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              447,
+              182,
+              732,
+              278
+            ],
+            "visibleBounds": [
+              447,
+              182,
+              608,
+              278
+            ]
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Shared Public Room",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              732,
+              182,
+              1017,
+              278
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Public Empty",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              1017,
+              182,
+              1213,
+              278
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_room_status",
+            "text": "加载失败，请检查网络后刷新；已保留上次列表",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              282,
+              608,
+              362
+            ],
+            "visibleBounds": [
+              32,
+              282,
+              608,
+              362
+            ]
+          },
+          {
+            "id": "home_device_open",
+            "text": "Public Device A",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              362,
+              608,
+              458
+            ],
+            "visibleBounds": [
+              32,
+              362,
+              608,
+              458
+            ]
+          },
+          {
+            "id": "home_selection_count",
+            "text": "已选中 0 个设备",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_cancel",
+            "text": "取消",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_done",
+            "text": "完成",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          }
+        ]
+      },
+      "frameFence": {
+        "requestedNanos": 417668113800,
+        "completedVsyncNanos": 417681315690
+      },
+      "geometryResult": "passed",
+      "visualResult": "not_reviewed"
+    },
+    {
+      "caseId": "native-return-rejects-old-uncooperative-read",
+      "name": "06-return-old-read-rejected.png",
+      "sha256": "47183f6b5c351e51b16516c3423af134e9b16f705d5b12287a6492e8350db728",
+      "bytes": 44379,
+      "realWindowFrame": true,
+      "semanticGuardBeforeAfter": true,
+      "geometry": {
+        "windowWidth": 640,
+        "windowHeight": 1280,
+        "density": 2,
+        "fontScale": 1,
+        "nodes": [
+          {
+            "id": "home_title",
+            "text": "首页",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              94,
+              608,
+              182
+            ],
+            "visibleBounds": [
+              32,
+              94,
+              608,
+              182
+            ]
+          },
+          {
+            "id": "home_room_tabs",
+            "text": "",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              182,
+              608,
+              282
+            ],
+            "visibleBounds": [
+              32,
+              182,
+              608,
+              282
+            ]
+          },
+          {
+            "id": "home_room_all",
+            "text": "全屋",
+            "selected": true,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              182,
+              208,
+              278
+            ],
+            "visibleBounds": [
+              32,
+              182,
+              208,
+              278
+            ]
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Public Newer Room",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              208,
+              182,
+              486,
+              278
+            ],
+            "visibleBounds": [
+              208,
+              182,
+              486,
+              278
+            ]
+          },
+          {
+            "id": "home_room_status",
+            "text": "",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              282,
+              608,
+              320
+            ],
+            "visibleBounds": [
+              32,
+              282,
+              608,
+              320
+            ]
+          },
+          {
+            "id": "home_device_open",
+            "text": "Public Newer Device",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              363,
+              608,
+              459
+            ],
+            "visibleBounds": [
+              32,
+              363,
+              608,
+              459
+            ]
+          },
+          {
+            "id": "home_selection_count",
+            "text": "已选中 0 个设备",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_cancel",
+            "text": "取消",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_done",
+            "text": "完成",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          }
+        ]
+      },
+      "frameFence": {
+        "requestedNanos": 424629040900,
+        "completedVsyncNanos": 424631315412
+      },
+      "geometryResult": "passed",
+      "visualResult": "not_reviewed"
+    },
+    {
+      "caseId": "real-device-container-navigation-and-back",
+      "name": "07-real-device-return.png",
+      "sha256": "e6bbe914101655b0c8b990dbf0f72a4919cab2a7242fab4e5e764fddbd4bc96b",
+      "bytes": 66923,
+      "realWindowFrame": true,
+      "semanticGuardBeforeAfter": true,
+      "geometry": {
+        "windowWidth": 640,
+        "windowHeight": 1280,
+        "density": 2,
+        "fontScale": 1,
+        "nodes": [
+          {
+            "id": "home_title",
+            "text": "首页",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              94,
+              608,
+              182
+            ],
+            "visibleBounds": [
+              32,
+              94,
+              608,
+              182
+            ]
+          },
+          {
+            "id": "home_room_tabs",
+            "text": "",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              182,
+              608,
+              282
+            ],
+            "visibleBounds": [
+              32,
+              182,
+              608,
+              282
+            ]
+          },
+          {
+            "id": "home_room_all",
+            "text": "全屋",
+            "selected": true,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              182,
+              208,
+              278
+            ],
+            "visibleBounds": [
+              32,
+              182,
+              208,
+              278
+            ]
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Public Kitchen",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              208,
+              182,
+              419,
+              278
+            ],
+            "visibleBounds": [
+              208,
+              182,
+              419,
+              278
+            ]
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Shared Public Room",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              419,
+              182,
+              704,
+              278
+            ],
+            "visibleBounds": [
+              419,
+              182,
+              608,
+              278
+            ]
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Shared Public Room",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              704,
+              182,
+              989,
+              278
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Public Empty",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              989,
+              182,
+              1185,
+              278
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_room_status",
+            "text": "",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              282,
+              608,
+              320
+            ],
+            "visibleBounds": [
+              32,
+              282,
+              608,
+              320
+            ]
+          },
+          {
+            "id": "home_device_open",
+            "text": "Public Device A",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              363,
+              608,
+              459
+            ],
+            "visibleBounds": [
+              32,
+              363,
+              608,
+              459
+            ]
+          },
+          {
+            "id": "home_device_open",
+            "text": "Public Device B",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              502,
+              608,
+              598
+            ],
+            "visibleBounds": [
+              32,
+              502,
+              608,
+              598
+            ]
+          },
+          {
+            "id": "home_device_open",
+            "text": "Public Device C",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              641,
+              608,
+              737
+            ],
+            "visibleBounds": [
+              32,
+              641,
+              608,
+              737
+            ]
+          },
+          {
+            "id": "home_device_open",
+            "text": "Public Unknown-room Device",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              780,
+              608,
+              876
+            ],
+            "visibleBounds": [
+              32,
+              780,
+              608,
+              876
+            ]
+          },
+          {
+            "id": "home_selection_count",
+            "text": "已选中 0 个设备",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_cancel",
+            "text": "取消",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_done",
+            "text": "完成",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          }
+        ]
+      },
+      "frameFence": {
+        "requestedNanos": 431619855100,
+        "completedVsyncNanos": 431631315132
+      },
+      "geometryResult": "passed",
+      "visualResult": "not_reviewed"
+    },
+    {
+      "caseId": "old-account-read-cannot-populate-new-home",
+      "name": "08-account-revision-fence.png",
+      "sha256": "47183f6b5c351e51b16516c3423af134e9b16f705d5b12287a6492e8350db728",
+      "bytes": 44379,
+      "realWindowFrame": true,
+      "semanticGuardBeforeAfter": true,
+      "geometry": {
+        "windowWidth": 640,
+        "windowHeight": 1280,
+        "density": 2,
+        "fontScale": 1,
+        "nodes": [
+          {
+            "id": "home_title",
+            "text": "首页",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              94,
+              608,
+              182
+            ],
+            "visibleBounds": [
+              32,
+              94,
+              608,
+              182
+            ]
+          },
+          {
+            "id": "home_room_tabs",
+            "text": "",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              182,
+              608,
+              282
+            ],
+            "visibleBounds": [
+              32,
+              182,
+              608,
+              282
+            ]
+          },
+          {
+            "id": "home_room_all",
+            "text": "全屋",
+            "selected": true,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              182,
+              208,
+              278
+            ],
+            "visibleBounds": [
+              32,
+              182,
+              208,
+              278
+            ]
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Public Newer Room",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              208,
+              182,
+              486,
+              278
+            ],
+            "visibleBounds": [
+              208,
+              182,
+              486,
+              278
+            ]
+          },
+          {
+            "id": "home_room_status",
+            "text": "",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              282,
+              608,
+              320
+            ],
+            "visibleBounds": [
+              32,
+              282,
+              608,
+              320
+            ]
+          },
+          {
+            "id": "home_device_open",
+            "text": "Public Newer Device",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              363,
+              608,
+              459
+            ],
+            "visibleBounds": [
+              32,
+              363,
+              608,
+              459
+            ]
+          },
+          {
+            "id": "home_selection_count",
+            "text": "已选中 0 个设备",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_cancel",
+            "text": "取消",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_selection_done",
+            "text": "完成",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              70,
+              0,
+              70
+            ],
+            "visibleBounds": null
+          }
+        ]
+      },
+      "frameFence": {
+        "requestedNanos": 435977640700,
+        "completedVsyncNanos": 435981314958
+      },
+      "geometryResult": "passed",
+      "visualResult": "not_reviewed"
+    },
+    {
+      "caseId": "s031-reviewed-draft-compatibility",
+      "name": "09-local-selection.png",
+      "sha256": "bd3bcfa3f4bf51fb3dc80baeb159312027ec62449d5e2fd7c979d61f22f505e9",
+      "bytes": 69108,
+      "realWindowFrame": true,
+      "semanticGuardBeforeAfter": true,
+      "geometry": {
+        "windowWidth": 640,
+        "windowHeight": 1280,
+        "density": 2,
+        "fontScale": 1,
+        "nodes": [
+          {
+            "id": "home_room_tabs",
+            "text": "",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              190,
+              608,
+              290
+            ],
+            "visibleBounds": [
+              32,
+              190,
+              608,
+              290
+            ]
+          },
+          {
+            "id": "home_room_all",
+            "text": "全屋",
+            "selected": true,
+            "checked": null,
+            "enabled": false,
+            "clickable": true,
+            "bounds": [
+              32,
+              190,
+              208,
+              286
+            ],
+            "visibleBounds": [
+              32,
+              190,
+              208,
+              286
+            ]
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Public Kitchen",
+            "selected": false,
+            "checked": null,
+            "enabled": false,
+            "clickable": true,
+            "bounds": [
+              208,
+              190,
+              419,
+              286
+            ],
+            "visibleBounds": [
+              208,
+              190,
+              419,
+              286
+            ]
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Shared Public Room",
+            "selected": false,
+            "checked": null,
+            "enabled": false,
+            "clickable": true,
+            "bounds": [
+              419,
+              190,
+              704,
+              286
+            ],
+            "visibleBounds": [
+              419,
+              190,
+              608,
+              286
+            ]
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Shared Public Room",
+            "selected": false,
+            "checked": null,
+            "enabled": false,
+            "clickable": true,
+            "bounds": [
+              704,
+              190,
+              989,
+              286
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_room_tab",
+            "text": "Public Empty",
+            "selected": false,
+            "checked": null,
+            "enabled": false,
+            "clickable": true,
+            "bounds": [
+              989,
+              190,
+              1185,
+              286
+            ],
+            "visibleBounds": null
+          },
+          {
+            "id": "home_room_status",
+            "text": "",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              290,
+              608,
+              328
+            ],
+            "visibleBounds": [
+              32,
+              290,
+              608,
+              328
+            ]
+          },
+          {
+            "id": "home_selection_bar",
+            "text": "",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              32,
+              94,
+              608,
+              190
+            ],
+            "visibleBounds": [
+              32,
+              94,
+              608,
+              190
+            ]
+          },
+          {
+            "id": "home_selection_count",
+            "text": "已选中 2 个设备",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": false,
+            "bounds": [
+              208,
+              117,
+              432,
+              209
+            ],
+            "visibleBounds": [
+              208,
+              117,
+              432,
+              190
+            ]
+          },
+          {
+            "id": "home_selection_item",
+            "text": "Public Device A",
+            "selected": false,
+            "checked": true,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              371,
+              608,
+              483
+            ],
+            "visibleBounds": [
+              32,
+              371,
+              608,
+              483
+            ]
+          },
+          {
+            "id": "home_selection_item",
+            "text": "Public Device B",
+            "selected": false,
+            "checked": true,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              526,
+              608,
+              638
+            ],
+            "visibleBounds": [
+              32,
+              526,
+              608,
+              638
+            ]
+          },
+          {
+            "id": "home_selection_item",
+            "text": "Public Device C",
+            "selected": false,
+            "checked": false,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              681,
+              608,
+              793
+            ],
+            "visibleBounds": [
+              32,
+              681,
+              608,
+              793
+            ]
+          },
+          {
+            "id": "home_selection_item",
+            "text": "Public Unknown-room Device",
+            "selected": false,
+            "checked": false,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              836,
+              608,
+              948
+            ],
+            "visibleBounds": [
+              32,
+              836,
+              608,
+              948
+            ]
+          },
+          {
+            "id": "home_selection_cancel",
+            "text": "取消",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              32,
+              94,
+              208,
+              190
+            ],
+            "visibleBounds": [
+              32,
+              94,
+              208,
+              190
+            ]
+          },
+          {
+            "id": "home_selection_done",
+            "text": "完成",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              432,
+              94,
+              608,
+              190
+            ],
+            "visibleBounds": [
+              432,
+              94,
+              608,
+              190
+            ]
+          },
+          {
+            "id": "home_selection_delete",
+            "text": "删除设备",
+            "selected": false,
+            "checked": null,
+            "enabled": true,
+            "clickable": true,
+            "bounds": [
+              0,
+              1120,
+              640,
+              1232
+            ],
+            "visibleBounds": [
+              0,
+              1120,
+              640,
+              1232
+            ]
+          }
+        ]
+      },
+      "frameFence": {
+        "requestedNanos": 439167262300,
+        "completedVsyncNanos": 439181314830
+      },
+      "geometryResult": "passed",
+      "visualResult": "not_reviewed"
+    }
+  ],
+  "nativeNavigation": [
+    {
+      "case": "native-return-rejects-old-uncooperative-read",
+      "stage": "entered",
+      "actualNativePage": "RoomsActivity",
+      "resumedAndFocused": true
+    },
+    {
+      "case": "native-return-rejects-old-uncooperative-read",
+      "stage": "returned",
+      "fromPage": "RoomsActivity",
+      "actualNativePage": "HomeActivity",
+      "resumedAndFocused": true,
+      "publicRowsMatched": true,
+      "lateReadIgnored": true,
+      "expectedRevisionMatched": true,
+      "actualReadHeldUntilOldReturn": true,
+      "replacementReadStartedAfterOldReturn": true
+    },
+    {
+      "case": "real-device-container-navigation-and-back",
+      "stage": "entered",
+      "actualNativePage": "DeviceActivity",
+      "resumedAndFocused": true,
+      "publicDeviceAndExpectedRevisionMatched": true,
+      "actualRnTestIdsMounted": true
+    },
+    {
+      "case": "real-device-container-navigation-and-back",
+      "stage": "returned",
+      "fromPage": "DeviceActivity",
+      "actualNativePage": "HomeActivity",
+      "resumedAndFocused": true,
+      "publicRowsMatched": true,
+      "expectedRevisionMatched": true
+    },
+    {
+      "case": "old-account-read-cannot-populate-new-home",
+      "stage": "recreated",
+      "actualNativePage": "HomeActivity",
+      "resumedAndFocused": true,
+      "currentFixtureRevisionChanged": true,
+      "oldReadIgnored": true,
+      "publicRowsMatched": true
+    }
+  ],
+  "limits": [
+    "Real HomeActivity/HomeRoomTabs with test repository, not real HTTP/MQTT proof.",
+    "No DELETE/PATCH/binding/SMTP/camera/gallery/permissions; original secure account storage never read or cleared.",
+    "Geometry and native navigation are separate from pixel/design approval. S031 is optional when its reviewed source is present.",
+    "Window screenshots contain public fixtures only; no system picker or other app surface is captured."
+  ]
+}

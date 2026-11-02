@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-01T23:08:19.491Z",
+  "command": "python -B ios-as/Scripts/verify_project.py",
+  "exitCode": 0,
+  "sourceBefore": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "3f4e9a0b698eefd9fd5a2dc8bf53517e10028ef1d76cb921d212a5ce66439651",
+    "sourceFiles": 248
+  },
+  "sourceAfter": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "3f4e9a0b698eefd9fd5a2dc8bf53517e10028ef1d76cb921d212a5ce66439651",
+    "sourceFiles": 248
+  },
+  "sourceUnchanged": true,
+  "execution": "Static project parsing only; no Swift/Xcode/XCTest/runtime execution"
+}

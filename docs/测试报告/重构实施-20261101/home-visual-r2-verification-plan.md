@@ -1,0 +1,13 @@
+# 后续Root实际验证计划（本稿未执行）
+
+纯布局/绘制，无新业务状态机，不新增镜像单元测试或伪造tests-first RED。现有Home域/账号/解绑/选择回归仍应全量保持。Root解除冻结并核两Home源SHA后应用，先双端消费者可用性检查：Android实际Kotlin/Release/lint；iOS无Mac时仍仅静态，不能计UIKit编译通过。
+
+Android沿用正式9场景真实SDK instrumentation和base/small/large/font150四配置，需以新配对APK与新源码正式provenance独立运行，不借老3fc9矩阵。卡根仍Button/CheckBox，ID/text=真实nickname，API原顺序，点击/长按的完整可见区域仍至少48dp；原ui.labels继续读卡根，不从空卡区域造标题。实际offscreen网格卡应记offscreen/可滚动，不能一律几何失败；测试要先真实滚动指定card到viewport，等待新真实View/frame再48dp触控，不能performClick或调低48dp。选择通过实际checked集合与count核对，不只count；前后guard必须保checked。正常footer与delete footer不得重叠；normal Add/Mine/Rooms入口和真实DeviceActivity/RN返回、账号/离页迟到、cleanup/logout重试、长名/同名opaqueID都要保留。
+
+Android布局另查动态字体：普通字号随sp，Add的“+”只是图形符号按dp固定并给独立无障碍label，不把图形变成大字号挤压48dp；白卡不裁字体，高字号可扩高/滚动。横向tabs保48dp触控和长名可滚动，选中下划线视觉12×3不代表触控区。
+
+iOS网格仍由唯一UITableViewController/consumer驱动，cell只双列UI壳与原ID闭包，核心打开前依旧deviceForOpen与账号revision；每卡input epoch由当前selection捕获防旧View。明确平台待验：UITableView自动高度/DynamicType、本页owned64pt footer/48pt真实目标及本页safe-area预留、iPad actionSheet正确锚定normalAddButton、Home离页移除自有footer/恢复本页inset与原toolbarHidden及回归重显（不影响下一页）、selection alert保留与cleanup隐藏正常footer。正常footer不借固定高度UINavigationController toolbar容纳48pt，而是本页自有64pt容器，禁止影响下一页safe-area/视图。
+
+人工视觉单列：本地export049与编辑页并排看margin/圆角/卡型/文本/层级、真实系统insets、无示例brand/product/status/电源、无截图按钮。未知在线版本和无图/空态专用稿仍待核对。交互/几何通过不等于pixel或最新蓝湖通过；不向用户页面输出协议/实现阻塞说明。
+
+R2追加真实UIKit回归场景（仅计划未运行）：初次HOME错误且无loaded→Mine→同前台返回，不主动制造额外account/OS通知、不等待既有异步reload执行，footer在viewWillAppear本身必须恢复且Add/Mine仍实际可点；成功cached HOME返回也如此。初次从toolbar已visible与hidden两种host状态进入，首次viewWillAppear各捕获原值；进子页与退出Home准确恢复。重复往返确认footer唯一实例/constraint不累积，原safe-area inset精确还原，pendingcleanup或旧account不显示。不能用同步FakeSignals或等待后续reload作为footer出现的前提；loadedfalse时已有cancelLoad会安排重读，这一事实保留不改变。

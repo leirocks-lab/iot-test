@@ -1,0 +1,31 @@
+{
+  "nonce": "0d905c56addf",
+  "fixtureSha256": "08af3ffd005d0100f258abf04b96f9bb916b08062910266e104fc3a11738b593",
+  "before": {
+    "rows": 1,
+    "metadata": [
+      {
+        "_size": "649",
+        "width": "NULL",
+        "height": "NULL",
+        "is_pending": "0",
+        "is_trashed": "0"
+      }
+    ],
+    "expectedBucket": true
+  },
+  "after": {
+    "rows": 1,
+    "metadata": [
+      {
+        "_size": "649",
+        "width": "512",
+        "height": "512",
+        "is_pending": "0",
+        "is_trashed": "0"
+      }
+    ],
+    "expectedBucket": true
+  },
+  "cleanup": "通过"
+}

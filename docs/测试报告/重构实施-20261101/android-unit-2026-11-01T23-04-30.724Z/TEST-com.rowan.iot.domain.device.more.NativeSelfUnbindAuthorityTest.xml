@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.device.more.NativeSelfUnbindAuthorityTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-01T23:04:22.671Z" hostname="DESKTOP-2AM89R2" time="0.081">
+  <properties/>
+  <testcase name="lateDiskInspectionCannotReplaceANewApplicationOperationWithIdle" classname="com.rowan.iot.domain.device.more.NativeSelfUnbindAuthorityTest" time="0.05"/>
+  <testcase name="knownAcceptedTaskRemainsReadableAfterItsOwnOwnershipRevocation" classname="com.rowan.iot.domain.device.more.NativeSelfUnbindAuthorityTest" time="0.011"/>
+  <testcase name="unknownJournalCannotBecomeANewWritePermit" classname="com.rowan.iot.domain.device.more.NativeSelfUnbindAuthorityTest" time="0.01"/>
+  <testcase name="idleAuthorityIsNativeAndDoesNotAuthorizeOrDispatch" classname="com.rowan.iot.domain.device.more.NativeSelfUnbindAuthorityTest" time="0.009"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

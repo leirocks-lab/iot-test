@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" tests="27" skipped="0" failures="0" errors="0" timestamp="2026-11-01T18:07:34.450Z" hostname="DESKTOP-2AM89R2" time="1.492">
+  <properties/>
+  <testcase name="forbiddenMembershipNeverRequestsCredentialsOrConnectsABroker" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.245"/>
+  <testcase name="ownershipRevocationSynchronouslyClearsAllHandlesAndCannotBeUndoneByOldLeaseMessages" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.124"/>
+  <testcase name="cancellingAViewsWaitDoesNotCancelTheApplicationOwnedReadSession" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.044"/>
+  <testcase name="aSlowAuthorizeRemainsUnknownAndDoesNotConnectPrematurely" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.069"/>
+  <testcase name="retryAfterAuthorizationFailureRechecksNativeMembershipAndUsesANewProof" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.049"/>
+  <testcase name="anEmptyValidShadowSnapshotCompletesReadingWithUnknownValues" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.033"/>
+  <testcase name="missingLoginOrPendingCleanupNeverStartsAuthorization" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.026"/>
+  <testcase name="aFutureEpochMessageWaitsForReadyAndOldEpochCannotOverwriteTheNewSnapshot" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.034"/>
+  <testcase name="authorityRevisionIncreasesAndReleasedSessionCallbacksCannotAffectAReopenedDevice" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.036"/>
+  <testcase name="closingTheApplicationOwnerReleasesNativeLeasesAndPreventsNewObservations" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.027"/>
+  <testcase name="disconnectRetainsStaleSameAccountValuesButOnlineBecomesUnknown" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.047"/>
+  <testcase name="transportReadyAndPubackAloneDoNotInventADeviceSnapshotOrOnlineState" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.029"/>
+  <testcase name="tokenRefreshAtTheSameRevisionDoesNotForkOrReconnectDeviceAuthority" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.026"/>
+  <testcase name="responseBeforeGetPubackIsHandledWithoutBlockingTheMessageOwner" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.031"/>
+  <testcase name="missingSnapshotHasABoundedUnknownResultInsteadOfSpinningForever" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.065"/>
+  <testcase name="releasedHandleCannotRevokeAReplacementResourceAtTheSameAccountRevision" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.031"/>
+  <testcase name="revocationWhileAuthorizationIgnoresCancellationCannotPublishOrOpenALateLease" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.069"/>
+  <testcase name="duplicateNativeObserverCannotInflateOrReleaseAnotherHandlesAuthority" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.028"/>
+  <testcase name="oldAccountHandleCannotRevokeNewAccountAuthorityForTheSameDevice" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.035"/>
+  <testcase name="revokedMembershipOnRetryStopsTheOldLeaseAndRemovesPreviouslyVisibleDeviceData" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.052"/>
+  <testcase name="preReadyOverflowDiscardsIncompleteHistoryAndRequiresAFreshGetResponse" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.037"/>
+  <testcase name="cleanupPhaseClosesExistingObserversEvenWhenTheRevisionIsUnchanged" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.035"/>
+  <testcase name="releasingOneObserverDoesNotCloseTheOtherOrExposeUpdatesToTheReleasedHandle" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.035"/>
+  <testcase name="absentReadProfileDoesNotGuessConnectTypeOrPublishControls" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.109"/>
+  <testcase name="aHandleFromAnotherOwnerCannotBeUsedAsARevocationCapability" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.032"/>
+  <testcase name="homeAndRnShareOneNativeAuthorizationLeaseReducerAndSnapshot" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.032"/>
+  <testcase name="accountChangeClosesObserversInvalidatesOldPoolAndRejectsLateAuthorization" classname="com.rowan.iot.domain.device.state.DeviceReadOwnerTest" time="0.111"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

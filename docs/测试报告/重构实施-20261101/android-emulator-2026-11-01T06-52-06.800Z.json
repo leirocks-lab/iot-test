@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-01T06:52:20.246Z",
+  "runId": "2026-11-01T06-52-06.800Z",
+  "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+  "worktreeDirty": true,
+  "sourceSha256": "79b8e56d9a10e354545ac8cdf2e969753892a180df0fff399e0bbf616e35e13a",
+  "sourceFiles": 165,
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "viewport": "Physical size: 1080x2400\r\nOverride size: 750x1624",
+  "density": "Physical density: 420\r\nOverride density: 320",
+  "fontScale": "1.0",
+  "screenshots": [],
+  "scope": "Android native login only; not complete UI/HTTP/MQTT acceptance",
+  "results": [
+    {
+      "id": "emulator-prerequisite-or-flow",
+      "result": "阻塞",
+      "stage": "initial-screen",
+      "reason": "启动、安装、页面状态或测试配置未满足；未记录凭据或层级正文"
+    }
+  ],
+  "hardware": "未验收"
+}

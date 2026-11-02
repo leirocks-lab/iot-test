@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.data.http.HttpSchedulesRepositoryTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-01T14:35:37.213Z" hostname="DESKTOP-2AM89R2" time="0.104">
+  <properties/>
+  <testcase name="completeDotScheduleSegmentsCannotDispatchEnableOrDelete" classname="com.rowan.iot.data.http.HttpSchedulesRepositoryTest" time="0.008"/>
+  <testcase name="cancelledLateTransportResponseCannotReturnSchedules" classname="com.rowan.iot.data.http.HttpSchedulesRepositoryTest" time="0.007"/>
+  <testcase name="lostCreateIdIsUnknownAndNeverRecoveredByLookingForASimilarRule" classname="com.rowan.iot.data.http.HttpSchedulesRepositoryTest" time="0.009"/>
+  <testcase name="deleteHasNoBodyAndDoesNotRequireMutationData" classname="com.rowan.iot.data.http.HttpSchedulesRepositoryTest" time="0.011"/>
+  <testcase name="enableUsesPutWithOnlyARealBooleanAndChecksTheReturnedValue" classname="com.rowan.iot.data.http.HttpSchedulesRepositoryTest" time="0.005"/>
+  <testcase name="createPostsOnlyDefinedBodyAndReturnsTheActualServerAssignedId" classname="com.rowan.iot.data.http.HttpSchedulesRepositoryTest" time="0.003"/>
+  <testcase name="poisonedReadIdsCannotBecomePatchPathsAndValidDottedIdsRemainWritable" classname="com.rowan.iot.data.http.HttpSchedulesRepositoryTest" time="0.007"/>
+  <testcase name="authorizedListWithUnknownModelUsesOnlyTheDefinedGetAndKeepsTheAccountGuard" classname="com.rowan.iot.data.http.HttpSchedulesRepositoryTest" time="0.005"/>
+  <testcase name="updateEncodesScheduleIdCarriesRequiredFieldsAndKeepsDisabledFalse" classname="com.rowan.iot.data.http.HttpSchedulesRepositoryTest" time="0.004"/>
+  <testcase name="completeDotDeviceSegmentsCannotDispatchAListRequest" classname="com.rowan.iot.data.http.HttpSchedulesRepositoryTest" time="0.004"/>
+  <testcase name="invalidListAndDuplicateIdsNeverBecomeAnEmptyOrLastWinsSuccess" classname="com.rowan.iot.data.http.HttpSchedulesRepositoryTest" time="0.004"/>
+  <testcase name="getUsesAuthenticatedExactEndpointWithEncodedDeviceSegment" classname="com.rowan.iot.data.http.HttpSchedulesRepositoryTest" time="0.003"/>
+  <testcase name="oldScopeCannotReadOrMutateUsingANewAccountsToken" classname="com.rowan.iot.data.http.HttpSchedulesRepositoryTest" time="0.006"/>
+  <testcase name="wrongUpdateResponseIdentityAndWrongEnabledResponseAreUnknown" classname="com.rowan.iot.data.http.HttpSchedulesRepositoryTest" time="0.006"/>
+  <testcase name="explicitBusinessFailuresRemainTypedAndAreNeverAutomaticallyRetried" classname="com.rowan.iot.data.http.HttpSchedulesRepositoryTest" time="0.007"/>
+  <testcase name="transportTimeoutForEveryMutationIsUnknownAndEachIsDispatchedOnce" classname="com.rowan.iot.data.http.HttpSchedulesRepositoryTest" time="0.009"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.data.device.DeviceAuthorizationRevocationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-11-01T18:07:25.513Z" hostname="DESKTOP-2AM89R2" time="0.169">
+  <properties/>
+  <testcase name="freshDevice01UnboundRevokesLiveCacheWithoutRetryingOrReusingCredentials" classname="com.rowan.iot.data.device.DeviceAuthorizationRevocationTest" time="0.168"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

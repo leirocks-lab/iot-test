@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-01T22:24:49.348Z",
+  "runId": "2026-11-01T22-24-49.105Z",
+  "scriptSha256": "23c0b5b6dbcdb256e35e10c9dba1618c9c86a3d6148ffb940f6fe6bec6883bc9",
+  "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+  "contentQuery": {
+    "type": "text"
+  },
+  "execution": "Node real HTTP; does not prove native implementation or emulator acceptance",
+  "results": [
+    {
+      "id": "CONTENT-01",
+      "method": "GET",
+      "path": "/app-api/privacy",
+      "authenticated": false,
+      "httpStatus": 200,
+      "businessCode": 1002030000,
+      "result": "失败",
+      "expectation": "业务成功",
+      "dataType": "undefined",
+      "durationMs": 173
+    },
+    {
+      "id": "CONTENT-02",
+      "method": "GET",
+      "path": "/app-api/serviceTerms",
+      "authenticated": false,
+      "httpStatus": 200,
+      "businessCode": 1002030001,
+      "result": "失败",
+      "expectation": "业务成功",
+      "dataType": "undefined",
+      "durationMs": 47
+    },
+    {
+      "id": "HOME-01-denial",
+      "method": "GET",
+      "path": "/app-api/devices",
+      "authenticated": false,
+      "httpStatus": 200,
+      "businessCode": 401,
+      "result": "通过",
+      "expectation": "拒绝未认证访问",
+      "dataType": "null",
+      "durationMs": 19
+    }
+  ],
+  "exclusions": [
+    "MQTT",
+    "native HTTP implementation",
+    "UI",
+    "hardware"
+  ]
+}

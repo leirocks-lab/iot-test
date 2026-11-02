@@ -1,0 +1,2 @@
+Static structure verified: 367 objects; 96 app sources; 50 XCTest sources (754 test methods); 6 configurations per target/project; 3 shared schemes.
+Not performed: CocoaPods/Codegen, xcodebuild, Swift typecheck, XCTest execution, simulator/device or signing validation.

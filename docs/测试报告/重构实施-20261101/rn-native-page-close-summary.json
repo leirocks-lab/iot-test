@@ -1,0 +1,56 @@
+{
+  "archivedAt": "2026-11-01T15:03:39.887Z",
+  "scope": "RN bridge major 3 page-instance close contract",
+  "checks": {
+    "lint": {
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "typecheck": {
+      "exitCode": 0
+    },
+    "vitest": {
+      "exitCode": 0,
+      "workers": 1,
+      "files": 11,
+      "tests": 99,
+      "addedTests": 6
+    },
+    "codegen": {
+      "exitCode": 0,
+      "reactNative": "0.86.3",
+      "methods": 13,
+      "events": 1,
+      "signature": "closeDevice(pageSessionId:string):void"
+    }
+  },
+  "red": "Old production accepted only major2, major3 fixtures and explicit major2 rejection failed; NativePageClose module absent. Exact log retained including unhandled deferred-rejection fallout from incompatible old controller.",
+  "sourceHashes": {
+    "src/host/specs/NativeRowanHost.ts": "75fc3d4766aecb296a477bef0f42d28df4d49002b741463e6c95ee97b8730255",
+    "src/host/adapter/DeviceSessionController.ts": "053699a441878cfe699828050b3a21809fc73233cad09c4ede9e3cb4bfc7ba0e",
+    "src/host/adapter/NativePageClose.ts": "9a970a1828702d527fc02a43e2e997dcf680abc3561d5a81e6d2c02409d931a7",
+    "src/entry/DeviceEntry.tsx": "e1d892c97ad645fab25652d3e1c88d408224abd54b70ccbb5d29e3854eec8028",
+    "tests/contract/session-controller.test.ts": "0e59bdeac5ca3c8b2da49d0d6b20a912d48f8073ef5492c09dc2dc7d22cb634d",
+    "tests/contract/page-close.test.ts": "5537078b6d54ee4dea643112d666df82eed68dfef7ded90c05195a2d70aaff10",
+    "README.md": "aa4b1ab80e53bfc6e33f022ce948a69cf6fdd7ca70347fc40dc4644ba77bb757",
+    "src/host/README.md": "fe102fff521806672b8c8b0ea7486e8d138b7951865e2c39c77c9aea1dc2e2f7",
+    "src/features/device-readonly/README.md": "605645707433a3f76c2ab1f22e1e4737a4bdb13e5d5182434212f385605b9d95",
+    "src/features/device-more/README.md": "1746a54141a1a42bf00d7598cbd3ba6d4c116ca5a1cd06176b279ae7f671b6aa"
+  },
+  "evidenceHashes": {
+    "red.log": "9bad595f1f9eb5fb5b9709ef9532d4f3397cb3ec7b57c6cc765c8936ff763496",
+    "lint.log": "7960138dbf9924e05133d4f570f78221cb940ba5690fe0e4b18ee9cefee519f4",
+    "typecheck.log": "5a3973f79ed9becd5f23c4feff467513814de7ea381d75a4d2e339aa8b8edca9",
+    "vitest.log": "6306d35fee654ec7deb02b3092bc7fc6fc5f4c91198f84b7e137d3cbb8457a1e",
+    "codegen.log": "fbd80e48bec89689f2994e89fc8099318a1ef8e5450a43d8cf78687ce14c93d9",
+    "schema.json": "c0231fb5f50215b635d74c57b165d459611f8354c016167a323c861b3eeb0544",
+    "verify-codegen.cjs": "f128c4141abf33773b77856cd02e2a2e1b2bf3383cb7eaddce60ae1c30607f6b"
+  },
+  "limitations": [
+    "No Gradle/ADB/Metro/network or production services",
+    "No iOS Swift compilation/runtime",
+    "Native token issuance/validation and delayed close policy owned by native implementations",
+    "No major3 APK/UI acceptance; old major2 Android410 GREEN and screenshots remain historical evidence"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-01T10:24:48.875Z",
+  "logical": {
+    "x": 375,
+    "y": 932
+  },
+  "physical": {
+    "x": 540,
+    "y": 1373
+  },
+  "dialogRemains": true,
+  "hasNativeHome": false,
+  "hasRNBootstrap": false,
+  "hasRNError": false,
+  "note": "只对已采证ROWAN ANR等待按钮探测坐标映射；不代表ANR已修复"
+}

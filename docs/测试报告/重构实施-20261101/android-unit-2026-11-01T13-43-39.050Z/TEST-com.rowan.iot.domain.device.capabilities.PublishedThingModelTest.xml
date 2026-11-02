@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.device.capabilities.PublishedThingModelTest" tests="17" skipped="0" failures="0" errors="0" timestamp="2026-11-01T13:43:31.526Z" hostname="DESKTOP-2AM89R2" time="0.034">
+  <properties/>
+  <testcase name="unsupportedDataTypesRemainUnknownRatherThanGuessingAnAlias" classname="com.rowan.iot.domain.device.capabilities.PublishedThingModelTest" time="0.013"/>
+  <testcase name="absentDefinitionCollectionsStayUnknownInsteadOfInventingAnEmptyCapabilitySet" classname="com.rowan.iot.domain.device.capabilities.PublishedThingModelTest" time="0.0"/>
+  <testcase name="integerBoundsStepAndUnitAreExplicitWithoutAssumingProductSemantics" classname="com.rowan.iot.domain.device.capabilities.PublishedThingModelTest" time="0.005"/>
+  <testcase name="legacyInternalShapeAndMixedWireShapesCannotSilentlyAuthorizeWrites" classname="com.rowan.iot.domain.device.capabilities.PublishedThingModelTest" time="0.0"/>
+  <testcase name="missingBlankAndNonStringVersionsNeverCreateAPublishedModel" classname="com.rowan.iot.domain.device.capabilities.PublishedThingModelTest" time="0.002"/>
+  <testcase name="invalidIdentifiersAndUnitsHaveDiagnosticsWithoutGuessingReplacementNames" classname="com.rowan.iot.domain.device.capabilities.PublishedThingModelTest" time="0.001"/>
+  <testcase name="integerWithoutStepRemainsUnknownRatherThanDefaultingToOne" classname="com.rowan.iot.domain.device.capabilities.PublishedThingModelTest" time="0.001"/>
+  <testcase name="publishedIdentityIsBoundToNativeRequestProvenanceAndExactVersion" classname="com.rowan.iot.domain.device.capabilities.PublishedThingModelTest" time="0.0"/>
+  <testcase name="parserConsumesDataOnlyAndDoesNotUnwrapOrAcceptABusinessEnvelope" classname="com.rowan.iot.domain.device.capabilities.PublishedThingModelTest" time="0.001"/>
+  <testcase name="missingUnitStaysAbsentEvenWhenIdentifierOrNameLooksLikeTemperature" classname="com.rowan.iot.domain.device.capabilities.PublishedThingModelTest" time="0.0"/>
+  <testcase name="duplicateIdentifiersAreNotResolvedByLastWinsAndDoNotPoisonUnrelatedAttributes" classname="com.rowan.iot.domain.device.capabilities.PublishedThingModelTest" time="0.001"/>
+  <testcase name="invalidAttributeCollectionCannotBeParsedAsAnEmptyModel" classname="com.rowan.iot.domain.device.capabilities.PublishedThingModelTest" time="0.0"/>
+  <testcase name="malformedRangeAndStepStayUnknownAndNeverWidenTheAllowedDomain" classname="com.rowan.iot.domain.device.capabilities.PublishedThingModelTest" time="0.003"/>
+  <testcase name="enumValuesRemainExactCaseSensitiveStringsAndNeedACompleteUniqueRange" classname="com.rowan.iot.domain.device.capabilities.PublishedThingModelTest" time="0.001"/>
+  <testcase name="accessMustBeExplicitAndNeverComesFromLabelsCategoryOrWritableHints" classname="com.rowan.iot.domain.device.capabilities.PublishedThingModelTest" time="0.0"/>
+  <testcase name="serviceAndEventDefinitionsAreDetachedAndDoNotBecomeExecutableProfiles" classname="com.rowan.iot.domain.device.capabilities.PublishedThingModelTest" time="0.002"/>
+  <testcase name="booleansStayTypedAndReadPermissionNeverBecomesWritePermission" classname="com.rowan.iot.domain.device.capabilities.PublishedThingModelTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

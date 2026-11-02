@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.data.storage.NicknameJournalDocumentTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-01T20:27:55.624Z" hostname="DESKTOP-2AM89R2" time="0.11">
+  <properties/>
+  <testcase name="wrongIdentityKeyAndWrongTypedTargetAreNotSilentlyRestored" classname="com.rowan.iot.data.storage.NicknameJournalDocumentTest" time="0.011"/>
+  <testcase name="documentRoundTripKeepsStableIdentityExactTargetAndUnknownPhase" classname="com.rowan.iot.data.storage.NicknameJournalDocumentTest" time="0.007"/>
+  <testcase name="storageBudgetRejectsWithoutDroppingUnknownRecords" classname="com.rowan.iot.data.storage.NicknameJournalDocumentTest" time="0.08"/>
+  <testcase name="terminalRoundTripDoesNotRevertToPending" classname="com.rowan.iot.data.storage.NicknameJournalDocumentTest" time="0.009"/>
+  <testcase name="unknownSchemaAndCorruptDocumentFailClosedWithoutReset" classname="com.rowan.iot.data.storage.NicknameJournalDocumentTest" time="0.001"/>
+  <testcase name="duplicateIdentityRecordsAreNotLastWins" classname="com.rowan.iot.data.storage.NicknameJournalDocumentTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

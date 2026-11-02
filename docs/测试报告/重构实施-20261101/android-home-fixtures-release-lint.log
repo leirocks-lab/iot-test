@@ -1,0 +1,75 @@
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+> Task :app:buildKotlinToolingMetadata UP-TO-DATE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateAutolinkingNewArchitectureFiles UP-TO-DATE
+> Task :app:generateAutolinkingPackageList UP-TO-DATE
+> Task :app:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :app:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :app:generateReactNativeEntryPoint UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDevelopmentReleaseBuild UP-TO-DATE
+> Task :app:generateDevelopmentReleaseBuildConfig UP-TO-DATE
+> Task :app:checkDevelopmentReleaseAarMetadata UP-TO-DATE
+> Task :app:createBundleDevelopmentReleaseJsAndAssets UP-TO-DATE
+> Task :app:generateDevelopmentReleaseResValues UP-TO-DATE
+> Task :app:mapDevelopmentReleaseSourceSetPaths UP-TO-DATE
+> Task :app:generateDevelopmentReleaseResources UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseResources UP-TO-DATE
+> Task :app:packageDevelopmentReleaseResources UP-TO-DATE
+> Task :app:parseDevelopmentReleaseLocalResources UP-TO-DATE
+> Task :app:createDevelopmentReleaseCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDevelopmentRelease UP-TO-DATE
+> Task :app:processDevelopmentReleaseMainManifest UP-TO-DATE
+> Task :app:processDevelopmentReleaseManifest UP-TO-DATE
+> Task :app:processDevelopmentReleaseManifestForPackage UP-TO-DATE
+> Task :app:processDevelopmentReleaseResources UP-TO-DATE
+> Task :app:compileDevelopmentReleaseKotlin UP-TO-DATE
+> Task :app:javaPreCompileDevelopmentRelease UP-TO-DATE
+> Task :app:compileDevelopmentReleaseJavaWithJavac UP-TO-DATE
+> Task :app:bundleDevelopmentReleaseClassesToCompileJar UP-TO-DATE
+> Task :app:preDevelopmentReleaseAndroidTestBuild SKIPPED
+> Task :app:generateDevelopmentReleaseAndroidTestResValues UP-TO-DATE
+> Task :app:generateDevelopmentReleaseAndroidTestLintModel
+> Task :app:extractProguardFiles UP-TO-DATE
+> Task :app:generateDevelopmentReleaseLintReportModel
+> Task :app:preDevelopmentReleaseUnitTestBuild UP-TO-DATE
+> Task :app:generateDevelopmentReleaseUnitTestLintModel
+> Task :app:lintAnalyzeDevelopmentReleaseAndroidTest
+> Task :app:lintAnalyzeDevelopmentRelease
+> Task :app:lintAnalyzeDevelopmentReleaseUnitTest
+
+> Task :app:lintReportDevelopmentRelease
+Wrote HTML report to file:///D:/workspace/rowaniot/rowan-iot-app/android-as/app/build/reports/lint-results-developmentRelease.html
+
+> Task :app:lintDevelopmentRelease
+
+[Incubating] Problems report is available at: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1m 57s
+45 actionable tasks: 8 executed, 37 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.3.1/userguide/configuration_cache_enabling.html

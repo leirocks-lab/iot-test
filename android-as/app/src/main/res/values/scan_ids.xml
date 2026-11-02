@@ -1,0 +1,13 @@
+<resources>
+    <item name="add_scan" type="id" />
+    <item name="add_manual" type="id" />
+    <item name="add_cancel" type="id" />
+    <item name="scan_title" type="id" />
+    <item name="scan_back" type="id" />
+    <item name="scan_album" type="id" />
+    <item name="scan_status" type="id" />
+    <item name="scan_retry" type="id" />
+    <item name="scan_permission" type="id" />
+    <item name="scan_settings" type="id" />
+    <item name="scan_preview" type="id" />
+</resources>

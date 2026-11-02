@@ -1,0 +1,7 @@
+<resources>
+    <style name="StartupTheme" parent="AppTheme">
+        <item name="android:windowBackground">#186DAF</item>
+        <item name="android:windowSplashScreenBackground">#186DAF</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@android:color/transparent</item>
+    </style>
+</resources>

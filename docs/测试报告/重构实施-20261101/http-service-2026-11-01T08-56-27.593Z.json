@@ -1,0 +1,358 @@
+{
+  "date": "2026-11-01T08:56:30.663Z",
+  "runId": "2026-11-01T08-56-27.593Z",
+  "scriptSha256": "e677971890d2cb075b23d0a7e1b86d2c11e9a931fa2ee7fa7fdaedc7f6ab5f4a",
+  "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+  "contentQuery": {
+    "type": "text"
+  },
+  "execution": "Node real HTTP; does not prove native implementation or emulator acceptance",
+  "results": [
+    {
+      "id": "CONTENT-01",
+      "method": "GET",
+      "path": "/app-api/privacy",
+      "authenticated": false,
+      "httpStatus": 200,
+      "businessCode": 1002030000,
+      "result": "失败",
+      "expectation": "业务成功",
+      "dataType": "undefined",
+      "durationMs": 366
+    },
+    {
+      "id": "CONTENT-02",
+      "method": "GET",
+      "path": "/app-api/serviceTerms",
+      "authenticated": false,
+      "httpStatus": 200,
+      "businessCode": 1002030001,
+      "result": "失败",
+      "expectation": "业务成功",
+      "dataType": "undefined",
+      "durationMs": 211
+    },
+    {
+      "id": "HOME-01-denial",
+      "method": "GET",
+      "path": "/app-api/devices",
+      "authenticated": false,
+      "httpStatus": 200,
+      "businessCode": 401,
+      "result": "通过",
+      "expectation": "拒绝未认证访问",
+      "dataType": "null",
+      "durationMs": 84
+    },
+    {
+      "id": "AUTH-04",
+      "method": "POST",
+      "path": "/app-api/session",
+      "authenticated": false,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "object",
+      "durationMs": 134
+    },
+    {
+      "id": "HOME-01",
+      "method": "GET",
+      "path": "/app-api/devices",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "array",
+      "durationMs": 465
+    },
+    {
+      "id": "DEVICE-01",
+      "method": "GET",
+      "path": "/app-api/devices/{deviceID}/mqtt",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "object",
+      "durationMs": 994
+    },
+    {
+      "id": "DEVICE-01-field-shape",
+      "result": "通过",
+      "note": "仅记录字段名/布尔，不记录MQTT地址、标识或凭据；不证明连接可用",
+      "fields": [
+        "clientID",
+        "deviceID",
+        "endpoint",
+        "expiresAt",
+        "host",
+        "password",
+        "path",
+        "sessionToken",
+        "username"
+      ],
+      "transport": "wss:",
+      "responseDeviceIDMatchesRequest": true,
+      "credentialFieldsPresent": true,
+      "expiryFieldPresent": true,
+      "expiresAtType": "number",
+      "expiresAtISO8601": false,
+      "expiresWithin24HoursIfEpochMillis": false,
+      "expiresWithin24HoursIfEpochSeconds": true,
+      "explicitAuthModePresent": false
+    },
+    {
+      "id": "DEVICE-02",
+      "method": "GET",
+      "path": "/app-api/devices/{deviceID}",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "object",
+      "durationMs": 145
+    },
+    {
+      "id": "DEVICE-02-field-shape",
+      "result": "通过",
+      "fields": [
+        "bindingAt",
+        "bindingRole",
+        "device",
+        "deviceNickname",
+        "online",
+        "product"
+      ],
+      "productFields": [
+        "category",
+        "id",
+        "image",
+        "modelName",
+        "name",
+        "seriesName"
+      ],
+      "note": "仅字段结构；角色、产品映射与运行状态仍须原生实现和联调"
+    },
+    {
+      "id": "THING-01",
+      "method": "GET",
+      "path": "/app-api/products/{productID}/thing-model",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "object",
+      "durationMs": 140
+    },
+    {
+      "id": "THING-01-field-shape",
+      "result": "通过",
+      "fields": [
+        "attributes",
+        "etag",
+        "events",
+        "services",
+        "version"
+      ],
+      "versionPresent": true,
+      "etagPresent": true,
+      "attributes": [
+        {
+          "identifier": "Power",
+          "dataType": "enum",
+          "access": "rw",
+          "fields": [
+            "access",
+            "dataType",
+            "identifier",
+            "name",
+            "range"
+          ]
+        },
+        {
+          "identifier": "Mode",
+          "dataType": "enum",
+          "access": "rw",
+          "fields": [
+            "access",
+            "dataType",
+            "identifier",
+            "name",
+            "range"
+          ]
+        },
+        {
+          "identifier": "TargetTemp",
+          "dataType": "integer",
+          "access": "rw",
+          "fields": [
+            "access",
+            "dataType",
+            "identifier",
+            "name",
+            "range",
+            "unit"
+          ]
+        },
+        {
+          "identifier": "TargetHumidity",
+          "dataType": "integer",
+          "access": "rw",
+          "fields": [
+            "access",
+            "dataType",
+            "identifier",
+            "name",
+            "range",
+            "unit"
+          ]
+        },
+        {
+          "identifier": "TempCurrent",
+          "dataType": "integer",
+          "access": "r",
+          "fields": [
+            "access",
+            "dataType",
+            "identifier",
+            "name",
+            "range",
+            "unit"
+          ]
+        },
+        {
+          "identifier": "HumidityCurrent",
+          "dataType": "integer",
+          "access": "r",
+          "fields": [
+            "access",
+            "dataType",
+            "identifier",
+            "name",
+            "range",
+            "unit"
+          ]
+        },
+        {
+          "identifier": "LightSwitch",
+          "dataType": "boolean",
+          "access": "rw",
+          "fields": [
+            "access",
+            "dataType",
+            "identifier",
+            "name"
+          ]
+        },
+        {
+          "identifier": "LightBrightness",
+          "dataType": "integer",
+          "access": "rw",
+          "fields": [
+            "access",
+            "dataType",
+            "identifier",
+            "name",
+            "range",
+            "unit"
+          ]
+        },
+        {
+          "identifier": "ChildLock",
+          "dataType": "boolean",
+          "access": "rw",
+          "fields": [
+            "access",
+            "dataType",
+            "identifier",
+            "name"
+          ]
+        },
+        {
+          "identifier": "Mute",
+          "dataType": "boolean",
+          "access": "rw",
+          "fields": [
+            "access",
+            "dataType",
+            "identifier",
+            "name"
+          ]
+        },
+        {
+          "identifier": "Online",
+          "dataType": "enum",
+          "access": "r",
+          "fields": [
+            "access",
+            "dataType",
+            "identifier",
+            "name",
+            "range"
+          ]
+        }
+      ],
+      "note": "仅物模型结构/属性标识；无设备值、产品标识或个人数据，不能据属性名猜业务控件映射"
+    },
+    {
+      "id": "USER-01",
+      "method": "GET",
+      "path": "/app-api/user/setting",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "object",
+      "durationMs": 106
+    },
+    {
+      "id": "ROOM-03",
+      "method": "GET",
+      "path": "/app-api/user/locations",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "array",
+      "durationMs": 115
+    },
+    {
+      "id": "AUTH-05",
+      "method": "PATCH",
+      "path": "/app-api/session",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "object",
+      "durationMs": 112
+    },
+    {
+      "id": "AUTH-06",
+      "method": "DELETE",
+      "path": "/app-api/session",
+      "authenticated": true,
+      "httpStatus": 200,
+      "businessCode": 0,
+      "result": "通过",
+      "expectation": "业务成功",
+      "dataType": "undefined",
+      "durationMs": 134
+    }
+  ],
+  "exclusions": [
+    "MQTT",
+    "native HTTP implementation",
+    "UI",
+    "hardware"
+  ]
+}

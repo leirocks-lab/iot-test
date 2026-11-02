@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-01T17:43:33.742Z",
+  "parentReport": "docs/测试报告/重构实施-20261101/android-scan-denied-layout-2026-11-01T17-38-46.660Z.json",
+  "pendingOwnCameraDialogDenied": true,
+  "permission": {
+    "result": "通过",
+    "original": {
+      "granted": false,
+      "flags": [
+        "USER_SENSITIVE_WHEN_DENIED",
+        "USER_SENSITIVE_WHEN_GRANTED"
+      ],
+      "appOp": "allow",
+      "uidAppOp": "ignore",
+      "packageEntryPresent": true
+    },
+    "current": {
+      "granted": false,
+      "flags": [
+        "USER_SENSITIVE_WHEN_DENIED",
+        "USER_SENSITIVE_WHEN_GRANTED"
+      ],
+      "appOp": "allow",
+      "uidAppOp": "ignore",
+      "packageEntryPresent": true
+    }
+  },
+  "logout": "尚待单次正常退出"
+}

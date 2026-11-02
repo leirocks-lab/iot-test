@@ -1,0 +1,8 @@
+{
+  "runId": "2026-11-01T10-21-11.871Z",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "action": "等待：仅本轮ROWAN应用，已先采集ANR证据",
+  "homeVisible": false,
+  "defectStatus": "进行中",
+  "note": "等待只恢复测试入口，不代表ANR根因已定位、已修复或验收通过；目标main采样位于MessageQueue/Looper轮询，ANR时刻栈未取得；未清数据/杀应用"
+}

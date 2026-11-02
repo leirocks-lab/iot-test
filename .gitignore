@@ -24,6 +24,8 @@ web-build/
 *.cer
 
 # Build, coverage, and caches
+__pycache__/
+*.py[cod]
 dist/
 coverage/
 *.tsbuildinfo

@@ -1,0 +1,108 @@
+{
+  "date": "2026-11-01T11:31:21.513Z",
+  "runId": "2026-11-01T11-30-25.791Z",
+  "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+  "worktreeDirty": true,
+  "sourceSha256": "d2ee8ab29dd7ae9a68ed4d8745a52cbfce0911975bbf1d0e7cf96f8089ec79b6",
+  "sourceFiles": 223,
+  "serial": "emulator-5554",
+  "packageId": "com.rowan.iot.dev.refactor",
+  "nativeDiagnostics": [
+    "application_react_load begin t=20464341 main=true",
+    "application_react_load end t=20464516 durationMs=175",
+    "home_focus_gain begin t=20484721 main=true",
+    "home_focus_gain end t=20484723 durationMs=2",
+    "application_react_load begin t=20488882 main=true",
+    "application_react_load end t=20489003 durationMs=121",
+    "home_focus_gain begin t=20493130 main=true",
+    "home_focus_gain end t=20493133 durationMs=3",
+    "device_create begin t=20498828 main=true",
+    "host_factory begin t=20498946 main=true",
+    "host_factory end t=20499031 durationMs=85",
+    "device_create end t=20499126 durationMs=298",
+    "device_resume begin t=20499171 main=true",
+    "device_resume end t=20499174 durationMs=3",
+    "home_focus_loss begin t=20499603 main=true",
+    "home_focus_loss end t=20499603 durationMs=0",
+    "device_focus_gain begin t=20500588 main=true",
+    "device_focus_gain end t=20500591 durationMs=3",
+    "phase=connecting snapshot=false epoch=0 delivery=1",
+    "phase=recovering snapshot=false epoch=0 delivery=2",
+    "kind=UNAVAILABLE reasonCode=32102 cause=OTHER",
+    "phase=connecting snapshot=false epoch=0 delivery=3",
+    "kind=CONFIGURATION reasonCode=0 cause=DNS",
+    "phase=failed snapshot=false epoch=0 delivery=4"
+  ],
+  "installedArtifactSha256": "494a45b36e1cfb3dc7f219b303e3ab8e4068ea4ce4d32298b0837c03a7c161b6",
+  "buildProvenance": {
+    "date": "2026-11-01T11:28:04.673Z",
+    "task": ":app:assembleDevelopmentRelease",
+    "artifactSha256": "494a45b36e1cfb3dc7f219b303e3ab8e4068ea4ce4d32298b0837c03a7c161b6",
+    "sourceBefore": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "d2ee8ab29dd7ae9a68ed4d8745a52cbfce0911975bbf1d0e7cf96f8089ec79b6",
+      "sourceFiles": 223
+    },
+    "sourceAfter": {
+      "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+      "worktreeDirty": true,
+      "sourceSha256": "d2ee8ab29dd7ae9a68ed4d8745a52cbfce0911975bbf1d0e7cf96f8089ec79b6",
+      "sourceFiles": 223
+    },
+    "sourceUnchangedDuringBuild": true,
+    "architecture": "x86_64",
+    "signing": "development debug key",
+    "isolatedValidation": true
+  },
+  "installedArtifactMatchesBuild": true,
+  "viewport": "Physical size: 1080x2400",
+  "density": "Physical density: 420",
+  "fontScale": "1.0",
+  "screenshots": [
+    "2026-11-01T11-30-25.791Z-android-login-initial.png",
+    "2026-11-01T11-30-25.791Z-android-home-after-login.png",
+    "2026-11-01T11-30-25.791Z-android-rn-bootstrap.png",
+    "2026-11-01T11-30-25.791Z-android-rn-native-readonly.png"
+  ],
+  "scope": "Android native startup/login/cold restore/logout and packaged RN navigation; not complete UI/HTTP/MQTT acceptance",
+  "results": [
+    {
+      "id": "STARTUP-no-session-native-entry",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-UI-empty",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-UI-consent-gate",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-04-native-emulator",
+      "result": "通过"
+    },
+    {
+      "id": "AUTH-03-05-cold-restore-native",
+      "result": "通过"
+    },
+    {
+      "id": "RN-release-bundle-host-context",
+      "result": "通过",
+      "note": "验证内置包及只读状态页面渲染；真实 MQTT 快照及设备控制须另有证据"
+    },
+    {
+      "id": "MQTT-native-authorized-cloud-snapshot",
+      "result": "失败",
+      "note": "仅认证原生只读云端快照与RN摘要；无desired命令，不证明设备执行或硬件在线"
+    },
+    {
+      "id": "emulator-prerequisite-or-flow",
+      "result": "阻塞",
+      "stage": "native-mqtt-readonly",
+      "reason": "实际原生连接未取得有效请求快照；保留失败，不替换为Node或测试替身成功"
+    }
+  ],
+  "hardware": "未验收"
+}

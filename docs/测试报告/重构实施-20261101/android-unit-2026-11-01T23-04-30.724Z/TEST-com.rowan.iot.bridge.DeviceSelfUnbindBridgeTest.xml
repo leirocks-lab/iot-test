@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" tests="21" skipped="0" failures="0" errors="0" timestamp="2026-11-01T23:04:20.431Z" hostname="DESKTOP-2AM89R2" time="0.151">
+  <properties/>
+  <testcase name="asynchronousAffirmativeBeginFailureIsUnknownAndCannotBeRetriedAsUnsent" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.049"/>
+  <testcase name="uncooperativePreflightCancelledBeforeItReturnsCannotOpenDialog" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.006"/>
+  <testcase name="unknownAndReleasedObservationCancelsCannotConsumeBudget" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.019"/>
+  <testcase name="unknownAuthorityNeverPresentsAnotherConfirmation" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.001"/>
+  <testcase name="pausedKnownObservationRecordsCancelWithoutCaptureAndRejectsLateResumedRequest" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.004"/>
+  <testcase name="queryReadsOnlyAuthorityAndKeepsHistoricalDistinct" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.003"/>
+  <testcase name="missedCancellationAtFullBudgetQuarantinesOnlyThatObservationUntilRelease" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.02"/>
+  <testcase name="duplicateAttemptJoinsButDifferentAttemptIsBusy" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.002"/>
+  <testcase name="sixtyFiveNormalCancelReleaseCyclesDoNotPoisonSharedModule" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.009"/>
+  <testcase name="exactCancelCannotCancelANewerAttempt" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.003"/>
+  <testcase name="cancelBeforeRequestPreventsLateDialogAndDispatch" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.0"/>
+  <testcase name="cancellationAfterDispatchDoesNotCancelOrRepeatApplicationTask" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.002"/>
+  <testcase name="projectionIncrementsOnlyForSemanticChangeAndFailsClosedAtJsLimit" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.0"/>
+  <testcase name="ownerCancelledDuringCaptureSettlesWithoutPhysicalPreflight" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.006"/>
+  <testcase name="duplicatePromiseRecipientsAndCancelTombstonesAreBounded" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.005"/>
+  <testcase name="invalidObservationCannotBorrowAnotherContext" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.005"/>
+  <testcase name="releasingSaturatedObservationRestoresBudgetForNewObservation" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.005"/>
+  <testcase name="requestRequiresActualNativeAffirmativeAndGeneratesNoJsIntent" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.001"/>
+  <testcase name="pauseCancelsPendingDialogAndLateAffirmativeIsInert" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.002"/>
+  <testcase name="pageOrAccountChangeBetweenDialogAndAffirmativeCannotDispatch" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.001"/>
+  <testcase name="cancelledQuerySettlesOnceButKeepsActualReadSlotUntilIoReturns" classname="com.rowan.iot.bridge.DeviceSelfUnbindBridgeTest" time="0.007"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,80 @@
+{
+  "date": "2026-11-01T20:54:55.612054+00:00",
+  "patch": ".cache/refactor/presentation-system-r2-draft/implementation.patch",
+  "patchSha256": "8b079372496f12da288c9b466b6c2f64366989a45d318319ba4ddee646e42134",
+  "stage": "APPLIED_EXACT_REVIEWED_TEXT_NOT_PLATFORM_VERIFIED",
+  "files": [
+    {
+      "path": "android-as/app/src/main/java/com/rowan/iot/MainApplication.kt",
+      "beforeSha256": "18d0de1b268fcf114dd9038773f867b4635b3001228b1c3d155f92f99358a8b8",
+      "afterSha256": "ed69458671e8ee64fe94e891a28800d596fad046317b4c14c63f2e1481d5ed28",
+      "reviewedOverlaySha256": "ed69458671e8ee64fe94e891a28800d596fad046317b4c14c63f2e1481d5ed28",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/app/AppServices.kt",
+      "beforeSha256": "25ed75e45ab57f1fc6363f7e68c7a4b8d15db18960990955177253a03033990d",
+      "afterSha256": "6b8cbb507323e024eb8afedede9524191c287d7253bd9bcac88ef1bb66e7d469",
+      "reviewedOverlaySha256": "6b8cbb507323e024eb8afedede9524191c287d7253bd9bcac88ef1bb66e7d469",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/domain/presentation/PresentationService.kt",
+      "beforeSha256": null,
+      "afterSha256": "2ede5b92ecd794d5e875b2406b553c051e6313cf28c0321ec03de4c60d0be344",
+      "reviewedOverlaySha256": "2ede5b92ecd794d5e875b2406b553c051e6313cf28c0321ec03de4c60d0be344",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/platform/presentation/AndroidPresentationSystemSource.kt",
+      "beforeSha256": null,
+      "afterSha256": "127fc0ffdece90fe1984506c9cebd46f625dd0c2d2e90bc6b00490b90d353a57",
+      "reviewedOverlaySha256": "127fc0ffdece90fe1984506c9cebd46f625dd0c2d2e90bc6b00490b90d353a57",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Rowan.xcodeproj/project.pbxproj",
+      "beforeSha256": "f5668d6d5407622b64a57c42dfc4ea46d6562db2094454af8de3aaf5c78b84e9",
+      "afterSha256": "2b36652b9779fe015a1084b4a2c3e54dcc83292ba60218f9815550e3a1589e6f",
+      "reviewedOverlaySha256": "2b36652b9779fe015a1084b4a2c3e54dcc83292ba60218f9815550e3a1589e6f",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Rowan/App/RowanAppServices.swift",
+      "beforeSha256": "f92b5cc72f4507aebd314c92f47efb007a34c4237d98007a2e05cdef649cf208",
+      "afterSha256": "c8f98d289b09edd5af1f6e27420edf03f2c0d055ade96748da4d42fe141596e7",
+      "reviewedOverlaySha256": "c8f98d289b09edd5af1f6e27420edf03f2c0d055ade96748da4d42fe141596e7",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Rowan/AppDelegate.swift",
+      "beforeSha256": "0c1c8fc04904ae98d3cd2a89f83219b194a791d5899e6cc43c03630ea62bd800",
+      "afterSha256": "ad2fbc7759fdcf4c9f6cd3bafb672b66af1701047af2db874cce0dae4055d497",
+      "reviewedOverlaySha256": "ad2fbc7759fdcf4c9f6cd3bafb672b66af1701047af2db874cce0dae4055d497",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Rowan/Domain/Presentation/PresentationService.swift",
+      "beforeSha256": null,
+      "afterSha256": "b00114e7aebedac97af83c272765be4b72674e98a4a5b2e971068b401d7eab71",
+      "reviewedOverlaySha256": "b00114e7aebedac97af83c272765be4b72674e98a4a5b2e971068b401d7eab71",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Rowan/Platform/Presentation/UIKitPresentationSystemSource.swift",
+      "beforeSha256": null,
+      "afterSha256": "ebba8361c5987535ac4caf7270ee5423a294315b96c3761c92603bed5fcc88ad",
+      "reviewedOverlaySha256": "ebba8361c5987535ac4caf7270ee5423a294315b96c3761c92603bed5fcc88ad",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    }
+  ]
+}

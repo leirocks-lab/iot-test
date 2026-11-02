@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2026-11-01T23:04:22.506Z" hostname="DESKTOP-2AM89R2" time="0.163">
+  <properties/>
+  <testcase name="lateOldAccountAckCannotInvalidateNewAccount" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.028"/>
+  <testcase name="freshOwnershipRejectionRevokesExistingCacheWithoutDelete" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.002"/>
+  <testcase name="originalResourceReceiptRetiresBWhenInitiatorHandleClosedIncludingAckStorageFailure" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.038"/>
+  <testcase name="noInventedRoleRestrictionForSelfUnbind" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.002"/>
+  <testcase name="failedHomeReadIsNeverProofOfAbsence" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.003"/>
+  <testcase name="firstCompletionOfOldPendingAckOrAbsenceIsAlreadyHistorical" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.006"/>
+  <testcase name="differentBindingCannotReceiveOldRunningTaskEvenAfterSameUserRelogin" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.004"/>
+  <testcase name="nativeInvalidationClearsOnlyOriginalResourceAndRecoveredRecordCannotRevokeReboundHandle" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.023"/>
+  <testcase name="oldTerminalRecordIsHistoricalForNewIncarnationNeverNewPageSuccess" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.003"/>
+  <testcase name="receiptRejectsForeignOwnerInSameProcessAndNeverReusesNewResourceSerial" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.022"/>
+  <testcase name="failedAckPersistenceStillInvalidatesKnownUnboundCacheButCannotClaimCompleted" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.002"/>
+  <testcase name="acknowledgementDoesNotPretendPendingHomeCleanupCompleted" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.003"/>
+  <testcase name="durableUnknownMustFinishBeforeWireAndCommonSuccessNeedsNoData" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.002"/>
+  <testcase name="formal136xAbsenceIsNeverCountedAsThisDeleteAcknowledgement" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.003"/>
+  <testcase name="failedDurableReserveCannotDelete" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.003"/>
+  <testcase name="homeDirtyTicketRequiresCurrentCompleteAbsenceAndDoesNotClearLaterTicket" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.002"/>
+  <testcase name="oldUnknownFirstAbsenceCompletionAlsoUsesRelationshipHistoricalFence" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.003"/>
+  <testcase name="relationshipRetiredDuringReserveNeverReachesWire" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.002"/>
+  <testcase name="uncertainDeleteSurvivesOwnerReconstructionAndNeverReplays" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.004"/>
+  <testcase name="duplicateClicksShareActualWorkerAndCancelledWaiterCannotStopIt" classname="com.rowan.iot.domain.device.more.DeviceSelfUnbindTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,100 @@
+Starting a Gradle Daemon, 2 stopped Daemons could not be reused, use --status for details
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+Warning: SDK processing. This version only understands SDK XML versions up to 3 but an SDK XML file of version 4 was encountered. This can happen if you use versions of Android Studio and the command-line tools that were released at different times.
+> Task :app:generateAutolinkingNewArchitectureFiles UP-TO-DATE
+> Task :app:generateAutolinkingPackageList UP-TO-DATE
+> Task :app:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :app:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :app:generateReactNativeEntryPoint UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preProductionReleaseBuild UP-TO-DATE
+> Task :app:configureCMakeRelWithDebInfo[x86_64]
+> Task :app:buildCMakeRelWithDebInfo[x86_64]
+> Task :app:preDevelopmentReleaseBuild UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseJniLibFolders UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseNativeLibs UP-TO-DATE
+> Task :app:stripDevelopmentReleaseDebugSymbols UP-TO-DATE
+> Task :app:extractDevelopmentReleaseNativeSymbolTables UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseNativeDebugMetadata UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseArtProfile UP-TO-DATE
+> Task :app:desugarDevelopmentReleaseFileDependencies UP-TO-DATE
+> Task :app:buildKotlinToolingMetadata UP-TO-DATE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateDevelopmentReleaseBuildConfig UP-TO-DATE
+> Task :app:checkDevelopmentReleaseAarMetadata UP-TO-DATE
+> Task :app:createBundleDevelopmentReleaseJsAndAssets UP-TO-DATE
+> Task :app:generateDevelopmentReleaseResValues UP-TO-DATE
+> Task :app:mapDevelopmentReleaseSourceSetPaths UP-TO-DATE
+> Task :app:generateDevelopmentReleaseResources UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseResources UP-TO-DATE
+> Task :app:packageDevelopmentReleaseResources UP-TO-DATE
+> Task :app:parseDevelopmentReleaseLocalResources UP-TO-DATE
+> Task :app:createDevelopmentReleaseCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDevelopmentRelease UP-TO-DATE
+> Task :app:processDevelopmentReleaseMainManifest UP-TO-DATE
+> Task :app:processDevelopmentReleaseManifest UP-TO-DATE
+> Task :app:processDevelopmentReleaseManifestForPackage UP-TO-DATE
+> Task :app:processDevelopmentReleaseResources UP-TO-DATE
+> Task :app:compileDevelopmentReleaseKotlin UP-TO-DATE
+> Task :app:javaPreCompileDevelopmentRelease UP-TO-DATE
+> Task :app:compileDevelopmentReleaseJavaWithJavac UP-TO-DATE
+> Task :app:dexBuilderDevelopmentRelease UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseGlobalSynthetics UP-TO-DATE
+> Task :app:checkDevelopmentReleaseDuplicateClasses UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseStartupProfile UP-TO-DATE
+> Task :app:mergeExtDexDevelopmentRelease UP-TO-DATE
+> Task :app:mergeDexDevelopmentRelease UP-TO-DATE
+> Task :app:compileDevelopmentReleaseArtProfile UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseShaders UP-TO-DATE
+> Task :app:compileDevelopmentReleaseShaders NO-SOURCE
+> Task :app:generateDevelopmentReleaseAssets UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseAssets UP-TO-DATE
+> Task :app:compressDevelopmentReleaseAssets UP-TO-DATE
+> Task :app:extractDevelopmentReleaseVersionControlInfo UP-TO-DATE
+> Task :app:extractProguardFiles UP-TO-DATE
+> Task :app:generateDevelopmentReleaseLintVitalReportModel UP-TO-DATE
+> Task :app:lintVitalAnalyzeDevelopmentRelease UP-TO-DATE
+> Task :app:lintVitalReportDevelopmentRelease UP-TO-DATE
+> Task :app:lintVitalDevelopmentRelease
+> Task :app:processDevelopmentReleaseJavaRes UP-TO-DATE
+> Task :app:mergeDevelopmentReleaseJavaResource UP-TO-DATE
+> Task :app:optimizeDevelopmentReleaseResources UP-TO-DATE
+> Task :app:collectDevelopmentReleaseDependencies UP-TO-DATE
+> Task :app:sdkDevelopmentReleaseDependencyData UP-TO-DATE
+> Task :app:validateSigningDevelopmentRelease UP-TO-DATE
+> Task :app:writeDevelopmentReleaseAppMetadata UP-TO-DATE
+> Task :app:writeDevelopmentReleaseSigningConfigVersions UP-TO-DATE
+> Task :app:packageDevelopmentRelease UP-TO-DATE
+> Task :app:createDevelopmentReleaseApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleDevelopmentRelease UP-TO-DATE
+
+[Incubating] Problems report is available at: file:///D:/workspace/rowaniot/rowan-iot-app/android-as/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1m 1s
+69 actionable tasks: 3 executed, 66 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.3.1/userguide/configuration_cache_enabling.html

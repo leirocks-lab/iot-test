@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.AccountExpectedRevisionTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-01T20:27:52.370Z" hostname="DESKTOP-2AM89R2" time="0.264">
+  <properties/>
+  <testcase name="sameAccountRevisionRemainsValidAfterTokenRenewalAndUsesRenewedTokenOnce" classname="com.rowan.iot.AccountExpectedRevisionTest" time="0.212"/>
+  <testcase name="mutationAlreadyDispatchedForOldAccountNeverRebindsOrReplaysOnNewAccount" classname="com.rowan.iot.AccountExpectedRevisionTest" time="0.038"/>
+  <testcase name="oldRevisionCannotDispatchAMutationUsingANewerAccountToken" classname="com.rowan.iot.AccountExpectedRevisionTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

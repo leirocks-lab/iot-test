@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-01T20:52:52.986323+00:00",
+  "patch": ".cache/refactor/presentation-system-r2-draft/tests.patch",
+  "patchSha256": "884b62896a93c9e2d0a04e470b2884366b491068d1d269e6e1f92d4907806321",
+  "stage": "APPLIED_EXACT_REVIEWED_TEXT_NOT_PLATFORM_VERIFIED",
+  "files": [
+    {
+      "path": "android-as/app/src/test/kotlin/com/rowan/iot/domain/presentation/PresentationServiceTest.kt",
+      "beforeSha256": null,
+      "afterSha256": "41b291c3ae94b1396fe7c6017a9fb06ed67704ba2500ff05cd09cc216c7e6cb5",
+      "reviewedOverlaySha256": "41b291c3ae94b1396fe7c6017a9fb06ed67704ba2500ff05cd09cc216c7e6cb5",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Rowan.xcodeproj/project.pbxproj",
+      "beforeSha256": "3e57e656ed313494c95ece10814cbc35ded0e16992854f3c335ce21564c8bb21",
+      "afterSha256": "f5668d6d5407622b64a57c42dfc4ea46d6562db2094454af8de3aaf5c78b84e9",
+      "reviewedOverlaySha256": "f5668d6d5407622b64a57c42dfc4ea46d6562db2094454af8de3aaf5c78b84e9",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    },
+    {
+      "path": "ios-as/Tests/Unit/PresentationServiceTests.swift",
+      "beforeSha256": null,
+      "afterSha256": "ee0d1634794d629dd07364614edb7f05630a501f8b779697e050b4e80a4f4aff",
+      "reviewedOverlaySha256": "ee0d1634794d629dd07364614edb7f05630a501f8b779697e050b4e80a4f4aff",
+      "normalizedReviewedCRLF": false,
+      "lineEnding": "UTF-8 LF"
+    }
+  ]
+}

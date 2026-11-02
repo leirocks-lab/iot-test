@@ -1,0 +1,4817 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-11-02",
+  "scope": "docs/prd/智能家居物联网项目计划&需求范围.xlsx",
+  "scopeSha256": "e676b0521b2a4fddc2718429cbee873ea90c517ebc719095afd5cfc8296071a8",
+  "sourceMapping": "docs/SDD/重构范围映射核对.json",
+  "note": "人工维护执行覆盖层。进行中可包含仅准备测试或局部基础实现；partialEvidence仅证明对应子检查，不代表范围行通过。所有完整验收用例保持未验收，直到逐例验证；未使用不适用掩盖缺失实现。",
+  "latestVerifiedAndroidAPK": "1417a05a0eb2ac3d518736c147c803cc54cfb93829fcdaa0c3764b2008afb38b",
+  "latestVerifiedAndroidSource": {
+    "sha256": "0b71eb6628a51ddf94758a023d574bd2021604f30b90d31f6f5080c3bcce2151",
+    "files": 336
+  },
+  "latestVerification": {
+    "androidEmulator": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T22-53-37.136Z.json",
+      "passed": 24,
+      "blocked": 2,
+      "artifactSha256": "1417a05a0eb2ac3d518736c147c803cc54cfb93829fcdaa0c3764b2008afb38b",
+      "sourceSha256": "0b71eb6628a51ddf94758a023d574bd2021604f30b90d31f6f5080c3bcce2151",
+      "sessionKept": true,
+      "logout": {
+        "evidence": "docs/测试报告/重构实施-20261101/android-native-readonly-2026-11-01T22-57-24.160Z.json",
+        "result": "通过",
+        "passed": 1,
+        "parentRunId": "2026-11-01T22-53-37.136Z"
+      },
+      "totalWithContinuation": {
+        "passed": 25,
+        "blocked": 2
+      },
+      "dnsForwarding": "主run与退出continuation均closed"
+    },
+    "androidUnit": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T22-38-55.207Z/summary.json",
+      "tests": 691,
+      "suites": 57,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sourceSha256": "0b71eb6628a51ddf94758a023d574bd2021604f30b90d31f6f5080c3bcce2151",
+      "sourceFiles": 336,
+      "relation": "本批运行1417 APK的同源码JVM检查"
+    },
+    "androidNewerSourceUnit": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T18-07-45.739Z/summary.json",
+      "tests": 507,
+      "suites": 45,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sourceSha256": "36acfca992ff83229bb6b2c92ad32e838dc1b42cbbadc9a3fa0a93c9662766b1",
+      "sourceFiles": 302,
+      "relation": "后续S016/昵称源码检查；未安装，不覆盖历史APK验证"
+    },
+    "androidRoomTabsUnit": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T18-11-30.635Z/summary.json",
+      "tests": 532,
+      "suites": 47,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sourceSha256": "14e1b3ed74a7f6d4444d3148dec511c4fec8cb19db9ebdf85f71977da5568180",
+      "sourceFiles": 306,
+      "relation": "包含S026后续源码检查；未安装，未借用旧APK验收"
+    },
+    "androidPreferencesUnit": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T18-17-50.155Z/summary.json",
+      "tests": 539,
+      "suites": 47,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sourceSha256": "0e254d1a1928f49e46298d32388318d9f7ac8dca8cdd829396a99b225697a9fb",
+      "sourceFiles": 306,
+      "relation": "c08d实际已运行APK同源码；后续核心新增未包含在该APK"
+    },
+    "androidCandidateLint": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-account-home-preferences-lint-provenance.json",
+      "log": "docs/测试报告/重构实施-20261101/android-account-home-preferences-lint.log",
+      "errors": 0,
+      "warnings": 27,
+      "result": "通过",
+      "sourceSha256": "0e254d1a1928f49e46298d32388318d9f7ac8dca8cdd829396a99b225697a9fb"
+    },
+    "androidCandidateRelease": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-account-home-preferences-release-provenance.json",
+      "log": "docs/测试报告/重构实施-20261101/android-account-home-preferences-release.log",
+      "result": "通过",
+      "artifactSha256": "c08d29c5907eb29a0c9226f822dbcdc22dcdd58ee2ce3b0c7c8c26b53851b2d6",
+      "sourceSha256": "0e254d1a1928f49e46298d32388318d9f7ac8dca8cdd829396a99b225697a9fb",
+      "sourceFiles": 306,
+      "installation": "已实际安装并完成c08d专项；保留candidate字段兼容历史报告读取者"
+    },
+    "preferencesSharedGate": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T18-17-50.155Z/summary.json",
+      "androidNewTestsPassed": 7,
+      "ios": {
+        "evidence": "ios-as/Tests/Unit/PreferencesServiceTests.swift",
+        "cas": {
+          "evidence": "ios-as/Tests/Unit/AccountSettingsCommitTests.swift"
+        },
+        "newTestDefinitions": 7,
+        "execution": "仅定义，未Swift/XCTest执行"
+      },
+      "implementation": "双端共享事务gate/unknown及settings publication CAS源码已实现",
+      "globalPresentation": "未完成"
+    },
+    "rn": {
+      "evidence": "docs/测试报告/重构实施-20261101/自解绑确认与授权隔离-20261102.md",
+      "tests": 116,
+      "files": 11,
+      "lint": "通过",
+      "typecheck": "通过",
+      "codegen": "通过",
+      "bridgeMajor": 3,
+      "methods": 16,
+      "scope": "正式lint/typecheck与12文件116项测试通过；原生确认入口不等于真实解绑闭环"
+    },
+    "more": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json",
+      "artifactSha256": "c08d29c5907eb29a0c9226f822dbcdc22dcdd58ee2ce3b0c7c8c26b53851b2d6",
+      "sourceSha256": "0e254d1a1928f49e46298d32388318d9f7ac8dca8cdd829396a99b225697a9fb",
+      "summary": "通过",
+      "members": "通过：loaded",
+      "help": "通过：empty",
+      "location": "仅unknown态通过，不确认分配"
+    },
+    "androidLint": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-account-home-preferences-lint-provenance.json",
+      "log": "docs/测试报告/重构实施-20261101/android-account-home-preferences-lint.log",
+      "errors": 0,
+      "warnings": 27,
+      "result": "通过",
+      "sourceSha256": "0e254d1a1928f49e46298d32388318d9f7ac8dca8cdd829396a99b225697a9fb"
+    },
+    "androidRelease": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-account-home-preferences-release-provenance.json",
+      "log": "docs/测试报告/重构实施-20261101/android-account-home-preferences-release.log",
+      "result": "通过",
+      "artifactSha256": "c08d29c5907eb29a0c9226f822dbcdc22dcdd58ee2ce3b0c7c8c26b53851b2d6",
+      "sourceSha256": "0e254d1a1928f49e46298d32388318d9f7ac8dca8cdd829396a99b225697a9fb",
+      "sourceFiles": 306,
+      "installation": "实际最终专项25通过+2固件阻塞，正常退出/DNS关闭；不代表后来未新包源码已运行"
+    },
+    "ios": {
+      "evidence": "ios-as/Verification/设备昵称基础-20261102.md",
+      "unitDefinitions": 764,
+      "definitionBasis": "正式源码静态计数；新增分享码10定义，均未执行",
+      "execution": "未Swift/XCTest/macOS执行",
+      "S016": {
+        "evidence": "ios-as/Verification/S016邮箱验证码登录-20261102.md",
+        "newTestDefinitions": 29,
+        "smtp": "未联调"
+      },
+      "roomTabs": {
+        "evidence": "ios-as/Tests/Unit/HomeAndAccountTests.swift",
+        "newTestDefinitions": 26,
+        "execution": "仅定义，未Swift/XCTest执行"
+      },
+      "structure": {
+        "evidence": "docs/测试报告/重构实施-20261101/share-code-ios-static-provenance.json",
+        "objects": 373,
+        "appSources": 98,
+        "testSources": 51,
+        "execution": "仅静态结构，无Xcode/Swift/XCTest"
+      }
+    },
+    "androidS016": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-email-login-public-2026-11-01T18-50-48.743Z.json",
+      "unit": {
+        "evidence": "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T18-07-45.739Z/summary.json",
+        "tests": 27
+      },
+      "publicUIChecksPassed": 25,
+      "sendActions": 0,
+      "submitActions": 0,
+      "artifactSha256": "c08d29c5907eb29a0c9226f822dbcdc22dcdd58ee2ce3b0c7c8c26b53851b2d6",
+      "sourceSha256": "0e254d1a1928f49e46298d32388318d9f7ac8dca8cdd829396a99b225697a9fb",
+      "status": "公开门禁/秘密清理/模式与前后台返回子项通过；无真实验证码发送/登录",
+      "visualDefect": {
+        "id": "UI-LOGIN-OTP-001",
+        "status": "源码已修且f249/ef3043新包公开视觉复测通过",
+        "evidence": "docs/测试报告/重构实施-20261101/android-email-login-public-2026-11-01T20-09-55.932Z.json"
+      },
+      "previousPublicUI": {
+        "evidence": "docs/测试报告/重构实施-20261101/android-email-login-public-2026-11-01T18-50-48.743Z.json",
+        "artifactSha256": "c08d29c5907eb29a0c9226f822dbcdc22dcdd58ee2ce3b0c7c8c26b53851b2d6",
+        "sourceSha256": "0e254d1a1928f49e46298d32388318d9f7ac8dca8cdd829396a99b225697a9fb",
+        "passed": 25
+      },
+      "visualFollowup": {
+        "evidence": "docs/测试报告/重构实施-20261101/android-email-login-public-2026-11-01T20-09-55.932Z.json",
+        "artifactSha256": "ef3043ea0ccac32a6dea78e6b308cbcc28c047bb6c97b606444294663b52f549",
+        "sourceSha256": "f24946de1730d0cda3731df136f56c9b1b3fc5816df4661e16a8a2e784821312",
+        "passed": 4,
+        "sendActions": 0,
+        "submitActions": 0,
+        "cleanup": "welcome-confirmed",
+        "screenshots": [
+          {
+            "evidence": "docs/测试报告/重构实施-20261101/2026-11-01T20-09-55.932Z-email-login-initial-welcome.png"
+          },
+          {
+            "evidence": "docs/测试报告/重构实施-20261101/2026-11-01T20-09-55.932Z-email-login-password-visual.png"
+          },
+          {
+            "evidence": "docs/测试报告/重构实施-20261101/2026-11-01T20-09-55.932Z-email-login-captcha-visual.png"
+          },
+          {
+            "evidence": "docs/测试报告/重构实施-20261101/2026-11-01T20-09-55.932Z-email-login-final-welcome.png"
+          }
+        ],
+        "scope": "公开固定输入视觉复测；非SMTP/验证码发送或登录/完整像素验收"
+      }
+    },
+    "nativeRoomTabs": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T18-11-30.635Z/summary.json",
+      "androidTestsPassed": 25,
+      "iosTestDefinitions": 26,
+      "reviewedDraft": {
+        "evidence": "docs/测试报告/重构实施-20261101/home-room-tabs-reviewed-manifest.json",
+        "relation": "正式归档的已review源清单；运行事实另见unit报告"
+      },
+      "status": "正式源码/域测试与四配置受控真实Home UI通过；fixture非真实服务器房间数据，像素及iOS仍未验收，保留历史失败",
+      "ui": {
+        "evidence": "docs/测试报告/重构实施-20261101/android-home-room-tabs-2026-11-01T19-02-48.278Z.json",
+        "passed": 3,
+        "notAccepted": 2,
+        "roomCount": 0,
+        "refresh": "未观察loading窗口",
+        "realRoomSelection": "无实际room tab，fixture不足"
+      },
+      "controlledFixture": {
+        "artifactSha256": "ef3043ea0ccac32a6dea78e6b308cbcc28c047bb6c97b606444294663b52f549",
+        "testArtifactSha256": "0cf2f2f91c6b93cbdb8fad30c2212457ba26c692a28db7ab6c947c77bb8478f1",
+        "sourceSha256": "f24946de1730d0cda3731df136f56c9b1b3fc5816df4661e16a8a2e784821312",
+        "initial": {
+          "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-fixtures-initial-systemui-blocked-baa9df10-2708-4c2c-9d95-01f06fc359f0/report.json",
+          "status": "环境阻塞",
+          "note": "Root实际确认System UI not responding遮挡首页焦点；原始报告failed保留，不归因应用"
+        },
+        "retry": {
+          "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-fixtures-retry-partial-failed-aedbf057-b5ec-4728-872a-33caaa19f69f/report.json",
+          "status": "部分失败",
+          "passed": [
+            "empty-home"
+          ],
+          "failed": [
+            "multiple-rooms-same-name-and-opaque-id"
+          ],
+          "screenshot": {
+            "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-fixtures-retry-partial-failed-aedbf057-b5ec-4728-872a-33caaa19f69f/00-empty-home.png"
+          },
+          "geometry": "仅empty-home通过",
+          "pixel": "未验收"
+        },
+        "scope": "真实HomeActivity和测试替身HTTP数据，非真实HTTP/产品控制/整行验收"
+      },
+      "matrix": {
+        "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/archive-index.json",
+        "fixtureOnly": true,
+        "realHttpAcceptance": false,
+        "pixelAcceptance": false,
+        "sourceSha256": "725e3f9a235c21f5cc5c40239fc34be683c1e9a46a1a900280e23da6ae0d6251",
+        "artifactSha256": "3fc9e74af7eb253cc7d150701cfe3aa6d82ae93615855fd308ee311c8b3f1197",
+        "testArtifactSha256": "0d39c88a6156492fd7a5ace794b64f473aae37549b5a077dd564b766bdbc0648",
+        "configurations": 4,
+        "scenariosPassed": 36,
+        "pngCount": 40,
+        "restoration": "精确恢复通过",
+        "children": [
+          {
+            "id": "base",
+            "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/base/report.json",
+            "screenshots": [
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/base/00-empty-home.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/base/01-same-name-room.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/base/02-empty-room.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/base/03-long-room-name.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/base/04-loading-cache.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/base/05-error-cache.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/base/06-return-old-read-rejected.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/base/07-real-device-return.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/base/08-account-revision-fence.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/base/09-local-selection.png"
+              }
+            ]
+          },
+          {
+            "id": "small",
+            "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/small/report.json",
+            "screenshots": [
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/small/00-empty-home.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/small/01-same-name-room.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/small/02-empty-room.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/small/03-long-room-name.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/small/04-loading-cache.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/small/05-error-cache.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/small/06-return-old-read-rejected.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/small/07-real-device-return.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/small/08-account-revision-fence.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/small/09-local-selection.png"
+              }
+            ]
+          },
+          {
+            "id": "large",
+            "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/large/report.json",
+            "screenshots": [
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/large/00-empty-home.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/large/01-same-name-room.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/large/02-empty-room.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/large/03-long-room-name.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/large/04-loading-cache.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/large/05-error-cache.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/large/06-return-old-read-rejected.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/large/07-real-device-return.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/large/08-account-revision-fence.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/large/09-local-selection.png"
+              }
+            ]
+          },
+          {
+            "id": "font150",
+            "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/font150/report.json",
+            "screenshots": [
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/font150/00-empty-home.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/font150/01-same-name-room.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/font150/02-empty-room.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/font150/03-long-room-name.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/font150/04-loading-cache.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/font150/05-error-cache.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/font150/06-return-old-read-rejected.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/font150/07-real-device-return.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/font150/08-account-revision-fence.png"
+              },
+              {
+                "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/font150/09-local-selection.png"
+              }
+            ]
+          }
+        ],
+        "manualBase": {
+          "evidence": "docs/测试报告/重构实施-20261101/android-home-ui-fixtures-base-passed-3c03f364-b68d-4eac-ad55-5d38df16cbe7/report.json",
+          "scenariosPassed": 9,
+          "pngCount": 10
+        }
+      },
+      "latestControlledMatrix": {
+        "evidence": "docs/测试报告/重构实施-20261101/android-home-joint-matrix-cdc53e11-6ca9-48a9-8c4a-5d78888c3c95/archive-index.json",
+        "sourceSha256": "0b71eb6628a51ddf94758a023d574bd2021604f30b90d31f6f5080c3bcce2151",
+        "artifactSha256": "1417a05a0eb2ac3d518736c147c803cc54cfb93829fcdaa0c3764b2008afb38b",
+        "configurations": 4,
+        "scenariosPassed": 36,
+        "pngCount": 40,
+        "restoration": "精确恢复通过",
+        "fixtureOnly": true,
+        "pixelAcceptance": false,
+        "realHttpAcceptance": false
+      }
+    },
+    "androidScan": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-scan-software-2026-11-01T17-27-42.092Z.json",
+      "implementation": "历史b8e APK/5d152源含平台封装及actualPhotoIO，匹配450项JVM",
+      "softwareSubchecksPassed": 5,
+      "cameraDeniedAlbumAvailable": "实际子项通过",
+      "photoRecognition": "真实系统picker公开normal/blank/multiple三图→原生解码通过；非生产码解释/绑定",
+      "liveCameraFrames": "未验收",
+      "cleanup": {
+        "picker": "不适用：already-closed",
+        "permission": "通过",
+        "mediaItemsPassed": 3,
+        "logout": "通过",
+        "dns": "closed"
+      },
+      "productionParser": "阻塞",
+      "artifactSha256": "b8e50abf3df261d6bcfd556a5d9ea30ca8971e6da7f3d910ba22a7a87a94394f",
+      "sourceSha256": "5d152ab3684c4f17415e9dd9487deb09b81d9fb9061488dd0ac755d28f7672cc",
+      "relation": "仅b8e/5d历史APK证据；不得移植为c08d扫码通过"
+    },
+    "androidScanLayout": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-scan-denied-layout-2026-11-01T17-48-40.395Z.json",
+      "configurations": 2,
+      "geometry": "通过",
+      "pixel": "未验收",
+      "restoration": "通过",
+      "logout": "通过",
+      "dns": "closed",
+      "artifactSha256": "b8e50abf3df261d6bcfd556a5d9ea30ca8971e6da7f3d910ba22a7a87a94394f",
+      "sourceSha256": "5d152ab3684c4f17415e9dd9487deb09b81d9fb9061488dd0ac755d28f7672cc",
+      "relation": "历史b8e/5d，非c08d视觉/扫码验收"
+    },
+    "historicalAndroidEmulator": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+      "passed": 24,
+      "blocked": 2,
+      "sessionKept": true,
+      "logout": "主run保留会话；正常退出见androidScan子run",
+      "dnsForwarding": "closed",
+      "artifactSha256": "b8e50abf3df261d6bcfd556a5d9ea30ca8971e6da7f3d910ba22a7a87a94394f",
+      "sourceSha256": "5d152ab3684c4f17415e9dd9487deb09b81d9fb9061488dd0ac755d28f7672cc",
+      "relation": "b8e/5d历史run，扫码子项仅绑定此artifact/source"
+    },
+    "historicalAndroidUnit": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T16-41-19.116Z/summary.json",
+      "tests": 450,
+      "suites": 41,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sourceSha256": "5d152ab3684c4f17415e9dd9487deb09b81d9fb9061488dd0ac755d28f7672cc",
+      "relation": "历史已安装APK的同源码检查"
+    },
+    "historicalAndroidLint": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-scan-final-lint-provenance.json",
+      "log": "docs/测试报告/重构实施-20261101/android-scan-final-lint.log",
+      "errors": 0,
+      "warnings": 26,
+      "result": "通过",
+      "artifactSha256": "b8e50abf3df261d6bcfd556a5d9ea30ca8971e6da7f3d910ba22a7a87a94394f",
+      "sourceSha256": "5d152ab3684c4f17415e9dd9487deb09b81d9fb9061488dd0ac755d28f7672cc"
+    },
+    "historicalAndroidRelease": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-scan-release-provenance.json",
+      "log": "docs/测试报告/重构实施-20261101/android-scan-release.log",
+      "result": "通过",
+      "artifactSha256": "b8e50abf3df261d6bcfd556a5d9ea30ca8971e6da7f3d910ba22a7a87a94394f",
+      "sourceSha256": "5d152ab3684c4f17415e9dd9487deb09b81d9fb9061488dd0ac755d28f7672cc"
+    },
+    "entryOnly": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T18-58-13.658Z.json",
+      "passed": 12,
+      "artifactSha256": "c08d29c5907eb29a0c9226f822dbcdc22dcdd58ee2ce3b0c7c8c26b53851b2d6",
+      "sourceSha256": "0e254d1a1928f49e46298d32388318d9f7ac8dca8cdd829396a99b225697a9fb",
+      "sessionKept": true,
+      "normalLogoutContinuation": {
+        "evidence": "docs/测试报告/重构实施-20261101/android-native-readonly-2026-11-01T19-04-57.125Z.json",
+        "result": "通过",
+        "dns": "closed"
+      },
+      "relation": "先前保留会话入口run及后续正常退出独立分层，不替代最终专项"
+    },
+    "firmwareShape": {
+      "evidence": "docs/测试报告/重构实施-20261101/http-service-2026-11-01T19-15-31.712Z.json",
+      "mcu": "firmware:null",
+      "wifi": "firmware:null",
+      "status": "HTTP业务成功但候选形状不足；不推导最新版/hasUpdate/虚构版本",
+      "currentUI": {
+        "evidence": "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T20-46-00.563Z.json",
+        "status": "当前mcu/wifi实际error态；历史HTTP firmware:null证据保留原run关联，不从error推断新版候选或无更新"
+      },
+      "latestDirectHTTP": {
+        "evidence": "docs/测试报告/重构实施-20261101/http-service-2026-11-01T20-50-41.485Z.json",
+        "mcu": {
+          "fieldPresent": true,
+          "firmwareType": "null",
+          "deviceIdMatches": true
+        },
+        "wifi": {
+          "fieldPresent": true,
+          "firmwareType": "null",
+          "deviceIdMatches": true
+        },
+        "relation": "最新独立Node真实HTTP类型证据，与当前APK mcu/wifi error态关联；不替代原生HTTP/UI/候选完整验收，历史19:15证据保留"
+      }
+    },
+    "androidSourceCores": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T19-24-59.467Z/summary.json",
+      "tests": 596,
+      "suites": 52,
+      "sourceSha256": "3c9c8042d30bcef16b537213513dc9149828194ad51c6ca3cdc604e153e723a7",
+      "sourceFiles": 317,
+      "homeSelectionTests": 21,
+      "homeActionControlsTests": 6,
+      "selfUnbindTests": 30,
+      "status": "正式源码，未新包；批量移除default deny，self-unbind生产接线待完成",
+      "applications": [
+        {
+          "evidence": "docs/测试报告/重构实施-20261101/home-selection-implementation-application.json"
+        },
+        {
+          "evidence": "docs/测试报告/重构实施-20261101/self-unbind-implementation-application.json"
+        }
+      ]
+    },
+    "androidLatestSourceUnit": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T23-04-30.724Z/summary.json",
+      "tests": 701,
+      "suites": 58,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sourceSha256": "62b987e110420b5ecbac610daf93553b7d0624ced9b2fa729a4cb26e27662bee",
+      "sourceFiles": 339,
+      "relation": "后续分享码协议适配源码，未装配生产入口；不沿用1417模拟器通过状态"
+    },
+    "presentationCore": {
+      "evidence": "docs/测试报告/重构实施-20261101/presentation-owner-implementation-application.json",
+      "android": {
+        "evidence": "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T19-28-00.310Z/summary.json",
+        "tests": 24,
+        "result": "JVM通过"
+      },
+      "ios": {
+        "evidence": "ios-as/Tests/Unit/PresentationOwnerTests.swift",
+        "definitions": 24,
+        "execution": "仅定义/静态，未Swift/XCTest"
+      },
+      "status": "双端核心正式；全局UI/bridge/DI未接，不代表语言/主题/单位已应用"
+    },
+    "androidFixtureConsumerBuild": {
+      "sourceSha256": "f24946de1730d0cda3731df136f56c9b1b3fc5816df4661e16a8a2e784821312",
+      "sourceFiles": 323,
+      "artifactSha256": "ef3043ea0ccac32a6dea78e6b308cbcc28c047bb6c97b606444294663b52f549",
+      "testArtifactSha256": "0cf2f2f91c6b93cbdb8fad30c2212457ba26c692a28db7ab6c947c77bb8478f1",
+      "checks": [
+        {
+          "evidence": "docs/测试报告/重构实施-20261101/android-home-fixtures-release-lint-provenance.json",
+          "result": "编译/检查通过"
+        },
+        {
+          "evidence": "docs/测试报告/重构实施-20261101/android-home-fixtures-host-provenance.json",
+          "result": "编译/检查通过"
+        },
+        {
+          "evidence": "docs/测试报告/重构实施-20261101/android-home-fixtures-test-provenance.json",
+          "result": "编译/检查通过"
+        }
+      ],
+      "runtime": "只公开OTP视觉和empty-home局部通过；多房间case失败，完整UI未通过"
+    },
+    "historicalC08dEmulator": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json",
+      "environment": {
+        "evidence": "docs/测试报告/重构实施-20261101/android-account-home-environment-final.json"
+      },
+      "passed": 25,
+      "blocked": 2,
+      "artifactSha256": "c08d29c5907eb29a0c9226f822dbcdc22dcdd58ee2ce3b0c7c8c26b53851b2d6",
+      "sourceSha256": "0e254d1a1928f49e46298d32388318d9f7ac8dca8cdd829396a99b225697a9fb",
+      "sourceFiles": 306,
+      "sessionKept": false,
+      "logout": "AUTH-06正常退出实际通过",
+      "dnsForwarding": "closed",
+      "limits": "专项只读子项通过，不是全范围/视觉/硬件验收；不继承历史b8e扫码子项"
+    },
+    "historicalC08dUnit": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T18-17-50.155Z/summary.json",
+      "tests": 539,
+      "suites": 47,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sourceSha256": "0e254d1a1928f49e46298d32388318d9f7ac8dca8cdd829396a99b225697a9fb",
+      "sourceFiles": 306,
+      "relation": "c08d实际已运行APK的同源码检查"
+    },
+    "historicalF249SourceUnit": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T19-58-25.333Z/summary.json",
+      "tests": 620,
+      "suites": 53,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sourceSha256": "f24946de1730d0cda3731df136f56c9b1b3fc5816df4661e16a8a2e784821312",
+      "sourceFiles": 323,
+      "relation": "f249正式源码同源JVM检查；与ef3043 host/test消费者编译对应，不代表完整UI矩阵通过"
+    },
+    "androidLatestBuild": {
+      "sourceSha256": "62b987e110420b5ecbac610daf93553b7d0624ced9b2fa729a4cb26e27662bee",
+      "sourceFiles": 339,
+      "artifactSha256": "ec3315a04e2ce3eb7fc935d49523fb8fa5b8d0afd44f69f3725749c329e74200",
+      "testArtifactSha256": "0661016c6a2b483975e65bf5b6ec6c3bb5f7993c6f4142052b08d75af5e3bbe2",
+      "lint": {
+        "evidence": "docs/测试报告/重构实施-20261101/share-code-lint-provenance.json",
+        "errors": 0,
+        "warnings": 29,
+        "result": "通过"
+      },
+      "release": {
+        "evidence": "docs/测试报告/重构实施-20261101/share-code-release-provenance.json",
+        "result": "通过"
+      },
+      "androidTest": {
+        "evidence": "docs/测试报告/重构实施-20261101/share-code-androidtest-provenance.json",
+        "result": "消费者编译通过"
+      },
+      "runtime": "候选包未安装运行，不替代latestVerifiedAndroidAPK"
+    },
+    "latestDirectHTTP": {
+      "evidence": "docs/测试报告/重构实施-20261101/http-service-2026-11-01T20-50-41.485Z.json",
+      "execution": "独立Node真实HTTP，不等于原生/App服务验收",
+      "timer": {
+        "state": "empty",
+        "count": 0
+      },
+      "auth06": "通过",
+      "content": {
+        "query": {
+          "type": "text"
+        },
+        "brandRegion": "当前未配置可选brand/region",
+        "privacyBusinessCode": 1002030000,
+        "serviceTermsBusinessCode": 1002030001,
+        "status": "当前配置/契约待核对；不从此声明服务回归"
+      },
+      "mutations": "仅该正式工具已记录的账号会话流程；无定时/OTA/设备写操作"
+    },
+    "previousAndroidRuntime": {
+      "androidEmulator": {
+        "evidence": "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T20-46-00.563Z.json",
+        "passed": 25,
+        "blocked": 2,
+        "artifactSha256": "3fc9e74af7eb253cc7d150701cfe3aa6d82ae93615855fd308ee311c8b3f1197",
+        "sourceSha256": "725e3f9a235c21f5cc5c40239fc34be683c1e9a46a1a900280e23da6ae0d6251",
+        "sourceFiles": 326,
+        "sessionKept": false,
+        "logout": "正常AUTH06实际通过",
+        "dnsForwarding": "closed",
+        "scope": "真实HTTP/原生及RN只读主回归子项；不代表全部范围行验收"
+      },
+      "androidUnit": {
+        "evidence": "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T20-28-06.944Z/summary.json",
+        "tests": 643,
+        "suites": 54,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "sourceSha256": "725e3f9a235c21f5cc5c40239fc34be683c1e9a46a1a900280e23da6ae0d6251",
+        "sourceFiles": 326,
+        "relation": "当前已运行3fc9 APK的同源码JVM检查"
+      },
+      "artifactSha256": "3fc9e74af7eb253cc7d150701cfe3aa6d82ae93615855fd308ee311c8b3f1197",
+      "sourceSha256": "725e3f9a235c21f5cc5c40239fc34be683c1e9a46a1a900280e23da6ae0d6251"
+    },
+    "selfUnbindCancel": {
+      "evidence": "docs/测试报告/重构实施-20261101/android-self-unbind-cancel-2026-11-01T22-56-33.737Z.json",
+      "passed": 3,
+      "positiveActions": 0,
+      "sourceUnchanged": true,
+      "realRelationshipWriteAcceptance": false,
+      "limitation": "仅原生确认、取消提示、返回首页；不证明真实解绑闭环，用户确认真实关系写联调阻塞"
+    },
+    "androidVerifiedBuild": {
+      "sourceSha256": "0b71eb6628a51ddf94758a023d574bd2021604f30b90d31f6f5080c3bcce2151",
+      "sourceFiles": 336,
+      "artifactSha256": "1417a05a0eb2ac3d518736c147c803cc54cfb93829fcdaa0c3764b2008afb38b",
+      "lint": {
+        "evidence": "docs/测试报告/重构实施-20261101/self-unbind-joint-final-lint-provenance.json",
+        "errors": 0,
+        "warnings": 29,
+        "result": "通过"
+      },
+      "release": {
+        "evidence": "docs/测试报告/重构实施-20261101/self-unbind-joint-final-release-provenance.json",
+        "result": "通过"
+      },
+      "androidTest": {
+        "evidence": "docs/测试报告/重构实施-20261101/self-unbind-joint-final-androidtest-provenance.json",
+        "result": "消费者编译通过"
+      }
+    },
+    "shareCodeAdapter": {
+      "evidence": "docs/测试报告/重构实施-20261101/分享码原生协议适配-20261102.md",
+      "androidTests": 10,
+      "iosTestDefinitions": 10,
+      "productionEntry": "未装配",
+      "realIntegration": "阻塞"
+    }
+  },
+  "scopeAcceptance": {
+    "total": 111,
+    "fullyAccepted": 0
+  },
+  "limits": [
+    "最新1417/0b71：691项57套/lint0错29警告/RN116/16方法/双APK编译；真实主run24通过2固件阻塞，独立正常退出1项通过；取消3项通过且确认点击0，真实关系写仍阻塞；四配置36场景40图及精确恢复通过，非完整像素或iOS验收",
+    "后续ec331/62b987分享码协议适配候选：701项58套/lint0错29警告/双APK编译，未安装运行、未装配生产分享入口；不得把前批UI/真实联调证据归属到该候选包",
+    "历史实际运行3fc9/725e：643项54套/lint0错29警告/双APK消费者编译，真实主回归25通过2固件阻塞、正常退出DNSclosed；四配置受控fixture36场景40图及精确恢复通过，不是完整像素/真实HTTP房间验收",
+    "历史实际运行c08d/0e254d：539项47套/lint0错27警告/release、专项25通过2固件阻塞、正常退出且DNSclosed；后续f249/ef3043已有620/53同源单测、lint及host/test消费者编译与局部UI，未完成新包整轮UI",
+    "历史b8e/5d的扫码PhotoPicker三图/五软件子项及两配置几何仍只绑定历史artifact/source，不能移植给c08d；pixel/真实相机帧/生产QR/绑定未验收",
+    "验证码公开25子项0send0submit，不是实际邮件/验证码登录；UI-LOGIN-OTP-001后续f249新包4项视觉已复测0send0submit；真实fixture empty通过、多房间失败，不是完整矩阵通过。房间公开3通过2未验收，缺真实tab和loading观测不假通过",
+    "iOS764定义/373objects/98app/51test仅静态，不等于Swift/XCTest/macOS通过；完整全局展示UI/RN桥接/资源尚未接",
+    "S096双端及RN原生确认和任务接线已formal，取消UI已实际验证；真实关系写因缺第二账号和隔离设备阻塞；S032批量执行仍defaultdeny，111整行验收仍0",
+    "生产产品字段/动作字典用户确认暂无补充，保持阻塞；最新真实OTA firmware:null不推导无更新/最新版",
+    "硬件能力未验收；云端快照不证明设备在线或控制执行"
+  ],
+  "items": [
+    {
+      "id": "S001",
+      "title": "基础框架搭建",
+      "sourceRow": 2,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "独立RN、双端宿主及major3页面实例关闭/只读桥接已有源码；最终Android包的内置RN、导航、关闭及真实原生MQTT快照通过，使用显式真实DNS转发；iOS未编译。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T09-06-50.552Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T16-41-19.116Z/summary.json",
+        "docs/测试报告/重构实施-20261101/rn-page-close-repeat-summary.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T18-58-13.658Z.json",
+        "docs/测试报告/重构实施-20261101/android-native-readonly-2026-11-01T19-04-57.125Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S001-OBS",
+          "scenario": "三端工程启动、原生导航进入RN再返回；会话和设备服务仅由原生持有；本行缺少可量化业务细节，按已确认架构验证",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S002",
+      "title": "启动页",
+      "sourceRow": 3,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "品牌启动与原生入口已有源码；有/无会话正常入口已在新包验证，异常/屏幕状态尚未全覆盖。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T09-06-50.552Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T18-58-13.658Z.json",
+        "docs/测试报告/重构实施-20261101/android-native-readonly-2026-11-01T19-04-57.125Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S002-OBS",
+          "scenario": "有会话与无会话各冷启动一次；品牌页后分别进入首页与账号入口，并反映网络与初始化失败",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S003",
+      "title": "登录态恢复",
+      "sourceRow": 4,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "正常冷恢复通过；旧会话隔离已有离线测试，网络失败与取消等完整模拟器回归待补。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T09-06-50.552Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T18-58-13.658Z.json",
+        "docs/测试报告/重构实施-20261101/android-native-readonly-2026-11-01T19-04-57.125Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S003-OBS",
+          "scenario": "本地有效会话触发刷新；刷新失败返回登录并清理Token、MQTT凭证及用户缓存，旧账号事件不能再更新界面",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S004",
+      "title": "地区选择",
+      "sourceRow": 5,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "全屏地区选择已有源码；密码框拉高缺陷修复后，模拟器选择美国并返回注册页通过，完整视觉尚未验收。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-auth-public-2026-11-01T10-33-59.836Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S004-OBS",
+          "scenario": "注册前选择地区后提交携带该regionCode；已创建账号不能直接改地区，客服引导不新增客服后台",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S005",
+      "title": "地区搜索",
+      "sourceRow": 6,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "本地ISO地区搜索已有源码；模拟器精确US搜索与选择返回通过，完整异常与各语言尚未验收。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-auth-public-2026-11-01T10-33-59.836Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S005-OBS",
+          "scenario": "输入国家地区名称得到本地筛选结果，清空后恢复列表；选项用于注册与协议查询，不为搜索新增HTTP",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S006",
+      "title": "隐私政策",
+      "sourceRow": 7,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "原生纯文本阅读器及前台60秒/底部门禁；真实CONTENT-01失败，正文闭环阻塞。",
+      "blockers": [
+        "真实协议正文未取得"
+      ],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/http-authenticated-service-probe.json",
+        "docs/测试报告/重构实施-20261101/http-service-2026-11-01T19-15-31.712Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S006-OBS",
+          "scenario": "不同regionCode加载适用隐私政策，正文未返回显示加载或错误；仅存在品牌内容差异时传brandId",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S007",
+      "title": "用户协议",
+      "sourceRow": 8,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "原生纯文本阅读器及前台60秒/底部门禁；真实CONTENT-02失败，正文闭环阻塞。",
+      "blockers": [
+        "真实协议正文未取得"
+      ],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/http-authenticated-service-probe.json",
+        "docs/测试报告/重构实施-20261101/http-service-2026-11-01T19-15-31.712Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S007-OBS",
+          "scenario": "协议正文由CONTENT-02返回；倒计时未结束、未滚动到底时不能完成阅读；完成后可勾选",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S008",
+      "title": "协议同意校验",
+      "sourceRow": 9,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "阅读与同意门禁已有源码/离线测试；真实正文不可用；版本提交按用户确认等待后端契约。",
+      "blockers": [
+        "真实协议正文未取得",
+        "协议版本获取/提交契约缺失；用户确认先实现V1.4已定义字段"
+      ],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S008-OBS",
+          "scenario": "未读完或未勾选时注册提交被阻止；满足条件时本次协议版本进入注册请求",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S009",
+      "title": "邮箱输入",
+      "sourceRow": 10,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S009-OBS",
+          "scenario": "无效邮箱本地提示且不发验证码；有效邮箱允许下一步",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S010",
+      "title": "发送邮箱验证码",
+      "sourceRow": 11,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S010-OBS",
+          "scenario": "发送请求accountType=email；发送中禁止重复提交；成功、频控与网络失败分别可见",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S011",
+      "title": "验证码输入",
+      "sourceRow": 12,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S011-OBS",
+          "scenario": "六位输入自动聚焦并展示错误；倒计时结束前不能重发，结束后可重发",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S012",
+      "title": "验证码校验",
+      "sourceRow": 13,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S012-OBS",
+          "scenario": "分别返回验证码错误、过期和频繁，界面按服务端结果提示，不在本地宣称验证成功",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S013",
+      "title": "密码设置",
+      "sourceRow": 14,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S013-OBS",
+          "scenario": "密码格式或两次不一致时禁止下一步；合法时继续，确认密码不出现在HTTP请求字段",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S014",
+      "title": "提交注册",
+      "sourceRow": 15,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "按V1.4已定义字段提交并接受返回会话；协议版本参数缺失已确认阻塞，未真实注册。",
+      "blockers": [
+        "真实协议正文未取得",
+        "协议版本获取/提交契约缺失；用户确认先实现V1.4已定义字段"
+      ],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S014-OBS",
+          "scenario": "成功请求包含邮箱、密码、验证码、地区与协议版本；仅服务端成功后进入成功或登录流程",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S015",
+      "title": "邮箱密码登录",
+      "sourceRow": 16,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "实际邮箱密码登录正常链路通过；不是全部异常场景或视觉验收通过。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T09-06-50.552Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T18-58-13.658Z.json",
+        "docs/测试报告/重构实施-20261101/android-native-readonly-2026-11-01T19-04-57.125Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S015-OBS",
+          "scenario": "正确凭据建立会话；账号不存在和密码错误使用统一提示，不暴露账号存在性",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S016",
+      "title": "验证码登录",
+      "sourceRow": 17,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "Android S016有27项JVM回归；c08d/0e254d公开UI25子项实际通过且0send/0submit，未SMTP或真实验证码登录联调。截图发现UI-LOGIN-OTP-001：验证码误带闭眼装饰，单行源码已修，但无新APK复测；iOS对应定义未执行。 后续f249/ef3043新包已实际完成4项OTP公开视觉复测，0send/0submit；闭眼装饰修复已新包复测，不等于真实验证码登录或完整像素验收。",
+      "blockers": [],
+      "partialEvidence": [
+        "ios-as/Verification/S016邮箱验证码登录-20261102.md",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T18-07-45.739Z/summary.json",
+        "docs/测试报告/重构实施-20261101/android-email-login-public-2026-11-01T20-09-55.932Z.json",
+        "docs/测试报告/重构实施-20261101/android-email-login-public-2026-11-01T18-50-48.743Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S016-OBS",
+          "scenario": "验证码登录请求verify=captcha，沿用获取与校验接口；密码登录与验证码登录不能串用请求状态",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S017",
+      "title": "会话保存",
+      "sourceRow": 18,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "原生安全存储及完整会话字段已实现，正常冷恢复通过；故障与取消边界仍在补测。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T09-06-50.552Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T18-58-13.658Z.json",
+        "docs/测试报告/重构实施-20261101/android-native-readonly-2026-11-01T19-04-57.125Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S017-OBS",
+          "scenario": "登录成功后安全持久化两种Token、到期与设置，重启可恢复；随后加载首页，普通日志无凭据",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S018",
+      "title": "找回账号输入",
+      "sourceRow": 19,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S018-OBS",
+          "scenario": "输入邮箱发送找回验证码，未注册或异常账号显示安全提示",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S019",
+      "title": "找回验证码校验",
+      "sourceRow": 20,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S019-OBS",
+          "scenario": "正确验证码可继续；错误、过期、重发与倒计时均有对应可见状态",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S020",
+      "title": "设置新密码",
+      "sourceRow": 21,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S020-OBS",
+          "scenario": "确认密码不一致阻止提交；一致时仅提交账号、验证码和新密码",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S021",
+      "title": "重置成功",
+      "sourceRow": 22,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S021-OBS",
+          "scenario": "重置成功提示后回登录；不能自动复用重置前Token进入首页",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S022",
+      "title": "退出登录",
+      "sourceRow": 23,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "Android实际正常退出通过；取消/401/本地删除失败已有JVM回归。iOS已同步后台存储/事务清理源码及测试定义，尚未编译运行。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T09-06-50.552Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T18-58-13.658Z.json",
+        "docs/测试报告/重构实施-20261101/android-native-readonly-2026-11-01T19-04-57.125Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S022-OBS",
+          "scenario": "注销成功返回账号入口，Token、MQTT凭证、订阅及用户缓存均清除",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S023",
+      "title": "加载状态",
+      "sourceRow": 24,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S023-OBS",
+          "scenario": "进入首页显示加载态，HOME-01完成后按房间分组渲染；失败有错误与重试，不以假设备填充",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S024",
+      "title": "空设备状态",
+      "sourceRow": 25,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S024-OBS",
+          "scenario": "空设备响应显示空态和添加入口，不出现虚拟设备卡片",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S025",
+      "title": "断网状态",
+      "sourceRow": 26,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S025-OBS",
+          "scenario": "断网保留最后确认数据并显示网络提示；恢复后重新拉首页且恢复MQTT订阅",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S026",
+      "title": "房间页签",
+      "sourceRow": 27,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "双端S026正式源码已应用，Android25项域/仓库用例实际通过。c08d房间公开UI3PASS+2未验收：无真实房间tab、未观察刷新loading，不能声称真实房间切换或刷新保留通过；iOS仅静态定义。 后续f249/ef3043真实SDK instrumentation：首run系统UI遮挡阻塞；同包retry仅empty-home真实帧/几何/截图通过，下一多房间同名opaque ID场景失败，完整矩阵未通过。 后续725e/3fc9受控SDK矩阵四配置36场景/40图及独立手动base9场景实际通过，精确恢复；这是公开fixture真实Home UI，不是服务器多房间数据/完整像素验收，早期失败保历史。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-home-ui-matrix-ff33f717-095e-475c-9aa6-cdda64862efb/archive-index.json",
+        "docs/测试报告/重构实施-20261101/android-home-ui-fixtures-base-passed-3c03f364-b68d-4eac-ad55-5d38df16cbe7/report.json",
+        "docs/测试报告/重构实施-20261101/home-room-tabs-reviewed-manifest.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T18-11-30.635Z/summary.json",
+        "docs/测试报告/重构实施-20261101/android-home-ui-fixtures-initial-systemui-blocked-baa9df10-2708-4c2c-9d95-01f06fc359f0/report.json",
+        "docs/测试报告/重构实施-20261101/android-home-ui-fixtures-retry-partial-failed-aedbf057-b5ec-4728-872a-33caaa19f69f/report.json",
+        "ios-as/Rowan/Domain/Device/HomeRepository.swift",
+        "docs/测试报告/重构实施-20261101/android-home-room-tabs-2026-11-01T19-02-48.278Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S026-OBS",
+          "scenario": "切换房间页签只筛选已有HOME-01分组，不改变设备归属",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S027",
+      "title": "设备卡片",
+      "sourceRow": 28,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S027-OBS",
+          "scenario": "卡片昵称、产品图和房间来自HOME-01；实时状态随设备上报更新",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S028",
+      "title": "在线与离线",
+      "sourceRow": 29,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S028-OBS",
+          "scenario": "设备上报在线与离线均更新卡片；离线操作不能显示成功，MQTT连接成功本身不等于设备在线",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S029",
+      "title": "快速开关",
+      "sourceRow": 30,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "未开始",
+        "iOS": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "尚未实现本条完整业务；来源和预期用例见逐项映射。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S029-OBS",
+          "scenario": "快速开关先显示发送中；只有匹配reported达到目标才确认成功，desired接受不冒充设备执行",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S030",
+      "title": "进入设备页",
+      "sourceRow": 31,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "真实HOME设备可进入内置RN只读状态页面；桥接观察、取消、重同步及ACK已有测试，不是完整设备控制验收通过。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T11-30-25.791Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T16-41-19.116Z/summary.json",
+        "docs/测试报告/重构实施-20261101/rn-page-close-repeat-summary.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S030-OBS",
+          "scenario": "点击卡片携带设备标识进入RN，静态详情与MQTT凭证分别获取；无权限时停止进入可控状态",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S031",
+      "title": "长按进入多选",
+      "sourceRow": 32,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "双端本地多选核心及原生Home UI源码已正式应用；Android21选择+6退出按钮调度定义随596/52实际JVM通过，iOS21定义未执行。尚无包含本批的新APK/UI验证。 后续725e/3fc9真实fixture矩阵四配置已覆盖长按多选/勾选/取消/返回，局部UI通过；不是批量删除授权。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T19-24-59.467Z/summary.json",
+        "docs/测试报告/重构实施-20261101/home-selection-implementation-application.json"
+      ],
+      "cases": [
+        {
+          "id": "S031-OBS",
+          "scenario": "长按进入多选，可选中、取消并退出；退出后恢复普通点击行为",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S032",
+      "title": "批量删除",
+      "sourceRow": 33,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "阻塞",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "本地确认核对与默认拒绝移除已正式应用；UI明确暂不可用，无逐台DELETE、汇总成功或执行闭环。需要S096生产执行/撤权清理接线，不能把defaultdeny当批量删除已完成。",
+      "blockers": [
+        "用户确认暂无第二专用测试账号与可恢复隔离设备；成员移除、分享绑定、自解绑及其批量执行的真实写联调阻塞，受控实现/UI验证不替代真实闭环"
+      ],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T19-24-59.467Z/summary.json",
+        "docs/测试报告/重构实施-20261101/home-selection-implementation-application.json",
+        "docs/测试报告/重构实施-20261101/真实关系变更联调阻塞-20261102.md",
+        "docs/测试报告/重构实施-20261101/自解绑确认与授权隔离-20261102.md",
+        "docs/测试报告/重构实施-20261101/真实关系变更联调阻塞-20261102.md"
+      ],
+      "cases": [
+        {
+          "id": "S032-OBS",
+          "scenario": "选择两台设备逐台解绑，一成功一失败时分别保留结果，不能整批显示成功",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S033",
+      "title": "Home",
+      "sourceRow": 34,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S033-OBS",
+          "scenario": "点击Home进入设备与房间主界面，可进入添加设备",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S034",
+      "title": "Store",
+      "sourceRow": 35,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "未开始",
+        "iOS": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "尚未实现本条完整业务；来源和预期用例见逐项映射。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S034-OBS",
+          "scenario": "Store仅保留导航占位，不形成商品、订单或支付功能",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S035",
+      "title": "Mine",
+      "sourceRow": 36,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "双端Mine仅设置/退出明确入口已有源码；Android实际进入设置与退出通过，未冻结的额外Mine内容未扩展。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-preferences-2026-11-01T12-35-32.932Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S035-OBS",
+          "scenario": "Mine可进入已明确的退出和偏好；完整页面未冻结，不凭导出图扩展个人信息、反馈等业务",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S036",
+      "title": "Add 菜单",
+      "sourceRow": 37,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "c08d专项原生Add扫码/手动sheet及产品目录只读入口通过；拒绝相机权限、相册公开三图及五软件子项仅为b8e/5d历史包证据，未在c08d复测。配网/生产码绑定未完成。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-native-readonly-2026-11-01T10-32-04.152Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-scan-software-2026-11-01T17-27-42.092Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T18-58-13.658Z.json",
+        "docs/测试报告/重构实施-20261101/android-native-readonly-2026-11-01T19-04-57.125Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S036-OBS",
+          "scenario": "从Add打开扫码、蓝牙发现、手动产品与推荐入口，各入口可返回首页",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S037",
+      "title": "相机扫码",
+      "sourceRow": 38,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "Android扫码平台驱动/页面/资源门在历史已安装b8e包内；17:27:42实际拒绝相机权限+相册入口与返回通过。17:48:40小屏/150%字号两配置布局几何/滚动可达通过，不代表pixel/蓝湖视觉；真实相机帧解码、全状态及iOS运行仍未验收。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-scan-denied-layout-2026-11-01T17-48-40.395Z.json",
+        "docs/测试报告/重构实施-20261101/android-scan-software-2026-11-01T17-27-42.092Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S037-OBS",
+          "scenario": "首次进入请求相机权限；允许后取景识别并做格式初检，拒绝有明确引导",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S038",
+      "title": "相册识别",
+      "sourceRow": 39,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "17:27:42实际系统PhotoPicker→原生解码：公开normal/blank/multiple三图分别得到unsupported/no-code/multiple-codes，五个软件子项通过。media3/权限恢复/正常退出通过；picker已关闭故恢复不适用。该证据替代17:12图库定位阻塞，但不证明真实相机帧、生产码解释/绑定或完整S038验收；iOS未运行。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-scan-denied-layout-2026-11-01T17-48-40.395Z.json",
+        "docs/测试报告/重构实施-20261101/android-scan-software-2026-11-01T17-27-42.092Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S038-OBS",
+          "scenario": "相册选择二维码可解析；拒绝权限、图片不可识别均明确提示并可进入设置",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S039",
+      "title": "二维码解析",
+      "sourceRow": 40,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "生产二维码编码未冻结；Android拒绝未知码的软件实现及消费者编译/450项全量单测通过，不解析或伪造deviceId/productId/bindCode，真实平台与业务仍未验收。",
+      "blockers": [
+        "生产二维码格式/过期/绑定契约未冻结；不得套用开发编码或虚构绑定成功"
+      ],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-scan-software-2026-11-01T17-27-42.092Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S039-OBS",
+          "scenario": "统一解析三种标识，格式合格才补产品详情并绑定；缺失或非法字段不发绑定",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S040",
+      "title": "无效二维码",
+      "sourceRow": 41,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "Android本地unsupported/多码/资源预算实现及消费者编译/450项全量单测通过；真实格式、过期、不存在/权限业务闭环未验收，不以unknown码推导云端错误。",
+      "blockers": [
+        "生产二维码格式/过期/绑定契约未冻结；不得套用开发编码或虚构绑定成功"
+      ],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-scan-software-2026-11-01T17-27-42.092Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S040-OBS",
+          "scenario": "分别测试格式错、过期、不存在与无权限，显示对应原因且不进入成功页",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S041",
+      "title": "扫码绑定",
+      "sourceRow": 42,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "未开始",
+        "iOS": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "生产码解释与单次消费契约仍阻塞；没有真实扫码绑定、自动PAIR-06重放、绑定成功或昵称闭环验收。",
+      "blockers": [
+        "生产二维码格式/过期/绑定契约未冻结；不得套用开发编码或虚构绑定成功"
+      ],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S041-OBS",
+          "scenario": "有效bindCode首次绑定得到管理员，重复使用失败；成功后进入昵称设置",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S042",
+      "title": "产品品类",
+      "sourceRow": 43,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "双端产品分类服务和页面已有源码，Android实际PAIR-03目录加载通过；完整分类切换与视觉未验收。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-native-readonly-2026-11-01T10-32-04.152Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T18-58-13.658Z.json",
+        "docs/测试报告/重构实施-20261101/android-native-readonly-2026-11-01T19-04-57.125Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S042-OBS",
+          "scenario": "品类名称显示服务端当前语言配置，筛选使用稳定value，不以翻译文本当ID",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S043",
+      "title": "手动产品列表",
+      "sourceRow": 44,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "双端手动产品列表已有源码，最终Android包实际PAIR-01目录及返回栈通过；图片加载与完整视觉未验收。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-native-readonly-2026-11-01T10-32-04.152Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T18-58-13.658Z.json",
+        "docs/测试报告/重构实施-20261101/android-native-readonly-2026-11-01T19-04-57.125Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S043-OBS",
+          "scenario": "产品列表按服务端配网方式、连接类型及云平台进入流程，不按型号硬编码",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S044",
+      "title": "推荐产品",
+      "sourceRow": 45,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "双端推荐/排序解析与离线测试已有实现，实际目录返回推荐与排序字段；完整推荐UI尚未验收。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/http-service-2026-11-01T09-19-08.469Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S044-OBS",
+          "scenario": "recommended、sort、buyLink与connectType变化后推荐标识、排序和购买入口同步；仅已配置链接可用",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S045",
+      "title": "产品详情",
+      "sourceRow": 46,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "双端PAIR-02详情已有源码；最终Android包实际产品文本详情与返回通过，未点击Shop/图片或进行配网绑定，视觉未验收。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-native-readonly-2026-11-01T10-32-04.152Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T18-58-13.658Z.json",
+        "docs/测试报告/重构实施-20261101/android-native-readonly-2026-11-01T19-04-57.125Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S045-OBS",
+          "scenario": "详情显示云端名称、型号、图片、参数、介绍及支持配网方式，缺能力不伪造",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S046",
+      "title": "扫描设备",
+      "sourceRow": 47,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "未开始",
+        "iOS": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "尚未实现本条完整业务；来源和预期用例见逐项映射。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S046-OBS",
+          "scenario": "蓝牙权限拒绝、关闭、扫描中、排序及超时各有状态；扫描可取消，不创建虚拟发现结果",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S047",
+      "title": "发现结果",
+      "sourceRow": 48,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "未开始",
+        "iOS": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "尚未实现本条完整业务；来源和预期用例见逐项映射。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S047-OBS",
+          "scenario": "识别广播后按产品标识获取能力；未知设备不能仅凭名称套用产品流程",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S048",
+      "title": "未发现设备",
+      "sourceRow": 49,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "未开始",
+        "iOS": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "尚未实现本条完整业务；来源和预期用例见逐项映射。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S048-OBS",
+          "scenario": "超时无设备显示重试、手动及推荐；重试重新开始一次扫描",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S049",
+      "title": "网络检查",
+      "sourceRow": 50,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "未开始",
+        "iOS": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "尚未实现本条完整业务；来源和预期用例见逐项映射。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S049-OBS",
+          "scenario": "识别5GHz时引导2.4GHz；系统无法判断频段时提示并允许继续",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S050",
+      "title": "SSID 展示",
+      "sourceRow": 51,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "未开始",
+        "iOS": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "尚未实现本条完整业务；来源和预期用例见逐项映射。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S050-OBS",
+          "scenario": "当前SSID可用则展示；无网络或权限不足提供设置入口；按双端能力降级",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S051",
+      "title": "密码输入",
+      "sourceRow": 52,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "未开始",
+        "iOS": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "尚未实现本条完整业务；来源和预期用例见逐项映射。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S051-OBS",
+          "scenario": "密码显隐切换不丢输入；不合法阻止继续；日志与无关HTTP请求中无Wi-Fi密码",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S052",
+      "title": "配网帮助",
+      "sourceRow": 53,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "未开始",
+        "iOS": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "尚未实现本条完整业务；来源和预期用例见逐项映射。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S052-OBS",
+          "scenario": "输入页及失败页按产品和语言加载帮助；只打开受信任链接，加载失败可返回配网",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S053",
+      "title": "获取服务地址",
+      "sourceRow": 54,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "未开始",
+        "iOS": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "尚未实现本条完整业务；来源和预期用例见逐项映射。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S053-OBS",
+          "scenario": "二期配网开始前获得认证、激活、绑定与OTA地址；缺失或非法地址阻止对应步骤",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S054",
+      "title": "统一进度状态机",
+      "sourceRow": 55,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "未开始",
+        "iOS": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "尚未实现本条完整业务；来源和预期用例见逐项映射。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S054-OBS",
+          "scenario": "连接、认证、发送Wi-Fi、激活、绑定、证书与服务器连接各呈现统一阶段；失败码保留发生阶段",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S055",
+      "title": "绑定结果轮询",
+      "sourceRow": 56,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "未开始",
+        "iOS": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "尚未实现本条完整业务；来源和预期用例见逐项映射。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S055-OBS",
+          "scenario": "绑定未完成时轮询间隔至少2秒且有总超时；成功、取消或超时立即停止后续轮询",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S056",
+      "title": "配网失败",
+      "sourceRow": 57,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "未开始",
+        "iOS": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "尚未实现本条完整业务；来源和预期用例见逐项映射。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S056-OBS",
+          "scenario": "注入网络失败显示网络所在阶段，提供重试、FAQ与返回，不误报硬件故障",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S057",
+      "title": "设置设备昵称",
+      "sourceRow": 58,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "未开始",
+        "iOS": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "尚未实现本条完整业务；来源和预期用例见逐项映射。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S057-OBS",
+          "scenario": "0与20字符边界按范围处理，超20阻止保存；跳过用产品默认名，成功保存才进入完成",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S058",
+      "title": "添加成功",
+      "sourceRow": 59,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "未开始",
+        "iOS": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "尚未实现本条完整业务；来源和预期用例见逐项映射。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S058-OBS",
+          "scenario": "提示完成后真实HOME-01中可见新设备并建立会话；列表未返回不能用成功提示代替",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S059",
+      "title": "静态元数据",
+      "sourceRow": 60,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "实际服务DEVICE-01/02及THING-01形状已取得；Android已按HOME归属授权加载真实设备元数据。通用模型解析/严格约束已有测试，尚未注册全产品写映射。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/http-service-2026-11-01T08-56-27.593Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json",
+        "docs/测试报告/重构实施-20261101/http-service-2026-11-01T19-15-31.712Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S059-OBS",
+          "scenario": "进入设备页显示详情昵称、产品、版本及角色；实时属性不持续轮询DEVICE-02",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S060",
+      "title": "MQTT 连接",
+      "sourceRow": 61,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "Node/JVM与Android真实原生只读云端快照通过；模拟器需显式真实DNS转发环境，普通UDP路径未证明修复。断网、到期、权限变化完整回归未做，iOS broker未接入。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/mqtt-readonly-2026-11-01T11-24-08.839Z.json",
+        "docs/测试报告/重构实施-20261101/paho-jvm-readonly-2026-11-01T11-29-00.094Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T11-30-25.791Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T12-33-06.557Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json",
+        "docs/测试报告/重构实施-20261101/http-service-2026-11-01T19-15-31.712Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S060-OBS",
+          "scenario": "凭证成功后先订阅响应再请求完整影子；过期与拒绝有错误，不把MQTT连通当作设备在线",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S061",
+      "title": "开关控制",
+      "sourceRow": 62,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [
+        "缺少生产产品定版字段/动作字典；用户确认暂无补充资料，保留阻塞，不套用开发测试映射"
+      ],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S061-OBS",
+          "scenario": "点击开关进入发送中，reported确认后更新；desired接受、拒绝和无回报分别处理",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S062",
+      "title": "目标温度",
+      "sourceRow": 63,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [
+        "缺少生产产品定版字段/动作字典；用户确认暂无补充资料，保留阻塞，不套用开发测试映射"
+      ],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S062-OBS",
+          "scenario": "切换C/F后温度显示与输入按用户偏好一致换算；下发合法产品温度值，回报才确认",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S063",
+      "title": "目标湿度",
+      "sourceRow": 64,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [
+        "缺少生产产品定版字段/动作字典；用户确认暂无补充资料，保留阻塞，不套用开发测试映射"
+      ],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S063-OBS",
+          "scenario": "目标湿度使用产品属性标识与范围，越界禁止下发；合法值等待回报",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S064",
+      "title": "模式选择",
+      "sourceRow": 65,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [
+        "缺少生产产品定版字段/动作字典；用户确认暂无补充资料，保留阻塞，不套用开发测试映射"
+      ],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S064-OBS",
+          "scenario": "只显示该产品配置的模式枚举；切换等reported回报，不把其他产品枚举写入",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S065",
+      "title": "灯光与亮度",
+      "sourceRow": 66,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [
+        "缺少生产产品定版字段/动作字典；用户确认暂无补充资料，保留阻塞，不套用开发测试映射"
+      ],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S065-OBS",
+          "scenario": "灯光与亮度按产品能力显示并下发，设备拒绝或无回报不能保持虚假成功",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S066",
+      "title": "童锁",
+      "sourceRow": 67,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [
+        "缺少生产产品定版字段/动作字典；用户确认暂无补充资料，保留阻塞，不套用开发测试映射"
+      ],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S066-OBS",
+          "scenario": "童锁回报更新锁定状态并限制冲突控件；可解除的操作仍按产品能力校验",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S067",
+      "title": "静音",
+      "sourceRow": 68,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [
+        "缺少生产产品定版字段/动作字典；用户确认暂无补充资料，保留阻塞，不套用开发测试映射"
+      ],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S067-OBS",
+          "scenario": "静音设置失败或超时恢复最近确认值；具体产品是否有控件须按能力核对",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S068",
+      "title": "清洁计时",
+      "sourceRow": 69,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [
+        "缺少生产产品定版字段/动作字典；用户确认暂无补充资料，保留阻塞，不套用开发测试映射"
+      ],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S068-OBS",
+          "scenario": "有维护能力产品显示设备上报时长，缺能力不显示虚构维护计数",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S069",
+      "title": "清洁重置",
+      "sourceRow": 70,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [
+        "缺少生产产品定版字段/动作字典；用户确认暂无补充资料，保留阻塞，不套用开发测试映射"
+      ],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S069-OBS",
+          "scenario": "清洁重置需二次确认，取消不发消息；确认沿产品一次性动作字段下发并等结果，保留次数或流水语义",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S070",
+      "title": "属性同步",
+      "sourceRow": 71,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S070-OBS",
+          "scenario": "reported快照与增量合并后运行、温湿度、目标及维护状态一致；首页与RN共享原生权威状态",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S071",
+      "title": "故障与告警",
+      "sourceRow": 72,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [
+        "缺少生产产品定版字段/动作字典；用户确认暂无补充资料，保留阻塞，不套用开发测试映射"
+      ],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S071-OBS",
+          "scenario": "显示原产品映射的故障上下文；无明确解除信号不自行清除告警，App不直接订阅云端notice",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S072",
+      "title": "控制超时",
+      "sourceRow": 73,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S072-OBS",
+          "scenario": "超时或设备离线结束发送中并恢复确认值，显示失败；后续迟到消息按会话和关联语义处理",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S073",
+      "title": "断线重连",
+      "sourceRow": 74,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S073-OBS",
+          "scenario": "重连时过期凭证重新获取，恢复精确订阅后发一次全量get，不重复订阅造成双处理",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S074",
+      "title": "加载列表",
+      "sourceRow": 75,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "原生定时仓库与只读RN列表已接线；新包实际TIMER读取空数组、空态及返回通过，非空/写操作及完整视觉未验收。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T13-43-39.050Z/summary.json",
+        "docs/测试报告/重构实施-20261101/rn-device-readonly-summary.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T13-57-15.088Z.json",
+        "docs/测试报告/重构实施-20261101/http-service-2026-11-01T14-00-06.774Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T16-41-19.116Z/summary.json",
+        "docs/测试报告/重构实施-20261101/rn-page-close-repeat-summary.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json",
+        "docs/测试报告/重构实施-20261101/http-service-2026-11-01T19-15-31.712Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S074-OBS",
+          "scenario": "一次与周期列表展示名称、时间、重复、启用及下次执行；空与加载失败状态明确",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S075",
+      "title": "创建一次定时",
+      "sourceRow": 76,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S075-OBS",
+          "scenario": "创建type=once携带时间、IANA时区和产品动作；服务成功后列表可见，App不本地承担到点执行",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S076",
+      "title": "创建周期日程",
+      "sourceRow": 77,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S076-OBS",
+          "scenario": "创建type=periodic携带起止时间、重复、星期、模式和动作；重新打开能读回一致配置",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S077",
+      "title": "重复周期",
+      "sourceRow": 78,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S077-OBS",
+          "scenario": "每天、工作日与自定义重复可选；周一序列化为1、周日为7，读取后还原同一星期集合",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S078",
+      "title": "模式与动作",
+      "sourceRow": 79,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [
+        "缺少生产产品定版字段/动作字典；用户确认暂无补充资料，保留阻塞，不套用开发测试映射"
+      ],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S078-OBS",
+          "scenario": "产品不支持的模式与action阻止保存；合法产品动作不被跨产品硬编码替换",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S079",
+      "title": "修改定时",
+      "sourceRow": 80,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S079-OBS",
+          "scenario": "编辑已有日程后重新读取时间、时区、重复、模式与动作一致；失败保留草稿及原列表",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S080",
+      "title": "启用或停用",
+      "sourceRow": 81,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S080-OBS",
+          "scenario": "启停请求仅修改enabled；服务端失败恢复原开关，不改变其他日程字段",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S081",
+      "title": "删除日程",
+      "sourceRow": 82,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S081-OBS",
+          "scenario": "删除取消不发请求；确认后服务成功才移除，失败保留行并提示",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S082",
+      "title": "时区与夏令时",
+      "sourceRow": 83,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S082-OBS",
+          "scenario": "客户端保存并读回IANA时区，展示服务端nextExecutionAt；跨夏令时样例需服务端联调证明，客户端不自建调度器",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S083",
+      "title": "到点下发",
+      "sourceRow": 84,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S083-OBS",
+          "scenario": "保存日程后关闭App，由云端到点触发；重新打开读取结果，设备执行需云端与硬件证据，不能模拟器单独验收",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S084",
+      "title": "设备名称",
+      "sourceRow": 85,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "c08d/0e254d最终专项真实设备元数据/更多摘要及major3关闭通过。昵称基础/journal30项已正式源码并通过JVM，生产许可/页面保存仍未接；iOS仅定义，无真实修改或昵称闭环验收。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T15-04-55.361Z/summary.json",
+        "docs/测试报告/重构实施-20261101/rn-native-page-close-summary.json",
+        "docs/测试报告/重构实施-20261101/http-service-2026-11-01T14-13-20.485Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T16-41-19.116Z/summary.json",
+        "docs/测试报告/重构实施-20261101/rn-page-close-repeat-summary.json",
+        "ios-as/Verification/设备昵称基础-20261102.md",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T18-07-45.739Z/summary.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S084-OBS",
+          "scenario": "保存昵称后更多页、首页及设备页同步；失败保留已确认名称，超长有校验",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S085",
+      "title": "所属房间",
+      "sourceRow": 86,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "双端房间移动数据服务已有源码；最终Android包RN更多只读归属呈现unknown及返回通过，未能确认assigned/unassigned，未真实移动。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T15-04-55.361Z/summary.json",
+        "docs/测试报告/重构实施-20261101/rn-native-page-close-summary.json",
+        "docs/测试报告/重构实施-20261101/http-service-2026-11-01T14-13-20.485Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T16-41-19.116Z/summary.json",
+        "docs/测试报告/重构实施-20261101/rn-page-close-repeat-summary.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S085-OBS",
+          "scenario": "当前房间从ROOM-02读取；绑定或解除成功后刷新归属，失败不虚假移动",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S086",
+      "title": "成员列表",
+      "sourceRow": 87,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "最终Android包真实成员安全摘要loaded及返回通过；不传联系方式/用户ID，不含成员移除/自解绑，完整状态与视觉未验收。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T15-04-55.361Z/summary.json",
+        "docs/测试报告/重构实施-20261101/rn-native-page-close-summary.json",
+        "docs/测试报告/重构实施-20261101/http-service-2026-11-01T14-13-20.485Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T16-41-19.116Z/summary.json",
+        "docs/测试报告/重构实施-20261101/rn-page-close-repeat-summary.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S086-OBS",
+          "scenario": "成员按云端角色展示，列表为空与无权限明确；全局分享中心图仅作视觉参考",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S087",
+      "title": "分享二维码",
+      "sourceRow": 88,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "未开始",
+        "iOS": "未开始",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "阻塞",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "undefined 后续双端新增原生SHARE-01协议适配，生成GET显式禁止账号刷新重放，校验响应设备ID及临时绑定码；Android新增10项随701/58实际通过，iOS10仅定义。尚未接入管理员/观察/页面任务所有权及RN生成入口，不是完整分享实现；生产二维码格式和有效期字段尚缺，真实生成联调阻塞。",
+      "blockers": [
+        "用户确认暂无第二专用测试账号与可恢复隔离设备；成员移除、分享绑定、自解绑及其批量执行的真实写联调阻塞，受控实现/UI验证不替代真实闭环",
+        "V1.4未冻结生产分享二维码编码结构/版本取值，SHARE-01无expiresAt/有效秒数字段；不臆造编码或倒计时，原生协议适配单独实现"
+      ],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/真实关系变更联调阻塞-20261102.md",
+        "docs/测试报告/重构实施-20261101/分享码原生协议适配-20261102.md"
+      ],
+      "cases": [
+        {
+          "id": "S087-OBS",
+          "scenario": "管理员生成包含deviceID与bindCode的二维码；非管理员不允许生成，失败不展示旧码为新码",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S088",
+      "title": "成员绑定",
+      "sourceRow": 89,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "未开始",
+        "iOS": "未开始",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "阻塞",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "尚未实现本条完整业务；来源和预期用例见逐项映射。",
+      "blockers": [
+        "用户确认暂无第二专用测试账号与可恢复隔离设备；成员移除、分享绑定、自解绑及其批量执行的真实写联调阻塞，受控实现/UI验证不替代真实闭环",
+        "V1.4未冻结生产分享二维码编码结构/版本取值，SHARE-01无expiresAt/有效秒数字段；不臆造编码或倒计时，原生协议适配单独实现"
+      ],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/真实关系变更联调阻塞-20261102.md"
+      ],
+      "cases": [
+        {
+          "id": "S088-OBS",
+          "scenario": "被分享者扫码单次bindCode完成绑定；角色按返回值，重复使用不成功",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S089",
+      "title": "移除成员",
+      "sourceRow": 90,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "未开始",
+        "iOS": "未开始",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "阻塞",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "尚未实现本条完整业务；来源和预期用例见逐项映射。",
+      "blockers": [
+        "用户确认暂无第二专用测试账号与可恢复隔离设备；成员移除、分享绑定、自解绑及其批量执行的真实写联调阻塞，受控实现/UI验证不替代真实闭环"
+      ],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/真实关系变更联调阻塞-20261102.md"
+      ],
+      "cases": [
+        {
+          "id": "S089-OBS",
+          "scenario": "管理员移除普通成员后刷新列表；越权与成员关系失效时显示失败且不虚假删除",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S090",
+      "title": "设备手册与 FAQ",
+      "sourceRow": 91,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "最终Android包真实type=text空帮助及返回通过；普通文本无URL打开，不代表非空帮助或全部状态验收。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T15-04-55.361Z/summary.json",
+        "docs/测试报告/重构实施-20261101/rn-native-page-close-summary.json",
+        "docs/测试报告/重构实施-20261101/http-service-2026-11-01T14-13-20.485Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T16-41-19.116Z/summary.json",
+        "docs/测试报告/重构实施-20261101/rn-page-close-repeat-summary.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S090-OBS",
+          "scenario": "按deviceID加载设备帮助文本或受信任链接，空与失败可返回，不扩展全局知识库功能",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S091",
+      "title": "检查 MCU 固件",
+      "sourceRow": 92,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "MCU只读页已接线且实际错误态可返回；真实接口firmware:null缺候选ID/version，契约阻塞，不推导最新版。 最新20:50独立HTTP再次确认mcu firmware字段存在且null、deviceID匹配；App错误态与该契约缺口关联，不推导无更新。",
+      "blockers": [
+        "真实候选查询firmware:null；V1.4未明确null语义，不能当最新版或虚构固件"
+      ],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T13-43-39.050Z/summary.json",
+        "docs/测试报告/重构实施-20261101/rn-device-readonly-summary.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T13-57-15.088Z.json",
+        "docs/测试报告/重构实施-20261101/http-service-2026-11-01T14-00-06.774Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T16-41-19.116Z/summary.json",
+        "docs/测试报告/重构实施-20261101/rn-page-close-repeat-summary.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json",
+        "docs/测试报告/重构实施-20261101/http-service-2026-11-01T19-15-31.712Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S091-OBS",
+          "scenario": "MCU检查按云端版本与可升级标识显示，最新与新版本区分，不在客户端猜测版本",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S092",
+      "title": "检查 Wi-Fi 固件",
+      "sourceRow": 93,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "Wi-Fi只读页已接线且切换/错误态可返回；真实接口firmware:null缺候选ID/version，候选读取阻塞。 最新20:50独立HTTP再次确认wifi firmware字段存在且null、deviceID匹配；App错误态与该契约缺口关联，不推导无更新。",
+      "blockers": [
+        "真实候选查询firmware:null；V1.4未明确null语义，不能当最新版或虚构固件"
+      ],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T13-43-39.050Z/summary.json",
+        "docs/测试报告/重构实施-20261101/rn-device-readonly-summary.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T13-57-15.088Z.json",
+        "docs/测试报告/重构实施-20261101/http-service-2026-11-01T14-00-06.774Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T16-41-19.116Z/summary.json",
+        "docs/测试报告/重构实施-20261101/rn-page-close-repeat-summary.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json",
+        "docs/测试报告/重构实施-20261101/http-service-2026-11-01T19-15-31.712Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S092-OBS",
+          "scenario": "Wi-Fi固件检查带设备认证；无权限失败，不显示其他设备版本",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S093",
+      "title": "创建升级任务",
+      "sourceRow": 94,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S093-OBS",
+          "scenario": "创建成功展示任务已创建并跟踪任务，不直接显示升级完成；禁止重复创建并行任务",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S094",
+      "title": "升级进度",
+      "sourceRow": 95,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S094-OBS",
+          "scenario": "按任务ID通过V1.4 OTA-05查询进度，只有终态与设备结果才完成；保留范围表原OTA-04编号差异",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S095",
+      "title": "取消升级",
+      "sourceRow": 96,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S095-OBS",
+          "scenario": "可取消任务通过V1.4 OTA-04取消并等确认；不可取消展示原因；保留范围表原OTA-05编号差异",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S096",
+      "title": "解除自己的绑定",
+      "sourceRow": 97,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "阻塞",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "双端self-unbind业务/HTTP/journal核心已正式应用，Android30项随596/52实际JVM通过；无生产许可发行/DI/桥接/页面完整接线，无真实DELETE或关系变更。iOS仅源码/静态，不声称完整解绑通过。 后续正式双端/RN确认入口与授权隔离已应用；原生持有确认和执行任务，取消不重放请求，旧关系撤权后须重新授权；Android691/57、RN116通过，iOS754仅定义。本批新APK的运行证据单列，真实解绑因缺第二账号和隔离设备阻塞。",
+      "blockers": [
+        "用户确认暂无第二专用测试账号与可恢复隔离设备；成员移除、分享绑定、自解绑及其批量执行的真实写联调阻塞，受控实现/UI验证不替代真实闭环"
+      ],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T19-24-59.467Z/summary.json",
+        "docs/测试报告/重构实施-20261101/self-unbind-implementation-application.json",
+        "docs/测试报告/重构实施-20261101/真实关系变更联调阻塞-20261102.md",
+        "docs/测试报告/重构实施-20261101/自解绑确认与授权隔离-20261102.md",
+        "docs/测试报告/重构实施-20261101/真实关系变更联调阻塞-20261102.md"
+      ],
+      "cases": [
+        {
+          "id": "S096-OBS",
+          "scenario": "确认解绑成功后取消设备MQTT订阅、清缓存并刷新首页；失败保留设备且提示",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S097",
+      "title": "加载房间",
+      "sourceRow": 98,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T16-50-54.643Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T19-08-53.705Z.json",
+        "docs/测试报告/重构实施-20261101/android-emulator-2026-11-01T18-58-13.658Z.json",
+        "docs/测试报告/重构实施-20261101/android-native-readonly-2026-11-01T19-04-57.125Z.json"
+      ],
+      "cases": [
+        {
+          "id": "S097-OBS",
+          "scenario": "列表显示云端名称、默认标识及deviceCount，不再次遍历设备推算数量",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S098",
+      "title": "新增房间",
+      "sourceRow": 99,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S098-OBS",
+          "scenario": "空名与重复名称不能新增；合法名称成功后列表可见，服务端错误有提示",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S099",
+      "title": "修改名称",
+      "sourceRow": 100,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S099-OBS",
+          "scenario": "修改后列表显示新名称；不存在与重名错误分别处理，失败保留原名",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S100",
+      "title": "房间排序",
+      "sourceRow": 101,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "已有部分服务/页面/纯状态核心源码，尚未完成本条全部要求与适用验收。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S100-OBS",
+          "scenario": "以最新列表整体提交排序，重新加载顺序一致；失败不宣称已保存",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S101",
+      "title": "删除房间",
+      "sourceRow": 102,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "仅明确非默认且空房间允许删除；非空/默认/属性未知删除待契约，未真实删除。",
+      "blockers": [
+        "默认/非空房间删除与设备迁移规则待补齐"
+      ],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S101-OBS",
+          "scenario": "确认设备迁移或解除规则后整体保存删除结果；规则未冻结保留待核对，不自行清空设备归属",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S102",
+      "title": "并发保护",
+      "sourceRow": 103,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "最新GET对比编辑基线→PUT定义字段→GET复核；服务端CAS字段未冻结，GET/PUT竞态未解决。",
+      "blockers": [
+        "服务端原子CAS契约未冻结；不能由客户端GET对比消除竞态"
+      ],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S102-OBS",
+          "scenario": "两终端基于旧版本整体保存时应识别冲突，刷新最新列表避免覆盖；version/updatedAt字段落地需后端确认",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S103",
+      "title": "移动设备",
+      "sourceRow": 104,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "移动数据服务已有源码；RN更多仅只读房间unknown与返回通过，选择/保存及真实设备移动仍未联调。",
+      "blockers": [],
+      "partialEvidence": [],
+      "cases": [
+        {
+          "id": "S103-OBS",
+          "scenario": "从更多选择新房间保存成功后首页分组改变；失败保留原归属",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S104",
+      "title": "获取设置",
+      "sourceRow": 105,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "双端完整设置读取/严格投影/原子账号缓存及原生页面已有实现；Android真实GET通过，未知/失败/多屏完整UI未验收。 后续双端源码已实现共享整段设置事务gate/共享unknown状态和settings-publication CAS；新增Android7项随539/47实际JVM通过，iOS7项仅定义。新增只读PresentationOwner核心双端24定义已正式应用，Android24项随620/53实际JVM通过，iOS仅静态；全App/RN展示UI和桥接尚未接线，不把核心通过当整行验收。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-preferences-2026-11-01T12-35-32.932Z.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T18-17-50.155Z/summary.json"
+      ],
+      "cases": [
+        {
+          "id": "S104-OBS",
+          "scenario": "读取设置得到语言、通知、主题、壁纸、布局、温度与度量，缺失值按确认默认策略，不扩大页面范围",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S105",
+      "title": "App 语言",
+      "sourceRow": 106,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "原生三语言选项及typed PATCH已实现，Android选项核对通过；全App/RN资源刷新尚未完成，未实际切换语言。 后续双端源码已实现共享整段设置事务gate/共享unknown状态和settings-publication CAS；新增Android7项随539/47实际JVM通过，iOS7项仅定义。新增只读PresentationOwner核心双端24定义已正式应用，Android24项随620/53实际JVM通过，iOS仅静态；全App/RN展示UI和桥接尚未接线，不把核心通过当整行验收。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-preferences-2026-11-01T12-35-32.932Z.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T18-17-50.155Z/summary.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T19-28-00.310Z/summary.json",
+        "docs/测试报告/重构实施-20261101/presentation-owner-implementation-application.json"
+      ],
+      "cases": [
+        {
+          "id": "S105-OBS",
+          "scenario": "简中、繁中、英文保存后原生与RN可见文本刷新；重开读取一致，失败有提示",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S106",
+      "title": "通知开关",
+      "sourceRow": 107,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "原生云通知偏好与系统权限分开展示；Android展示检查通过，没有改变通知偏好、请求系统权限或验证推送。 后续双端源码已实现共享整段设置事务gate/共享unknown状态和settings-publication CAS；新增Android7项随539/47实际JVM通过，iOS7项仅定义。新增只读PresentationOwner核心双端24定义已正式应用，Android24项随620/53实际JVM通过，iOS仅静态；全App/RN展示UI和桥接尚未接线，不把核心通过当整行验收。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-preferences-2026-11-01T12-35-32.932Z.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T18-17-50.155Z/summary.json"
+      ],
+      "cases": [
+        {
+          "id": "S106-OBS",
+          "scenario": "通知偏好保存且独立反映系统通知权限；系统拒绝时提供原生设置引导",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S107",
+      "title": "主题",
+      "sourceRow": 108,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "theme保存/回读/缓存及设置页配色已实现，Android真实切深色后恢复原system通过；全App/RN主题仍未完成。 后续双端源码已实现共享整段设置事务gate/共享unknown状态和settings-publication CAS；新增Android7项随539/47实际JVM通过，iOS7项仅定义。新增只读PresentationOwner核心双端24定义已正式应用，Android24项随620/53实际JVM通过，iOS仅静态；全App/RN展示UI和桥接尚未接线，不把核心通过当整行验收。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-preferences-2026-11-01T12-35-32.932Z.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T18-17-50.155Z/summary.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T19-28-00.310Z/summary.json",
+        "docs/测试报告/重构实施-20261101/presentation-owner-implementation-application.json"
+      ],
+      "cases": [
+        {
+          "id": "S107-OBS",
+          "scenario": "跟随系统、明亮、暗黑保存后主题生效；跟随系统时系统主题变化同步",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S108",
+      "title": "壁纸",
+      "sourceRow": 109,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "读取壁纸对象与typed字符串ID PATCH基础已有；展示真实当前状态，没有权威目录，选择器阻塞，不造ID。 后续双端源码已实现共享整段设置事务gate/共享unknown状态和settings-publication CAS；新增Android7项随539/47实际JVM通过，iOS7项仅定义。新增只读PresentationOwner核心双端24定义已正式应用，Android24项随620/53实际JVM通过，iOS仅静态；全App/RN展示UI和桥接尚未接线，不把核心通过当整行验收。",
+      "blockers": [
+        "权威壁纸可选目录/资源契约缺失"
+      ],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-preferences-2026-11-01T12-35-32.932Z.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T18-17-50.155Z/summary.json"
+      ],
+      "cases": [
+        {
+          "id": "S108-OBS",
+          "scenario": "仅展示返回的壁纸配置并保存选中ID；缺配置不发明壁纸目录",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S109",
+      "title": "布局选择",
+      "sourceRow": 110,
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "保留真实布局字符串但不显示wire ID；布局枚举/目录未冻结，选择器阻塞，不造layout1等选项。 后续双端源码已实现共享整段设置事务gate/共享unknown状态和settings-publication CAS；新增Android7项随539/47实际JVM通过，iOS7项仅定义。新增只读PresentationOwner核心双端24定义已正式应用，Android24项随620/53实际JVM通过，iOS仅静态；全App/RN展示UI和桥接尚未接线，不把核心通过当整行验收。",
+      "blockers": [
+        "首页布局合法枚举/可选目录未冻结"
+      ],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-preferences-2026-11-01T12-35-32.932Z.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T18-17-50.155Z/summary.json"
+      ],
+      "cases": [
+        {
+          "id": "S109-OBS",
+          "scenario": "保留并读写homeLayout字段；具体布局未定义，不从导出图生成额外布局方案",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S110",
+      "title": "温度单位",
+      "sourceRow": 111,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "C/F独立typed PATCH及原生选项已实现，Android选项核对通过；未改单位、统一首页/RN显示或验证设备写值换算。 后续双端源码已实现共享整段设置事务gate/共享unknown状态和settings-publication CAS；新增Android7项随539/47实际JVM通过，iOS7项仅定义。新增只读PresentationOwner核心双端24定义已正式应用，Android24项随620/53实际JVM通过，iOS仅静态；全App/RN展示UI和桥接尚未接线，不把核心通过当整行验收。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-preferences-2026-11-01T12-35-32.932Z.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T18-17-50.155Z/summary.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T19-28-00.310Z/summary.json",
+        "docs/测试报告/重构实施-20261101/presentation-owner-implementation-application.json"
+      ],
+      "cases": [
+        {
+          "id": "S110-OBS",
+          "scenario": "C/F偏好保存后首页与设备页同步换算，重启一致；视觉图在设备更多不改变全局偏好所有权",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "S111",
+      "title": "度量制式",
+      "sourceRow": 112,
+      "platforms": [
+        "Android",
+        "iOS",
+        "共享RN"
+      ],
+      "implementation": {
+        "Android": "进行中",
+        "iOS": "进行中",
+        "共享RN": "未开始"
+      },
+      "acceptance": {
+        "androidUI": "未验收",
+        "androidEmulator": "未验收",
+        "http": "未验收",
+        "nativeMQTT": "未验收",
+        "iosBuild": "未验收",
+        "iosRuntime": "未验收",
+        "hardware": "未验收"
+      },
+      "note": "metric/imperial独立typed PATCH及选项已实现，Android选项核对通过；未改偏好，不造跨字段组合矩阵。 后续双端源码已实现共享整段设置事务gate/共享unknown状态和settings-publication CAS；新增Android7项随539/47实际JVM通过，iOS7项仅定义。新增只读PresentationOwner核心双端24定义已正式应用，Android24项随620/53实际JVM通过，iOS仅静态；全App/RN展示UI和桥接尚未接线，不把核心通过当整行验收。",
+      "blockers": [],
+      "partialEvidence": [
+        "docs/测试报告/重构实施-20261101/android-preferences-2026-11-01T12-35-32.932Z.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T18-17-50.155Z/summary.json",
+        "docs/测试报告/重构实施-20261101/android-unit-2026-11-01T19-28-00.310Z/summary.json",
+        "docs/测试报告/重构实施-20261101/presentation-owner-implementation-application.json"
+      ],
+      "cases": [
+        {
+          "id": "S111-OBS",
+          "scenario": "metric/imperial与温度单位一致保存；只更新某字段时其他未传字段保持原值，不被null清空",
+          "status": "未验收",
+          "evidence": []
+        }
+      ]
+    }
+  ]
+}

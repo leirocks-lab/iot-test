@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-02",
+  "artifactSha256": "c08d29c5907eb29a0c9226f822dbcdc22dcdd58ee2ce3b0c7c8c26b53851b2d6",
+  "sourceSha256": "0e254d1a1928f49e46298d32388318d9f7ac8dca8cdd829396a99b225697a9fb",
+  "initialPublicReport": "android-email-login-public-2026-11-01T18-24-36.165Z.json",
+  "state": "阻塞",
+  "observations": {
+    "snapshot": "Android system ANR dialog; title matched System UI, did not match ROWAN; no Welcome visible",
+    "guestBootMs": 99339,
+    "eventBufferANRs": [
+      "com.android.systemui",
+      "com.google.android.inputmethod.latin",
+      "com.google.android.as",
+      "com.google.android.apps.messaging:rcs",
+      "com.google.android.googlequicksearchbox:interactor",
+      "com.google.android.gms.persistent"
+    ],
+    "rowanANREventObserved": false,
+    "guestPressureRead": "Permission denied; not measured",
+    "hostFreePhysicalKiB": 3838352,
+    "hostTotalVisibleKiB": 16658532
+  },
+  "action": "Only Wait on exact known System UI dialog; retry after returning native Welcome",
+  "limits": [
+    "Transient cold-boot system failure is observed; root cause not established.",
+    "No ROWAN ANR event in captured am_anr buffer does not prove the application cannot hang.",
+    "First run remains blocked and is not replaced by retry.",
+    "No captcha/email/login send or submit performed by the public tool."
+  ]
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.device.ota.OtaServiceTest" tests="21" skipped="0" failures="0" errors="0" timestamp="2026-11-01T18:11:21.698Z" hostname="DESKTOP-2AM89R2" time="0.115">
+  <properties/>
+  <testcase name="unknownCreateResultNeverRecreatesTheTaskOnRetryOrResume" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.032"/>
+  <testcase name="pollFailureKeepsTheLastConfirmedResultAndCanOnlyRetryTheRead" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.012"/>
+  <testcase name="validNativeGrantCreatesOnlyTheSelectedCandidateAndDoesNotInventDeviceSuccess" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.001"/>
+  <testcase name="aKnownActiveTaskCannotBeCreatedTwice" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.002"/>
+  <testcase name="lateOldAccountOrRevokedScopeCannotPublishOrDispatchAnyMoreRequests" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.018"/>
+  <testcase name="pollingPolicyCannotSpecifyAnUnboundedOrSubThreeSecondLoop" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.0"/>
+  <testcase name="concurrentPollingHasOnlyOneRequestInFlight" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.005"/>
+  <testcase name="statusPollsAreAtLeastThreeSecondsApart" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.001"/>
+  <testcase name="cancellationAfterCreateDispatchCannotCauseMutationReplay" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.007"/>
+  <testcase name="unknownOfflineStaleStaticOrSupersededOnlineEvidenceCannotAuthorizeStart" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.003"/>
+  <testcase name="expiredWrongAccountAndWrongFirmwareGrantsCannotStart" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.002"/>
+  <testcase name="cancelTaskMissingOrTransportUnknownNeverAppearsCancelledAndIsNotReplayed" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.006"/>
+  <testcase name="noProductionStartPermitMeansNoTaskPublication" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.003"/>
+  <testcase name="everyDeclaredTerminalResultStopsFurtherPollingWithoutDelete" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.002"/>
+  <testcase name="cancelAcknowledgementWithUpdatingReadbackIsNotDeviceCancellationOrPermissionToReplay" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.003"/>
+  <testcase name="updatingWithMissingExpiredOrWrongScopeCancellationGrantDoesNotSendDelete" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.004"/>
+  <testcase name="aBoundedPollWindowNeverRestartsOrCancelsTheTaskWhenExhausted" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.002"/>
+  <testcase name="startRequiresAnExplicitLoadedFirmwareCandidate" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.002"/>
+  <testcase name="explicitlyPermittedCancellationMustBeConfirmedByTheResultEndpoint" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.002"/>
+  <testcase name="backgroundOrLeavingStopsObservationWithoutCancellingOrForgettingTheTask" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.002"/>
+  <testcase name="createAcknowledgementCannotResumeObservationPausedWhileStartWasInFlight" classname="com.rowan.iot.domain.device.ota.OtaServiceTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

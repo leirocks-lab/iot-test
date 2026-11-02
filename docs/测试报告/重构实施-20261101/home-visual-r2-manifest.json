@@ -1,0 +1,37 @@
+{
+  "status": "CACHE_ONLY_UI_R2_NOT_APPLIED_NOT_COMPILED_NOT_VISUALLY_VERIFIED",
+  "files": {
+    "android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActivity.kt": {
+      "baselineSha256": "66e2e6bd4597d58ea378da186d3a79f7afd9532ed649e2747cdc0dfd8c5452a8",
+      "finalSha256": "0f0367f855175c9e5497ce8db0934c8f48000730f46dc083b96bfbda8307482e"
+    },
+    "ios-as/Rowan/Features/Home/HomeViewController.swift": {
+      "baselineSha256": "82c66f67c21b260303531d129822d2eac6b902f4224a7b5944bcd044baa9e4a5",
+      "finalSha256": "c38bc4f40506bea07f291559734d02568a0eaa45cdf6178e4f51184d06644192"
+    }
+  },
+  "patchSha256": "fc3e1fa929c181a9018f6d1519d606b3b769b32046b4232977344dca95e0f53d",
+  "testsPolicy": "No new mirror layout unit tests; retain existing9SDK scenarios and4configuration matrix. No platform execution in this draft.",
+  "newDependencies": 0,
+  "newResources": 0,
+  "newCommunication": false,
+  "sourceLimits": "Local export049 and selection export; current online version unknown; no product image/online/power/brand inference",
+  "toolsSha256": {
+    "verify.py": "0d95910286fe1bc356fba799eb8dfc1883bb9892596b9c3aeeee1e739b81da06",
+    "apply.py": "ed875df741614e56e598efe4dac7f6439eb58e199552f5927d2d2cad949db88e",
+    "README.md": "54b141cfdac0e6fe2875d7999f5d105b2f0ba5b48c2663226533ebe46b24c90d",
+    "verification-plan.md": "ddc376487e76da1d19b72e179b630d01f47b7970ab02200dadb58979f2e3d3b6",
+    "design-differences.md": "ea2b791e3d77df9414392cd9f05e3292203883d19e9e93c8f1e52c7a63614987",
+    "design-sources.json": "91d59c456bacbe6909e2068e64f91d2e9affdc997be832b96d352012469687d0",
+    "resource-candidates.json": "fd0477b0a171e1ea10cf64b08a095f516d66e48420d4c87bb7599bef4b2662c8"
+  },
+  "previousFrozenDraft": {
+    "path": ".cache/refactor/home-visual-draft",
+    "patchSha256": "7bfd4f7d986e25b96b3f194c4d14cdbc60d586f26937df8dac722ff44cae6bfd",
+    "finalFiles": {
+      "android-as/app/src/main/kotlin/com/rowan/iot/features/home/HomeActivity.kt": "0f0367f855175c9e5497ce8db0934c8f48000730f46dc083b96bfbda8307482e",
+      "ios-as/Rowan/Features/Home/HomeViewController.swift": "96105169e65c93ed65718c674e1160ff266a459eef72eb77122922b70827598b"
+    }
+  },
+  "r1ToR2PatchSha256": "5c58a1a28297132dfeb79a96d26cb40f68599c0b51c11ccebe423635988749e4"
+}

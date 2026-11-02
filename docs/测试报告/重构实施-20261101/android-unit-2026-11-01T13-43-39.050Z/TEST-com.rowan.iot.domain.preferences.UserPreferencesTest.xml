@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.preferences.UserPreferencesTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-01T13:43:32.737Z" hostname="DESKTOP-2AM89R2" time="0.007">
+  <properties/>
+  <testcase name="wallpaperReadShapeIsAnObjectAndNeverASyntheticCatalogOrIdCoercion" classname="com.rowan.iot.domain.preferences.UserPreferencesTest" time="0.002"/>
+  <testcase name="unknownEnumsAndWrongTypesAreRetainedRawButNeverCoercedIntoKnownPreferences" classname="com.rowan.iot.domain.preferences.UserPreferencesTest" time="0.0"/>
+  <testcase name="languagesAndThemesUseOnlyTheThreeDefinedWireValues" classname="com.rowan.iot.domain.preferences.UserPreferencesTest" time="0.001"/>
+  <testcase name="explicitFalseIsNotDroppedAndOmittedFieldsNeverBecomeJsonNull" classname="com.rowan.iot.domain.preferences.UserPreferencesTest" time="0.0"/>
+  <testcase name="wallpaperPatchSendsOnlyTheSelectedIdAsAString" classname="com.rowan.iot.domain.preferences.UserPreferencesTest" time="0.0"/>
+  <testcase name="missingFieldsRemainUnknownRatherThanApplyingFixtureDefaults" classname="com.rowan.iot.domain.preferences.UserPreferencesTest" time="0.0"/>
+  <testcase name="notificationRequiresAnActualBooleanIncludingFalse" classname="com.rowan.iot.domain.preferences.UserPreferencesTest" time="0.001"/>
+  <testcase name="malformedTopLevelSettingsAreRejectedRatherThanBecomingAnEmptySuccess" classname="com.rowan.iot.domain.preferences.UserPreferencesTest" time="0.001"/>
+  <testcase name="emptyPatchAndBlankOpaqueSelectionsAreRejectedWithoutInventingLayoutEnums" classname="com.rowan.iot.domain.preferences.UserPreferencesTest" time="0.0"/>
+  <testcase name="unitsAreIndividuallyOptionalAndAnExplicitPairSendsOnlyItsOwnFields" classname="com.rowan.iot.domain.preferences.UserPreferencesTest" time="0.0"/>
+  <testcase name="readProjectionPreservesTheCompleteUnknownJsonWithoutReturningMutableState" classname="com.rowan.iot.domain.preferences.UserPreferencesTest" time="0.0"/>
+  <testcase name="typedPatchesContainOnlyExplicitChangesAndNoReadModelOrUnknownFields" classname="com.rowan.iot.domain.preferences.UserPreferencesTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

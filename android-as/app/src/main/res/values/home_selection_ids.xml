@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="home_selection_bar" type="id"/>
+    <item name="home_selection_cancel" type="id"/>
+    <item name="home_selection_count" type="id"/>
+    <item name="home_selection_done" type="id"/>
+    <item name="home_selection_status" type="id"/>
+    <item name="home_selection_delete" type="id"/>
+    <item name="home_selection_item" type="id"/>
+</resources>

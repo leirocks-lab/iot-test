@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.AccountSettingsCommitTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-01T19:27:49.907Z" hostname="DESKTOP-2AM89R2" time="0.13">
+  <properties/>
+  <testcase name="refreshPublicationRejectsCapturedOldSettingsBeforeAnyPhysicalWrite" classname="com.rowan.iot.AccountSettingsCommitTest" time="0.008"/>
+  <testcase name="failedStorageWriteKeepsValidAccountAndLastConfirmedPreferencesWithoutReportingSuccess" classname="com.rowan.iot.AccountSettingsCommitTest" time="0.009"/>
+  <testcase name="actualPreferencesLoadCapturedBeforeRefreshCannotOverwriteRenewedSettings" classname="com.rowan.iot.AccountSettingsCommitTest" time="0.043"/>
+  <testcase name="newAccountWaitsForCancelledSettingsWriteAndCannotBeOverwrittenByItsLateCompletion" classname="com.rowan.iot.AccountSettingsCommitTest" time="0.016"/>
+  <testcase name="cancellationAfterPhysicalWriteStartsPublishesConfirmedSettingsBeforeReportingCancellation" classname="com.rowan.iot.AccountSettingsCommitTest" time="0.012"/>
+  <testcase name="settingsCasAdvancesOnlySettingsPublicationAndPreservesLatestCredentialIdentity" classname="com.rowan.iot.AccountSettingsCommitTest" time="0.004"/>
+  <testcase name="staleSettingsCommitDoesNotWriteOrChangeNewAccount" classname="com.rowan.iot.AccountSettingsCommitTest" time="0.004"/>
+  <testcase name="lateRefreshAcceptsNewCredentialsWithoutOverwritingSettingsConfirmedWhileItWasInFlight" classname="com.rowan.iot.AccountSettingsCommitTest" time="0.015"/>
+  <testcase name="confirmedSettingsPublicationDoesNotSuppressRefreshForALateUnauthorizedRead" classname="com.rowan.iot.AccountSettingsCommitTest" time="0.009"/>
+  <testcase name="commitAfterRefreshPreservesLatestCredentialsAndCompleteUnknownSettingsWithoutChangingRevision" classname="com.rowan.iot.AccountSettingsCommitTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rowan.iot.domain.preferences.PreferencesServiceTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-01T13:25:39.532Z" hostname="DESKTOP-2AM89R2" time="0.075">
+  <properties/>
+  <testcase name="saveBeforeSuccessfulLoadCannotWriteWithInventedDefaults" classname="com.rowan.iot.domain.preferences.PreferencesServiceTest" time="0.017"/>
+  <testcase name="timeoutLocksUnknownResultUntilReadAndNeverReplaysTheOldPatch" classname="com.rowan.iot.domain.preferences.PreferencesServiceTest" time="0.007"/>
+  <testcase name="cancellationAfterMutationDispatchKeepsUnknownAndCannotReplayOnReturn" classname="com.rowan.iot.domain.preferences.PreferencesServiceTest" time="0.006"/>
+  <testcase name="initialGetFailureHasNoDefaultsOrLanguageAppliedClaim" classname="com.rowan.iot.domain.preferences.PreferencesServiceTest" time="0.005"/>
+  <testcase name="successfulPatchFollowedByFailedReadDoesNotInventConfirmedValues" classname="com.rowan.iot.domain.preferences.PreferencesServiceTest" time="0.003"/>
+  <testcase name="cancellingAQueuedCallerDoesNotMarkAnotherCallUnknownOrDispatchItsPatch" classname="com.rowan.iot.domain.preferences.PreferencesServiceTest" time="0.008"/>
+  <testcase name="aLateOldAccountReadCannotPublishOrCommitPrivateSettings" classname="com.rowan.iot.domain.preferences.PreferencesServiceTest" time="0.006"/>
+  <testcase name="independentConcurrentChangesAreSerializedThroughTheirOwnReadback" classname="com.rowan.iot.domain.preferences.PreferencesServiceTest" time="0.007"/>
+  <testcase name="localCommitFailureCannotReportServerMutationAsFullyConfirmed" classname="com.rowan.iot.domain.preferences.PreferencesServiceTest" time="0.004"/>
+  <testcase name="readbackThatDoesNotMatchEveryExplicitChangeRemainsUnknown" classname="com.rowan.iot.domain.preferences.PreferencesServiceTest" time="0.003"/>
+  <testcase name="temperatureOnlyUpdatePreservesEvenAnUnknownMeasurementPreference" classname="com.rowan.iot.domain.preferences.PreferencesServiceTest" time="0.002"/>
+  <testcase name="saveIsPatchThenAuthoritativeGetAndCommitBeforeConfirmedPublication" classname="com.rowan.iot.domain.preferences.PreferencesServiceTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,59 @@
+{
+  "archivedAt": "2026-11-01T15:46:16.382Z",
+  "scope": "RN major3 repeated close intents retain the original page token without a permanent JS latch",
+  "actualRed": {
+    "filesFailed": 1,
+    "filesPassed": 10,
+    "testsFailed": 2,
+    "testsPassed": 98,
+    "tests": 100,
+    "behavior": "same A helper cannot dispatch after native rejects it over B; old requested latch also blocks a repeated stale intent"
+  },
+  "checks": {
+    "lint": {
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "typecheck": {
+      "exitCode": 0
+    },
+    "vitest": {
+      "exitCode": 0,
+      "workers": 1,
+      "files": 11,
+      "tests": 100
+    },
+    "codegen": {
+      "exitCode": 0,
+      "reactNative": "0.86.3",
+      "bridgeMajor": 3,
+      "methods": 13,
+      "events": 1,
+      "signature": "closeDevice(pageSessionId:string):void"
+    }
+  },
+  "sourceHashes": {
+    "src/host/adapter/NativePageClose.ts": "d5990908e998483f299be1255326bed33e13dce7e5c104c04ad4e55e1ef53c9a",
+    "tests/contract/page-close.test.ts": "671694e4d2a3f1e0986d874b142593756ab9a76c1e2095ba70ab3470738fba13",
+    "src/host/README.md": "eb7567c4bf0818300d37764a03f11a019ae238bb93cdc2c60ddd1d98f3749eb7",
+    "src/host/specs/NativeRowanHost.ts": "75fc3d4766aecb296a477bef0f42d28df4d49002b741463e6c95ee97b8730255",
+    "src/host/adapter/DeviceSessionController.ts": "053699a441878cfe699828050b3a21809fc73233cad09c4ede9e3cb4bfc7ba0e",
+    "src/entry/DeviceEntry.tsx": "e1d892c97ad645fab25652d3e1c88d408224abd54b70ccbb5d29e3854eec8028"
+  },
+  "evidenceHashes": {
+    "red.log": "16e5b10afa076119e0a13872d6e7cb0f65e78b32af7afc1dc4a383afb1f5bb7b",
+    "lint.log": "7960138dbf9924e05133d4f570f78221cb940ba5690fe0e4b18ee9cefee519f4",
+    "typecheck.log": "5a3973f79ed9becd5f23c4feff467513814de7ea381d75a4d2e339aa8b8edca9",
+    "vitest.log": "0463448442ded9708ec842b134019cd847f795dc2e25b7d40a75419c0953c134",
+    "codegen.log": "fc660ee17e67b2e743774b733ad575cd47eada622d4528acb929e3c54a766ef0",
+    "schema.json": "c0231fb5f50215b635d74c57b165d459611f8354c016167a323c861b3eeb0544",
+    "verify-codegen.cjs": "d73068a22c5edcad614fa7513df789edd7b2eb1629d9d4edd6922cf48700b7ac"
+  },
+  "limitations": [
+    "No native, old project, package/dependency or lock changes",
+    "No Gradle/ADB/Metro/network or real service run",
+    "Native top/resumed/token/identity policy and new APK integration remain separately validated by Root",
+    "No Swift/UIKit compilation/runtime; prior 99-test and prior APK lifecycle evidence remain historical"
+  ]
+}

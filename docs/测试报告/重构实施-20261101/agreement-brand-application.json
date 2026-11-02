@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-01T20:57:12.489460+00:00",
+  "patchSha256": "15f1d58872f107acca3131c5dfb2aae8de3b2c86aa7a3cf864657298f437bd57",
+  "stage": "APPLIED_EXACT_REVIEWED_OVERLAY_NOT_CONSUMER_VERIFIED",
+  "files": [
+    {
+      "path": "android-as/app/build.gradle",
+      "beforeSha256": "07cde16d679f5418641e16235644df91062dc4996ce162929f383cae29a1280a",
+      "afterSha256": "7e5be338e47a69f163620ebd44fc645b2f9fa57df0f59e178ed038140413c640"
+    },
+    {
+      "path": "android-as/scripts/build.mjs",
+      "beforeSha256": "88a4ad999fc1607814bcdeb56a54a2a271e48f7dfdbd091babdc7bf1ea188ff7",
+      "afterSha256": "281be12b3fa69b41045890326218d5536ee57a56fc7df1d3eefe95383323cb26"
+    },
+    {
+      "path": "android-as/app/src/main/kotlin/com/rowan/iot/app/AppServices.kt",
+      "beforeSha256": "6b8cbb507323e024eb8afedede9524191c287d7253bd9bcac88ef1bb66e7d469",
+      "afterSha256": "e118922f079b6aad75ceb25ecf019ed4f7de3fd0115dfd4dd32c184a96cf3b6d"
+    },
+    {
+      "path": "docs/tools/http_acceptance.mjs",
+      "beforeSha256": "7cfd89c445c93208aaf018972f977ae770af5aba3865244edc2af4daa0f12007",
+      "afterSha256": "23c0b5b6dbcdb256e35e10c9dba1618c9c86a3d6148ffb940f6fe6bec6883bc9"
+    },
+    {
+      "path": "docs/tools/content-brand-config.mjs",
+      "beforeSha256": null,
+      "afterSha256": "daee603373b686b9d8bb12b0ff59d2153f7d5f0b30daebc5cdbd5018935dddab"
+    }
+  ]
+}

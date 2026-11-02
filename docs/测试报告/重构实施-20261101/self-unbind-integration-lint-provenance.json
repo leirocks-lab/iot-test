@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-01T20:31:49.445Z",
+  "task": ":app:lintDevelopmentRelease",
+  "exitCode": 0,
+  "sourceBefore": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "725e3f9a235c21f5cc5c40239fc34be683c1e9a46a1a900280e23da6ae0d6251",
+    "sourceFiles": 326
+  },
+  "sourceAfter": {
+    "commit": "a50ee76abf9905120d7f3ff3efc8c25a32e0a996",
+    "worktreeDirty": true,
+    "sourceSha256": "725e3f9a235c21f5cc5c40239fc34be683c1e9a46a1a900280e23da6ae0d6251",
+    "sourceFiles": 326
+  },
+  "sourceUnchangedDuringCheck": true
+}

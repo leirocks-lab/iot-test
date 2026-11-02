@@ -1,0 +1,52 @@
+{
+  "name": "@rowan/device-module",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "start": "react-native start",
+    "lint": "eslint src index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run tests",
+    "bundle:android": "node scripts/bundle.mjs android",
+    "bundle:ios": "node scripts/bundle.mjs ios"
+  },
+  "dependencies": {
+    "react": "19.2.3",
+    "react-native": "0.86.3"
+  },
+  "devDependencies": {
+    "@babel/core": "7.25.2",
+    "@babel/runtime": "7.25.0",
+    "@react-native-community/cli": "20.1.0",
+    "@react-native-community/cli-platform-android": "20.1.0",
+    "@react-native-community/cli-platform-ios": "20.1.0",
+    "@react-native/babel-preset": "0.86.3",
+    "@react-native/eslint-config": "0.86.3",
+    "@react-native/metro-config": "0.86.3",
+    "@react-native/typescript-config": "0.86.3",
+    "@types/react": "19.2.2",
+    "eslint": "8.57.1",
+    "typescript": "6.0.3",
+    "vitest": "4.0.0",
+    "vite": "7.1.9"
+  },
+  "codegenConfig": {
+    "name": "RowanHostSpec",
+    "type": "modules",
+    "jsSrcsDir": "src/host/specs",
+    "android": {
+      "javaPackageName": "com.rowan.iot.bridge"
+    },
+    "ios": {
+      "modules": {
+        "NativeRowanHost": {
+          "className": "RowanHost"
+        }
+      }
+    }
+  }
+}
