@@ -1,4 +1,0 @@
-buildscript {
-    repositories { mavenCentral() }
-    assert repositories.first().url.toString() == 'https://maven.aliyun.com/repository/central'
-}
